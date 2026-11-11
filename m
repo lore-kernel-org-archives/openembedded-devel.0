@@ -1,160 +1,306 @@
-Received: from mail-dy1-f180.google.com (mail-dy1-f180.google.com [74.125.82.180])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.680.1794421091327239199
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.213.1794419955330465588
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 11 Nov 2026 10:18:11 -0800
+ Wed, 11 Nov 2026 09:59:15 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=0PT2DfNQ;
- spf=pass (domain: gmail.com, ip: 74.125.82.180, mailfrom: raj.khem@gmail.com)
-Received: by mail-dy1-f180.google.com with SMTP id 5a478bee46e88-37071c0f42aso5898675eec.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 11 Nov 2026 10:18:11 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794421091; x=1795025891; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=JJrROAvnU4qZBnJAJ9E4aNnDeWjSBRpP8sduqLKTZOw=;
-        b=0PT2DfNQUGx7CtvJa65MzR67vnn3qD9mh+KrBe5q8mhNbsKOYrzxWXfmGjWYKg4PPT
-         hanlSzJNUnTtB8P/2Pnv6ebx6L1b6TyKVp51O6kips6ajGFYkxhc+2F5TBTQYKTsSwvT
-         nmSdeCJh/xgEAmeB3RRNkOoo5jB2Q0BkXDQ1hH7VSq8KFpxfaYDNlN6dn/6RNEyYqw28
-         zEIgeHj/Kw//DGai5EFrYxqh9u3wil5Ed/I2ZQf/domeEFs0LDucrGPWMQd5Ra5SZ+Oy
-         Qu6GH65zlHyF1FB/krN5dOV5lBuQrEoTNGFmN4aX0pA9h15HH5zKNREhRfVpKPxvWWlH
-         Svkg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794421091; x=1795025891;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=JJrROAvnU4qZBnJAJ9E4aNnDeWjSBRpP8sduqLKTZOw=;
-        b=CeSgCCF6HCM7niSO7LtSkkghiSYNjGdIa6hOtl2fMo35zVe+KpQAUc+VRUo4KP5SBB
-         BML8BqlerC4X1wYwp8ZJInERhYt88MHm52kt5Zu3Oi3cFUyqguup7ZuUf8oftrTpO1Uy
-         PCKPYRIaN0sXAE4IpVMMzhMkU09xurEJ+YrorI0abLLukdckkzglX7DfGZnyLD6sZVzE
-         ScBtgShnuwW8YNErJ5RtMbrSK+AqPXFqf3wzYwHfQIsroIGbVNdlzk8VZIslAhEy3qF+
-         xGVAHcDwgbLTuQGRBfo9pqMtxrdj5PqedGXyx/gvPBsizdaUNZzqHOPn5ymQKcye/qwy
-         /ZmA==
-X-Gm-Message-State: APuU4Z/JN+Jy0iizPOULpxncblV6NvAWLxkln451/a/GxC/kOyFnsqoB
-	7Wsz/TxvzanqSo1wf7bzbbLUKY89ePyrtp2rcgINulye1obFpefnsL9NdjMBYsy4KT0=
-X-Gm-Gg: AYBFou3yP+NKzjq9vCoBGrcgxl2tRXxErsCdn7WbkkkKCFSI8lhvV34mUld0a0B7EMN
-	TZF9GdpJll8UW+K2GevhPDIF39ZxZc83v3W+p4sADTpbx+/Q/lxX3xekcRXFygrRGhCLgZgK1ge
-	YrOhOCdYtCa2EZ1cVXc6yBpBZFdpLuB8R9NtK+OrvETRyds4gUIvV3c6Qgragte247wPuZSpPI7
-	RLfCukNnZObUSBm+1sUFvJHgkVl9f4ODE7eAT3z310k9PQ4ugjnthnraAKWA0MGAhypPPSAgQYT
-	xWmsT/4M6ureMMAsUJYy+yUzcBEnj0s58R+kC0K1HZLVWD5GVPECdM3xltSy8XbubnUoakphkPK
-	TrQtwrp0OxM26cuddVhsCzHi3DXoAPLAblLM8M08tT0RI7g+4JHvDE7XlNrMvgQf3l1Z602UK8u
-	VdPkGAEAuOrJj/h2q1Cq2ybDeferCGI8Ox66AsGHoKxNnZNsXvntN9QYuTghxserFB59994KWkq
-	jy+UFOiB2RvxhXc9UTEPhxzq+nPyeBFzKK+/uN8zF9TcXm3JsRs/n9EUFqqZZVXRi9JfCWKEf1z
-	/i/bS7trSLKwpy3FD8FcfD7kXH7Ut1uTt5TLO9VogyOD3J5mI5daCV5ZQ8fxhoi8Q/1MWqEVJQT
-	CeVKzSib3ss4u1D09gWMGzhH3Vy4jkgtsPuWSpgjBakYydVPOJoQhWolihg5PueQyPJXjiXXoba
-	WjzL+4wVW1BXprO6pG5jR97FVqhWsX3YJ1KpJtshAAZLFpDAMmzoLpKyScyknl6QN5QWs6g09mq
-	KrIrD2I6nis9+vfb/6ifN7l4vTryZFExbdts5fM/cHCBCRtn7C8xqRDOjkDX0c810GI+KvwtJe+
-	CmQ5
-X-Received: by 2002:a05:7301:904:b0:375:7be3:1bbd with SMTP id 5a478bee46e88-37686278c60mr3436119eec.23.1794421090421;
-        Wed, 11 Nov 2026 10:18:10 -0800 (PST)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3752060c4b6sm18363976eec.15.2026.11.11.10.18.09
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 11 Nov 2026 10:18:09 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
-X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
+ dkim=pass header.i=@qualcomm.com header.s=qcppdkim1 header.b=E1zQ/ho5;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: qualcomm.com, ip: 205.220.168.131, mailfrom: kshakir@qualcomm.com)
+Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6ABHtSEJ2980850;
+	Wed, 11 Nov 2026 17:59:14 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:date:from:message-id:mime-version
+	:subject:to; s=qcppdkim1; bh=FLsLgloyunaMAHvAZsPgauHB0m+qA9pYRdT
+	YsjHTRW4=; b=E1zQ/ho58PpBc+aMpl/N9mSs/i3tP2OQ8Ntyd7I0Xx+z4Jx3dkH
+	uFWl+txQju2oMbA+ii/HQaH05rdoT4V2PQR2seiUmxeo6pkGi2lqynL4G5RKOP8E
+	fFSNOj6PtPgGA7vhpD4l3xJsGzldu0NZWpOyF9aBZYTwsGXoVJATubK0kmMDh7ls
+	kiiRQqQ+K2oK27eszaAzt3iV7c/qXD6RrDH8+sULp9m957VXzSRM1yZI55xB/FqH
+	WfewhdpMtXWoQnvHt2+cQAo3gTuW8nOkrdik/rRT0JWQ8xAEeedgKNBnkj50fARI
+	w1HOi32wZXA7xdrF+Kbv43UVCo86mXjxwtw==
+Received: from nalasppmta01.qualcomm.com (Global_NAT1.qualcomm.com [129.46.96.20])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hvksmag8e-1
+	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
+	Wed, 11 Nov 2026 17:59:13 +0000 (GMT)
+Received: from pps.filterd (nalasppmta01.qualcomm.com [127.0.0.1])
+	by NALASPPMTA01.qualcomm.com (8.18.1.11/8.18.1.11) with ESMTP id 6ABHxDAR2575350;
+	Wed, 11 Nov 2026 17:59:13 GMT
+Received: from las-colo41-d19-20.qualcomm.com (las-colo41-d19-20.qualcomm.com [10.37.19.117])
+	by NALASPPMTA01.qualcomm.com (PPS) with ESMTPS id 6ABHxC5d2575345
+	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
+	Wed, 11 Nov 2026 17:59:13 +0000 (GMT)
+Received: by las-colo41-d19-20.qualcomm.com (Postfix, from userid 2366661)
+	id A900C41146; Wed, 11 Nov 2026 09:59:12 -0800 (PST)
+From: Kemal Rasim Sh <kshakir@las-colo41-d19-20.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-oe][PATCH] libhugetlbfs: Fix linking tests with lld
-Date: Wed, 11 Nov 2026 10:18:07 -0800
-Message-ID: <20261111181807.2376884-1-khem.raj@oss.qualcomm.com>
-X-Mailer: git-send-email 2.56.1
+Cc: bruce.ashfield@gmail.com, Kemal Rasim Sh <kshakir@qti.qualcomm.com>
+Subject: [PATCH] docker-moby: preserve gids during docker exec
+Date: Wed, 11 Nov 2026 09:59:10 -0800
+Message-ID: <20261111175910.1620396-1-kshakir@las-colo41-d19-20.qualcomm.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
+X-Proofpoint-Reinject: loops=2 maxloops=12
+X-QCInternal: smtphost
+X-QCInternal: smtphost
+X-Proofpoint-GUID: cajusozAcaLoieOR4BiB7DcEiAsJ6Kju
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTExMDA3MSBTYWx0ZWRfX7XN90IF1Mpmg
+ 5Qvj/fhrjTX6P57qlcQhFSi/1HTKepoadGZ//D5lf1MEadwp1GLFx3kA645mOS9xh07pHPWOyxE
+ 52L7u5MiHcqgZE+NfR4RwLvF6CRQxLQuwMb1kXuECI8dp3Eg/AK0o4VmrmDOQ1DFXNls15n4DnK
+ eP3XRrAFidNQDyDQPYAxUFdJcKSMzcosrPiM0XkFPD/GEqK8VA+rOu6WAqWjCAWhlWd+Op0pqpt
+ /5cjynkhYJgMXUVxCIOkYyb2kbdVF7uHhT5SFjSFGuXaAWXQKg02lBQi1CE1lFdEa8fPlwezA5O
+ mbbCtNqdxPU88dvyd7mjHdALoMApp5BEtiOrS4RUhay6LuZ+rAhvIjXSqy13B3aEkvLr7jKmx+n
+ cRrlKOl0Nr1jVhcr+gbumhaJwBmxr18Lv44fDxUYBNhYKegCPDMALdQ2Tgl7pcbMWSGTTezijAw
+ vxbO7nvIXwMpgaGZQ5Q==
+X-Proofpoint-ORIG-GUID: cajusozAcaLoieOR4BiB7DcEiAsJ6Kju
+X-Authority-Analysis: v=2.4 cv=O9isLx9W c=1 sm=1 tr=0 ts=6af4acf1 cx=c_pps
+ a=ouPCqIW2jiPt+lZRy3xVPw==:117 a=ouPCqIW2jiPt+lZRy3xVPw==:17
+ a=zJRp6_cAMcgA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
+ a=yOCtJkima9RkubShWh1s:22 a=NEAV23lmAAAA:8 a=EUspDBNiAAAA:8 a=Ikd4Dj_1AAAA:8
+ a=A1X0JdhQAAAA:8 a=GFwbhVXWLe-BoAFTT8IA:9 a=3nWjig0DUKXJB_ZfKOX2:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTExMDA3MSBTYWx0ZWRfX63p2u8xDTEXv
+ MSxauGIFqFNTPf58Gh8p4P3XmPyJEiTEyftlxjtynGHS6/s8ukH1LmSWkLYuXCXnqGhg2wMlBpU
+ 9XPuDETL+zLQwlWT5qWCJi7jNIve6yo=
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-11-11_04,2026-11-11_03,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ spamscore=0 phishscore=0 clxscore=1034 lowpriorityscore=0 suspectscore=0
+ impostorscore=0 adultscore=0 priorityscore=1501 bulkscore=0 malwarescore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611110071
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Wed, 11 Nov 2026 18:18:14 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132132
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Wed, 11 Nov 2026 18:22:14 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132133
 Content-Type: text/plain; charset="utf-8"
 
-ld.hugetlbfs runs $LD as the real linker and adds the GNU ld only
--Ttext-segment option for --hugetlbfs-align links on arm/aarch64, i386 and
-ppc64. Now that LD is ld.lld this fails with
+From: Kemal Rasim Sh <kshakir@qti.qualcomm.com>
 
-  ld.lld: error: -Ttext-segment is not supported. Use --image-base if you intend to set the base address
+Processes started with docker exec do not inherit all
+supplemental groups assigned to the container when it was
+created.
 
-Teach ld.hugetlbfs to use --image-base when the linker is LLD.
+When OCI additionalGids are injected through CDI or other
+OCI runtime modifications, the container init process
+receives the groups correctly. However, docker exec rebuilds
+user credentials and drops the original additionalGids from
+the OCI process specification.
 
-AI-Generated: Uses Claude Code
-Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+As a result, exec'd processes may lose access to devices and
+resources granted through supplemental group membership,
+leading to inconsistent behavior within the same container.
+
+Preserve and merge the original OCI additionalGids into the
+exec process specification so that groups assigned during
+container creation remain available to docker exec
+processes.
+
+Before:
+
+  docker exec <container> cat /proc/self/status | grep Groups
+  Groups: 15 44 1000
+
+After:
+
+  docker exec <container> cat /proc/self/status | grep Groups
+  Groups: 15 44 981 987 992 993 999 1000
+
+This backport also includes the CDI additionalGids fix
+required by the exec path change.
+
+(cherry picked from commit
+5c36dadb2543835d79eb4d398cfc9da507f6ff882)
+
+Signed-off-by: Kemal Rasim Sh <kshakir@qti.qualcomm.com>
 ---
- ...ld.hugetlbfs-Use-image-base-with-LLD.patch | 57 +++++++++++++++++++
- .../libhugetlbfs/libhugetlbfs_2.24.bb         |  1 +
- 2 files changed, 58 insertions(+)
- create mode 100644 meta-oe/recipes-benchmark/libhugetlbfs/files/0016-ld.hugetlbfs-Use-image-base-with-LLD.patch
+ recipes-containers/docker/docker-moby_git.bb  |  2 +
+ ...-daemon-preserve-CDI-additional-GIDs.patch | 96 +++++++++++++++++++
+ ...preserve-OCI-additionalGids-for-exec.patch | 61 ++++++++++++
+ 3 files changed, 159 insertions(+)
+ create mode 100644 recipes-containers/docker/files/0001-daemon-preserve-CDI-additional-GIDs.patch
+ create mode 100644 recipes-containers/docker/files/0002-daemon-preserve-OCI-additionalGids-for-exec.patch
 
-diff --git a/meta-oe/recipes-benchmark/libhugetlbfs/files/0016-ld.hugetlbfs-Use-image-base-with-LLD.patch b/meta-oe/recipes-benchmark/libhugetlbfs/files/0016-ld.hugetlbfs-Use-image-base-with-LLD.patch
+diff --git a/recipes-containers/docker/docker-moby_git.bb b/recipes-containers/docker/docker-moby_git.bb
+index 9768b306..c4c79110 100644
+--- a/recipes-containers/docker/docker-moby_git.bb
++++ b/recipes-containers/docker/docker-moby_git.bb
+@@ -54,6 +54,8 @@ SRC_URI = "\
+         file://0001-cli-use-external-GO111MODULE-and-cross-compiler.patch \
+         file://0001-dynbinary-use-go-cross-compiler.patch;patchdir=src/import \
+         file://0001-check-config-make-CONFIG_MEMCG_SWAP-conditional.patch;patchdir=src/import \
++        file://0001-daemon-preserve-CDI-additional-GIDs.patch;patchdir=src/import \
++        file://0002-daemon-preserve-OCI-additionalGids-for-exec.patch;patchdir=src/import \
+         file://CVE-2026-41568.patch;patchdir=src/import \
+         file://CVE-2026-42306_p1.patch;patchdir=src/import \
+         file://CVE-2026-42306_p2.patch;patchdir=src/import \
+diff --git a/recipes-containers/docker/files/0001-daemon-preserve-CDI-additional-GIDs.patch b/recipes-containers/docker/files/0001-daemon-preserve-CDI-additional-GIDs.patch
 new file mode 100644
-index 0000000000..01e8702a13
+index 00000000..ee4687a9
 --- /dev/null
-+++ b/meta-oe/recipes-benchmark/libhugetlbfs/files/0016-ld.hugetlbfs-Use-image-base-with-LLD.patch
-@@ -0,0 +1,57 @@
-+From 49b8283544ae5c897f4cf186e174f98a9dc6e1c6 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Wed, 11 Nov 2026 07:56:45 -0800
-+Subject: [PATCH] ld.hugetlbfs: Use --image-base with LLD
++++ b/recipes-containers/docker/files/0001-daemon-preserve-CDI-additional-GIDs.patch
+@@ -0,0 +1,96 @@
++From 704210f9e6d44af1501c7564c82a98653b059b7a Mon Sep 17 00:00:00 2001
++From: Evan Lezar <elezar@nvidia.com>
++Date: Fri, 8 May 2026 00:46:21 +0200
++Subject: [PATCH] daemon: preserve CDI additional GIDs
 +
-+LLD does not implement the GNU ld -Ttext-segment option and errors out:
++CDI injection runs from WithDevices and may append supplementary groups to process.user.additionalGids. Docker's WithUser option previously ran afterwards and replaced Process.User, dropping any CDI-provided groups.
 +
-+  ld.lld: error: -Ttext-segment is not supported. Use --image-base if you intend to set the base address
++Resolve the final container user before device injection so CDI edits append to that user, and add regression coverage for a CDI v0.7 spec that injects additionalGids.
 +
-+which breaks linking the --hugetlbfs-align testcases when LD is lld. Detect
-+LLD and pass the equivalent --image-base instead. LLD reads the value with
-+base auto-detection, so emit the address with a 0x prefix, which GNU ld also
-+accepts.
++Upstream-Status: Backport [https://github.com/moby/moby/pull/52579]
 +
-+Upstream-Status: Submitted [https://github.com/libhugetlbfs/libhugetlbfs/pull/118]
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+
++Signed-off-by: Evan Lezar <elezar@nvidia.com>
 +---
-+ ld.hugetlbfs | 16 +++++++++++-----
-+ 1 file changed, 11 insertions(+), 5 deletions(-)
++ daemon/oci_linux.go      |  3 ++-
++ daemon/oci_linux_test.go | 40 ++++++++++++++++++++++++++++++++++++++++
++ 2 files changed, 42 insertions(+), 1 deletion(-)
 +
-+diff --git a/ld.hugetlbfs b/ld.hugetlbfs
-+index d4a6306..11db0cf 100755
-+--- a/ld.hugetlbfs
-++++ b/ld.hugetlbfs
-+@@ -126,6 +126,12 @@ armelf*_linux_eabi|aarch64elf*|aarch64linux*)
-+ 	SLICE_SIZE=$HPAGE_SIZE ;;
-+ esac
-+
-++# LLD does not implement -Ttext-segment, --image-base is its equivalent
-++TEXTSEG="-Ttext-segment="
-++if ${LD} --version 2>/dev/null | grep -q "^LLD"; then
-++	TEXTSEG="--image-base="
-++fi
++diff --git a/daemon/oci_linux.go b/daemon/oci_linux.go
++index d7a8859d6be30..668891e2672d8 100644
++--- a/daemon/oci_linux.go
+++++ b/daemon/oci_linux.go
++@@ -1015,6 +1015,8 @@ func (daemon *Daemon) createSpec(ctx context.Context, daemonCfg *configStore, c
++ 		withCgroups(daemon, &daemonCfg.Config, c),
++ 		WithResources(c),
++ 		WithSysctls(c),
+++		// Set the user before CDI device injection, which may append supplementary groups.
+++		WithUser(c),
++ 		WithDevices(daemon, c),
++ 		withRlimits(daemon, &daemonCfg.Config, c),
++ 		WithNamespaces(daemon, c),
++@@ -1025,7 +1027,6 @@ func (daemon *Daemon) createSpec(ctx context.Context, daemonCfg *configStore, c
++ 		WithSelinux(c),
++ 		WithOOMScore(&c.HostConfig.OomScoreAdj),
++ 		coci.WithAnnotations(c.HostConfig.Annotations),
++-		WithUser(c),
++ 	)
++ 
++ 	if c.NoNewPrivileges {
++diff --git a/daemon/oci_linux_test.go b/daemon/oci_linux_test.go
++index 9e2c361a83a19..fa0a442a0bc18 100644
++--- a/daemon/oci_linux_test.go
+++++ b/daemon/oci_linux_test.go
++@@ -2,6 +2,7 @@ package daemon
++ 
++ import (
++ 	"context"
+++	"maps"
++ 	"os"
++ 	"path/filepath"
++ 	"slices"
++@@ -76,6 +77,45 @@ func (i *fakeImageService) StorageDriver() string {
++ 	return "overlay"
++ }
++ 
+++func TestCreateSpecPreservesCDIAdditionalGIDs(t *testing.T) {
+++	cdiDir := t.TempDir()
+++	err := os.WriteFile(filepath.Join(cdiDir, "test-device.yaml"), []byte(`
+++cdiVersion: "0.7.0"
+++kind: "example.com/device"
+++devices:
+++- name: foo
+++  containerEdits:
+++    additionalGids:
+++    - 1234
+++`), 0o644)
+++	assert.NilError(t, err)
 ++
-+ if [ "$HTLB_ALIGN" == "slice" ]; then
-+ 	HTLBOPTS="-zcommon-page-size=$SLICE_SIZE -zmax-page-size=$SLICE_SIZE"
-+ 	HTLBOPTS="$HTLBOPTS -lhugetlbfs"
-+@@ -134,13 +140,13 @@ if [ "$HTLB_ALIGN" == "slice" ]; then
-+ 	# otherwise it will be NULL.
-+ 	case "$EMU" in
-+ 	armelf*_linux_eabi|aarch64elf*|aarch64linux*)
-+-		printf -v TEXTADDR "%x" "$SLICE_SIZE"
-+-		HTLBOPTS="$HTLBOPTS -Ttext-segment=$TEXTADDR" ;;
-+-	elf_i386)		HTLBOPTS="$HTLBOPTS -Ttext-segment=0x08000000" ;;
-++		printf -v TEXTADDR "0x%x" "$SLICE_SIZE"
-++		HTLBOPTS="$HTLBOPTS ${TEXTSEG}$TEXTADDR" ;;
-++	elf_i386)		HTLBOPTS="$HTLBOPTS ${TEXTSEG}0x08000000" ;;
-+ 	elf64ppc|elf64lppc)
-+ 		if [ "$MMU_TYPE" == "Hash" ] ; then
-+-			printf -v TEXTADDR "%x" "$SLICE_SIZE"
-+-			HTLBOPTS="$HTLBOPTS -Ttext-segment=$TEXTADDR"
-++			printf -v TEXTADDR "0x%x" "$SLICE_SIZE"
-++			HTLBOPTS="$HTLBOPTS ${TEXTSEG}$TEXTADDR"
-+ 		fi ;;
-+ 	esac
-+ fi
-diff --git a/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_2.24.bb b/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_2.24.bb
-index dd2fbbc7cd..f1a68afb9d 100644
---- a/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_2.24.bb
-+++ b/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_2.24.bb
-@@ -26,6 +26,7 @@ SRC_URI = " \
-     file://0013-elflink.c-include-libgen.h-for-basename.patch \
-     file://0014-tests-Add-ldflags-to-linker-commandline-for-libheaps.patch \
-     file://0015-support-reproducible-builds.patch \
-+    file://0016-ld.hugetlbfs-Use-image-base-with-LLD.patch \
- "
+++	origDeviceDrivers := maps.Clone(deviceDrivers)
+++	t.Cleanup(func() {
+++		deviceDrivers = origDeviceDrivers
+++	})
+++	RegisterCDIDriver(cdiDir)
+++
+++	c := &container.Container{
+++		Config: &containertypes.Config{},
+++		HostConfig: &containertypes.HostConfig{
+++			Resources: containertypes.Resources{
+++				DeviceRequests: []containertypes.DeviceRequest{
+++					{
+++						Driver:    "cdi",
+++						DeviceIDs: []string{"example.com/device=foo"},
+++					},
+++				},
+++			},
+++		},
+++	}
+++	d := setupFakeDaemon(t, c)
+++
+++	s, err := d.createSpec(t.Context(), &configStore{}, c, nil)
+++	assert.NilError(t, err)
+++	assert.Assert(t, slices.Contains(s.Process.User.AdditionalGids, uint32(1234)), "CDI additional GID not present in OCI spec")
+++}
+++
++ // TestTmpfsDevShmNoDupMount checks that a user-specified /dev/shm tmpfs
++ // mount (as in "docker run --tmpfs /dev/shm:rw,size=NNN") does not result
++ // in "Duplicate mount point" error from the engine.
+diff --git a/recipes-containers/docker/files/0002-daemon-preserve-OCI-additionalGids-for-exec.patch b/recipes-containers/docker/files/0002-daemon-preserve-OCI-additionalGids-for-exec.patch
+new file mode 100644
+index 00000000..8c5c5102
+--- /dev/null
++++ b/recipes-containers/docker/files/0002-daemon-preserve-OCI-additionalGids-for-exec.patch
+@@ -0,0 +1,61 @@
++From 6a21aad6ca4fd964672fbf54dd409650a1e05110 Mon Sep 17 00:00:00 2001
++From: Kemal Rasim Sh <kshakir@qti.qualcomm.com>
++Date: Fri, 30 Oct 2026 09:02:24 +0200
++Subject: [PATCH] daemon: preserve OCI additionalGids for exec processes
++
++docker exec rebuilds user credentials using WithUser() and
++WithAdditionalGIDs(), which causes OCI Process.User.AdditionalGids
++defined during container creation to be lost.
++
++Preserve and merge the container's original AdditionalGids into the
++exec process specification so that supplemental groups injected by CDI
++or other OCI spec modifications remain available to exec sessions.
++
++Fixes a discrepancy where the container init process receives CDI
++additionalGids but processes started through docker exec do not.
++
++Upstream-Status: Submitted [https://github.com/moby/moby/pull/54104]
++
++Signed-off-by: Kemal Rasim Sh <kshakir@qti.qualcomm.com>
++---
++ daemon/exec_linux.go | 20 ++++++++++++++++++++
++ 1 file changed, 20 insertions(+)
++
++diff --git a/daemon/exec_linux.go b/daemon/exec_linux.go
++index 2d2f3d82f0999..014ab2f41c1b9 100644
++--- a/daemon/exec_linux.go
+++++ b/daemon/exec_linux.go
++@@ -27,6 +27,11 @@ func getUserFromContainerd(ctx context.Context, containerdCli *containerd.Client
++ 		return specs.User{}, err
++ 	}
++ 
+++	// Preserve OCI additional groups from container creation.
+++	inheritedGids := append(
+++		[]uint32(nil),
+++		spec.Process.User.AdditionalGids...,)
+++
++ 	opts := []coci.SpecOpts{
++ 		coci.WithUser(ec.User),
++ 		coci.WithAdditionalGIDs(ec.User),
++@@ -38,6 +43,21 @@ func getUserFromContainerd(ctx context.Context, containerdCli *containerd.Client
++ 		}
++ 	}
++ 
+++	// Merge inherited OCI groups.
+++	existing := map[uint32]struct{}{}
+++
+++	for _, gid := range spec.Process.User.AdditionalGids {
+++		existing[gid] = struct{}{}
+++	}
+++
+++	for _, gid := range inheritedGids {
+++		if _, ok := existing[gid]; !ok {
+++			spec.Process.User.AdditionalGids = append(
+++				spec.Process.User.AdditionalGids,
+++				gid,)
+++		}
+++	}
+++
++ 	return spec.Process.User, nil
++ }
++ 
+-- 
+2.43.0
 
- UPSTREAM_CHECK_GITTAGREGEX = "(?P<pver>\d+(\.\d+)+)"
