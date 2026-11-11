@@ -1,72 +1,72 @@
-Received: from rcdn-iport-2.cisco.com (rcdn-iport-2.cisco.com [173.37.86.73])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.3284.1794374984292199101
+Received: from rcdn-iport-4.cisco.com (rcdn-iport-4.cisco.com [173.37.86.75])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.3364.1794374983916368146
  for <openembedded-devel@lists.openembedded.org>;
  Tue, 10 Nov 2026 21:29:44 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=WQKpVdhs;
- spf=pass (domain: cisco.com, ip: 173.37.86.73, mailfrom: dkelaiya@cisco.com)
+ dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=hm6S6nlU;
+ spf=pass (domain: cisco.com, ip: 173.37.86.75, mailfrom: dkelaiya@cisco.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=cisco.com; i=@cisco.com; l=18284; q=dns/txt;
+  d=cisco.com; i=@cisco.com; l=15187; q=dns/txt;
   s=iport01; t=1794374984; x=1795584584;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=5t6KSy7vfPdKsXCtgz/8/DBoScy61xhT9/m3PJr2v4g=;
-  b=WQKpVdhsy/Fi72Ob8/RZQCRmwRdyNnUcyunHPeuL1GaR5tBvIlwEX+pu
-   +/ikuvwkkAswp1zRJHMp5m0wDbEo+oPr+ih55EbG9EnXTDzNMQv4ZEtZ/
-   sipN+1mh0HOMLUTiAU0t91a45aGBdXPDDWDd04/7glX7PGnAuVYP9pp7N
-   wVvsIM7W70pwnKlW7KRWK5vKApR83h4ke7iX1dwj2BHhIjuThuPmyzxcQ
-   eYDAI0sCLcEaczmmVwbweBEmM1MeVOfvp5vaqYdD4bJ0aaYIJCb2WYaiI
-   JWaxp1yy9Ul2W0qVzMOYeim1NJdvcNGFqLDp/uokMyCOYhGc2GSDm/QXn
-   A==;
-X-CSE-ConnectionGUID: cN0NEegrT6OGN891R6Xucg==
-X-CSE-MsgGUID: 59Ys0ctjQniYGxDfrsRoRg==
-X-IPAS-Result: =?us-ascii?q?A0BSAgDP+/Nq/5L/Ja1RCYEVgUSCV3VgQ0kDhFSRdAOBE?=
- =?us-ascii?q?4pSkj0UgWoPAQEBD0QNBAEBhD9GAk8VjToCJjQJDgECBAMCAwEBAQEBAQEBA?=
- =?us-ascii?q?QEBAQoBAQUBAQECAQcFgQ4Thk8NkBIBAgEDIwQLARgBLRAcAwECAwImAgIgC?=
- =?us-ascii?q?x0BBQgQCR6CZAGCOgM3AxEFuVF6fzOBAYMpATEFgR7YTA2CWgELFAGBCi6FQ?=
- =?us-ascii?q?oMAIAGFA10YAYR9JxsbgXKBFYJzdoEFgRpCAoE0EoN2gkgiBIIiehKBWoECB?=
- =?us-ascii?q?4UzA4ZbAoFPhyVIgQIcA1ksAVUTDQoLBwWBaAM1EioVbjIdgSM+Fy9YGwYFg?=
- =?us-ascii?q?RyBHoESgQddgSsoXQEhgQiBdgKCUYIAAgFJQQ4HRVMJJUMSRyQiCBIJARMaL?=
- =?us-ascii?q?AqBGjU8CSY/FQxnCxoFYQgCDQx0ORAwHiQvBRomPhsKfhgNSBEsNxUZBD0Bb?=
- =?us-ascii?q?geSboMVexMBJgUEEzkEKxIJBg89GAchHAIELJJDHQkIkBaCIYE1nmtxCiiDe?=
- =?us-ascii?q?Iwkjz6FfBozhASBV5JDklQLmH2OCoQKhQeMWBtNhGqBaDyBWXAVO4JnCUoZD?=
- =?us-ascii?q?1cBjVYLC4Ngg1LLCSYyAgkDLwEBBwIHDgMLgWiQACxyYAEB?=
-IronPort-Data: A9a23:jsHDFaOT8ubntyfvrR31lsFynXyQoLVcMsEvi/4bfWQNrUpw1mYCy
- jQYCm2CO62NNDOgedh+bI2/8xsCvcSGzNFkS3M5pCpnJ55oRWUpJjg4wmPYZX76whjrFRo/h
- ykmQoCeap1yFjmD9k/F3oHJ9RFUzbuPSqf3FNnKMyVwQR4MYCo6gHqPocZh6mJTqYb/WVzlV
- e/a+ZWFZgb8gmcsawr41orawP9RlKWq0N8nlgRWicBj5Df2i3QTBZQDEqC9R1OQapVUBOOzW
- 9HYx7i/+G7Dlz91Yj9yuu+mGqGiaue60Tmm0hK6aYD76vRxjnBaPpIACRYpQRw/ZwNlMDxG4
- I4lWZSYEW/FN0BX8QgXe0Ew/ypWZcWq9FJbSJSymZT78qHIT5fj6/5IVGcbMIICxrhQLkcep
- KUidgAQZR/W0opawJrjIgVtrt4oIM+uOMYUvWttiGmIS/0nWpvEBa7N4Le03h9p2ZsIRqmYP
- ZdEL2MzMnwsYDUXUrsTIJ49keOhh2j2WzZZs1mS46Ew5gA/ySQsi+K3boCIJIPiqcN9wxepv
- TrN42bABBArG8yzxyCeyHWWibqa9c/8cMdIfFGizdZtmFCVy2kZBREaWFf+rfSnh0qWX9NEN
- 1dS/TIjq6U3/kGnQtTxGRqirxa5UgU0QdFcFag+rQqK0KeRu1ffDWkfRTkHY9sj3CMreQEXO
- payt4uBLVRSXHe9EBpxKp/8QeuOBBUo
-IronPort-HdrOrdr: A9a23:yb1smKFyP+IeP6kGpLqEMMeALOsnbusQ8zAXPo5KJiC9Ffbo8f
- xG/c5rsiMc5wxxZJhNo7290ey7MBHhHP1OkO0s1MmZPDUO0VHAROoJ0WKh+UyEJ8SUzIBgPM
- lbH5SWcOeAbmRSvILd/BSyFcomzZ2s9aClgvqb8lJWJDsaEp2JK2xCe32m+oocfng/OaYE
-X-Talos-CUID: 9a23:mrcQOG4SkAiJkyerE9ss/2hMPO0ofWfhklD/BR/pUFw3eKCeRgrF
-X-Talos-MUID: =?us-ascii?q?9a23=3ADzA0yA8xgcfdKJHSlrui8k2Qf5o50r/2A1wPqJM?=
- =?us-ascii?q?HiuaUGSJqIA2atjviFw=3D=3D?=
+  bh=fDJukE3FBwP4GfwfI45J8y5RekQ3PP8r42m6Qr/bRXo=;
+  b=hm6S6nlUfKb2wgnC57UZHC7Xcqr62LNVacrlCimy2dOkyxlMmzcKu1iV
+   qfylgpbuB5HiMh7PPqY8/t7mjQrF2b+cjJrNtS77gDUBxKDZIs1PJku9X
+   czkSlNUJe1j1kiY4HQAB4nHNSD4CjI/dw3DOpXB/Of5GoYFeMNOHv/8GO
+   YrFgdAZqYlLVU1322WdyszTRqfBLqNpRN6Ncp0jmLsiHYDoVcHrn4AXSp
+   LldKEs0vFSu3leAktCRK/lyusuYo4Nxop0kfYBk2Om717qfPoNofjxURp
+   PxzaugscstDrDsz13VK5cTBjeR9/7AGjbTmcNc9Mu5HVSJu1XSfs0nteB
+   w==;
+X-CSE-ConnectionGUID: mG1Jr12xQ6WjqY2BgXstUQ==
+X-CSE-MsgGUID: x+NliCO3SKKYgFkwmWjvzQ==
+X-IPAS-Result: =?us-ascii?q?A0BQAgDN/PNq/4z/Ja1RAQiCWYJXdWBDSQOEVJF0A4tlh?=
+ =?us-ascii?q?WeMVoF+DwEBAQ9EDQQBAYQ/RgKOHgImNAkOAQIEAwIDAQEBAQEBAQEBAQEBC?=
+ =?us-ascii?q?gEBBQEBAQIBBwWBDhOGTw2QEgECAQMjBAsBGAEtEBwDAQIDAiYCAiALHQEFC?=
+ =?us-ascii?q?BAJgwIBgjoDNwMRBrlYen8zgQGDKQGBVNhMDYJaAQsUAYEKLoVCgwAgAYUDX?=
+ =?us-ascii?q?RgBRIQ5JxsbgXKBFYNpgQWBGkICAoEyBAGEA4JIIgSCDRV6EoFagQIHghuDG?=
+ =?us-ascii?q?AOGWwKBT4clSIECHANZLAFVEw0KCwcFgWgDNRIqFW4yHYEjPhcvWBsGBYEcg?=
+ =?us-ascii?q?R6BEoEHXYErKF0BIYEIgXYCglGCAAIBSUEOB0VTCSVDEkckIggSCQETGiwKg?=
+ =?us-ascii?q?Ro1PAkmPxUMZwsaBWEIAg0MdDkQMB4kLwUaJj4bCn4YDUgRLDcVGQQ9AW4Hk?=
+ =?us-ascii?q?m6CdR8BFkMiEwEHHwMCFRolMQxbGScPEykDkmcCkB6CIaAgcQoog3iMJI8+h?=
+ =?us-ascii?q?XwaM4QElBqSVAuYfY4KhAqRXxtNhGqBaDxGgRNwFTuCZwlKGQ+OKw4Lg2CFE?=
+ =?us-ascii?q?8lIJjICCQMvAQEHAgcOAwuBaJABgX0BAQ?=
+IronPort-Data: A9a23:j2hACa68we1ivmt/kZQKAwxRtGjGchMFZxGqfqrLsTDasY5as4F+v
+ msbCm/VOf6IYGumfY10bInl9RgO75KEztJjGQBsqHs8Zn8b8sCt6fZ1gavT04J+CuWZESqLO
+ u1HMoGowPgcFyGa+1H1dOex9RGQ7InQLpLkEunIJyttcgFtTSYlmHpLlvUw6mJSqYDR7zil5
+ 5Wo/KUzBHf/g2QqaztNsvrawP9SlK2aVA0w7wRWic9j5Dcyp1FNZLoDKKe4KWfPQ4U8NoaSW
+ +bZwbilyXjS9hErB8nNuu6TnpoiG+O60aCm0xK6aoD66vRwjnVaPpUTaJLwXXxqZwChxLid/
+ jniWauYEm/FNoWU8AgUvoIx/ytWZcWq85efSZSzXFD6I0DuKxPRL/tS4E4eOKJB2PwuW3F3q
+ 8MaMQFXRB+znP6L+efuIgVsrpxLwMjDJogTvDRkiDreF/tjGcuFSKTR7tge1zA17ixMNa+BP
+ IxCNnw1MUmGOkEXUrsUIMpWcOOAinrydzRZuVu9rqss6G+Vxwt0uFToGIeJJIHQFJ0Oxi50o
+ ErWvEL9Azo9b+e86guK3HGzg9DNgzHCDdd6+LqQs6QCbEeo7msLBRsbUFG2rfW0hguyVsxSL
+ 2QQ+zEytu417EGtQ9z3UhG0rXLCuQQTM+e8CMUg4w2Lj66R6AGDCy1cFXhKaccts4k9QjlCO
+ kK1ou4FzAdH6NW9IU9xPJ/Oxd9uEUD59VM/WBI=
+IronPort-HdrOrdr: A9a23:dIs/GK0tMdEFHbD0jX5cUgqjBGokLtp133Aq2lEZdPWaSKOlfq
+ eV7ZImPH7P+VEssR4b+OxoVJPsfZqYz+8W3WBzB8bHYOCZgguVxehZhOOIqQEIWReOk9K1vp
+ 0PT0ERMrHN5CBB/KXHyTj9Nco8y9+a963tr+Lfw3BxCTxOUchbnn5E4sLxKDwMeOGAbqBJbK
+ ah2g==
+X-Talos-CUID: 9a23:XeNxhW8WoCNSNAix3lmVv0s7Q+I/KyfN9SnvIVaJU0xmeKaJdGbFrQ==
+X-Talos-MUID: 9a23:wrciWwpCnUZXQ2l7UYAezyEhEsNpyIP1M2MuoJoouNaBCi5uKQ7I2Q==
 X-IronPort-Anti-Spam-Filtered: true
 X-IronPort-AV: E=Sophos;i="6.27,207,1787011200"; 
-   d="scan'208";a="532262567"
-Received: from rcdn-l-core-09.cisco.com ([173.37.255.146])
-  by rcdn-iport-2.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 11 Nov 2026 05:29:43 +0000
+   d="scan'208";a="546529030"
+Received: from rcdn-l-core-03.cisco.com ([173.37.255.140])
+  by rcdn-iport-4.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 11 Nov 2026 05:29:43 +0000
 Received: from sjc-ads-5675.cisco.com (sjc-ads-5675.cisco.com [10.28.88.189])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by rcdn-l-core-09.cisco.com (Postfix) with ESMTPS id 09B3318000238;
+	by rcdn-l-core-03.cisco.com (Postfix) with ESMTPS id 4FD96180001C8;
 	Wed, 11 Nov 2026 05:29:43 +0000 (GMT)
 Received: by sjc-ads-5675.cisco.com (Postfix, from userid 1887444)
-	id AA36ECBF203; Tue, 10 Nov 2026 21:29:42 -0800 (PST)
+	id B6740CBF21E; Tue, 10 Nov 2026 21:29:42 -0800 (PST)
 From: "Darsh Kelaiya -X (dkelaiya - E INFOCHIPS PRIVATE LIMITED at Cisco)" <dkelaiya@cisco.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Darsh Kelaiya <dkelaiya@cisco.com>
-Subject: [oe][meta-python][wrynose][PATCH 3/9] python3-filelock: fix CVE-2026-112909
-Date: Tue, 10 Nov 2026 21:29:32 -0800
-Message-Id: <20261111052938.3691463-4-dkelaiya@cisco.com>
+Subject: [oe][meta-python][wrynose][PATCH 5/9] python3-filelock: fix CVE-2026-112915
+Date: Tue, 10 Nov 2026 21:29:34 -0800
+Message-Id: <20261111052938.3691463-6-dkelaiya@cisco.com>
 X-Mailer: git-send-email 2.35.6
 In-Reply-To: <20261111052938.3691463-1-dkelaiya@cisco.com>
 References: <20261111052938.3691463-1-dkelaiya@cisco.com>
@@ -74,424 +74,328 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Outbound-Client-TLS: ANONYMOUS;sjc-ads-5675.cisco.com [10.28.88.189];TLSv1.3;TLS_AES_256_GCM_SHA384;256
 X-Outbound-SMTP-Client: 10.28.88.189, sjc-ads-5675.cisco.com
-X-Outbound-Node: rcdn-l-core-09.cisco.com
+X-Outbound-Node: rcdn-l-core-03.cisco.com
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Wed, 11 Nov 2026 05:29:50 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132116
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132117
 Content-Type: text/plain; charset="utf-8"
 
 From: Darsh Kelaiya <dkelaiya@cisco.com>
 
-Backport the UnixFileLock integrity fix [1] referenced by advisory [2].
-Open existing lock files without truncation and apply explicit modes
-only to files created by this acquisition. Keep descriptors pinned
-through ownership-aware fallback cleanup.
+Backport the schema-work guards from [1], as identified by advisory
+[2]. Bound SQLite schema size and query work before acquisition so a
+crafted lock database cannot cause unbounded schema processing.
 
-Include the required ENOSYS ownership handling [3] and the focused
-upstream descriptor-mock correction [4]. Reuse the preceding atomic
-helpers and preserve the existing 3.25.2 public API and FUSE retries.
+Retain 3.25.2's persistent connections and timeout behavior. Use the
+SQLite limits available in Wrynose's Python 3.14, disable statement
+caching for guarded work and retain both upstream malformed-schema
+regressions. The shared-path changes follow in the CVE-2026-112940 fix.
 
-[1] https://github.com/tox-dev/filelock/commit/e1e825b1992f69fb6b346dc395d5ae4893536c0a
-[2] https://github.com/tox-dev/filelock/security/advisories/GHSA-69hj-f68j-2879
-[3] https://github.com/tox-dev/filelock/commit/17a7c3182674601998588eb7aad6ec765c959251
-[4] https://github.com/tox-dev/filelock/commit/65f5ea039c30ac6a77f09a88c1920503bff10a82
+[1] https://github.com/tox-dev/filelock/commit/5e3f2ec0c5fb17cb2635b60b2b68bc63ab81ca2d
+[2] https://github.com/tox-dev/filelock/security/advisories/GHSA-cwqr-hh33-gh44
 
 Signed-off-by: Darsh Kelaiya <dkelaiya@cisco.com>
 ---
- .../python3-filelock/CVE-2026-112909_p1.patch | 312 ++++++++++++++++++
- .../python3-filelock/CVE-2026-112909_p2.patch |  53 +++
- .../python/python3-filelock_3.25.2.bb         |   2 +
- 3 files changed, 367 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-filelock/CVE-2026-112909_p1.patch
- create mode 100644 meta-python/recipes-devtools/python/python3-filelock/CVE-2026-112909_p2.patch
+ .../python3-filelock/CVE-2026-112915.patch    | 280 ++++++++++++++++++
+ .../python/python3-filelock_3.25.2.bb         |   1 +
+ 2 files changed, 281 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-filelock/CVE-2026-112915.patch
 
-diff --git a/meta-python/recipes-devtools/python/python3-filelock/CVE-2026-112909_p1.patch b/meta-python/recipes-devtools/python/python3-filelock/CVE-2026-112909_p1.patch
+diff --git a/meta-python/recipes-devtools/python/python3-filelock/CVE-2026-112915.patch b/meta-python/recipes-devtools/python/python3-filelock/CVE-2026-112915.patch
 new file mode 100644
-index 0000000000..b145023a31
+index 0000000000..47aa3a3aba
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-filelock/CVE-2026-112909_p1.patch
-@@ -0,0 +1,312 @@
-+From e1e825b1992f69fb6b346dc395d5ae4893536c0a Mon Sep 17 00:00:00 2001
++++ b/meta-python/recipes-devtools/python/python3-filelock/CVE-2026-112915.patch
+@@ -0,0 +1,280 @@
++From 5e3f2ec0c5fb17cb2635b60b2b68bc63ab81ca2d Mon Sep 17 00:00:00 2001
 +From: =?UTF-8?q?Bern=C3=A1t=20G=C3=A1bor?= <gaborjbernat@gmail.com>
-+Date: Sat, 17 Oct 2026 03:47:58 -0700
-+Subject: [PATCH] =?UTF-8?q?=F0=9F=90=9B=20fix(open):=20keep=20lock=20files?=
-+ =?UTF-8?q?=20intact,=20honor=20deadlines=20and=20mode=20(#835)?=
++Date: Sat, 17 Oct 2026 03:39:07 -0700
++Subject: [PATCH] =?UTF-8?q?=F0=9F=90=9B=20fix(read-write):=20keep=20SQLite?=
++ =?UTF-8?q?=20off=20shared=20names,=20bound=20schema=20(#834)?=
 +MIME-Version: 1.0
 +Content-Type: text/plain; charset=UTF-8
 +Content-Transfer-Encoding: 8bit
 +
-+CVE: CVE-2026-112909
-+Upstream-Status: Backport [https://github.com/tox-dev/filelock/commit/e1e825b1992f69fb6b346dc395d5ae4893536c0a]
++CVE: CVE-2026-112915
++Upstream-Status: Backport [https://github.com/tox-dev/filelock/commit/5e3f2ec0c5fb17cb2635b60b2b68bc63ab81ca2d]
 +
 +Backport Changes:
-+- Backport only the UnixFileLock file-integrity changes and regressions.
-+- Adapt acquisition, creation detection, cleanup and comments to the
-+  3.25.2 context and helper layout; keep its pathname, FUSE/NFS retries
-+  and unlink-on-release behavior.
-+- Reuse remove_own_file() from the preceding helper backport for ENOSYS
-+  cleanup while the created descriptor still pins its inode.
-+- Include the own-placeholder ENOSYS handling and regressions from
-+  commit 17a7c3182674601998588eb7aad6ec765c959251, plus the
-+  placeholder-swap regression from the preceding helper backport.
-+- Omit unrelated lease/oplock deadline and Windows permission changes,
-+  newer descriptor/read-write/strict/soft plumbing and its tests, plus
-+  associated build, task and documentation changes.
-+- Use this suite's Unix marks, inline flock mocks and two-line
-+  PID/hostname format instead of newer capability/identity helpers.
++- Split the schema-loading guard from the shared-path changes,
++  which are applied separately for CVE-2026-112940.
++- Place the guard in _rw_security.py and wrap the existing 3.25.2
++  configure/begin path instead of newer operation-context classes.
++- Keep the per-instance connection and existing timeout semantics.
++- Disable statement caching so guarded statements are prepared
++  within the schema budget.
++- Use sqlite3.Connection.setlimit supplied by Wrynose Python 3.14;
++  this ReadWriteLock backport requires Python 3.11 or newer.
++- Retain both upstream malformed-schema fixtures in the dedicated
++  regression file and explicitly close persistent connections.
++- Omit unrelated path, Windows, fork and coverage-task changes
++  from this split patch; applicable path changes follow separately.
 +
-+Co-authored-by: pre-commit-ci[bot] <66853113+pre-commit-ci[bot]@users.noreply.github.com>
 +Signed-off-by: Darsh Kelaiya <dkelaiya@cisco.com>
 +---
-+ src/filelock/_unix.py       | 82 +++++++++++++++++++++++--------------
-+ tests/test_filelock.py      | 45 +++++++++++++++++++-
-+ tests/test_unix_fallback.py | 79 ++++++++++++++++++++++++++++++++++-
-+ 3 files changed, 171 insertions(+), 35 deletions(-)
++ src/filelock/_read_write.py       |  45 ++++++-------
++ src/filelock/_rw_security.py      |  34 ++++++++--
++ tests/test_read_write_security.py | 101 ++++++++++++++++++++++++++++++
++ 3 files changed, 154 insertions(+), 26 deletions(-)
 +
-+diff --git a/src/filelock/_unix.py b/src/filelock/_unix.py
-+index ac5f26a..650be40 100644
-+--- a/src/filelock/_unix.py
-++++ b/src/filelock/_unix.py
-+@@ -9,7 +9,7 @@ from pathlib import Path
-+ from typing import cast
++diff --git a/src/filelock/_read_write.py b/src/filelock/_read_write.py
++index e8b6420..66a4664 100644
++--- a/src/filelock/_read_write.py
+++++ b/src/filelock/_read_write.py
++@@ -13,7 +13,7 @@ from weakref import WeakValueDictionary
 + 
-+ from ._api import BaseFileLock
-+-from ._util import ensure_directory_exists
-++from ._util import ensure_directory_exists, remove_own_file
-+ 
-+ #: a flag to indicate if the fcntl API is available
-+ has_fcntl = False
-+@@ -45,52 +45,72 @@ else:  # pragma: win32 no cover
-+ 
-+         def _acquire(self) -> None:  # noqa: C901, PLR0912
-+             ensure_directory_exists(self.lock_file)
-+-            open_flags = os.O_RDWR | os.O_TRUNC
-++            if (opened := self._open_lock_file()) is None:
-++                return
-++            fd, created = opened
-++            keep_fd = False
-++            missing_flock = False
-++            try:
-++                if created and self.has_explicit_mode:
-++                    # Before the flock: a peer may win it first, and only the creator may set the mode.
-++                    # An fchmod that answers ENOSYS says nothing about flock.
-++                    with suppress(PermissionError):
-++                        os.fchmod(fd, self._context.mode)
-++                try:
-++                    fcntl.flock(fd, fcntl.LOCK_EX | fcntl.LOCK_NB)
-++                except OSError as exception:
-++                    if exception.errno == ENOSYS:
-++                        # Keep the descriptor open so a peer cannot reuse this inode while its own placeholder
-++                        # is removed. An existing file may be a peer's live marker and must stay.
-++                        if created:
-++                            with suppress(OSError):
-++                                remove_own_file(self.lock_file, fd)
-++                        missing_flock = True
-++                    elif exception.errno not in {EAGAIN, EWOULDBLOCK}:
-++                        raise
-++                else:
-++                    # A lock on an inode unlinked between open() and flock() guards no name. Retry it.
-++                    if os.fstat(fd).st_nlink != 0:
-++                        self._context.lock_file_fd = fd
-++                        keep_fd = True
-++            except BaseException:
-++                self._context.lock_file_fd = None
-++                keep_fd = False
-++                raise
-++            finally:
-++                if not keep_fd:
-++                    os.close(fd)
-++            if missing_flock:
-++                self._fallback_to_soft_lock()
-++                self._acquire()
-++
-++        def _open_lock_file(self) -> tuple[int, bool] | None:
-++            # A renamed or hard-linked regular file is indistinguishable from an existing lock file: do not
-++            # truncate it. O_EXCL identifies a file this acquire created, so only that file receives its mode.
-++            open_flags = os.O_RDWR
-+             o_nofollow = getattr(os, "O_NOFOLLOW", None)
-+             if o_nofollow is not None:
-+                 open_flags |= o_nofollow
-+-            open_flags |= os.O_CREAT
-+             open_mode = self._open_mode()
-+             try:
-+-                fd = os.open(self.lock_file, open_flags, open_mode)
-++                return os.open(self.lock_file, open_flags | os.O_CREAT | os.O_EXCL, open_mode), True
-++            except FileExistsError:
-++                pass
-+             except FileNotFoundError:
-+                 # On FUSE/NFS, os.open(O_CREAT) is not atomic: LOOKUP + CREATE can be split, allowing a concurrent
-+                 # unlink() to delete the file between them. For valid paths, treat ENOENT as transient contention.
-+                 # For invalid paths (e.g., empty string), re-raise to avoid infinite retry loops.
-+                 if self.lock_file and Path(self.lock_file).parent.exists():
-+-                    return
-++                    return None
-+                 raise
-+             except PermissionError:
-+                 # Sticky-bit dirs (e.g. /tmp): O_CREAT fails if the file is owned by another user (#317).
-+-                # Fall back to opening the existing file without O_CREAT.
-+                 if not Path(self.lock_file).exists():
-+                     raise
-+-                try:
-+-                    fd = os.open(self.lock_file, open_flags & ~os.O_CREAT, open_mode)
-+-                except FileNotFoundError:
-+-                    return
-+-            if self.has_explicit_mode:
-+-                with suppress(PermissionError):
-+-                    os.fchmod(fd, self._context.mode)
-+             try:
-+-                fcntl.flock(fd, fcntl.LOCK_EX | fcntl.LOCK_NB)
-+-            except OSError as exception:
-+-                os.close(fd)
-+-                if exception.errno == ENOSYS:
-+-                    with suppress(OSError):
-+-                        Path(self.lock_file).unlink()
-+-                    self._fallback_to_soft_lock()
-+-                    self._acquire()
-+-                    return
-+-                if exception.errno not in {EAGAIN, EWOULDBLOCK}:
-+-                    raise
-+-            else:
-+-                # The file may have been unlinked by a concurrent _release() between our open() and flock().
-+-                # A lock on an unlinked inode is useless — discard and let the retry loop start fresh.
-+-                if os.fstat(fd).st_nlink == 0:
-+-                    os.close(fd)
-+-                else:
-+-                    self._context.lock_file_fd = fd
-++                return os.open(self.lock_file, open_flags, open_mode), False
-++            except FileNotFoundError:
-++                return None
-+ 
-+         def _fallback_to_soft_lock(self) -> None:
-+             from ._soft import SoftFileLock  # noqa: PLC0415
-+diff --git a/tests/test_filelock.py b/tests/test_filelock.py
-+index 38c7b90..b733f1b 100644
-+--- a/tests/test_filelock.py
-++++ b/tests/test_filelock.py
-+@@ -7,10 +7,10 @@ import sys
-+ import threading
-+ from concurrent.futures import ThreadPoolExecutor
-+ from contextlib import contextmanager
-+-from errno import ENOSYS
-++from errno import EIO, ENOSYS, EWOULDBLOCK
-+ from inspect import getframeinfo, stack
-+ from pathlib import Path, PurePath
-+-from stat import S_IWGRP, S_IWOTH, S_IWUSR, filemode
-++from stat import S_IMODE, S_IWGRP, S_IWOTH, S_IWUSR, filemode
-+ from types import TracebackType
-+ from typing import TYPE_CHECKING, Any
-+ from uuid import uuid4
-+@@ -1146,3 +1146,44 @@ def test_filenotfound_on_fuse_nfs_retries(tmp_path: Path, mocker: MockerFixture)
-+     # First call failed with ENOENT, retry succeeded
-+     assert call_count >= 2
-+     lock.release()
-++
-++
-++@pytest.mark.skipif(sys.platform == "win32", reason="Unix flock semantics")
-++@pytest.mark.parametrize("mode", [pytest.param(-1, id="default-mode"), pytest.param(0o666, id="explicit-mode")])
-++def test_winner_leaves_existing_file_as_found(tmp_path: Path, mode: int) -> None:
-++    (journal := tmp_path / "journal.log").write_text("data", encoding="utf-8")
-++    journal.chmod(0o600)
-++    # A regular file with one name is indistinguishable from a lock file an earlier holder left.
-++    journal.rename(lock_path := tmp_path / "resource.lock")
-++
-++    with FileLock(lock_path, timeout=0, mode=mode):
-++        assert (lock_path.read_text(encoding="utf-8"), S_IMODE(lock_path.stat().st_mode)) == ("data", 0o600)
-++
-++
-++@pytest.mark.skipif(sys.platform == "win32", reason="Unix flock semantics")
-++def test_creator_that_loses_the_flock_applies_mode(tmp_path: Path, mocker: MockerFixture) -> None:
-++    lock_path = tmp_path / "resource.lock"
-++    # A peer may win the flock first, and only the creator may set the mode.
-++    mocker.patch("filelock._unix.fcntl.flock", side_effect=OSError(EWOULDBLOCK, "Resource temporarily unavailable"))
-++
-++    initial_umask = os.umask(0o077)
-++    try:
-++        with pytest.raises(Timeout):
-++            FileLock(lock_path, timeout=0, mode=0o666).acquire()
-++    finally:
-++        os.umask(initial_umask)
-++
-++    assert S_IMODE(lock_path.stat().st_mode) == 0o666
-++
-++
-++@pytest.mark.skipif(sys.platform == "win32", reason="Unix flock semantics")
-++@pytest.mark.parametrize("failing", [pytest.param("fchmod", id="fchmod"), pytest.param("fstat", id="fstat")])
-++def test_post_open_failure_closes_fd(tmp_path: Path, mocker: MockerFixture, failing: str) -> None:
-++    mocker.patch(f"os.{failing}", side_effect=OSError(EIO, "Input/output error"))
-++    open_spy = mocker.spy(os, "open")
-++    close_spy = mocker.spy(os, "close")
-++
-++    with pytest.raises(OSError, match="Input/output error"):
-++        FileLock(tmp_path / "resource.lock", timeout=0, mode=0o644).acquire()
-++
-++    assert any(call.args and call.args[0] == open_spy.spy_return for call in close_spy.call_args_list)
-+diff --git a/tests/test_unix_fallback.py b/tests/test_unix_fallback.py
-+index b99c716..d48a1f6 100644
-+--- a/tests/test_unix_fallback.py
-++++ b/tests/test_unix_fallback.py
-+@@ -3,12 +3,13 @@ from __future__ import annotations
-+ import os
-+ import socket
-+ import sys
-++import warnings
-+ from errno import EIO, ENOSYS
-+-from typing import TYPE_CHECKING
-++from typing import TYPE_CHECKING, Final
-+ 
-+ import pytest
-+ 
-+-from filelock import SoftFileLock, UnixFileLock
-++from filelock import SoftFileLock, Timeout, UnixFileLock
++ from ._api import AcquireReturnProxy
++ from ._error import Timeout
++-from ._rw_security import canonical, connect
+++from ._rw_security import bounded_schema, canonical, connect
 + 
 + if TYPE_CHECKING:
-+     from pathlib import Path
-+@@ -111,3 +112,77 @@ def test_release_suppresses_eio_on_close(tmp_path: Path, mocker: MockerFixture)
-+     mocker.patch("filelock._unix.os.close", side_effect=_close_eio)
-+     lock.release()
-+     assert not lock.is_locked
++     from collections.abc import Generator
++@@ -189,27 +189,28 @@ class ReadWriteLock(metaclass=_ReadWriteLockMeta):
++     def _configure_and_begin(
++         self, mode: Literal["read", "write"], timeout: float, *, blocking: bool, start_time: float
++     ) -> None:
++-        waited = time.perf_counter() - start_time
++-        timeout_ms = timeout_for_sqlite(timeout, blocking=blocking, already_waited=waited)
++-        self._con.execute(f"PRAGMA busy_timeout={timeout_ms};").close()
++-        # Use legacy journal mode (not WAL) because WAL does not block readers when a concurrent EXCLUSIVE
++-        # write transaction is active, making read-write locking impossible without modifying table data.
++-        # MEMORY is safe here since no actual writes happen — crashes cannot corrupt the DB.
++-        # See https://sqlite.org/lang_transaction.html#deferred_immediate_and_exclusive_transactions
++-        #
++-        # Set here (not in __init__) because this pragma itself may block on a locked database,
++-        # so it must run after busy_timeout is configured above.
++-        self._con.execute("PRAGMA journal_mode=MEMORY;").close()
++-        # Recompute remaining timeout after the potentially blocking journal_mode pragma.
++-        waited = time.perf_counter() - start_time
++-        if (recomputed := timeout_for_sqlite(timeout, blocking=blocking, already_waited=waited)) != timeout_ms:
++-            self._con.execute(f"PRAGMA busy_timeout={recomputed};").close()
++-        stmt = "BEGIN EXCLUSIVE TRANSACTION;" if mode == "write" else "BEGIN TRANSACTION;"
++-        self._con.execute(stmt).close()
++-        if mode == "read":
++-            # A SELECT is needed to force SQLite to actually acquire the SHARED lock on the database.
++-            # https://www.sqlite.org/lockingv3.html#transaction_control
++-            self._con.execute("SELECT name FROM sqlite_schema LIMIT 1;").close()
+++        with bounded_schema(self._con, self.lock_file):
+++            waited = time.perf_counter() - start_time
+++            timeout_ms = timeout_for_sqlite(timeout, blocking=blocking, already_waited=waited)
+++            self._con.execute(f"PRAGMA busy_timeout={timeout_ms};").close()
+++            # Use legacy journal mode (not WAL) because WAL does not block readers when a concurrent EXCLUSIVE
+++            # write transaction is active, making read-write locking impossible without modifying table data.
+++            # MEMORY is safe here since no actual writes happen — crashes cannot corrupt the DB.
+++            # See https://sqlite.org/lang_transaction.html#deferred_immediate_and_exclusive_transactions
+++            #
+++            # Set here (not in __init__) because this pragma itself may block on a locked database,
+++            # so it must run after busy_timeout is configured above.
+++            self._con.execute("PRAGMA journal_mode=MEMORY;").close()
+++            # Recompute remaining timeout after the potentially blocking journal_mode pragma.
+++            waited = time.perf_counter() - start_time
+++            if (recomputed := timeout_for_sqlite(timeout, blocking=blocking, already_waited=waited)) != timeout_ms:
+++                self._con.execute(f"PRAGMA busy_timeout={recomputed};").close()
+++            stmt = "BEGIN EXCLUSIVE TRANSACTION;" if mode == "write" else "BEGIN TRANSACTION;"
+++            self._con.execute(stmt).close()
+++            if mode == "read":
+++                # A SELECT is needed to force SQLite to actually acquire the SHARED lock on the database.
+++                # https://www.sqlite.org/lockingv3.html#transaction_control
+++                self._con.execute("SELECT name FROM sqlite_schema LIMIT 1;").close()
++ 
++     def _acquire(self, mode: Literal["read", "write"], timeout: float, *, blocking: bool) -> AcquireReturnProxy:
++         opposite = "write" if mode == "read" else "read"
++diff --git a/src/filelock/_rw_security.py b/src/filelock/_rw_security.py
++index 6916212..9e4f92f 100644
++--- a/src/filelock/_rw_security.py
+++++ b/src/filelock/_rw_security.py
++@@ -7,10 +7,13 @@ import stat
++ import sys
++ import threading
++ from collections import deque
++-from contextlib import suppress
+++from contextlib import contextmanager, suppress
++ from dataclasses import dataclass, field
++ from itertools import count
++-from typing import NamedTuple
+++from typing import TYPE_CHECKING, NamedTuple
+++
+++if TYPE_CHECKING:
+++    from collections.abc import Generator
++ 
++ _DatabaseIdentity = tuple[int, int]
++ _DB_OPEN_FLAGS = os.O_RDWR | os.O_CREAT | getattr(os, "O_NOFOLLOW", 0) | getattr(os, "O_NONBLOCK", 0)
++@@ -154,14 +157,14 @@ def _open_lock_database(database: str) -> tuple[int, _DatabaseIdentity]:
++ def connect(database: str) -> sqlite3.Connection:
++     if sys.platform == "win32":
++         # Windows handle hardening is not part of the POSIX recipe backport.
++-        return sqlite3.connect(database, check_same_thread=False)
+++        return sqlite3.connect(database, check_same_thread=False, cached_statements=0)
++     claimed: list[_Probe] = []
++     try:
++         if (probe := _PROBE_DESCRIPTORS.adopt(database, claimed)) is None:
++             fd, identity = _open_lock_database(database)
++             probe = _PROBE_DESCRIPTORS.retain(fd, identity, claimed)
++         _PROBE_DESCRIPTORS.drain()
++-        connection = sqlite3.connect(f"{_FD_DIR}/{probe.fd}", check_same_thread=False, factory=_Connection)
+++        connection = sqlite3.connect(f"{_FD_DIR}/{probe.fd}", check_same_thread=False, factory=_Connection, cached_statements=0)
++         connection._probe = probe
++         connection.database_identity = probe.identity
++         claimed.clear()
++@@ -169,3 +172,26 @@ def connect(database: str) -> sqlite3.Connection:
++     finally:
++         for probe in claimed:
++             _PROBE_DESCRIPTORS.release(probe)
 ++
 ++
-++@unix_only
-++def test_fchmod_enosys_is_not_a_missing_flock(tmp_path: Path, mocker: MockerFixture) -> None:  # pragma: needs fcntl
-++    mocker.patch("os.fchmod", side_effect=OSError(ENOSYS, "Function not implemented"))
-++    lock = UnixFileLock(tmp_path / "test.lock", mode=0o644)
+++@contextmanager
+++def bounded_schema(connection: sqlite3.Connection, database: str) -> Generator[None]:
+++    # The first statement loads the file's complete schema, which no timeout bounds, and a lock database has none.
+++    # Waiting for a lock runs no virtual machine steps, so a step budget bounds only that load.
+++    calls = count()
+++    max_calls = 10
+++    connection.setlimit(sqlite3.SQLITE_LIMIT_LENGTH, 4096)
+++    connection.set_progress_handler(lambda: next(calls) >= max_calls, 1000)
+++    try:
+++        yield
+++    except sqlite3.DatabaseError as error:
+++        # An interrupted schema load reports a malformed schema rather than the interrupt.
+++        if isinstance(error, sqlite3.DataError) or next(calls) > max_calls:
+++            msg = (
+++                f"refusing a lock database whose schema is too large to load: {database!r}; "
+++                "give ReadWriteLock a file of its own"
+++            )
+++            raise ValueError(msg) from error
+++        raise
+++    finally:
+++        connection.set_progress_handler(None, 0)
++diff --git a/tests/test_read_write_security.py b/tests/test_read_write_security.py
++index e2b862a..a995c80 100644
++--- a/tests/test_read_write_security.py
+++++ b/tests/test_read_write_security.py
++@@ -2,6 +2,8 @@ from __future__ import annotations
++ 
++ import errno
++ import os
+++import struct
+++from typing import Literal
++ import subprocess
++ import sys
++ from pathlib import Path
++@@ -65,6 +67,105 @@ def test_closing_a_peer_keeps_another_connections_lock(tmp_path: Path) -> None:
++         holder.close()
++ 
++ 
+++_PAGE_SIZE = 4096
 ++
-++    with warnings.catch_warnings(record=True) as recorded:
-++        warnings.simplefilter("always")
-++        with pytest.raises(OSError, match="Function not implemented"):
-++            lock.acquire()
 ++
-++    assert not recorded
-++    assert not isinstance(lock, SoftFileLock)
+++_TABLE_LEAF_PAGE = 0x0D
 ++
 ++
-++@unix_only
-++@pytest.mark.filterwarnings("ignore:flock not supported on this filesystem:UserWarning")
-++def test_fallback_removes_placeholder_it_created(tmp_path: Path, mocker: MockerFixture) -> None:  # pragma: needs fcntl
-++    mocker.patch(_FLOCK_PATCH_TARGET, side_effect=_ENOSYS_SIDE_EFFECT)
-++    lock = UnixFileLock(tmp_path / "test.lock")
-++
-++    lock.acquire(timeout=0)
-++    assert lock.is_locked
-++    lock.release()
-++
-++
-++@unix_only
-++@pytest.mark.filterwarnings("ignore:flock not supported on this filesystem:UserWarning")
-++def test_fallback_keeps_peer_soft_marker(tmp_path: Path, mocker: MockerFixture) -> None:  # pragma: needs fcntl
-++    mocker.patch(_FLOCK_PATCH_TARGET, side_effect=_ENOSYS_SIDE_EFFECT)
-++    lock_path = tmp_path / "test.lock"
-++    holder = UnixFileLock(lock_path)
-++    holder.acquire()
-++    marker = lock_path.stat().st_ino, lock_path.read_bytes()
-++
-++    with pytest.raises(Timeout):
-++        UnixFileLock(lock_path).acquire(timeout=0)
-++    assert (lock_path.stat().st_ino, lock_path.read_bytes()) == marker
-++    holder.release()
-++
-++
-++@unix_only
-++@pytest.mark.filterwarnings("ignore:flock not supported on this filesystem:UserWarning")
-++def test_fallback_spares_a_peer_marker_that_replaced_its_placeholder(  # pragma: needs fcntl
-++    tmp_path: Path, mocker: MockerFixture
+++@pytest.mark.timeout(60)
+++@pytest.mark.parametrize("mode", [pytest.param("read", id="read"), pytest.param("write", id="write")])
+++def test_read_write_lock_refuses_a_schema_that_never_finishes_loading(
+++    tmp_path: Path, mode: Literal["read", "write"]
 ++) -> None:
-++    lock_path: Final = tmp_path / "test.lock"
-++    peer_marker: Final = f"{os.getpid()}\n{socket.gethostname()}\n"
-++    lstat: Final = os.lstat
-++    stalled: list[bool] = []
+++    # Every interior page leads to the next one through each of its 660 cells, so the schema has 661**4 rows to scan.
+++    database = tmp_path / "lock.db"
+++    pages = [
+++        _btree_page(
+++            0x05,  # table interior page
+++            struct.pack(">IB", number + 1, 1),
+++            660,
+++            right_child=struct.pack(">I", number + 1),
+++            header_at=100 if number == 1 else 0,
+++        )
+++        for number in range(1, 5)
+++    ]
+++    pages.append(_btree_page(_TABLE_LEAF_PAGE, bytes([6, 1, 6, 0, 0, 0, 0, 0]), 1))
+++    pages[0][:100] = _file_header(len(pages))
+++    database.write_bytes(b"".join(pages))
+++    lock = ReadWriteLock(database, is_singleton=False)
 ++
-++    def flock_missing(fd: int, operation: int) -> None:
-++        stalled.append(False)
-++        raise OSError(ENOSYS, f"Function not implemented for {fd} with {operation}")
+++    try:
+++        with pytest.raises(ValueError, match="schema"):
+++            (lock.acquire_read if mode == "read" else lock.acquire_write)(timeout=1)
+++    finally:
+++        lock.close()
 ++
-++    def lstat_then_peer_replaces_placeholder(path: str, *, dir_fd: int | None = None) -> os.stat_result:
-++        found: Final = lstat(path, dir_fd=dir_fd)
-++        if stalled == [False] and os.fspath(path) == os.fspath(lock_path):
-++            # The cleanup stalls past the grace a waiting soft lock gives an empty file, which evicts the placeholder
-++            # and publishes its own marker.
-++            stalled[0] = True
-++            lock_path.unlink()
-++            lock_path.write_text(peer_marker, encoding="utf-8")
-++        return found
 ++
-++    mocker.patch("filelock._unix.fcntl.flock", side_effect=flock_missing)
-++    mocker.patch("os.lstat", side_effect=lstat_then_peer_replaces_placeholder)
-++    with pytest.raises(Timeout):
-++        UnixFileLock(lock_path).acquire(timeout=0)
-++    mocker.stopall()
+++@pytest.mark.parametrize("mode", [pytest.param("read", id="read"), pytest.param("write", id="write")])
+++def test_read_write_lock_refuses_a_schema_row_longer_than_a_lock_needs(
+++    tmp_path: Path, mode: Literal["read", "write"]
+++) -> None:
+++    # The row's text continues on an overflow page that names itself as the next one, so one page of disk reads as a
+++    # megabyte, far more schema text than a lock database holds and below SQLite's one-billion-byte string limit.
+++    long_sql_length = 1_000_000
+++    database = tmp_path / "lock.db"
+++    statement = b"CREATE TABLE application (value) --"
+++    columns = [b"table", b"application", b"application", b"\x02"]
+++    serial_types = [13 + 2 * len(column) for column in columns[:3]] + [1, 13 + 2 * long_sql_length]
+++    record_header = b"".join(_varint(serial_type) for serial_type in serial_types)
+++    record_start = _varint(len(record_header) + 1) + record_header + b"".join(columns) + statement
+++    record_length = len(record_start) + long_sql_length - len(statement)
+++    # How much of an overflowing record a table leaf keeps on its own page.
+++    local = (minimum := (_PAGE_SIZE - 12) * 32 // 255 - 23) + (record_length - minimum) % (_PAGE_SIZE - 4)
+++    cell = _varint(record_length) + _varint(1) + record_start.ljust(local, b"-") + struct.pack(">I", 2)
+++    leaf = _btree_page(_TABLE_LEAF_PAGE, cell, 1, header_at=100)
+++    page_count = long_sql_length // _PAGE_SIZE + 2
+++    leaf[:100] = _file_header(page_count)
+++    database.write_bytes(leaf + struct.pack(">I", 2).ljust(_PAGE_SIZE, b"-"))
+++    # SQLite refuses a record longer than the file, which a hole stretches at no cost.
+++    os.truncate(database, page_count * _PAGE_SIZE)
+++    lock = ReadWriteLock(database, is_singleton=False)
 ++
-++    # Where os.link cannot restore it, the peer's marker waits under a break name, but it is never deleted.
-++    assert peer_marker in [path.read_text(encoding="utf-8") for path in tmp_path.glob("test.lock*")]
-diff --git a/meta-python/recipes-devtools/python/python3-filelock/CVE-2026-112909_p2.patch b/meta-python/recipes-devtools/python/python3-filelock/CVE-2026-112909_p2.patch
-new file mode 100644
-index 0000000000..62bff82a46
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-filelock/CVE-2026-112909_p2.patch
-@@ -0,0 +1,53 @@
-+From 65f5ea039c30ac6a77f09a88c1920503bff10a82 Mon Sep 17 00:00:00 2001
-+From: =?UTF-8?q?Bern=C3=A1t=20G=C3=A1bor?= <gaborjbernat@gmail.com>
-+Date: Tue, 27 Oct 2026 21:01:48 -0700
-+Subject: [PATCH] =?UTF-8?q?=F0=9F=A7=AA=20test:=20narrow=20fstat=20mocks?=
-+ =?UTF-8?q?=20to=20the=20lock's=20descriptor=20(#893)?=
-+MIME-Version: 1.0
-+Content-Type: text/plain; charset=UTF-8
-+Content-Transfer-Encoding: 8bit
-+
-+CVE: CVE-2026-112909
-+Upstream-Status: Backport [https://github.com/tox-dev/filelock/commit/65f5ea039c30ac6a77f09a88c1920503bff10a82]
-+
-+Backport Changes:
-+- Retain only the test_post_open_failure_closes_fd() correction; the
-+  other newer test modules and cases are absent from this backport.
-+- Add the required Final import and retain the target Unix skip mark.
-+
-+Signed-off-by: Darsh Kelaiya <dkelaiya@cisco.com>
-+---
-+ tests/test_filelock.py | 11 +++++++++--
-+ 1 file changed, 9 insertions(+), 2 deletions(-)
-+
-+diff --git a/tests/test_filelock.py b/tests/test_filelock.py
-+index b733f1b..0479c85 100644
-+--- a/tests/test_filelock.py
-++++ b/tests/test_filelock.py
-+@@ -12,7 +12,7 @@ from inspect import getframeinfo, stack
-+ from pathlib import Path, PurePath
-+ from stat import S_IMODE, S_IWGRP, S_IWOTH, S_IWUSR, filemode
-+ from types import TracebackType
-+-from typing import TYPE_CHECKING, Any
-++from typing import TYPE_CHECKING, Any, Final
-+ from uuid import uuid4
-+ from weakref import WeakValueDictionary
-+ 
-+@@ -1179,9 +1179,16 @@ def test_creator_that_loses_the_flock_applies_mode(tmp_path: Path, mocker: Mocke
-+ @pytest.mark.skipif(sys.platform == "win32", reason="Unix flock semantics")
-+ @pytest.mark.parametrize("failing", [pytest.param("fchmod", id="fchmod"), pytest.param("fstat", id="fstat")])
-+ def test_post_open_failure_closes_fd(tmp_path: Path, mocker: MockerFixture, failing: str) -> None:
-+-    mocker.patch(f"os.{failing}", side_effect=OSError(EIO, "Input/output error"))
-+     open_spy = mocker.spy(os, "open")
-+     close_spy = mocker.spy(os, "close")
-++    real: Final = getattr(os, failing)
+++    try:
+++        with pytest.raises(ValueError, match="schema"):
+++            (lock.acquire_read if mode == "read" else lock.acquire_write)(timeout=1)
+++    finally:
+++        lock.close()
 ++
-++    def fail_for_the_lock_file(fd: int, *args: int) -> os.stat_result | None:
-++        if fd == open_spy.spy_return:
-++            raise OSError(EIO, "Input/output error")
-++        return real(fd, *args)
 ++
-++    mocker.patch(f"os.{failing}", side_effect=fail_for_the_lock_file)
-+ 
-+     with pytest.raises(OSError, match="Input/output error"):
-+         FileLock(tmp_path / "resource.lock", timeout=0, mode=0o644).acquire()
+++def _btree_page(kind: int, cell: bytes, cell_count: int, *, right_child: bytes = b"", header_at: int = 0) -> bytearray:
+++    page = bytearray(_PAGE_SIZE)
+++    cell_at = _PAGE_SIZE - len(cell)
+++    page[cell_at:] = cell
+++    # Every slot of the cell pointer array names the one cell.
+++    header = struct.pack(">BHHHB", kind, 0, cell_count, cell_at, 0) + right_child
+++    pointers = struct.pack(">H", cell_at) * cell_count
+++    page[header_at : header_at + len(header) + len(pointers)] = header + pointers
+++    return page
+++
+++
+++def _file_header(page_count: int) -> bytes:
+++    # Rollback journal format, a matching change counter and version-valid-for, so SQLite trusts the page count.
+++    return struct.pack(
+++        ">16sH6B12I20s2I",
+++        b"SQLite format 3\0",
+++        _PAGE_SIZE,
+++        *(1, 1, 0, 64, 32, 32),
+++        *(1, page_count, 0, 0, 1, 4, 0, 0, 1, 0, 0, 0),
+++        b"",
+++        1,
+++        3040001,
+++    )
+++
+++
+++def _varint(value: int) -> bytes:
+++    groups = [value & 0x7F]
+++    while value := value >> 7:
+++        groups.insert(0, value & 0x7F | 0x80)
+++    return bytes(groups)
+++
+++
++ def _fail_opened_database_fstat(database: Path, monkeypatch: pytest.MonkeyPatch) -> list[int]:
++     opened: list[int] = []
++     real_open = os.open
 diff --git a/meta-python/recipes-devtools/python/python3-filelock_3.25.2.bb b/meta-python/recipes-devtools/python/python3-filelock_3.25.2.bb
-index 352ab29a29..a4bd002f1f 100644
+index db7f9187de..4f059e438e 100644
 --- a/meta-python/recipes-devtools/python/python3-filelock_3.25.2.bb
 +++ b/meta-python/recipes-devtools/python/python3-filelock_3.25.2.bb
-@@ -12,6 +12,8 @@ SRC_URI += " file://run-ptest \
-     file://CVE-2026-112935_p1.patch \
-     file://CVE-2026-112935_p2.patch \
-     file://CVE-2026-112935_p3.patch \
-+    file://CVE-2026-112909_p1.patch \
-+    file://CVE-2026-112909_p2.patch \
+@@ -15,6 +15,7 @@ SRC_URI += " file://run-ptest \
+     file://CVE-2026-112909_p1.patch \
+     file://CVE-2026-112909_p2.patch \
+     file://CVE-2026-112936.patch \
++    file://CVE-2026-112915.patch \
  "
  SRC_URI[sha256sum] = "b64ece2b38f4ca29dd3e810287aa8c48182bbecd1ae6e9ae126c9b35f1382694"
  
