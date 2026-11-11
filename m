@@ -1,386 +1,328 @@
-Received: from rcdn-iport-4.cisco.com (rcdn-iport-4.cisco.com [173.37.86.75])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.3373.1794375526351485394
+Received: from mail-dl1-f46.google.com (mail-dl1-f46.google.com [74.125.82.46])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.3546.1794376449300784715
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 10 Nov 2026 21:38:46 -0800
+ Tue, 10 Nov 2026 21:54:09 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=TnfB2Ndj;
- spf=pass (domain: cisco.com, ip: 173.37.86.75, mailfrom: dkelaiya@cisco.com)
+ dkim=pass header.i=@mvista.com header.s=google header.b=fgv5HtqP;
+ spf=pass (domain: mvista.com, ip: 74.125.82.46, mailfrom: hprajapati@mvista.com)
+Received: by mail-dl1-f46.google.com with SMTP id a92af1059eb24-1b244fb7fffso3484562c88.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 10 Nov 2026 21:54:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=cisco.com; i=@cisco.com; l=11263; q=dns/txt;
-  s=iport01; t=1794375526; x=1795585126;
-  h=from:to:cc:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=ImW/V9cloFa1Ri+m92nS/QgyvHlRoUfTEdoq1k2LwVo=;
-  b=TnfB2NdjG58gJ/pYNuftVxZpM55IWaPp25mKpVikou8XW1AMI+46xgP4
-   9sTmxd/nVx1BK1eAvCUPddKQjo9DwmyquI+/G4eBHvIMgm+J6Xeq8ZZ4E
-   06GpyV6B4ccsMyCpHPlOYXCSZd46Zv1FR99tKpVAi5lrV1AdrnGwxJCFg
-   40XcODkqUN9TRwvjicZ1xcX5C98/1/CTlUcXtlS5o0wJEAFnJQnEfS9mt
-   NLyW+tbiBepoQ4/4bodN4b3hx7f1tOVjaRQ4EwVPJvYQ4C09gVOWO775y
-   BqK4cbXvciDD/8utMECzAt5qA4aBcTNLlzuauHFzf+aCJSNnCQ0+mBQ6z
-   A==;
-X-CSE-ConnectionGUID: saKxHymzQK+yzymMyRJ5yg==
-X-CSE-MsgGUID: omhYGcamQja/MKZArKi8AQ==
-X-IPAS-Result: =?us-ascii?q?A0BEAgDZ/vNq/5T/Ja1aHgEBCxIMggULgld1YENJA5ZIn?=
- =?us-ascii?q?iWBfg8BAQEPRA0EAQGFBY4gAiY0CQ4BAgQDAgMBAQEBAQEBAQEBAQEKAQEFA?=
- =?us-ascii?q?QEBAgEHBYEOE4ZPDZASAQIBKgsBRiwDAQJaIyGDAgGCdAMRuWeBeTOBAYR+2?=
- =?us-ascii?q?zMBCxQBgTiFQogkXRgBhH0nGxuBcoEVg2mBBYFcAoEXhw8EgiJ6EoFaGAaMf?=
- =?us-ascii?q?AKBT4clSIEeA1ksAVUTDQoLBwWBaAM1EioVbjIdgSM+F4EHGwYFgRyBHoESg?=
- =?us-ascii?q?QddgSsoXQEhgQiBdgKCUYIAAgFJQQ4HRVMJJUMSRyQiCBIJARMaLAqBGjU8C?=
- =?us-ascii?q?SY/FQxnCxoFYQgCDQx0ORAwHiQvBRomPhsKfhgNSBEsNxUZBD5uB5JugwMLB?=
- =?us-ascii?q?wGBDQEKIRcJXxIKMgMzAQEnBUmSZwoyj2SCIYE1n1wKKIN4jCSPQoV4GjOFW?=
- =?us-ascii?q?6UXC5h9jgqVYSNNhGqBaDyBWXAVgyIJShkPji0MC4NghUEGyRQmMgsDLwEBB?=
- =?us-ascii?q?wIHDgMLgWiQAi2BTwEB?=
-IronPort-Data: A9a23:LIznIqrezSJULZSs1lTpbp7rVQ5eBmJIZBIvgKrLsJaIsI4StFCzt
- garIBnTa6nZYmWnLY1/b4znpx9VscDVxtFmTAs++Ck9QSoV8OPIVI+TRqvS04x+DSFioGZPt
- Zh2hgzodZhsJpPkjk7zdOWn9T8jhfngqoPUUIbsIjp2SRJvVBAvgBdin/9RqoNziLBVOSvV0
- T/Ji5OZYgDNNwJcaDpOtfva8Uo35ZwehRtB1rAATaET1LPhvyF94KI3fcmZM3b+S49IKe+2L
- 86r5K255G7Q4yA2AdqjlLvhGmVSKlIFFVHT4pb+c/HKbilq/kTe4I5iXBYvQRs/ZwGyojxE4
- I4lWapc5useFvakdOw1C3G0GszlVEFM0OevzXOX6aR/w6BaGpfh660GMa04AWEX0v1+InFu5
- PkKERNOfwKSgsen+pDmW+Y506zPLOGzVG8ekmtrwTecCbMtRorOBvyTo9RZxzw3wMtJGJ4yZ
- eJANmEpN0uGOUASfA5LWPrSn8/w7pX7WzFbpVacpLs+y2PS1wd2lrPqNbI5f/TXGZsIxR/B/
- DKuE2LRBRQaBfOUwD+88Hvro8z9tDnYWdI7LejtnhJtqBjJroAJMzURTVa9rPyzh0KyVt4aJ
- 0EK9y4Gqakp6FftScHwWRC9qnOIshMQHd1KHIUHBBql0KHY5UOdQ2MDVDMEMYVgv84tTjts3
- ViM9z/0OQFSXHSuYSr13t+pQfmaYED58Udqifc4cDY4
-IronPort-HdrOrdr: A9a23:VKuISq+BtNwpmigy/jluk+DuI+orL9Y04lQ7vn2ZhyY7TiX+rb
- HKoB11737JYVoqNU3I+urwWpVoP0m9yXcd2+B4Vt2ftWLd1ldAQrsP0WKb+UyCJwTOsshAyK
- xnb69yTPf0DVR8kILGxTPQKadF/DFCm5rY49s3CBxWPGZXV50=
-X-Talos-CUID: 9a23:xc6gCW/AdwaCXTBVrByVv1UdOdAFY3jP9VSTMl2pDEN4cp/IWFDFrQ==
-X-Talos-MUID: =?us-ascii?q?9a23=3AYHhIAg6sS5mON6EvdDcj8Eb4xoxv5qSfJ0sElKw?=
- =?us-ascii?q?Eso6hFh5ZIRSc3B2OF9o=3D?=
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-AV: E=Sophos;i="6.27,207,1787011200"; 
-   d="scan'208";a="546531128"
-Received: from rcdn-l-core-11.cisco.com ([173.37.255.148])
-  by rcdn-iport-4.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 11 Nov 2026 05:38:39 +0000
-Received: from sjc-ads-5675.cisco.com (sjc-ads-5675.cisco.com [10.28.88.189])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by rcdn-l-core-11.cisco.com (Postfix) with ESMTPS id EA54B18000147;
-	Wed, 11 Nov 2026 05:38:38 +0000 (GMT)
-Received: by sjc-ads-5675.cisco.com (Postfix, from userid 1887444)
-	id 92491CC1611; Tue, 10 Nov 2026 21:38:38 -0800 (PST)
-From: "Darsh Kelaiya -X (dkelaiya - E INFOCHIPS PRIVATE LIMITED at Cisco)" <dkelaiya@cisco.com>
+        d=mvista.com; s=google; t=1794376448; x=1794981248; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=uTNvFIXbtW0n8kkDj+fHo2GWICmZJv4CuB9vPzsDum8=;
+        b=fgv5HtqPTbpP2+sHO2lBxiMGBqg9ixcsOiVouJ3dpSaQzKPx7+4H2oENAPgj39Wkhd
+         yjChgGQPuP6rbe1boBdyDZJxXnT2x4CXCM1DXuC/MJfGRuH43m/FawUuHmmyoUtD1Sli
+         SUUHwqbF6GFR6PfMf2z3keQcTrtNGuVApo85k=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1794376448; x=1794981248;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=uTNvFIXbtW0n8kkDj+fHo2GWICmZJv4CuB9vPzsDum8=;
+        b=GYbGHb7fJ8EVJ2DcvFaGlXbclr8Pj8G3pMmIUR6ye7gEEuYZKWP1OeAiuOs9Virsuo
+         9Wh9IgxjVc9pJkdLR1Exz6dZrb5pn+j6W5k19+pXV6smxcK8g14W/fJY9znFHM79zi2L
+         z3GyOFmHR6TMigL7cW5DD5z4GDMcx4xisrniS74Z2vzk0yosZdjatA+SGolAH/hhEjEX
+         MLpS5iTX3LnTRFXcKmBTUBHOI7il4oLMKj8yFMFKAIK7QRiJidW0XsUdUSSmnhxmDhZc
+         u8EaGzVkHgHdedM6MWOLukdwfVPfQX8Wx2D5oMiteBUuhvM1pd6hRn85A2l7srjKb/Ac
+         lnbg==
+X-Gm-Message-State: APuU4Z+E7edVcOFQ+MRmrNzKlBxiC1Irlc8xLI7doKW8uzQ3pMCy2nSa
+	1n/Z6QkF9YzXmyN4tHSUhKseDKUvXw8+KtwveSZK4EqOapWTL+OHisQrrRV4dPHZog+CB+/VgML
+	l+A/0uh8=
+X-Gm-Gg: AYBFou0sfUAd3qN7fBvQpDfUdUX0rpzQneQeMFrz+Ni15JjLROSYbM5NqBDOUBPrOtv
+	71Oe9v4BpKtliGi/+8cRUHgcLxI+kvWluOC7Z6tMC1qPX72myHtbm20Fpoz067k1jpqzXXcrim/
+	+9MjKtnIIfjiC0HP0pmbkqQjM1vXZk1wy8Cr9bxI2DJhXLdlVCDtn+BfVsy9SICvouUr4wmKC/P
+	uV63SoMM1LKg0YnDFX5XsGNRAzwQ90tfQ4AHxBmBMvdZ2DXFpCkfeGwsHYhV7kq3201fpKGBn3P
+	IUkMD1KorlMH59uI8xNQsKj4Nk3cEh5laMMuimEzeRcYQ7Rv8KuhKR4Wv6Ux5riqFeGr2k/KE4B
+	4xGns+4EdnqeGjfxTNfszsyE+K4WMLKF6nJBCwszyzKEpBFChKZuB13Ux1eRheFvaJJr64iq2EK
+	v/FV60g5A0sPg2nIqB+J9UI6QeYYkkZUpbBUxf9N2zbiwE7Bsm4n70AyPgCyRMZCdD2QiFjQeDx
+	hgiVU2OwyreG9QDsnGUv80s/58C1/OPQG6RpxJzbAUWacAcFK4/xDihb68ncFHvtv64prOIQtwM
+	SaEdBLtwU/rChsQw07c9Ysyw2ZQ3lw98RFhbxWO8
+X-Received: by 2002:a05:693c:4081:b0:377:678:231b with SMTP id 5a478bee46e88-37706782701mr535848eec.25.1794376448064;
+        Tue, 10 Nov 2026 21:54:08 -0800 (PST)
+Return-Path: <hprajapati@mvista.com>
+Received: from MVIN00013.mvista.com ([27.121.101.115])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-37520cfdfadsm14730177eec.19.2026.11.10.21.54.05
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 10 Nov 2026 21:54:07 -0800 (PST)
+From: Hitendra Prajapati <hprajapati@mvista.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Darsh Kelaiya <dkelaiya@cisco.com>
-Subject: [oe][meta-oe][wrynose][PATCH 1/5] libdbi-perl: fix CVE-2026-78030
-Date: Tue, 10 Nov 2026 21:38:30 -0800
-Message-Id: <20261111053834.3702246-1-dkelaiya@cisco.com>
-X-Mailer: git-send-email 2.35.6
+Cc: anuj.mittal@oss.qualcomm.com,
+	Hitendra Prajapati <hprajapati@mvista.com>
+Subject: [meta-networking][scarthgap][PATCH] iscsi-initiator-utils: fix for CVE-2026-44943, CVE-2026-44944
+Date: Wed, 11 Nov 2026 11:24:00 +0530
+Message-ID: <20261111055400.111834-1-hprajapati@mvista.com>
+X-Mailer: git-send-email 2.50.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Outbound-Client-TLS: ANONYMOUS;sjc-ads-5675.cisco.com [10.28.88.189];TLSv1.3;TLS_AES_256_GCM_SHA384;256
-X-Outbound-SMTP-Client: 10.28.88.189, sjc-ads-5675.cisco.com
-X-Outbound-Node: rcdn-l-core-11.cisco.com
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Wed, 11 Nov 2026 05:38:51 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132126
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Wed, 11 Nov 2026 05:54:11 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132127
 Content-Type: text/plain; charset="utf-8"
 
-From: Darsh Kelaiya <dkelaiya@cisco.com>
+Pick patch from [1] also mentioned at Debian report in [2] & [3].
 
-Backport the module-name validation fix [1] to DBI 1.647 for the
-arbitrary module loading issue described in [2]. Validate dbm_type
-and dbm_mldbm before loading the selected backend or serializer.
+[1] https://github.com/open-iscsi/open-iscsi/commit/668ca1df9c9a1e9bdd5c999ae1d67c9c8909237e
+[2] https://security-tracker.debian.org/tracker/CVE-2026-44943
+[3] https://security-tracker.debian.org/tracker/CVE-2026-44944
 
-Retain the upstream regression tests and optional Params::Util
-fallback. Module::Load is already a recipe runtime dependency.
-
-[1] https://github.com/perl5-dbi/dbi/commit/315c6ce703b8b3cbe9188062d9ec80730293554a
-[2] https://github.com/perl5-dbi/dbi/security/advisories/GHSA-wqmw-wqwx-3fr7
-
-Signed-off-by: Darsh Kelaiya <dkelaiya@cisco.com>
+Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
 ---
- .../perl/libdbi-perl/CVE-2026-78030.patch     | 268 ++++++++++++++++++
- .../perl/libdbi-perl_1.647.bb                 |   1 +
- 2 files changed, 269 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/perl/libdbi-perl/CVE-2026-78030.patch
+ .../files/CVE-2026-44943.patch                | 181 ++++++++++++++++++
+ .../files/CVE-2026-44944.patch                |  41 ++++
+ .../iscsi-initiator-utils_2.1.9.bb            |   2 +
+ 3 files changed, 224 insertions(+)
+ create mode 100644 meta-networking/recipes-daemons/iscsi-initiator-utils/files/CVE-2026-44943.patch
+ create mode 100644 meta-networking/recipes-daemons/iscsi-initiator-utils/files/CVE-2026-44944.patch
 
-diff --git a/meta-oe/recipes-devtools/perl/libdbi-perl/CVE-2026-78030.patch b/meta-oe/recipes-devtools/perl/libdbi-perl/CVE-2026-78030.patch
+diff --git a/meta-networking/recipes-daemons/iscsi-initiator-utils/files/CVE-2026-44943.patch b/meta-networking/recipes-daemons/iscsi-initiator-utils/files/CVE-2026-44943.patch
 new file mode 100644
-index 0000000000..5a2fbf9a4b
+index 0000000000..1219b156b1
 --- /dev/null
-+++ b/meta-oe/recipes-devtools/perl/libdbi-perl/CVE-2026-78030.patch
-@@ -0,0 +1,268 @@
-+From 315c6ce703b8b3cbe9188062d9ec80730293554a Mon Sep 17 00:00:00 2001
-+From: Robert Rothenberg <perl@rhizomnic.com>
-+Date: Sat, 22 Aug 2026 01:37:15 +0100
-+Subject: [PATCH] Load serializer class using Module::Load (CVE-2026-78030)
++++ b/meta-networking/recipes-daemons/iscsi-initiator-utils/files/CVE-2026-44943.patch
+@@ -0,0 +1,181 @@
++From: Lee Duncan <lduncan@suse.com>
++Date: Tue, 14 Jul 2026 12:16:58 -0700
++Subject: Improve iscsid discovery handling of IQN names.
 +
-+This replaces calls to require with Module::Load, and adds specific
-+checks that arguments are module names instead of filenames.
++Currently, IQN names received via discovery are assumed to be valid up
++to the NULL character, i.e. the end of the supplied string. But this
++may not be correct.
 +
-+Instead of using our own regex matcher, we attempt to use the
-+Params::Util _CLASS function. The style of trying to import it or adding
-+our own is based on similar code in DBD::File. (This uses SPDX
-+annotations to indicate where the code comes from.)
++The ASCII characters allowed in an IQN are detailed in RFC 3722, section
++6.2: "Currently Prohibited ASCII Characters".
 +
-+This also adds a suggestion for Params::Util in Makefile.PL.
++Disallowing such characters should not break current usage, since the
++disallowed characters should not be in an IQN anyway. For example, they
++include characters like forward slashes, backward slashes, spaces,
++control characters, etc..
 +
-+Note that code of the form
++Open-iscsi uses target names as directory names in the "database"
++directory (typically /var/lib/iscsi), so fixing this eliminates discovery
++target name containing sequences like "../../../*" from being allowed.
 +
-+    $INC{"$tie_type.pm"} or require "$tie_type.pm"
++Reference: CVE-2026-44943
++Found-by: <keith@linnemanlabs.com>
 +
-+is redundant, since require checks %INC.
++Reviewed-By: Daniel Leidert <dleidert@debian.org>
++Origin: https://github.com/open-iscsi/open-iscsi/commit/668ca1df9c9a1e9bdd5c999ae1d67c9c8909237e
++Origin: https://github.com/open-iscsi/open-iscsi/pull/535/changes/c61d97dccb68c2e47f35bf72ba98f6c304f488db
++Origin: https://github.com/open-iscsi/open-iscsi/commit/3f747d10ce743483a5d5e9512eb28a08b12d9677
++Bug-Debian: https://bugs.debian.org/1143059
++Bug-Debian-Security: https://security-tracker.debian.org/tracker/CVE-2026-44943
++Bug-Freexian-Security: https://deb.freexian.com/extended-lts/tracker/CVE-2026-44943
 +
-+See also the similar vulnerability to the DBI::Profile vulnerability
-+CVE-2026-14380 in commit b73d5d9901767fc1d16b6661ef08fbed4532e259.
-+
-+CVE: CVE-2026-78030
-+Upstream-Status: Backport [https://github.com/perl5-dbi/dbi/commit/315c6ce703b8b3cbe9188062d9ec80730293554a]
-+
-+Assisted-By: Claude Opus 5 (1M context) <noreply@anthropic.com>
-+
-+Signed-off-by: Robert Rothenberg <rrwo@cpansec.org>
-+Signed-off-by: Darsh Kelaiya <dkelaiya@cisco.com>
++CVE: CVE-2026-44943
++Upstream-Status: Backport [https://github.com/open-iscsi/open-iscsi/commit/668ca1df9c9a1e9bdd5c999ae1d67c9c8909237e]
++Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
 +---
-+ MANIFEST              |   1 +
-+ Makefile.PL           |   1 +
-+ lib/DBD/DBM.pm        |  34 ++++++++++---
-+ t/53dbm_module_name.t | 115 ++++++++++++++++++++++++++++++++++++++++++
-+ 4 files changed, 144 insertions(+), 7 deletions(-)
-+ create mode 100644 t/53dbm_module_name.t
++ usr/discovery.c        | 16 ++++++++++++++++
++ usr/initiator.h        |  3 +++
++ usr/initiator_common.c | 33 +++++++++++++++++++++++++++++++++
++ usr/iscsiadm.c         |  4 ++++
++ usr/iscsistart.c       |  5 ++++-
++ 5 files changed, 60 insertions(+), 1 deletion(-)
 +
-+diff --git a/MANIFEST b/MANIFEST
-+index 23858dc..d7f8e4e 100644
-+--- a/MANIFEST
-++++ b/MANIFEST
-+@@ -107,6 +107,7 @@ t/49dbd_file.t			DBD::File API and very basic tests
-+ t/50dbm_simple.t		simple DBD::DBM tests
-+ t/51dbm_file.t			extended DBD::File tests (through DBD::DBM)
-+ t/52dbm_complex.t		Complex DBD::DBM tests with SQL::Statement
-++t/53dbm_module_name.t		dbm_type / dbm_mldbm must name a module, not a path
-+ t/53sqlengine_adv.t
-+ t/54_dbd_mem.t
-+ t/60preparse.t
-+diff --git a/Makefile.PL b/Makefile.PL
-+index 3bba048..2ad475a 100644
-+--- a/Makefile.PL
-++++ b/Makefile.PL
-+@@ -76,6 +76,7 @@ my %opts = (
-+ 	suggests              => {
-+ 	    "RPC::PlServer"   => 0.2020,
-+ 	    "Net::Daemon"     => 0,
-++	    "Params::Util"    => '1.100',
-+ 	    "SQL::Statement"  => 1.414,
-+ 	    "Clone"           => 0.47,
-+ 	    "MLDBM"           => 0,
-+diff --git a/lib/DBD/DBM.pm b/lib/DBD/DBM.pm
-+index f77e98a..26b1497 100644
-+--- a/lib/DBD/DBM.pm
-++++ b/lib/DBD/DBM.pm
-+@@ -59,6 +59,21 @@ sub CLONE
-+     undef $drh;
++diff --git a/usr/discovery.c b/usr/discovery.c
++index 587af6d..243afe2 100644
++--- a/usr/discovery.c
+++++ b/usr/discovery.c
++@@ -216,6 +216,11 @@ int discovery_isns_query(struct discovery_rec *drec, const char *iname,
++ 			continue;
++ 		}
++ 
+++		if (!iqn_name_valid(pg_tgt)) {
+++			log_error("iSNS discovery Target Name invalid: ignoring it");
+++			continue;
+++		}
+++
++ 		if (!isns_object_get_ipaddr(obj, ISNS_TAG_PG_PORTAL_IP_ADDR,
++ 					    &in_addr)) {
++ 			log_debug(1, "Missing addr");
++@@ -294,6 +299,11 @@ static int discovery_isns_reg_node(const char *iname, int op_reg)
++ 	log_debug(1, "trying to %s %s with iSNS server.",
++ 		  op_reg ? "register" : "deregister", iname);
++ 
+++	if (!iqn_name_valid(iname)) {
+++		log_error("iSNS initiatorname invalid: ignoring it");
+++		return ISCSI_ERR_INVAL;
+++	}
+++
++ 	source = isns_source_create_iscsi(iname);
++ 	if (!source)
++ 		return ISCSI_ERR_NOMEM;
++@@ -615,6 +625,12 @@ add_target_record(char *name, char *end, discovery_rec_t *drec,
++ 		log_error("TargetName %s too long, ignoring", name);
++ 		return 0;
++ 	}
+++
+++	if (!iqn_name_valid(name)) {
+++		log_error("Discovery TargetName invalid, ignoring");
+++		return 0;
+++	}
+++
++ 	text = name + length;
++ 
++ 	/* skip NULs after the name */
++diff --git a/usr/initiator.h b/usr/initiator.h
++index 0222797..6bb38ca 100644
++--- a/usr/initiator.h
+++++ b/usr/initiator.h
++@@ -21,6 +21,7 @@
++ #define INITIATOR_H
++ 
++ #include <stdint.h>
+++#include <stdbool.h>
++ #include <net/if.h>
++ #include <sys/time.h>
++ 
++@@ -410,4 +411,6 @@ extern int iscsi_set_net_config(struct iscsi_transport *t,
++ extern void iscsi_session_init_params(struct iscsi_session *session);
++ 
++ extern int session_in_use(int sid);
+++
+++extern bool iqn_name_valid(const char *name);
++ #endif /* INITIATOR_H */
++diff --git a/usr/initiator_common.c b/usr/initiator_common.c
++index bc69fbd..8067a70 100644
++--- a/usr/initiator_common.c
+++++ b/usr/initiator_common.c
++@@ -24,6 +24,7 @@
++ #include <stdlib.h>
++ #include <errno.h>
++ #include <dirent.h>
+++#include <stdbool.h>
++ #include <libmount/libmount.h>
++ 
++ #include "initiator.h"
++@@ -732,3 +733,35 @@ int iscsi_host_set_net_params(struct iface_rec *iface,
++ 	}
++ 	return 0;
 + }
-+ 
-++if (eval { require Params::Util; }) {
-++    Params::Util->import ("_CLASS");
-++} else {
-++    # SPDX-SnippetBegin
-++    # SPDX-SnippetCopyrightText: 2005-2012 Adam Kennedy. 2020 Jens Rehsack.
-++    # SPDX-License-Identifier: Artistic-1.0-Perl
-++    # SPDX-PackageName: pkg:cpan/Params-Util@1.102
-++    # SPDX-Description: taken from Params::Util::PP 1.102
-++    *_CLASS = sub {
-++        my $arg = $_[0];
-++        return (defined $arg and not ref $arg and $arg =~ m/^[^\W\d]\w*(?:::\w+)*\z/s) ? $arg : undef;
-++    };
-++    # SPDX-SnippetEnd
-++}
 ++
-+ #####################
-+ package DBD::DBM::dr;
-+ #####################
-+@@ -77,7 +92,8 @@ package DBD::DBM::db;
-+ our $imp_data_size = 0;
-+ our @ISA           = qw(DBD::File::db);
-+ 
-+-use Carp qw/carp/;
-++use Carp;
-++use Module::Load ();
-+ 
-+ sub validate_STORE_attr
-+ {
-+@@ -189,10 +205,9 @@ sub get_dbm_versions
-+         };
-+         eval {
-+             my $ser_class = "MLDBM::Serializer::" . $meta->{dbm_mldbm};
-+-            my $ser_mod   = $ser_class;
-+-            $ser_mod =~ s|::|/|g;
-+-            $ser_mod .= ".pm";
-+-            require $ser_mod;
-++            DBD::DBM::_CLASS($ser_class)
-++                or croak "Invalid dbm_mldbm '$ser_class': expected a module name";
-++            Module::Load::load $ser_class;
-+             $dver = $ser_class->VERSION();
-+             $dtype .= ' + ' . $ser_class;    # (*)
-+             $dver and $dtype .= " ($dver)";  # (*)
-+@@ -253,6 +268,7 @@ package DBD::DBM::Table;
-+ ########################
-+ use Carp;
-+ use Fcntl;
-++use Module::Load ();
-+ 
-+ our @ISA = qw(DBD::File::Table);
-+ 
-+@@ -318,12 +334,14 @@ sub init_table_meta
-+     unless ( defined( $meta->{dbm_tietype} ) )
-+     {
-+         my $tie_type = $meta->{dbm_type};
-+-        $INC{"$tie_type.pm"} or require "$tie_type.pm";
-++        DBD::DBM::_CLASS($tie_type)
-++            or croak "Invalid dbm_type '$tie_type': expected a module name";
-++        Module::Load::load $tie_type;
-+         $tie_type eq 'BerkeleyDB' and $tie_type = 'BerkeleyDB::Hash';
-+ 
-+         if ( $meta->{dbm_mldbm} )
-+         {
-+-            $INC{"MLDBM.pm"} or require "MLDBM.pm";
-++            Module::Load::load "MLDBM";
-+             $meta->{dbm_usedb} = $tie_type;
-+             $tie_type = 'MLDBM';
-+         }
-+@@ -389,6 +407,8 @@ sub open_data
-+         {
-+             $MLDBM::UseDB      = $meta->{dbm_usedb};
-+             $MLDBM::Serializer = $meta->{dbm_mldbm};
-++            DBD::DBM::_CLASS($MLDBM::Serializer)
-++                or croak "Invalid dbm_mldbm '${MLDBM::Serializer}': expected a module name";
-+         }
-+ 
-+         $meta->{hash} = {};
-+diff --git a/t/53dbm_module_name.t b/t/53dbm_module_name.t
-+new file mode 100644
-+index 0000000..e331fa4
-+--- /dev/null
-++++ b/t/53dbm_module_name.t
-+@@ -0,0 +1,115 @@
-++#!perl -w
-++# dbm_type and dbm_mldbm name a Perl module, never a file path.
-++#
-++# Both attributes reach require(). require() treats a path-shaped string as a
-++# literal file and never consults @INC, so without a grammar check a caller
-++# who influences either attribute can make the process load -- and therefore
-++# execute -- a .pm from anywhere on the filesystem.
-++#
-++# The two "rejected" cases below fail on an unvalidated DBD::DBM: the planted
-++# module gets loaded and sets the flag. The two "still works" cases pin the
-++# behaviour the check must not break.
-++
-++use strict;
-++use warnings;
-++
-++require DBD::DBM;
-++
-++use DBI;
-++use File::Path qw(mkpath);
-++use File::Spec;
-++use File::Temp qw(tempdir);
-++use Test::More;
-++
-++my $dir = tempdir( CLEANUP => 1 );
-++my $dbdir = File::Spec->catdir( $dir, 'db' );
-++mkpath($dbdir);
-++
-++# A module planted outside @INC. Loading it is observable and can happen for
-++# exactly one reason: something required this path.
-++my $plant = File::Spec->catfile( $dir, 'DbmPlant.pm' );
-++open( my $fh, '>', $plant ) or plan skip_all => "cannot write $plant: $!";
-++print {$fh} "\$::DBM_PLANT_LOADED = 1;\n1;\n";
-++close($fh);
-++
-++( my $plant_noext = $plant ) =~ s/\.pm\z//;
-++
-++my $have_mldbm = eval { require 'MLDBM.pm'; 1 };
-++
-++# --- dbm_type must not name a path --------------------------------------
+++/**
+++ * @brief iqn_name_valid -- return whether or not the supplied
+++ * IQN name valid
+++ *
+++ * @details Checks for invalid characters, using RFC 3722,
+++ * section 6.2, "Currently Prohibited ASCII Characters"
+++ *
+++ * @param name the IQN name we are checking
+++ * @return true iff the whole name (string) has valid
+++ * charaters
+++ */
+++bool
+++iqn_name_valid(const char *name)
 ++{
-++    local $::DBM_PLANT_LOADED = 0;
-++    my $dbh = DBI->connect( "dbi:DBM:f_dir=$dbdir", undef, undef,
-++                            { RaiseError => 0, PrintError => 0 } );
-++    $dbh->{dbm_type} = $plant_noext;
-++    eval { $dbh->do("CREATE TABLE t_reject (id INT, v CHAR(8))"); 1 };
-++    ok( !$::DBM_PLANT_LOADED,
-++        "a path-shaped dbm_type does not load the file it names" );
-++    $dbh->disconnect;
+++	const unsigned char *cp;
+++
+++	/* ensure no invalid characters */
+++	for (cp = (const unsigned char *)name; *cp != '\0'; cp++)
+++		if ((*cp <= '\x2c') ||
+++		    (*cp == '\x2f') ||
+++		    ((*cp >= '\x3b') && (*cp <= '\x40')) ||
+++		    ((*cp >= '\x5b') && (*cp <= '\x60')) ||
+++		    (*cp >= '\x7b')) {
+++			log_debug(8, "IQN name is invalid: \"%s\" (char: '%#02x')",
+++				  name, *cp);
+++			return false;
+++		}
+++
+++	log_debug(8, "IQN name has all valid characters: \"%s\"", name);
+++	return true;
 ++}
-++
-++# The same path with its ".pm" suffix left on. This is the case a loader
-++# swap alone does not cover: Module::Load treats anything outside [\w:'] as a
-++# filename and requires it verbatim, so "/path/Evil" fails only because no
-++# such file exists -- "/path/Evil.pm" loads.
-++{
-++    local $::DBM_PLANT_LOADED = 0;
-++    my $dbh = DBI->connect( "dbi:DBM:f_dir=$dbdir", undef, undef,
-++                            { RaiseError => 0, PrintError => 0 } );
-++    $dbh->{dbm_type} = $plant;
-++    eval { $dbh->do("CREATE TABLE t_reject_pm (id INT, v CHAR(8))"); 1 };
-++    ok( !$::DBM_PLANT_LOADED,
-++        "a dbm_type naming a .pm file directly does not load it" );
-++    $dbh->disconnect;
-++}
-++
-++# --- dbm_type still accepts a real DBM implementation -------------------
-++{
-++    my $dbh = DBI->connect( "dbi:DBM:f_dir=$dbdir;dbm_type=SDBM_File", undef, undef,
-++                            { RaiseError => 1, PrintError => 0 } );
-++    $dbh->do("CREATE TABLE t_ok (id INT, v CHAR(8))");
-++    $dbh->do("INSERT INTO t_ok VALUES (1, 'hello')");
-++    my ($v) = $dbh->selectrow_array("SELECT v FROM t_ok WHERE id = 1");
-++    is( $v, 'hello', "dbm_type=SDBM_File still round-trips a row" );
-++    $dbh->disconnect;
-++}
-++
-++# --- dbm_mldbm must not escape the MLDBM::Serializer:: prefix ------------
-++SKIP: {
-++    skip "MLDBM not installed", 1 unless $have_mldbm;
-++
-++    # "MLDBM::Serializer::" only looks like containment. s|::|/|g rewrites
-++    # "::" and leaves a literal "/" alone, and MLDBM ships MLDBM/Serializer/
-++    # into @INC, so every component of a traversal out of it exists.
-++    my ($inc) = grep { -d File::Spec->catdir( $_, 'MLDBM', 'Serializer' ) } @INC;
-++    skip "no \@INC entry holds MLDBM/Serializer/", 1 unless defined $inc;
-++
-++    my @up = File::Spec->splitdir( File::Spec->canonpath($inc) );
-++    shift(@up) while ( @up && $up[0] eq '' );
-++    my $escape = ( '../' x ( scalar(@up) + 2 ) ) . substr( $plant_noext, 1 );
-++
-++    local $::DBM_PLANT_LOADED = 0;
-++    my $dbh = DBI->connect( "dbi:DBM:f_dir=$dbdir;dbm_type=SDBM_File", undef, undef,
-++                            { RaiseError => 0, PrintError => 0,
-++                              dbm_mldbm   => $escape } );
-++    eval {
-++        $dbh->do("CREATE TABLE t_ser (id INT, v CHAR(8))");
-++        $dbh->func( 't_ser', 'dbm_versions' );
-++        1;
-++    };
-++    ok( !$::DBM_PLANT_LOADED,
-++        "a dbm_mldbm that traverses out of MLDBM::Serializer:: does not load the file it names" );
-++    $dbh->disconnect;
-++}
-++
-++# --- dbm_mldbm still accepts a real serializer name ---------------------
-++{
-++    my $dbh = DBI->connect( "dbi:DBM:f_dir=$dbdir;dbm_type=SDBM_File", undef, undef,
-++                            { RaiseError => 0, PrintError => 0 } );
-++    my $versions = eval { $dbh->func( 'dbm_versions' ) };
-++    ok( defined $versions && length $versions,
-++        "dbm_versions() still reports for an unmodified handle" );
-++    $dbh->disconnect;
-++}
-++
-++done_testing;
-diff --git a/meta-oe/recipes-devtools/perl/libdbi-perl_1.647.bb b/meta-oe/recipes-devtools/perl/libdbi-perl_1.647.bb
-index 03be7eabea..e2760d84d5 100644
---- a/meta-oe/recipes-devtools/perl/libdbi-perl_1.647.bb
-+++ b/meta-oe/recipes-devtools/perl/libdbi-perl_1.647.bb
-@@ -20,6 +20,7 @@ SRC_URI = "${CPAN_MIRROR}/authors/id/H/HM/HMBRAND/DBI-${PV}.tgz \
-            file://CVE-2026-73194_p3.patch \
-            file://CVE-2026-73193_p1.patch \
-            file://CVE-2026-73193_p2.patch \
-+           file://CVE-2026-78030.patch \
++diff --git a/usr/iscsiadm.c b/usr/iscsiadm.c
++index 862bcb6..55dd6a2 100644
++--- a/usr/iscsiadm.c
+++++ b/usr/iscsiadm.c
++@@ -1155,6 +1155,10 @@ exec_disc_op_on_recs(discovery_rec_t *drec, struct list_head *rec_list,
++ 	if (op & OP_NEW || op & OP_UPDATE) {
++ 		/* now add/update records */
++ 		list_for_each_entry(new_rec, rec_list, list) {
+++			if (!iqn_name_valid(new_rec->name)) {
+++				log_error("FW discovery Target Name invalid: ignoring it");
+++				continue;
+++			}
++ 			rc = idbm_add_node(new_rec, drec, op & OP_UPDATE);
++ 			if (rc)
++ 				log_error("Could not add/update "
++diff --git a/usr/iscsistart.c b/usr/iscsistart.c
++index 546840f..b3c8270 100644
++--- a/usr/iscsistart.c
+++++ b/usr/iscsistart.c
++@@ -403,7 +403,10 @@ int main(int argc, char *argv[])
++ 		case 't':
++ 			check_str_param_len(optarg, TARGET_NAME_MAXLEN,
++ 					    "targetname");
++-			strlcpy(config_rec.name, optarg, TARGET_NAME_MAXLEN);
+++			if (!iqn_name_valid(optarg))
+++				log_error("iscsistart Target Name invalid: ignoring");
+++			else
+++				strlcpy(config_rec.name, optarg, TARGET_NAME_MAXLEN);
++ 			break;
++ 		case 'g':
++ 			config_rec.tpgt = atoi(optarg);
+diff --git a/meta-networking/recipes-daemons/iscsi-initiator-utils/files/CVE-2026-44944.patch b/meta-networking/recipes-daemons/iscsi-initiator-utils/files/CVE-2026-44944.patch
+new file mode 100644
+index 0000000000..0ce2daf137
+--- /dev/null
++++ b/meta-networking/recipes-daemons/iscsi-initiator-utils/files/CVE-2026-44944.patch
+@@ -0,0 +1,41 @@
++From: Lee Duncan <lduncan@suse.com>
++Date: Tue, 14 Jul 2026 12:16:58 -0700
++Subject: Fix iscsiuio control-socket credential verification.
++
++Prevent unprivilidged user from driving the isscsiuio control socket,
++by validating connection against correct file descriptor.
++
++Reference: CVE-2026-44944
++Found-by: <keith@linnemanlabs.com>
++
++Reviewed-By: Daniel Leidert <dleidert@debian.org>
++Origin: https://github.com/open-iscsi/open-iscsi/commit/668ca1df9c9a1e9bdd5c999ae1d67c9c8909237e
++Origin: https://github.com/open-iscsi/open-iscsi/pull/535/changes/61548b598cce28b3042073dd546e2609777fa3a5
++Bug-Debian: https://bugs.debian.org/1143059
++Bug-Debian-Security: https://security-tracker.debian.org/tracker/CVE-2026-44944
++Bug-Freexian-Security: https://deb.freexian.com/extended-lts/tracker/CVE-2026-44944
++
++CVE: CVE-2026-44944
++Upstream-Status: Backport [https://github.com/open-iscsi/open-iscsi/commit/668ca1df9c9a1e9bdd5c999ae1d67c9c8909237e]
++Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
++---
++ iscsiuio/src/unix/iscsid_ipc.c | 4 ++--
++ 1 file changed, 2 insertions(+), 2 deletions(-)
++
++diff --git a/iscsiuio/src/unix/iscsid_ipc.c b/iscsiuio/src/unix/iscsid_ipc.c
++index ea03d37..2eaf928 100644
++--- a/iscsiuio/src/unix/iscsid_ipc.c
+++++ b/iscsiuio/src/unix/iscsid_ipc.c
++@@ -1115,10 +1115,10 @@ static void *iscsid_loop(void *arg)
++ 			continue;
++ 		}
++ 
++-		if (!mgmt_peeruser(iscsid_opts.fd, user) || strncmp(user, "root", PEERUSER_MAX)) {
+++		if (!mgmt_peeruser(s2, user) || strncmp(user, "root", PEERUSER_MAX)) {
++ 			close(s2);
++ 			LOG_ERR(PFX "Access error: non-administrative connection rejected");
++-			break;
+++			continue;
++ 		}
++ 
++ 		/* this closes the file descriptor s2 */
+diff --git a/meta-networking/recipes-daemons/iscsi-initiator-utils/iscsi-initiator-utils_2.1.9.bb b/meta-networking/recipes-daemons/iscsi-initiator-utils/iscsi-initiator-utils_2.1.9.bb
+index 18ab16bc20..7873efd297 100644
+--- a/meta-networking/recipes-daemons/iscsi-initiator-utils/iscsi-initiator-utils_2.1.9.bb
++++ b/meta-networking/recipes-daemons/iscsi-initiator-utils/iscsi-initiator-utils_2.1.9.bb
+@@ -22,6 +22,8 @@ SRC_URI = "git://github.com/open-iscsi/open-iscsi;branch=master;protocol=https \
+            file://iscsi-initiator.service \
+            file://iscsi-initiator-targets.service \
+            file://set_initiatorname \
++           file://CVE-2026-44943.patch \
++           file://CVE-2026-44944.patch \
             "
- SRC_URI[sha256sum] = "0df16af8e5b3225a68b7b592ab531004ddb35a9682b50300ce50174ad867d9aa"
+ S = "${WORKDIR}/git"
  
 -- 
-2.35.6
+2.50.1
+
