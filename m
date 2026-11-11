@@ -1,158 +1,123 @@
-Received: from mail-dy1-f182.google.com (mail-dy1-f182.google.com [74.125.82.182])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.800.1794363040035780267
+Received: from mail-dl1-f47.google.com (mail-dl1-f47.google.com [74.125.82.47])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.800.1794363041500004325
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 10 Nov 2026 18:10:40 -0800
+ Tue, 10 Nov 2026 18:10:41 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=LTKuB62w;
- spf=pass (domain: gmail.com, ip: 74.125.82.182, mailfrom: raj.khem@gmail.com)
-Received: by mail-dy1-f182.google.com with SMTP id 5a478bee46e88-37628596783so1384218eec.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 10 Nov 2026 18:10:39 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=PT7BZrMz;
+ spf=pass (domain: gmail.com, ip: 74.125.82.47, mailfrom: raj.khem@gmail.com)
+Received: by mail-dl1-f47.google.com with SMTP id a92af1059eb24-1a2af4c8d00so1930736c88.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 10 Nov 2026 18:10:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794363039; x=1794967839; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=UsCMlL0JZjfEfpYFs0kvridOfvAcJHDIkpIidKNxVjI=;
-        b=LTKuB62w284L+5i16epL12lnFp8we2Bu3rxWHiBhGgSqRLXaN7hkxrzx0V23NTPkKX
-         J1BfGtxD9ap72jD1fyySMLEtv4sml2t5xuLZqxRFHfsdQNmQnFTDO3iUSgPCSylZrrdV
-         wFoKsb6d4tRdXjBSKrezgnh8kL3j5woku68yYak5tYy/hwBEevWgdMzuI5vmCcs2CfeZ
-         8q3CP+gEFmqdS0QJDLowql41ZwwZdjM1jiALivLnb8CwJzcdjBI1MmsgMdaGYBLKT/E1
-         q8YgFIDMmcZi3n8K2H3gN4grCvk7yGgRFi0Jcsg+bgFmMHHHtxF2g+zQTPHcPCBvV+4V
-         jgMQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794363039; x=1794967839;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=gmail.com; s=20260707; t=1794363041; x=1794967841; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=UsCMlL0JZjfEfpYFs0kvridOfvAcJHDIkpIidKNxVjI=;
-        b=wtZBMUBFPVgu7PubhvveF6jAas2n90ZZMTaULnidlhDidYMN8tLgR2Eu5B2M8k61kk
-         J3PzWg9VlgNttXV+V25HRM8dhMHCU4ux/dlyicaph40k3VbhhT/Z0mKmE9aw1GdLVbwq
-         o0Ipc05wNx3M2Wbemib3O2ySDp8HQ0SpDHEHXe0RWLpfUD+k4uE5+HEZHkNrOocWSniY
-         e2cXQp8vJZnsp8p3yZOwK3+N79Se/dx07Vu6kb/jkhS5nluR+VWmBIqCFkXhS1xLEqQN
-         gHMArnAmImAsoIS/N7iBYKNnydQFyf5dfVTR4mMFIy/G7EUki14eIpQkV+X0x/Nn/QMY
-         WVLg==
-X-Gm-Message-State: APuU4Z83/Yyppl3jlkG5jXlnc5PR7rTWQPpgN1P4mmn1BIVs4d19LnHw
-	KaGVX63Pf0L0Ag/bbBGhEAC1b0Sck8wUPE+LtvaKS+QGA9ghdBEKV25GLhMxp7v6z7Gs8Q==
-X-Gm-Gg: AYBFou1vItm8g8btiiG9wX3TIksU3MB1wOrhNS0FJvLMabE8gxOEqcKoAs9e/PV1tdd
-	SxSU5G52RZNPG27kzirK0yAzD5Xim1pLXgU/aJeskwehbMv41UEQZUh37WiWa7H1M8tlnBvSmq1
-	yobsnPxidTEWX7tKyXoG5BJ4CbnFVfa91s9M0Dv33soux06/fUswZbaP1bCkYI5RtmIXxrFiZEl
-	Ev18OtGyHyps/LgK2GgQNuVtVVzu+F33B9Y/4hr5+XJcweCJsJo5NZWuyHzTqcO9W/8d4C97bIi
-	pjDkFqvSVxGjt6hKeRCmE33b8pugOQZe5NdmOPTNquUsSOalSTAgz51q7juEAj9mMe4TzUnnkt1
-	RxNi74UCZA4gODECthct8VnPj99/pLEwFK9AcRbHPoaz/OHNTl+2xK+T9RaG+z8djC8JyPU3zun
-	LcZ2WhLANOG0UYY+HNt9oHQ7z90IUo8lezC0D0hI4IJHEqPG28Q/+h5dfrj4Bw6mLhyjjTMsLJO
-	2bMu7l8Dw2e+qIgVlS1rwP2lujU1ghk/1OB6zuHseGdrb0LCD2zopACdCqwjgO+H5WYXCjVDkJR
-	pqRQyMCDkRYNQPhqIKA3SpfoLCfMsYDclqafGmAu2vBBEo419FaXzEg7BETBV8ul++DZ7zzJ6s9
-	kRxQwgGNU0COHb1bihOlTrv/ZZYoEghxw2enOHjL9NkY0Q3GdTucQyY9sDx0xb2Z2+f4l08Ydef
-	1DJfV/907fKeT20G+FoXnRVszDWo6lvSnecksnjjY+Y9iuK2IPGztnkad0rvLO5bcv+DfpeOa1Q
-	y+JW2HsgD1U+Xh8rWXPJ9wdEMxJz298Y2XJztNmsTst1sskg3WZfKguJ3ybGKisjqCGR3psSR8O
-	1o1y
-X-Received: by 2002:a05:7301:715:b0:36d:2b02:86a6 with SMTP id 5a478bee46e88-37682f9422amr1481475eec.4.1794363039194;
-        Tue, 10 Nov 2026 18:10:39 -0800 (PST)
+        bh=mk/g8cJkLQA6dWa+iAYbm5E1Ex97/zG0BpHy66J5w3I=;
+        b=PT7BZrMzjYbMO1Nzp14GUSVE+eNPBFI78Ym6VtpRKyye4qwR5B3vbGsb9h55A6sm6p
+         IQGk7922gh+Jke69TCKY0EiwPlAiagvqqvVuqDYTFIoDVJoVIcF/wJxMnxctbAjWHf+2
+         bedi6+wlH5/nF4I64iogNCq3BWbHllVp/MemdStX4XT8HZNV2YU0yyzrBmOr4RPyIOZn
+         Utgl0CAf4vIUmjlQK1KFFfprMqJreBqGgIuJUH7Ba6ci/1Sye9DwqjT9SJsQ43OXKoJp
+         9Ie2KO/VweSR/wU6rS2Lbo2lf7Li607tswNXK8s0kiwA6AJiYJeWnJcI6EqZbws0SHzV
+         qF4A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1794363041; x=1794967841;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=mk/g8cJkLQA6dWa+iAYbm5E1Ex97/zG0BpHy66J5w3I=;
+        b=U5xe6xUMMQ6i0XfnePmE07IBqDk1j3/OXhVwfV1cLYyksgLZtJKXos1op1OPhUjpxc
+         eGoDY7+JA/PbupYnI8BpWF71mgXz27org3AD0/xqNag2HgX0oi1qVP9e8glB75Yq9dqO
+         nWz2uCb28a9aGiFXerWz7peTcMx2on0EJf3pm2zFfNu+ikuO+1DjZGVi5OZS/F24DT18
+         4cGz9KKFsegyrQP4VEcQeAJ3LCbLAiPxga4/WmveNXoi4rTOAxK1+qJfSxxFbUat6uwq
+         T7jahavJ75tCc/n/yodYmdaWErz1c2JtbqD/WLpuzPYeZ41HVaUNf7X5j8/TOBXdrHyr
+         OaeA==
+X-Gm-Message-State: APuU4Z+rGwda5b0/mj9Aj9qvBsP6SSqAHvRTlt9BmhoRIqYTE1hxmUUF
+	duhQhfai585ig+FloznuBNrOMfzWrNegjQTQsizHIhaTvFeMdQ2sCTRdf9yHfnJOP6h5vA==
+X-Gm-Gg: AYBFou1AqJQwz+TelAhB5JuesjPCgwJk06FzKV9x359x6lHN3RIlacsWMb/ShPuvQzD
+	R1BLK4bCHwkrthkBOizbXE1XoStt5e8u/XnC774edjQLH4sAm5txIK1ZzfvIWtjl5ULSxYZOfVe
+	/GT47T3Ti8LtX8jKe8/WLe7hDBKOIzLFCb8X2wd3vtFsGQec5jMmOf8UD3+A+K+p/WAmVdasrVa
+	CK+FXPL0KNRUXjUut0undEqd18H/KSJWYbGkDb8fgeGgFkUCfLZlzERB5RjP+GaMztfxCYeyzA+
+	0eW9/hJpYzEj0wRyzDxHs73u98MbTVLJAj4JW/aCe++kurnm+Ly78MF1ZokKHbNYFEu6h4+pcfd
+	CII4JTxc8EPThjSfWUUSBhN6EbcSUB1t1chPvFNyVenJvZURpePL6FkIWyvigI3esuAGmGWcpsZ
+	n/DZrDFs19rUpoAXPPu8/3JzbJkzQItu88LnIwcaE3nasKihGfZ/pY9Vt4OGdnVsKmurUcIolCr
+	/fJq17/1WfIGy2O2cX3mbT0I9HCQ+qAqWeEZv17QuV0QEqoicC5C2Hn6IWDySfvnwv6XUQgieev
+	1esGhgzlA+tfx+HafDvQJp7x7leiMa9JZCICHDiPpH2qpmSVxabzR6QYTvNdZMNvG/Oxhyo0AoD
+	4Eq1WscHNL+WwPZs6/k+3iV9hKBGuTnctB+Y6MEAxkLj4AYJALwDxzvMhStrtwPG1pKXRY4Onjw
+	qAq8b9Cg7kS/TnJJkKCZscjCc6SOY619dit8xuSmcNd72ribmJqQW3WO886ZaSc+uXendWX2Wqm
+	wnmxPN0UH7XC9/Rl3nJGYslJ/oupSdpwmYLg/5lh2FVO+x7UZlcSrXRtiCbBebfXCZ4Xd5lz9VO
+	Bq4y
+X-Received: by 2002:a05:7022:ef07:b0:13b:2f26:6881 with SMTP id a92af1059eb24-1b3c024ac7amr1266243c88.4.1794363040731;
+        Tue, 10 Nov 2026 18:10:40 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1b3b5b4efc2sm9475312c88.15.2026.11.10.18.10.38
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1b3b5b4efc2sm9475312c88.15.2026.11.10.18.10.39
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 10 Nov 2026 18:10:38 -0800 (PST)
+        Tue, 10 Nov 2026 18:10:39 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>,
 	Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 1/2] mongodb: Backport fix for SERVER-49099
-Date: Tue, 10 Nov 2026 18:10:35 -0800
-Message-ID: <20261111021036.3866389-1-khem.raj@oss.qualcomm.com>
+Subject: [meta-oe][PATCH 2/2] mongodb: Keep build paths out of buildInfo
+Date: Tue, 10 Nov 2026 18:10:36 -0800
+Message-ID: <20261111021036.3866389-2-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.0
+In-Reply-To: <20261111021036.3866389-1-khem.raj@oss.qualcomm.com>
+References: <20261111021036.3866389-1-khem.raj@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Wed, 11 Nov 2026 02:10:42 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132109
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132110
 Content-Type: text/plain; charset="utf-8"
 
-The Node and Head swap() friends and the copy-and-swap assignment
-operators in Biggie store.h are unused and refer to members that do
-not exist. Backport the upstream removal.
+By default buildInfo embeds the compiler version string and CCFLAGS,
+CXXFLAGS and LINKFLAGS, which carry --sysroot and -ffile-prefix-map
+paths into mongod and mongos and trigger buildpaths QA warnings. Pass
+a variables file that drops those entries from
+MONGO_BUILDINFO_ENVIRONMENT_DATA.
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-AI-Generated: Uses Claude Code
 ---
- ...ove-the-Node-swap-function-in-Biggie.patch | 58 +++++++++++++++++++
- .../recipes-dbs/mongodb/mongodb_git.bb        |  1 +
- 2 files changed, 59 insertions(+)
- create mode 100644 meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb/0005-SERVER-49099-Remove-the-Node-swap-function-in-Biggie.patch
+ .../recipes-dbs/mongodb/mongodb/oe-buildinfo.vars     | 11 +++++++++++
+ .../meta-python/recipes-dbs/mongodb/mongodb_git.bb    |  2 ++
+ 2 files changed, 13 insertions(+)
+ create mode 100644 meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb/oe-buildinfo.vars
 
-diff --git a/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb/0005-SERVER-49099-Remove-the-Node-swap-function-in-Biggie.patch b/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb/0005-SERVER-49099-Remove-the-Node-swap-function-in-Biggie.patch
+diff --git a/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb/oe-buildinfo.vars b/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb/oe-buildinfo.vars
 new file mode 100644
-index 0000000000..b2d1d92f30
+index 0000000000..950dc4baa2
 --- /dev/null
-+++ b/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb/0005-SERVER-49099-Remove-the-Node-swap-function-in-Biggie.patch
-@@ -0,0 +1,58 @@
-+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
-+From: Yuhong Zhang <danielzhangyh@gmail.com>
-+Date: Thu, 9 Jul 2020 15:43:33 +0000
-+Subject: [PATCH] SERVER-49099 Remove the Node::swap() function in Biggie
++++ b/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb/oe-buildinfo.vars
+@@ -0,0 +1,11 @@
++# Keep the compiler and its flags, which carry build paths, out of
++# the buildInfo command and --version output
++from mongo.generators import default_buildinfo_environment_data
 +
-+The Node and Head swap() friends and the copy-and-swap assignment
-+operators built on them are unused and do not compile: Node::swap()
-+does not exist and Node has no trieKey, depth, data or children
-+members (they are _-prefixed). This went unnoticed because they are
-+in a class template that never instantiates them.
++MONGO_BUILDINFO_ENVIRONMENT_DATA = {
++    k: v for k, v in default_buildinfo_environment_data().items()
++    if k not in ('cc', 'ccflags', 'cxx', 'cxxflags', 'linkflags')
++}
 +
-+Upstream-Status: Backport [https://github.com/mongodb/mongo/commit/77ffbcb4f5673b154fe64872cba9f34ce97bc55d]
-+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
-+---
-+ src/mongo/db/storage/biggie/store.h | 21 ---------------------
-+ 1 file changed, 21 deletions(-)
-+
-+diff --git a/src/mongo/db/storage/biggie/store.h b/src/mongo/db/storage/biggie/store.h
-+index a09b5b4..aeaa337 100644
-+--- a/src/mongo/db/storage/biggie/store.h
-++++ b/src/mongo/db/storage/biggie/store.h
-+@@ -809,18 +809,6 @@ private:
-+
-+         virtual ~Node() = default;
-+
-+-        friend void swap(Node& first, Node& second) {
-+-            std::swap(first.trieKey, second.trieKey);
-+-            std::swap(first.depth, second.depth);
-+-            std::swap(first.data, second.data);
-+-            std::swap(first.children, second.children);
-+-        }
-+-
-+-        Node& operator=(const Node other) {
-+-            swap(*this, other);
-+-            return *this;
-+-        }
-+-
-+         bool isLeaf() const {
-+             for (auto child : _children) {
-+                 if (child != nullptr)
-+@@ -855,17 +843,8 @@ private:
-+                 _nextVersion->_hasPreviousVersion = false;
-+         }
-+
-+-        friend void swap(Head& first, Head& second) {
-+-            Node::swap(first, second);
-+-        }
-+-
-+         Head(Head&& other) : Node(std::move(other)) {}
-+
-+-        Head& operator=(const Head other) {
-+-            swap(*this, other);
-+-            return *this;
-+-        }
-+-
-+         bool hasPreviousVersion() const {
-+             return _hasPreviousVersion;
-+         }
++# SConstruct rejects unknown names left in a variables file
++del default_buildinfo_environment_data
 diff --git a/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb_git.bb b/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb_git.bb
-index e1016681e4..22169ddd64 100644
+index 22169ddd64..6c4fdf91a9 100644
 --- a/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb_git.bb
 +++ b/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb_git.bb
-@@ -40,6 +40,7 @@ SRC_URI = "git://github.com/mongodb/mongo.git;branch=v4.4;protocol=https \
-            file://0002-SConstruct-Pass-call-to-CheckLibWithHeader-as-a-keyw.patch \
+@@ -41,6 +41,7 @@ SRC_URI = "git://github.com/mongodb/mongo.git;branch=v4.4;protocol=https \
             file://0003-boost-Fix-build-with-clang-23.patch \
             file://0004-ssl-Fix-build-with-OpenSSL-4.patch \
-+           file://0005-SERVER-49099-Remove-the-Node-swap-function-in-Biggie.patch \
+            file://0005-SERVER-49099-Remove-the-Node-swap-function-in-Biggie.patch \
++           file://oe-buildinfo.vars \
             "
  SRC_URI:append:libc-musl = "\
             file://0001-Mark-one-of-strerror_r-implementation-glibc-specific.patch \
+@@ -87,6 +88,7 @@ EXTRA_OESCONS = "PREFIX=${prefix} \
+                  TARGET_ARCH=${MONGO_ARCH} \
+                  MONGO_VERSION=${PV} \
+                  OBJCOPY=${OBJCOPY} \
++                 --variables-files=${UNPACKDIR}/oe-buildinfo.vars \
+                  --ssl \
+                  --disable-warnings-as-errors \
+                  --use-system-zlib \
