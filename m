@@ -1,71 +1,71 @@
-Received: from rcdn-iport-4.cisco.com (rcdn-iport-4.cisco.com [173.37.86.75])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.3364.1794374983916368146
+Received: from rcdn-iport-1.cisco.com (rcdn-iport-1.cisco.com [173.37.86.72])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.3283.1794374983856874227
  for <openembedded-devel@lists.openembedded.org>;
  Tue, 10 Nov 2026 21:29:44 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=VrmWGz2W;
- spf=pass (domain: cisco.com, ip: 173.37.86.75, mailfrom: dkelaiya@cisco.com)
+ dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=IvP93J3x;
+ spf=pass (domain: cisco.com, ip: 173.37.86.72, mailfrom: dkelaiya@cisco.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=cisco.com; i=@cisco.com; l=5776; q=dns/txt;
-  s=iport01; t=1794374983; x=1795584583;
+  d=cisco.com; i=@cisco.com; l=1692; q=dns/txt;
+  s=iport01; t=1794374984; x=1795584584;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=qPohO+U92fHfJA9TQa9Ww5vCv+51F8nyHpv6RGDilkY=;
-  b=VrmWGz2Wgwv9ed07XNeVY524kc+ApXxFX8WsCoNs3JU5KacT9RiBomSW
-   6TrLJST4kB/bEt8hWw8jZm2WSt9u50N541Zsc6luksqmxCq5a3GGKZVTf
-   jkK1eQwEkW9ilNTtB6eHDt4aQzYlDBGjXWf+KvJgfmGqImY/zmM1EF6NK
-   AjyG5ICaBDIO+j6AGNorgRNvXblFHymTNb/rXq+lGOHxF8kaJoB/jO3aY
-   0OkyL08u9q4UzxrIzqmKwNJyO04QnaKrKcBnoJtekU7ti6ozQ4z1Dmp99
-   +/yKizv1U/aFUXcDWcmtk1xPhGrpSF3R2ghOpNOKVN7s0F2xiocFAHwZs
-   w==;
-X-CSE-ConnectionGUID: 4CJcE3QUT2uE0clZ8SjdyQ==
-X-CSE-MsgGUID: aqAxdrFtQKqJzo/Z1zowMQ==
-X-IPAS-Result: =?us-ascii?q?A0BNAgDN/PNq/43/Ja1RCYJZgld1YENJA5VcbAOLZZI9F?=
- =?us-ascii?q?IFqDwEBAQ9EDQQBAYQ/RgKOHgImNAkOAQIEAwIDAQEBAQEBAQEBAQEBCgEBB?=
- =?us-ascii?q?QEBAQIBBwWBDhOGTw2QEgECAQMnCwEYAS0QHAMBAhYZIAsdAQUIEAmDAgGCO?=
- =?us-ascii?q?gM3AxG5XoF5M4EBgykBgVTYTA2CWgELFAGBOIVCgwCFJF0YAYR9JxsbgXKBF?=
- =?us-ascii?q?YNpgQWBGkICgRkODWuFZSIEgiKBDIFajRoCgU+HJUiBHgNZLAFVEw0KCwcFg?=
- =?us-ascii?q?WgDNRIqFW4yHYEjPheBBxsGBYEcgR6BEoEHXYErKF0BIYEIgXYCglGCAAIBS?=
- =?us-ascii?q?UEOB0VTCSVDEkckIggSCQETGiwKgRo1PAkmPxUMZwsaBWEIAg0MdDkQMB4kL?=
- =?us-ascii?q?wUaJj4bCn4YDUgRLDcVGQQ+bgeSboIRgQSBDgEmBVQ9CBYUKUBOkmkIkjegI?=
- =?us-ascii?q?HEKKIN4jCSPPoV8GjOqcguYfY4KhAqRek2EaoFoPIFZcBWDIglKGQ9XjVgKC?=
- =?us-ascii?q?4NgzlsmMgIJAy8BAQcCBw4DC4FokACBfgEB?=
-IronPort-Data: A9a23:4ogClat0w+e0tbCPdKOGEN8qEefnVAZfMUV32f8akzHdYApBsoF/q
- tZmKW2BPPaKYjTxLt1+O4myp0IFu5WAnNY2HFBkqSA0FXlGgMeUXt7xwmUckM+xwmwvaGo9s
+  bh=KDYSz17B6S2htjGwkxrzV5iSWtA7cMdSi3GstFA9Kfk=;
+  b=IvP93J3xR4ap4sbA8iXIqNV/F+o8DWnIhFCDsZCq6pzY/SpTkWTTBupG
+   xQFCwMDsNzgm2xw7WHrO13l0RyNmpxaTSrnELgJZ8V9VICx5VG1h5wj1L
+   RdhVpryhfa3RbS5gMo5Ey4mxT5Bq9zWo9Gvn5nbxvvxeMAPNRAV+Xiyxc
+   mQxVOknPEtK+23b45sqZpNz61h8YeUcT9jQtcF/F0RiqPIKH9CQl1gTPt
+   Gwy9z8KjxMzrIHihFgCpkEZp2+DiYIvx5dGf+6W+KfA+QVtf7/K5KFDdi
+   ILL6/5Jh+H8rVNF6klGD+ipxXCoRRZ0bAe6YstNcpmuqdOGgclRb72Js9
+   A==;
+X-CSE-ConnectionGUID: /aTpxtcORgWK8Cu509qnCQ==
+X-CSE-MsgGUID: Qt3l+y9FRbuyQ8kzYQcKGg==
+X-IPAS-Result: =?us-ascii?q?A0BIAgBQ/PNq/5H/Ja1aHgEBCxIMggULgld1YENJA5ZIA?=
+ =?us-ascii?q?4ETnQ8UgWoPAQEBD0QNBAEBhD9GAo4eAiY0CQ4BAgQDAgMBAQEBAQEBAQEBA?=
+ =?us-ascii?q?QEKAQEFAQEBAgEHBYEOE4ZPDZATAgEDMgEYAS0QIBgZKx0BDRmDAgGCdAMRu?=
+ =?us-ascii?q?ViCLIEBgykBPwJDUNszAQsUAYE4hUKIJHUBhH0nGxuBcoEVgnN2gQWBXAEBg?=
+ =?us-ascii?q?RmBBg6FVyIEgiKBDIJjjBGIdkiBHgNZLAFVEw0KCwcFgWgDNRIqFW4yHYEjP?=
+ =?us-ascii?q?heBBxsGBYEcgR6BEoEHXYErKF0BIYEIgXYCglGCAAIBSUEOB0VTCSVDEkckI?=
+ =?us-ascii?q?ggSCQETGiwKgRo1PAkmPxUMZwsaBWEIAg0MdDkQMB4kLwUaJj4bCn4YDUgRL?=
+ =?us-ascii?q?DcVGQQ+bgeSboMVgQ4BKwQcggyldqERCiiDeIwkg12RXRozqnILmH2OCpZRh?=
+ =?us-ascii?q?GqBaDyBRwsHcBWDIglKGQ+OOYNrgX/MXCYyAgwvAQEHAgcOAwuBaJF+AQE?=
+IronPort-Data: A9a23:2FT0VKtqhmQOSmmGBht4WYlm0+fnVAZfMUV32f8akzHdYApBsoF/q
+ tZmKWiAPfrcZGT9e9klb4Xg9BkFuJ+BzN8wQFBpriEwRiIbgMeUXt7xwmUckM+xwmwvaGo9s
  q3yv/GZdJhcokf0/0nrb/656yYsjclkf5KkYMbcICd9WAR4fykojBNnioYRj5Vh6TSDK1vlV
  eja/YuFZzdJ5xYuajhKsvva8Us21BjPkGpwUmIWNKgjUGD2zxH5PLpHTYmtIn3xRJVjH+LSb
  47r0LGj82rFyAwmA9Wjn6yTWhVirmn6ZFXmZtJ+AsBOszAazsAA+v9T2Mk0NS+7vw60c+VZk
- 72hg3AfpTABZcUgkMxFO/VR/roX0aduoNcrKlDn2SCfItGvn3bEm51T4E8K0YIwps1VCkwVz
- MEkci0gNhuHtbKNwr6qc7w57igjBJGD0II3oHpsy3TdSP0hW52GG/mM7t5D1zB2jcdLdRrcT
- 5NGMnw0M1KaPkAJYwtOYH49tL/Aan3Xfz5VrFuUtKMf6GnIxws327/oWDbQUoHWG5gPzx7C+
- Qoq+UzwGzgKOMax1QOm61C+gaj9xDH8R6crQejQGvlCxQf7KnYoIBoOWF22pPO0hkKzV5dTJ
- lIZ/gIqrLMu7wqsVtT7UhiyrXKIsxJaXMBfe9DW8ymXwabSpgLcDW8eQ3sZNJottdQ9Qnoh0
+ 72hg3AfpTABZcUgkMxFO/VR/roX0aduoNcrKlDn2SCfItGvn3bEm51T4E8K0YIwve9LGXFS/
+ tsiJw8uPjue2rrn2bSQc7w57igjBJGD0II3oHpsy3TdSP0hW52GG/WM7t5D1zB2jcdLdRrcT
+ 5NGMnw0M1KaPkAJYwtKYH49tL/Aan3Xfz5VrFuUtKMf6GnIxws327/oWDbQUoHWG54NwRjI+
+ goq+UzAHkoed83O5wCP72OV1uzdrBrwe60dQejQGvlCxQf7KnYoIBoOWF22pPO0hkKzV5dTJ
+ lIZ/gIqrLMu7wqsVtT7UhiyrXKIsxJaXMBfe9DW8ymXwabSpgLcDW8eQ3sZOJottdQ9Qnoh0
  Vrhc87VOAGDeYa9ERq1nop4ZxvrUcTJBQfuvRM5cDY=
-IronPort-HdrOrdr: A9a23:Lng+O6PjwzQJIMBcTuOjsMiBIKoaSvp037Dk7S9MoHtuA6ulfq
- +V/cjzuSWYtN9VYgBDpTniAtjlfZqjz/5ICOAqVN/INjUO+lHYSb2KhrGN/9SPIUHDH5ZmpM
- RdWpk7LsHsBl5nisu/ygy5H9E8hOSjysmT9IHjJ7MHd3ATV0mmhD0JczqmLg==
-X-Talos-CUID: 9a23:3mvy22zeCTGanSDTniNYBgVIMeIuXybk8UuKPmLgAmJbGIaXRU6prfY=
-X-Talos-MUID: =?us-ascii?q?9a23=3Ah1RHOQ+Rv5TufgdT7/kk/AOQf85xyrSiEm4RqLY?=
- =?us-ascii?q?fmduDch4pKTCCqQ3iFw=3D=3D?=
+IronPort-HdrOrdr: A9a23:hQDxlql/hpY0oqy7UtKBSRbnLdXpDfIO3DAbv31ZSRFFG/FwWf
+ rAoB19726StN9/YhAdcLy7VZVoBEmsl6KdgrNhWYtKIjOHhILAFugLhuHfKn/bakjDH4Vmu5
+ uIHZITNDSJNykYse/KpC+lDt0n3N6LtIqshevY0jNRaDsCUdAH0++8YTzranGfg2J9dOMEKK
+ Y=
+X-Talos-CUID: =?us-ascii?q?9a23=3Anh0bk2ozXHmbT88TcB+KLgzmUYcsTmXN0Hz3GUC?=
+ =?us-ascii?q?HKjZCVeDNGEaW05oxxg=3D=3D?=
+X-Talos-MUID: 9a23:sbrIdQX3+xUP8/Lq/Abw3zUhJZZG2a6zGXldkoc3gsKnGiMlbg==
 X-IronPort-Anti-Spam-Filtered: true
 X-IronPort-AV: E=Sophos;i="6.27,207,1787011200"; 
-   d="scan'208";a="546529027"
-Received: from rcdn-l-core-04.cisco.com ([173.37.255.141])
-  by rcdn-iport-4.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 11 Nov 2026 05:29:43 +0000
+   d="scan'208";a="546307684"
+Received: from rcdn-l-core-08.cisco.com ([173.37.255.145])
+  by rcdn-iport-1.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 11 Nov 2026 05:29:43 +0000
 Received: from sjc-ads-5675.cisco.com (sjc-ads-5675.cisco.com [10.28.88.189])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by rcdn-l-core-04.cisco.com (Postfix) with ESMTPS id F3D87180001B5;
-	Wed, 11 Nov 2026 05:29:42 +0000 (GMT)
+	by rcdn-l-core-08.cisco.com (Postfix) with ESMTPS id 744E11800044B;
+	Wed, 11 Nov 2026 05:29:43 +0000 (GMT)
 Received: by sjc-ads-5675.cisco.com (Postfix, from userid 1887444)
-	id 9E771CBF201; Tue, 10 Nov 2026 21:29:42 -0800 (PST)
+	id CE44ECBEFAB; Tue, 10 Nov 2026 21:29:42 -0800 (PST)
 From: "Darsh Kelaiya -X (dkelaiya - E INFOCHIPS PRIVATE LIMITED at Cisco)" <dkelaiya@cisco.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Darsh Kelaiya <dkelaiya@cisco.com>
-Subject: [oe][meta-python][wrynose][PATCH 1/9] python3-filelock: fix CVE-2026-112939
-Date: Tue, 10 Nov 2026 21:29:30 -0800
-Message-Id: <20261111052938.3691463-2-dkelaiya@cisco.com>
+Subject: [oe][meta-python][wrynose][PATCH 9/9] python3-filelock: ignore CVE-2026-112913
+Date: Tue, 10 Nov 2026 21:29:38 -0800
+Message-Id: <20261111052938.3691463-10-dkelaiya@cisco.com>
 X-Mailer: git-send-email 2.35.6
 In-Reply-To: <20261111052938.3691463-1-dkelaiya@cisco.com>
 References: <20261111052938.3691463-1-dkelaiya@cisco.com>
@@ -73,156 +73,44 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Outbound-Client-TLS: ANONYMOUS;sjc-ads-5675.cisco.com [10.28.88.189];TLSv1.3;TLS_AES_256_GCM_SHA384;256
 X-Outbound-SMTP-Client: 10.28.88.189, sjc-ads-5675.cisco.com
-X-Outbound-Node: rcdn-l-core-04.cisco.com
+X-Outbound-Node: rcdn-l-core-08.cisco.com
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Wed, 11 Nov 2026 05:29:50 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132113
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132114
 Content-Type: text/plain; charset="utf-8"
 
 From: Darsh Kelaiya <dkelaiya@cisco.com>
 
-Backport the SoftFileLock owner-permission fix [1], as identified by
-advisory [2]. Prevent other accounts from modifying the marker's
-recorded holder while preserving the existing two-line marker format.
-Retain the permission regression adapted to the 3.25.2 test harness.
+Analysis:
+- Upstream scopes this issue to Windows ReadWriteLock and
+  AsyncReadWriteLock in directories writable by another account. [1]
+- Attacker-controlled SQLite side files can cause acquisition
+  failures or unsafe hot-journal recovery on Windows. [1][2]
+- The advisory tracks the Linux/macOS issue separately; this series
+  addresses that issue as CVE-2026-112940. [1][3]
+- Mark this Windows-only CVE as not applicable to the Linux target.
 
-[1] https://github.com/tox-dev/filelock/commit/eeceaa846cbe4df72718d94c8371ca1ab8f5b3cc
-[2] https://github.com/tox-dev/filelock/security/advisories/GHSA-rfpc-qcw5-3pc4
+Reference:
+[1] https://github.com/tox-dev/filelock/security/advisories/GHSA-9vhv-jxww-xfm5
+[2] https://nvd.nist.gov/vuln/detail/CVE-2026-112913
+[3] https://github.com/tox-dev/filelock/security/advisories/GHSA-v4x8-3wr5-3wq8
 
 Signed-off-by: Darsh Kelaiya <dkelaiya@cisco.com>
 ---
- .../python3-filelock/CVE-2026-112939.patch    | 107 ++++++++++++++++++
- .../python/python3-filelock_3.25.2.bb         |   4 +-
- 2 files changed, 110 insertions(+), 1 deletion(-)
- create mode 100644 meta-python/recipes-devtools/python/python3-filelock/CVE-2026-112939.patch
+ meta-python/recipes-devtools/python/python3-filelock_3.25.2.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-python/recipes-devtools/python/python3-filelock/CVE-2026-112939.patch b/meta-python/recipes-devtools/python/python3-filelock/CVE-2026-112939.patch
-new file mode 100644
-index 0000000000..621f704837
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-filelock/CVE-2026-112939.patch
-@@ -0,0 +1,107 @@
-+From eeceaa846cbe4df72718d94c8371ca1ab8f5b3cc Mon Sep 17 00:00:00 2001
-+From: =?UTF-8?q?Bern=C3=A1t=20G=C3=A1bor?= <gaborjbernat@gmail.com>
-+Date: Sat, 17 Oct 2026 02:21:17 -0700
-+Subject: [PATCH] =?UTF-8?q?=F0=9F=90=9B=20fix(soft):=20keep=20live=20holde?=
-+ =?UTF-8?q?rs=20when=20owner=20identity=20differs=20(#836)?=
-+MIME-Version: 1.0
-+Content-Type: text/plain; charset=UTF-8
-+Content-Transfer-Encoding: 8bit
-+
-+CVE: CVE-2026-112939
-+Upstream-Status: Backport [https://github.com/tox-dev/filelock/commit/eeceaa846cbe4df72718d94c8371ca1ab8f5b3cc]
-+
-+Backport Changes:
-+- Retain the 3.25 mode-opening API and mask group/other write bits.
-+- Omit newer identity, namespace and Windows helper changes because
-+  those interfaces are absent from the older two-line marker protocol.
-+- Omit their newer tests and documentation; adapt the upstream mode
-+  regression to the existing platform checks.
-+
-+Signed-off-by: Darsh Kelaiya <dkelaiya@cisco.com>
-+---
-+ src/filelock/_soft.py  |  7 ++++++-
-+ tests/test_filelock.py | 31 ++++++++++++++++---------------
-+ 2 files changed, 22 insertions(+), 16 deletions(-)
-+
-+diff --git a/src/filelock/_soft.py b/src/filelock/_soft.py
-+index 8e2cde5..3a535ea 100644
-+--- a/src/filelock/_soft.py
-++++ b/src/filelock/_soft.py
-+@@ -2,15 +2,20 @@ from __future__ import annotations
-+ 
-+ import os
-+ import socket
-++import stat
-+ import sys
-+ import time
-+ from contextlib import suppress
-+ from errno import EACCES, EEXIST, EPERM, ESRCH
-+ from pathlib import Path
-++from typing import Final
-+ 
-+ from ._api import BaseFileLock
-+ from ._util import ensure_directory_exists, raise_on_not_writable_file
-+ 
-++#: Contenders act on the record in the marker, so no other account may write it, whatever the mode or umask.
-++_OTHERS_WRITE: Final[int] = stat.S_IWGRP | stat.S_IWOTH
-++
-+ _WIN_SYNCHRONIZE = 0x100000
-+ _WIN_ERROR_INVALID_PARAMETER = 87
-+ 
-+@@ -41,7 +46,7 @@ class SoftFileLock(BaseFileLock):
-+         if (o_nofollow := getattr(os, "O_NOFOLLOW", None)) is not None:
-+             flags |= o_nofollow
-+         try:
-+-            file_handler = os.open(self.lock_file, flags, self._open_mode())
-++            file_handler = os.open(self.lock_file, flags, self._open_mode() & ~_OTHERS_WRITE)
-+         except OSError as exception:
-+             if not (
-+                 exception.errno == EEXIST or (exception.errno == EACCES and sys.platform == "win32")
-+diff --git a/tests/test_filelock.py b/tests/test_filelock.py
-+index b7751c5..38c7b90 100644
-+--- a/tests/test_filelock.py
-++++ b/tests/test_filelock.py
-+@@ -586,27 +586,28 @@ def test_lock_mode(tmp_path: Path) -> None:
-+     lock.release()
-+ 
-+ 
-+-def test_lock_mode_soft(tmp_path: Path) -> None:
-+-    # test soft lock permissions are dependent of umask
-++@pytest.mark.skipif(sys.platform == "win32", reason="POSIX marker permission bits")
-++@pytest.mark.parametrize(
-++    ("mode", "umask"),
-++    [
-++        pytest.param(0o666, 0o022, id="explicit-mode"),
-++        pytest.param(None, 0, id="default-mode-open-umask"),
-++    ],
-++)
-++def test_lock_mode_soft_lets_only_the_owner_write_the_marker(
-++    mode: int | None, umask: int, tmp_path: Path
-++) -> None:
-++    # Contenders act on the record inside, so no other account may rewrite it.
-+     lock_path = tmp_path / "a.lock"
-+-    lock = SoftFileLock(str(lock_path), mode=0o666)
-++    lock = SoftFileLock(str(lock_path)) if mode is None else SoftFileLock(str(lock_path), mode=mode)
-+ 
-+-    # set umask so permissions can be anticipated
-+-    initial_umask = os.umask(0o022)
-++    initial_umask = os.umask(umask)
-+     try:
-+-        lock.acquire()
-+-        assert lock.is_locked
-+-
-+-        mode = filemode(lock_path.stat().st_mode)
-+-        if sys.platform == "win32":
-+-            assert mode == "-rw-rw-rw-"
-+-        else:
-+-            assert mode == "-rw-r--r--"
-++        with lock:
-++            assert filemode(lock_path.stat().st_mode) == "-rw-r--r--"
-+     finally:
-+         os.umask(initial_umask)
-+ 
-+-    lock.release()
-+-
-+ 
-+ def test_umask(tmp_path: Path) -> None:
-+     lock_path = tmp_path / "a.lock"
 diff --git a/meta-python/recipes-devtools/python/python3-filelock_3.25.2.bb b/meta-python/recipes-devtools/python/python3-filelock_3.25.2.bb
-index 9308674f9a..03c23092b9 100644
+index 40c4fe9427..9617d82b31 100644
 --- a/meta-python/recipes-devtools/python/python3-filelock_3.25.2.bb
 +++ b/meta-python/recipes-devtools/python/python3-filelock_3.25.2.bb
-@@ -7,7 +7,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=2c6acbdf7bb74caa37512c3a5ca6857b"
+@@ -9,6 +9,7 @@ CVE_PRODUCT = "tox-dev:filelock"
  
- CVE_PRODUCT = "tox-dev:filelock"
+ CVE_STATUS[CVE-2026-112907] = "not-applicable-platform: Windows oplock handling is not used on Linux"
+ CVE_STATUS[CVE-2026-112910] = "not-applicable-platform: Windows ACL inheritance is affected; Linux uses POSIX file permissions"
++CVE_STATUS[CVE-2026-112913] = "not-applicable-platform: The CVE affects SQLite side-file handling on Windows only"
  
--SRC_URI += "file://run-ptest"
-+SRC_URI += " file://run-ptest \
-+    file://CVE-2026-112939.patch \
-+"
- SRC_URI[sha256sum] = "b64ece2b38f4ca29dd3e810287aa8c48182bbecd1ae6e9ae126c9b35f1382694"
- 
- BBCLASSEXTEND = "native nativesdk"
+ SRC_URI += " file://run-ptest \
+     file://CVE-2026-112939.patch \
 -- 
 2.35.6
