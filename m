@@ -1,328 +1,216 @@
-Received: from mail-dl1-f46.google.com (mail-dl1-f46.google.com [74.125.82.46])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.3546.1794376449300784715
+Received: from DUZPR83CU001.outbound.protection.outlook.com (DUZPR83CU001.outbound.protection.outlook.com [52.101.66.93])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.4172.1794379134628465682
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 10 Nov 2026 21:54:09 -0800
+ Tue, 10 Nov 2026 22:38:55 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@mvista.com header.s=google header.b=fgv5HtqP;
- spf=pass (domain: mvista.com, ip: 74.125.82.46, mailfrom: hprajapati@mvista.com)
-Received: by mail-dl1-f46.google.com with SMTP id a92af1059eb24-1b244fb7fffso3484562c88.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 10 Nov 2026 21:54:09 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=mvista.com; s=google; t=1794376448; x=1794981248; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=uTNvFIXbtW0n8kkDj+fHo2GWICmZJv4CuB9vPzsDum8=;
-        b=fgv5HtqPTbpP2+sHO2lBxiMGBqg9ixcsOiVouJ3dpSaQzKPx7+4H2oENAPgj39Wkhd
-         yjChgGQPuP6rbe1boBdyDZJxXnT2x4CXCM1DXuC/MJfGRuH43m/FawUuHmmyoUtD1Sli
-         SUUHwqbF6GFR6PfMf2z3keQcTrtNGuVApo85k=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794376448; x=1794981248;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=uTNvFIXbtW0n8kkDj+fHo2GWICmZJv4CuB9vPzsDum8=;
-        b=GYbGHb7fJ8EVJ2DcvFaGlXbclr8Pj8G3pMmIUR6ye7gEEuYZKWP1OeAiuOs9Virsuo
-         9Wh9IgxjVc9pJkdLR1Exz6dZrb5pn+j6W5k19+pXV6smxcK8g14W/fJY9znFHM79zi2L
-         z3GyOFmHR6TMigL7cW5DD5z4GDMcx4xisrniS74Z2vzk0yosZdjatA+SGolAH/hhEjEX
-         MLpS5iTX3LnTRFXcKmBTUBHOI7il4oLMKj8yFMFKAIK7QRiJidW0XsUdUSSmnhxmDhZc
-         u8EaGzVkHgHdedM6MWOLukdwfVPfQX8Wx2D5oMiteBUuhvM1pd6hRn85A2l7srjKb/Ac
-         lnbg==
-X-Gm-Message-State: APuU4Z+E7edVcOFQ+MRmrNzKlBxiC1Irlc8xLI7doKW8uzQ3pMCy2nSa
-	1n/Z6QkF9YzXmyN4tHSUhKseDKUvXw8+KtwveSZK4EqOapWTL+OHisQrrRV4dPHZog+CB+/VgML
-	l+A/0uh8=
-X-Gm-Gg: AYBFou0sfUAd3qN7fBvQpDfUdUX0rpzQneQeMFrz+Ni15JjLROSYbM5NqBDOUBPrOtv
-	71Oe9v4BpKtliGi/+8cRUHgcLxI+kvWluOC7Z6tMC1qPX72myHtbm20Fpoz067k1jpqzXXcrim/
-	+9MjKtnIIfjiC0HP0pmbkqQjM1vXZk1wy8Cr9bxI2DJhXLdlVCDtn+BfVsy9SICvouUr4wmKC/P
-	uV63SoMM1LKg0YnDFX5XsGNRAzwQ90tfQ4AHxBmBMvdZ2DXFpCkfeGwsHYhV7kq3201fpKGBn3P
-	IUkMD1KorlMH59uI8xNQsKj4Nk3cEh5laMMuimEzeRcYQ7Rv8KuhKR4Wv6Ux5riqFeGr2k/KE4B
-	4xGns+4EdnqeGjfxTNfszsyE+K4WMLKF6nJBCwszyzKEpBFChKZuB13Ux1eRheFvaJJr64iq2EK
-	v/FV60g5A0sPg2nIqB+J9UI6QeYYkkZUpbBUxf9N2zbiwE7Bsm4n70AyPgCyRMZCdD2QiFjQeDx
-	hgiVU2OwyreG9QDsnGUv80s/58C1/OPQG6RpxJzbAUWacAcFK4/xDihb68ncFHvtv64prOIQtwM
-	SaEdBLtwU/rChsQw07c9Ysyw2ZQ3lw98RFhbxWO8
-X-Received: by 2002:a05:693c:4081:b0:377:678:231b with SMTP id 5a478bee46e88-37706782701mr535848eec.25.1794376448064;
-        Tue, 10 Nov 2026 21:54:08 -0800 (PST)
-Return-Path: <hprajapati@mvista.com>
-Received: from MVIN00013.mvista.com ([27.121.101.115])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-37520cfdfadsm14730177eec.19.2026.11.10.21.54.05
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 10 Nov 2026 21:54:07 -0800 (PST)
-From: Hitendra Prajapati <hprajapati@mvista.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: anuj.mittal@oss.qualcomm.com,
-	Hitendra Prajapati <hprajapati@mvista.com>
-Subject: [meta-networking][scarthgap][PATCH] iscsi-initiator-utils: fix for CVE-2026-44943, CVE-2026-44944
-Date: Wed, 11 Nov 2026 11:24:00 +0530
-Message-ID: <20261111055400.111834-1-hprajapati@mvista.com>
-X-Mailer: git-send-email 2.50.1
+ dkim=pass header.i=@topic.nl header.s=selector2 header.b=D4GjZklc;
+ spf=pass (domain: topic.nl, ip: 52.101.66.93, mailfrom: mike.looijmans@topic.nl)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=dqphBsKEl3dVuzuUu4q/XHkTf1USdRJu5OqvSjA0ydDqUs+Ij2lN+58ML/620+fgpfj/7QvmTnTijE7JOrndVeAAPvQ7d5TdFbibgp2cCG63jS7ZO0cMKamV9yfHMzBaowraWegeYZBZDg11sPWqITVgY2GUudLzAI2N62MDpQZKm1nlsY11MN0/sK6zI2j/H3wkwgkuexEjeOxTm0ucGVFk7PSiKbLCtSW8nESiNgeOsacrm1EN0QefLZL/SHJurep1yR6LDnEQc/5Dsb8ZM9Bb/bDTJz5z11Gl0+tg1CEe4BKOpaDF0iKuEHZY6LgvwoDN9dFvPanC6x6UkAZ01g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=FEO47OKRaHkOq/ghkS/wOXJiRhRoW27ileHzvaKEuVg=;
+ b=DRIl7StbvFr0Z8+6pmSUT7PMTjBjiSvuVznM+eju3ZaI3dy46XWL/IOIcSt75xp7+4YcN5DeSIE+sevfGjOgU9o8v4+zXhvlWPJ+R9klDtgCKscXyjH/yMW4EXj4ar7Cu/SASQk/gq2sNwx+0IwwgwzoCirWD9Bct9p/x6f6vbQ6/ksyG+s4rAmBd1oQ5qU3CRRFjSZnS2wd5DoJqGwq6g0ct7lEFqYaskqSYxPIwLwr8GZzW44AFOpKVAIdo7r1LU6GBPOAR+2nFF/ept+sYRd4f+oFqQu4KhgE/5Jgb4bPCdfV4IellO1jXVL4okGx+Me/M+ALUkM50ijc1L39Yg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 20.93.157.195) smtp.rcpttodomain=gmail.com smtp.mailfrom=topic.nl; dmarc=pass
+ (p=quarantine sp=quarantine pct=100) action=none header.from=topic.nl;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=topic.nl; s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=FEO47OKRaHkOq/ghkS/wOXJiRhRoW27ileHzvaKEuVg=;
+ b=D4GjZklccMKJOo4cK+0WeID80+99I4t3IAnCfDViqb+odE1zslkgwUqbGK9Ui6OQ4Q8rnG7J1RlqPAePCSSMXWtYgpACQWQHKIXYPH6kNwxaiuYu/N4Nd0FllA5tXt+X625/ytmsZTFmC9xYZk5gqGrbkzSXjG3ISmkIDt4EEzLq4qr5j+KlteNSJ/SXPbm+rqTZxWJ3aOJ8w3oIwPYZHbrLm7tRrBkGCMcTipezan6Vvt7IPvW/j39FUSQJzp+8xwoMb7xTwMZrz5pTfc64/cCH0bAfI7YQ4poYyArlX1nzDhu5nRrwT7Hwl7gISSyxuQRAWlsc2n0FI9hXEb1hhg==
+Received: from PAZP264CA0137.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:1f8::15)
+ by CPH1PF99222C660.eurprd04.prod.outlook.com (2603:10a6:388::3cf) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.615.8; Wed, 11 Nov
+ 2026 06:38:49 +0000
+Received: from MI3PEPF00008558.eurprd05.prod.outlook.com
+ (2603:10a6:102:1f8:cafe::60) by PAZP264CA0137.outlook.office365.com
+ (2603:10a6:102:1f8::15) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.615.8 via Frontend Transport; Wed, 11
+ Nov 2026 06:38:49 +0000
+X-MS-Exchange-Authentication-Results: mx.microsoft.com 1; spf=pass (sender IP
+ is 20.93.157.195) smtp.mailfrom=topic.nl; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=topic.nl;
+Received-SPF: Pass (protection.outlook.com: domain of topic.nl designates
+ 20.93.157.195 as permitted sender) receiver=protection.outlook.com;
+ client-ip=20.93.157.195; helo=westeu11-emailsignatures-cloud.codetwo.com;
+ pr=C
+Received: from westeu11-emailsignatures-cloud.codetwo.com (20.93.157.195) by
+ MI3PEPF00008558.mail.protection.outlook.com (10.167.240.20) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.615.4 via Frontend Transport; Wed, 11 Nov 2026 06:38:49 +0000
+Received: from DB6PR07CU003.outbound.protection.outlook.com (40.93.64.89) by westeu11-emailsignatures-cloud.codetwo.com with CodeTwo SMTP Server (TLS12) via SMTP; Wed, 11 Nov 2026 06:38:48 +0000
+Authentication-Results-Original: mx.microsoft.com 1; dkim=none (message not
+ signed) header.d=none;dmarc=none action=none header.from=topic.nl;
+Received: from VI0PR04MB12030.eurprd04.prod.outlook.com
+ (2603:10a6:800:316::24) by PA1PR04MB10284.eurprd04.prod.outlook.com
+ (2603:10a6:102:460::10) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.615.8; Wed, 11 Nov
+ 2026 06:38:45 +0000
+Received: from VI0PR04MB12030.eurprd04.prod.outlook.com
+ ([fe80::e428:3105:17ec:8224]) by VI0PR04MB12030.eurprd04.prod.outlook.com
+ ([fe80::e428:3105:17ec:8224%3]) with mapi id 15.21.0615.007; Wed, 11 Nov 2026
+ 06:38:45 +0000
+Message-ID: <c8443741-eb78-4aef-bc31-50ee8b7eec25@topic.nl>
+Date: Wed, 11 Nov 2026 07:38:45 +0100
+User-Agent: Mozilla Thunderbird
+From: <mike.looijmans@topic.nl>
+Subject: Re: [oe] [PATCH 0/4] Apply the mongodb patches from the scarthgap
+ branch, which is ahead
+To: Khem Raj <raj.khem@gmail.com>
+CC: openembedded-devel@lists.openembedded.org
+References: <1b153bce-a66a-45ee-a5c6-963ea6fb1c82.949ef384-8293-46b8-903f-40a477c056ae.60c45970-bf59-4753-942e-e3561e9c5a75@emailsignatures365.codetwo.com>
+ <20261109081800.69803-1-mike.looijmans@topic.nl>
+ <CAMKF1soWj4FYR=Kq-mMRXjMnUzMkztdO9Epss9D61RWPE5nS0g@mail.gmail.com>
+ <eedf7b3e-36c7-49b0-bea2-2abbe74026a7@topic.nl>
+ <CAMKF1spaQc--uVEevw2S4vrKJd5wSMSSOYxzv5aOEsb+SqLqKQ@mail.gmail.com>
+Content-Language: nl, en-US
+Organization: TOPIC
+In-Reply-To: <CAMKF1spaQc--uVEevw2S4vrKJd5wSMSSOYxzv5aOEsb+SqLqKQ@mail.gmail.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-ClientProxiedBy: AS4P191CA0036.EURP191.PROD.OUTLOOK.COM
+ (2603:10a6:20b:657::18) To VI0PR04MB12030.eurprd04.prod.outlook.com
+ (2603:10a6:800:316::24)
+Return-Path: mike.looijmans@topic.nl
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-MS-TrafficTypeDiagnostic: VI0PR04MB12030:EE_|PA1PR04MB10284:EE_|MI3PEPF00008558:EE_|CPH1PF99222C660:EE_
+X-MS-Office365-Filtering-Correlation-Id: 76e5c81b-b236-414d-5e3f-08df3fbe71d1
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam-Untrusted: BCL:0;ARA:13230040|23010399003|366016|1800799024|376014|22082099003|18002099003|13003099007|4143699003|10067099003|261026140227099003|261028144727099003|261022075727099003|261021121427099003|261022105027099003|261021123027099003|56012099006|261102123227099003|261009223027099003;
+X-Microsoft-Antispam-Message-Info-Original: 4iUhRxIVZ1Eb0q/qhdgzrswiJh8/2/6QsLDxVw35gERQLcix84TmFwY7RQzgDXLSNFMimfD4zLTv8aTnSeasAy1kxr/ggoR/VHxI0q/RNIGHncIrk+IkgQwKEk0eirGnCcg1Eb5KRzyiFxph+tsWOPIociWdxyGEdrNJk3z/sB0B2DJaUSy+2NoJMhvboyMLQD5GRqIwYMdwNQt5XQ9McBCdpASOYi81GmoH5VZyj1BXZUYsCN3IyKbHZoYnZPaAiqimeOTxkGMg7vYoDz4bjSMH+UFRjDr9vRBcdbUou//pkdcEDdogtOfy2dMzF4OESh3DmjnDbliZP4fHPHD65Ei+4f9dGhfwkYRmUDz+mTWgxB2stLGR95WMZdpU2IHzPwpyjTfhezeqh8C/9A6LISNczGoqbWwpCcg6BEYiKK24Rg1rGwSdeAdj55dWdr+ozryn4nkVHhi2S4vlBTzGNnSvo25bLs0j+2QJPpxTY/a7Bq7rW6GYOugvPg9ZmUTHUjRcb5IwdtuWEDzFgbPG4+hzBFkNyqBkJ5yJN7WElZ9zQmT/9PyB0b6vg6enawWDy/9qr9D/I/wH3sPwetAY4GLiVF1rxDyGJB1LV0Sig9M=
+X-Forefront-Antispam-Report-Untrusted: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VI0PR04MB12030.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(23010399003)(366016)(1800799024)(376014)(22082099003)(18002099003)(13003099007)(4143699003)(10067099003)(261026140227099003)(261028144727099003)(261022075727099003)(261021121427099003)(261022105027099003)(261021123027099003)(56012099006)(261102123227099003)(261009223027099003);DIR:OUT;SFP:1102;
+X-Exchange-RoutingPolicyChecked: SIAeyN/CDFKsLz3UedvY2X6n7Nt6qgsmn271FY1NVr/N75FzGn8Oa17HXhNI/CqHu57MZpxEcu0Y/Rv8bpHGRaPTk19NJv2noWtUNp8yvQyeY7l6b7r3jKFEw9cgSV5aGO421qrX61DWXqcRNeZw4pp5gzrd4s3/Rl5+vWpJLnZreDhqhiFReJjDoJyWDp/DqP8tUK8wsi7mSQjLiEXsWiJPeIaKFOLbBc1PIDbL5FM0yyRBLzcq7E18thHbXfiGUzPlZlYxa3EnrDgeiw8Bxg3/C6qMSDsv6OX2xaB0IaGlGNu5jtU5d6SrBvEQxNYVRwTmy+qNPD8kUc1NtwDFhg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA1PR04MB10284
+X-CodeTwo-MessageID: ff5f22cd-f543-4f65-8641-f88b612bb5f1.20261111063848@westeu11-emailsignatures-cloud.codetwo.com
+X-CodeTwoProcessed: true
+X-EOPAttributedMessage: 0
+X-MS-Exchange-Transport-CrossTenantHeadersStripped: MI3PEPF00008558.eurprd05.prod.outlook.com
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id-Prvs: 527dca4b-5f90-4e42-07a5-08df3fbe6f79
+X-Microsoft-Antispam: BCL:0;ARA:13230040|82310400026|14060799003|35042699022|23010399003|1800799024|376014|36860700016|18002099003|22082099003|13003099007|56012099006|4143699003|261026140227099003|261028144727099003|261022105027099003|261102123227099003|261021121427099003|261022075727099003|261021123027099003|261009223027099003|10067099003;
+X-Microsoft-Antispam-Message-Info: pGul62RAkXQsxTUlQVKn3qVwj1fJteP+rLkIwmzS+3AReLsLNxabAiOo1yIi4rigKoQmOHzehI4eDETkwRXk1rTZtPSKKyDRHmBwoyG9g+WvAV9CPCLaB4Pa6RgzCT4OjliIIaD4SXjX6BbyNmBDJqqoAKvJT/qtBsCyTrg+6lho0qTOUK8jNR/iv5cGpz/Kza2KREQoqVfpVZRY2zg0Ql/YV+PFYKkC2JTV3cpb1juuJoGnpyZfoWKraGMItnMPfxtIaYIoITmqlrBTGKmsvvxCmgpY2SZuGxOw1xdSWRuVFbWm6sOHzNDWKW0d9/bNBd6YdqiMaVzQEKV2X8aI15ZYh+GfG2mTga2rOtKe/w4NcjYJJgzFIKYAO2fpD7d/pl/rklyBIEZEmsvDvKEimwEkV0JysmPUmV/UVyrUpOQMy31zOqhSh8racn8ysae5GFeEViCYD2ztxoEvMnMfw7KOme6/tBYupNW+7Y2cMZgpssKyMzhUjcRKLn4ne3S9N6RQw2pJWdsxAeCCXbKQEGCW9d+oUv3800l2XhaWGndYezZkX8tdrLLAfOxqdgnq9nnoN7xBalIjhFbSQmmThaoSFrXtKNq27ovoBoCLfehBsGakOdPZpxnUI38oo+wq6YIb/1/H7exrikraRNRpOA==
+X-Forefront-Antispam-Report: CIP:20.93.157.195;CTRY:NL;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:westeu11-emailsignatures-cloud.codetwo.com;PTR:westeu11-emailsignatures-cloud.codetwo.com;CAT:NONE;SFS:(13230040)(82310400026)(14060799003)(35042699022)(23010399003)(1800799024)(376014)(36860700016)(18002099003)(22082099003)(13003099007)(56012099006)(4143699003)(261026140227099003)(261028144727099003)(261022105027099003)(261102123227099003)(261021121427099003)(261022075727099003)(261021123027099003)(261009223027099003)(10067099003);DIR:OUT;SFP:1102;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 6Nn2RBixyxXg4uJogW9TO7JHzcDDUL8QrnS+3NgEv4YCC/wSTwKsUj9d6C2Te5JdYzGJ+zssHw8pvFkF02NxTsQRua7p63BSwmVjP948QBR8S2mhZ7el+lvheyzO+jZOCSXlz34dQDfUBAcGJto/P5+4itNaQybfheA2+WO41Bd2Kl32c80GWrimG5gonOb6xi6ebJ5SxQ9GF8tq1Qqh7iKcz+kjcyX9gpcRPshBbBXEubVWpo1TjMWX0tj0y2sqCIUfPegGatugfhp8KiWP5AVk92YAjXjPgIYS1pBqIFHbCq09/Gu/KcwAzoJrDu7XuYXhr9rW4hsntkLVs7+ujcnLwxR3f9o0Y2fHdZQJyBZR2Ub1dEUDAs0j7iZLwF16oyG16fRaGZ6Gmv/g1IePl/dTtVU6dZBcKzhctEnJnGvOdzIeRU5SurKYFUTq/gQw
+X-OriginatorOrg: topic.nl
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Nov 2026 06:38:49.5154
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 76e5c81b-b236-414d-5e3f-08df3fbe71d1
+X-MS-Exchange-CrossTenant-Id: 449607a5-3517-482d-8d16-41dd868cbda3
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=449607a5-3517-482d-8d16-41dd868cbda3;Ip=[20.93.157.195];Helo=[westeu11-emailsignatures-cloud.codetwo.com]
+X-MS-Exchange-CrossTenant-AuthSource: MI3PEPF00008558.eurprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CPH1PF99222C660
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Wed, 11 Nov 2026 05:54:11 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132127
-Content-Type: text/plain; charset="utf-8"
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Wed, 11 Nov 2026 06:39:03 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132128
 
-Pick patch from [1] also mentioned at Debian report in [2] & [3].
+On 11/10/26 08:47, Khem Raj wrote:
+>
+>
+> On Mon, Nov 9, 2026 at 10:02=E2=80=AFPM Mike Looijmans via openembedded-d=
+evel=20
+> <mike.looijmans=3Dtopic.nl@lists.openembedded.org> wrote:
+>
+>     I know, I also wrote in the description (second line) that it wouldn'=
+t
+>     build.
+>
+>     But at least this brings it up to the "scarthgap" level. It's weird t=
+o
+>     have to start several commits behind the previous LTS.
+>
+>     I have a workaround for=C2=A0 the pkg_resources error, but that's sti=
+ll not
+>     enough...
+>
+>
+> I have sent a patch which addresses=C2=A0bunch of these issues.I wonder i=
+f we should
+> upgrade mongo to latest release as well.
 
-[1] https://github.com/open-iscsi/open-iscsi/commit/668ca1df9c9a1e9bdd5c999ae1d67c9c8909237e
-[2] https://security-tracker.debian.org/tracker/CVE-2026-44943
-[3] https://security-tracker.debian.org/tracker/CVE-2026-44944
+It would at least be reasonable to have a version (and CVE updates) that is=
+=20
+equal to or newer than the one in scarthgap.
 
-Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
----
- .../files/CVE-2026-44943.patch                | 181 ++++++++++++++++++
- .../files/CVE-2026-44944.patch                |  41 ++++
- .../iscsi-initiator-utils_2.1.9.bb            |   2 +
- 3 files changed, 224 insertions(+)
- create mode 100644 meta-networking/recipes-daemons/iscsi-initiator-utils/files/CVE-2026-44943.patch
- create mode 100644 meta-networking/recipes-daemons/iscsi-initiator-utils/files/CVE-2026-44944.patch
+M.
 
-diff --git a/meta-networking/recipes-daemons/iscsi-initiator-utils/files/CVE-2026-44943.patch b/meta-networking/recipes-daemons/iscsi-initiator-utils/files/CVE-2026-44943.patch
-new file mode 100644
-index 0000000000..1219b156b1
---- /dev/null
-+++ b/meta-networking/recipes-daemons/iscsi-initiator-utils/files/CVE-2026-44943.patch
-@@ -0,0 +1,181 @@
-+From: Lee Duncan <lduncan@suse.com>
-+Date: Tue, 14 Jul 2026 12:16:58 -0700
-+Subject: Improve iscsid discovery handling of IQN names.
-+
-+Currently, IQN names received via discovery are assumed to be valid up
-+to the NULL character, i.e. the end of the supplied string. But this
-+may not be correct.
-+
-+The ASCII characters allowed in an IQN are detailed in RFC 3722, section
-+6.2: "Currently Prohibited ASCII Characters".
-+
-+Disallowing such characters should not break current usage, since the
-+disallowed characters should not be in an IQN anyway. For example, they
-+include characters like forward slashes, backward slashes, spaces,
-+control characters, etc..
-+
-+Open-iscsi uses target names as directory names in the "database"
-+directory (typically /var/lib/iscsi), so fixing this eliminates discovery
-+target name containing sequences like "../../../*" from being allowed.
-+
-+Reference: CVE-2026-44943
-+Found-by: <keith@linnemanlabs.com>
-+
-+Reviewed-By: Daniel Leidert <dleidert@debian.org>
-+Origin: https://github.com/open-iscsi/open-iscsi/commit/668ca1df9c9a1e9bdd5c999ae1d67c9c8909237e
-+Origin: https://github.com/open-iscsi/open-iscsi/pull/535/changes/c61d97dccb68c2e47f35bf72ba98f6c304f488db
-+Origin: https://github.com/open-iscsi/open-iscsi/commit/3f747d10ce743483a5d5e9512eb28a08b12d9677
-+Bug-Debian: https://bugs.debian.org/1143059
-+Bug-Debian-Security: https://security-tracker.debian.org/tracker/CVE-2026-44943
-+Bug-Freexian-Security: https://deb.freexian.com/extended-lts/tracker/CVE-2026-44943
-+
-+CVE: CVE-2026-44943
-+Upstream-Status: Backport [https://github.com/open-iscsi/open-iscsi/commit/668ca1df9c9a1e9bdd5c999ae1d67c9c8909237e]
-+Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
-+---
-+ usr/discovery.c        | 16 ++++++++++++++++
-+ usr/initiator.h        |  3 +++
-+ usr/initiator_common.c | 33 +++++++++++++++++++++++++++++++++
-+ usr/iscsiadm.c         |  4 ++++
-+ usr/iscsistart.c       |  5 ++++-
-+ 5 files changed, 60 insertions(+), 1 deletion(-)
-+
-+diff --git a/usr/discovery.c b/usr/discovery.c
-+index 587af6d..243afe2 100644
-+--- a/usr/discovery.c
-++++ b/usr/discovery.c
-+@@ -216,6 +216,11 @@ int discovery_isns_query(struct discovery_rec *drec, const char *iname,
-+ 			continue;
-+ 		}
-+ 
-++		if (!iqn_name_valid(pg_tgt)) {
-++			log_error("iSNS discovery Target Name invalid: ignoring it");
-++			continue;
-++		}
-++
-+ 		if (!isns_object_get_ipaddr(obj, ISNS_TAG_PG_PORTAL_IP_ADDR,
-+ 					    &in_addr)) {
-+ 			log_debug(1, "Missing addr");
-+@@ -294,6 +299,11 @@ static int discovery_isns_reg_node(const char *iname, int op_reg)
-+ 	log_debug(1, "trying to %s %s with iSNS server.",
-+ 		  op_reg ? "register" : "deregister", iname);
-+ 
-++	if (!iqn_name_valid(iname)) {
-++		log_error("iSNS initiatorname invalid: ignoring it");
-++		return ISCSI_ERR_INVAL;
-++	}
-++
-+ 	source = isns_source_create_iscsi(iname);
-+ 	if (!source)
-+ 		return ISCSI_ERR_NOMEM;
-+@@ -615,6 +625,12 @@ add_target_record(char *name, char *end, discovery_rec_t *drec,
-+ 		log_error("TargetName %s too long, ignoring", name);
-+ 		return 0;
-+ 	}
-++
-++	if (!iqn_name_valid(name)) {
-++		log_error("Discovery TargetName invalid, ignoring");
-++		return 0;
-++	}
-++
-+ 	text = name + length;
-+ 
-+ 	/* skip NULs after the name */
-+diff --git a/usr/initiator.h b/usr/initiator.h
-+index 0222797..6bb38ca 100644
-+--- a/usr/initiator.h
-++++ b/usr/initiator.h
-+@@ -21,6 +21,7 @@
-+ #define INITIATOR_H
-+ 
-+ #include <stdint.h>
-++#include <stdbool.h>
-+ #include <net/if.h>
-+ #include <sys/time.h>
-+ 
-+@@ -410,4 +411,6 @@ extern int iscsi_set_net_config(struct iscsi_transport *t,
-+ extern void iscsi_session_init_params(struct iscsi_session *session);
-+ 
-+ extern int session_in_use(int sid);
-++
-++extern bool iqn_name_valid(const char *name);
-+ #endif /* INITIATOR_H */
-+diff --git a/usr/initiator_common.c b/usr/initiator_common.c
-+index bc69fbd..8067a70 100644
-+--- a/usr/initiator_common.c
-++++ b/usr/initiator_common.c
-+@@ -24,6 +24,7 @@
-+ #include <stdlib.h>
-+ #include <errno.h>
-+ #include <dirent.h>
-++#include <stdbool.h>
-+ #include <libmount/libmount.h>
-+ 
-+ #include "initiator.h"
-+@@ -732,3 +733,35 @@ int iscsi_host_set_net_params(struct iface_rec *iface,
-+ 	}
-+ 	return 0;
-+ }
-++
-++/**
-++ * @brief iqn_name_valid -- return whether or not the supplied
-++ * IQN name valid
-++ *
-++ * @details Checks for invalid characters, using RFC 3722,
-++ * section 6.2, "Currently Prohibited ASCII Characters"
-++ *
-++ * @param name the IQN name we are checking
-++ * @return true iff the whole name (string) has valid
-++ * charaters
-++ */
-++bool
-++iqn_name_valid(const char *name)
-++{
-++	const unsigned char *cp;
-++
-++	/* ensure no invalid characters */
-++	for (cp = (const unsigned char *)name; *cp != '\0'; cp++)
-++		if ((*cp <= '\x2c') ||
-++		    (*cp == '\x2f') ||
-++		    ((*cp >= '\x3b') && (*cp <= '\x40')) ||
-++		    ((*cp >= '\x5b') && (*cp <= '\x60')) ||
-++		    (*cp >= '\x7b')) {
-++			log_debug(8, "IQN name is invalid: \"%s\" (char: '%#02x')",
-++				  name, *cp);
-++			return false;
-++		}
-++
-++	log_debug(8, "IQN name has all valid characters: \"%s\"", name);
-++	return true;
-++}
-+diff --git a/usr/iscsiadm.c b/usr/iscsiadm.c
-+index 862bcb6..55dd6a2 100644
-+--- a/usr/iscsiadm.c
-++++ b/usr/iscsiadm.c
-+@@ -1155,6 +1155,10 @@ exec_disc_op_on_recs(discovery_rec_t *drec, struct list_head *rec_list,
-+ 	if (op & OP_NEW || op & OP_UPDATE) {
-+ 		/* now add/update records */
-+ 		list_for_each_entry(new_rec, rec_list, list) {
-++			if (!iqn_name_valid(new_rec->name)) {
-++				log_error("FW discovery Target Name invalid: ignoring it");
-++				continue;
-++			}
-+ 			rc = idbm_add_node(new_rec, drec, op & OP_UPDATE);
-+ 			if (rc)
-+ 				log_error("Could not add/update "
-+diff --git a/usr/iscsistart.c b/usr/iscsistart.c
-+index 546840f..b3c8270 100644
-+--- a/usr/iscsistart.c
-++++ b/usr/iscsistart.c
-+@@ -403,7 +403,10 @@ int main(int argc, char *argv[])
-+ 		case 't':
-+ 			check_str_param_len(optarg, TARGET_NAME_MAXLEN,
-+ 					    "targetname");
-+-			strlcpy(config_rec.name, optarg, TARGET_NAME_MAXLEN);
-++			if (!iqn_name_valid(optarg))
-++				log_error("iscsistart Target Name invalid: ignoring");
-++			else
-++				strlcpy(config_rec.name, optarg, TARGET_NAME_MAXLEN);
-+ 			break;
-+ 		case 'g':
-+ 			config_rec.tpgt = atoi(optarg);
-diff --git a/meta-networking/recipes-daemons/iscsi-initiator-utils/files/CVE-2026-44944.patch b/meta-networking/recipes-daemons/iscsi-initiator-utils/files/CVE-2026-44944.patch
-new file mode 100644
-index 0000000000..0ce2daf137
---- /dev/null
-+++ b/meta-networking/recipes-daemons/iscsi-initiator-utils/files/CVE-2026-44944.patch
-@@ -0,0 +1,41 @@
-+From: Lee Duncan <lduncan@suse.com>
-+Date: Tue, 14 Jul 2026 12:16:58 -0700
-+Subject: Fix iscsiuio control-socket credential verification.
-+
-+Prevent unprivilidged user from driving the isscsiuio control socket,
-+by validating connection against correct file descriptor.
-+
-+Reference: CVE-2026-44944
-+Found-by: <keith@linnemanlabs.com>
-+
-+Reviewed-By: Daniel Leidert <dleidert@debian.org>
-+Origin: https://github.com/open-iscsi/open-iscsi/commit/668ca1df9c9a1e9bdd5c999ae1d67c9c8909237e
-+Origin: https://github.com/open-iscsi/open-iscsi/pull/535/changes/61548b598cce28b3042073dd546e2609777fa3a5
-+Bug-Debian: https://bugs.debian.org/1143059
-+Bug-Debian-Security: https://security-tracker.debian.org/tracker/CVE-2026-44944
-+Bug-Freexian-Security: https://deb.freexian.com/extended-lts/tracker/CVE-2026-44944
-+
-+CVE: CVE-2026-44944
-+Upstream-Status: Backport [https://github.com/open-iscsi/open-iscsi/commit/668ca1df9c9a1e9bdd5c999ae1d67c9c8909237e]
-+Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
-+---
-+ iscsiuio/src/unix/iscsid_ipc.c | 4 ++--
-+ 1 file changed, 2 insertions(+), 2 deletions(-)
-+
-+diff --git a/iscsiuio/src/unix/iscsid_ipc.c b/iscsiuio/src/unix/iscsid_ipc.c
-+index ea03d37..2eaf928 100644
-+--- a/iscsiuio/src/unix/iscsid_ipc.c
-++++ b/iscsiuio/src/unix/iscsid_ipc.c
-+@@ -1115,10 +1115,10 @@ static void *iscsid_loop(void *arg)
-+ 			continue;
-+ 		}
-+ 
-+-		if (!mgmt_peeruser(iscsid_opts.fd, user) || strncmp(user, "root", PEERUSER_MAX)) {
-++		if (!mgmt_peeruser(s2, user) || strncmp(user, "root", PEERUSER_MAX)) {
-+ 			close(s2);
-+ 			LOG_ERR(PFX "Access error: non-administrative connection rejected");
-+-			break;
-++			continue;
-+ 		}
-+ 
-+ 		/* this closes the file descriptor s2 */
-diff --git a/meta-networking/recipes-daemons/iscsi-initiator-utils/iscsi-initiator-utils_2.1.9.bb b/meta-networking/recipes-daemons/iscsi-initiator-utils/iscsi-initiator-utils_2.1.9.bb
-index 18ab16bc20..7873efd297 100644
---- a/meta-networking/recipes-daemons/iscsi-initiator-utils/iscsi-initiator-utils_2.1.9.bb
-+++ b/meta-networking/recipes-daemons/iscsi-initiator-utils/iscsi-initiator-utils_2.1.9.bb
-@@ -22,6 +22,8 @@ SRC_URI = "git://github.com/open-iscsi/open-iscsi;branch=master;protocol=https \
-            file://iscsi-initiator.service \
-            file://iscsi-initiator-targets.service \
-            file://set_initiatorname \
-+           file://CVE-2026-44943.patch \
-+           file://CVE-2026-44944.patch \
-            "
- S = "${WORKDIR}/git"
- 
--- 
-2.50.1
+
+>
+>     Mike.
+>
+>     On 09-11-2026 16:41, Khem Raj via openembedded-devel wrote:
+>     > fails to build=C2=A0-
+>     >
+>     https://autobuilder.yoctoproject.org/valkyrie/#/builders/81/builds/19=
+47/steps/18/logs/stdio
+>
+>     >
+>     >
+>     > | scons: Reading SConscript files ...
+>     > | ModuleNotFoundError: No module named 'pkg_resources':
+>     >
+>     > On Mon, Nov 9, 2026 at 12:18=E2=80=AFAM Mike Looijmans via openembe=
+dded-devel
+>     > <mike.looijmans=3Dtopic.nl@lists.openembedded.org> wrote:
+>     >
+>     >=C2=A0 =C2=A0 =C2=A0of the current state and was apparently lost in =
+master.
+>     >
+>     >=C2=A0 =C2=A0 =C2=A0As wrynose introduces new build issues, this sti=
+ll won't build yet.
+>     >
+>     >
+>     >=C2=A0 =C2=A0 =C2=A0Awais Belal (2):
+>     >=C2=A0 =C2=A0 =C2=A0=C2=A0 mongodb: fix build with python 3.12
+>     >=C2=A0 =C2=A0 =C2=A0=C2=A0 mongodb: update to 4.4.29
+>     >
+>     >=C2=A0 =C2=A0 =C2=A0Gyorgy Sarvari (2):
+>     >=C2=A0 =C2=A0 =C2=A0=C2=A0 mongodb: upgrade 4.4.29 -> 4.4.30
+>     >=C2=A0 =C2=A0 =C2=A0=C2=A0 mongodb: ignore CVE-2025-14911
+>     >
+>     >=C2=A0 =C2=A0 =C2=A0=C2=A0...001-free_mon-Include-missing-cstdint.pa=
+tch | 28 ---------
+>     >=C2=A0 =C2=A0 =C2=A0=C2=A0...econfig.py-python-3.12-compatibility.pa=
+tch | 57
+>     >=C2=A0 =C2=A0 =C2=A0+++++++++++++++++++
+>     >=C2=A0 =C2=A0 =C2=A0=C2=A0.../recipes-dbs/mongodb/mongodb_git.bb <ht=
+tp://mongodb_git.bb>
+>     <http://mongodb_git.bb>
+>     >=C2=A0 =C2=A0 =C2=A0=C2=A0 =C2=A0 | 11 ++--
+>     >=C2=A0 =C2=A0 =C2=A0=C2=A03 files changed, 62 insertions(+), 34 dele=
+tions(-)
+>     >=C2=A0 =C2=A0 =C2=A0=C2=A0delete mode 100644
+>     >
+>     =C2=A0meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb/=
+0001-free_mon-Include-missing-cstdint.patch
+>     >=C2=A0 =C2=A0 =C2=A0=C2=A0create mode 100644
+>     >
+>     =C2=A0meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb/=
+0001-moduleconfig.py-python-3.12-compatibility.patch
+>     >
+>     >=C2=A0 =C2=A0 =C2=A0---
+>     >=C2=A0 =C2=A0 =C2=A0base-commit: c734c2cb9713dbd6d50697a9f6c25ebdf3a=
+e589e
+>     >=C2=A0 =C2=A0 =C2=A0branch: wrynose-mongodb
+>     >
+>     >=C2=A0 =C2=A0 =C2=A0--
+>     >=C2=A0 =C2=A0 =C2=A02.43.0
+>     >
+>     >
+>     >=C2=A0 =C2=A0 =C2=A0Met vriendelijke groet / kind regards,
+>     >
+>     >=C2=A0 =C2=A0 =C2=A0Mike Looijmans
+>     >
+>
+--
+
+Mike Looijmans
+
+
 
