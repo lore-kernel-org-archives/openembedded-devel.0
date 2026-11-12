@@ -1,164 +1,132 @@
-Received: from mail-dy1-f171.google.com (mail-dy1-f171.google.com [74.125.82.171])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.8157.1794465928132999917
+Received: from mail-pg1-f178.google.com (mail-pg1-f178.google.com [209.85.215.178])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.8420.1794467546445440918
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 11 Nov 2026 22:45:28 -0800
+ Wed, 11 Nov 2026 23:12:26 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=rVhG0AGp;
- spf=pass (domain: gmail.com, ip: 74.125.82.171, mailfrom: raj.khem@gmail.com)
-Received: by mail-dy1-f171.google.com with SMTP id 5a478bee46e88-33fb4680717so4745143eec.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 11 Nov 2026 22:45:28 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=ZKBezOsj;
+ spf=pass (domain: gmail.com, ip: 209.85.215.178, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pg1-f178.google.com with SMTP id 41be03b00d2f7-cdb15cd8558so1662262a12.2
+        for <openembedded-devel@lists.openembedded.org>; Wed, 11 Nov 2026 23:12:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794465927; x=1795070727; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=o8wBnxFNCQ9F1WfXKilPNY1PoyMrdLuJUT7tBNXts30=;
-        b=rVhG0AGpEG4fgoEPcmcdpjwmAQmalNzgsG8kcGuptpuF0yPFB6VLp4v0KuRN/p8jBt
-         FLVhRBcFFB5q87KcF95ZNwhsSUkKGkIC3W9ydR7bZNsqH7rdbWqk/sD6A9Xu3bjgDmqd
-         YAK5GJ7iSe6PQGGOuZaFGDX4jEeenpaV3ecrSYu+yF1n9IOqaH5VWq04crwG3qXC+9Pn
-         bRXMVLIBonsUdIR5eIN3VTMc+ow/O4A4ZzvRDzE8tJfHwaVCARGHNHt0KuSjQ52OVs4S
-         X4nRF5ApPd67oHOV7tyyRtDY9uDUcu4pTXvmGgPM9koA2pJAk8UxrOgX33HBGn9c3gSy
-         F6Mg==
+        d=gmail.com; s=20260707; t=1794467546; x=1795072346; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=Vd5SD3p0efXkTUYyLJO4uC1u5tQVNvKva8m39m31jKo=;
+        b=ZKBezOsjN9vgBwTqohCM1H+lzu+cKVXFIvf2mO6GOOuq4D/CuMiRNy0GuDF3rBniAz
+         CQTLQtJst3P9m54tgTd+v/KVQH20gToLoY+bmERe0FvkdTO+FLq8hJlrZH8XRkaYTCDG
+         b0+X/irLtXR7JHJcUBcnktu5e02LA8ZVm2WoerySmvwYbTNktKwBNHy0DBoeyoP0yKA4
+         eALl6Be9Lgbxj4ejMqluEz52oC7dVip8ZMsqg2j/+ByQf7Ntlx86l65qphaMOLY/ltBN
+         qplygTVFsIb9BlQKSOHMIIaSREWkwptBRX40dtmxLRgek1uLhgofR2f/w5DSjvr/26W6
+         iAOA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794465927; x=1795070727;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=o8wBnxFNCQ9F1WfXKilPNY1PoyMrdLuJUT7tBNXts30=;
-        b=XVkAvWvF3M8K8fZ0IHQPCqcTJ2To3kbNIODrLrb8lU1zcqgsmcrUsYzTYaTapHIcww
-         QnV09C9OYU0kZBtCa1eXhaA/YLnTXi3LIm5kntBf/grNsMSpFbEvoXYXJfQu58MmOAlN
-         8Oaw7l6x5RVyfUgFmgNY6Iu2AKEYKU5NTTqe0aWS0EgwDN+8Gq5GIX6Gati27nA/vI/j
-         wlnzIzmDFC6akt+542zsUS4XYegKyYWDLEpff3F385UGLx2bSJEBFW97K4aQ2dacVs1u
-         SACLuyzu+XJtP/DV6l+w/4CDsJxco91EpZH4j9XbEtx/+X4mlWPJBiFWOvzKMPovtevP
-         7azg==
-X-Gm-Message-State: APuU4Z9nGT7SVCidnkMv66VTwwMcFYCPpE6frHa6ui5SsSKM+TGO1D8X
-	wgKRY5F+JqUe9ma80qBqlbIDdPUXwdIGZqGHKoUqjnk5kbmc26gLrTfFEavw/XqFcP8=
-X-Gm-Gg: AYBFou2gLm78Va3ueZsvlIQFCAj5Z7EuQYQkGpZxl7Dk37bx9dXuyLXTk43qfFDxt4h
-	ONIRpZz7Gwe6kozAuRIEI/0YzWjW/+/k/l3PIkhXBSlneaUS7awM23qolOk27HSo2234v8Jd2Tq
-	AeZ+vGFwe3XYFtK2H4PILKht1vbQmjzOudPORECZbcA015JJ7r+Lvv74DJOwGyYTnrgfe5wSLls
-	d9sqR0aKZ+lZVimWY+q1xX2jgZ1ILwXwVOfYKsy61VNUrmJ+WmNVGVw0Wy8l/6JvJPJ7hsvtNi/
-	9XBdPkcZkUq0oyTXGZ0WK9OQVyMHVQdpwVrkv0s2KuxHXkUJaBtr1/GxX2Ac79XBgjEBMp1v4/c
-	OkSXYMxjtnYABU72870wLH3nbgdQmkn6sezluViWzTlMtoLuF/sPPIf2iMTtfsjWqxTI7i32B2o
-	3/LTozccPqPqZW9tyVTtV4zy+boAUlA1g9/5iS2yV2yiAJIVl1NvRQMIsori/RkDE8Ifa9q86Sz
-	mksk5+eXWAjEfKd5irnJtkhjJNPRSHSI2EubKkcfhiX1/b3zKnA5/uWX3a74p9uaNnr3RRoYesw
-	EHR/yJPxfNnIXWRGDcvTpIxMnxte+dKFCXRD+a2auq7p18O/ZYcoyIrJm2SnPFinY4iNJCBbV0A
-	DnpXkXWZFmZ9VzlqdA/uM4okcm8ZpOdSeAvSaJ1uZ+LYeK1ikBQ9uNR+QFF1jBNvr99KpLJ7kBG
-	qZt8NTLFdq3YlLW5UklbrR7utgmk5jdshjSVCaNWoduLqtfPQNsiBJG4JtSGje02fL/Wfvptjpw
-	qhfjXf6VF5bgNkleF3J2VdwPQHpjNx9cjrbdcGxCPhaCkWhJA1oflBLSL9Mnc4T5NfhWbc1PjVt
-	TZy8
-X-Received: by 2002:a05:693c:414d:20b0:36d:dd5a:4528 with SMTP id 5a478bee46e88-376851ce396mr5755157eec.7.1794465927493;
-        Wed, 11 Nov 2026 22:45:27 -0800 (PST)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3751dae6377sm21055001eec.3.2026.11.11.22.45.26
+        d=1e100.net; s=20260707; t=1794467546; x=1795072346;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=Vd5SD3p0efXkTUYyLJO4uC1u5tQVNvKva8m39m31jKo=;
+        b=vwjuNuI/DQFrH71ZWS66gKAB/Z68uIW0VlVkSs1S3K67Svivmcy9XA4EnN5C+CLUG8
+         HprZwyNezZ+QW72XvwQ0zgbgRqgVyUlH9CldQ3h+uWP7JD2EZ6/jyXKHptHvISGM52ab
+         qTEAQxLI9RUENBjPmBXn+XBb4n6GcDfkBv8nUfQZQybRthFzVJh9Tjboutg7Rp1N0vTf
+         ODiO300fo0xtQvaf/ZsqbJ+0iXu4BjWSSraGcn+t1pQPZVMFs4bJ25CUWjt153xzJ2gj
+         +jkpVLIc17kQaiHYHsPToPltbqiuckeEVwufvORLdzuuppf8huzxRfpqEE0HLJyE2uan
+         ZGNA==
+X-Gm-Message-State: APuU4Z/1kN2O+O/2IolbJJap5MV1xlPfnIdG0D2WLQEOpYb5c9fK2Dxc
+	/h0KrxtTXJBC8z+Xx0BYDQXqsM6QavATiNWDYxopPpHdWE2ueLTCcNc4Hp385g==
+X-Gm-Gg: AYBFou0Xg+vvFjGQLF4gWGfqy8P36cvuu7mXGVue9C6aLYZKwpEgpaOUhrDS9Ic44Z2
+	NanbWnf6q0H1CO/gJ8ih5V2zNPSyfPZQmLy6Mxokqs2DW87WEsDwV6XclggJ7rWq8YLEjZqL79b
+	lkt5JcHTdlZiANYkMO/zHEW9k0s+2e5oTyscEpVNkXgi1b6WmYrL9cY/JUvSsB8SDP4m0jG790K
+	euz6bhwAxW5kIvBlnwbYcdetNZX6Tt+UucCoPfM80f7ALLdnOW3t1H1ZxGVTaKqQs0nUDJJ/ls3
+	V2Utk3rf7dF2IpoTk5QtyDYnY7fKXAzxA/PqnbAgmCx8U3u3IikMvTn/UYcnhtvhBobDKhujDP3
+	oa+eNifcWrYbWyKkeYJ9k7yU2BDB6iPyEULIt8AY6SZ7u/61TYk32502GffhZsGVR4uBdlysTnG
+	mwhZ1hJOa7Ilq1IGvlcfM8hBVmi4mMnDU+sCEjBuJ+IvTjh0xpFHFOvNML4eYoikgWngTQR+OPU
+	aUjCAejlBEn5FajHoYGgzJbePJlQNyjZwrM+zNpv74kcL4CFL+T8yAvW93QAkEtPP310SaqcCue
+	uzaZgs8vkKSaCQqfug6ax/QPRNTuxzVoK4GdwkYSfDOlYWM+8nksWTfFU4Uz9u9ZtKFFvdmhfbr
+	DweErvQA=
+X-Received: by 2002:a17:90b:1d0c:b0:3ac:c98e:345e with SMTP id 98e67ed59e1d1-3b182f59b68mr3444398a91.45.1794467545455;
+        Wed, 11 Nov 2026 23:12:25 -0800 (PST)
+Return-Path: <ankur.tyagi85@gmail.com>
+Received: from NVAPF55DW0D-IPD.. ([147.161.217.9])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3b197d32ea0sm3016298a91.15.2026.11.11.23.12.23
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 11 Nov 2026 22:45:26 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
-X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
+        Wed, 11 Nov 2026 23:12:25 -0800 (PST)
+From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-webserver][PATCH 5/5] webmin: Remove unused patches
-Date: Wed, 11 Nov 2026 22:45:15 -0800
-Message-ID: <20261112064515.2411568-5-khem.raj@oss.qualcomm.com>
-X-Mailer: git-send-email 2.56.1
-In-Reply-To: <20261112064515.2411568-1-khem.raj@oss.qualcomm.com>
-References: <20261112064515.2411568-1-khem.raj@oss.qualcomm.com>
+Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
+Subject: [oe][meta-oe][blacksail][PATCH v2] mpv: patch CVE-2026-123095
+Date: Thu, 12 Nov 2026 20:12:17 +1300
+Message-ID: <20261112071217.4141727-1-ankur.tyagi85@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Thu, 12 Nov 2026 06:45:31 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132198
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Thu, 12 Nov 2026 07:12:31 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132199
 Content-Type: text/plain; charset="utf-8"
 
-These were dropped from SRC_URI in eb4d6ede5d (webmin: upgrade 2.641 -> 2.653) but the files were left behind:
+From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
-  init-exclude.patch
+Details:
+https://nvd.nist.gov/vuln/detail/cve-2026-123095
 
-AI-Generated: Uses Claude Code
-Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../webmin/files/init-exclude.patch           | 75 -------------------
- 1 file changed, 75 deletions(-)
- delete mode 100644 meta-webserver/recipes-webadmin/webmin/files/init-exclude.patch
+ .../mplayer/mpv/CVE-2026-123095.patch         | 37 +++++++++++++++++++
+ .../recipes-multimedia/mplayer/mpv_0.41.0.bb  |  1 +
+ 2 files changed, 38 insertions(+)
+ create mode 100644 meta-oe/recipes-multimedia/mplayer/mpv/CVE-2026-123095.patch
 
-diff --git a/meta-webserver/recipes-webadmin/webmin/files/init-exclude.patch b/meta-webserver/recipes-webadmin/webmin/files/init-exclude.patch
-deleted file mode 100644
-index 489318b4bd..0000000000
---- a/meta-webserver/recipes-webadmin/webmin/files/init-exclude.patch
-+++ /dev/null
-@@ -1,75 +0,0 @@
--Hack in support for an "exclude" config option for the init module, so
--we can hide certain system services that shouldn't really be configurable
--via the web interface
--
--Upstream-Status: Pending
--
--Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
--Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
-----
-- init/index.cgi   | 27 ++++++++++++++-------------
-- init/init-lib.pl |  5 +++--
-- 2 files changed, 17 insertions(+), 15 deletions(-)
--
--Index: webmin-1.850/init/index.cgi
--===================================================================
----- webmin-1.850.orig/init/index.cgi
--+++ webmin-1.850/init/index.cgi
--@@ -45,19 +45,20 @@ elsif ($init_mode eq "init" && $access{'
-- 					     : "$config{'init_dir'}/$ac[0]");
-- 		}
-- 	@runlevels = &list_runlevels();
---	foreach $r (@runlevels) {
---		foreach $w ("S", "K") {
---			foreach $a (&runlevel_actions($r, $w)) {
---				@ac = split(/\s+/, $a);
---				if (!$nodemap{$ac[2]}) {
---					push(@acts, $ac[1]);
---					push(@actsl,
---					     "1+$r+$ac[0]+$ac[1]+$ac[2]+$w");
---					push(@actsf, "$config{'init_base'}/rc$r.d/$w$ac[0]$ac[1]");
---					}
---				}
---			}
---		}
--+	# Assume there won't be any of these broken actions
--+	#foreach $r (@runlevels) {
--+	#	foreach $w ("S", "K") {
--+	#		foreach $a (&runlevel_actions($r, $w)) {
--+	#			@ac = split(/\s+/, $a);
--+	#			if (!$nodemap{$ac[2]}) {
--+	#				push(@acts, $ac[1]);
--+	#				push(@actsl,
--+	#				     "1+$r+$ac[0]+$ac[1]+$ac[2]+$w");
--+	#				push(@actsf, "$config{'init_base'}/rc$r.d/$w$ac[0]$ac[1]");
--+	#				}
--+	#			}
--+	#		}
--+	#	}
--
-- 	# For each action, look at /etc/rc*.d/* files to see if it is
-- 	# started at boot
--Index: webmin-1.850/init/init-lib.pl
--===================================================================
----- webmin-1.850.orig/init/init-lib.pl
--+++ webmin-1.850/init/init-lib.pl
--@@ -124,8 +124,9 @@ List boot time action names from init.d,
-- =cut
-- sub list_actions
-- {
---local($dir, $f, @stbuf, @rv);
--+local($dir, $f, @stbuf, @rv, @exclude);
-- $dir = $config{init_dir};
--+@exclude = split(/,/, $config{exclude});
-- opendir(DIR, $dir);
-- foreach $f (sort { lc($a) cmp lc($b) } readdir(DIR)) {
-- 	if ($f eq "." || $f eq ".." || $f =~ /\.bak$/ || $f eq "functions" ||
--@@ -133,7 +134,7 @@ foreach $f (sort { lc($a) cmp lc($b) } r
-- 	    -d "$dir/$f" || $f =~ /\.swp$/ || $f eq "skeleton" ||
-- 	    $f =~ /\.lock$/ || $f =~ /\.dpkg-(old|dist)$/ ||
-- 	    $f =~ /^\.depend\./ || $f eq '.legacy-bootordering' ||
---	    $f =~ /^mandrake/) { next; }
--+	    $f =~ /^mandrake/ || grep {$_ eq $f} @exclude ) { next; }
-- 	if (@stbuf = stat("$dir/$f")) {
-- 		push(@rv, "$f $stbuf[1]");
-- 		}
+diff --git a/meta-oe/recipes-multimedia/mplayer/mpv/CVE-2026-123095.patch b/meta-oe/recipes-multimedia/mplayer/mpv/CVE-2026-123095.patch
+new file mode 100644
+index 0000000000..1efa0fdee6
+--- /dev/null
++++ b/meta-oe/recipes-multimedia/mplayer/mpv/CVE-2026-123095.patch
+@@ -0,0 +1,37 @@
++From 2c6599aa7d16efd29ae49865757eb449d9306742 Mon Sep 17 00:00:00 2001
++From: =?UTF-8?q?Kacper=20Michaj=C5=82ow?= <kasper93@gmail.com>
++Date: Wed, 4 Nov 2026 20:28:57 +0100
++Subject: [PATCH] ytdl_hook: reject playlist entry URLs with control characters
++
++The entries are joined into a memory:// M3U playlist, one URL per line.
++A URL with a line break became several entries, and only the first line
++went through url_is_safe(). The other lines were loaded with the origin
++of the opened URL, so any protocol was allowed. Skip any URLs with
++control characters.
++
++Fixes: e6e6b0dcc7
++Fixes: GHSA-p99g-m25w-x8xv
++(cherry picked from commit c3096515dcd26c14004f985538b5aa41db613856)
++
++CVE: CVE-2026-123095
++Upstream-Status: Backport [https://github.com/mpv-player/mpv/commit/c3096515dcd26c14004f985538b5aa41db613856]
++
++Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
++---
++ player/lua/ytdl_hook.lua | 3 +++
++ 1 file changed, 3 insertions(+)
++
++diff --git a/player/lua/ytdl_hook.lua b/player/lua/ytdl_hook.lua
++index 65ef859595..2b0edb193a 100644
++--- a/player/lua/ytdl_hook.lua
+++++ b/player/lua/ytdl_hook.lua
++@@ -1111,6 +1111,9 @@ local function run_ytdl_hook(url)
++                 -- links without protocol as returned by --flat-playlist
++                 if not site then
++                     msg.error("Playlist entry does not have unique URL, can't add it.")
+++                elseif site:find("%c") then
+++                    -- a line break would add entries to the playlist
+++                    msg.error("Playlist entry URL contains control characters, can't add it.")
++                 elseif not site:find("://") then
++                     -- youtube extractor provides only IDs,
++                     -- others come prefixed with the extractor name and ":"
+diff --git a/meta-oe/recipes-multimedia/mplayer/mpv_0.41.0.bb b/meta-oe/recipes-multimedia/mplayer/mpv_0.41.0.bb
+index f37ae4ac50..0c99e354e7 100644
+--- a/meta-oe/recipes-multimedia/mplayer/mpv_0.41.0.bb
++++ b/meta-oe/recipes-multimedia/mplayer/mpv_0.41.0.bb
+@@ -27,6 +27,7 @@ SRC_URI = " \
+     git://github.com/mpv-player/mpv;name=mpv;branch=release/${@oe.utils.trim_version('${PV}', 2)};protocol=https;tag=v${PV} \
+     file://0001-opengl-context-require-swap_buffers-param-for-FenceS.patch \
+     file://0002-hwdec_drmprime_overlay-make-the-framebuffer-the-whole-frame.patch \
++    file://CVE-2026-123095.patch \
+ "
+ 
+ inherit meson pkgconfig mime-xdg
