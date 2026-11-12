@@ -1,102 +1,122 @@
-Received: from mail-pf1-f176.google.com (mail-pf1-f176.google.com [209.85.210.176])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.6945.1794458710459515217
+Received: from mail-yw1-f177.google.com (mail-yw1-f177.google.com [209.85.128.177])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.6945.1794459224827291336
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 11 Nov 2026 20:45:10 -0800
+ Wed, 11 Nov 2026 20:53:44 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=REx5CUhT;
- spf=pass (domain: gmail.com, ip: 209.85.210.176, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pf1-f176.google.com with SMTP id d2e1a72fcca58-8b67f25e6e1so1914976b3a.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 11 Nov 2026 20:45:10 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=yaMGB60U;
+ spf=pass (domain: gmail.com, ip: 209.85.128.177, mailfrom: schonm@gmail.com)
+Received: by mail-yw1-f177.google.com with SMTP id 00721157ae682-8b0d63f60bcso51727417b3.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 11 Nov 2026 20:53:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794458710; x=1795063510; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=+W+3ebitfH7Z2kx9Dq0ky1ws67GrYQknPDAcWL2i/bE=;
-        b=REx5CUhTRf8aGCHQhrr+NelpH9fEsXyUw/MoOx4Tf3HP6GUBaGfulNNWhMdsIqCK7a
-         H4HP4aTfwMexzasp21x/iRczqHENdjUbvJ+a2EORmSqw30dw+NxdpTzBSy8XeiCRIvFh
-         c93zoope93sgvTZkIpG4pCsvtFESInmXWzjrj3hLGOEfNHHbSz+Qc9wq3o89/MLAUQ3t
-         sh125biFzMkFPy78d1nPQdj3YKOqSFjTpUQFHnO1EuLuJhDQf/ND4K/Ix4vteI8+Lc5D
-         rFZ2hgiMuGVwF8CNOVWH7pYvQ8R2K/B81UESLBNJLGzeNURwMcuMJBrXfOtokGUm//8b
-         PWmw==
+        d=gmail.com; s=20260707; t=1794459224; x=1795064024; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=5wiKWqEBw8zYTK4vIr1c0+vObByFfQzos9pTNdc2HFU=;
+        b=yaMGB60UrWHkV5EsVq2Yyn7DuPbN7rsITq0tk6efLXPLzf37r0468ovJJZOH0veSNw
+         yszeatBrzDU3Qzg7o5PMu+/vX2qPkJi/6sOViomnEKFuEhUIJ+JPEWPDU38O4HJ9AY1M
+         ydxLotb3Wq59CDH2xgShUVZTS557GWS88q7PSKDnaJHvWNyOhDb4MEmoGFvHwqESSYZy
+         A7rLT1JN17IpSS4tPNSCqGqNNkREd2teUdTwIT1YVPakVyXd4my8qlafrSHeyVDf617x
+         1/R1kDRgqD3v4ZtIQTfJXD+FuCetWZb4RQWSQk+nTLcY7dMXmaOO8X3wUGeZXLqWomEQ
+         kxvw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794458710; x=1795063510;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=+W+3ebitfH7Z2kx9Dq0ky1ws67GrYQknPDAcWL2i/bE=;
-        b=2OQxhd55nNa1MZ8gH/NYqi//OSVrWgEbBcYPdb50KBruH1rUu4QfPicVlL7Lksgeju
-         M7VNWLve9qfTiWqMgs5kYYX9KDeaDIoAl3aK9/MbK2rPfwrRA6zY+ldlIMurPffK+WUB
-         eGKpaezVLap8+e25f8dFzPK+8nbJ+81QHOXcWO584YG0IhhZPx3I9Ue/y8QJigPQrIwi
-         zknsrJXqynBbOHxeiem7Pd8Zsz1sfs+x31q8gFoeaPVZb/43XBJXFe5GMgS8NbrQMHal
-         5AE0gJBWCVmhsRTRnF72RkJfRUTcMe8dHXzVHquA3SFvr6yU/EOuuOQbjMAvQ9xgxY5A
-         E6vA==
-X-Gm-Message-State: APuU4Z9hwr4MN9QhwaWXAmdNpyII1IiRFry8jEVf/DpMhBZ4iW+SJcyZ
-	/OgZvYC9whGY3umEOpiksjMxMulLzHJ76H6R9USph2OlI9r1MsaDL+nRahsT+A==
-X-Gm-Gg: AYBFou0KZy+GhD1dfCtWzevE/l1fvQwkDpS/kRHE5S/fVlC9dx2noM7wgRcNsHiV/ah
-	dbRLkqk0oyzZqSuAYoT79rjdGRIguZB5ke9cQQClxONudlDmw3OyNSYbvQksZpmyiU9O9OM/ZMy
-	fVErSRVlpIG1xIitrFyznQTW3at9aE/HKlqg9y20sZJPeZasbsSwIpTc9IWTNYDNhuKg1NnjiIc
-	H46AA++cY6KyhF0td8EaFl8PrUg7pn7TpzDWQTR5uWCBLvdu1ICu7TCMzV/Z6EU1ZS7Pa33udU6
-	a7ojkZvwF6PlgRUku9pkhN8C3pUK/JFB2cNGf/fQjr0STVdz2HoOznU89+MAY8SNE4t2vREzvGR
-	OryfNfRkb/koafwzFvfRSa9O46s6MKPT0Fl2Ob64pL9SRm2n8ENRe+1NR1rBH4Rotdsv8UvR68C
-	/EJNfpsWKzkfIzjBXY+qd2cl6r991SR0NJ2xJPiEo+SsSc9xv/DZOiBhKdBTBOy381sEOVCutD6
-	a0LltdOZfDODI1ip5FYJL9jsNDDCnKud296Re80VcAIYiZ7UAyrKpDSmRNfPBex8iy9WVylOBnJ
-	/lqmJ07bcyqTsR5vepMS9VpnDK+QAxHbbCDLEgl2Zm8Dvuqo7eTISTrfrSvMjquGGpl6Za1PQIr
-	jQNOHd0w=
-X-Received: by 2002:a05:6a20:cf88:b0:3e0:c955:cd5a with SMTP id adf61e73a8af0-3f2ffdc33demr5004318637.68.1794458709764;
-        Wed, 11 Nov 2026 20:45:09 -0800 (PST)
-Return-Path: <ankur.tyagi85@gmail.com>
-Received: from NVAPF55DW0D-IPD.. ([147.161.217.9])
-        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-cdd8d7dd5bbsm2238527a12.30.2026.11.11.20.45.07
+        d=1e100.net; s=20260707; t=1794459224; x=1795064024;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=5wiKWqEBw8zYTK4vIr1c0+vObByFfQzos9pTNdc2HFU=;
+        b=oQO4YJajvojTTmYE8NkAKPbT74QShBNQYICenj8SooqUrlJDAlxP+K4zRdPu+7fLEJ
+         8DXtuBmCUlTNvsWFUTICtH/zGTugwzcWJsbs+55hKi4aiQnortpRfGppXS1L95aDQkX+
+         /lObYpIXvBk73oP8pUuHezNJ3lbLwbjkPbikKkVcy1rKhYF+sQlxLfLYX3rM7yVIPH/p
+         KH6tu0EYK0Twz/hbKNtyeesT2JkNycLyMZgXzTs69zrUrxRTOBZZJq7wvHk2pCjUJ6Yl
+         BDKTZeAUcKdvAIVIvyC9rDQ7fyZMHSVzpPEoi+JoZJ04o2Sc1Csj8JmHGQyMJaZZURg9
+         1MHg==
+X-Gm-Message-State: APuU4Z/IwlzA/W5NtdQC6rlsDFtzAGKOE1hk5tIq7H2TaI7nSFfFd2on
+	zjAQkyd0m4P/ntBGMxlB12EXzSE6BbhoIwVtfXhOHzZwX6PYDLwcjwaLrkLIzWmwZ5s=
+X-Gm-Gg: AYBFou03kI99194/JW7L39fSDCHO6LPdVbJWlhML6LWZdsoitz8RzVQspcXTfAArizb
+	o8YPr94ZF933h9Xz4HzmyneFz9Fygak8FwEdgWUGtUrDaMRZCvKA0YgFzWiwCxVf/caPvo9s5M0
+	vPPBxpcFZBxnD5NTjL/48WA3Hot96QgLeIKpd4OKrxgx5403NB4E1LVWJ61KAGCBwmaCqlE9nL3
+	IUiIrsXyjC8VYohFYyXbXxByB2VrIed8lZkCDwdd7URtuRNSYclRppQzvdkOvSF1diOcjRH2WUn
+	SChhrKJ5s6RqxQg4jRqN2zGptAbp3+hHszKtkAQiNaYC536pdcQRY920U6tCmUpJqsyIE0M37Rv
+	GcSvm5/bXAYFLTIPgk18GynD4ANYbQtYJUQzE4qjGF9oSJ9UQ1wjOP0QqzqDjXqDZ8VDNdJL8vG
+	aAKi+uSxHYlDBq5wmZHOzCX9SuMM3K7olRG/jSc9ExLQJHU9NUqrZef+2z6SiYXwjw0DadIK5LV
+	syWGIx4VUIatgFeMR2+Xt4tA9Fm3i5erHAmk316iTBebsgw6peCSh7t68zE/nb4yLmxSzHMWZ6p
+	QBNn2nzpXHc4m8bm0iuDQ9opOtJQtbA5AvG5K4jT+TaqlG/X+8Hl7oftcYPeD0YqcqEHFpIikjh
+	I03p+8170pNwUXoWAaI9Q3BbAAOs7dpKSmnaYWYSxKt0trJyVMepV
+X-Received: by 2002:a05:690c:9208:b0:8b0:ecb2:8861 with SMTP id 00721157ae682-8b3a820c4a0mr29171907b3.63.1794459223792;
+        Wed, 11 Nov 2026 20:53:43 -0800 (PST)
+Return-Path: <schonm@gmail.com>
+Received: from localhost.localdomain ([71.3.193.106])
+        by smtp.gmail.com with ESMTPSA id 00721157ae682-8b393437e54sm61252647b3.35.2026.11.11.20.53.43
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 11 Nov 2026 20:45:09 -0800 (PST)
-From: ankur.tyagi85@gmail.com
+        Wed, 11 Nov 2026 20:53:43 -0800 (PST)
+From: Jason Schonberg <schonm@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-python][blacksail][PATCH 16/16] python3-filelock: upgrade 4.0.4 -> 4.0.12
-Date: Thu, 12 Nov 2026 17:44:26 +1300
-Message-ID: <20261112044426.3933391-16-ankur.tyagi85@gmail.com>
+Cc: Jason Schonberg <schonm@gmail.com>
+Subject: [meta-oe][wrynose][PATCH] nodejs: upgrade 22.23.4 -> 22.23.5
+Date: Wed, 11 Nov 2026 23:53:25 -0500
+Message-ID: <20261112045326.97145-1-schonm@gmail.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20261112044426.3933391-1-ankur.tyagi85@gmail.com>
-References: <20261112044426.3933391-1-ankur.tyagi85@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Thu, 12 Nov 2026 04:45:16 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132167
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Thu, 12 Nov 2026 04:53:46 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132168
 Content-Type: text/plain; charset="utf-8"
 
-From: Ankur Tyagi <ankur.tyagi85@gmail.com>
+This is the November 2026 security release.
 
-Changelog:
-https://py-filelock.readthedocs.io/en/latest/changelog.html#release-4-0-5
-https://py-filelock.readthedocs.io/en/latest/changelog.html#release-4-0-6
-https://py-filelock.readthedocs.io/en/latest/changelog.html#release-4-0-7
-https://py-filelock.readthedocs.io/en/latest/changelog.html#release-4-0-8
-https://py-filelock.readthedocs.io/en/latest/changelog.html#release-4-0-9
-https://py-filelock.readthedocs.io/en/latest/changelog.html#release-4-0-10
-https://py-filelock.readthedocs.io/en/latest/changelog.html#release-4-0-11
-https://py-filelock.readthedocs.io/en/latest/changelog.html#release-4-0-12
+  7 high severity issues.
+  6 medium severity issues.
+  3 low severity issues.
 
-Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
+High severity issues.
+  CVE-2026-123863
+  CVE-2026-123864
+  CVE-2026-123865
+  CVE-2026-123866
+  CVE-2026-126051
+  CVE-2026-123872
+  CVE-2026-123874
+
+Medium severity issues.
+  CVE-2026-123828
+  CVE-2026-123867
+  CVE-2026-123868
+  CVE-2026-123871
+  CVE-2026-123877
+  CVE-2026-123875
+
+Low severity issues.
+  CVE-2026-123829
+  CVE-2026-123862
+  CVE-2026-106071
+
+https://nodejs.org/en/blog/vulnerability/november-2026-security-releases
+
+Changelog: https://github.com/nodejs/node/releases/tag/v22.23.5
+
+Signed-off-by: Jason Schonberg <schonm@gmail.com>
 ---
- .../{python3-filelock_4.0.4.bb => python3-filelock_4.0.12.bb}   | 2 +-
+ .../nodejs/{nodejs_22.23.4.bb => nodejs_22.23.5.bb}             | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-filelock_4.0.4.bb => python3-filelock_4.0.12.bb} (93%)
+ rename meta-oe/recipes-devtools/nodejs/{nodejs_22.23.4.bb => nodejs_22.23.5.bb} (99%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-filelock_4.0.4.bb b/meta-python/recipes-devtools/python/python3-filelock_4.0.12.bb
-similarity index 93%
-rename from meta-python/recipes-devtools/python/python3-filelock_4.0.4.bb
-rename to meta-python/recipes-devtools/python/python3-filelock_4.0.12.bb
-index 23cc4484c8..cfb84f1c7e 100644
---- a/meta-python/recipes-devtools/python/python3-filelock_4.0.4.bb
-+++ b/meta-python/recipes-devtools/python/python3-filelock_4.0.12.bb
-@@ -9,7 +9,7 @@ CVE_PRODUCT = "tox-dev:filelock"
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_22.23.4.bb b/meta-oe/recipes-devtools/nodejs/nodejs_22.23.5.bb
+similarity index 99%
+rename from meta-oe/recipes-devtools/nodejs/nodejs_22.23.4.bb
+rename to meta-oe/recipes-devtools/nodejs/nodejs_22.23.5.bb
+index 4dedfe36f8..79a2d91020 100644
+--- a/meta-oe/recipes-devtools/nodejs/nodejs_22.23.4.bb
++++ b/meta-oe/recipes-devtools/nodejs/nodejs_22.23.5.bb
+@@ -39,7 +39,7 @@ SRC_URI:append:class-target = " \
+ SRC_URI:append:toolchain-clang:powerpc64le = " \
+            file://0001-ppc64-Do-not-use-mminimal-toc-with-clang.patch \
+            "
+-SRC_URI[sha256sum] = "7b9adc82d612d0a2a863d96c46de2292552e250cee51956ebbe0146c42aacae9"
++SRC_URI[sha256sum] = "6cce7c58bf058700c643944903d60a325e8c9ceede1f5c2c088b435f2ada091a"
  
- SRC_URI += "file://run-ptest"
+ S = "${UNPACKDIR}/node-v${PV}"
  
--SRC_URI[sha256sum] = "90999ed63a26ccf86b93b959ab10cf1017f422d816be454ed54cbed263e71ab5"
-+SRC_URI[sha256sum] = "cf42711a7ac791818b299fab0332a088c65aeeefa36290de98db92c434303b0c"
- 
- BBCLASSEXTEND = "native nativesdk"
- 
+-- 
+2.43.0
+
