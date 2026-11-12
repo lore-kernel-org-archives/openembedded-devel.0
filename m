@@ -1,136 +1,168 @@
-Received: from mail-pf1-f172.google.com (mail-pf1-f172.google.com [209.85.210.172])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.6839.1794458688358851996
+Received: from mail-pj1-f54.google.com (mail-pj1-f54.google.com [209.85.216.54])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.6937.1794458691142027111
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 11 Nov 2026 20:44:48 -0800
+ Wed, 11 Nov 2026 20:44:51 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=xdAd/A77;
- spf=pass (domain: gmail.com, ip: 209.85.210.172, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pf1-f172.google.com with SMTP id d2e1a72fcca58-8b904d10882so1723165b3a.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 11 Nov 2026 20:44:48 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=IurHVTXm;
+ spf=pass (domain: gmail.com, ip: 209.85.216.54, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pj1-f54.google.com with SMTP id 98e67ed59e1d1-3b0e0e65adbso1952699a91.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 11 Nov 2026 20:44:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794458688; x=1795063488; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1794458690; x=1795063490; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=FUz6b237LeBwom0vnUx9UXSM0szJhlsGYhXyLTK8h0Y=;
-        b=xdAd/A77QVdHEKDi1Nrn5FaEyA6q6z5VK74X1pQQcTnTmTRv/nLlhc8pADhdCvMcNm
-         Wu8Dpuce4MCRb/ld9J6nwAqNFAptW5IrzHDuX2oBfb1VaEu8SPIITornaKnLFz5zfmqM
-         KTZjfsEnRXTYXnp/t6fn8UkHrDRCQjiH+mCYrkUC2lghpa8qCqto10zxqOEuMzgXldkO
-         76c/sB1k5nIxdswSrA88BDwYAwPDRV28K09NK20wyN1bDUoyF+/se1wSv2HqVfR1AL84
-         omEjz9NzoaRnP6fsIubEKTICgxP7ebrs99fYMwSssa4R7l+s2+isDsX+nbkJEmEFINLx
-         JkAA==
+        bh=DJ8Sqp2Qy8v/2Tm+GlgAu/UL6bsjajOG1m6Q/zvsfgI=;
+        b=IurHVTXmxC/S/fhIOzAvcEbn7mHviKxD4gSKVPaGaa3w64tES2/zqrwoKeMABRrtvl
+         qU9L+UVLHHFZ0BNbTLEBoA2jsKXRgIy/gWIiJ44yF47GeRzRMohk97ZL9aEv1AwkLpUJ
+         l6lmCEdCtmCfsC+lwoeR7hMQbziK/N2UbJlD2/1s1LcuetJeVaE7pw294OxTDEZ5pUxn
+         Hiv7JLAvZVN7qmE9erdLa4v6HIjNJ9bLFaT8GiE9ZX5vAMcagUE6KmgzWDL2Kv/QEkzU
+         YNzKbC7r1idmAHxOrSS1httZ+dObGs1pkZRkFxNdq1EFHDyZJe/B3Os8oHMEviyJeihs
+         j1eQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794458688; x=1795063488;
+        d=1e100.net; s=20260707; t=1794458690; x=1795063490;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=FUz6b237LeBwom0vnUx9UXSM0szJhlsGYhXyLTK8h0Y=;
-        b=SltzNPvejkl6x2J/Sdz/OpUG6qlaxXDiUHQ3UL4jxH8Zp2ytviyU4nwKUYuS+X+RJY
-         LPStKunTX9YHTXCE6JwqdgVvTtBly5yqYCisWgV+9mRleX1EgtfFsBLbpGbF0LJxSViT
-         PkUCC6rsZu0zzIbjM9PcEhd21ca2Y3PjGzoTPsBb9D6FlTeWQsyQKtxNfhxnQDhaRwXx
-         viigodoXct+tOy34QQ1x6rRuHI60WdfKTTpwurTb2LjvpSVo34jLFMwSSWkcehnPis0i
-         u1M2hQ1j9V0zHanNUtIIh5QQH5fk++tEujuFhoHkm8U+DDaUH0zF8Csbto3N4kO3waBo
-         N8ag==
-X-Gm-Message-State: APuU4Z+9Dp0He9INhsv3ePfvPYnuw9WbGsqXCP+rP+e7IQ7gJE3a+Y1I
-	3h+Nz9wKAzhWkNU6NRrES6V3/SwbJT9bSBDPLG+CckCkmTbXP+O1BpJfNSVzCQ==
-X-Gm-Gg: AYBFou3WwTOpCs2fDHA6DTiNL+MlrcapYEayLAfnSCYOloSnOWakBk2IbIAJcyLSa96
-	5VnLE+1s3spwJmP3p/OHLdApBsJtrOp5/36nd8wI72muLfqlbRGv5+3N65gy5g4Z/RD4TEZM0vd
-	hcMnIiAGeFPSbEn7t47SckP4EUPyFidorghZfNtmN5fm6KKl0F33mA1z7ypJDmOQK5Pm5N+StLX
-	+AxyYMp0H/nY34jh2M5sIWnvpvhBfuEPecAuu2eiZwtyz5AIEYP+pFFB+uqI5EHp8lCLHA3YF8g
-	mo2z9/PnKIM5nfCWazoiy9wY7IEVnTswrRBlSiY2JqJDtWNBTvTyZRqiE+HbaJURUnYUK+y5zcr
-	t7k/AFji4o068nLUP4R/0SFx4Ue9uQI6hqLWpl8H7nrlbPzqgycRSukNMUVbBQ7D1ezxAe9hBFE
-	kBoTpvuq8YhzqMPe9Ksi5g6HyFsCtgmmDCXvHyxCe27THugm3zeIECrld0DmOPekNLL87r+pLNz
-	siF3p1TA9uZTJLV5GcVOWWqArGneQUCWsUr3/rb2+5GxqoluaS+jR/C9VV6WIJ5A4Z8ERg5c4mW
-	kOtpGRLdPHhPWnOVkbX1yI25ZgNFYF0Mnbc1N6dvhlxj4iJl8y0V9JkHt0WJ5nyl8scdK7ZaTL+
-	g09HTj5s=
-X-Received: by 2002:a05:6a20:4388:b0:3e2:1aa6:ac24 with SMTP id adf61e73a8af0-3f2fd8a102emr4574061637.32.1794458687665;
-        Wed, 11 Nov 2026 20:44:47 -0800 (PST)
+        bh=DJ8Sqp2Qy8v/2Tm+GlgAu/UL6bsjajOG1m6Q/zvsfgI=;
+        b=YRZEnr8S7ULhw4F9K7rMv4y7hzircyW37dmyFrrdWdKprq4sAOlsjphnU46gYqMs3T
+         85U/q11kXk8sD3qGyab1uZfCOT1HIKVEkJXkGdS/cxF3LpSkXXINTJsyDV/Arpm5kB0n
+         aCxrfZec8DLQdScOKPsmdOrW1yrH9tgN3q5g4RCRyQEFt3TbULDN+0c/y4pNYMVE3MZB
+         fP0Cccrt0M7vFZ1qUxBYeQexsaAa+kqAFX6N2SYljCk0IRHjY3+dBdwt/3PwDLXjuqA2
+         afgTKPUBKdqSCw8y8qwKjwk7+YLnRW/FutbGgRz2+A418jLf3EVQW5sc4i3aFt7a1U6H
+         bRDw==
+X-Gm-Message-State: APuU4Z95QEpn+txS9mbiKFewT0hMt+gy+PP0NWoH5jyLPkr86U8g1yZh
+	gRUAoNff0UAGdckvfeu0OVeX7JxfQ5lS0MaXmlSVPEvSl9Zhue2UospQdxrv7g==
+X-Gm-Gg: AYBFou1C5R8PwQUVr7Bb6jYTfYE4m3B5fzCCJbtioL01byFnLVByhW5l9IZk30Z2oQJ
+	T3XpraBo0ZSu46TatYEK6/07vglMEzGjnbrNs/m8u24orQs0AGw65hpcAAxJVwz9PWtY/8mIpBQ
+	hhKwh0Ij9pMA9QlJdXlJbhjEddmmEEUZ6f5TaX5gEDwGbP6bSg44FPuR/JX0q9wU+1HqOouCVcZ
+	rl4v/ldtL8O1dBuaeTaOcCeeqXtJogR0KJ9E4130uBiFIC3NipSHJ0ZWk0e8XfckCTFvJ5eZtiQ
+	IcQ6TN5KukEIghiyb50eYfcbI1YIar/D4Uq5sPX83RRQ4nQv9kvyi5E0NS4QNfY0LMu/wBsp87E
+	pxxvaBAIS1hMbWqPcPoWrcdnqdhpsW/HuZXfGsyUMCf0R0p+gDfa1pfTOW8fkrC42ClncyBuHyw
+	bo4eirMc3xiJ5F8TdWlo9DeCna/4+zzs5uQrAew6Rz3+kPWkUWYfLED4Izv13dFa8uJyAY7xVjS
+	V/hPD1S4bc1Snrmxnobk5aNMjf0WmYuAjpCPbVnZpjNZ5eLe+9DsXn6sYC+eKZ4xTL+Nm2A2+hc
+	aNAEIwH1PsGk6KiJp7Fjc3B4hlu2K8VvOPo32GhX/6V6eD/UeJL0Ff9qR1jX4EFEKz8PdvTm6+M
+	CQIVKNyE=
+X-Received: by 2002:a17:90b:3c44:b0:3b0:97b8:d6bc with SMTP id 98e67ed59e1d1-3b182ec221dmr4080622a91.16.1794458690245;
+        Wed, 11 Nov 2026 20:44:50 -0800 (PST)
 Return-Path: <ankur.tyagi85@gmail.com>
 Received: from NVAPF55DW0D-IPD.. ([147.161.217.9])
-        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-cdd8d7dd5bbsm2238527a12.30.2026.11.11.20.44.45
+        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-cdd8d7dd5bbsm2238527a12.30.2026.11.11.20.44.48
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 11 Nov 2026 20:44:47 -0800 (PST)
+        Wed, 11 Nov 2026 20:44:49 -0800 (PST)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-oe][blacksail][PATCH 6/16] mpv: patch CVE-2026-123095
-Date: Thu, 12 Nov 2026 17:44:16 +1300
-Message-ID: <20261112044426.3933391-6-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-networking][blacksail][PATCH 7/16] tinyproxy: patch CVE-2026-125371
+Date: Thu, 12 Nov 2026 17:44:17 +1300
+Message-ID: <20261112044426.3933391-7-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20261112044426.3933391-1-ankur.tyagi85@gmail.com>
 References: <20261112044426.3933391-1-ankur.tyagi85@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Thu, 12 Nov 2026 04:44:55 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132157
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Thu, 12 Nov 2026 04:44:56 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132158
 Content-Type: text/plain; charset="utf-8"
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
 Details:
-https://nvd.nist.gov/vuln/detail/cve-2026-123095
+https://nvd.nist.gov/vuln/detail/cve-2026-125371
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../mplayer/mpv/CVE-2026-123095.patch         | 35 +++++++++++++++++++
- .../recipes-multimedia/mplayer/mpv_0.41.0.bb  |  4 ++-
- 2 files changed, 38 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-multimedia/mplayer/mpv/CVE-2026-123095.patch
+ .../tinyproxy/tinyproxy/CVE-2026-125371.patch | 70 +++++++++++++++++++
+ .../tinyproxy/tinyproxy_1.11.3.bb             |  1 +
+ 2 files changed, 71 insertions(+)
+ create mode 100644 meta-networking/recipes-support/tinyproxy/tinyproxy/CVE-2026-125371.patch
 
-diff --git a/meta-oe/recipes-multimedia/mplayer/mpv/CVE-2026-123095.patch b/meta-oe/recipes-multimedia/mplayer/mpv/CVE-2026-123095.patch
+diff --git a/meta-networking/recipes-support/tinyproxy/tinyproxy/CVE-2026-125371.patch b/meta-networking/recipes-support/tinyproxy/tinyproxy/CVE-2026-125371.patch
 new file mode 100644
-index 0000000000..9cbd7d8b96
+index 0000000000..7a86af207c
 --- /dev/null
-+++ b/meta-oe/recipes-multimedia/mplayer/mpv/CVE-2026-123095.patch
-@@ -0,0 +1,35 @@
-+From 29025d6211cbbceb5e74c3619ddec9dc2fb20ed7 Mon Sep 17 00:00:00 2001
-+From: =?UTF-8?q?Kacper=20Michaj=C5=82ow?= <kasper93@gmail.com>
-+Date: Wed, 4 Nov 2026 20:28:57 +0100
-+Subject: [PATCH] ytdl_hook: reject playlist entry URLs with control characters
++++ b/meta-networking/recipes-support/tinyproxy/tinyproxy/CVE-2026-125371.patch
+@@ -0,0 +1,70 @@
++From 8c8463fb1a0bf7db82d3dfc6f363d5b339e96cd3 Mon Sep 17 00:00:00 2001
++From: rofl0r <rofl0r@users.noreply.github.com>
++Date: Tue, 15 Sep 2026 06:42:05 +0000
++Subject: [PATCH] acl: use hostspec parser to disallow suffix hostname matches
 +
-+The entries are joined into a memory:// M3U playlist, one URL per line.
-+A URL with a line break became several entries, and only the first line
-+went through url_is_safe(). The other lines were loaded with the origin
-+of the opened URL, so any protocol was allowed. Skip any URLs with
-+control characters.
++the existing ad-hoc parsing in acl.c allowed an attacker to
++use e.g. an "untrusted.net" domain name to access a reachable
++tinyproxy instance if it had an allow list entry for "trusted.net".
 +
-+Fixes: e6e6b0dcc7
-+Fixes: GHSA-p99g-m25w-x8xv
-+(cherry picked from commit c3096515dcd26c14004f985538b5aa41db613856)
-+CVE: CVE-2026-123095
-+Upstream-Status: Backport [https://github.com/mpv-player/mpv/commit/c3096515dcd26c14004f985538b5aa41db613856]
++exploiting it would require that the attacker has prior knowledge
++of the instance's configuration or is damn good at guessing and
++well-budgeted to register lots of potentially matching domains.
++
++fix by re-using the existing hardened hostspec parser.
++
++closes #627
++
++(cherry picked from commit 3991ac8f98c6a9f05b3265018b812dbf2ca92c28)
++CVE: CVE-2026-125371
++Upstream-Status: Backport [https://github.com/tinyproxy/tinyproxy/commit/3991ac8f98c6a9f05b3265018b812dbf2ca92c28]
 +Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 +---
-+ player/lua/ytdl_hook.lua | 3 +++
-+ 1 file changed, 3 insertions(+)
++ src/acl.c | 25 +++++++++----------------
++ 1 file changed, 9 insertions(+), 16 deletions(-)
 +
-+diff --git a/player/lua/ytdl_hook.lua b/player/lua/ytdl_hook.lua
-+index 65ef859595..2b0edb193a 100644
-+--- a/player/lua/ytdl_hook.lua
-++++ b/player/lua/ytdl_hook.lua
-+@@ -1111,6 +1111,9 @@ local function run_ytdl_hook(url)
-+                 -- links without protocol as returned by --flat-playlist
-+                 if not site then
-+                     msg.error("Playlist entry does not have unique URL, can't add it.")
-++                elseif site:find("%c") then
-++                    -- a line break would add entries to the playlist
-++                    msg.error("Playlist entry URL contains control characters, can't add it.")
-+                 elseif not site:find("://") then
-+                     -- youtube extractor provides only IDs,
-+                     -- others come prefixed with the extractor name and ":"
-diff --git a/meta-oe/recipes-multimedia/mplayer/mpv_0.41.0.bb b/meta-oe/recipes-multimedia/mplayer/mpv_0.41.0.bb
-index c8a0222ebf..8c68de04c2 100644
---- a/meta-oe/recipes-multimedia/mplayer/mpv_0.41.0.bb
-+++ b/meta-oe/recipes-multimedia/mplayer/mpv_0.41.0.bb
-@@ -23,7 +23,9 @@ LIC_FILES_CHKSUM = "file://LICENSE.GPL;md5=570a9b3749dd0463a1778803b12a6dce"
- LICENSE_FLAGS = "commercial"
++diff --git a/src/acl.c b/src/acl.c
++index 2d141ba..db526db 100644
++--- a/src/acl.c
+++++ b/src/acl.c
++@@ -105,7 +105,6 @@ acl_string_processing (struct acl_s *acl, const char *ip_address,
++ {
++         int match;
++         struct addrinfo hints, *res, *ressave;
++-        size_t test_length, match_length;
++         char ipbuf[512];
++ 
++         assert (acl && acl->h.type == HST_STRING);
++@@ -153,23 +152,17 @@ STRING_TEST:
++                         return -1;
++         }
++ 
++-        test_length = strlen (string_addr);
++-        match_length = strlen (acl->h.address.string);
++-
++         /*
++-         * If the string length is shorter than AC string, return a -1 so
++-         * that the "driver" will skip onto the next control in the list.
+++         * compare the reverse-resolved client hostname against the ACL
+++         * entry, using the shared hostspec matcher so that hostname
+++         * entries are matched at label boundaries: plain entries match
+++         * the whole hostname exactly, and leading-dot entries match the
+++         * apex host plus every subdomain below it. This prevents
+++         * suffix-collision bypasses, e.g. "Allow trusted.net" must not
+++         * admit "untrusted.net" (GH issue #627).
++          */
++-        if (test_length < match_length)
++-                return -1;
++-
++-        if (strcasecmp
++-            (string_addr + (test_length - match_length),
++-             acl->h.address.string) == 0) {
++-                if (acl->access == ACL_DENY)
++-                        return 0;
++-                else
++-                        return 1;
+++        if (hostspec_match (string_addr, &acl->h) != 0) {
+++                return acl->access != ACL_DENY;
++         }
++ 
++         /* Indicate that no tests succeeded, so skip to next control. */
+diff --git a/meta-networking/recipes-support/tinyproxy/tinyproxy_1.11.3.bb b/meta-networking/recipes-support/tinyproxy/tinyproxy_1.11.3.bb
+index 46d3a4d7c6..86e7e906b1 100644
+--- a/meta-networking/recipes-support/tinyproxy/tinyproxy_1.11.3.bb
++++ b/meta-networking/recipes-support/tinyproxy/tinyproxy_1.11.3.bb
+@@ -13,6 +13,7 @@ SRC_URI = "https://github.com/${BPN}/${BPN}/releases/download/${PV}/${BP}.tar.gz
+            file://CVE-2026-54387.patch \
+            file://CVE-2026-55202.patch \
+            file://CVE-2026-54388.patch \
++           file://CVE-2026-125371.patch \
+            "
  
- SRCREV = "41f6a645068483470267271e1d09966ca3b9f413"
--SRC_URI = "git://github.com/mpv-player/mpv;name=mpv;branch=release/${@oe.utils.trim_version('${PV}', 2)};protocol=https;tag=v${PV}"
-+SRC_URI = "git://github.com/mpv-player/mpv;name=mpv;branch=release/${@oe.utils.trim_version('${PV}', 2)};protocol=https;tag=v${PV} \
-+           file://CVE-2026-123095.patch \
-+"
- 
- inherit meson pkgconfig mime-xdg
- 
+ SRC_URI[sha256sum] = "9bcf46db1a2375ff3e3d27a41982f1efec4706cce8899ff9f33323a8218f7592"
