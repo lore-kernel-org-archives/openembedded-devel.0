@@ -1,110 +1,108 @@
-Received: from mail-pg1-f170.google.com (mail-pg1-f170.google.com [209.85.215.170])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.3640.1794429601506107041
+Received: from mail-dy1-f179.google.com (mail-dy1-f179.google.com [74.125.82.179])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.2983.1794442801057307411
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 11 Nov 2026 12:40:01 -0800
+ Wed, 11 Nov 2026 16:20:01 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=pNW9S6Dp;
- spf=pass (domain: gmail.com, ip: 209.85.215.170, mailfrom: bbnpreetsingh@gmail.com)
-Received: by mail-pg1-f170.google.com with SMTP id 41be03b00d2f7-cdab8873d9dso1540550a12.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 11 Nov 2026 12:40:01 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=sGcC+LRd;
+ spf=pass (domain: gmail.com, ip: 74.125.82.179, mailfrom: raj.khem@gmail.com)
+Received: by mail-dy1-f179.google.com with SMTP id 5a478bee46e88-37628596783so3314444eec.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 11 Nov 2026 16:20:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794429601; x=1795034401; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=kwwvbVpbBKpTwniQr0F26nnvIbZB981KNeSIwtQvbmg=;
-        b=pNW9S6DpyZUA22i7RuRhS4qTPbTlKBaHET6dAuKrek10tMlCvF1NVNTpXb+IO3GzzH
-         VFOCkVVb1JAZZPWwsd34AXVGiDr9WoVT59id1q+Nknq5IysaP37PQuhkr/Xo/zZs6a9f
-         l2OJU3CnSZ6S02zHBGjvKNJmDFZiD7AwlYzhLmUiucLxZK7lD4sJwtJiF3UcnxKbVLlG
-         BboZey3UFtEl9qVkYP+GmqyfzX3QrPHnwHmFon6Bji90Ep99C8L76fCBtX6GgPqAUuPo
-         QgKM7Dv+ACJPZCkSfk9PmHn0mDgvPEwKqHZ+FZtJ9ZCgxrpksCWsAOKKqLsj1fygdX9a
-         DGTQ==
+        d=gmail.com; s=20260707; t=1794442800; x=1795047600; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=4zEHPs42eYpHBmM8PWs0UOiVyT9vZoXhZgExg0SJrmA=;
+        b=sGcC+LRdFBcOgYMi/SEklW5Y91yheCyFIeXkiw1xLIzOSMV/zzWrXYBhgShtUhOvzz
+         WJLCyBdE+A7Hr3+bKgxvQHZ+aTBK1bLQZyHNy/JZfJi7A6W0tsisxE+P/Fyi/VupaxZG
+         J3/e7jviqPET3wiZmQv9aExj9lHiY/53JbGmeD7JGhDl2HDCt9BHjhOfDtQYCUSuyzeT
+         5uMGjk3HbVlMZcevWEipIZZgFGjqIBlsvRdfyxUXVEsYwQCOUUSn3MIcwRiTOvdC9HnZ
+         nKs9awdnsPq/tlxFYEyVaQ0HtoY9V9qrT+nn4eZoadJMnVd308Mm4VSSEvO0q/sYzCUh
+         LM8Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794429601; x=1795034401;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=kwwvbVpbBKpTwniQr0F26nnvIbZB981KNeSIwtQvbmg=;
-        b=NAgNKqYFW8vK9LYLUrS2+cQ8VuTKWFwVmiDCOKFeVIjBRDOXj2Mqsdy+rLDESfI2jE
-         vFwkkCf1vlNHS7BDkSYMj33sXpth8C8CjRs7wa2MKWHU3muPSmSYnhkBzdtaE731UzQV
-         XG6VAHJz9wKk2rHpFu06Zz4tTj8wHnk4Fl5fMzSdJIG2DGnBc26pNmo8P73NUdkOGdrc
-         yaKt+gxYw6DlBbNLE0ly4ZPMbbiozV4E9OuB/G+YHWJ5fkEq1liM9HUmu1jsbZRVIi+5
-         kSvv8KTqAkD8ZcIF3Zw2riEB8NKt4um9rRUvx4Eggf/vQ/mFDsiqldlyoymycyI6Whe8
-         K6KQ==
-X-Gm-Message-State: APuU4Z+Vls0kJHpowAeBoBSwm84zyt9RfkM9/9efGyUhpfSO45Sp6Hpx
-	wYnZn7FuxMCRPeN0JU/4YqVoLx7fdzge1C84lE8q1KjdcLCFOlDtZY8K+sNkJXam
-X-Gm-Gg: AYBFou152rcZ499tYMRdvGSdhLoac4mSMGTG1Ki923GrdxAvNhyimsVKx2dKND7eMSv
-	ve19K3XlNwBcjveOfjWqIEHC2ozF4QO/li9ePrc64gXHBtEPHbH39UdjjxVjvY1Ss79F9I7CiU/
-	YbgJofbbTQsdqw3sHBIylOY+Ttz3KSxb6A35EEXRCDkSfyO8kFWQRm5Nkajqc8175vgXw/EFCvr
-	2i/bFjE1263CPSWueF7Opy9Q/2g8u0bXb6oa0SfceBsiQ7KQhWu+fQqmc6xwR2xpwF4LKgbXMbR
-	VS19Gk9HIin0TuXs8c4juvro1WjWOXuMn/5gf06hmZuL+AiGCoXiQavGWvbZgcaWxBlkJoD+3MG
-	Wb/rVG2hFX8F0KvaU9XJkULC6AehVNTMeTY3DCG9WubTcyjnY+E+O7wmIecTmpLCFN0LUUG+QlN
-	EvbDyue0ASDS93pkBdTV5hYgLP1yYgp1yZBd0f/zTXAS9n6jtZVzQrQMfFDtK1v+5A6YDVJtsoU
-	0r54Nq67RzclUpCmnTeP1Js6zthxlwzRvILGs2dF+uWiW8kSVaofiVIfZhefWL/4AjYuMuGQ01s
-	qyGQQ3N9Z1iLn0RcZFrgJcR8lVFHhKzBTMEJBdpbfkXIVUBcpnLjAz4Hry6LQiE=
-X-Received: by 2002:a17:90b:4a12:b0:3b0:9fbf:8951 with SMTP id 98e67ed59e1d1-3b182e0346bmr3570997a91.5.1794429600833;
-        Wed, 11 Nov 2026 12:40:00 -0800 (PST)
-Return-Path: <bbnpreetsingh@gmail.com>
-Received: from localhost.localdomain ([108.180.159.198])
-        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-cdd8d699b93sm1841011a12.14.2026.11.11.12.40.00
+        d=1e100.net; s=20260707; t=1794442800; x=1795047600;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=4zEHPs42eYpHBmM8PWs0UOiVyT9vZoXhZgExg0SJrmA=;
+        b=iJ/FYRl3NomAlQz/t1NYfOalQUAGYetdSsJaHPLVGjBuVltA1HnsCbPxYeygbZesHl
+         2cbB+qIWSZPg0gytatFqix2/P78xn5Af1DXF9g3PfvLxrxbhyeTrF5QBqB2Rtzj7vlPn
+         xJ7hsX0Ov8gBO+bj1H4kaFtVOKLOmKybBz6p6/SDUoxAnNpRPRDmfe8REjoGX8ytSJ/N
+         TP+BbKYc1uVRLWJdY5foqye88qaMhdC1zEk2A2PbsMHPkR1vgzWmgvbmKBY7DEeGKcE4
+         WS8WZ64adhQc0gFO9loBoPqMUYMjyFLHzYMPbSdvfPM79eA9ZetdlVXMTz2maYyWOYK7
+         lffw==
+X-Gm-Message-State: APuU4Z+xolUxaAaHxtr9H8qgqIDpo8ysz9a9PGsfOtOSJzE2njQdu5Du
+	udsBpyc3c81JC19QheOj4e4IfywrDj0+nF9fjW5NOHXRkGaBtR11EIft9gFLhsgX76M=
+X-Gm-Gg: AYBFou0s18P3s6FOdq6tWvvuVoH2AAamfD4bj4j5tWTACMfz5m9EhdQ/6/FWz3NyxGG
+	kZNwxC/fmU96OrjBh2lmso7jry5jTLCrO3phxyHRs9KJUgb5o2l9TpGZGbyeHr3Zndx9Rn8+vCa
+	i0X5zTK/u9SSTg1bNBt+TrsnBjJThfdm8jID1ICIgG0Ve3HlpzkXwBK9j1vfMaOaN6HX8aRg9ec
+	28VskP1rjOaOTweTXb8yZ8+TnBKYldR+87TiX6YUxkCePgaBXrBeZKQdZw+QkaDAcOFBW0Uyhdi
+	ZzNU9M31gioeXJvCIuc4tmfh7j90W/a+vzW0cZujXWkBlttOegu520PwAxDnkFthuuq8kB6HdSe
+	i29/IzlsOriZHz2BWheynY61U2G0d7qZ5mUZOHkwfyuHoRf1MjUfZ/R4nPOSlTw+fcTgT6qCI4p
+	GwZiUAHL4OuDbDjM9z/B0MH57bqps0Jjr5FjhcwwyDwZzmyGbwmUmXCBNRISYIjzj2htTwL+lnt
+	0S8yzxBQ4qbSJ7X3AD0LItDgYpaQprPxdPItk7zTpwkHSGNlQjgIrTMtCztTsSCA6GYi9cOFWdI
+	JTg46NPyJrIZdJSihGg3gpz+gNaVPYfGt2+cvs3fJ0UmH0Jkhr22HClgUPuPJVL9ZEOBDG9i3+5
+	XHC2lYOKO1Gbx8CqJcX+CB/cvByLSxRyo30Ge7q4f4cdmlbyA4UIgykz01Cw1lT7Jh2DIUI0XET
+	WWw1Lpd2rEqMDPpfmC8mRgjxeu77uy6L2W4td1ksmwW/lMXz3DxhOYEq3sbBLIMpbY+MrTD2gSR
+	+YUDV5ak2aPUHCYeGzlmiHVJl2EqDogpJELdXsBNkUMfLjVygl5EFm59YuDqJbP+u5ImdSWmx8e
+	l8Pf
+X-Received: by 2002:a05:7022:7f0d:b0:1b3:abd2:2eb2 with SMTP id a92af1059eb24-1b3c02f3a1fmr2933199c88.10.1794442800051;
+        Wed, 11 Nov 2026 16:20:00 -0800 (PST)
+Return-Path: <raj.khem@gmail.com>
+Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1b3b5b2fc14sm19357327c88.12.2026.11.11.16.19.58
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 11 Nov 2026 12:40:00 -0800 (PST)
-From: Babanpreet Singh <bbnpreetsingh@gmail.com>
+        Wed, 11 Nov 2026 16:19:59 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
+X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>,
-	Ross Burton <ross.burton@arm.com>,
-	Babanpreet Singh <bbnpreetsingh@gmail.com>
-Subject: [meta-oe][PATCH 2/3] pgxs.bbclass: add class for PostgreSQL extensions
-Date: Wed, 11 Nov 2026 20:39:56 +0000
-Message-ID: <20261111203957.7-3-bbnpreetsingh@gmail.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20261111203957.7-1-bbnpreetsingh@gmail.com>
-References: <20261111203957.7-1-bbnpreetsingh@gmail.com>
+Cc: Khem Raj <khem.raj@oss.qualcomm.com>
+Subject: [meta-oe][PATCH] cpupower: Install systemd unit into systemd_system_unitdir
+Date: Wed, 11 Nov 2026 16:19:56 -0800
+Message-ID: <20261112001956.1124296-1-khem.raj@oss.qualcomm.com>
+X-Mailer: git-send-email 2.56.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Wed, 11 Nov 2026 20:40:07 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132139
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Thu, 12 Nov 2026 00:20:02 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132141
 Content-Type: text/plain; charset="utf-8"
 
-Extensions that build with PGXS need the same dependency, make
-arguments and FILES. Put them in a class so a recipe only has to
-inherit pgxs.
+The kernel cpupower Makefile installs cpupower.service into a hardcoded
+/usr/lib/systemd/system, while the systemd package ships
+${systemd_unitdir}. On distros without usrmerge (e.g. poky) these
+differ, and on sysvinit distros the unit is not wanted at all, causing
+installed-vs-shipped QA errors.
 
-Signed-off-by: Babanpreet Singh <bbnpreetsingh@gmail.com>
+Pass unitdir=${systemd_system_unitdir} so the unit lands where OE
+expects, and set SYSTEMD=false when systemd is not in DISTRO_FEATURES
+so the unit is not installed.
+
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- meta-oe/classes/pgxs.bbclass | 22 ++++++++++++++++++++++
- 1 file changed, 22 insertions(+)
- create mode 100644 meta-oe/classes/pgxs.bbclass
+ meta-oe/recipes-kernel/cpupower/cpupower.bb | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/classes/pgxs.bbclass b/meta-oe/classes/pgxs.bbclass
-new file mode 100644
-index 0000000000..b1c7aca264
---- /dev/null
-+++ b/meta-oe/classes/pgxs.bbclass
-@@ -0,0 +1,22 @@
-+#
-+# Copyright OpenEmbedded Contributors
-+#
-+# SPDX-License-Identifier: MIT
-+#
-+
-+# Class for PostgreSQL extensions that are built with PGXS
-+
-+DEPENDS += "postgresql"
-+
-+# USE_PGXS is for makefiles that can also build inside the PostgreSQL tree
-+EXTRA_OEMAKE:append = " USE_PGXS=1 PG_CONFIG=pg_config"
-+
-+pgxs_do_install() {
-+    oe_runmake install DESTDIR=${D}
-+}
-+
-+EXPORT_FUNCTIONS do_install
-+
-+FILES:${PN} += "${libdir}/postgresql ${datadir}/postgresql"
-+
-+RDEPENDS:${PN} += "postgresql"
--- 
-2.43.0
+diff --git a/meta-oe/recipes-kernel/cpupower/cpupower.bb b/meta-oe/recipes-kernel/cpupower/cpupower.bb
+index b453308770..a8cdf1bf0a 100644
+--- a/meta-oe/recipes-kernel/cpupower/cpupower.bb
++++ b/meta-oe/recipes-kernel/cpupower/cpupower.bb
+@@ -11,7 +11,9 @@ inherit kernelsrc kernel-arch bash-completion
+
+ do_populate_lic[depends] += "virtual/kernel:do_shared_workdir"
+
+-EXTRA_OEMAKE = "-C ${S}/tools/power/cpupower O=${B} CROSS=${TARGET_PREFIX} CC="${CC}" LD="${LD}" AR=${AR} ARCH=${ARCH}"
++EXTRA_OEMAKE = "-C ${S}/tools/power/cpupower O=${B} CROSS=${TARGET_PREFIX} CC="${CC}" LD="${LD}" AR=${AR} ARCH=${ARCH} \
++                unitdir=${systemd_system_unitdir} \
++                SYSTEMD=${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}"
+
+ do_configure[depends] += "virtual/kernel:do_shared_workdir"
+
+@@ -27,7 +29,7 @@ do_install() {
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
+ PACKAGES =+ "${PN}-systemd"
+
+-FILES:${PN}-systemd = "${sysconfdir}/cpupower-service.conf ${systemd_unitdir}"
++FILES:${PN}-systemd = "${sysconfdir}/cpupower-service.conf ${systemd_system_unitdir}"
+
+ RDEPENDS:${PN} = "bash"
 
