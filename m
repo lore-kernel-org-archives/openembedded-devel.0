@@ -1,143 +1,149 @@
-Received: from mail-dy1-f177.google.com (mail-dy1-f177.google.com [74.125.82.177])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.742.1794499092603273171
+Received: from mail-dy1-f174.google.com (mail-dy1-f174.google.com [74.125.82.174])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.1583.1794503618715783275
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 12 Nov 2026 07:58:12 -0800
+ Thu, 12 Nov 2026 09:13:38 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=iq44cMPY;
- spf=pass (domain: gmail.com, ip: 74.125.82.177, mailfrom: raj.khem@gmail.com)
-Received: by mail-dy1-f177.google.com with SMTP id 5a478bee46e88-33fb4680717so6811eec.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 12 Nov 2026 07:58:12 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=gCgHaf0O;
+ spf=pass (domain: gmail.com, ip: 74.125.82.174, mailfrom: raj.khem@gmail.com)
+Received: by mail-dy1-f174.google.com with SMTP id 5a478bee46e88-3282db206d3so240883eec.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 12 Nov 2026 09:13:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794499092; x=1795103892; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1794503618; x=1795108418; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=txExOnDKU44BmOGODwigcHIK5LkIBpSz+w7E5Z/z+vw=;
-        b=iq44cMPYl4GFjpCVN5XSRJkioj7w1VaPfZeMtYSyqN3tXbao5aRldV66hihq4nOkN+
-         UB23O5FvGDrQ4WNn9fMOew5aMSbni+x/uPM89K8+slF/7Svf2AiKDhpifAT9tjN6QCeb
-         AxeJlYU2lKFE+vWsOQuVhluIALkv/eVBGwqHpjRw25G/wIuZYHg4DsZvNHyT1Y0jiB0u
-         +GTlBvWxZXsGQ2d/DJgtCwWQoTi6tm8/BfNeQ5gQei31KkzvEuIJpCX7+c3HJUOOIeUf
-         Vx3VvxFs0af/sicrppNHAUAxwm3RvrQoXBNW6pasumFZ+rHB1EZeSHR/kwZBHeXztMr2
-         fRIg==
+        bh=aJiqP/Edj6kZ1aL+hqTtwh2WSl5ZJCxo/mbxnecY+gs=;
+        b=gCgHaf0OkwEbCJPceRQh6dOHkyLf3u8QXPeuh5f1n2427CTdP53R1c2sK1u0Qe/MA+
+         EjahSjo1E0XHwAulVCuMnvuwcvA4+tZmPRYGyGvhX2RAfMKyzRPHXq7Wpj6i40qRQE/E
+         CqAENZ9bikTZyA1BUIUIJqwbzuCccBp/Q/JLp/YNJmeh/NDRHNk9NamM0TuirA7nwzFr
+         iqnw59Ee9P5qbc+l4vhGuPVPljUQ02CFymTOQOpej3P0D/74sa8/LYejpTJwOqxpUjGO
+         +DRx+u0z62mk6crzYi/NDW/6P96bRPJznhbSV8z6HDaDz84baqQrBpZPX3zuZd3v0FYi
+         Enjw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794499092; x=1795103892;
+        d=1e100.net; s=20260707; t=1794503618; x=1795108418;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=txExOnDKU44BmOGODwigcHIK5LkIBpSz+w7E5Z/z+vw=;
-        b=jyiZV3DacHjXMkFBh1Y31n8X8o7tqQ/esGOV5iQCXASSlGpTp92wC/cY7vH0UAoXv1
-         N4TOAPhCV2rYWdl9rdQEP25AeMDs6bDLeobFjjUNw8hJuHUoM64VcbT81wgmyQKliZub
-         +FJQQiIYZAMX7oR+mtJCPdmShrLiMoo2Hl4AkcLvVfgSkPQgucYALc1OFW1lml3tf4NF
-         DhVByAaUjFDW+jU45Ys27SlUiXUrbMgKbFQ0nBle8IwVgoG2TG4g4dxPhKlOl8GFxBG4
-         7WBxsfxr3+7SqknPnCmOUFMPqgG2wUl+Skuxx+nu2iJp1JK5DWExiw6XJQiNi+WzSrIf
-         7jlw==
-X-Gm-Message-State: APuU4Z/VXp7liFYILggETXkoSxwfXkZ0Fw/GEtv0IJOocVTBQ2dqR9SW
-	cJkVws81R8ILUZOdkM2IxOQ9uf8SI2FHzZVy3SxrwmCQy4srmNAtl1OMLoydCEB7AaI=
-X-Gm-Gg: AYBFou3htGBJAFDRAlSPkGzEieJJudI6XEUjOThLx6vLPOTEB9BeLqvgI+uER5Sbtdy
-	S2dBtDagR9q5mD3l2+uBnJzGi7gGlCs58ElXuHDVYBmnFRnTszx9/o3VWujlkdFa2AKJfWhOCIF
-	HoheytR0DaP57xtGf/RdUVcIuVhZoqjVmp/ZfCS/IzjfIcAX5300MqyIxAwWYRooiHEDkAFhtXP
-	nlyA+ttZue8wmEvvwgEkrlRNzZ7MK4raf3OB4ws3ThXxqXOac3tEcF9vHZy4Q05xwc2A1kFfa5O
-	VOaxM2S8NkDlk+khwsn/WcXukuY26OllyR0zfuZVPFdfxkuc8QMA2jmJ3mJKFLw4vsYoLQucSWy
-	4qr0SEtqgbEX7UDQSvixQuzUfeYeet2IaOZwxrljuGLHjwq9DL1J1HjNzg6dweqtgf1/3O1jOqG
-	9F+rnfjDlr2CJt2m2AaJ83x+l2EPWcyf12xSyByKpo5pgXg/35hCakpMeqPag9k1/ltgCMjiURe
-	JmOaFT+ZB6qt5+hhz1uvjw7ZTPrVTjC5fYURxSwmtT9PIPO4MVKBNT155Yz7zLXjtTWV91dis0J
-	fX3CuwXOLlAPDygrlkdC8I240Mt5K3C7O6w7yw+mD34Rp5Uhgo7PiSRFK3FFk58rtXaqCgV8YMb
-	D+ai+DBKAf8gctF3dEth1GRtmTyNZoypFthzQ6+yNMr20UgyZ57gQORHYn6beZFeOljQSeJAz0i
-	XFZ2JZeIhZS5DtHc3W2WTneJMm+VgHWNDSuzygsCB0/G2ih+F7tCsF/Jb3Tuk+dGgpTIBBeS3CR
-	pvqfD5/8vi8064r3a6TbwYGC5siXiG6UTzNyWct4An8c+zm7zZgved5Wdf6sbgkpljebkQ1RHBF
-	IF5M
-X-Received: by 2002:a05:693c:65c5:b0:369:fc93:eda5 with SMTP id 5a478bee46e88-37686950cffmr6483510eec.39.1794499091612;
-        Thu, 12 Nov 2026 07:58:11 -0800 (PST)
+        bh=aJiqP/Edj6kZ1aL+hqTtwh2WSl5ZJCxo/mbxnecY+gs=;
+        b=qCOWXYMKPSvz3MNfMFQgDnA5nsgycCOpKSygStFalRXIhe1mfKm9ycMOZwO+YsC3km
+         TPjARc5RmPy5nBuFjWY67SzR3oCBoDq2Csiw6z3Qicnb1qGAE3sikEjsRyIHbuXygVHc
+         Eqy7NvIX6h2n5rBR/E2D4uMjHQ7aqlTSp18+DTmOVSyUq0EEUMF2UKSS1fPnIuds0tno
+         HAu+R8AMdZbAANk5tWVIKbpyypP2WRSyxoeeOyWTXWiLJjOxddCmky4+2A8Kb7RLRfrn
+         5YxGyPC+XTBc8UwgjRlFFv7hCoA9rupCEeBpHUD2z/I/zXMzhblawEf6YmRvjiiJDNny
+         z7aA==
+X-Gm-Message-State: APuU4Z/x9GXLYssoNiM+w2f1Ggzm+FuAcBxE2/g/z3kx2DJUmXhazlvq
+	ZOl2gprpUED0lYowkzynlRUim6Ew8eR+wOtHBNV6+LTPrsVIXdLcc0+aWDcu4H8ctzk=
+X-Gm-Gg: AYBFou0i9DeMoUMOypUx0z5E3dVRk9PJyPhqTRBh0NVu6OCUcfqpGDiDuKJHTU3pqjK
+	FpDGNW29paZgo7DPSMm9a5X8R165kesTrYfaiKKVrooVbRjo/iWORhEgaYEjaIwZUgP7j/inMBD
+	rS6flGqfqPbBVyWR8NalKlrZzUOrEPzX3a8tNGHE6PYOOwWmbOIeoN0M8c9uyu1WLGIP+8AzOq/
+	QVk/a1Xuvkrc3bAZIgVNE5nmJFF32cztAl7C6qmziDSzGokbmpyvu2SG/iAZxqjTsjK9PICM1eB
+	6xypCtTHGvtO21mP8R+SOMHkV5FSi38N5Uq3S8wufHFioCCHcOVBaGPHJzglm63Sufp0VBDOZE+
+	vqtbrvT6Iepa/t+af8ZFQ87rXd7+YIPEqyJ71inv2m/PITqQOdtbKIZo2eLMNjIaPOy9iv8SEDL
+	XiqOVqmGsIEmr2lL2pvT18fuGpdaya9jEaztfOrLGsmfzmDR1yDwgKVZY38fVSQDRXAsNhNVcMv
+	fcClBcd/s4I7lb3ome3b5+uI44Wat5MGNtfJQfYr42Guk+yeS5CdbRej6vcOkALHUN6TcF1q+7Q
+	UCczsD/PyASn8hQOgwAZN0r9eF9ftaWa228pE0QSqB567nngeVyJ3YbeoUrPh4pi+EaeLBE8d1s
+	yzaEko+U1X44y2meFV5bC65QqO6QW3T1GMyzrgbgnYDqnIr26E+aXF/fBgmufZMcgQDxwIZnTvT
+	iqHJBwZBxiWd0QP4mAXBOpY/DrAiD4F8hXqWRNnm4Sv14zT44Jle0aZr3+bpfa+WILZxtSvGTmH
+	Ulho8Onc5LmojOlYYU3RCBrGsa9QP3/oBk0PaFMEHUEaZsVm15oxybRRWQ27SocwuX3wR+PpZJF
+	GXse
+X-Received: by 2002:a05:7301:4703:b0:370:1652:5ff4 with SMTP id 5a478bee46e88-376851ce2bdmr6239719eec.6.1794503617735;
+        Thu, 12 Nov 2026 09:13:37 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-37926255ad0sm546563eec.25.2026.11.12.07.58.10
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-37922f3767bsm934490eec.3.2026.11.12.09.13.35
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 12 Nov 2026 07:58:10 -0800 (PST)
+        Thu, 12 Nov 2026 09:13:36 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-networking][PATCH] frr: Do not look at host include paths in configure
-Date: Thu, 12 Nov 2026 07:58:07 -0800
-Message-ID: <20261112155807.502040-1-khem.raj@oss.qualcomm.com>
+Subject: [meta-oe][PATCH] apitrace: Do not export _init and _fini from wrappers
+Date: Thu, 12 Nov 2026 09:13:32 -0800
+Message-ID: <20261112171332.513897-1-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Thu, 12 Nov 2026 15:58:21 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132209
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Thu, 12 Nov 2026 17:13:41 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132210
 Content-Type: text/plain; charset="utf-8"
 
-frr 10.7 added an OpenBSD fallback that retries the libunwind.h check
-with -I/usr/include/c++/v1 when libunwind is not found. gcc with
--Wpoison-system-directories reports that as unsafe for cross-compilation,
-failing the configure-unsafe QA check. clang does not warn about it.
+The wrapper version scripts name _init and _fini, which riscv64 glibc does
+not define, so linking egltrace.so with lld fails:
 
-Only use the fallback on OpenBSD.
+  ld.lld: error: version script assignment of 'global' to symbol '_init' failed: symbol not defined
+
+Drop them from the version scripts; the loader uses DT_INIT/DT_FINI and
+nothing looks them up by name.
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- ...ry-the-OpenBSD-libunwind-location-on.patch | 41 +++++++++++++++++++
- .../recipes-protocols/frr/frr_10.7.1.bb       |  1 +
- 2 files changed, 42 insertions(+)
- create mode 100644 meta-networking/recipes-protocols/frr/frr/0002-configure-Only-try-the-OpenBSD-libunwind-location-on.patch
+ ...appers-Do-not-export-_init-and-_fini.patch | 46 +++++++++++++++++++
+ .../apitrace/apitrace_14.0.bb                 |  1 +
+ 2 files changed, 47 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/apitrace/apitrace/0002-wrappers-Do-not-export-_init-and-_fini.patch
 
-diff --git a/meta-networking/recipes-protocols/frr/frr/0002-configure-Only-try-the-OpenBSD-libunwind-location-on.patch b/meta-networking/recipes-protocols/frr/frr/0002-configure-Only-try-the-OpenBSD-libunwind-location-on.patch
+diff --git a/meta-oe/recipes-devtools/apitrace/apitrace/0002-wrappers-Do-not-export-_init-and-_fini.patch b/meta-oe/recipes-devtools/apitrace/apitrace/0002-wrappers-Do-not-export-_init-and-_fini.patch
 new file mode 100644
-index 0000000000..81a8c72497
+index 0000000000..1d1d812974
 --- /dev/null
-+++ b/meta-networking/recipes-protocols/frr/frr/0002-configure-Only-try-the-OpenBSD-libunwind-location-on.patch
-@@ -0,0 +1,41 @@
++++ b/meta-oe/recipes-devtools/apitrace/apitrace/0002-wrappers-Do-not-export-_init-and-_fini.patch
+@@ -0,0 +1,46 @@
++From 4661c86d9a64bf4057bc80fc9e6a4aed83754b5e Mon Sep 17 00:00:00 2001
 +From: Khem Raj <raj.khem@gmail.com>
-+Date: Thu, 12 Nov 2026 00:00:00 -0800
-+Subject: [PATCH] configure: Only try the OpenBSD libunwind location on OpenBSD
++Date: Wed, 11 Nov 2026 11:41:05 -0800
++Subject: [PATCH] wrappers: Do not export _init and _fini
 +
-+When libunwind.h is not found, configure retries with
-+-I/usr/include/c++/v1, which is where OpenBSD keeps it. On other
-+systems this only makes the compiler look at a host directory. When
-+cross-compiling with a gcc that has -Wpoison-system-directories, that
-+is reported as "include location /usr/include/c++/v1 is unsafe for
-+cross-compilation".
++_init and _fini come from crti.o on some architectures. The dynamic loader
++finds them through DT_INIT/DT_FINI, not by symbol lookup, so there is no
++reason to export them from the wrappers.
 +
-+Limit the fallback to OpenBSD hosts.
++On architectures without crti.o _init/_fini, e.g. riscv64, they are not
++defined at all, and lld, which defaults to --no-undefined-version, fails:
 +
-+Upstream-Status: Submitted [https://github.com/FRRouting/frr/pull/24383]
++  ld.lld: error: version script assignment of 'global' to symbol '_init' failed: symbol not defined
++  ld.lld: error: version script assignment of 'global' to symbol '_fini' failed: symbol not defined
++
++Upstream-Status: Submitted [https://github.com/apitrace/apitrace/pull/1004]
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ configure.ac | 4 ++++
-+ 1 file changed, 4 insertions(+)
++ wrappers/egltrace.version | 2 --
++ wrappers/glxtrace.version | 2 --
++ 2 files changed, 4 deletions(-)
 +
-+diff --git a/configure.ac b/configure.ac
-+index 8778c24..cbd0767 100644
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -2629,6 +2629,8 @@ if test "$enable_backtrace" != "no" ; then
-+           backtrace_ok=true
-+         ])
-+       ], [
-++        case "$host_os" in
-++        openbsd*)
-+         # OpenBSD. no idea why the header file is under C++, but it is
-+         ac_cflags_save="$CFLAGS"
-+         CFLAGS="$CFLAGS -I/usr/include/c++/v1"
-+@@ -2652,6 +2654,8 @@ if test "$enable_backtrace" != "no" ; then
-+ 	  LIBS="$ac_libs_save"
-+         ])
-+         CFLAGS="$ac_cflags_save"
-++        ;;
-++        esac
-+       ])
-+     ])
-+     if test "$enable_backtrace" = "libunwind" -a "$backtrace_ok" = "false"; then
-diff --git a/meta-networking/recipes-protocols/frr/frr_10.7.1.bb b/meta-networking/recipes-protocols/frr/frr_10.7.1.bb
-index 6e238fc7bf..d0ddf2ea7d 100644
---- a/meta-networking/recipes-protocols/frr/frr_10.7.1.bb
-+++ b/meta-networking/recipes-protocols/frr/frr_10.7.1.bb
-@@ -13,6 +13,7 @@ LIC_FILES_CHKSUM = "file://doc/licenses/GPL-2.0;md5=b234ee4d69f5fce4486a80fdaf4a
- SRC_URI = "git://github.com/FRRouting/frr.git;protocol=https;branch=stable/${@oe.utils.trim_version('${PV}', 2)};tag=frr-${PV} \
-            file://frr.pam \
-            file://0001-lib-Don-t-use-paths-in-bison-output-defines-directiv.patch \
-+           file://0002-configure-Only-try-the-OpenBSD-libunwind-location-on.patch \
++diff --git a/wrappers/egltrace.version b/wrappers/egltrace.version
++index 0e7e62b..f4154be 100644
++--- a/wrappers/egltrace.version
+++++ b/wrappers/egltrace.version
++@@ -1,7 +1,5 @@
++ {
++     global:
++-        _init;
++-        _fini;
++         egl[A-Z]*;
++         gl[A-Z]*;
++         dlopen;
++diff --git a/wrappers/glxtrace.version b/wrappers/glxtrace.version
++index 0546a05..68cd8d1 100644
++--- a/wrappers/glxtrace.version
+++++ b/wrappers/glxtrace.version
++@@ -1,7 +1,5 @@
++ {
++     global:
++-        _init;
++-        _fini;
++         gl[A-Z]*;
++         dlopen;
++ 	_exit;
+diff --git a/meta-oe/recipes-devtools/apitrace/apitrace_14.0.bb b/meta-oe/recipes-devtools/apitrace/apitrace_14.0.bb
+index cb5ee92e04..729c8be91d 100644
+--- a/meta-oe/recipes-devtools/apitrace/apitrace_14.0.bb
++++ b/meta-oe/recipes-devtools/apitrace/apitrace_14.0.bb
+@@ -8,6 +8,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=aeb969185a143c3c25130bc2c3ef9a50 \
+ SRCREV = "18cfd388ac47a9e00978b34d6c20341f3e2cdb56"
+ SRC_URI = "gitsm://github.com/${BPN}/${BPN}.git;branch=master;protocol=https;tag=${PV} \
+            file://0001-zstd-disable-the-x86-64-BMI2-assembly-fast-loops.patch \
++           file://0002-wrappers-Do-not-export-_init-and-_fini.patch \
             "
- SRCREV = "f8c0b08dcb0c78f9e42b9b86ae70b049e4e617c1"
 
+ DEPENDS += "zlib libpng python3-native"
