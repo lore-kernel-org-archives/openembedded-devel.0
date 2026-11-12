@@ -1,59 +1,60 @@
-Received: from mail-wr1-f47.google.com (mail-wr1-f47.google.com [209.85.221.47])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.7013.1794520739710039062
+Received: from mail-wr1-f53.google.com (mail-wr1-f53.google.com [209.85.221.53])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.7036.1794520742647735562
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 12 Nov 2026 13:59:00 -0800
+ Thu, 12 Nov 2026 13:59:02 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=dWiGspAS;
- spf=pass (domain: konsulko.com, ip: 209.85.221.47, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-wr1-f47.google.com with SMTP id ffacd0b85a97d-48e1d0e5dafso826584f8f.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 12 Nov 2026 13:58:59 -0800 (PST)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=ZOXtL5uf;
+ spf=pass (domain: konsulko.com, ip: 209.85.221.53, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-wr1-f53.google.com with SMTP id ffacd0b85a97d-490d59c3edaso148458f8f.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 12 Nov 2026 13:59:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1794520738; x=1795125538; darn=lists.openembedded.org;
+        d=konsulko.com; s=google; t=1794520741; x=1795125541; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=b4hAGVYafDNi2X+pXqluR312b1LonI2PQPj6IjITtgo=;
-        b=dWiGspASQeB5iwKc+kZ67SSZzivs66iAvnPztjGt0dQyiisvLkaZCW6akiEoBcYg95
-         IVKGrTZrAv2r2LHJfdF/YaTl7F7O/h/InAdaDahSJia4DS5s9QEi4rMmjIfVCIzXMIbS
-         UE23MaeHIVdejIR1oiDa/lJSxjHC8ebyTKpxc=
+        bh=DSAKyFxQQpPy0LQXMM++2tU2xmypqRYrY5LwViy6tJ8=;
+        b=ZOXtL5ufwCcB321IahJLRgEbu1zJuk87DBHhS4ZVZTAiAPeh21Q5ztK0DlEJnVW5nA
+         fIbfqsUE4IYw6CSXmM0y0TRVocuXh2CQhLnrz7E1BQrjvStZdzrReAVFJt1lvDJh/T9L
+         4sxRc/EfgZuBRXiRNDq9mvMijJvGHpHZhpBZ0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794520738; x=1795125538;
+        d=1e100.net; s=20260707; t=1794520741; x=1795125541;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=b4hAGVYafDNi2X+pXqluR312b1LonI2PQPj6IjITtgo=;
-        b=Apfap04WvNZYpG7akFu2N5TTkDVjiq2Gv3AjP+INNLDKpSRW9bjWM7ivyzgw3x5KKv
-         5UDX7S+AOe4dcnNYvK1suczjp/T/94kwTFgegOQ0la3OsQxbCOLQH7ZYgpNONaUqS2ah
-         v/VBWJJjA0x+W151EoKR1I88SQ8quE8qAjEg9INORHHvSIeSlrRdV97DGX57Eli6Fwcs
-         zWX8hN2l5aVveS0CxJpla1BOaAEWxUbGLyXSKa04YCMk+PwxN7lTZtzINgWDiSIVlN71
-         C7eBMqPLs3kBqpGRr2vfL3vtffEnyhwyg+a9j7ldatjfXsOC1nqU/sehmeQjTFAtDYbP
-         FH7w==
-X-Gm-Message-State: APuU4Z8azhLKJhwzDrVDTeHZBFgJ6xZU+aLy1q4sxyZyt/s+qBde6PSZ
-	A/0hYsm95bEYX3Obg+kpW8d6fsDM+e38yAc0CwcQEX11/83l4mi5ttVc793wG2nDSa5eYCCNm5b
-	gDVpe
-X-Gm-Gg: AYBFou1CUiMzYWdDlrtYFyd9cKUzDxYUcdvBfeE41klw9sdm0Oj38ruWJLvowkBEyCO
-	q7SEE00vpSbj0HgK2iJbbKtvTMQp8oY+HAseziCuC5nuhY6elWfZB+GH8nPotU1x/3uzl6IFkl0
-	LBph9bTzLum9Q7HfZlGGlUWVz2byZV9j/PwndyPRPnK93QrPaITY9s8Mt4Tyeb0C32JdhqDWBVS
-	a7qbyU+T31c0vAfm2NZTx8oSF36lSoOEkVjPZvlBtScUdrSHPaUw0pIpfU65xts0WF9XfDLTl1K
-	576wPDB2CbkZ/kK/wXc6uzfPT7LkZRppCbb/jujBh3c6iVGjJI+BK+dEnkpNjDDsrsH4Y4tDSN9
-	5elJa4flTSjjfItyPqdmn/KUjLP8weIYsfCuqw2zODVua7A4sHCo6aUKuLcI3jJflJndrNBWmav
-	OXS/7i63+z3iz33hQA4tf7lzMdUEw3LgKRFcp/DlB9AhOayzVXWzK3tGsniQtqE5p1TcSJrYl3H
-	H4oj2tag0s+QxRDPBGfMGanUCdO0zqTV57lrU6D+/dP9lJaOV84HHVVUd7P1DsPoGiJhjeT7JXF
-	mvjCjE/KZd6furLc55S6r+b2xiu+wrz1hpVIZ2kjzW/ROslEXWaZM2+HpdaYPvx2wioRWkebJgI
-	WJ3+NnT6hlcmNjxLF2kJXDYs3q7fiq0cQT1wgS6jOjdcaXGBP2XtPTQ==
-X-Received: by 2002:a05:6000:288c:b0:49b:f7e8:6f3d with SMTP id ffacd0b85a97d-49bf7e86f6emr5041166f8f.18.1794520738060;
-        Thu, 12 Nov 2026 13:58:58 -0800 (PST)
+        bh=DSAKyFxQQpPy0LQXMM++2tU2xmypqRYrY5LwViy6tJ8=;
+        b=nnfp6h4gu68D7ZS0Am3XiM8Yj0TasXrvscy4vpzGk1aTc8cyZoXOo0Yuj6c6MtUhQg
+         t+PDun2ZUPmsSOD2Ej3qCoKJc11NETel+TJHU6wtwJUP1GZJeKUy3cqDKBZG8/LgZG/N
+         vp4z6Clty66u6yonVQdbjEnHQwnx2wuFFOh8JlCQtnTAwya5r0oJaSzJadxSbkoFc8d6
+         0dMwFEjaL3RRjg0auPyoLtYwO6O6K2YenWkPZP04App6s1iDRE4VoCuAuzbBA9sOeObW
+         7dNnkWDy7nV1DdZgkCNNr2Of8FURuw2mvs8bOHh1lw4a0cVGWJ6IL7nbZcU/KOeZexFE
+         wjdg==
+X-Gm-Message-State: APuU4Z+9yxd4KwQeNp45Sw736oI6mfc7GrLYSwAJFEG2KXqdHcDkPVwz
+	E4DnUBRPV7jcIZQY8r+mkglrhVdHtl0mDLgHvCtQclwxgdY8tn4hxxAAd2QHQfCKcq7xHvrovkQ
+	eJPvG
+X-Gm-Gg: AYBFou1GIEN9+YBzsjjAAS9GFOfxlipk0kV2g5c/iZaPY5NVWCXpAr4FUFRv8Ltr7/7
+	WRF0FZZjOfuaZBJRtTv7ZHx+xC1ZyjisOLWMQ8PvoYVbj4Q3TY6Ttfn8vzZxUxyajaQRV9vL3BI
+	TQcdwuHanqYF5gGl0NqZ66wc9r8SDuNLfTAg98EXDb9JP8zfZB/Z8eq0Hv5m+MRJMogb+jFAgrX
+	+Ru0OYWNUOQhiEomWABIgg7r78j0dCO7g1WIGPuiSYjkNN5pvOqwl5kGxQWd9Y4ofesqq62TG4t
+	9jmhPe4m51Sp0Eg4ADGbM5uXw6ZOWRY/Vs4N68BMuXCpiTM/BsOH4tvXUtOueY/DzIuL4SixcL7
+	02YV8dSGdlCFjX9tFtk2DEg1UsmkvpmRRG5GLsTltFgmn7YhqlZT1f4GCN4kWeKuo/k7euqfzmR
+	BZgnuckxdqkV0xYGRyWoDpkI7fjbhXJI6uz+znYcAli25AZa96YRM9o1pZuZLk6ftdTdWtnUhuS
+	4yNLkI7rbHUQbC8YDzv3BD54xAR8L5yUbcJxSo0f5tU1SclviIrYwvsuFGt38r2nmW8JfuvBSq6
+	T5SO7rsK5usxEjUKH16suYGJrQW3gJw6j7SggmUWh/Y0ATbzYdyU61Aw1B8ZZSP6WPGK9uVECWJ
+	NrpYjJYiaucaaENQ3ZkPGbKT69acPa2LpRuRMNB1EuPMfR2AAI+vvhQG9K930AN3mykHMUrA5ZG
+	U=
+X-Received: by 2002:a05:6000:4718:b0:48e:d7c:4bc3 with SMTP id ffacd0b85a97d-49b0287cd7dmr8330013f8f.21.1794520740940;
+        Thu, 12 Nov 2026 13:59:00 -0800 (PST)
 Return-Path: <leon.anavi@konsulko.com>
 Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-49c77393700sm1043896f8f.18.2026.11.12.13.58.56
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-49c77393700sm1043896f8f.18.2026.11.12.13.58.58
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 12 Nov 2026 13:58:57 -0800 (PST)
+        Thu, 12 Nov 2026 13:58:59 -0800 (PST)
 From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 3/5] python3-cmd2: Upgrade 4.4.1 -> 4.4.2
-Date: Thu, 12 Nov 2026 23:58:50 +0200
-Message-ID: <20261112215852.3336380-3-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 4/5] python3-cucumber-expressions: Upgrade 20.1.0 -> 20.2.0
+Date: Thu, 12 Nov 2026 23:58:51 +0200
+Message-ID: <20261112215852.3336380-4-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20261112215852.3336380-1-leon.anavi@konsulko.com>
 References: <20261112215852.3336380-1-leon.anavi@konsulko.com>
@@ -61,46 +62,73 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Thu, 12 Nov 2026 21:59:04 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132219
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132220
 Content-Type: text/plain; charset="utf-8"
 
-Upgrade to release 4.4.2 with security fixes:
+Upgrade to release 20.2.0:
 
-- Fixed shell command injection through file names in the edit
-  command and Cmd.run_editor(). A file name containing shell
-  syntax such as $(...) or backticks was interpreted by the
-  shell instead of being passed to the editor as-is. On
-  Windows, run_editor() now raises ValueError for an editor or
-  file path containing a double quote, which cannot be passed
- safely to cmd.exe.
+Added:
 
-- The persistent history file is now readable and writable only
-  by its owner (mode 0600 on POSIX), since history can contain
-  secrets typed as command arguments. The permissions of an
-  existing history file are tightened the next time history is
-  saved.
+- [CPP] initial C++ implementation.
+- [Dart] Add a Dart implementation of Cucumber Expressions
+
+Fixed:
+
+- [Java] Fix project url
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../python/{python3-cmd2_4.4.1.bb => python3-cmd2_4.4.2.bb}     | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-cmd2_4.4.1.bb => python3-cmd2_4.4.2.bb} (87%)
+ ...e-dependency-uv_build-to-0.13.0-0.14.patch | 23 -------------------
+ ...=> python3-cucumber-expressions_20.2.0.bb} |  3 +--
+ 2 files changed, 1 insertion(+), 25 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python3-cucumber-expressions/0001-chore-deps-update-dependency-uv_build-to-0.13.0-0.14.patch
+ rename meta-python/recipes-devtools/python/{python3-cucumber-expressions_20.1.0.bb => python3-cucumber-expressions_20.2.0.bb} (72%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-cmd2_4.4.1.bb b/meta-python/recipes-devtools/python/python3-cmd2_4.4.2.bb
-similarity index 87%
-rename from meta-python/recipes-devtools/python/python3-cmd2_4.4.1.bb
-rename to meta-python/recipes-devtools/python/python3-cmd2_4.4.2.bb
-index e3e8d075e6..577eaff41c 100644
---- a/meta-python/recipes-devtools/python/python3-cmd2_4.4.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-cmd2_4.4.2.bb
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=f2a861642858e0858af9dd4e4716bae0"
+diff --git a/meta-python/recipes-devtools/python/python3-cucumber-expressions/0001-chore-deps-update-dependency-uv_build-to-0.13.0-0.14.patch b/meta-python/recipes-devtools/python/python3-cucumber-expressions/0001-chore-deps-update-dependency-uv_build-to-0.13.0-0.14.patch
+deleted file mode 100644
+index 5a9796a8b3..0000000000
+--- a/meta-python/recipes-devtools/python/python3-cucumber-expressions/0001-chore-deps-update-dependency-uv_build-to-0.13.0-0.14.patch
++++ /dev/null
+@@ -1,23 +0,0 @@
+-From f643f89f9150dcea8c97c8eda989baeef8a2b24d Mon Sep 17 00:00:00 2001
+-From: "renovate[bot]" <29139614+renovate[bot]@users.noreply.github.com>
+-Date: Sat, 10 Oct 2026 12:26:36 +0000
+-Subject: [PATCH] chore(deps): update dependency uv_build to >=0.13.0,<0.14.0
+-
+-Upstream-Status: Backport [https://github.com/cucumber/cucumber-expressions/commit/b6e45a7ee46490996bf4a150832b0a4f0b75bad1]
+-Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+----
+- pyproject.toml | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/pyproject.toml b/pyproject.toml
+-index 2fb5f57..e8fc3a5 100644
+---- a/pyproject.toml
+-+++ b/pyproject.toml
+-@@ -1,6 +1,6 @@
+- [build-system]
+- build-backend = "uv_build"
+--requires = ["uv_build>=0.12.0,<0.13.0"]
+-+requires = ["uv_build>=0.13.0,<0.14.0"]
+- 
+- [project]
+- name = "cucumber-expressions"
+diff --git a/meta-python/recipes-devtools/python/python3-cucumber-expressions_20.1.0.bb b/meta-python/recipes-devtools/python/python3-cucumber-expressions_20.2.0.bb
+similarity index 72%
+rename from meta-python/recipes-devtools/python/python3-cucumber-expressions_20.1.0.bb
+rename to meta-python/recipes-devtools/python/python3-cucumber-expressions_20.2.0.bb
+index 8f397e6c69..3a1d901963 100644
+--- a/meta-python/recipes-devtools/python/python3-cucumber-expressions_20.1.0.bb
++++ b/meta-python/recipes-devtools/python/python3-cucumber-expressions_20.2.0.bb
+@@ -4,8 +4,7 @@ HOMEPAGE = "https://github.com/cucumber/cucumber-expressions"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=2b2bb1048cefa23c375b8ce5f13313ea"
  
- DEPENDS += "python3-setuptools-scm-native"
+-SRC_URI += "file://0001-chore-deps-update-dependency-uv_build-to-0.13.0-0.14.patch"
+-SRC_URI[sha256sum] = "0d216ec26e36c71b3e5643f2e72c41f9b266ef04eaa0c7e47a6e3b2caf523b1a"
++SRC_URI[sha256sum] = "f526dda8f3af10642afd5293ffdbe7b471d3c509633b88af03d05f62b387d294"
  
--SRC_URI[sha256sum] = "e8ef3f9bf2fb8f72acddaf934b97c49d14c6ae2be7271c547b97593abdea6c1e"
-+SRC_URI[sha256sum] = "677696e293a1a6a310425d3d52e470518078918585d650fa7eff10635ef4256a"
- 
- inherit pypi python_setuptools_build_meta python3native
+ inherit pypi python_uv_build
  
 -- 
 2.47.3
