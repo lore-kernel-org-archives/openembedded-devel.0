@@ -1,122 +1,162 @@
-Received: from mail-yw1-f182.google.com (mail-yw1-f182.google.com [209.85.128.182])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.3462.1794444355197236389
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.4516.1794448075383306786
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 11 Nov 2026 16:45:55 -0800
+ Wed, 11 Nov 2026 17:47:55 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=jvmPr1JN;
- spf=pass (domain: gmail.com, ip: 209.85.128.182, mailfrom: schonm@gmail.com)
-Received: by mail-yw1-f182.google.com with SMTP id 00721157ae682-8b3b31a6290so7849227b3.2
-        for <openembedded-devel@lists.openembedded.org>; Wed, 11 Nov 2026 16:45:55 -0800 (PST)
+ dkim=pass header.i=@qualcomm.com header.s=qcppdkim1 header.b=dK6ofYtd;
+ dkim=pass header.i=@oss.qualcomm.com header.s=google header.b=hx4JUFYb;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: oss.qualcomm.com, ip: 205.220.168.131, mailfrom: ricardo.salveti@oss.qualcomm.com)
+Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6ABMaECi3703223
+	for <openembedded-devel@lists.openembedded.org>; Thu, 12 Nov 2026 01:47:54 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	content-transfer-encoding:date:from:message-id:mime-version
+	:subject:to; s=qcppdkim1; bh=tTu3SZxYAQTqqfVkK7Irjbw0iAjiBedIQ9Z
+	ZJR65Nnk=; b=dK6ofYtdva6W1ifCYrU901IsLrKKVRqGqCDiogVNEgxuGPRS8yh
+	j4A3711J7WeaxYgvHmE+qxBUUHrXBiCnQhxGDWBAQpY5Ezo2SK/A/Ef0Hm3T4xFq
+	h1bzXXwbSYiDRAmbdfYcsc+tzyGrd4SyomylM8TqWhgkUIJJAslF8sJgnl0mbnAS
+	T9UGwQ3X07AkBtAeUc8HuAFeGwR2LfJaReiFFWN3wQM4gK3+UoPk55IVbjR0EbK/
+	NDPYHdTSacpVjI8AOhdYfKi/DVojXNMwUyXmHZylOx2QjoKTLPjzbJSWOykxuyb8
+	hBLxJOdYAMaknW1kCmxKDoKR1eq/fza7cyw==
+Received: from mail-pf1-f199.google.com (mail-pf1-f199.google.com [209.85.210.199])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hvgjdmsgd-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Thu, 12 Nov 2026 01:47:54 +0000 (GMT)
+Received: by mail-pf1-f199.google.com with SMTP id d2e1a72fcca58-8b60129a46eso5030163b3a.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 11 Nov 2026 17:47:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794444354; x=1795049154; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=6OSnTr9Dybu3fdU6MEE5JrXVNiVJsEadRvW3mJCLg8Y=;
-        b=jvmPr1JNaYHOIm3OCZBCmAv/By41mAKt5cItbcUKhAGKcIm6XOyHIYagd3Ba3YOd/r
-         6wvBP4FwsTGtjl3DSCrjG4htgX0MVT69M5oa7SD5X8PBHnSXudtyoJEC8IrAiU+w7XMr
-         /GeMawVO8gLvCkSmUl94lBa5f6nvOU12p0nHKyaHQY4O2CSoRWS3uZLbxXK96/q+GFaa
-         ZpyenfWfVz1R1npB1ZTrILt68d1UC8z3MwO3QRbTym5jMRDkUttBut+Yo1jVjs9Ew+Xv
-         sgaAjOU7nXcD0GYVFVFIKLAurBWU8N58DFokn72AZ3dajcGEqg6kf5HZtehT2L6OqINn
-         vyWA==
+        d=oss.qualcomm.com; s=google; t=1794448074; x=1795052874; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=tTu3SZxYAQTqqfVkK7Irjbw0iAjiBedIQ9ZZJR65Nnk=;
+        b=hx4JUFYbvpgYi9s83r65mTlh/Dc7KYn12sdlNLCdN9la3Nzcf9n98nrcjkoz+PWZyK
+         c4nS79pWAnNtElpcS8w/jNSbuaK0B2Xf6KtrTbQ6hndFLf2i4EeJJuOoO8GDgh0xsoPU
+         R7Cs+BMlqwathELJof+UsWywolQxDYZWoqOaBc823f32OdbMhG7cv31m97yUdnsNDQ3l
+         3N07xfYNPWZnV6p2hk4Iz2Ht3eAjbVfAEAGHVP4Z1YntQxFOSw9Z+Q/BlUac3pWMGgy+
+         VkA8ZY38RZ+6wLVET/yRoSGMUefhfenSGMcTjjDJMZsRoB35mdbDvWvs8/qbtHssg5vg
+         NmjA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794444354; x=1795049154;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=6OSnTr9Dybu3fdU6MEE5JrXVNiVJsEadRvW3mJCLg8Y=;
-        b=tlZSwCw2/J62mFbiicTAz3vNaNFrQr2s28TcAiDXwYQZscf64fYa63sxMEWYuGeaCS
-         REoPzC6wBIjD2X9e9sXDy0SITFfErPaDYDEmIusQOEfDeB9MHRkUD6D9KHBPmMMJcoiL
-         202Mjs4ZK0uIB67yQmxfQVYW7yueTsI/Lpev2pbwdmZzx9mwOpzceYMbe6ZLMoETiVcM
-         WZMhYJgFfxz00dyuSBfWXNQRcHWXAnXvRizp8F36U5+sJ1+rgNfC/+rddiEMt5jryQfM
-         45oZteSbAktiTrrFc5qcMPfhlA401E6ql+6Og9TIbFKdd+iot9V0Yd7TbIr7lgqXFf0S
-         6WYQ==
-X-Gm-Message-State: APuU4Z80BtG5TJEPIffnUCJIRKKCcsFVhIbPvOod0dTNcl44xsQZOeJ2
-	SwiLwmhZSqNgJ9vLYx89g4IDnykmyq1vHu1dmWlhGOJfN31MVaOYekfrejIqtYGPzcQ=
-X-Gm-Gg: AYBFou2hyiNTRimZo4AcrT/0m9IAeOhYkMKEyMWrSKrrpbmN5GXGOIHw+uGVuNCEHK4
-	hXIFm9Olpb/os88BfP7gZIGtUYLIo931GKy6YCj1jmj4T5db49FLd2+lolEkW4T06EUxdRuoska
-	wgTsSaHIEaOCON+X/h+ld6yASHQESWCPcORAo59WNPEfBzuIIbqb9Q2RJpUNgSi2+FU9xIEbZQF
-	4SmNLTWGlk+LOAtCGApahZuySqCpKPrPri/H0ZeR9hVIob1R/ww9nMQoE7dCq5DmGLlJpqs4dBi
-	Leiv9F1E7Uu7NurDhzS+14ArsfXsI5zW2PIsEOY7BKc0u4T7NVPp9tbbLyuoqoS94R0+sJCk9pV
-	Tntg6wfd/mbDjAJ24onSmrccRpeXEZwv8nhUhhMztJlMfkuV/uQ4HVC1Bg+k3fbL3QYhvDtlpJD
-	+Se3qI0WpfcOccDNICnt7AUH08NxHcDTFko3nkbmA8LYRbUaq+57P5X7cW9vyceQe18MH2ADnM1
-	FZD9BdqmOfILa/winrz/UDBZpRjGbqMPssi3VK32o4TmOzk1vo71VGfH9teTc3IzjjBajiMcsD3
-	rzyppPe6YeDkYPaHDnafJkTMzo7Pc1YRxo9OYAOf0kh4f0Mt+x6ciJQhvJLG9wfBWZcdVi5oglm
-	Uek7sX5OPdvUOF24HdA/3DNsCRqMfgwiWUD4b15JbXhLqyhxf9ADv
-X-Received: by 2002:a05:690c:39d:b0:8b3:22c:b40e with SMTP id 00721157ae682-8b3a7db5711mr26549587b3.5.1794444353908;
-        Wed, 11 Nov 2026 16:45:53 -0800 (PST)
-Return-Path: <schonm@gmail.com>
-Received: from localhost.localdomain ([71.3.193.106])
-        by smtp.gmail.com with ESMTPSA id 00721157ae682-8b39343e9edsm57111337b3.36.2026.11.11.16.45.53
+        d=1e100.net; s=20260707; t=1794448074; x=1795052874;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=tTu3SZxYAQTqqfVkK7Irjbw0iAjiBedIQ9ZZJR65Nnk=;
+        b=KbEikQNLJuFceQiuVrsT1THKvvBvt3Tpna5nzFzYJy2yHhG0HcB2mW/SMNtJJUnZh5
+         Us+ITOS2h5WluGh4WqfhE03dVcSs+wvWtsG/8gAHhpExv5idUfCNvyJIc82lg1PhKc9U
+         Q8eGyoXmpw94Xp70AJsDWeHNaNzjJm17Clumtk9E62vRXdk26nI1qFbTbj0YH+MVSgwM
+         qb8KW2EbgI87J04eGe4Cx3tFIPnKxZIul1KgUi+P+OzX2SN/6yZ3BBcr0B1wZQCXdkg4
+         fgBAp35L7jbVDINExMlDC/V933nDXA3Cdg8k7MCKspplwd6rLuFhTageNNySv14iJeir
+         rmlw==
+X-Gm-Message-State: APuU4Z+Cmnu8S2FieDZEJKY+vqRsRWgY8/uR9JaBosKf1UIcBWXxtF8z
+	pUN2dyxQs2olKWBBLvoVjJiGrA/Zx7w83SekwNDGiwEtO7D8fm+mUhXYrn3uYx5CH3OJmdQBo9w
+	CWF0wxLHm63RTWRxhykphv/Cl2qwmDJhgx3ilYJLNszX8JCjRjoXw991eUGQ9NqzNif6uJNtEqV
+	IojHSMivN0IFsQopBaHgE=
+X-Gm-Gg: AYBFou0x/k7gXMlM8z0KW3DV9U936Gagi3THf7FmYRb+r77lSa/OWFW3w2vdtSPH6y2
+	7+vp24wjpQsa11g9HPXaQyikbt+DyajVwef3c06yzwwuVUW/yQjx4kZQnPdCQiTX3s8F0vYbOHY
+	sI7nb8aSvEwY4X1EPFsIOFGkjikWQ9yr0IsPSLuMlX5U/T37ZBXAozKqg11bwX5ae7OOcWMqnyB
+	W46zEDAPI34j32Aq4OXsVk2xgR0hY5Pg1idMb+gdePycM1ZYaPljPxe265A27eqKl6lbW3g8gmg
+	pNjDN2fQFBg0ya3EvQaa2IhGAmtLYUCsXemQyBi1czw55/TYnmXLItiTL468Jyjy9hUL0HDQ1Ti
+	h22zTm5CgI7I4tRvW1Z72MmEJ1+uIyQcoDIFu6W1nZ3pvUmjIMBqWhp7gn1QDas/H0JM1zjjDaG
+	W7Zi53cdNbTQIXpq+R3SDakFFUxnFaMogQi5jLA5atl1ALZu5C2hVDtrtQKqZH/IXIU5VBFrKxj
+	YgepDbx6Whwq7k=
+X-Received: by 2002:a05:6a20:6a06:b0:3ef:cbb4:4dc3 with SMTP id adf61e73a8af0-3f2fa09c4a1mr4568394637.5.1794448073694;
+        Wed, 11 Nov 2026 17:47:53 -0800 (PST)
+X-Received: by 2002:a05:6a20:6a06:b0:3ef:cbb4:4dc3 with SMTP id adf61e73a8af0-3f2fa09c4a1mr4568367637.5.1794448073018;
+        Wed, 11 Nov 2026 17:47:53 -0800 (PST)
+Received: from ip-172-31-25-255.us-west-2.compute.internal (ec2-35-83-207-173.us-west-2.compute.amazonaws.com. [35.83.207.173])
+        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-cdd8d699b93sm1973715a12.14.2026.11.11.17.47.51
+        for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 11 Nov 2026 16:45:53 -0800 (PST)
-From: Jason Schonberg <schonm@gmail.com>
+        Wed, 11 Nov 2026 17:47:52 -0800 (PST)
+From: Ricardo Salveti <ricardo.salveti@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Jason Schonberg <schonm@gmail.com>
-Subject: [meta-oe][PATCH] nodejs: upgrade 24.22.2 -> 24.22.3
-Date: Wed, 11 Nov 2026 19:45:48 -0500
-Message-ID: <20261112004548.4996-1-schonm@gmail.com>
+Subject: [meta-oe][PATCH] cpupower: split cpufreq-bench into cpupower-bench
+Date: Thu, 12 Nov 2026 01:47:40 +0000
+Message-ID: <20261112014740.789894-1-ricardo.salveti@oss.qualcomm.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-Authority-Analysis: v=2.4 cv=E7tYNqdl c=1 sm=1 tr=0 ts=6af51aca cx=c_pps
+ a=WW5sKcV1LcKqjgzy2JUPuA==:117 a=P2/bgbqRawb6I1+7fxbs5g==:17
+ a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22 a=EUspDBNiAAAA:8
+ a=C5qg9FS71YztyAyyvFoA:9 a=OpyuDcXvxspvyRM73sMx:22
+X-Proofpoint-ORIG-GUID: VZ_vITydcdFBe49mtG3EFjrfJeT70C32
+X-Proofpoint-GUID: VZ_vITydcdFBe49mtG3EFjrfJeT70C32
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTEyMDAwNiBTYWx0ZWRfX6fMc57oWPa8Z
+ UUwj1zNagj2+VBOJ4tzzU9lUXLrNJfe6XMdEfXA7y364o1LYrbmiVFIZuBtUbt4zqpw3atIYmA5
+ utXcn/FLQu3wm6UjJ/4yprVhHoOJ/B3T/7MRFFUC5oNalpcYAfqOjZeYFzr3Wc9Z6lKvo/NbdgD
+ 1WU2tBGzvDNUC1/QKj7MRPYgmyTv7kPXWRwC9WpejCvZ1RQHmOl9ZM7GLqbucwWjtWKG5XrSX71
+ JMAFiq9j1AJGEmC3zWPto4GYYYbkm44Zmipsi6h1o369flXzYJwenXtYV4qUyGhUw3d5RQR/qWz
+ bQd2KoD3P9wQYhXKBv8AAD+PuBloDDYYNWmw/2fnhYMh0S3YFCnVIyY6mV/eXVKpfwGcqffU6PV
+ Npd2+8cnG3HCqQKDgkpPcZkVzV+h9vMbbmMmARMLTV+IA6oecehEYxhhpMbs45HCd7mJOe42ETF
+ +kgwVEQUdhEwSHuS7qw==
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTEyMDAwNiBTYWx0ZWRfX/n2PgyrqnwxJ
+ P2qI7lC5BRIxoOkD85KVgGPfzYIpnBFaxhRc/ZzfGQ9KiNcVW5+Rv2Qv8SLw16SSAwC5UTatsYc
+ 7sC8GQy0n6QT+3MQUux3AVDjp2ZH6u8=
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-11-11_06,2026-11-11_03,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ phishscore=0 suspectscore=0 priorityscore=1501 impostorscore=0 adultscore=0
+ malwarescore=0 clxscore=1015 bulkscore=0 spamscore=0 lowpriorityscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611120006
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Thu, 12 Nov 2026 00:46:02 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132142
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Thu, 12 Nov 2026 01:48:04 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132143
 Content-Type: text/plain; charset="utf-8"
 
-This is the November 2026 security release.
+The kernel's cpupower Makefile builds cpufreq-bench by default and
+installs its cpufreq-bench_plot.sh helper, a bash script, into
+${bindir}. That makes the whole cpupower package RDEPEND on bash,
+which pulls bash into images that only want the cpupower tool, such
+as busybox based initramfs images.
 
-  7 high severity issues.
-  6 medium severity issues.
-  3 low severity issues.
+Move cpufreq-bench, its plot script and its configuration file to
+cpupower-bench and carry the bash dependency there. Images that use
+cpufreq-bench now need to install cpupower-bench, so switch the
+benchmarks packagegroup to it.
 
-High severity issues.
-  CVE-2026-123863
-  CVE-2026-123864
-  CVE-2026-123865
-  CVE-2026-123866
-  CVE-2026-126051
-  CVE-2026-123872
-  CVE-2026-123874
-
-Medium severity issues.
-  CVE-2026-123828
-  CVE-2026-123867
-  CVE-2026-123868
-  CVE-2026-123871
-  CVE-2026-123877
-  CVE-2026-123875
-
-Low severity issues.
-  CVE-2026-123829
-  CVE-2026-123862
-  CVE-2026-106071
-
-https://nodejs.org/en/blog/vulnerability/november-2026-security-releases
-
-Changelog: https://github.com/nodejs/node/releases/tag/v24.22.3
-
-Signed-off-by: Jason Schonberg <schonm@gmail.com>
+AI-Generated: Uses Claude Code
+Signed-off-by: Ricardo Salveti <ricardo.salveti@oss.qualcomm.com>
 ---
- .../nodejs/{nodejs_24.22.2.bb => nodejs_24.22.3.bb}             | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-devtools/nodejs/{nodejs_24.22.2.bb => nodejs_24.22.3.bb} (98%)
+ meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb | 2 +-
+ meta-oe/recipes-kernel/cpupower/cpupower.bb                | 5 +++--
+ 2 files changed, 4 insertions(+), 3 deletions(-)
 
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_24.22.2.bb b/meta-oe/recipes-devtools/nodejs/nodejs_24.22.3.bb
-similarity index 98%
-rename from meta-oe/recipes-devtools/nodejs/nodejs_24.22.2.bb
-rename to meta-oe/recipes-devtools/nodejs/nodejs_24.22.3.bb
-index fc4eb60ebd..f9b4eea38e 100644
---- a/meta-oe/recipes-devtools/nodejs/nodejs_24.22.2.bb
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs_24.22.3.bb
-@@ -36,7 +36,7 @@ SRC_URI = "https://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
- SRC_URI:append:class-target = " \
-            file://0009-Using-native-binaries.patch \
-            "
--SRC_URI[sha256sum] = "8fe2ec1723bb9f8d0b683907c82708debbeda64af21cb2aa214c4241eed0a061"
-+SRC_URI[sha256sum] = "48ca3aa8a9b02133356922ef4fc80200e00598c80a4ef446f7c39a459222593d"
+diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+index ebd66425de..d01f889374 100644
+--- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
++++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+@@ -53,7 +53,7 @@ RDEPENDS:packagegroup-meta-oe = "\
+ RDEPENDS:packagegroup-meta-oe-benchmarks = "\
+     bonnie++ \
+     coremark-pro \
+-    cpupower \
++    cpupower-bench \
+     dbench \
+     dhrystone \
+     fio \
+diff --git a/meta-oe/recipes-kernel/cpupower/cpupower.bb b/meta-oe/recipes-kernel/cpupower/cpupower.bb
+index b453308770..e4e24e94ee 100644
+--- a/meta-oe/recipes-kernel/cpupower/cpupower.bb
++++ b/meta-oe/recipes-kernel/cpupower/cpupower.bb
+@@ -25,11 +25,12 @@ do_install() {
+ }
  
- S = "${UNPACKDIR}/node-v${PV}"
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
+-PACKAGES =+ "${PN}-systemd"
++PACKAGES =+ "${PN}-bench ${PN}-systemd"
  
++FILES:${PN}-bench = "${sbindir}/cpufreq-bench ${bindir}/cpufreq-bench_plot.sh ${sysconfdir}/cpufreq-bench.conf"
+ FILES:${PN}-systemd = "${sysconfdir}/cpupower-service.conf ${systemd_unitdir}"
+ 
+-RDEPENDS:${PN} = "bash"
++RDEPENDS:${PN}-bench = "bash"
+ 
+ python do_package:prepend() {
+     d.setVar('PKGV', d.getVar("KERNEL_VERSION").split("-")[0])
 -- 
 2.43.0
 
