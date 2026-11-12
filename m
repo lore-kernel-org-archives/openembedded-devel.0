@@ -1,65 +1,65 @@
-Received: from mail-pj1-f52.google.com (mail-pj1-f52.google.com [209.85.216.52])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.8126.1794465753929019162
+Received: from mail-pj1-f44.google.com (mail-pj1-f44.google.com [209.85.216.44])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.7986.1794465754719531940
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 11 Nov 2026 22:42:33 -0800
+ Wed, 11 Nov 2026 22:42:34 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=GjZOXr4H;
- spf=pass (domain: gmail.com, ip: 209.85.216.52, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f52.google.com with SMTP id 98e67ed59e1d1-3b17cf2fa0aso1571176a91.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 11 Nov 2026 22:42:33 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=t43Zqih3;
+ spf=pass (domain: gmail.com, ip: 209.85.216.44, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f44.google.com with SMTP id 98e67ed59e1d1-3b0e61a4decso2984545a91.2
+        for <openembedded-devel@lists.openembedded.org>; Wed, 11 Nov 2026 22:42:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794465753; x=1795070553; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1794465754; x=1795070554; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=1XAXsuSiYGwuYG3OmdpWgtvav2Qu7kHj5a6AX7l6Rvs=;
-        b=GjZOXr4HbHjSqtqkN9U/gHWJATVqap5+oagbWUZt7zgxaxK3WPQDy0+iFc6rzEqu5h
-         Q6PrQcltF6RwT14rRUxl7zkEzTNMMcaDjTn95Cofyvig8ysmhUmvQ4YJ4Kl3CQVZIAPr
-         S45fJhK/pohU47b9rlN6CIbbmtmicaXC5Kog4QPqwmgp2b7Hlh0JiibxH2T5McNxP3LK
-         QcNm0B/Z9fK27sTrBJiNuu+2Beus+ZuRaAwu5XG+7ZDawb1CF8LRJQ1Is9UmH/AN2baE
-         BGruxJcyUef2nHMyaeh+GN9E/aAu1PpBdA1ZkU1HtBhcXt12t5hJfatGqLx1xs6CoPHM
-         pwOw==
+        bh=B5xeQDPepjG1TmQ/2eQC0dQTft0IH4BC7wMhpSkYpaI=;
+        b=t43Zqih3EudS/h7pMESwHwgd91pSsaPzZpkTeUKy5UEq1EaJG1tL5Tdnw8NCj3mJ2g
+         uffXAWoV5OSm1B8XCMxvwOHbKQ6tgIJ8CyDCBXSmswlJCUFf8NdyUp1O/sWFu4HGJ7+T
+         HR4Ij+VhDIpwimJBMQZsuHvIK0veUBufgL06yklL/q1HXlTgUgTRxzPsSWCi8bpkmQUE
+         Ijadbdnmf0g/Xoqy37vC2hyHsJ4/baDA6SBbWnO0PF7OJgOJeHfZC5ztiysoz5Q1AZtf
+         Bz5auaO6wBoiCccOLM9Z2POZJnWkJnL9x61hwbt3rkmoh3uoN4/fjQPBwPLjoYsgQqvd
+         RN5Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794465753; x=1795070553;
+        d=1e100.net; s=20260707; t=1794465754; x=1795070554;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=1XAXsuSiYGwuYG3OmdpWgtvav2Qu7kHj5a6AX7l6Rvs=;
-        b=eejerqArD/Q2q5FaPOzoXzsIZ21cMHfLOFS7q+H6tIygGpVHKZ6uaNWfRG8BCWCOqH
-         tOIUAcX+/FEqg+RKjLEIRo+aDgSQ9cR5okHaJ1RaB+Afkgq9NKKP5pFilQ5RhZzb00j3
-         n6Wcr99lAYXGYHl7WoceaMsEuOYUvNCZGvvuyOb4tELRkqfTakpMf6yuvKPsTWl63umb
-         ScUXVKJkIHW9AndNqZAi9aYajUY71fgAcqw94NS3xLq/Um4xwhZcW0ZMRvAHX2VZUn+H
-         pp5req6p+mLgz91Nasy9nrl4iat5uKpA8hRhGCa/3aO7pGeWJYieuROeSJrk99oA19IM
-         4bYA==
-X-Gm-Message-State: APuU4Z/uQdWXhNQjdltxav5Tx6L3cPz64FBAcD8vSLdWmW9/u/7lS9DV
-	HMRqBvMxoI0BPMTvvRZGQIWgmPgeGSFOVsR5khbao1XMcvHsrzmB7e4qsi8lWyZLkRw=
-X-Gm-Gg: AYBFou2Q3vQ+w/f4UbPhLqk0zJxOMrBKqtK2k/r/IitrthoikP3ndOnS37tbGoXkdCC
-	HXWxfszgslnNsK0NG5Dhke6q5H2Nleb+4WM9ZPrtaOWTOjwggZptg5V/DWA5w//uSIZYyaObRt6
-	WgEo1ds5TFxR3alSmgEPpKaWR8XNeo/MbIJ21/4i95rWdJfhzCeg47EKp3tbAO6+x3p7v+5ntJu
-	zweStNIa6UekBmejjlFmt3INFySohBi2W/no+t9mfnOwxsL1VUozuc10bHBkY8MkUxmwvyXYwGY
-	W8cWNPsXjGFBatSx+uvYA42vSfWBOdCK8dRYx1DoOch/pHb2QeoxPhEPKilznm8tXCDHkxGCn8Z
-	DHU9wa3vvmy24GEBYaSr5N8nBor/uVeElGbMa3p8GUqxuKzmqTdLUkh3/MA9fqZqKrfr5b1qFtq
-	vUC3TEDKVbf4t3isCHPr6+KvflMTbO6yCKdzL7l9pscAtuZW+vDbLIVCsOBA4QyPn39YDiJtASi
-	Y/EiGAQrXO5te/87MfI3p9Fm3JntMg2U9MdZIjLcLWHCoxLW+894saydj+umkdlBO0zfraq1OCP
-	65ogOW7taUx7TbpiATsLILUAaMNrllsAYFMHGAnjiqIYoReMZpJZbABUD3ZxeVBuc8ciZJuPhci
-	3f/hVul1Bw0nqaoskPR0Q49jVFfkXrNLBRuHS2XSe9+9eMS+Zd7f2ronQLrwBhZ61wNi5X8FbPO
-	xROJrBflouZQWIWjTxqzL40qSGqT3MCG3esE13Nwce2qt2Zq9t0obgomnYKOqcLfKTvDeDSPoxp
-	VCfsL6rMkFP3nTaLHQCMNN5sWtyKVprVtgTBTciON2N0dqLnlFpF4UV8VuybMgDCzIowHqn0QOM
-	p3Jn
-X-Received: by 2002:a17:90b:2884:b0:3ab:e588:c2a8 with SMTP id 98e67ed59e1d1-3b182f83739mr4365552a91.64.1794465753081;
-        Wed, 11 Nov 2026 22:42:33 -0800 (PST)
+        bh=B5xeQDPepjG1TmQ/2eQC0dQTft0IH4BC7wMhpSkYpaI=;
+        b=UMvqDUtDLGjIdRkRWhHC5Ew4YXSt+vz6PnVxLG8v+t7g1OZ9R/KOuPXS5HxzW/wzq0
+         kitgXI3aJO+TIEWwWpzI9Y4EmemzGcZBE2geAhS7iTG+RCPNh+xQVrPkk+YtPqPbk1KE
+         xqrMIqPFAvvSpHis6Ax7Hok5r4rOBkaZGFjREAA+UsMju+RZ4n6MHFNeIADYHQV2LG/a
+         O7QXEuZB+wbodGLRsfZp6i4N2b1kkV1ibRyG43YVTf68cU/DR/JRtMFN/f9nrWQIXYF9
+         ecOxXaGx6qm3+A16IQaWlvUuxjXSgYU0tt3zCqWMImpn+Kyktjc5gQ3SovYVBYw2DmT2
+         stkQ==
+X-Gm-Message-State: APuU4Z8oT3xxXkm4gaKEzL7idRQLAXHBpXh3L2JFVv8bTk2IWHw5gY+W
+	/WYej1IYbgL1JYA7HwLZZEB1wxydClen0SdcSc9fbR03I3+jcWMfPhoHwmtW7XpEjBo=
+X-Gm-Gg: AYBFou1HstT91y4ZCgbkC+HIkyEuIN8nOqZavNX8oGi196UX8A5v3zMONrZVXXwMLwO
+	7cG3/y9uSoEagbojY+2eXButxvH9SFJxzK6I7D8/tscq+ptauWJjqqv7zA3R35dgUmlCf2yk/tF
+	8Df9bMG2+whQ9ANZcYqj5Is5V79o7GZdqJBpJtJGWCxLaKMKNWknM695/E3pbHTnc6cY3KKY9DQ
+	3qvRV/7WVFqvVdfCBjyMqMSBgHx1BhMUWHacfcj61VwLQHnpzP1OZHnaeYgp47Ujb1D2Xq19rIw
+	anV+QUv9KyogjHfRNN3/z+vkT0PHlJTwUtajuZTWoSiSH46k5GOh/uqxc+buWBjn5QWFhut2itU
+	fsbdWr+nvAnBJiqvWhQW4/m4SwKvJOyQGKlIJDERPDjlsCILq07j7eDDYA8K82c6VOwuucqyk9K
+	Xnw81Vuif4UwsqfgxzVPYyNugQqTtLGwLC2Xj6Hb2A/Q9H2JHKRtyrq2z3tYuUWxQqxZz7s6eTs
+	I2lOpsewdDHlfnRKJ2ujoQ4v6XtVu350NIoNdv4x+XE8iAr14YWOeMd3Ymrt6u6H3imMQTHGL5b
+	VKOqfaSr5JauNF87qWesecM1ITPkyxWIxWzzbdiYkS1n4HXzZEvF7IOOEzbTiPJ2ITbAGzBhOp5
+	gHS3FH7ivFfOHDu/7wLJ7GEqkYIAnUgRUYiXlCIX8j8Sp17Vu/ZY2bXxwktM6pkKzshQMzLGCgE
+	To/+kIpU6v1aFeMgQlzCflZjWxqiJkr/v8GUI+ln3Z25w7ABUH9riDUGdhg+YJibeyfIntxf0Ov
+	OZgoUKcTduuj2U0uCTAeOMwIbZlF+u9Yp5hdKGpzBq/08fcSV2k44TvqSQX/aFtoaGnWWJiY2Qg
+	+E+W
+X-Received: by 2002:a17:90b:4ecc:b0:3ac:a521:959 with SMTP id 98e67ed59e1d1-3b182edaefemr4398653a91.29.1794465754078;
+        Wed, 11 Nov 2026 22:42:34 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3b197c768e8sm2984715a91.11.2026.11.11.22.42.32
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3b197c768e8sm2984715a91.11.2026.11.11.22.42.33
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 11 Nov 2026 22:42:32 -0800 (PST)
+        Wed, 11 Nov 2026 22:42:33 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-networking][PATCH 04/24] nbdkit: upgrade 1.49.4 -> 1.49.5
-Date: Wed, 11 Nov 2026 22:42:04 -0800
-Message-ID: <20261112064225.2410019-4-khem.raj@oss.qualcomm.com>
+Subject: [meta-networking][PATCH 05/24] networkmanager: upgrade 1.58.0 -> 1.58.1
+Date: Wed, 11 Nov 2026 22:42:05 -0800
+Message-ID: <20261112064225.2410019-5-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.1
 In-Reply-To: <20261112064225.2410019-1-khem.raj@oss.qualcomm.com>
 References: <20261112064225.2410019-1-khem.raj@oss.qualcomm.com>
@@ -67,29 +67,29 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Thu, 12 Nov 2026 06:42:39 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132173
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132174
 Content-Type: text/plain; charset="utf-8"
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- .../nbdkit/{nbdkit_1.49.4.bb => nbdkit_1.49.5.bb}               | 2 +-
+ .../{networkmanager_1.58.0.bb => networkmanager_1.58.1.bb}      | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-networking/recipes-support/nbdkit/{nbdkit_1.49.4.bb => nbdkit_1.49.5.bb} (96%)
+ rename meta-networking/recipes-connectivity/networkmanager/{networkmanager_1.58.0.bb => networkmanager_1.58.1.bb} (99%)
 
-diff --git a/meta-networking/recipes-support/nbdkit/nbdkit_1.49.4.bb b/meta-networking/recipes-support/nbdkit/nbdkit_1.49.5.bb
-similarity index 96%
-rename from meta-networking/recipes-support/nbdkit/nbdkit_1.49.4.bb
-rename to meta-networking/recipes-support/nbdkit/nbdkit_1.49.5.bb
-index c1d9b18356..4df3d4c6dd 100644
---- a/meta-networking/recipes-support/nbdkit/nbdkit_1.49.4.bb
-+++ b/meta-networking/recipes-support/nbdkit/nbdkit_1.49.5.bb
-@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=26250adec854bc317493f6fb98efe049"
- SRC_URI = "git://gitlab.com/nbdkit/nbdkit.git;protocol=https;branch=master;tag=v${PV} \
-            file://0002-plugins-Avoid-absolute-buildpaths-in-binaries.patch \
-            "
--SRCREV = "9ac3038efcb2d9be603788bfb7e1b1ba2eb06f57"
-+SRCREV = "4915a2cbaffdd74856be52574c22ae3cfd5985c9"
- 
- 
- DEPENDS = "curl xz e2fsprogs zlib"
+diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.58.0.bb b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.58.1.bb
+similarity index 99%
+rename from meta-networking/recipes-connectivity/networkmanager/networkmanager_1.58.0.bb
+rename to meta-networking/recipes-connectivity/networkmanager/networkmanager_1.58.1.bb
+index 003ef86c02..3173aa3ace 100644
+--- a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.58.0.bb
++++ b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.58.1.bb
+@@ -45,7 +45,7 @@ SRC_URI = " \
+ "
+ SRC_URI:append:libc-musl = "${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-lld', ' file://0001-linker-scripts-Do-not-export-_IO_stdin_used.patch', '', d)}"
+
+-SRCREV = "61302aac7f2e7411f3b42159544926484eacd37e"
++SRCREV = "7406dfbcc35beed79bf2734e3e7376ead320bd99"
+
+ # ['auto', 'symlink', 'file', 'netconfig', 'resolvconf']
+ NETWORKMANAGER_DNS_RC_MANAGER_DEFAULT ??= "auto"
