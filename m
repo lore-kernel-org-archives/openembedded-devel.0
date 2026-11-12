@@ -1,122 +1,121 @@
-Received: from mail-yw1-f177.google.com (mail-yw1-f177.google.com [209.85.128.177])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.6945.1794459224827291336
+Received: from mail.tafhub.de (mail.tafhub.de [5.9.40.180])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.7853.1794464079093777041
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 11 Nov 2026 20:53:44 -0800
+ Wed, 11 Nov 2026 22:14:40 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=yaMGB60U;
- spf=pass (domain: gmail.com, ip: 209.85.128.177, mailfrom: schonm@gmail.com)
-Received: by mail-yw1-f177.google.com with SMTP id 00721157ae682-8b0d63f60bcso51727417b3.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 11 Nov 2026 20:53:44 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794459224; x=1795064024; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=5wiKWqEBw8zYTK4vIr1c0+vObByFfQzos9pTNdc2HFU=;
-        b=yaMGB60UrWHkV5EsVq2Yyn7DuPbN7rsITq0tk6efLXPLzf37r0468ovJJZOH0veSNw
-         yszeatBrzDU3Qzg7o5PMu+/vX2qPkJi/6sOViomnEKFuEhUIJ+JPEWPDU38O4HJ9AY1M
-         ydxLotb3Wq59CDH2xgShUVZTS557GWS88q7PSKDnaJHvWNyOhDb4MEmoGFvHwqESSYZy
-         A7rLT1JN17IpSS4tPNSCqGqNNkREd2teUdTwIT1YVPakVyXd4my8qlafrSHeyVDf617x
-         1/R1kDRgqD3v4ZtIQTfJXD+FuCetWZb4RQWSQk+nTLcY7dMXmaOO8X3wUGeZXLqWomEQ
-         kxvw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794459224; x=1795064024;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=5wiKWqEBw8zYTK4vIr1c0+vObByFfQzos9pTNdc2HFU=;
-        b=oQO4YJajvojTTmYE8NkAKPbT74QShBNQYICenj8SooqUrlJDAlxP+K4zRdPu+7fLEJ
-         8DXtuBmCUlTNvsWFUTICtH/zGTugwzcWJsbs+55hKi4aiQnortpRfGppXS1L95aDQkX+
-         /lObYpIXvBk73oP8pUuHezNJ3lbLwbjkPbikKkVcy1rKhYF+sQlxLfLYX3rM7yVIPH/p
-         KH6tu0EYK0Twz/hbKNtyeesT2JkNycLyMZgXzTs69zrUrxRTOBZZJq7wvHk2pCjUJ6Yl
-         BDKTZeAUcKdvAIVIvyC9rDQ7fyZMHSVzpPEoi+JoZJ04o2Sc1Csj8JmHGQyMJaZZURg9
-         1MHg==
-X-Gm-Message-State: APuU4Z/IwlzA/W5NtdQC6rlsDFtzAGKOE1hk5tIq7H2TaI7nSFfFd2on
-	zjAQkyd0m4P/ntBGMxlB12EXzSE6BbhoIwVtfXhOHzZwX6PYDLwcjwaLrkLIzWmwZ5s=
-X-Gm-Gg: AYBFou03kI99194/JW7L39fSDCHO6LPdVbJWlhML6LWZdsoitz8RzVQspcXTfAArizb
-	o8YPr94ZF933h9Xz4HzmyneFz9Fygak8FwEdgWUGtUrDaMRZCvKA0YgFzWiwCxVf/caPvo9s5M0
-	vPPBxpcFZBxnD5NTjL/48WA3Hot96QgLeIKpd4OKrxgx5403NB4E1LVWJ61KAGCBwmaCqlE9nL3
-	IUiIrsXyjC8VYohFYyXbXxByB2VrIed8lZkCDwdd7URtuRNSYclRppQzvdkOvSF1diOcjRH2WUn
-	SChhrKJ5s6RqxQg4jRqN2zGptAbp3+hHszKtkAQiNaYC536pdcQRY920U6tCmUpJqsyIE0M37Rv
-	GcSvm5/bXAYFLTIPgk18GynD4ANYbQtYJUQzE4qjGF9oSJ9UQ1wjOP0QqzqDjXqDZ8VDNdJL8vG
-	aAKi+uSxHYlDBq5wmZHOzCX9SuMM3K7olRG/jSc9ExLQJHU9NUqrZef+2z6SiYXwjw0DadIK5LV
-	syWGIx4VUIatgFeMR2+Xt4tA9Fm3i5erHAmk316iTBebsgw6peCSh7t68zE/nb4yLmxSzHMWZ6p
-	QBNn2nzpXHc4m8bm0iuDQ9opOtJQtbA5AvG5K4jT+TaqlG/X+8Hl7oftcYPeD0YqcqEHFpIikjh
-	I03p+8170pNwUXoWAaI9Q3BbAAOs7dpKSmnaYWYSxKt0trJyVMepV
-X-Received: by 2002:a05:690c:9208:b0:8b0:ecb2:8861 with SMTP id 00721157ae682-8b3a820c4a0mr29171907b3.63.1794459223792;
-        Wed, 11 Nov 2026 20:53:43 -0800 (PST)
-Return-Path: <schonm@gmail.com>
-Received: from localhost.localdomain ([71.3.193.106])
-        by smtp.gmail.com with ESMTPSA id 00721157ae682-8b393437e54sm61252647b3.35.2026.11.11.20.53.43
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 11 Nov 2026 20:53:43 -0800 (PST)
-From: Jason Schonberg <schonm@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Jason Schonberg <schonm@gmail.com>
-Subject: [meta-oe][wrynose][PATCH] nodejs: upgrade 22.23.4 -> 22.23.5
-Date: Wed, 11 Nov 2026 23:53:25 -0500
-Message-ID: <20261112045326.97145-1-schonm@gmail.com>
-X-Mailer: git-send-email 2.43.0
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Thu, 12 Nov 2026 04:53:46 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132168
+ dkim=pass header.i=@tafhub.de header.s=dkim header.b=SwsFe+of;
+ spf=pass (domain: tafhub.de, ip: 5.9.40.180, mailfrom: tafil@tafhub.de)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPA id 714C82E400D9;
+	Thu, 12 Nov 2026 07:14:35 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=tafhub.de; s=dkim;
+	t=1794464076; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+	 content-transfer-encoding:in-reply-to:references;
+	bh=kOVs+Ap6/ch415RozihcJV+aPKYAaZ1jdm1eBinIKxc=;
+	b=SwsFe+ofNuwh65Hza8UR3BDjnkRsKtS3IBMAqEfLAiItE8FU08KAm7EOQ7zxVONiR9rSjY
+	SyO115S1+QImWYfzpAFCxRFWa6bFwdYq0Xmc8j0OQQw6e1tsGzfDjPGVx3g/X/1xVGpZBN
+	sOBzx0wvxxSuMPwrHNPxwVh1hddTMzZemZT7eDEyfoXAp8R784wqqBKEG6Mum2bz+vaxqf
+	13vQteOmZPWaKJ6HzmwD/7pzS08GoaFiGyOI7P4hcXpVB+FKtZSfMyU2KaNONllToQPLnG
+	oo9bdQ2V4Pf2aMdeoPTqH1rKlEm/IH7MRhamgbWTiiJJ+7wq68tCUzObtgIUIg==
+From: "Tafil Avdyli" <tafil@tafhub.de>
+In-Reply-To: <CAMKF1sqwkkAtRkCh5Y8cgZoaadBDy2OgUa6P=0+6oTqb8y=5-Q@mail.gmail.com>
 Content-Type: text/plain; charset="utf-8"
+References: <20261110163904.15077-1-tafil@tafhub.de> <20261110163904.15077-3-tafil@tafhub.de> <CAMKF1sqwkkAtRkCh5Y8cgZoaadBDy2OgUa6P=0+6oTqb8y=5-Q@mail.gmail.com>
+Date: Thu, 12 Nov 2026 07:14:35 +0100
+Cc: openembedded-devel@lists.openembedded.org
+To: "Khem Raj" <raj.khem@gmail.com>
+MIME-Version: 1.0
+Message-ID: <c55ee4f2-8006-4808-6f5b-eea7a7c72f20@tafhub.de>
+Subject: =?utf-8?q?Re=3A?= [oe] [meta-oe][PATCH 3/3] =?utf-8?q?fastfetch=3A?= 
+ upgrade =?utf-8?q?2=2E70=2E0?= -> =?utf-8?q?2=2E71=2E0?=
+User-Agent: SOGoMail 5.12.12
+Content-Transfer-Encoding: quoted-printable
+X-Last-TLS-Session-Version: None
+List-Id: <openembedded-devel.lists.openembedded.org>
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Thu, 12 Nov 2026 06:14:48 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132169
 
-This is the November 2026 security release.
+On Wednesday, November 11, 2026 16:20 CET, Khem Raj <raj.khem@gmail.com=
+> wrote:
 
-  7 high severity issues.
-  6 medium severity issues.
-  3 low severity issues.
+> this fails with clang compiler
+>=20
+> /home/ubuntu/yoe/build/tmp/work/cortexa57-yoe-linux/fastfetch/2.71.0/=
+sources/fastfetch-2.71.0/src/detection/users/users=5Flinux.c:189:5:
+> error: use of undeclared identifier 'endutxent'; did you mean 'endute=
+nt'?
+>   189 |     endutxent();
+>       |     ^~~~~~~~~
+>       |     endutent
+> /home/ubuntu/yoe/build/tmp/work/cortexa57-yoe-linux/fastfetch/2.71.0/=
+recipe-sysroot/usr/include/utmp.h:68:13:
+> note: 'endutent' declared here
+>    68 | extern void endutent (void) =5F=5FTHROW;
+>       |             ^
+> 1 error generated.
 
-High severity issues.
-  CVE-2026-123863
-  CVE-2026-123864
-  CVE-2026-123865
-  CVE-2026-123866
-  CVE-2026-126051
-  CVE-2026-123872
-  CVE-2026-123874
+Hi,
 
-Medium severity issues.
-  CVE-2026-123828
-  CVE-2026-123867
-  CVE-2026-123868
-  CVE-2026-123871
-  CVE-2026-123877
-  CVE-2026-123875
+I was trying yesterday to reproduce it, but lacked build capacity. I al=
+ready saw the new patch you sent and the fastfetch PR.=20
+Thanks!
 
-Low severity issues.
-  CVE-2026-123829
-  CVE-2026-123862
-  CVE-2026-106071
+Best regards=20
+Tafil
 
-https://nodejs.org/en/blog/vulnerability/november-2026-security-releases
 
-Changelog: https://github.com/nodejs/node/releases/tag/v22.23.5
-
-Signed-off-by: Jason Schonberg <schonm@gmail.com>
----
- .../nodejs/{nodejs_22.23.4.bb => nodejs_22.23.5.bb}             | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-devtools/nodejs/{nodejs_22.23.4.bb => nodejs_22.23.5.bb} (99%)
-
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_22.23.4.bb b/meta-oe/recipes-devtools/nodejs/nodejs_22.23.5.bb
-similarity index 99%
-rename from meta-oe/recipes-devtools/nodejs/nodejs_22.23.4.bb
-rename to meta-oe/recipes-devtools/nodejs/nodejs_22.23.5.bb
-index 4dedfe36f8..79a2d91020 100644
---- a/meta-oe/recipes-devtools/nodejs/nodejs_22.23.4.bb
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs_22.23.5.bb
-@@ -39,7 +39,7 @@ SRC_URI:append:class-target = " \
- SRC_URI:append:toolchain-clang:powerpc64le = " \
-            file://0001-ppc64-Do-not-use-mminimal-toc-with-clang.patch \
-            "
--SRC_URI[sha256sum] = "7b9adc82d612d0a2a863d96c46de2292552e250cee51956ebbe0146c42aacae9"
-+SRC_URI[sha256sum] = "6cce7c58bf058700c643944903d60a325e8c9ceede1f5c2c088b435f2ada091a"
- 
- S = "${UNPACKDIR}/node-v${PV}"
- 
--- 
-2.43.0
+>=20
+> On Tue, Nov 10, 2026 at 8:39=E2=80=AFAM Tafil Avdyli via openembedded=
+-devel <tafil=3D
+> tafhub.de@lists.openembedded.org> wrote:
+>=20
+> > Full changelog:
+> > https://github.com/fastfetch-cli/fastfetch/blob/2.71.0/CHANGELOG.md
+> >
+> > Signed-off-by: Tafil Avdyli <tafil@tafhub.de>
+> > ---
+> >  .../fastfetch/{fastfetch=5F2.70.0.bb =3D> fastfetch=5F2.71.0.bb}  =
+    | 2 +-
+> >  1 file changed, 1 insertion(+), 1 deletion(-)
+> >  rename meta-oe/recipes-support/fastfetch/{fastfetch=5F2.70.0.bb =3D=
+>
+> > fastfetch=5F2.71.0.bb} (98%)
+> >
+> > diff --git a/meta-oe/recipes-support/fastfetch/fastfetch=5F2.70.0.b=
+b
+> > b/meta-oe/recipes-support/fastfetch/fastfetch=5F2.71.0.bb
+> > similarity index 98%
+> > rename from meta-oe/recipes-support/fastfetch/fastfetch=5F2.70.0.bb
+> > rename to meta-oe/recipes-support/fastfetch/fastfetch=5F2.71.0.bb
+> > index 9db8b2cbce..c9ba3519b0 100644
+> > --- a/meta-oe/recipes-support/fastfetch/fastfetch=5F2.70.0.bb
+> > +++ b/meta-oe/recipes-support/fastfetch/fastfetch=5F2.71.0.bb
+> > @@ -11,7 +11,7 @@ LIC=5FFILES=5FCHKSUM =3D
+> > "file://LICENSE;md5=3D2090e7d93df7ad5a3d41f6fb4226ac76"
+> >  DEPENDS =3D "yyjson"
+> >
+> >  SRC=5FURI =3D "git://
+> > github.com/fastfetch-cli/fastfetch.git;protocol=3Dhttps;branch=3Dma=
+ster;tag=3D${PV}
+> > <http://github.com/fastfetch-cli/fastfetch.git;protocol=3Dhttps;bra=
+nch=3Dmaster;tag=3D$%7BPV%7D>
+> > "
+> > -SRCREV =3D "17bb3fd2384bd814b421d73b8c8b8d08e06cfa26"
+> > +SRCREV =3D "8c9d9c0449dd515e0088c4a60a38d2dc40c5ccd0"
+> >
+> >  inherit cmake pkgconfig
+> >
+> >
+> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> > Links: You receive all messages sent to this group.
+> > View/Reply Online (#132096):
+> > https://lists.openembedded.org/g/openembedded-devel/message/132096
+> > Mute This Topic: https://lists.openembedded.org/mt/122196593/199791=
+4
+> > Group Owner: openembedded-devel+owner@lists.openembedded.org
+> > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/un=
+sub [
+> > raj.khem@gmail.com]
+> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> >
+> >
 
