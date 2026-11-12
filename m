@@ -1,61 +1,61 @@
-Received: from mail-pj1-f41.google.com (mail-pj1-f41.google.com [209.85.216.41])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.6938.1794458693140419802
+Received: from mail-pf1-f175.google.com (mail-pf1-f175.google.com [209.85.210.175])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.6840.1794458695079692065
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 11 Nov 2026 20:44:53 -0800
+ Wed, 11 Nov 2026 20:44:55 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=ATiN1vwO;
- spf=pass (domain: gmail.com, ip: 209.85.216.41, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pj1-f41.google.com with SMTP id 98e67ed59e1d1-3acb11973c3so3063386a91.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 11 Nov 2026 20:44:53 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=C4V01Lh/;
+ spf=pass (domain: gmail.com, ip: 209.85.210.175, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pf1-f175.google.com with SMTP id d2e1a72fcca58-8b29b83fdf1so1763141b3a.2
+        for <openembedded-devel@lists.openembedded.org>; Wed, 11 Nov 2026 20:44:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794458692; x=1795063492; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1794458694; x=1795063494; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=QP6oPwa70E5kCFOZjGla0Yl4/YlmeEjF3j013wiu/k0=;
-        b=ATiN1vwODvprFJ6S1lkgBTua76KOwZslfFE7C6sQgwk+ZV/hgiN4Cgqa2SsCqkhBsX
-         4HZR4y3uVrQiEU3AjGVZfhW+Do/kGO3IyDNhq6fHvGzjsPeQEdS6o26RnxPgdzgFeFEa
-         kw59wF+xdmM+N7h3U2ou9tlaZG6ry07+fgTjDbogcuNUlF6G/IPdtzQ4r7uukCerLvc6
-         dwZXTCaQSdRW+dNA7bRgzMidO0MbUUdCc6oAEQsHMpnOH9m+0UViWys5d80JbanP5m4g
-         L1nsWpKcQYQQe5PJn3oAnEr2p6IjTWK9HhGPTCqaCdNQnaeCd7+hRHLOaXo7MpxCdHDN
-         KChw==
+        bh=3FKr6IdO3AGErrp84q6Y01mG8CJRDIV41AlHUtn2j/s=;
+        b=C4V01Lh/6Fejs+cT0XCZVtSKZ4jNxCPq3b+lzQBnOMjTFVj03igUtpxIgjE4WRcGKu
+         P6j/s5V/GIiXrckiRouwie0DHNotDs96Eroi2afIqu+qg7KrfHFi+CDBdBsBge1/9DiR
+         ZixhMzNlwh6/Ou0CpvRPU5ykMpd24ZxNfSE1lUS+udgVuR5KmG1ufvzMjfEnV4hLElqA
+         2vV/WisusorNye5Z3Qe3KVy9QmOH4GRNVjocYkD84VkpjfSIG1Mg0s3+fh6iULREX5hY
+         9NA9DHXXs837xg9vjfD08LqGl9Y4a+sxjvmS8ffsTiHRPUyHqnfngrHCbgFJpVlc04nK
+         0MkA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794458692; x=1795063492;
+        d=1e100.net; s=20260707; t=1794458694; x=1795063494;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=QP6oPwa70E5kCFOZjGla0Yl4/YlmeEjF3j013wiu/k0=;
-        b=0VTlzAuYXhOlNH4M8ALeh3mP/EB8nrSJJG7flbmLHv8QcOnUEVJulGvFTgU4awpCHU
-         1ocVAnOLaqEyLkmBfsO/8jjEbZ71T0kxPkArV/l4aG9eBO/KfAzRJto8etbOG4nbaghV
-         rEH+BFXu+ckQqPraaEQIDn6uJuBMYile7DsW5hoFdO69ojN2LxxtWHWpFgGfcuLtsbKo
-         SYwNkkUenAX4yvr2kA7ih+7V52/ux2KhDIU6NpLnPN+JXljXQsT313OKC5hYDLP1hsiR
-         PsRM/2km81B4WR5MvKL0vROkAyNLBdoqPt/dBCFvtys/BLSuN5T/PS27eDIfyzGBIPYY
-         42mg==
-X-Gm-Message-State: APuU4Z/6mWRf9CiTaTUlzIYV83MBn6f8aJLhxTznvIBlcJFtSIgpqWeE
-	OWjJXL99W82jghqTlbtEVWber+a7K9JgW3rxfWOH2dVlEbDkpdHrT9uR4KVh9w==
-X-Gm-Gg: AYBFou2RfHIMDnfAE4l0itmKG7hslpy/Gy6vQkvtbLYI+KBbJU+pO0ABPRZ5Wycekd/
-	9NaQgHXrcetguks6Wd06GIqDVzp/tCWn1g1T9CmBvBbY86REdNa/vZumTQl3RHPShgH539pvZAA
-	H+9aTpFpnTzNRKIofZ4k2pxrHBojsI9o1EIA+RcM80FdDUaoR8L/ik/tEWlSOX4SRpNVGMHvQnG
-	aoKwBd13bOpn0zJANYKdqLz8rlj5JGRpfRfAbI9ld0uPbpXo++HGv4BpkQCFF458xrHocoWEBa9
-	dB+emAvzPBpWPCHGiWpFyl+sLZ9qcoyJkTpWfpS5DGJBw1LUPpXAY6ERISCVdyfYN7ToMPcZQ1B
-	hJKKSSWLAPtSqKYcvRpl3bBW6HkoPtCOA/TL3HWM+eI9pIl39aDlV+wPiQDzx6+Bglohymq0ucz
-	VTbACgHY+8Pn5xXI2N+0k86/sc6EfVNZhodGM1HyG1D+UYftLGkPNe4q9whKCgWLqV8Sh1Uvbvx
-	7ImI0Df0vJEaVzsEL8rUKXJl2orXBjGtj/9N8GiKJWFBK5gp1tcJBlafIxJMOT9fkXS89MEMygp
-	kEU6SWQB0imRbjmPvdF9Jsi5AQ8ff1azSXRF8OqcgqJz07xI/N1ekY6xgzLUE+xm0NmvNB5lQmV
-	68ii5mGk=
-X-Received: by 2002:a17:90b:37c3:b0:3a8:59d3:5317 with SMTP id 98e67ed59e1d1-3b182ebe741mr4813302a91.32.1794458692429;
-        Wed, 11 Nov 2026 20:44:52 -0800 (PST)
+        bh=3FKr6IdO3AGErrp84q6Y01mG8CJRDIV41AlHUtn2j/s=;
+        b=Heu/aXT+Nu1l/u2qU2Ow0Q74y2qrHEwJqXa9Rx+LcuvXzyZjAdqFfIU1YOZR9wvtIF
+         k6F+z9aLioKm0+Tebcb2nyQmvIlRPVYdE9HOJJ/f/pdMS8NAxcSGidGPIcTyiM6UrHu4
+         EyaWaxiX0VynG4zRaRj3aUXBVXZpEL9LNYesRF4IpmEB6NzP2Zn4/SvSiUgvXbZgI6Ft
+         mUTIOoxvHwjHNmxlbx60YmEiScp+P4HaCvcsYHfXWEFnLI6duscF+VRljH4ENWMCp0yE
+         7DzVGwHZswFWqEf8j2wqgj7PrrHAyl+m11hNIgtAeBW0t8+O8RCvgiZAJ1pOyjK4vZBC
+         /BQg==
+X-Gm-Message-State: APuU4Z/MDwB1o5jsWVJ/WUS9dxvIJ87yjsVFMZAXqV3AplO99BU/Bf6D
+	A99U1ums/gVLpUzcKuniVDHt2CyBOwoiCBiHe04qbtm/SO+YKN45PAofXY6Uaw==
+X-Gm-Gg: AYBFou2l5adS17YbehqX+GW+FE8no/vxzd2ASg4Nd74/VyqVe/9QARZC7LqjGyp46hs
+	MgYjf0KYktfLlKxfXQNeKVxo1JGr2Y5wgoz/eN+CeQ64KBOdH8848oHM9s+r5Lipz6UF/5e0KKv
+	+OAtT4FAtz7BJkwt0+nkT3xv3fmlNy9hA4x9oMI5va5CsuyK8ZZCqOdZ8CLun5PKjgxTSsw249x
+	81bCJDuW+rzgWQeNJzPiPu2NzgFMSdMBftbJOjpJev0vlq4im0zR6LA7NxjQ9A0X6c98jb/g75+
+	+rEhSKv+tNve6kpAIW3KjibDL0nNbnKVIuc0GDYoFFGUY3khI63z/z0wCq+Sy7S2Llq54wOP3cx
+	5BPe3aELEMPE8zPxfgWGg6xIz8ZXX3ZxOLmCiwF/KitwZZqU7MTJ+b1zx7qeCG/8kVx5GfaL3lK
+	LTp1da2mogUsjY401x32oSv2OGSHXaQuS+0y5FsWW65jNfsrDrfS/K5nKhaPwAoF385hg11sLeg
+	r9CeuyhoJKmhghlZ24qnBquCn0pWMj52cTl4tbV0fuKm6y4q0cfFyFpGk2oSxOdSg3EZofascIZ
+	H+VDsrL8rCyDs6e1qgH2qFtcVqN9hLXiGncz2NB2y6OMSHG3nHbb8kJu3R8Sq3FIKDnEXhNdUDf
+	I71N0ECk=
+X-Received: by 2002:a05:6a21:a91:b0:3e2:6fe6:9b91 with SMTP id adf61e73a8af0-3f2fa4934f1mr4686421637.12.1794458694413;
+        Wed, 11 Nov 2026 20:44:54 -0800 (PST)
 Return-Path: <ankur.tyagi85@gmail.com>
 Received: from NVAPF55DW0D-IPD.. ([147.161.217.9])
-        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-cdd8d7dd5bbsm2238527a12.30.2026.11.11.20.44.50
+        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-cdd8d7dd5bbsm2238527a12.30.2026.11.11.20.44.52
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 11 Nov 2026 20:44:52 -0800 (PST)
+        Wed, 11 Nov 2026 20:44:54 -0800 (PST)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-webserver][blacksail][PATCH 8/16] webmin: patch CVE-2026-125391
-Date: Thu, 12 Nov 2026 17:44:18 +1300
-Message-ID: <20261112044426.3933391-8-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-webserver][blacksail][PATCH 9/16] webmin: patch CVE-2026-125392
+Date: Thu, 12 Nov 2026 17:44:19 +1300
+Message-ID: <20261112044426.3933391-9-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20261112044426.3933391-1-ankur.tyagi85@gmail.com>
 References: <20261112044426.3933391-1-ankur.tyagi85@gmail.com>
@@ -63,73 +63,62 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Thu, 12 Nov 2026 04:44:56 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132159
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132160
 Content-Type: text/plain; charset="utf-8"
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
 Details:
-https://nvd.nist.gov/vuln/detail/cve-2026-125391
+https://nvd.nist.gov/vuln/detail/cve-2026-125392
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../webmin/files/CVE-2026-125391.patch        | 37 +++++++++++++++++++
+ .../webmin/files/CVE-2026-125392.patch        | 26 +++++++++++++++++++
  .../recipes-webadmin/webmin/webmin_2.653.bb   |  1 +
- 2 files changed, 38 insertions(+)
- create mode 100644 meta-webserver/recipes-webadmin/webmin/files/CVE-2026-125391.patch
+ 2 files changed, 27 insertions(+)
+ create mode 100644 meta-webserver/recipes-webadmin/webmin/files/CVE-2026-125392.patch
 
-diff --git a/meta-webserver/recipes-webadmin/webmin/files/CVE-2026-125391.patch b/meta-webserver/recipes-webadmin/webmin/files/CVE-2026-125391.patch
+diff --git a/meta-webserver/recipes-webadmin/webmin/files/CVE-2026-125392.patch b/meta-webserver/recipes-webadmin/webmin/files/CVE-2026-125392.patch
 new file mode 100644
-index 0000000000..077adc95d5
+index 0000000000..f357eb703a
 --- /dev/null
-+++ b/meta-webserver/recipes-webadmin/webmin/files/CVE-2026-125391.patch
-@@ -0,0 +1,37 @@
-+From 86791cd2bd1848b3967dc86ae0909493e768db7e Mon Sep 17 00:00:00 2001
-+From: Ilia Ross <ilia@ross.gdn>
-+Date: Sun, 8 Nov 2026 17:38:12 +0100
-+Subject: [PATCH] Fix Samba account option command injection
++++ b/meta-webserver/recipes-webadmin/webmin/files/CVE-2026-125392.patch
+@@ -0,0 +1,26 @@
++From 261c858c1f09b734add7239b835c1085eab3106c Mon Sep 17 00:00:00 2001
++From: Jamie Cameron <jcameron@webmin.com>
++Date: Sun, 8 Nov 2026 17:20:57 -0800
++Subject: [PATCH] Add HTML escaping in all-records mode
 +
-+(cherry picked from commit 18cab89b1fc74ab7e8b1b8b90bbccbe5aba99154)
-+CVE: CVE-2026-125391
-+Upstream-Status: Backport [https://github.com/webmin/webmin/commit/18cab89b1fc74ab7e8b1b8b90bbccbe5aba99154]
++(cherry picked from commit 224cbd91467c98c3147df695fe9abc8149183356)
++CVE: CVE-2026-125392
++Upstream-Status: Backport [https://github.com/webmin/webmin/commit/224cbd91467c98c3147df695fe9abc8149183356]
 +Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 +---
-+ samba/samba-lib.pl | 6 ++++--
-+ 1 file changed, 4 insertions(+), 2 deletions(-)
++ bind8/edit_recs.cgi | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
 +
-+diff --git a/samba/samba-lib.pl b/samba/samba-lib.pl
-+index bafd03b8b..2bd90ba26 100755
-+--- a/samba/samba-lib.pl
-++++ b/samba/samba-lib.pl
-+@@ -656,7 +656,8 @@ if ($has_pdbedit) {
-+ 		"cd / && $config{'pdbedit'} -a -s $config{'smb_conf'} -t -u ".
-+ 		quotemeta($user->{'name'}).
-+ 		($config{'sync_gid'} ? " -g $config{'sync_gid'}" : "").
-+-		" -c '[".join("", @opts)."]' $ws <$temp 2>&1");
-++		" -c ".quotemeta("[".join("", @opts)."]").
-++		" $ws <$temp 2>&1");
-+ 	$? && &error("$config{'pdbedit'} failed : <pre>$out</pre>");
-+ 	}
-+ else {
-+@@ -700,7 +701,8 @@ if ($has_pdbedit) {
-+ 		$out = &backquote_logged(
-+ 			"cd / && $config{'pdbedit'} -r -s $config{'smb_conf'} -u ".
-+ 			quotemeta($_[0]->{'name'}).
-+-			" -c '[".join("", @opts)."]' 2>&1");
-++			" -c ".quotemeta("[".join("", @opts)."]").
-++			" 2>&1");
-+ 		$? && &error("$config{'pdbedit'} failed : <pre>$out</pre>");
++diff --git a/bind8/edit_recs.cgi b/bind8/edit_recs.cgi
++index 2141c0a12..627143b37 100755
++--- a/bind8/edit_recs.cgi
+++++ b/bind8/edit_recs.cgi
++@@ -268,7 +268,7 @@ for(my $i=0; $i<@_; $i++) {
++ 		if (length($joined) > 80) {
++ 			$joined = substr($joined, 0, 80)." ...";
++ 			}
++-		push(@cols, $joined);
+++		push(@cols, &html_escape($joined));
 + 		}
-+ 	}
++ 	if ($config{'allow_comments'} && $in{'type'} ne "WKS") {
++ 		push(@cols, &html_escape($r->{'comment'}));
 diff --git a/meta-webserver/recipes-webadmin/webmin/webmin_2.653.bb b/meta-webserver/recipes-webadmin/webmin/webmin_2.653.bb
-index a46c3aad16..e4380e16a0 100644
+index e4380e16a0..8598994a17 100644
 --- a/meta-webserver/recipes-webadmin/webmin/webmin_2.653.bb
 +++ b/meta-webserver/recipes-webadmin/webmin/webmin_2.653.bb
-@@ -17,6 +17,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/webadmin/webmin-${PV}.tar.gz \
-            file://media-tomb.patch \
+@@ -18,6 +18,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/webadmin/webmin-${PV}.tar.gz \
             file://mysql-config-fix.patch \
             file://webmin.service \
-+           file://CVE-2026-125391.patch \
+            file://CVE-2026-125391.patch \
++           file://CVE-2026-125392.patch \
              "
  SRC_URI[sha256sum] = "9acc680d3d45cee876f36fc8810ce68bb6e44a0365e245a4298a180e0d016696"
  UPSTREAM_CHECK_URI = "http://www.webmin.com/download.html"
