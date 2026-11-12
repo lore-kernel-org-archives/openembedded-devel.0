@@ -1,240 +1,169 @@
-Received: from mail-dl1-f42.google.com (mail-dl1-f42.google.com [74.125.82.42])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.5136.1794450087915043522
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.6358.1794455833807576231
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 11 Nov 2026 18:21:27 -0800
+ Wed, 11 Nov 2026 19:57:13 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=ErX+nKQ8;
- spf=pass (domain: gmail.com, ip: 74.125.82.42, mailfrom: raj.khem@gmail.com)
-Received: by mail-dl1-f42.google.com with SMTP id a92af1059eb24-1b3beeaf6f9so1799251c88.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 11 Nov 2026 18:21:27 -0800 (PST)
+ dkim=pass header.i=@qualcomm.com header.s=qcppdkim1 header.b=H5mdPl1i;
+ dkim=pass header.i=@oss.qualcomm.com header.s=google header.b=e/y7/Qym;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: oss.qualcomm.com, ip: 205.220.168.131, mailfrom: anuj.mittal@oss.qualcomm.com)
+Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AC2Zw0Y904507
+	for <openembedded-devel@lists.openembedded.org>; Thu, 12 Nov 2026 03:57:10 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	26NTGg6tNaUXOJQZdS+BmMvPxc7QLPVPOqDMI15rpSg=; b=H5mdPl1iiktBAE49
+	a1wmPMg+IuC9Je3y2JZqeXzde0TYkzsL5loyFrIxkorB1c2mi1QMlvcRAY/wesbl
+	4xr/3XLmDU4kcZQcgYcba2bUbJVSsnEc9VmLqODXCtOUe5zptSAOluZef2GfHCok
+	/qDyoqt+U6KPnVw6a581P0NYdrsIE7biMv+Po6/crhamtaeHhlMpTBNsMUKGf+85
+	beGPbxE22o4iKTqfCCDyZ56mrano6x5hmxqSa+WEU4wxqOWOPPSbX29x6zSpvXIf
+	1GR4Q+M6i5p8oV6W7Ix3zvBryrsZE9AzT1Z5J9FswkW0WRy8XEiCqoseCV+MCNky
+	VvLUEw==
+Received: from mail-qv1-f71.google.com (mail-qv1-f71.google.com [209.85.219.71])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hvt1uaump-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Thu, 12 Nov 2026 03:57:10 +0000 (GMT)
+Received: by mail-qv1-f71.google.com with SMTP id 6a1803df08f44-91eee6fa56bso33489666d6.2
+        for <openembedded-devel@lists.openembedded.org>; Wed, 11 Nov 2026 19:57:10 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1794455829; cv=none;
+        d=google.com; s=arc-20260327;
+        b=g/RoowPqUIBV1l70byUjLqbyXoTAy0UPdnN8vgZrIkzoutGHNFlxcA4x9ei82k3XNi
+         lVeVv5nsbz0Oc9vzIfnpJ4GRK24EsVYZGbVdkntEdtXnwmynLKviMdp2zk76jz6I8hnh
+         MuvmBcD9hOIpAoQgSawuf96HoCslBhIecGoRpvwK4SvWuRKTVmiMOaoGRv3jPcdBZcg7
+         YLKukS66/bye8ivSEVhTwta/88HmHUVM8vN/7BEkfzOUZNij/pGkYZnSDGaLuKUhESZi
+         irOCeOIoBwUhRpnt5ovt8CHXAUELmUljEbtsi/5h2Tk43ZwzP6idlxNOVHDXyu5p41/3
+         RkNQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=26NTGg6tNaUXOJQZdS+BmMvPxc7QLPVPOqDMI15rpSg=;
+        fh=lN7vxPhETxChMSc60P0Vxmn/bh4wLo0yLkkRPuTiq2c=;
+        b=RQUVxgiMDClmTdG6g1MRH3OX6hILfW9aUwRglkIJfsz5STsuXYVibLc3gS9Bt+nafH
+         5GWtjDnEpjKno4ni4gelt7uihCFz/IQ/Wib6QbtR7aSqLIfgp1riWNXCnOjPakykWH2p
+         hgrMmWxce2yD3pUsbcKFc/UAh02DFYev2rmVTwkXVb4BMS6DKIKnMeJjelCefloMA2sA
+         NPvyLB6iYpZ3f0IKfZj+0QqWg5UzqxRgiH4oRE+Y2z7jCa1y/+ArKGf8U4Oe8FLboQGZ
+         xAK6um1WuiXXwIctIjbZTc2Uo3UmuYwEr1yA8S5NPhq+TR1qp8veckuTB4TJ6YenpP3R
+         G+Bg==;
+        darn=lists.openembedded.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794450087; x=1795054887; darn=lists.openembedded.org;
-        h=content-transfer-encoding:content-type:mime-version:references
-         :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
+        d=oss.qualcomm.com; s=google; t=1794455829; x=1795060629; darn=lists.openembedded.org;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
          :date:message-id:reply-to:content-type;
-        bh=4C7zAW7bL56xRKkC54NIKWnzvw6FkZTErYPWB7dgn/w=;
-        b=ErX+nKQ89o29jezgeIcw0v4KG3u5KfQwcCL97oC4miJZsVHQePBO/2ocIJHEej9NZC
-         gTTfediL5XfDodaxbGQN1CtPh6GPpothrigugR1w78valxyOMTeqL90td3chhw3Jnnpo
-         aUCxEfW2yPH/rd20CdX3uEu8oDYxztxjOTJBF72ZOxoOY4W0ntNxY7Ht3tFzuPR/B43s
-         pbox/7qLGHF5Fl2D68XciVzpamAGzHq8NWcrclICvJJCxVsxFegKqLwqfDPDtt3VZfjp
-         dWMhbJTl1oqiXYwe2nmblxtHbIflkV2Of9nLnrflt4mvtveczehJrdmR0ZZblcB90kg4
-         5QIQ==
+        bh=26NTGg6tNaUXOJQZdS+BmMvPxc7QLPVPOqDMI15rpSg=;
+        b=e/y7/QymfHNboKf3vwd7PmO9IxRcyJKa720MBjwKcHR+l5//vLSxDU9He/w7IdBCQ8
+         ettltm6NbwdD4PhYk9lp+qWvx/KmqkivOE1rs0GYa+moglrVc0cQU1M5TBi+OGPxKJ4b
+         ssgaHa64+P86kPlDQiPovc+szXcj9orRl5AraA5zWQiGOYTF9ZAjLoWMaz154TBy0P1A
+         7w7XiWDVrmKKU1RgpsrQOABsF/hjCgwDlI4uNKANqBvK3IGlqbVIQad17A9Qfd4B7tSH
+         MEEcFoDKnqNKDW8iEkbE8jfKIJ02e7SPIIGnfzAVjE28Edob7AMSb0iOcOG/mtsw2rlN
+         1Y7Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794450087; x=1795054887;
-        h=content-transfer-encoding:content-type:mime-version:references
-         :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
+        d=1e100.net; s=20260707; t=1794455829; x=1795060629;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=4C7zAW7bL56xRKkC54NIKWnzvw6FkZTErYPWB7dgn/w=;
-        b=eVycC315gQZMGrctI9vqQrqm3KzT9f5NbFYh3o5zSQScH/QblYvBLQknljLJONyIVZ
-         Rstx6UUZxyq+vlXrfFTjv9lJTRlYfg7eGYYpmkq/Gx1MoNAJGPXXXQzfliP6kMRofgtH
-         5HodUxth0LSKlDKk3nR1hugegj36mCnDIJ7OUT0hM/dOmtTzUCtkoBhhM5G4c78XcaP1
-         awAQSME0gSM+mauPnyb3ZrdifHDHKRRgPAW0BULkp0nwMTQhh3ykKglSO6K7bbHVlFr/
-         /J1vC4qF0QixwRcVT9pjIG49XWcTQDRHcNaW3yZwrhlQKGi98Z9Sbx7XuuZQ4b/urb0y
-         Va4Q==
-X-Gm-Message-State: APuU4Z88ZoeeMSuLTYz9eadQIjKinoqgXvT7p+k5eCXyBRWYEH0c1R1+
-	vZYx7mRHjiOy8XsWEeogoVeeTCb8HyWGE0lnrssjrG0/ZznAL1LCjIUiYbB2Ua1kU34=
-X-Gm-Gg: AYBFou0KPitrcNg+aqKcgU8T0HkpDsZ88grHV7oAXgoZ+xJ3lux5y5KOXsBxnvZ/N6i
-	9htHQc187DwIKahi3/aAqvCtFbqnn9W+iGc7YHSjm1FSzUpqSWC5WcolGOfgERJn18w1z2tqJur
-	z1pnZ+GnzJmwGVqCFw/dlAIVNcZDELf6xTM3mJhQVItB7hvHmPVDWiKlCn3oJQlTnDM4WcQxiIB
-	zZrfrabLiAzOvncVag2BUpyiwDiWhJ6l2XR2L85ojYTpCmKJ1IIdPndvB+5lVNFJgESA17jV0K7
-	xGk9vJ8frehEMkUT9UcWJCiErI7vzpr30tqhGY8ANUu93b9x/+S/cVdQYd4VPxieVdDjVo/tRS2
-	D7MlRDrPYfxGAIk3dSy9ijXx5g63Wa+kcMyBcTc7P11+l1uifmEj2qmXUX49bDTKl1ZHfdYfOTj
-	7qQPh4jrE1b9PcD1Aax4X0Ph8+CQMR0vfcSFmUoh/oe5ozPK/fqFITTHnxV5HZJ0NS8KgtAqXII
-	mgBnhX+jgb69/qTnJ2swh4GPQCMik7oK34PGiuUxIUElLDNPfUNZD64FDrf9EFGnYNcK4cSpGPK
-	DjxnZamXmmfCHOaTIoXqTSLnAkbIuTy9zRqM4opIcqhBQ7m6Sa15i/W8fDB4HCcXc3kVE/fowrl
-	E+avCMsnsxqtkl39ECrvCjQJv1AeKHdfAFafrXjNkYrhyV+kum+plWp6XfZKVCPV4wBnANkoeqx
-	oGjUplz55igSIXcgJ1YlRq0T5gwrycIADlImtw5wGY/d7lRtRaSGe//Y9e9CyuiK1HC7qDjWzYg
-	Wu3ISH5d7knWrQewoieHQHEXmg86zfemTnu8v6Hu2NXG54FsbtXsfgBmZOaLAOfbxnrNjG2NvY1
-	1YrJ
-X-Received: by 2002:a05:7022:5f05:b0:1b3:ac34:bd59 with SMTP id a92af1059eb24-1b3c036b32emr2969678c88.45.1794450086921;
-        Wed, 11 Nov 2026 18:21:26 -0800 (PST)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1b3b5890584sm22148612c88.3.2026.11.11.18.21.25
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 11 Nov 2026 18:21:26 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
-X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-oe][PATCH 2/2] bpftool-native: Upgrade 6.16 -> 7.3.4
-Date: Wed, 11 Nov 2026 18:21:19 -0800
-Message-ID: <20261112022121.3643745-2-khem.raj@oss.qualcomm.com>
-X-Mailer: git-send-email 2.56.1
-In-Reply-To: <20261112022121.3643745-1-khem.raj@oss.qualcomm.com>
-References: <20261112022121.3643745-1-khem.raj@oss.qualcomm.com>
+        bh=26NTGg6tNaUXOJQZdS+BmMvPxc7QLPVPOqDMI15rpSg=;
+        b=ZGMR+u00f0LBbmgPXRTfG1vSxSlSMj3UW942dOu4YY08C0+4YViOgOTrFprimp9pwd
+         7KpkFvXPw5DhtWpL2wf956oKsj8J3mejbbkf5tz9rYSoq2fpuJtu8mUfkO0gz76+mEl2
+         8kY4Uo2+HrDCWuHlXqIyJS/lqUvJX83VBjhhHf2y4xSbRp6yIoL2D713pydOmbGqaFme
+         q5Eu3Oil1eIQB97jA8zHoFFSnAOBKdD+txZgZKQ7gWlVC6cvKLjVVjn68J2yqTwtkiTh
+         fQrbXNnA0Mx+aAmmQr9KJEsEFvM08F+yc+I6ViLuiwm+8nOXE1GruziLN/o5BS2WA0Nj
+         c5FQ==
+X-Forwarded-Encrypted: i=1; AL+hErGsfm8SfIdZNCt5AK8nc/13HI8Ef9fDdk0xJYbAoRHuJjPPywNj/sG8v55c1icIde/CSu0Yiiqk6C/GKbvHBEh4ymQ=@lists.openembedded.org
+X-Gm-Message-State: APuU4Z/EseBj882ex7i+3PWdHAnnYo42VjomIYCytPr0yBMy3jVCsegL
+	x087vc1meevmRrQMUVwg1TDba96p7KWbApNidLgvYL54iZfDMug5YjkVcba1SP6Euq5RSe3KawG
+	e6g+ASLgWEYXB5gJT9o3dSbdb4uoRda7t7sAEuKqo5DWZW+hrVsRajxxeugFBdqOFvkoG1JKiUZ
+	jSzqLVPXc5VQctYbBD1betiWaxbwOgRyYVDwpFRAaCR/JOaWjKeHR9fh9E/Fs=
+X-Gm-Gg: AYBFou0IM3O/3hycnpbt11YZineoNrm72VrkBwAJQv/fyWb2PWSGYiDuOJ245A0W5e5
+	3faFL2W0672fPUUbWGEaC2pHpqIg1ejZMNgTrePq17B9J255AKKt1o6jGm38m3+qQDBoKjufRTM
+	gZd+GJN+tCpOPsfFTs0H3lBmqA+RVl9CY3M9kmYwqFJtwLulcKbDeJhMZZ4A==
+X-Received: by 2002:a05:6214:3bc2:b0:91e:739a:187b with SMTP id 6a1803df08f44-91f04195b7emr76742396d6.51.1794455829071;
+        Wed, 11 Nov 2026 19:57:09 -0800 (PST)
+X-Received: by 2002:a05:6214:3bc2:b0:91e:739a:187b with SMTP id
+ 6a1803df08f44-91f04195b7emr76742186d6.51.1794455828471; Wed, 11 Nov 2026
+ 19:57:08 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <1b153bce-a66a-45ee-a5c6-963ea6fb1c82.949ef384-8293-46b8-903f-40a477c056ae.60c45970-bf59-4753-942e-e3561e9c5a75@emailsignatures365.codetwo.com>
+ <20261109081800.69803-1-mike.looijmans@topic.nl> <CAMKF1soWj4FYR=Kq-mMRXjMnUzMkztdO9Epss9D61RWPE5nS0g@mail.gmail.com>
+ <eedf7b3e-36c7-49b0-bea2-2abbe74026a7@topic.nl> <CAMKF1spaQc--uVEevw2S4vrKJd5wSMSSOYxzv5aOEsb+SqLqKQ@mail.gmail.com>
+ <4e85e314-552f-4963-a5c2-0dc79a0b8496@topic.nl>
+In-Reply-To: <4e85e314-552f-4963-a5c2-0dc79a0b8496@topic.nl>
+From: Anuj Mittal <anuj.mittal@oss.qualcomm.com>
+Date: Thu, 12 Nov 2026 11:56:57 +0800
+X-Gm-Features: AclHuK8GwyAXeCwm51LbNGY9aebxYF9x_aO1VpgX8g0yNCu91tTKg-2kzrOUjhw
+Message-ID: <CA+s=J=wxTGnJFwoKiDLo-Apc4Q+KpkZrHeTjX1R5r_9tkO8TaA@mail.gmail.com>
+Subject: Re: [oe] [PATCH 0/4] Apply the mongodb patches from the scarthgap
+ branch, which is ahead
+To: mike.looijmans@topic.nl
+Cc: Khem Raj <raj.khem@gmail.com>, openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTEyMDAxNSBTYWx0ZWRfX89svKRCG48HH
+ ZcX9JTjj/kySycf+RoN7JFMsvD5x3QJqKnzg5ZTemHyM4w3vcb/NsrW4QHOUm3K2jDeq1qfwVMo
+ ubrtL7ATfQyNkvEU3UapZ9AcKE8nzpI=
+X-Proofpoint-GUID: MVGalJmAcz8DtuE4JMsyQyUce3ClGy0I
+X-Proofpoint-ORIG-GUID: MVGalJmAcz8DtuE4JMsyQyUce3ClGy0I
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTEyMDAxNSBTYWx0ZWRfXzXbL4x6mzwW+
+ Cdtw6IN08jYD+Q6siRSyRJIn6pGbfBeNhilVePinzaPwTruCh8miK9EnHWzM23g69yf/vKVVxP5
+ RUg31tUF/2RZNplLr90ltT6U/IFNcDxFB2n5GFLzBmqJUc3RwmzoxqIymBakiXrQFuzwNDCz/j6
+ Lvopmj6fW4+EFt/c5WMWA/HNvBP9euNx6kV2iJERd00eFZrHdPV/nOckbDvTMzEqIw3W8rkuYuW
+ kaQGzjq2MkpcUzRIHOZ3bM+YLF95WRhcEEpNibvfpSvM7Mt8ZGtTrN9RvoyNHMoX+HxvpHdqG4F
+ lPBWsvqjU77WhsG2OFhWlsBGlsLh0cDA+/ByNbJQYA1efUwWZIdfy73UUk4x0JHZ3MaeBnFePPJ
+ HKbbw8Sy5ChBjBPRc/cWtvWh3l66AgMVC9BLlFOyyK9vrV3pBN7Hk9qGXBD9aIDbJGkQbQuaYq1
+ RGPx0E0gj9MuuuoHU6g==
+X-Authority-Analysis: v=2.4 cv=LvcHWXdc c=1 sm=1 tr=0 ts=6af53916 cx=c_pps
+ a=UgVkIMxJMSkC9lv97toC5g==:117 a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10
+ a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
+ a=eoimf2acIAo5FJnRuUoq:22 a=Q4-j1AaZAAAA:8 a=cbCWaqvfhR-e-JJluKQA:9
+ a=QEXdDO2ut3YA:10 a=1HOtulTD9v-eNWfpl4qZ:22 a=9H3Qd4_ONW2Ztcrla5EB:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-11-12_01,2026-11-11_03,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ spamscore=0 phishscore=0 adultscore=0 suspectscore=0 impostorscore=0
+ malwarescore=0 lowpriorityscore=0 bulkscore=0 priorityscore=1501
+ clxscore=1015 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2611040001
+ definitions=main-2611120015
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Thu, 12 Nov 2026 02:21:34 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132150
-Content-Type: text/plain; charset="utf-8"
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Thu, 12 Nov 2026 03:57:15 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132151
 
-Drop patches which are included in this release:
-0001-libbpf-Fix-Wdiscarded-qualifiers-under-C23.patch
-0002-tools-linux-types.h-Add-128-bit-integer-types-for-ar.patch
+On Wed, Nov 11, 2026 at 11:33=E2=80=AFPM Mike Looijmans via openembedded-de=
+vel
+<mike.looijmans=3Dtopic.nl@lists.openembedded.org> wrote:
+>
+> On 10-11-2026 08:47, Khem Raj wrote:
+>
+>
+> On Mon, Nov 9, 2026 at 10:02=E2=80=AFPM Mike Looijmans via openembedded-d=
+evel <mike.looijmans=3Dtopic.nl@lists.openembedded.org> wrote:
+>>
+>> I know, I also wrote in the description (second line) that it wouldn't
+>> build.
+>>
+>> But at least this brings it up to the "scarthgap" level. It's weird to
+>> have to start several commits behind the previous LTS.
+>>
+>> I have a workaround for  the pkg_resources error, but that's still not
+>> enough...
+>
+>
+> I have sent a patch which addresses bunch of these issues.I wonder if we =
+should
+> upgrade mongo to latest release as well.
+>
+> Thanks for that!
+>
+> Applied them from master-next to wrynose, appears to fix all the build is=
+sues. It'd be good to copy them into the wrynose branch, so that at least m=
+ongodb compiles again (like in scarthgap).
+>
 
-Derive the kernel.org v<major>.x directory from PV.
+I will include them in the next round of patches I test.
 
-AI-Generated: Uses Claude Code
-Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
----
- ...native_6.16.bb => bpftool-native_7.3.4.bb} |  8 +--
- ...-Fix-Wdiscarded-qualifiers-under-C23.patch | 69 -------------------
- ...s.h-Add-128-bit-integer-types-for-ar.patch | 47 -------------
- 3 files changed, 2 insertions(+), 122 deletions(-)
- rename meta-oe/recipes-kernel/bpftool/{bpftool-native_6.16.bb => bpftool-native_7.3.4.bb} (75%)
- delete mode 100644 meta-oe/recipes-kernel/bpftool/bpftool/0001-libbpf-Fix-Wdiscarded-qualifiers-under-C23.patch
- delete mode 100644 meta-oe/recipes-kernel/bpftool/bpftool/0002-tools-linux-types.h-Add-128-bit-integer-types-for-ar.patch
+Thanks,
 
-diff --git a/meta-oe/recipes-kernel/bpftool/bpftool-native_6.16.bb b/meta-oe/recipes-kernel/bpftool/bpftool-native_7.3.4.bb
-similarity index 75%
-rename from meta-oe/recipes-kernel/bpftool/bpftool-native_6.16.bb
-rename to meta-oe/recipes-kernel/bpftool/bpftool-native_7.3.4.bb
-index f174414200..148afdf3dc 100644
---- a/meta-oe/recipes-kernel/bpftool/bpftool-native_6.16.bb
-+++ b/meta-oe/recipes-kernel/bpftool/bpftool-native_7.3.4.bb
-@@ -9,12 +9,8 @@ DEPENDS = "binutils-native elfutils-native"
-
- inherit native bash-completion
-
--SRC_URI = "\
--    ${KERNELORG_MIRROR}/linux/kernel/v6.x/linux-${PV}.tar.xz \
--    file://0001-libbpf-Fix-Wdiscarded-qualifiers-under-C23.patch \
--    file://0002-tools-linux-types.h-Add-128-bit-integer-types-for-ar.patch \
--"
--SRC_URI[sha256sum] = "1a4be2fe6b5246aa4ac8987a8a4af34c42a8dd7d08b46ab48516bcc1befbcd83"
-+SRC_URI = "${KERNELORG_MIRROR}/linux/kernel/v${@d.getVar('PV').split('.')[0]}.x/linux-${PV}.tar.xz"
-+SRC_URI[sha256sum] = "b11b6df8295e8e991ff040b71aaa4994a8b55caa23b6b092907f195b5840fd1f"
-
- S = "${UNPACKDIR}/linux-${PV}"
-
-diff --git a/meta-oe/recipes-kernel/bpftool/bpftool/0001-libbpf-Fix-Wdiscarded-qualifiers-under-C23.patch b/meta-oe/recipes-kernel/bpftool/bpftool/0001-libbpf-Fix-Wdiscarded-qualifiers-under-C23.patch
-deleted file mode 100644
-index 4726727c3d..0000000000
---- a/meta-oe/recipes-kernel/bpftool/bpftool/0001-libbpf-Fix-Wdiscarded-qualifiers-under-C23.patch
-+++ /dev/null
-@@ -1,69 +0,0 @@
--From ab21cf885fb2af179c44d8beeabd716133b9385d Mon Sep 17 00:00:00 2001
--From: Mikhail Gavrilov <mikhail.v.gavrilov@gmail.com>
--Date: Sat, 6 Dec 2025 14:28:25 +0500
--Subject: [PATCH] libbpf: Fix -Wdiscarded-qualifiers under C23
--MIME-Version: 1.0
--Content-Type: text/plain; charset=UTF-8
--Content-Transfer-Encoding: 8bit
--
--commit d70f79fef65810faf64dbae1f3a1b5623cdb2345 upstream.
--
--glibc ≥ 2.42 (GCC 15) defaults to -std=gnu23, which promotes
---Wdiscarded-qualifiers to an error.
--
--In C23, strstr() and strchr() return "const char *".
--
--Change variable types to const char * where the pointers are never
--modified (res, sym_sfx, next_path).
--
--Suggested-by: Florian Weimer <fweimer@redhat.com>
--Suggested-by: Andrii Nakryiko <andrii@kernel.org>
--Signed-off-by: Mikhail Gavrilov <mikhail.v.gavrilov@gmail.com>
--Link: https://lore.kernel.org/r/20251206092825.1471385-1-mikhail.v.gavrilov@gmail.com
--Signed-off-by: Alexei Starovoitov <ast@kernel.org>
--[ shung-hsi.yu: needed to fix kernel build failure due to libbpf since glibc
--  2.43+ (which adds 'const' qualifier to strstr) ]
--Signed-off-by: Shung-Hsi Yu <shung-hsi.yu@suse.com>
--Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
--
--Upstream-Status: Backport [https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/commit/?h=linux-6.18.y&id=ab21cf885fb2af179c44d8beeabd716133b9385d]
--Signed-off-by: He Zhe <zhe.he@windriver.com>
-----
-- tools/lib/bpf/libbpf.c | 7 ++++---
-- 1 file changed, 4 insertions(+), 3 deletions(-)
--
--diff --git a/tools/lib/bpf/libbpf.c b/tools/lib/bpf/libbpf.c
--index dd3b2f57082d..9c98c6adb6d0 100644
----- a/tools/lib/bpf/libbpf.c
--+++ b/tools/lib/bpf/libbpf.c
--@@ -8245,7 +8245,7 @@ static int kallsyms_cb(unsigned long long sym_addr, char sym_type,
-- 	struct bpf_object *obj = ctx;
-- 	const struct btf_type *t;
-- 	struct extern_desc *ext;
---	char *res;
--+	const char *res;
--
-- 	res = strstr(sym_name, ".llvm.");
-- 	if (sym_type == 'd' && res)
--@@ -11574,7 +11574,8 @@ static int avail_kallsyms_cb(unsigned long long sym_addr, char sym_type,
-- 		 *
-- 		 *   [0] fb6a421fb615 ("kallsyms: Match symbols exactly with CONFIG_LTO_CLANG")
-- 		 */
---		char sym_trim[256], *psym_trim = sym_trim, *sym_sfx;
--+		char sym_trim[256], *psym_trim = sym_trim;
--+		const char *sym_sfx;
--
-- 		if (!(sym_sfx = strstr(sym_name, ".llvm.")))
-- 			return 0;
--@@ -12159,7 +12160,7 @@ static int resolve_full_path(const char *file, char *result, size_t result_sz)
-- 		if (!search_paths[i])
-- 			continue;
-- 		for (s = search_paths[i]; s != NULL; s = strchr(s, ':')) {
---			char *next_path;
--+			const char *next_path;
-- 			int seg_len;
--
-- 			if (s[0] == ':')
----
--2.34.1
--
-diff --git a/meta-oe/recipes-kernel/bpftool/bpftool/0002-tools-linux-types.h-Add-128-bit-integer-types-for-ar.patch b/meta-oe/recipes-kernel/bpftool/bpftool/0002-tools-linux-types.h-Add-128-bit-integer-types-for-ar.patch
-deleted file mode 100644
-index 2181274430..0000000000
---- a/meta-oe/recipes-kernel/bpftool/bpftool/0002-tools-linux-types.h-Add-128-bit-integer-types-for-ar.patch
-+++ /dev/null
-@@ -1,47 +0,0 @@
--From 10a47fb67340bca274276faf855d7d460afd9a7a Mon Sep 17 00:00:00 2001
--From: Will Deacon <will@kernel.org>
--Date: Fri, 26 Jun 2026 15:17:28 +0100
--Subject: [PATCH] tools: linux/types.h: Add 128-bit integer types for arm64 UAPI
-- structures
--
--The arm64 UAPI exposes some 128-bit integer types to represent things
--such as fpsimd registers in the sigcontext. In preparation for defining
--these using the '__u128' typedef implemented by uapi/linux/types.h, copy
--that typedef over to the private linux/types.h header used by the tools
--directory.
--
--Cc: Arnd Bergmann <arnd@arndb.de>
--Cc: Arnaldo Carvalho de Melo <acme@redhat.com>
--Cc: David Matlack <dmatlack@google.com>
--Signed-off-by: Will Deacon <will@kernel.org>
--
--Debian 13 now ships linux-libc-dev 7.3, whose arm64 asm/ptrace.h and
--asm/sigcontext.h use __u128. bpftool-native picks up
--tools/include/linux/types.h ahead of the host linux/types.h, so the
--build fails on arm64 hosts with "unknown type name '__u128'".
--
--Upstream-Status: Backport [https://git.kernel.org/torvalds/c/10a47fb67340bca274276faf855d7d460afd9a7a]
--Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
-----
-- tools/include/linux/types.h | 5 +++++
-- 1 file changed, 5 insertions(+)
--
--diff --git a/tools/include/linux/types.h b/tools/include/linux/types.h
--index d41f8a261bce8..b6c473b7920db 100644
----- a/tools/include/linux/types.h
--+++ b/tools/include/linux/types.h
--@@ -23,6 +23,11 @@ typedef enum {
-- 	__GFP_HIGH
-- } gfp_t;
--
--+#ifdef __SIZEOF_INT128__
--+typedef __signed__ __int128 __s128 __attribute__((aligned(16)));
--+typedef unsigned __int128 __u128 __attribute__((aligned(16)));
--+#endif
--+
-- /*
--  * We define u64 as uint64_t for every architecture
--  * so that we can print it with "%"PRIx64 without getting warnings.
----
--2.53.0
--
+Anuj
