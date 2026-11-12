@@ -1,91 +1,1299 @@
-Received: from mail-pf1-f177.google.com (mail-pf1-f177.google.com [209.85.210.177])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.6838.1794458683555952356
+Received: from mail-pf1-f170.google.com (mail-pf1-f170.google.com [209.85.210.170])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.6936.1794458686576332713
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 11 Nov 2026 20:44:43 -0800
+ Wed, 11 Nov 2026 20:44:46 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=nXOE/G3v;
- spf=pass (domain: gmail.com, ip: 209.85.210.177, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pf1-f177.google.com with SMTP id d2e1a72fcca58-8b6399ebb41so3376749b3a.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 11 Nov 2026 20:44:43 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=Tb3ZhRJX;
+ spf=pass (domain: gmail.com, ip: 209.85.210.170, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pf1-f170.google.com with SMTP id d2e1a72fcca58-8a4c72951b8so391398b3a.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 11 Nov 2026 20:44:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794458683; x=1795063483; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1794458686; x=1795063486; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=2h/7Xw7QWiKqNawLALhqEGQOuq9Yggf5eN9lcwkDIwU=;
-        b=nXOE/G3vJ6HUwVVkLP7yb4sW3oHlWE6gBfr4oa+wjjzR/iQnKCF9i8QfiGbs2NeDC/
-         rh7F84WBeis5T5phOXLUdjpwoJNUI8i9tE1OV9jpbDR8gb3bT8wYXHU+SDUs2rfuoyjQ
-         sjZ7q+u5UTfmQtiiWE5idQ92hpw60PVuUa6LjxUg+gzFN0LQJd14IjpTMKhjL6mTwcBo
-         fLPtqYAk4B2EhxvITW8aFx8p8co7xfB50N2SJtLLXuZbNlnEuWzHrUIG/bacBA7CnpSS
-         PeSgFlAQrCgKW01lXzwiCBnxBhKht2yK4I0E3hoizQOVpmOQxAd3pjRuAe5xUje2l1ml
-         YmUA==
+        bh=wS0oBfFXLAO7f85Gl3HZi9YwcyL9mR19tTPYvUs6LTE=;
+        b=Tb3ZhRJXd2wBL+Lo5tkc4PymmdI3IDLuTslFdvf2NG/yT8Wg1a3QzJCD73PEdD2hzN
+         idXkGX8GtbDEP+SqtRgTR6ixRrDPYzCRJ9HHDLmuWO3UarT1wmVi3X9O4rvXLhBaCARp
+         XlaOjlIyNlZ6gh6QUYc3/pZ+izuCySxMcHO39b9NyJvc/q7Z4U2Ol5N/1/lxPL41TUbj
+         mVKFHzclfszGbQHrFdJVbPPaPIqMLWcXo2wpWYcYHn7rMovIGu3g98PHkvPEIa6aFklX
+         5SQlDOIecb9Rl52M7jgVFJ1DVCMYz2xGhnC9rpahV1wzswP8IE2qXqOM9urtN5WaaRVx
+         o4TA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794458683; x=1795063483;
+        d=1e100.net; s=20260707; t=1794458686; x=1795063486;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=2h/7Xw7QWiKqNawLALhqEGQOuq9Yggf5eN9lcwkDIwU=;
-        b=uNcy3xq9lk8VDeJpMBEvhq8RCYrhubDoW5KuJ91CCLr5qvQxJ+l0aHqaf47cci0Uc3
-         z/9FVNzDkfMuoGfgy0VMLRDnTbEPrC5cipIEmFNPi32nN6v6Q7Vb8MqWv+qP23wQH195
-         ian1Xh6SNAhGpyDrD/VxCYEmKNMLcssOyjIyJkjzhYIxp3zSZP8aPu0R+TSF0CTQ520O
-         vakNXrXIeCfqPHWQvVQqu2EUd6TESLCxKr4YYryttg6+XgivK4TL5AL5v8HDK6Tp/ipo
-         RV0iic0p6YiY0Q0QvNToOLcHQFG4UqXkAaNtNl4ZsFb7zElcH1s5AcgFJoycxH6x2J2r
-         4NYg==
-X-Gm-Message-State: APuU4Z/9vgG+Ym9IJeu7FmRcC0Z4pAhJzOF8IvhEix0XeT3dYAOdX4Td
-	sUbkoxeJiHPbKtc1e3/E3w1E45CxGkWairMPfjwJtk4oYoQX3C+KoNfjngObsw==
-X-Gm-Gg: AYBFou1nZQkehRzCRUpV+brKxTIqFz2Eqz34WuxVdIS/8IsSzCYvTatolzkHyg0srpo
-	YueD/zW8MVMWzltT7NSsgZ0S8PAEa/2yR2mAJF+F/mcgYMMHM9htGRq5inh4upAhYWcBkZ005YV
-	0Qtkc6Tgw0tXiMbWOE4jEqgXYJC8ILQ/zBzPe9VN/VIfS86qUbdvLycY4lA4ut1Dq3dItPGHeBq
-	JUZzTSBEZDsTpztSGHhUAJ9WbEjCadDCoInwvUS7HFJ2c9cA9QsewQSe8ARjyUYZHK8cbJtzwj8
-	z0xtVf/ocvzXelmFRsKirJsr0esA1wsMhaQY+jnZabW9tFKeKsYEu/TenOWM88V9iAtWk534pa8
-	gmH5rTX2PRS+Z/rQlI7xZTbONTFnfQh+h2c84UdFRqz4mwtxBmZ2GpU56Ji88KWCEBvu8W7wau2
-	E6Ud1wc4Hs81O/NjQYarC6MjoKPTvaQXcir2+OjMlfdBKCYUtf5IFE1uVfGNy2Z0aSp6UTYAdZX
-	C2+Ci7HpPTSEcknd08BmcVpw19E/IFwi8Jls16r66vDpqs9/ihcFoHARixJoVez9RHkaWN6cKCB
-	gvRaJN+0LRP6OZ+qSreJeZXKFoGzgWCw7aPvUjzHrQS9TVpKOnUex0qVQ564VA==
-X-Received: by 2002:a05:6a20:a120:b0:3e2:1418:aae2 with SMTP id adf61e73a8af0-3f2ffbcee70mr4861629637.68.1794458682872;
-        Wed, 11 Nov 2026 20:44:42 -0800 (PST)
+        bh=wS0oBfFXLAO7f85Gl3HZi9YwcyL9mR19tTPYvUs6LTE=;
+        b=awSqpao+IYiiiGcR/pgnzlaU7ZugALfU50FrXTN+Z2NcMs/1hR+1dHrQNSvKuiNiQ9
+         000l0DpBeHMhp2e4YdMBMiIiklmED9fdUv+ivdlTrlypvOfZ9/c93WmZw/9ZlhqQyjXn
+         WE8oqlMS27G7Jxy/zc6+aQk0axH4LpBEPIpPm/+5hSwI50wBYXMx6Gl0nVNOdOQ8BEh/
+         TSKFQ6mEAT/CIUF6JfncZd61JYWMwy80Co7hnCVRMGvsxNtxyM1KH7d9OGe+xNPrK/Uy
+         kgbh+wJt6SaMITAn6Hf94hmEBLWfac+V7gEenkIxxAlzCEP+O9Sp9dc/2PvotZ0Fpd6c
+         aI2Q==
+X-Gm-Message-State: APuU4Z+V/ufXcE3GFWDQkDUUKuBUil461zCsQErN3qOX526Yhk0AXmBw
+	1lp1aGysIi5K5yY3Bhlwnjed5GcjRF5qEbkMlRu2XGHbwbngtLqrmHQ58Iq0kg==
+X-Gm-Gg: AYBFou2LHti2juuZbyijHBE5WD+K7b9cKXO+s7R7V1qleBIrv8Ajl5HlOu0HAitQllV
+	+wWAJKTb/v6akbyh43jTfU6K/woBAaHoCcEzEaPhMkI71CDQ3Xym6dau0giJEe9BFLZYa+nlj2P
+	epaB5LdJ63SdVHXYMJK5cJFrL+5Pgg2IwUtwAYoix52GxfO/EFkyoWU/KQKRhYoUJtY5qTxja/E
+	dWFCREw6+8CQDdz0ZDp3WBxJG+AJlJAAVhhbcPm2gZPH3fNhCw9e39BtylXtF8gfpVPfIECcCiV
+	YjNHpAuyHad1sdwXGAiT8g07zZPyYFjjgHSqzLDSeYBy+5gcQWe+x7TEQK4NyQEkxtNJ3tkjLqq
+	M+erAFbjzTcOb6Zky6L6YSX5nvLuqYal9TzXn0io6Vzk59uJFDPtETXofml4STlffhJGQs2hIVC
+	tbdm4DFS4JtQBU6YWdo782sbuzSFD0uVOSQDEcU32SQjfcFE6Vvz91vCteVwp/hgNZTiReNbKsN
+	EIBi92WH247LjuLYI7NFUBQEyT+90PuHUc0+k+PpEAW/8oApWpaJV94HU/NQJfwazhbN7LjioUx
+	2xKvr5Me1CS7Y9QkdfcvJK2HH6G6qWkdfBXiFEnpVB4Whu93OjmoHfZxBYi09g==
+X-Received: by 2002:a05:6a21:a96:b0:3e2:3c7:7754 with SMTP id adf61e73a8af0-3f2feedbf30mr4774200637.65.1794458685457;
+        Wed, 11 Nov 2026 20:44:45 -0800 (PST)
 Return-Path: <ankur.tyagi85@gmail.com>
 Received: from NVAPF55DW0D-IPD.. ([147.161.217.9])
-        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-cdd8d7dd5bbsm2238527a12.30.2026.11.11.20.44.41
+        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-cdd8d7dd5bbsm2238527a12.30.2026.11.11.20.44.43
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 11 Nov 2026 20:44:42 -0800 (PST)
+        Wed, 11 Nov 2026 20:44:44 -0800 (PST)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-oe][blacksail][PATCH 4/16] brotli: set CVE_PRODUCT to "google:brotli"
-Date: Thu, 12 Nov 2026 17:44:14 +1300
-Message-ID: <20261112044426.3933391-4-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-networking][blacksail][PATCH 5/16] ettercap: patch CVEs CVE-2026-125400 - CVE-2026-125406
+Date: Thu, 12 Nov 2026 17:44:15 +1300
+Message-ID: <20261112044426.3933391-5-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20261112044426.3933391-1-ankur.tyagi85@gmail.com>
 References: <20261112044426.3933391-1-ankur.tyagi85@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Thu, 12 Nov 2026 04:44:45 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132155
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Thu, 12 Nov 2026 04:44:55 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132156
 Content-Type: text/plain; charset="utf-8"
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
-cve-check class is setting default CVE_PRODUCT to 'brotli' which ignores
-the CVEs from NVD Database.
+Also backport commits[1][2][3] to cherry pick commit identified by NVD.
 
-Reference:
-CVE-2026-111497
-https://nvd.nist.gov/vuln/detail/cve-2026-111497
+Details:
+https://nvd.nist.gov/vuln/detail/cve-2026-125400
+
+[1]https://github.com/Ettercap/ettercap/commit/593a11ff49e61293fcf4ed24f8b017df0aeac6fd
+[2]https://github.com/Ettercap/ettercap/commit/feeae6fa366e01a3dd9f1857ec6aae847b2ae00c
+[3]https://github.com/Ettercap/ettercap/commit/ffd9e06c3cdab9c056f7e729b5083ed81126315e
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- meta-oe/recipes-extended/brotli/brotli_1.2.1.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ .../ettercap/ettercap_0.8.4.1.bb              |   4 +
+ .../ettercap/files/CVE-2026-125400-06_1.patch | 121 +++
+ .../ettercap/files/CVE-2026-125400-06_2.patch | 149 ++++
+ .../ettercap/files/CVE-2026-125400-06_3.patch |  92 ++
+ .../ettercap/files/CVE-2026-125400-06_4.patch | 807 ++++++++++++++++++
+ 5 files changed, 1173 insertions(+)
+ create mode 100644 meta-networking/recipes-support/ettercap/files/CVE-2026-125400-06_1.patch
+ create mode 100644 meta-networking/recipes-support/ettercap/files/CVE-2026-125400-06_2.patch
+ create mode 100644 meta-networking/recipes-support/ettercap/files/CVE-2026-125400-06_3.patch
+ create mode 100644 meta-networking/recipes-support/ettercap/files/CVE-2026-125400-06_4.patch
 
-diff --git a/meta-oe/recipes-extended/brotli/brotli_1.2.1.bb b/meta-oe/recipes-extended/brotli/brotli_1.2.1.bb
-index dca16cb79b..14d7fe96e5 100644
---- a/meta-oe/recipes-extended/brotli/brotli_1.2.1.bb
-+++ b/meta-oe/recipes-extended/brotli/brotli_1.2.1.bb
-@@ -20,3 +20,5 @@ do_install:append () {
- }
+diff --git a/meta-networking/recipes-support/ettercap/ettercap_0.8.4.1.bb b/meta-networking/recipes-support/ettercap/ettercap_0.8.4.1.bb
+index 9a2090719b..8ac3c7703c 100644
+--- a/meta-networking/recipes-support/ettercap/ettercap_0.8.4.1.bb
++++ b/meta-networking/recipes-support/ettercap/ettercap_0.8.4.1.bb
+@@ -23,6 +23,10 @@ RDEPENDS:${PN} += "bash ethtool libgcc"
  
- BBCLASSEXTEND = "native nativesdk"
+ SRC_URI = "gitsm://github.com/Ettercap/ettercap;branch=master;protocol=https;tag=v${PV} \
+            file://0001-ec.h-do-not-strip-a-pre-existing-_GNU_SOURCE-define.patch \
++           file://CVE-2026-125400-06_1.patch \
++           file://CVE-2026-125400-06_2.patch \
++           file://CVE-2026-125400-06_3.patch \
++           file://CVE-2026-125400-06_4.patch \
+            "
+ 
+ SRCREV = "0dc8409779f3a09cbfff4434b9a4d7b33480d88d"
+diff --git a/meta-networking/recipes-support/ettercap/files/CVE-2026-125400-06_1.patch b/meta-networking/recipes-support/ettercap/files/CVE-2026-125400-06_1.patch
+new file mode 100644
+index 0000000000..5fdc42d48b
+--- /dev/null
++++ b/meta-networking/recipes-support/ettercap/files/CVE-2026-125400-06_1.patch
+@@ -0,0 +1,121 @@
++From d6ae972f54be633b3b7b2d7905f89cf53abbb839 Mon Sep 17 00:00:00 2001
++From: Gianfranco Costamagna <locutusofborg@debian.org>
++Date: Fri, 24 Apr 2026 11:37:12 +0200
++Subject: [PATCH] ec_gg: Add new GG_MAX_LEN equal to 70
 +
-+CVE_PRODUCT = "google:brotli"
++(cherry picked from commit 593a11ff49e61293fcf4ed24f8b017df0aeac6fd)
++
++CVE: CVE-2026-125400 CVE-2026-125401 CVE-2026-125402 CVE-2026-125403 CVE-2026-125404 CVE-2026-125405 CVE-2026-125406
++Upstream-Status: Backport [https://github.com/Ettercap/ettercap/commit/593a11ff49e61293fcf4ed24f8b017df0aeac6fd]
++
++Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
++---
++ src/dissectors/ec_gg.c | 31 ++++++++++++++++---------------
++ 1 file changed, 16 insertions(+), 15 deletions(-)
++
++diff --git a/src/dissectors/ec_gg.c b/src/dissectors/ec_gg.c
++index 82799f93..fa303e87 100644
++--- a/src/dissectors/ec_gg.c
+++++ b/src/dissectors/ec_gg.c
++@@ -149,22 +149,23 @@ uncomment #define below if you want to see all contacts status changes - be care
++ 
++ /* globals */
++ 
++-#define GG_LOGIN50_CMD		0x0000000c
++-#define GG_LOGIN60_CMD		0x00000015
++-#define GG_LOGIN70_CMD		0x00000019
+++#define GG_LOGIN50_CMD	   0x0000000c
+++#define GG_LOGIN60_CMD	   0x00000015
+++#define GG_LOGIN70_CMD	   0x00000019
++ 
++-#define GG_WELCOME_CMD		0x00000001
+++#define GG_WELCOME_CMD	   0x00000001
++ 
++-#define GG_SEND_MSG_CMD		0x0000000b
++-#define GG_RECV_MSG_CMD		0x0000000a
+++#define GG_SEND_MSG_CMD	   0x0000000b
+++#define GG_RECV_MSG_CMD	   0x0000000a
++ 
++ #define GG_NEW_STATUS_CMD  0x00000002
++ 
++ #define GG_STATUS_CMD      0x00000002
++ 
++-#define GG_STATUS50_CMD		0x0000000c
+++#define GG_STATUS50_CMD	   0x0000000c
++ #define GG_STATUS60_CMD    0x0000000f
++ #define GG_STATUS70_CMD    0x00000017
+++#define GG_MAX_LEN         70
++ 
++ struct gg_hdr {
++    u_int32 type;
++@@ -182,7 +183,7 @@ struct gg_login50_hdr {
++    u_int32 version;   
++    u_int8 local_ip[4];  
++    u_int16 local_port;
++-   char description[71];     /* 70+1 (0x0) */
+++   char description[GG_MAX_LEN + 1];     /* 70+1 (0x0) */
++    u_int32 time;
++ }__attribute__ ((packed));
++ 
++@@ -198,7 +199,7 @@ struct gg_login60_hdr {
++    u_int16 remote_port;
++    u_int8 image_size;
++    u_int8 unknown2;          /* 0xbe */
++-   char description[71];     /* 70+1 (0x0) */
+++   char description[GG_MAX_LEN + 1];     /* 70+1 (0x0) */
++    u_int32 time;
++ }__attribute__ ((packed));
++ 
++@@ -217,7 +218,7 @@ struct gg_login70_hdr {
++    u_int16 remote_port;
++    u_int8 image_size;
++    u_int8 unknown5;          /* 0xbe */
++-   char description[71];     /* 70+1 (0x0) */
+++   char description[GG_MAX_LEN + 1];     /* 70+1 (0x0) */
++    u_int32 time;
++ }__attribute__ ((packed));
++ 
++@@ -238,14 +239,14 @@ struct gg_recv_msg_hdr {
++ 
++ struct gg_new_status_hdr {
++    u_int32 status;
++-   char description[71];     /* 70+1 (0x0) */
+++   char description[GG_MAX_LEN + 1];     /* 70+1 (0x0) */
++    u_int32 time;
++ };
++ 
++ struct gg_status_hdr {
++    u_int32 uin;
++    u_int32 status;
++-   char description[71];     /* 70+1 (0x0) */
+++   char description[GG_MAX_LEN + 1];     /* 70+1 (0x0) */
++    u_int32 time;
++ };
++ 
++@@ -256,7 +257,7 @@ struct gg_status50_hdr {
++    u_int16 remote_port;
++    u_int32 version;   
++    u_int16 unknown1;         /* remote port again? */
++-   char description[71];     /* 70+1 (0x0) */
+++   char description[GG_MAX_LEN + 1];     /* 70+1 (0x0) */
++    u_int32 time;
++ }__attribute__ ((packed));
++ 
++@@ -268,7 +269,7 @@ struct gg_status60_hdr {
++    u_int8 version;   
++    u_int8 image_size;
++    u_int8 unknown1;          /* 0x00 */
++-   char description[71];     /* 70+1 (0x0) */
+++   char description[GG_MAX_LEN + 1];     /* 70+1 (0x0) */
++    u_int32 time;
++ }__attribute__ ((packed));;
++ 
++@@ -281,7 +282,7 @@ struct gg_status70_hdr {
++    u_int8 image_size;
++    u_int8 unknown1;          /* 0x00 */
++    u_int32 unknown2;         /* 0x00 */
++-   char description[71];     /* 70+1 (0x0) */
+++   char description[GG_MAX_LEN + 1];     /* 70+1 (0x0) */
++    u_int32 time;
++ }__attribute__ ((packed));;
++ 
+diff --git a/meta-networking/recipes-support/ettercap/files/CVE-2026-125400-06_2.patch b/meta-networking/recipes-support/ettercap/files/CVE-2026-125400-06_2.patch
+new file mode 100644
+index 0000000000..af8e290f40
+--- /dev/null
++++ b/meta-networking/recipes-support/ettercap/files/CVE-2026-125400-06_2.patch
+@@ -0,0 +1,149 @@
++From 6e5c1c1f7d18a381ef64877538e2a7fb714083e2 Mon Sep 17 00:00:00 2001
++From: Gianfranco Costamagna <locutusofborg@debian.org>
++Date: Fri, 24 Apr 2026 11:40:16 +0200
++Subject: [PATCH] fix Heap buffer overflow in GG Dissector, thanks to
++ <dapickle> for the bug report and fix Closes: #1306
++
++(cherry picked from commit feeae6fa366e01a3dd9f1857ec6aae847b2ae00c)
++
++CVE: CVE-2026-125400 CVE-2026-125401 CVE-2026-125402 CVE-2026-125403 CVE-2026-125404 CVE-2026-125405 CVE-2026-125406
++Upstream-Status: Backport [https://github.com/Ettercap/ettercap/commit/feeae6fa366e01a3dd9f1857ec6aae847b2ae00c]
++
++Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
++---
++ src/dissectors/ec_gg.c | 64 ++++++++++++++++++++++++++----------------
++ 1 file changed, 40 insertions(+), 24 deletions(-)
++
++diff --git a/src/dissectors/ec_gg.c b/src/dissectors/ec_gg.c
++index fa303e87..2a7dd8a6 100644
++--- a/src/dissectors/ec_gg.c
+++++ b/src/dissectors/ec_gg.c
++@@ -359,10 +359,12 @@ FUNC_DECODER(dissector_gg)
++ if ((gg->type == GG_LOGIN50_CMD) && !FROM_SERVER("gg", PACKET)) {
++    gg_get_status(gg_login50->status,tbuf);
++    gg_get_version(gg_login50->version,tbuf3);
++-   if ((int)gg->len-22 < 0)
+++   size_t offset=22;
+++   if (gg->len-offset < 0)
++        return NULL;
++-   strncpy(tbuf2,gg_login50->description, (gg->len)-22);
++-   tbuf2[(gg->len)-22]='\0';
+++   size_t copy_len = MIN(gg->len - offset, GG_MAX_LEN);
+++   strncpy(tbuf2,gg_login50->description, copy_len);
+++   tbuf2[copy_len]='\0';
++    sprintf(user,"%u",gg_login50->uin);
++    PACKET->DISSECTOR.user = strdup(user);
++    sprintf(pass,"%u",gg_login50->hash);
++@@ -381,10 +383,12 @@ if ((gg->type == GG_LOGIN50_CMD) && !FROM_SERVER("gg", PACKET)) {
++ else if (gg->type == GG_LOGIN60_CMD) {
++    gg_get_status(gg_login60->status,tbuf);
++    gg_get_version(gg_login60->version,tbuf3);
++-   if ((int)gg->len-31 < 0)
+++   size_t offset=31;
+++   if (gg->len-offset < 0)
++        return NULL;
++-   strncpy(tbuf2,gg_login60->description, (gg->len)-31);
++-   tbuf2[(gg->len)-31]='\0';
+++   size_t copy_len = MIN(gg->len - offset, GG_MAX_LEN);
+++   strncpy(tbuf2,gg_login60->description, copy_len);
+++   tbuf2[copy_len]='\0';
++    sprintf(user,"%u",gg_login60->uin);
++    PACKET->DISSECTOR.user = strdup(user);
++    sprintf(pass,"%u",gg_login60->hash);
++@@ -405,10 +409,12 @@ else if (gg->type == GG_LOGIN60_CMD) {
++ else if (gg->type == GG_LOGIN70_CMD) {
++    gg_get_status(gg_login70->status,tbuf);
++    gg_get_version(gg_login70->version,tbuf3);
++-   if ((int)gg->len-92 < 0)
+++   size_t offset=92;
+++   if (gg->len-offset < 0)
++        return NULL;
++-   strncpy(tbuf2,gg_login70->description, (gg->len)-92);
++-   tbuf2[(gg->len)-92]='\0';
+++   size_t copy_len = MIN(gg->len - offset, GG_MAX_LEN);
+++   strncpy(tbuf2,gg_login70->description, copy_len);
+++   tbuf2[copy_len]='\0';
++    sprintf(user,"%u",gg_login70->uin);
++    PACKET->DISSECTOR.user = strdup(user);
++    sprintf(pass,"%X%X%X%X%X",gg_login70->hash[0],gg_login70->hash[1],gg_login70->hash[2],gg_login70->hash[3],gg_login70->hash[4]);
++@@ -454,10 +460,12 @@ else if (gg->type == GG_WELCOME_CMD) {
++ #ifdef GG_CONTACTS_STATUS_CHANGES
++ else if ((gg->type == GG_STATUS_CMD) && FROM_SERVER("gg", PACKET)) {
++     gg_get_status(gg_status->status,tbuf);
++-    if ((int)gg->len-8 < 0)
+++    size_t offset=8;
+++    if (gg->len-offset < 0)
++         return NULL;
++-    strncpy(tbuf2,gg_status->description, (gg->len)-8);
++-    tbuf2[(gg->len)-8]='\0';
+++    size_t copy_len = MIN(gg->len - offset, GG_MAX_LEN);
+++    strncpy(tbuf2,gg_status->description, copy_len);
+++    tbuf2[copy_len]='\0';
++     DISSECT_MSG("GG : %s:%d -> %s:%d - STATUS CHANGED  UIN: %u  STATUS: %s (%s)\n", ip_addr_ntoa(&PACKET->L3.src, tmp),
++                                  ntohs(PACKET->L4.src),
++                                  ip_addr_ntoa(&PACKET->L3.dst, tmp2),
++@@ -468,10 +476,12 @@ else if ((gg->type == GG_STATUS_CMD) && FROM_SERVER("gg", PACKET)) {
++ #endif
++ else if ((gg->type == GG_NEW_STATUS_CMD) && !FROM_SERVER("gg", PACKET)) {
++       gg_get_status(gg_new_status->status,tbuf);
++-      if ((int)gg->len-4 < 0)
+++      size_t offset=4;
+++      if (gg->len-offset < 0)
++           return NULL;
++-      strncpy(tbuf2,gg_new_status->description, (gg->len)-4);
++-      tbuf2[(gg->len)-4]='\0';
+++      size_t copy_len = MIN(gg->len - offset, GG_MAX_LEN);
+++      strncpy(tbuf2,gg_new_status->description, copy_len);
+++      tbuf2[copy_len]='\0';
++       DISSECT_MSG("GG : %s:%d -> %s:%d - NEW STATUS  STATUS: %s (%s)\n", ip_addr_ntoa(&PACKET->L3.src, tmp),
++                                  ntohs(PACKET->L4.src),
++                                  ip_addr_ntoa(&PACKET->L3.dst, tmp2),
++@@ -482,10 +492,12 @@ else if ((gg->type == GG_NEW_STATUS_CMD) && !FROM_SERVER("gg", PACKET)) {
++ else if ((gg->type == GG_STATUS50_CMD) && FROM_SERVER("gg", PACKET)) {
++       gg_get_status(gg_status50->status,tbuf);
++       gg_get_version(gg_status50->version,tbuf3);
++-      if ((int)gg->len-20 < 0)
+++      size_t offset=20;
+++      if (gg->len-offset < 0)
++           return NULL;
++-      strncpy(tbuf2,gg_status50->description, (gg->len)-20);
++-      tbuf2[(gg->len)-20]='\0';
+++      size_t copy_len = MIN(gg->len - offset, GG_MAX_LEN);
+++      strncpy(tbuf2,gg_status50->description, copy_len);
+++      tbuf2[copy_len]='\0';
++       DISSECT_MSG("GG4/5 : %s:%d -> %s:%d - STATUS CHANGED  UIN: %u  STATUS: %s (%s)  VERSION: %s  RIP: %u.%u.%u.%u:%u\n", ip_addr_ntoa(&PACKET->L3.src, tmp),
++                                  ntohs(PACKET->L4.src),
++                                  ip_addr_ntoa(&PACKET->L3.dst, tmp2),
++@@ -499,10 +511,12 @@ else if ((gg->type == GG_STATUS50_CMD) && FROM_SERVER("gg", PACKET)) {
++ else if (gg->type == GG_STATUS60_CMD) {
++       gg_get_status(gg_status60->status,tbuf);
++       gg_get_version(gg_status60->version,tbuf3);
++-      if ((int)gg->len-14 < 0)
+++      size_t offset=14;
+++      if (gg->len-offset < 0)
++           return NULL;
++-      strncpy(tbuf2,gg_status60->description, (gg->len)-14);
++-      tbuf2[(gg->len)-14]='\0';
+++      size_t copy_len = MIN(gg->len - offset, GG_MAX_LEN);
+++      strncpy(tbuf2,gg_status60->description, copy_len);
+++      tbuf2[copy_len]='\0';
++       DISSECT_MSG("GG6 : %s:%d -> %s:%d - STATUS CHANGED  UIN: %u  STATUS: %s (%s)  VERSION: %s  RIP: %u.%u.%u.%u:%u\n", ip_addr_ntoa(&PACKET->L3.src, tmp),
++                                  ntohs(PACKET->L4.src),
++                                  ip_addr_ntoa(&PACKET->L3.dst, tmp2),
++@@ -515,11 +529,13 @@ else if (gg->type == GG_STATUS60_CMD) {
++ }
++ else if (gg->type == GG_STATUS70_CMD) {
++       gg_get_status(gg_status70->status,tbuf);
++-      if ((int)gg->len-18 < 0)
+++      size_t offset=18;
+++      if (gg->len-offset < 0)
++           return NULL;
+++      size_t copy_len = MIN(gg->len - offset, GG_MAX_LEN);
++       gg_get_version(gg_status70->version,tbuf3);
++-      strncpy(tbuf2,gg_status70->description, (gg->len)-18);
++-      tbuf2[(gg->len)-18]='\0';
+++      strncpy(tbuf2,gg_status70->description, copy_len);
+++      tbuf2[copy_len]='\0';
++       DISSECT_MSG("GG7 : %s:%d -> %s:%d - STATUS CHANGED  UIN: %u  STATUS: %s (%s)  VERSION: %s  RIP: %u.%u.%u.%u:%u\n", ip_addr_ntoa(&PACKET->L3.src, tmp),
++                                  ntohs(PACKET->L4.src),
++                                  ip_addr_ntoa(&PACKET->L3.dst, tmp2),
+diff --git a/meta-networking/recipes-support/ettercap/files/CVE-2026-125400-06_3.patch b/meta-networking/recipes-support/ettercap/files/CVE-2026-125400-06_3.patch
+new file mode 100644
+index 0000000000..f649082cb9
+--- /dev/null
++++ b/meta-networking/recipes-support/ettercap/files/CVE-2026-125400-06_3.patch
+@@ -0,0 +1,92 @@
++From 4fee3420f939bb738e883a8baad15a6da473ab8a Mon Sep 17 00:00:00 2001
++From: Gianfranco Costamagna <locutusofborg@debian.org>
++Date: Fri, 24 Apr 2026 11:48:23 +0200
++Subject: [PATCH] ec_gg: don't check if two unsigned integers go <0, check just
++ if the len is greater than the offset
++
++(cherry picked from commit ffd9e06c3cdab9c056f7e729b5083ed81126315e)
++
++CVE: CVE-2026-125400 CVE-2026-125401 CVE-2026-125402 CVE-2026-125403 CVE-2026-125404 CVE-2026-125405 CVE-2026-125406
++Upstream-Status: Backport [https://github.com/Ettercap/ettercap/commit/ffd9e06c3cdab9c056f7e729b5083ed81126315e]
++
++Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
++---
++ src/dissectors/ec_gg.c | 16 ++++++++--------
++ 1 file changed, 8 insertions(+), 8 deletions(-)
++
++diff --git a/src/dissectors/ec_gg.c b/src/dissectors/ec_gg.c
++index 2a7dd8a6..aaabd9b9 100644
++--- a/src/dissectors/ec_gg.c
+++++ b/src/dissectors/ec_gg.c
++@@ -360,7 +360,7 @@ if ((gg->type == GG_LOGIN50_CMD) && !FROM_SERVER("gg", PACKET)) {
++    gg_get_status(gg_login50->status,tbuf);
++    gg_get_version(gg_login50->version,tbuf3);
++    size_t offset=22;
++-   if (gg->len-offset < 0)
+++   if (gg->len < offset)
++        return NULL;
++    size_t copy_len = MIN(gg->len - offset, GG_MAX_LEN);
++    strncpy(tbuf2,gg_login50->description, copy_len);
++@@ -384,7 +384,7 @@ else if (gg->type == GG_LOGIN60_CMD) {
++    gg_get_status(gg_login60->status,tbuf);
++    gg_get_version(gg_login60->version,tbuf3);
++    size_t offset=31;
++-   if (gg->len-offset < 0)
+++   if (gg->len < offset)
++        return NULL;
++    size_t copy_len = MIN(gg->len - offset, GG_MAX_LEN);
++    strncpy(tbuf2,gg_login60->description, copy_len);
++@@ -410,7 +410,7 @@ else if (gg->type == GG_LOGIN70_CMD) {
++    gg_get_status(gg_login70->status,tbuf);
++    gg_get_version(gg_login70->version,tbuf3);
++    size_t offset=92;
++-   if (gg->len-offset < 0)
+++   if (gg->len < offset)
++        return NULL;
++    size_t copy_len = MIN(gg->len - offset, GG_MAX_LEN);
++    strncpy(tbuf2,gg_login70->description, copy_len);
++@@ -461,7 +461,7 @@ else if (gg->type == GG_WELCOME_CMD) {
++ else if ((gg->type == GG_STATUS_CMD) && FROM_SERVER("gg", PACKET)) {
++     gg_get_status(gg_status->status,tbuf);
++     size_t offset=8;
++-    if (gg->len-offset < 0)
+++    if (gg->len < offset)
++         return NULL;
++     size_t copy_len = MIN(gg->len - offset, GG_MAX_LEN);
++     strncpy(tbuf2,gg_status->description, copy_len);
++@@ -477,7 +477,7 @@ else if ((gg->type == GG_STATUS_CMD) && FROM_SERVER("gg", PACKET)) {
++ else if ((gg->type == GG_NEW_STATUS_CMD) && !FROM_SERVER("gg", PACKET)) {
++       gg_get_status(gg_new_status->status,tbuf);
++       size_t offset=4;
++-      if (gg->len-offset < 0)
+++      if (gg->len < offset)
++           return NULL;
++       size_t copy_len = MIN(gg->len - offset, GG_MAX_LEN);
++       strncpy(tbuf2,gg_new_status->description, copy_len);
++@@ -493,7 +493,7 @@ else if ((gg->type == GG_STATUS50_CMD) && FROM_SERVER("gg", PACKET)) {
++       gg_get_status(gg_status50->status,tbuf);
++       gg_get_version(gg_status50->version,tbuf3);
++       size_t offset=20;
++-      if (gg->len-offset < 0)
+++      if (gg->len < offset)
++           return NULL;
++       size_t copy_len = MIN(gg->len - offset, GG_MAX_LEN);
++       strncpy(tbuf2,gg_status50->description, copy_len);
++@@ -512,7 +512,7 @@ else if (gg->type == GG_STATUS60_CMD) {
++       gg_get_status(gg_status60->status,tbuf);
++       gg_get_version(gg_status60->version,tbuf3);
++       size_t offset=14;
++-      if (gg->len-offset < 0)
+++      if (gg->len < offset)
++           return NULL;
++       size_t copy_len = MIN(gg->len - offset, GG_MAX_LEN);
++       strncpy(tbuf2,gg_status60->description, copy_len);
++@@ -530,7 +530,7 @@ else if (gg->type == GG_STATUS60_CMD) {
++ else if (gg->type == GG_STATUS70_CMD) {
++       gg_get_status(gg_status70->status,tbuf);
++       size_t offset=18;
++-      if (gg->len-offset < 0)
+++      if (gg->len < offset)
++           return NULL;
++       size_t copy_len = MIN(gg->len - offset, GG_MAX_LEN);
++       gg_get_version(gg_status70->version,tbuf3);
+diff --git a/meta-networking/recipes-support/ettercap/files/CVE-2026-125400-06_4.patch b/meta-networking/recipes-support/ettercap/files/CVE-2026-125400-06_4.patch
+new file mode 100644
+index 0000000000..81c4c4a8a5
+--- /dev/null
++++ b/meta-networking/recipes-support/ettercap/files/CVE-2026-125400-06_4.patch
+@@ -0,0 +1,807 @@
++From eb36ce39dc88056e854745d36dcc04b2d09a296f Mon Sep 17 00:00:00 2001
++From: "Emilio A. Escobar" <eescobar@gmail.com>
++Date: Tue, 8 Sep 2026 08:37:37 -0700
++Subject: [PATCH] Fix seven memory-safety bugs reachable from network traffic
++
++All seven were reported by the DREAM Security Research Team against v0.8.4.1
++(3548c10c) and validated against master.
++
++Vulnerability discovered by: Adiel Sol, Arad Inbar, Erez Cohen, Nir Somech,
++Ben Grinberg, Daniel Lubel, Shir Sadon (DREAM Security Research Team)
++
++Each has a draft advisory; the GHSA id is cited in the comment at every fix
++site. CVE ids have been requested and are not assigned yet.
++
++GHSA-f3j5-rhhr-85j5 - use-after-free in func_pcre (src/ec_filter.c)
++  The PCRE2 match data was freed before pcre2_get_ovector_pointer() was
++  called on it, and the resulting pointer then drove an allocation size,
++  two memcpy offsets into the pcap buffer, and the packet length delta.
++  The offsets are now copied out of the match data before it is released,
++  which also plugs the leaks on the no-match paths of both level 5 and 6.
++  This is the default build path wherever pcre2 is installed.
++
++GHSA-vrjv-f8gv-2h35 - heap overflow in gg_get_version (ec_gg.c)
++  The helper composed up to 44 bytes into a 30-byte allocation via
++  sprintf()/strcat(). Both helpers now build into a private buffer and hand
++  back only a bounded copy. Also fixes user[10]/pass[40], which were one
++  byte short for a u_int32 uin and 41 bytes short for five %X, and the
++  scratch buffers leaked by the short-packet guards.
++
++GHSA-v48w-7cvh-c7f4 - SNI heap over-read (ec_sslwrap.c)
++  val_len was read from the ClientHello and passed to strndup() without
++  being checked against the extension length, so it read up to 64KB past
++  the buffer and shipped the result to the upstream server. The reported
++  double free was not reproducible - ae->hostname is freed once and
++  SAFE_FREE() NULLs - but the callback fires twice and leaked the first
++  allocation, so it now releases any previous value before reassigning.
++
++GHSA-hq2w-pg4m-6w63 - out-of-bounds read in sslw_remove_sts (ec_sslwrap.c)
++  The search for the end of the STS header used the length of the whole
++  packet from an already-advanced pointer, reading past the buffer, and did
++  not check memmem() for NULL - h_end became 0x2, header_length underflowed
++  and memcpy() got a near-SIZE_MAX length. Bounded and NULL-checked; len
++  still describes the whole packet, as the rebuild below is sized from it.
++
++GHSA-j37f-7jx3-rf8j - size_t underflow in ccmp_decrypt (ec_encryption_ccmp.c)
++  len -= WPA_CCMP_TRAILER wrapped for frames shorter than 8 bytes and the
++  decrypt loop then ran ~2^60 times up the stack. Both the outer and inner
++  function now reject undersized frames, and the UINT16_MAX check moved
++  above the VLA it was meant to bound.
++
++GHSA-jw9q-j2rm-94j2 - heap over-read in the NTLM parser (ec_http.c)
++  lmResponse/ntResponse/uUser offsets were used as displacements from the
++  decoded message with no bounds checking, letting a peer read 24 bytes
++  from anywhere in a 4GB window and have us log the result. The decoded
++  length is now kept and every offset/length pair validated against it;
++  short blobs are rejected before msgType is read at offset 8.
++
++GHSA-w5ch-7c4x-crcc - stack underflow in the telnet dissector (ec_telnet.c)
++  Backspace handling decremented the write pointer with no lower bound, so
++  leading backspaces walked it below the VLA and later characters wrote
++  attacker-chosen bytes underneath it. Bounded by str.
++
++Verified with an AddressSanitizer build: the func_pcre use-after-free
++reproduces end to end via etterfilter + a crafted pcap and is gone after
++the fix, and extracted harnesses confirm the gg, ccmp and telnet fixes.
++Existing test suite passes.
++
++Co-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>
++Claude-Session: https://claude.ai/code/session_01U7DPkxps63uUMetZEJSTLr
++(cherry picked from commit a8c1a5085791b38c234be0e4129302fdc36964e0)
++
++CVE: CVE-2026-125400 CVE-2026-125401 CVE-2026-125402 CVE-2026-125403 CVE-2026-125404 CVE-2026-125405 CVE-2026-125406
++Upstream-Status: Backport [https://github.com/Ettercap/ettercap/commit/a8c1a5085791b38c234be0e4129302fdc36964e0]
++
++Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
++---
++ src/dissectors/ec_gg.c     | 138 +++++++++++++++++++++----------------
++ src/dissectors/ec_http.c   | 101 +++++++++++++++++++++++----
++ src/dissectors/ec_telnet.c |   8 ++-
++ src/ec_encryption_ccmp.c   |  38 ++++++++--
++ src/ec_filter.c            |  46 ++++++++++---
++ src/ec_sslwrap.c           |  36 ++++++++--
++ 6 files changed, 274 insertions(+), 93 deletions(-)
++
++diff --git a/src/dissectors/ec_gg.c b/src/dissectors/ec_gg.c
++index aaabd9b9..adf7f6f2 100644
++--- a/src/dissectors/ec_gg.c
+++++ b/src/dissectors/ec_gg.c
++@@ -166,6 +166,9 @@ uncomment #define below if you want to see all contacts status changes - be care
++ #define GG_STATUS60_CMD    0x0000000f
++ #define GG_STATUS70_CMD    0x00000017
++ #define GG_MAX_LEN         70
+++/* GHSA-vrjv-f8gv-2h35: sized for the longest string each helper can build */
+++#define GG_TBUF_SIZE       64
+++#define GG_TBUF3_SIZE      64
++ 
++ struct gg_hdr {
++    u_int32 type;
++@@ -290,8 +293,8 @@ struct gg_status70_hdr {
++ 
++ FUNC_DECODER(dissector_gg);
++ void gg_init(void);
++-void gg_get_status(u_int32 status, char *str);
++-void gg_get_version(u_int32 version, char *str);
+++void gg_get_status(u_int32 status, char *str, size_t size);
+++void gg_get_version(u_int32 version, char *str, size_t size);
++ 
++ /************************************************/
++ 
++@@ -320,7 +323,12 @@ FUNC_DECODER(dissector_gg)
++    struct gg_recv_msg_hdr *gg_recv_msg;
++    struct gg_new_status_hdr *gg_new_status;
++    char *tbuf, *tbuf2, *tbuf3;
++-   char user[10], pass[40];
+++   /* GHSA-vrjv-f8gv-2h35: a u_int32 uin needs 11 bytes and 5 x %X needs 41 */
+++   char user[12], pass[48];
+++
+++/* GHSA-vrjv-f8gv-2h35: the short-packet guards below used to return without
+++ * releasing the three scratch buffers */
+++#define GG_BAIL() do { SAFE_FREE(tbuf); SAFE_FREE(tbuf2); SAFE_FREE(tbuf3); return NULL; } while(0)
++ 
++    /* don't complain about unused var */
++    (void)end;
++@@ -352,16 +360,16 @@ FUNC_DECODER(dissector_gg)
++ 
++    DEBUG_MSG("Gadu-Gadu --> TCP dissector_gg (%.8X:%.8X)", gg->type, gg->len);
++ 
++-   SAFE_CALLOC(tbuf, 50, sizeof(char));
++-   SAFE_CALLOC(tbuf2, 71, sizeof(char));
++-   SAFE_CALLOC(tbuf3, 30, sizeof(char));
+++   SAFE_CALLOC(tbuf, GG_TBUF_SIZE, sizeof(char));
+++   SAFE_CALLOC(tbuf2, GG_MAX_LEN + 1, sizeof(char));
+++   SAFE_CALLOC(tbuf3, GG_TBUF3_SIZE, sizeof(char));
++    
++ if ((gg->type == GG_LOGIN50_CMD) && !FROM_SERVER("gg", PACKET)) {
++-   gg_get_status(gg_login50->status,tbuf);
++-   gg_get_version(gg_login50->version,tbuf3);
+++   gg_get_status(gg_login50->status, tbuf, GG_TBUF_SIZE);
+++   gg_get_version(gg_login50->version, tbuf3, GG_TBUF3_SIZE);
++    size_t offset=22;
++    if (gg->len < offset)
++-       return NULL;
+++       GG_BAIL();
++    size_t copy_len = MIN(gg->len - offset, GG_MAX_LEN);
++    strncpy(tbuf2,gg_login50->description, copy_len);
++    tbuf2[copy_len]='\0';
++@@ -381,11 +389,11 @@ if ((gg->type == GG_LOGIN50_CMD) && !FROM_SERVER("gg", PACKET)) {
++                                  gg_login50->local_port);
++ }
++ else if (gg->type == GG_LOGIN60_CMD) {
++-   gg_get_status(gg_login60->status,tbuf);
++-   gg_get_version(gg_login60->version,tbuf3);
+++   gg_get_status(gg_login60->status, tbuf, GG_TBUF_SIZE);
+++   gg_get_version(gg_login60->version, tbuf3, GG_TBUF3_SIZE);
++    size_t offset=31;
++    if (gg->len < offset)
++-       return NULL;
+++       GG_BAIL();
++    size_t copy_len = MIN(gg->len - offset, GG_MAX_LEN);
++    strncpy(tbuf2,gg_login60->description, copy_len);
++    tbuf2[copy_len]='\0';
++@@ -407,11 +415,11 @@ else if (gg->type == GG_LOGIN60_CMD) {
++                                  gg_login60->remote_port);
++ }
++ else if (gg->type == GG_LOGIN70_CMD) {
++-   gg_get_status(gg_login70->status,tbuf);
++-   gg_get_version(gg_login70->version,tbuf3);
+++   gg_get_status(gg_login70->status, tbuf, GG_TBUF_SIZE);
+++   gg_get_version(gg_login70->version, tbuf3, GG_TBUF3_SIZE);
++    size_t offset=92;
++    if (gg->len < offset)
++-       return NULL;
+++       GG_BAIL();
++    size_t copy_len = MIN(gg->len - offset, GG_MAX_LEN);
++    strncpy(tbuf2,gg_login70->description, copy_len);
++    tbuf2[copy_len]='\0';
++@@ -459,10 +467,10 @@ else if (gg->type == GG_WELCOME_CMD) {
++ }
++ #ifdef GG_CONTACTS_STATUS_CHANGES
++ else if ((gg->type == GG_STATUS_CMD) && FROM_SERVER("gg", PACKET)) {
++-    gg_get_status(gg_status->status,tbuf);
+++    gg_get_status(gg_status->status, tbuf, GG_TBUF_SIZE);
++     size_t offset=8;
++     if (gg->len < offset)
++-        return NULL;
+++        GG_BAIL();
++     size_t copy_len = MIN(gg->len - offset, GG_MAX_LEN);
++     strncpy(tbuf2,gg_status->description, copy_len);
++     tbuf2[copy_len]='\0';
++@@ -475,10 +483,10 @@ else if ((gg->type == GG_STATUS_CMD) && FROM_SERVER("gg", PACKET)) {
++ } 
++ #endif
++ else if ((gg->type == GG_NEW_STATUS_CMD) && !FROM_SERVER("gg", PACKET)) {
++-      gg_get_status(gg_new_status->status,tbuf);
+++      gg_get_status(gg_new_status->status, tbuf, GG_TBUF_SIZE);
++       size_t offset=4;
++       if (gg->len < offset)
++-          return NULL;
+++          GG_BAIL();
++       size_t copy_len = MIN(gg->len - offset, GG_MAX_LEN);
++       strncpy(tbuf2,gg_new_status->description, copy_len);
++       tbuf2[copy_len]='\0';
++@@ -490,11 +498,11 @@ else if ((gg->type == GG_NEW_STATUS_CMD) && !FROM_SERVER("gg", PACKET)) {
++ }
++ #ifdef GG_CONTACTS_STATUS_CHANGES
++ else if ((gg->type == GG_STATUS50_CMD) && FROM_SERVER("gg", PACKET)) {
++-      gg_get_status(gg_status50->status,tbuf);
++-      gg_get_version(gg_status50->version,tbuf3);
+++      gg_get_status(gg_status50->status, tbuf, GG_TBUF_SIZE);
+++      gg_get_version(gg_status50->version, tbuf3, GG_TBUF3_SIZE);
++       size_t offset=20;
++       if (gg->len < offset)
++-          return NULL;
+++          GG_BAIL();
++       size_t copy_len = MIN(gg->len - offset, GG_MAX_LEN);
++       strncpy(tbuf2,gg_status50->description, copy_len);
++       tbuf2[copy_len]='\0';
++@@ -509,11 +517,11 @@ else if ((gg->type == GG_STATUS50_CMD) && FROM_SERVER("gg", PACKET)) {
++                                  gg_status50->remote_port);
++ }
++ else if (gg->type == GG_STATUS60_CMD) {
++-      gg_get_status(gg_status60->status,tbuf);
++-      gg_get_version(gg_status60->version,tbuf3);
+++      gg_get_status(gg_status60->status, tbuf, GG_TBUF_SIZE);
+++      gg_get_version(gg_status60->version, tbuf3, GG_TBUF3_SIZE);
++       size_t offset=14;
++       if (gg->len < offset)
++-          return NULL;
+++          GG_BAIL();
++       size_t copy_len = MIN(gg->len - offset, GG_MAX_LEN);
++       strncpy(tbuf2,gg_status60->description, copy_len);
++       tbuf2[copy_len]='\0';
++@@ -528,12 +536,12 @@ else if (gg->type == GG_STATUS60_CMD) {
++                                  gg_status60->remote_port);
++ }
++ else if (gg->type == GG_STATUS70_CMD) {
++-      gg_get_status(gg_status70->status,tbuf);
+++      gg_get_status(gg_status70->status, tbuf, GG_TBUF_SIZE);
++       size_t offset=18;
++       if (gg->len < offset)
++-          return NULL;
+++          GG_BAIL();
++       size_t copy_len = MIN(gg->len - offset, GG_MAX_LEN);
++-      gg_get_version(gg_status70->version,tbuf3);
+++      gg_get_version(gg_status70->version, tbuf3, GG_TBUF3_SIZE);
++       strncpy(tbuf2,gg_status70->description, copy_len);
++       tbuf2[copy_len]='\0';
++       DISSECT_MSG("GG7 : %s:%d -> %s:%d - STATUS CHANGED  UIN: %u  STATUS: %s (%s)  VERSION: %s  RIP: %u.%u.%u.%u:%u\n", ip_addr_ntoa(&PACKET->L3.src, tmp),
++@@ -564,133 +572,147 @@ else {
++    return NULL;
++ }
++ 
++-void gg_get_status(u_int32 status, char *str)  {
+++void gg_get_status(u_int32 status, char *str, size_t size)  {
+++   char buf[128];
+++
+++   buf[0] = '\0';
++ 
++ switch ((status&0x00ff)) {
++ 
++ case 0x0014:
++-   strcpy(str,"invisible");
+++   strcpy(buf,"invisible");
++    break;
++ 
++ case 0x0002:
++-   strcpy(str,"available");
+++   strcpy(buf,"available");
++    break;
++ 
++ case 0x0003:
++-   strcpy(str,"busy");
+++   strcpy(buf,"busy");
++    break;
++ 
++ case 0x0006:
++-   strcpy(str,"blocked");
+++   strcpy(buf,"blocked");
++    break;
++ 
++ case 0x0001:
++-   strcpy(str,"not available");
+++   strcpy(buf,"not available");
++    break;
++ 
++ case 0x0016:
++-   strcpy(str,"invisible + descr");
+++   strcpy(buf,"invisible + descr");
++    break;
++ 
++ case 0x0004:
++-   strcpy(str,"available + descr");
+++   strcpy(buf,"available + descr");
++    break;
++ 
++ case 0x0005:
++-   strcpy(str,"busy + descr");
+++   strcpy(buf,"busy + descr");
++    break;
++ 
++ case 0x0015:
++-   strcpy(str,"not available + descr");
+++   strcpy(buf,"not available + descr");
++    break;
++ 
++ default:
++-   strcpy(str,"unknown");
+++   strcpy(buf,"unknown");
++ }
++ 
++ if ((status&0xff00)==0x8000)
++-   strcat(str," + private");
+++   strcat(buf," + private");
+++
+++/* GHSA-vrjv-f8gv-2h35: the helper composes into an ample private buffer
+++ * and only ever hands the caller a bounded copy */
+++snprintf(str, size, "%s", buf);
++ 
++ }
++ 
++-void gg_get_version(u_int32 version, char *str)  {
+++void gg_get_version(u_int32 version, char *str, size_t size)  {
+++   char buf[128];
+++
+++   buf[0] = '\0';
++ 
++ switch ((version&0x00ff)) {
++ 
++ case 0x0000002A:
++-   strcpy(str,"7.7");
+++   strcpy(buf,"7.7");
++    break;
++ 
++ case 0x00000029:
++-   strcpy(str,"7.6");
+++   strcpy(buf,"7.6");
++    break;
++ 
++ case 0x00000024:
++-   strcpy(str,"6.1/7.6");
+++   strcpy(buf,"6.1/7.6");
++    break;
++ 
++ case 0x00000028:
++-   strcpy(str,"7.5");
+++   strcpy(buf,"7.5");
++    break;
++ 
++ case 0x00000027:
++ case 0x00000026:
++ case 0x00000025:
++-   strcpy(str,"7.0");
+++   strcpy(buf,"7.0");
++    break;
++ 
++ case 0x00000022:
++ case 0x00000021:
++ case 0x00000020:
++-   strcpy(str,"6.0");
+++   strcpy(buf,"6.0");
++    break;
++ 
++ case 0x0000001E:
++ case 0x0000001C:
++-   strcpy(str,"5.7");
+++   strcpy(buf,"5.7");
++    break;
++ 
++ case 0x0000001B:
++ case 0x00000019:
++-   strcpy(str,"5.0");
+++   strcpy(buf,"5.0");
++    break;
++ 
++ case 0x00000018:
++-   strcpy(str,"5.0/4.9");
+++   strcpy(buf,"5.0/4.9");
++    break;
++ 
++ case 0x00000017:
++ case 0x00000016:
++-   strcpy(str,"4.9");
+++   strcpy(buf,"4.9");
++    break;
++ 
++ case 0x00000015:
++ case 0x00000014:
++-   strcpy(str,"4.8");
+++   strcpy(buf,"4.8");
++    break;
++ 
++ case 0x00000011:
++-   strcpy(str,"4.6");
+++   strcpy(buf,"4.6");
++    break;
++ 
++ case 0x00000010:
++ case 0x0000000f:
++-   strcpy(str,"4.5");
+++   strcpy(buf,"4.5");
++    break;
++ 
++ case 0x0000000b:
++-   strcpy(str,"4.0");
+++   strcpy(buf,"4.0");
++    break;
++ 
++ default:
++-   sprintf(str,"unknown (0x%X)",version);
+++   sprintf(buf,"unknown (0x%X)",version);
++ }
++ 
++ if ((version&0xf0000000)==0x40000000)
++-   strcat(str," + has audio");
+++   strcat(buf," + has audio");
++ 
++ if ((version&0x0f000000)== 0x04000000)
++-   strcat(str," + eraomnix");
+++   strcat(buf," + eraomnix");
+++
+++/* GHSA-vrjv-f8gv-2h35: the helper composes into an ample private buffer
+++ * and only ever hands the caller a bounded copy */
+++snprintf(str, size, "%s", buf);
++ 
++ }
++ 
++diff --git a/src/dissectors/ec_http.c b/src/dissectors/ec_http.c
++index 6384d0af..30f09a94 100644
++--- a/src/dissectors/ec_http.c
+++++ b/src/dissectors/ec_http.c
++@@ -26,6 +26,8 @@
++ #include <ec_session.h>
++ #include <ec_sslwrap.h>
++ 
+++#include <stddef.h>   /* offsetof() */
+++
++ /* globals */
++ #define USER 0
++ #define PASS 1
++@@ -105,6 +107,7 @@ static int Parse_Basic_Auth(char *ptr, char *from_here, struct packet_object *po
++ static int Parse_User_Agent(char *end, char *from_here, struct packet_object *po);
++ static char *unicodeToString(char *p, size_t len);
++ static void dumpRaw(char *str, unsigned char *buf, size_t len);
+++static char *unicodeToStringChecked(char *base, size_t buflen, u_int32 offset, u_int16 len);
++ int http_fields_init(void);
++ 
++ #define CVAL(buf,pos) (((unsigned char *)(buf))[pos])
++@@ -112,7 +115,19 @@ int http_fields_init(void);
++ #define SVAL(buf,pos) (PVAL(buf,pos)|PVAL(buf,(pos)+1)<<8)
++ #define IVAL(buf,pos) (SVAL(buf,pos)|SVAL(buf,(pos)+2)<<16)
++ 
++-#define GetUnicodeString(structPtr, header) unicodeToString(((char*)structPtr) + IVAL(&structPtr->header.offset,0) , SVAL(&structPtr->header.len,0)/2)
+++/*
+++ * GHSA-jw9q-j2rm-94j2: the offset and length of every NTLM string are taken
+++ * verbatim from the packet, so both have to be validated against the size of
+++ * the decoded message before they are used as a displacement. buflen is the
+++ * number of bytes base64decode() actually produced.
+++ */
+++#define NTLM_FIELD_IN_BOUNDS(buflen, off, cnt) \
+++   ((size_t)(off) <= (size_t)(buflen) && (size_t)(cnt) <= (size_t)(buflen) - (size_t)(off))
+++
+++#define GetUnicodeString(structPtr, header, buflen) \
+++   unicodeToStringChecked((char*)(structPtr), (buflen), \
+++                          IVAL(&(structPtr)->header.offset,0), \
+++                          SVAL(&(structPtr)->header.len,0))
++ 
++ /************************************************/
++ 
++@@ -465,7 +480,21 @@ static int Parse_NTLM_Auth(char *ptr, char *from_here, struct packet_object *po)
++    ec_strtok(to_decode, "\r", &tok);
++ 
++    char *decoded;
++-   base64decode(to_decode, &decoded);
+++   int decoded_len;
+++
+++   decoded_len = base64decode(to_decode, &decoded);
+++
+++   /*
+++    * GHSA-jw9q-j2rm-94j2: base64decode() sizes its output from the input
+++    * string, so a short blob left every read below out of bounds - starting
+++    * with msgType, which lives at offset 8.
+++    */
+++   if (decoded_len < (int)sizeof(tSmbStdHeader)) {
+++      SAFE_FREE(to_decode);
+++      SAFE_FREE(decoded);
+++      return 1;
+++   }
+++
++    hSmb = (tSmbStdHeader *) decoded;
++    msgType = IVAL(&hSmb->msgType, 0);
++ 
++@@ -476,7 +505,14 @@ static int Parse_NTLM_Auth(char *ptr, char *from_here, struct packet_object *po)
++       tSmbNtlmAuthChallenge *challenge_struct;
++ 
++       challenge_struct = (tSmbNtlmAuthChallenge *) decoded;
++-      
+++
+++      /* the fixed part up to and including challengeData must be present */
+++      if (decoded_len < (int)(offsetof(tSmbNtlmAuthChallenge, challengeData) + 8)) {
+++         SAFE_FREE(to_decode);
+++         SAFE_FREE(decoded);
+++         return 1;
+++      }
+++
++       /* Create a session to remember the server challenge */
++       dissect_create_session(&s, po, DISSECT_CODE(dissector_http));
++       SAFE_CALLOC(s->data, 1, sizeof(struct http_status));                  
++@@ -502,17 +538,42 @@ static int Parse_NTLM_Auth(char *ptr, char *from_here, struct packet_object *po)
++          if (conn_status->c_status == NTLM_WAIT_RESPONSE) {
++             /* Fill the user and passwords */
++             response_struct  = (tSmbNtlmAuthResponse *) decoded;
++-            po->DISSECTOR.user = strdup(GetUnicodeString(response_struct, uUser));
++-            SAFE_CALLOC(po->DISSECTOR.pass, strlen(po->DISSECTOR.user) + 150, sizeof(char));
++-            snprintf(po->DISSECTOR.pass, strlen(po->DISSECTOR.user) + 150, "(NTLM) %s:\"\":\"\":", po->DISSECTOR.user);
++-            outstr = po->DISSECTOR.pass + strlen(po->DISSECTOR.pass);
++-            dumpRaw(outstr,((unsigned char*)response_struct)+IVAL(&response_struct->lmResponse.offset,0), 24);	    	 
++-            outstr[48] = ':';
++-            outstr+=49;
++-            dumpRaw(outstr,((unsigned char*)response_struct)+IVAL(&response_struct->ntResponse.offset,0), 24);	       	    
++-            outstr[48] = ':';
++-            outstr += 49;
++-            strcat(po->DISSECTOR.pass, (const char*)conn_status->c_data);
+++
+++            u_int32 lm_off = IVAL(&response_struct->lmResponse.offset, 0);
+++            u_int32 nt_off = IVAL(&response_struct->ntResponse.offset, 0);
+++            char *ntlm_user;
+++
+++            /*
+++             * GHSA-jw9q-j2rm-94j2: the fixed header has to be there, and both
+++             * response offsets have to address 24 bytes that are really inside
+++             * the decoded message. Both used to be added to the message base
+++             * unchecked, letting a peer read - and have us log - heap memory
+++             * from anywhere in a 4GB window above the allocation.
+++             */
+++            if (decoded_len >= (int)offsetof(tSmbNtlmAuthResponse, buffer) &&
+++                NTLM_FIELD_IN_BOUNDS(decoded_len, lm_off, 24) &&
+++                NTLM_FIELD_IN_BOUNDS(decoded_len, nt_off, 24) &&
+++                (ntlm_user = GetUnicodeString(response_struct, uUser, decoded_len)) != NULL) {
+++
+++               po->DISSECTOR.user = strdup(ntlm_user);
+++               SAFE_CALLOC(po->DISSECTOR.pass, strlen(po->DISSECTOR.user) + 150, sizeof(char));
+++               snprintf(po->DISSECTOR.pass, strlen(po->DISSECTOR.user) + 150, "(NTLM) %s:\"\":\"\":", po->DISSECTOR.user);
+++               outstr = po->DISSECTOR.pass + strlen(po->DISSECTOR.pass);
+++               dumpRaw(outstr, ((unsigned char*)response_struct) + lm_off, 24);
+++               outstr[48] = ':';
+++               outstr+=49;
+++               dumpRaw(outstr, ((unsigned char*)response_struct) + nt_off, 24);
+++               outstr[48] = ':';
+++               outstr += 49;
+++               strcat(po->DISSECTOR.pass, (const char*)conn_status->c_data);
+++            } else {
+++               DEBUG_MSG("HTTP --> malformed NTLM type 3 message, skipped");
+++               session_free(s);
+++               SAFE_FREE(ident);
+++               SAFE_FREE(to_decode);
+++               SAFE_FREE(decoded);
+++               return 1;
+++            }
++ 
++             /* Are we authenticating to the proxy or to a website? */
++             if (Proxy_Auth)
++@@ -865,6 +926,18 @@ static void dumpRaw(char *str, unsigned char *buf, size_t len)
++       snprintf(str, 3, "%02x", buf[i]);
++ }
++ 
+++/*
+++ * Bounds-checked wrapper around unicodeToString(). Returns NULL when the
+++ * packet-supplied offset/length pair does not fit inside the decoded message.
+++ */
+++static char *unicodeToStringChecked(char *base, size_t buflen, u_int32 offset, u_int16 len)
+++{
+++   if (!NTLM_FIELD_IN_BOUNDS(buflen, offset, len))
+++      return NULL;
+++
+++   return unicodeToString(base + offset, len / 2);
+++}
+++
++ /* A little helper function */
++ static char *unicodeToString(char *p, size_t len)
++ {
++diff --git a/src/dissectors/ec_telnet.c b/src/dissectors/ec_telnet.c
++index cbf97b33..dab44afe 100644
++--- a/src/dissectors/ec_telnet.c
+++++ b/src/dissectors/ec_telnet.c
++@@ -151,7 +151,13 @@ FUNC_DECODER(dissector_telnet)
++             stringlen = strlen((const char*)str);
++             for (p = str, i = 0; i < stringlen; i++) {
++                if (str[i] == '\b' || str[i] == 0x7f) {
++-                  p--;
+++                  /*
+++                   * GHSA-w5ch-7c4x-crcc: a backspace arriving before any
+++                   * printable character used to walk p below str, after which
+++                   * this loop wrote attacker-chosen bytes underneath the VLA.
+++                   */
+++                  if (p > str)
+++                     p--;
++                } else {
++                   *p = str[i];
++                   p++;  
++diff --git a/src/ec_encryption_ccmp.c b/src/ec_encryption_ccmp.c
++index 8f8761e8..3c78733c 100644
++--- a/src/ec_encryption_ccmp.c
+++++ b/src/ec_encryption_ccmp.c
++@@ -56,15 +56,35 @@ int wpa_ccmp_decrypt(u_char *mac, u_char *data, size_t len, struct wpa_sa sa)
++ {
++    u_char mic[WPA_CCMP_TRAILER];
++    u_char PN[6]; /* 48 bit Packet Number */
++-   size_t data_len = len - sizeof(struct wpa_header);
++    u_char AAD[AES_BLOCK_SIZE*2];
++    u_char BZERO[AES_BLOCK_SIZE], A[AES_BLOCK_SIZE], B[AES_BLOCK_SIZE];
++-   u_char decbuf[len];
++    AES_KEY aes_ctx;
+++   size_t data_len;
++ 
++-   if (len > UINT16_MAX) {
++-       return -E_NOTHANDLED;
++-   }
+++   /*
+++    * GHSA-j37f-7jx3-rf8j: len is the payload that follows the WPA header, so
+++    * it has to be at least large enough to hold the CCMP MIC trailer. It used
+++    * to be used unchecked: data_len underflowed for len < 8, the memset near
+++    * the end of this function wrote before data, and ccmp_decrypt() wrapped
+++    * its own length and ran away up the stack.
+++    *
+++    * The upper bound is checked here too, before the decbuf VLA is sized from
+++    * len rather than after it.
+++    */
+++   if (len > UINT16_MAX)
+++      return -E_NOTHANDLED;
+++
+++   if (len < WPA_CCMP_TRAILER)
+++      return -E_NOTHANDLED;
+++
+++   /*
+++    * Numerically identical to the previous len - sizeof(struct wpa_header)
+++    * (both are 8), but this is the value CCM actually wants in B0: the length
+++    * of the plaintext payload, i.e. everything except the MIC trailer.
+++    */
+++   data_len = len - WPA_CCMP_TRAILER;
+++
+++   u_char decbuf[len];
++ 
++    /* init the AES with the decryption key from SA */
++    AES_set_encrypt_key(sa.decryption_key, 128, &aes_ctx);
++@@ -191,6 +211,14 @@ static int ccmp_decrypt(u_char *enc, u_char *BZERO, u_char *B, u_char *A, u_char
++ {
++    int i = 1;
++ 
+++   /*
+++    * GHSA-j37f-7jx3-rf8j: len is unsigned, so a frame shorter than the
+++    * trailer wrapped this subtraction to ~SIZE_MAX and the loop below then
+++    * wrote AES blocks far past the caller's stack buffer.
+++    */
+++   if (len < WPA_CCMP_TRAILER)
+++      return -E_NOTHANDLED;
+++
++    /* remove the trailer from the length */
++    len -= WPA_CCMP_TRAILER;
++ 
++diff --git a/src/ec_filter.c b/src/ec_filter.c
++index a436d6df..7b6ca084 100644
++--- a/src/ec_filter.c
+++++ b/src/ec_filter.c
++@@ -567,8 +567,18 @@ static int func_pcre(struct filter_op *fop, struct packet_object *po)
++    return -E_NOTFOUND;
++ #else
++ #ifdef HAVE_PCRE2
++-   PCRE2_SIZE *ovec;
+++   /*
+++    * GHSA-f3j5-rhhr-85j5: hold our own copy of the ovector.
+++    * The ovector lives inside the pcre2_match_data block, so a pointer to it
+++    * is only valid while that block is alive. Copying the offsets out lets us
+++    * release the match data on every path without the rest of the function
+++    * reading (and computing memcpy offsets from) freed heap memory.
+++    */
+++   PCRE2_SIZE ovec[PCRE_OVEC_SIZE];
+++   PCRE2_SIZE *ovec_src;
++    pcre2_match_data *match_data;
+++   uint32_t ovec_pairs, n;
+++   memset(&ovec, 0, sizeof(ovec));
++ #else
++    int ovec[PCRE_OVEC_SIZE];
++    memset(&ovec, 0, sizeof(ovec));
++@@ -583,14 +593,28 @@ static int func_pcre(struct filter_op *fop, struct packet_object *po)
++          /* search in the real packet */
++ #ifdef HAVE_PCRE2
++          match_data = pcre2_match_data_create_from_pattern(fop->op.func.ropt->pregex, NULL);
++-         if ( (ret = pcre2_match(fop->op.func.ropt->pregex, (PCRE2_SPTR)po->DATA.data, po->DATA.len, 0, 0, match_data, NULL)) < 0)
++-#else
++-         if ( (ret = pcre_exec(fop->op.func.ropt->pregex, fop->op.func.ropt->preg_extra, po->DATA.data, po->DATA.len, 0, 0, ovec, sizeof(ovec) / sizeof(*ovec))) < 0)
++-#endif
+++         if ( (ret = pcre2_match(fop->op.func.ropt->pregex, (PCRE2_SPTR)po->DATA.data, po->DATA.len, 0, 0, match_data, NULL)) < 0) {
+++            /* also plugs the leak this path used to have */
+++            pcre2_match_data_free(match_data);
++             return -E_NOTFOUND;
+++         }
+++
+++         /* snapshot the offsets before the match data goes away */
+++         ovec_src = pcre2_get_ovector_pointer(match_data);
+++         ovec_pairs = pcre2_get_ovector_count(match_data);
+++         if (ovec_pairs > PCRE_OVEC_SIZE / 2)
+++            ovec_pairs = PCRE_OVEC_SIZE / 2;
+++         for (n = 0; n < ovec_pairs * 2; n++)
+++            ovec[n] = ovec_src[n];
++ 
++-#ifdef HAVE_PCRE2
++          pcre2_match_data_free(match_data);
+++
+++         /* never let a marker index past the pairs we actually copied */
+++         if (ret > (int)ovec_pairs)
+++            ret = (int)ovec_pairs;
+++#else
+++         if ( (ret = pcre_exec(fop->op.func.ropt->pregex, fop->op.func.ropt->preg_extra, po->DATA.data, po->DATA.len, 0, 0, ovec, sizeof(ovec) / sizeof(*ovec))) < 0)
+++            return -E_NOTFOUND;
++ #endif
++ 
++          /* the pcre wants to modify the packet */
++@@ -621,9 +645,6 @@ static int func_pcre(struct filter_op *fop, struct packet_object *po)
++             }
++             /* now: i = strlen(q) */
++ 
++-#ifdef HAVE_PCRE2
++-            ovec = pcre2_get_ovector_pointer(match_data);
++-#endif
++             SAFE_CALLOC(replaced, markers*(ovec[1]-ovec[0]) + i + 1, sizeof(char));
++           
++             po->flags |= PO_MODIFIED;
++@@ -707,11 +728,14 @@ static int func_pcre(struct filter_op *fop, struct packet_object *po)
++          /* search in the decoded one */
++ #ifdef HAVE_PCRE2
++          match_data = pcre2_match_data_create_from_pattern(fop->op.func.ropt->pregex, NULL);
++-         if ( pcre2_match(fop->op.func.ropt->pregex, (PCRE2_SPTR)po->DATA.disp_data, po->DATA.disp_len, 0, 0, match_data, NULL) < 0)
+++         if ( pcre2_match(fop->op.func.ropt->pregex, (PCRE2_SPTR)po->DATA.disp_data, po->DATA.disp_len, 0, 0, match_data, NULL) < 0) {
+++            pcre2_match_data_free(match_data);
+++            return -E_NOTFOUND;
+++         }
++ #else
++          if ( pcre_exec(fop->op.func.ropt->pregex, fop->op.func.ropt->preg_extra, po->DATA.disp_data, po->DATA.disp_len, 0, 0, NULL, 0) < 0)
++-#endif
++             return -E_NOTFOUND;
+++#endif
++ 
++ #ifdef HAVE_PCRE2
++          pcre2_match_data_free(match_data);
++diff --git a/src/ec_sslwrap.c b/src/ec_sslwrap.c
++index 8581c7a9..873225b7 100644
++--- a/src/ec_sslwrap.c
+++++ b/src/ec_sslwrap.c
++@@ -573,7 +573,16 @@ static int sslw_clienthello_cb(SSL *ssl, int *alert, void *arg)
++ 
++    ae = (struct accepted_entry *)arg;
++ 
++-   /* extract hostname value from SNI extension */
+++   /*
+++    * Extract hostname value from SNI extension.
+++    *
+++    * This callback is invoked more than once per handshake (it returns
+++    * SSL_CLIENT_HELLO_RETRY the first time), so release whatever the previous
+++    * invocation stored before taking ownership of a new string. SAFE_FREE()
+++    * NULLs as it frees, which keeps this safe to re-enter and makes a double
+++    * free of ae->hostname unreachable on every path that reaches here.
+++    */
+++   SAFE_FREE(ae->hostname);
++    ae->hostname = sslw_get_clienthello_sni(ssl);
++ 
++    if (ae->tls_handshake_state != SSL_CLIENTHELLO_INTERCEPTED) {
++@@ -600,8 +609,14 @@ static char* sslw_get_clienthello_sni(SSL *ssl)
++          sni_type = sni[2];
++          val_len = sni[3] << 8 | sni[4];
++ 
++-         if (sni_type == TLSEXT_NAMETYPE_host_name)
++-            return strndup(sni+5, val_len);
+++         /*
+++          * GHSA-v48w-7cvh-c7f4: val_len comes straight off the wire and the
+++          * client_hello callback runs before OpenSSL validates extension
+++          * bodies, so it has to be checked against the extension we actually
+++          * got. Without this, strndup() walked up to 64KB past the buffer.
+++          */
+++         if (sni_type == TLSEXT_NAMETYPE_host_name && val_len <= len - 5)
+++            return strndup((const char *)sni + 5, val_len);
++       }
++    }
++ 
++@@ -1309,9 +1324,22 @@ static int sslw_remove_sts(struct packet_object *po)
++    len = end - ptr;
++ 
++    ptr = (u_char*)memmem(ptr, len, "\r\nStrict-Transport-Security:", slen);
+++   if (ptr == NULL)
+++      return -E_NOTFOUND;
++    ptr += 2;
++ 
++-   h_end = (u_char*)memmem(ptr, len, "\r\n", 2);
+++   /*
+++    * GHSA-hq2w-pg4m-6w63: len still described the whole buffer, so this search
+++    * ran up to (ptr - po->DATA.data) bytes past the end of it and could match
+++    * out of bounds. Bound it by what is actually left after the advanced
+++    * pointer, and bail out when the header is not terminated inside this
+++    * packet - h_end used to become 0x2 there, underflowing header_length and
+++    * handing memcpy() a near-SIZE_MAX length. len itself must keep describing
+++    * the whole packet, since the reconstruction below is sized from it.
+++    */
+++   h_end = (u_char*)memmem(ptr, (size_t)(end - ptr), "\r\n", 2);
+++   if (h_end == NULL)
+++      return -E_NOTFOUND;
++    h_end += 2;
++ 
++    size_t before_header = ptr - po->DATA.data;
