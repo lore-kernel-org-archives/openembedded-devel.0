@@ -1,65 +1,65 @@
 Received: from mail-pg1-f173.google.com (mail-pg1-f173.google.com [209.85.215.173])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.8133.1794465762262353514
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.7992.1794465766386651665
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 11 Nov 2026 22:42:42 -0800
+ Wed, 11 Nov 2026 22:42:46 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=w2C7xvMd;
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=osYnqYgt;
  spf=pass (domain: gmail.com, ip: 209.85.215.173, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f173.google.com with SMTP id 41be03b00d2f7-cc147d86bebso313052a12.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 11 Nov 2026 22:42:42 -0800 (PST)
+Received: by mail-pg1-f173.google.com with SMTP id 41be03b00d2f7-cc147d86bebso313108a12.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 11 Nov 2026 22:42:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794465762; x=1795070562; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1794465765; x=1795070565; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=/k3WuKf/BcLye/0ehxhx/m5Spkf8cynwzeNWewHwt2Y=;
-        b=w2C7xvMdvp8MC5Uunj3H864P+tfrNb9SYs1p+XAGt33+i+kOI0OmmLObFUUJkyR6xA
-         HC2vCWvpi0E3rkEe5te9KbqDRuaGbrQSr+KcrKgdJ27px10alkKqt0aEEsFYzMM3Yvau
-         QRmn+VJ8SVgSoiBVQM28io5KSEk0FMAgsNWveXQOGZINLCXvaIcRjrYhXLESPZhbjPAr
-         w6wBlqrsVG1h2Bu7zsQvjmC5wQYLMLvTK/QsJeVklv70sB0uZUo75Xi99YouUwZVs9rm
-         HVO5Kbmf4qSeHxfUtwrV78Z+/CC6aRGj5pKeHr1WoXZdwL9ev5p3oz7ZbMdZJO7JBrmB
-         rAQw==
+        bh=/rNHFvuaCWmB5RnxAZZKIdW+PRj011jNKmsshin+LTI=;
+        b=osYnqYgtkdttdOJKIc95o9GxfGvmS03dN+OPUgZKaxPteuDj8tSo9DH+myQUbRzlc6
+         GogLfAFgDS0a6alZHtGfKPSbEBSvZrVXKM4xKJ4k8wzWM5vaKVRN9tLs/p/CSuMZN7al
+         uYEFI1rvO+sDBPcScc8ye4B93HtTQhY6KRtFrCcjGqolGZmGS804Tu8/uGiTl/QVUncl
+         Cnq3UdK1Wj13uYLNheSnWoUIE+xmBRLWTQ1e8BJxd7fltv1EUu2tvZA0uphcS5y+cm0a
+         WwwvXCC8fToOUioViFi4+2502LigYPTy/kQwJ3g+J3Luxbt6K46evA6AZV44pTV6yQ6R
+         xGIQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794465762; x=1795070562;
+        d=1e100.net; s=20260707; t=1794465765; x=1795070565;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=/k3WuKf/BcLye/0ehxhx/m5Spkf8cynwzeNWewHwt2Y=;
-        b=xC8208zSzqm/1bAfqG+ys1doTN/aLUrithyv13ei0J61oZdba48JEbpDm4CnDyAeyo
-         UFSuzjh4RsmwsSQ0gXdFNCnqCgbnZlSfzdbMGtoieMCDThfUTFwaBi6QJ+iyfwSRho38
-         YcGuoo1qWmSIjM7JXO39lKmiJMs6oXtSi6QonpdHTJTZLHeSEe3auWgCkCzRyQbu0eHy
-         IWh5jpfJT0KfKE6q36AWrMsGRfHWk4JoVqcJaG2bCEQ1lLeQ5hCsUYvwjorGP7nPhN69
-         WpcX360AyMAm0mMPP5sXihsDs8fekuHJGmbWFmXjh7cuKsIUg7Z151rJsRT9Oyd/OFfT
-         Ykbw==
-X-Gm-Message-State: APuU4Z8AFIBJh+4qEkCd41T7l6fA6uE5i8TKX+VKISFNAy3Lgpa7U+15
-	ATYwve53MVNIaJlbjXWT4iq5QRrQdYnNERA44ZpVAYz2S0KshN1BeXWyXMakn4ki6Jk=
-X-Gm-Gg: AYBFou0MGLwNK97RlwOrt/sgDtQjT6+yHZlEm75B6006cSE1DROn3/FZYbCEnyvSTk3
-	3vQS1Q/IvPBUQCCEIWuQ7DTnpXJI2tTOiuV6nbwgCsCZXNWs3SYB+lChDJLli7eLhkCeSNgNGl/
-	872EL51IGUO/+hk2gdemBpOlQjMqCBdrObdoncfAWRlyREUs9Qkjn3aP+eU+R89bOyyjlvLxDLO
-	R/RkFGoxdNJq00UZEHD7eMNkbL4gG0qVvJS08D4ODziAt21s7SErXZnbknXiFZy4fwhM27wwXHV
-	80wucmRrMkrVyBd/8RFnTD5Lq1uWq2+6feRPNfXWBeciR3ZE/X57AGp1zIvDEw79PXEhNW4a6lT
-	Ik16Lxp7p1xWdQusCzmo6EkvK36tqvaEj3f/vuHZbJNlmskil4jF5AtgF6KwRfl3rIBjx09TIz5
-	ZICfAcpjPS7g6Qne3zip0ClOPj+8MvuvQ2dnQfc5oMk0pxpGsqRPngGjUFN9iLEg2tlCmLKPKTn
-	Cg4BRRieG3KjBnom0IvUjueFP9d7PdwNz41ZbmxCHfW9xBpuOw2i+21/+9pLXrdAxoMxfP2qUYv
-	4BrAdoGuvDHvvqHhnfmRpqEQO6RC+EWRJjVnzR7IZ26qBw77RHF+86lZooIUzVwLF6iAnK3ZfR3
-	eOt4p/+7hed8a2roc/usbNKWNIEyIzPv5JQwmimzI9xms/+alTwd10lrGls8X9Uw8k0Za9b++9u
-	nMciDnPrz8ILIl8b/pbijUqf5rHJD7Wz+5z3mc6IZvvdCJz4oJ9w7dXNZtD+byD8NueaehB0Rsg
-	18HpKxvjKDZWSZIgdEYAZ77CxkZ6maWAlVcBdxe/Y+XaMhy1tLLfZdEONoRM3SABCuoDf4VA568
-	t6JF
-X-Received: by 2002:a17:90b:5785:b0:3a0:d82b:237b with SMTP id 98e67ed59e1d1-3b197caa72dmr1070539a91.25.1794465761513;
-        Wed, 11 Nov 2026 22:42:41 -0800 (PST)
+        bh=/rNHFvuaCWmB5RnxAZZKIdW+PRj011jNKmsshin+LTI=;
+        b=ogvA3+Xfyj1BuLuTrJeABe5nKo0DRDIBs2UzUkND3Vp7MFLy3l4C5uVZByddRek7GK
+         QxjRzv3wcV+ylDFIc9SKEDEtfmWToqC+FENAWdFQu6/yvUEEipw2e0kcqrvbV2agg5IX
+         XPrN4JvGiem0pC4lUNFDKMbVWieMPjE8uocES+f5OiGqCpolZnIL7Ooot+Ta6DODESm6
+         6/Mq9kb2QKT/oxuZbUAJ1pswaKi82HguaoANAung/T47Cjq5hjgoIME41aIUdXO4MHfj
+         1R/QRDYSt5hGom69ZgRH2+WdzPI9kkkwGjOlpSHi1Ebvg7JVW52XJOpdOSgX1XkvfWx8
+         +B4A==
+X-Gm-Message-State: APuU4Z/8+hjeGf4/ceIwbc5/RMImoq+GAoZalKw113dIr6o9Gs7bZ3gG
+	siQSiWgt5ir1YwlbymOP/tnbJ9K+zMKezNtP6BALNN4l2Jxv7vYB/kEaS2fv5w==
+X-Gm-Gg: AYBFou3gXeD+NhGwYtTtVjzbmglB4oEY5iO5fHDXOkdaSn90Nt4QoO6QlfQDj4IRDzE
+	9N5kpTCRnh/Ubpw5j47IUDIZjjnAJHyBvdB0zwvXCL/m//r8wz1uaDZR17hDGaxjXgMbK8AzodE
+	E/f0fmU0SWeymjTEAtKzT9W77dUrXamZl+60mvnLN0VXvj00F6qV6h9t1TB+K+JbJkCWkcgHzk9
+	8Co8ciB77XP+4jbmR8+GLHWX36WR1fSQIOL+v9I10W7sojyKPbY444t7zfHjVz8Bkrwye0UMl2Y
+	bC7SUAogRO98k+QTX44njr7dBQkmKrQMPFlfpR6I96/Z2m/xZKeC76DcSYEGD97qfeZm96+cAOX
+	LmBCBb7EqTO+5pbGMwjtYQE0VoiSqLoWJbNm5qQCpvFxDxCC2LHL3n6bn8q/gPJVTunrhLG5whe
+	mAdYkbH0gKY+JKkyIcz3oNnS9Cy90NAB6Ka5L+ubd9Xx16+KL7IDkaDNhRicAdLXCjdxpLd1RCV
+	MC0o3fEl8Ox/14Axto8uMh2qzdqP6+Z7EjG4Lw2e9JQdp/BHM0ucAZ9z5TVusVALwRPEcYidK+A
+	sA7+rUwZ+wnkZf+k0Ib2vbV6qnaTnWC2dKTxeAgCgnZPg/rZU0y0lhr4QDW3aPaVevZo4stdXNZ
+	4cYHru8JPtZ//TIBOy0aciM/K0qY9bAtI8vX0uFIfQQVG6lhFed+9CnMmgW3jalsMK+ZSKiMEzW
+	p3XxVYE46wX3CL+nwl+iOqxllaCyZFvdykOvMPPTGhegWIViv4pzfTv2uzGtT1gK+3k2ML8zgOc
+	AUtIAMHPXr6aT8EglLBI/kqT8NplEdS2ILmVfJR7f6NRV4fj54ncY/xUIxOuTLoikUROrs42nRK
+	Gngg
+X-Received: by 2002:a17:90b:50c3:b0:3ac:b6eb:e0de with SMTP id 98e67ed59e1d1-3b197c81808mr1069608a91.4.1794465765546;
+        Wed, 11 Nov 2026 22:42:45 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3b197c768e8sm2984715a91.11.2026.11.11.22.42.40
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3b197c768e8sm2984715a91.11.2026.11.11.22.42.44
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 11 Nov 2026 22:42:40 -0800 (PST)
+        Wed, 11 Nov 2026 22:42:44 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-networking][PATCH 11/24] chrony: upgrade 4.8 -> 4.9
-Date: Wed, 11 Nov 2026 22:42:11 -0800
-Message-ID: <20261112064225.2410019-11-khem.raj@oss.qualcomm.com>
+Subject: [meta-networking][PATCH 14/24] stunnel: upgrade 5.80 -> 5.82
+Date: Wed, 11 Nov 2026 22:42:14 -0800
+Message-ID: <20261112064225.2410019-14-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.1
 In-Reply-To: <20261112064225.2410019-1-khem.raj@oss.qualcomm.com>
 References: <20261112064225.2410019-1-khem.raj@oss.qualcomm.com>
@@ -67,96 +67,86 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Thu, 12 Nov 2026 06:42:49 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132180
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132183
 Content-Type: text/plain; charset="utf-8"
 
-Refresh arm_eabi.patch.
+Refresh fix-openssl-no-des.patch.
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- .../chrony/chrony/arm_eabi.patch               | 18 +++++++++---------
- .../chrony/{chrony_4.8.bb => chrony_4.9.bb}    |  2 +-
- 2 files changed, 10 insertions(+), 10 deletions(-)
- rename meta-networking/recipes-support/chrony/{chrony_4.8.bb => chrony_4.9.bb} (98%)
+ .../stunnel/stunnel/fix-openssl-no-des.patch  | 22 +++++++++----------
+ .../{stunnel_5.80.bb => stunnel_5.82.bb}      |  2 +-
+ 2 files changed, 12 insertions(+), 12 deletions(-)
+ rename meta-networking/recipes-support/stunnel/{stunnel_5.80.bb => stunnel_5.82.bb} (92%)
 
-diff --git a/meta-networking/recipes-support/chrony/chrony/arm_eabi.patch b/meta-networking/recipes-support/chrony/chrony/arm_eabi.patch
-index 07bb044c6d..846de1b13d 100644
---- a/meta-networking/recipes-support/chrony/chrony/arm_eabi.patch
-+++ b/meta-networking/recipes-support/chrony/chrony/arm_eabi.patch
-@@ -27,18 +27,18 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
-  1 file changed, 9 insertions(+), 6 deletions(-)
+diff --git a/meta-networking/recipes-support/stunnel/stunnel/fix-openssl-no-des.patch b/meta-networking/recipes-support/stunnel/stunnel/fix-openssl-no-des.patch
+index 0e94a969c0..47ee5fd3d0 100644
+--- a/meta-networking/recipes-support/stunnel/stunnel/fix-openssl-no-des.patch
++++ b/meta-networking/recipes-support/stunnel/stunnel/fix-openssl-no-des.patch
+@@ -17,10 +17,10 @@ Signed-off-by: Kai Kang <kai.kang@windriver.com>
+  2 files changed, 5 insertions(+), 3 deletions(-)
  
- diff --git a/sys_linux.c b/sys_linux.c
--index 8373e25..47b4459 100644
-+index 1815398..2a2e104 100644
- --- a/sys_linux.c
- +++ b/sys_linux.c
--@@ -490,7 +490,6 @@ SYS_Linux_EnableSystemCallFilter(int level, SYS_ProcessContext context)
-+@@ -431,7 +431,6 @@ SYS_Linux_EnableSystemCallFilter(int level, SYS_ProcessContext context)
-+ #ifdef __NR_clock_settime64
-+     SCMP_SYS(clock_settime64),
-  #endif
--     SCMP_SYS(gettimeofday),
--     SCMP_SYS(settimeofday),
- -    SCMP_SYS(time),
+ diff --git a/src/common.h b/src/common.h
+-index ada7ff7..8484144 100644
++index 8c441ec..48d9c31 100644
+ --- a/src/common.h
+ +++ b/src/common.h
+-@@ -489,7 +489,9 @@ extern char *sys_errlist[];
++@@ -537,7 +537,9 @@ extern char *sys_errlist[];
+  #ifndef OPENSSL_NO_MD4
+  #include <openssl/md4.h>
+  #endif /* !defined(OPENSSL_NO_MD4) */
+@@ -31,19 +31,19 @@ index ada7ff7..8484144 100644
+  #include <openssl/dh.h>
+  #endif /* !defined(OPENSSL_NO_DH) */
+ diff --git a/src/protocol.c b/src/protocol.c
+-index cddc381..ae0f374 100644
++index 7a2db00..dcdcbf6 100644
+ --- a/src/protocol.c
+ +++ b/src/protocol.c
+-@@ -82,7 +82,7 @@ NOEXPORT void ldap_client_middle(CLI *);
+- NOEXPORT void connect_server_early(CLI *);
+- NOEXPORT const char *connect_client_init(SERVICE_OPTIONS *);
+- NOEXPORT void connect_client_middle(CLI *);
++@@ -86,7 +86,7 @@ NOEXPORT void ldap_client_middle(CLI *c);
++ NOEXPORT void connect_server_early(CLI *c);
++ NOEXPORT const char *connect_client_init(SERVICE_OPTIONS *opt);
++ NOEXPORT void connect_client_middle(CLI *c);
+ -#ifndef OPENSSL_NO_MD4
+ +#if !defined(OPENSSL_NO_MD4) && !defined(OPENSSL_NO_DES)
+- NOEXPORT void ntlm(CLI *);
++ NOEXPORT void ntlm(CLI *c);
+  NOEXPORT char *ntlm1(void);
+- NOEXPORT char *ntlm3(char *, char *, char *, char *);
+-@@ -1392,7 +1392,7 @@ NOEXPORT void connect_client_middle(CLI *c) {
++ NOEXPORT char *ntlm3(char *domain, char *user, char *password, char *phase2);
++@@ -1472,7 +1472,7 @@ NOEXPORT void connect_client_middle(CLI *c) {
+      fd_printf(c, c->remote_fd.fd, "Host: %s", c->opt->protocol_host);
+      if(c->opt->protocol_username && c->opt->protocol_password) {
+          if(!strcasecmp(c->opt->protocol_authentication, "ntlm")) {
+@@ -52,7 +52,7 @@ index cddc381..ae0f374 100644
+              ntlm(c);
+  #else
+              s_log(LOG_ERR, "NTLM authentication is not available");
+-@@ -1435,7 +1435,7 @@ NOEXPORT void connect_client_middle(CLI *c) {
++@@ -1515,7 +1515,7 @@ NOEXPORT void connect_client_middle(CLI *c) {
+      str_free(line);
+  }
   
-      /* Process */
-      SCMP_SYS(clone),
--@@ -500,7 +499,6 @@ SYS_Linux_EnableSystemCallFilter(int level, SYS_ProcessContext context)
-+@@ -441,7 +440,6 @@ SYS_Linux_EnableSystemCallFilter(int level, SYS_ProcessContext context)
-      SCMP_SYS(exit),
-      SCMP_SYS(exit_group),
-      SCMP_SYS(getpid),
-@@ -46,7 +46,7 @@ index 8373e25..47b4459 100644
-      SCMP_SYS(getuid),
-      SCMP_SYS(getuid32),
-  #ifdef __NR_membarrier
--@@ -520,7 +518,6 @@ SYS_Linux_EnableSystemCallFilter(int level, SYS_ProcessContext context)
-+@@ -461,7 +459,6 @@ SYS_Linux_EnableSystemCallFilter(int level, SYS_ProcessContext context)
-      /* Memory */
-      SCMP_SYS(brk),
-      SCMP_SYS(madvise),
-@@ -54,7 +54,7 @@ index 8373e25..47b4459 100644
-      SCMP_SYS(mmap2),
-      SCMP_SYS(mprotect),
-      SCMP_SYS(mremap),
--@@ -580,8 +577,6 @@ SYS_Linux_EnableSystemCallFilter(int level, SYS_ProcessContext context)
-+@@ -521,8 +518,6 @@ SYS_Linux_EnableSystemCallFilter(int level, SYS_ProcessContext context)
-      SCMP_SYS(sendmsg),
-      SCMP_SYS(sendto),
-      SCMP_SYS(shutdown),
-@@ -63,7 +63,7 @@ index 8373e25..47b4459 100644
-  
-      /* General I/O */
-      SCMP_SYS(_newselect),
--@@ -605,7 +600,6 @@ SYS_Linux_EnableSystemCallFilter(int level, SYS_ProcessContext context)
-+@@ -547,7 +542,6 @@ SYS_Linux_EnableSystemCallFilter(int level, SYS_ProcessContext context)
-  #ifdef __NR_futex_time64
-      SCMP_SYS(futex_time64),
-  #endif
-@@ -71,7 +71,7 @@ index 8373e25..47b4459 100644
-      SCMP_SYS(set_robust_list),
-      SCMP_SYS(write),
-      SCMP_SYS(writev),
--@@ -614,6 +608,15 @@ SYS_Linux_EnableSystemCallFilter(int level, SYS_ProcessContext context)
-+@@ -556,6 +550,15 @@ SYS_Linux_EnableSystemCallFilter(int level, SYS_ProcessContext context)
-      SCMP_SYS(getrandom),
-      SCMP_SYS(sysinfo),
-      SCMP_SYS(uname),
-diff --git a/meta-networking/recipes-support/chrony/chrony_4.8.bb b/meta-networking/recipes-support/chrony/chrony_4.9.bb
-similarity index 98%
-rename from meta-networking/recipes-support/chrony/chrony_4.8.bb
-rename to meta-networking/recipes-support/chrony/chrony_4.9.bb
-index a7fc73e081..fb76c373e9 100644
---- a/meta-networking/recipes-support/chrony/chrony_4.8.bb
-+++ b/meta-networking/recipes-support/chrony/chrony_4.9.bb
-@@ -36,7 +36,7 @@ SRC_URI = "https://chrony-project.org/releases/chrony-${PV}.tar.gz \
-     file://arm_eabi.patch \
+diff --git a/meta-networking/recipes-support/stunnel/stunnel_5.80.bb b/meta-networking/recipes-support/stunnel/stunnel_5.82.bb
+similarity index 92%
+rename from meta-networking/recipes-support/stunnel/stunnel_5.80.bb
+rename to meta-networking/recipes-support/stunnel/stunnel_5.82.bb
+index 9f14f0fd85..78fd89b7db 100644
+--- a/meta-networking/recipes-support/stunnel/stunnel_5.80.bb
++++ b/meta-networking/recipes-support/stunnel/stunnel_5.82.bb
+@@ -11,7 +11,7 @@ SRC_URI = "https://stunnel.org/archive/5.x/${BP}.tar.gz \
+            file://fix-openssl-no-des.patch \
  "
  
--SRC_URI[sha256sum] = "33ea8eb2a4daeaa506e8fcafd5d6d89027ed6f2f0609645c6f149b560d301706"
-+SRC_URI[sha256sum] = "4924c6f530105bcd5b9e9e33c48a2ae1bfd889222c8480bc41601110efc864d0"
+-SRC_URI[sha256sum] = "6d0841d48de07cbbaf4a055919065bf7bb5ebc63cc15c97a2c76caa2bf285513"
++SRC_URI[sha256sum] = "8e7438ccd6b3a2ab05182d0846e112a56a7f557ecdee40de07bf67820008bef7"
  
- DEPENDS = "pps-tools"
+ inherit autotools bash-completion pkgconfig
  
