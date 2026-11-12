@@ -1,359 +1,179 @@
-Received: from mail-pf1-f178.google.com (mail-pf1-f178.google.com [209.85.210.178])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.6944.1794458706136175192
+Received: from mail-pf1-f177.google.com (mail-pf1-f177.google.com [209.85.210.177])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.6845.1794458708251688266
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 11 Nov 2026 20:45:06 -0800
+ Wed, 11 Nov 2026 20:45:08 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=UrjG8luX;
- spf=pass (domain: gmail.com, ip: 209.85.210.178, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pf1-f178.google.com with SMTP id d2e1a72fcca58-8b67f25e6e1so1914959b3a.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 11 Nov 2026 20:45:06 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=JDUhulX8;
+ spf=pass (domain: gmail.com, ip: 209.85.210.177, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pf1-f177.google.com with SMTP id d2e1a72fcca58-8b612fd74e1so1393113b3a.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 11 Nov 2026 20:45:08 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794458705; x=1795063505; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1794458708; x=1795063508; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=JczhozRz3vzKyF+dmJZAfyVNQCPv8vcOXRxLVtrpa20=;
-        b=UrjG8luX8H18zrvNUHmLQ8bYZ/en6s984kXoDWv1GXxG1GpFva3ajvzW0C9vaIJ3sB
-         XYxJqXfrZMDLsfiQ3mbVyM/uQ0ZaFdFBm5sV5Js+PHpVbxwJqAFbFTcExYSFG4zvYMZk
-         jliu3DjvjiJD6B6NTlA2cSQBmmmD1tpYreDjN3Uipqv3Oc8MO4A6RgY1SrFBQj1zHV2g
-         9vsheT4lJp+a5ZWiGTcsuhSBnR7pVTEoMKcrUSwHSzZizpeJWZ7RZ8gUz8DthMXKWvjx
-         rTnSBajer+P0npbjAUzvfHjRDj5LWvL65Vm6VCPtxUTFdvzTH4IqoWrSgDNqT7ec+/R8
-         YtvQ==
+        bh=bnhZOEUmH7DZgb+dCxIVsEa2abQGsaAOGIYQhRfpgCQ=;
+        b=JDUhulX8lJLkY3NBEhMYWnQ7B0h4QTahm6l0pxJ8r7pu95qVrKHvvw649G8ietEb7T
+         MlnuyA0+ki+FJ5tDmHzm42d5ANd/nnbin+WyPvAe6c/MVxd5oAXuB1BWd1o729/oBmTn
+         zXh7bCYXDoNp3nRda+ZUrKnIRdLBcLcRMb8xjdi4EqAJ+PtXr2f1bKco2nTwQrUGJ+bq
+         deUW8FNqFkyZG7Zb4RVS3Y4Ey//WD4LCpillWP9M9HSIrfkZH/2TV20ByJamvuwQ/B0h
+         CkrAstRzqbNyYXXAZsFYTMSxuWD3cobN4CRLvOhBaYhBg/+/inwMagdTHmFK7yqVaOOX
+         czLw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794458705; x=1795063505;
+        d=1e100.net; s=20260707; t=1794458708; x=1795063508;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=JczhozRz3vzKyF+dmJZAfyVNQCPv8vcOXRxLVtrpa20=;
-        b=2lNilSPmSYBIF8eJqWVnkw8QdXimrw9eCSh5dAx51nLS0mJVzManTC6snBSzFOjQfb
-         aZq4YogGuWmnBnnZ+R7oXyfJ7yPyFv2zMI9LyDVpddRPw+EYtWe3rOBOCwZLp2aPqm9N
-         w07oW7k4RDFRuXan1RjBOEinkBceCV+zDgzsWTdJZjhIbmKEe2ccapa/G/8Ehxw/rhTL
-         lKuSriTvnNjlVcoyoxKaZApJhMSL7x11pWsXWP8Z/8OtPKDbsYaN7xLXB6PEBMSWDP5I
-         u1BWJaE6ckniOvsYkPgYsOG2fPvvMSlCYUCjZgblqBtt4dg8mb+BZDaVEeGOJV/YqGUU
-         TJnQ==
-X-Gm-Message-State: APuU4Z/vk+P8lJF02hUVjVsc7NU1i/OB7SVDOSevfJWGfXEmls/c0TJo
-	MCdnSaVBPALEv9AyCusTlAjwdM+EFFT+dQos9woz+RfSaIH0DSrIE0lVs3ENag==
-X-Gm-Gg: AYBFou3Nwnye0iSsu9j1DkKgBsDe4Wl6lSmz/oIsCEjVq0FHFunwtNj3x/hO8PtfAkc
-	M3xGbUaXjpAruMhk2mfzCHZ6f4l8aYQh//8rqJl4GAyN6RgZyhnJEWnGGvPywbbwoT81V6g1L5S
-	LzRW43hRVtHp7ev/JdsucZhoYwfrLBOySMEN+s8wiPIxShdyOpKRhKIa0s9qwSi4lnMj4M9Z7V1
-	XIEXExzdqDzx8pMkWyU77aXOsjwZeuRJUj3fkCNcLXd5bFNDDOpyAJySoKt4kyWK+yeyBRtvIzR
-	fUiCiGC8xx3u4qbG4U41uf+OcrwG+SX6gRvKBrToPHWr0bYNnGa1klOlhLsQ/3i3yHSffhEx6ua
-	4HpWnar+D8lbuqUf+b0PVQqOT2mlX5vBjcvP7NMf+iddfM0gHPba6tPSkohmyyey5kde+OyNbZN
-	dK6gu7NEVR8NANrtz7JkCym1zxlWMG3j/udGoc6ADkbA2vLWu+vJg2S+HyXV/u2dnqbAfIHWfE1
-	VD7fQa2pmvD/MilbV+X2VXohXUN+fUCqtrkvZqBy3p0cWrpZvtVn+bFTHyJP55wL5on04tHM4pn
-	6henS09q+jd7txA0GleM3CHcNs4ZKKUxqdTpRqu7nhEZef2Go8zLZNPDQ8WZrQ==
-X-Received: by 2002:a05:6a20:6a24:b0:3eb:abb7:f92b with SMTP id adf61e73a8af0-3f2fd69cf4cmr4819130637.21.1794458705379;
-        Wed, 11 Nov 2026 20:45:05 -0800 (PST)
+        bh=bnhZOEUmH7DZgb+dCxIVsEa2abQGsaAOGIYQhRfpgCQ=;
+        b=wb8xDDEOMkApy5DIvBWn1zOfBCl9u0PwZYW3Es28DaKssgl5ANrduVHFWsldExZvnq
+         IsCxYDX6FVVFyuCO5aDW9s/G8IkoKinrvuC39wz0cMgxbGC7Jva75otvPwaB09hfmy6V
+         W7UAYuqmneK6eKAeLwpxzKyJR/fCYd+Tw2IsGf69KMPHccNJRdY1syMkyRvK/nvRvhQ3
+         B4FzJaIviAApXkOIQ14zIyaY6GXfAhpdYzGc3YjDJMOqOly1nJlWkErWYfIZvQSL4xVV
+         vd6nzxL9OEGv+hia0TA3WHonWw63vbljxtMskmJsGGMzDDnKwQbmu9mJEgrCu/dgx2HI
+         U8ZA==
+X-Gm-Message-State: APuU4Z+bnRVyhjG3+yAlhC3wFJExs7xsme6Sxg0kTpKOJqiZv3QvA3+9
+	jLdWYW+CzofrGbR71Pfzl3/ykTLysPps5SuG7YRRShxxyeCdZbAybFMi+X1f0Q==
+X-Gm-Gg: AYBFou3jSa/O81ZaYIV0XPpPEc59tDpE7l2xBYXh+Ze9ols32qkQzl+66olRYmKPoCo
+	NVjeqZfsQ/8l+3VwfsZbOyfPg2QKEeDN03+0OBppEtbpnqrpTM4nP2pEXdkfwsFd2D29BV8aRV3
+	tpYt1yg7aP5362mtd67606vLl1i/jzpPm0FBSDX42pEgpPDz41W6YMDLeXl0Tjb2rN8Ugh8CesE
+	/GbAYY1JDXu5wcoB61ubQaeIoybEebtdzWQ6ZCfCrtjY2TX8lrqsTdFlm+COKsnARLLHIgAwz9n
+	DZdlqcRYZhE8LNuJU1GNcUmJA+dKIi9wHo3D9kRM+vWCruXM1txyQhnqMk59MItNx8LQLkAWeIt
+	OA6ScJMSnd+xAuRmixEmY3GrbCV7Y5vYcZGA0I3UwCsDXqU3YCHVObare1sp6UngUc8GCgRlIvA
+	O1cLqqM/GrL9/gVwyTOiEB/MN8Wh/11s1qMv9PG+wzHyZXR2oqll0OQtUMTSKvzOK0l+Ecr7c0l
+	PnqO/UPMpYHnKjouAbGEGNFVANUD7mckellTCeDEexhZ1T7YmpfIx/VjXCkB4fzYr2ddu42946w
+	m9lUwXxVJqd/Q8PIp5L5w2DuP3VSF5GYgkOLZ9jw+bWMYvUqhmDcDBCjmGqlLw==
+X-Received: by 2002:a05:6a21:778d:b0:3eb:39fd:badf with SMTP id adf61e73a8af0-3f2f749d75amr3644779637.0.1794458707582;
+        Wed, 11 Nov 2026 20:45:07 -0800 (PST)
 Return-Path: <ankur.tyagi85@gmail.com>
 Received: from NVAPF55DW0D-IPD.. ([147.161.217.9])
-        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-cdd8d7dd5bbsm2238527a12.30.2026.11.11.20.45.03
+        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-cdd8d7dd5bbsm2238527a12.30.2026.11.11.20.45.05
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 11 Nov 2026 20:45:05 -0800 (PST)
+        Wed, 11 Nov 2026 20:45:07 -0800 (PST)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-python][blacksail][PATCH 14/16] python3-aiohttp: patch CVE-2026-111749
-Date: Thu, 12 Nov 2026 17:44:24 +1300
-Message-ID: <20261112044426.3933391-14-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-python][blacksail][PATCH 15/16] python3-aiohttp: patch CVE-2026-111750
+Date: Thu, 12 Nov 2026 17:44:25 +1300
+Message-ID: <20261112044426.3933391-15-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20261112044426.3933391-1-ankur.tyagi85@gmail.com>
 References: <20261112044426.3933391-1-ankur.tyagi85@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Thu, 12 Nov 2026 04:45:06 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132165
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Thu, 12 Nov 2026 04:45:16 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132166
 Content-Type: text/plain; charset="utf-8"
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
 Details:
-https://nvd.nist.gov/vuln/detail/cve-2026-111749
+https://nvd.nist.gov/vuln/detail/cve-2026-111750
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../python3-aiohttp/CVE-2026-111749.patch     | 262 ++++++++++++++++++
- .../python/python3-aiohttp_3.14.3.bb          |   1 +
- 2 files changed, 263 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-111749.patch
+ .../python3-aiohttp/CVE-2026-111750.patch     | 82 +++++++++++++++++++
+ .../python/python3-aiohttp_3.14.3.bb          |  1 +
+ 2 files changed, 83 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-111750.patch
 
-diff --git a/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-111749.patch b/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-111749.patch
+diff --git a/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-111750.patch b/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-111750.patch
 new file mode 100644
-index 0000000000..d1a7c60fb5
+index 0000000000..ff9088ad3c
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-111749.patch
-@@ -0,0 +1,262 @@
-+From 66405536d4410c7456a52d2b6780e827f4e56d44 Mon Sep 17 00:00:00 2001
++++ b/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-111750.patch
+@@ -0,0 +1,82 @@
++From 18e23a890422e952b0fdbf09e02794adda56c120 Mon Sep 17 00:00:00 2001
 +From: Sam Bull <git@sambull.org>
-+Date: Wed, 9 Sep 2026 02:21:06 +0100
-+Subject: [PATCH] Fix host-only state on cookie expiration (#13674) (#13676)
++Date: Wed, 9 Sep 2026 01:25:13 +0100
++Subject: [PATCH] Fix head request parsing (#13671) (#13673)
 +
-+(cherry picked from commit 9332972cfcb0f5a2b6677e7307819ab8f13b5d09)
-+(cherry picked from commit 6a07c171ef9f3be583e2907dcd1931372efca8d6)
++(cherry picked from commit 5789546e37fe35af27d0a2f840870b22bc15bfc4)
++(cherry picked from commit 9b27347e61454d9f8ca2055f4c67a37dee336e83)
 +
-+CVE: CVE-2026-111749
-+Upstream-Status: Backport [https://github.com/aio-libs/aiohttp/commit/6a07c171ef9f3be583e2907dcd1931372efca8d6]
++CVE: CVE-2026-111750
++Upstream-Status: Backport [https://github.com/aio-libs/aiohttp/commit/9b27347e61454d9f8ca2055f4c67a37dee336e83]
 +
 +Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 +---
-+ CHANGES/13674.bugfix.rst     |  1 +
-+ aiohttp/abc.py               |  2 +-
-+ aiohttp/cookiejar.py         | 29 ++++++++--------
-+ docs/client_reference.rst    | 10 ++++--
-+ tests/test_client_session.py |  2 +-
-+ tests/test_cookiejar.py      | 64 ++++++++++++++++++++++++++++++++++--
-+ 6 files changed, 89 insertions(+), 19 deletions(-)
-+ create mode 100644 CHANGES/13674.bugfix.rst
++ CHANGES/13671.bugfix.rst  |  1 +
++ aiohttp/http_parser.py    |  6 +++++-
++ tests/test_http_parser.py | 27 ++++++++++++++++++++++++++-
++ 3 files changed, 32 insertions(+), 2 deletions(-)
++ create mode 100644 CHANGES/13671.bugfix.rst
 +
-+diff --git a/CHANGES/13674.bugfix.rst b/CHANGES/13674.bugfix.rst
++diff --git a/CHANGES/13671.bugfix.rst b/CHANGES/13671.bugfix.rst
 +new file mode 100644
-+index 000000000..5152bceae
++index 000000000..e6fbc7000
 +--- /dev/null
-++++ b/CHANGES/13674.bugfix.rst
+++++ b/CHANGES/13671.bugfix.rst
 +@@ -0,0 +1 @@
-++Fixed host-only cookie state being lost on expiration -- by :user:`Dreamsorcerer`.
-+diff --git a/aiohttp/abc.py b/aiohttp/abc.py
-+index b67287318..74ca7216e 100644
-+--- a/aiohttp/abc.py
-++++ b/aiohttp/abc.py
-+@@ -181,7 +181,7 @@ class AbstractCookieJar(Sized, IterableBase):
+++Fixed pure-Python request parser not reading a body in a ``HEAD`` request -- by :user:`Dreamsorcerer`.
++diff --git a/aiohttp/http_parser.py b/aiohttp/http_parser.py
++index 678aee020..947060c9a 100644
++--- a/aiohttp/http_parser.py
+++++ b/aiohttp/http_parser.py
++@@ -433,8 +433,12 @@ class HttpParser(abc.ABC, Generic[_MsgT]):
 + 
-+     @property
-+     @abstractmethod
-+-    def host_only_cookies(self) -> frozenset[tuple[str, str]]:
-++    def host_only_cookies(self) -> frozenset[tuple[str, str, str]]:
-+         """Return the host-only cookies stored in this jar."""
++                         assert self.protocol is not None
++                         # calculate payload
+++                        # https://www.rfc-editor.org/info/rfc9112/#name-message-body-length
+++                        # https://www.rfc-editor.org/info/rfc9110/#section-9.3.1-6
+++                        # EMPTY_BODY_METHODS should only apply to responses.
+++                        # self.method is None on request parser.
++                         empty_body = code in EMPTY_BODY_STATUS_CODES or bool(
++-                            method and method in EMPTY_BODY_METHODS
+++                            self.method and self.method in EMPTY_BODY_METHODS
++                         )
++                         if not empty_body and (
++                             (length is not None and length > 0) or msg.chunked
++diff --git a/tests/test_http_parser.py b/tests/test_http_parser.py
++index fcc1b6018..e9d40532b 100644
++--- a/tests/test_http_parser.py
+++++ b/tests/test_http_parser.py
++@@ -2181,7 +2181,32 @@ def test_http_request_chunked_payload_and_next_message(parser) -> None:
++     assert not payload2.is_eof()
 + 
-+     @abstractmethod
-+diff --git a/aiohttp/cookiejar.py b/aiohttp/cookiejar.py
-+index b949cc118..1af02144e 100644
-+--- a/aiohttp/cookiejar.py
-++++ b/aiohttp/cookiejar.py
-+@@ -134,7 +134,8 @@ class CookieJar(AbstractCookieJar):
-+         self._morsel_cache: defaultdict[tuple[str, str], dict[str, Morsel[str]]] = (
-+             defaultdict(dict)
-+         )
-+-        self._host_only_cookies: set[tuple[str, str]] = set()
-++        # Cookie identity is (domain, path, name).
-++        self._host_only_cookies: set[tuple[str, str, str]] = set()
-+         self._unsafe = unsafe
-+         self._quote_cookie = quote_cookie
-+         if treat_as_secure_origin is None:
-+@@ -166,7 +167,7 @@ class CookieJar(AbstractCookieJar):
-+         return MappingProxyType(self._cookies)
 + 
-+     @property
-+-    def host_only_cookies(self) -> frozenset[tuple[str, str]]:
-++    def host_only_cookies(self) -> frozenset[tuple[str, str, str]]:
-+         """Return the host-only cookies stored in this jar."""
-+         return frozenset(self._host_only_cookies)
-+ 
-+@@ -195,7 +196,7 @@ class CookieJar(AbstractCookieJar):
-+                     if attr_val:
-+                         morsel_data[attr] = attr_val
-+                 # Persist or it reloads as a domain cookie and leaks to subdomains.
-+-                if (domain, name) in self._host_only_cookies:
-++                if (domain, path, name) in self._host_only_cookies:
-+                     morsel_data["host_only"] = True
-+                 if (exp := self._expirations.get((domain, path, name))) is not None:
-+                     morsel_data["expires_timestamp"] = exp
-+@@ -358,7 +359,7 @@ class CookieJar(AbstractCookieJar):
-+ 
-+     def _delete_cookies(self, to_del: list[tuple[str, str, str]]) -> None:
-+         for domain, path, name in to_del:
-+-            self._host_only_cookies.discard((domain, name))
-++            self._host_only_cookies.discard((domain, path, name))
-+             self._cookies[(domain, path)].pop(name, None)
-+             self._morsel_cache[(domain, path)].pop(name, None)
-+             self._expirations.pop((domain, path, name), None)
-+@@ -395,18 +396,12 @@ class CookieJar(AbstractCookieJar):
-+                 domain = ""
-+                 del cookie["domain"]
-+ 
-+-            if not domain and hostname is not None:
-+-                # Set the cookie's domain to the response hostname
-+-                # and set its host-only-flag
-+-                self._host_only_cookies.add((hostname, name))
-+-                domain = cookie["domain"] = hostname
-+-
-+             if domain and domain[0] == ".":
-+                 # Remove leading dot
-+                 domain = domain[1:]
-+                 cookie["domain"] = domain
-+ 
-+-            if hostname and not self._is_domain_match(domain, hostname):
-++            if domain and hostname and not self._is_domain_match(domain, hostname):
-+                 # Setting cookies for different domains is not allowed
-+                 continue
-+ 
-+@@ -422,6 +417,14 @@ class CookieJar(AbstractCookieJar):
-+                 cookie["path"] = path
-+             path = path.rstrip("/")
-+ 
-++            if not domain and hostname is not None:
-++                self._host_only_cookies.add((hostname, path, name))
-++                domain = cookie["domain"] = hostname
-++            else:
-++                # A cookie with an explicit Domain attribute replaces any
-++                # host-only cookie with the same (domain, path, name) identity.
-++                self._host_only_cookies.discard((domain, path, name))
-++
-+             if max_age := cookie["max-age"]:
-+                 try:
-+                     delta_seconds = int(max_age)
-+@@ -522,7 +525,7 @@ class CookieJar(AbstractCookieJar):
-+             for name, cookie in self._cookies[p].items():
-+                 domain = cookie["domain"]
-+ 
-+-                if (domain, name) in self._host_only_cookies and domain != hostname:
-++                if domain != hostname and p + (name,) in self._host_only_cookies:
-+                     continue
-+ 
-+                 # Skip edge case when the cookie has a trailing slash but request doesn't.
-+@@ -672,7 +675,7 @@ class DummyCookieJar(AbstractCookieJar):
-+         return MappingProxyType({})
-+ 
-+     @property
-+-    def host_only_cookies(self) -> frozenset[tuple[str, str]]:
-++    def host_only_cookies(self) -> frozenset[tuple[str, str, str]]:
-+         """Return an empty frozenset."""
-+         return frozenset()
-+ 
-+diff --git a/docs/client_reference.rst b/docs/client_reference.rst
-+index a237fb64b..476e6e81f 100644
-+--- a/docs/client_reference.rst
-++++ b/docs/client_reference.rst
-+@@ -2611,11 +2611,17 @@ Utilities
-+ 
-+    .. attribute:: host_only_cookies
-+ 
-+-      A :class:`frozenset` of ``(domain, name)`` tuples indicating which
-+-      cookies are host-only (not sent to subdomains).
-++      A :class:`frozenset` of ``(domain, path, name)`` tuples indicating
-++      which cookies are host-only (not sent to subdomains).
-+ 
-+       .. versionadded:: 3.14
-+ 
-++      .. versionchanged:: 3.14.4
-++
-++         The tuples gained the *path* element; host-only state is tracked
-++         per ``(domain, path, name)`` cookie identity so that same-named
-++         cookies on other paths cannot affect it.
-++
-+ 
-+ .. class:: DummyCookieJar(*, loop=None)
-+ 
-+diff --git a/tests/test_client_session.py b/tests/test_client_session.py
-+index 6b3516879..4481a4bf8 100644
-+--- a/tests/test_client_session.py
-++++ b/tests/test_client_session.py
-+@@ -758,7 +758,7 @@ async def test_cookie_jar_usage(loop: Any, aiohttp_client: Any) -> None:
-+             return MappingProxyType({})
-+ 
-+         @property
-+-        def host_only_cookies(self) -> frozenset[tuple[str, str]]:
-++        def host_only_cookies(self) -> frozenset[tuple[str, str, str]]:
-+             return frozenset()
-+ 
-+         def clear(self, predicate: abc.ClearCookiePredicate | None = None) -> None:
-+diff --git a/tests/test_cookiejar.py b/tests/test_cookiejar.py
-+index be6da2a5f..4fd2959e1 100644
-+--- a/tests/test_cookiejar.py
-++++ b/tests/test_cookiejar.py
-+@@ -878,7 +878,45 @@ async def test_cookie_jar_host_only_cookies_property() -> None:
-+ 
-+     host_only = jar.host_only_cookies
-+     assert isinstance(host_only, frozenset)
-+-    assert ("example.com", "hostonly") in host_only
-++    assert ("example.com", "", "hostonly") in host_only
-++
-++
-++async def test_host_only_marker_survives_same_name_expiry_on_other_path() -> None:
-++    """Expiring a same-name cookie on another path must not clear host-only state."""
-++    jar = CookieJar()
-++    origin = URL("http://auth.example.com/")
-++    subdomain = URL("http://evil.auth.example.com/")
-++
-++    jar.update_cookies_from_headers(["sid=secret; Path=/"], origin)
-++    assert "sid" not in jar.filter_cookies(subdomain)
-++
-++    # Attacker-controlled descendant expires a same-name cookie on its own path.
-++    jar.update_cookies_from_headers(
-++        ["sid=gone; Domain=auth.example.com; Path=/attacker; Max-Age=0"],
-++        subdomain,
++-def test_http_request_chunked_payload_chunks(parser) -> None:
+++def test_http_request_parser_head_with_content_length_payload(
+++    parser: HttpRequestParser,
+++) -> None:
+++    smuggled = b"GET /smuggled HTTP/1.1\r\nHost: a\r\n\r\n"
+++    text = (
+++        b"HEAD /test HTTP/1.1\r\nHost: a\r\nContent-Length: %d\r\n\r\n" % len(smuggled)
+++        + smuggled
+++        + b"POST /next HTTP/1.1\r\nHost: a\r\nContent-Length: 0\r\n\r\n"
 ++    )
+++    messages, upgraded, tail = parser.feed_data(text)
 ++
-++    assert ("auth.example.com", "", "sid") in jar.host_only_cookies
-++    assert "sid" not in jar.filter_cookies(subdomain)
-++    assert jar.filter_cookies(origin)["sid"].value == "secret"
+++    assert len(messages) == 2
+++    msg, payload = messages[0]
+++    assert msg.method == "HEAD"
+++    assert b"".join(payload._buffer) == smuggled
+++    assert payload.is_eof()
+++
+++    msg2, payload2 = messages[1]
+++    assert msg2.method == "POST"
+++    assert msg2.path == "/next"
+++    assert payload2.is_eof()
+++    assert not upgraded
+++    assert not tail
 ++
 ++
-++async def test_explicit_domain_replacement_clears_host_only_marker() -> None:
-++    """A replacing cookie with an explicit Domain is a domain cookie."""
-++    jar = CookieJar()
-++    origin = URL("http://example.com/")
-++    subdomain = URL("http://sub.example.com/")
-++
-++    jar.update_cookies_from_headers(["sid=hostonly; Path=/"], origin)
-++    assert ("example.com", "", "sid") in jar.host_only_cookies
-++    assert "sid" not in jar.filter_cookies(subdomain)
-++
-++    jar.update_cookies_from_headers(
-++        ["sid=domainwide; Domain=example.com; Path=/"], origin
-++    )
-++
-++    assert jar.host_only_cookies == frozenset()
-++    assert jar.filter_cookies(subdomain)["sid"].value == "domainwide"
+++def test_http_request_chunked_payload_chunks(parser: HttpRequestParser) -> None:
++     text = b"GET /test HTTP/1.1\r\nHost: a\r\ntransfer-encoding: chunked\r\n\r\n"
++     msg, payload = parser.feed_data(text)[0][0]
 + 
-+ 
-+ async def test_cookie_jar_cookies_property_immutable() -> None:
-+@@ -1857,7 +1895,7 @@ async def test_save_load_json_preserves_host_only_scope(tmp_path: Path) -> None:
-+     jar_load = CookieJar()
-+     jar_load.load(file_path=file_path)
-+ 
-+-    assert jar_load.host_only_cookies == frozenset({("auth.example.com", "sid")})
-++    assert jar_load.host_only_cookies == frozenset({("auth.example.com", "", "sid")})
-+     assert "sid" not in jar_load.filter_cookies(subdomain)
-+     assert "sid" in jar_load.filter_cookies(issuer)
-+ 
-+@@ -1882,6 +1920,28 @@ async def test_save_load_json_domain_cookie_still_matches_subdomain(
-+     assert "sid" in jar_load.filter_cookies(subdomain)
-+ 
-+ 
-++async def test_save_load_json_host_only_per_path(tmp_path: Path) -> None:
-++    """Verify save/load keeps host-only state per (domain, path, name)."""
-++    file_path = tmp_path / "per_path.json"
-++    origin = URL("https://example.com/")
-++    subdomain = URL("https://sub.example.com/")
-++
-++    jar_save = CookieJar()
-++    jar_save.update_cookies_from_headers(
-++        ["sid=hostonly; Path=/", "sid=domainwide; Domain=example.com; Path=/api"],
-++        origin,
-++    )
-++    jar_save.save(file_path=file_path)
-++
-++    jar_load = CookieJar()
-++    jar_load.load(file_path=file_path)
-++
-++    assert jar_load.host_only_cookies == frozenset({("example.com", "", "sid")})
-++    assert "sid" not in jar_load.filter_cookies(subdomain)
-++    filtered = jar_load.filter_cookies(URL("https://sub.example.com/api/x"))
-++    assert filtered["sid"].value == "domainwide"
-++
-++
-+ async def test_save_load_json_preserves_max_age_deadline(tmp_path: Path) -> None:
-+     """Verify save/load restores the absolute deadline without resetting it."""
-+     file_path = tmp_path / "max_age.json"
 diff --git a/meta-python/recipes-devtools/python/python3-aiohttp_3.14.3.bb b/meta-python/recipes-devtools/python/python3-aiohttp_3.14.3.bb
-index 3654f95532..78845ffb56 100644
+index 78845ffb56..81ed8a849b 100644
 --- a/meta-python/recipes-devtools/python/python3-aiohttp_3.14.3.bb
 +++ b/meta-python/recipes-devtools/python/python3-aiohttp_3.14.3.bb
-@@ -10,6 +10,7 @@ SRC_URI += "file://CVE-2026-111063.patch \
-             file://CVE-2026-111065.patch \
+@@ -11,6 +11,7 @@ SRC_URI += "file://CVE-2026-111063.patch \
              file://CVE-2026-111066.patch \
              file://CVE-2026-111748.patch \
-+            file://CVE-2026-111749.patch \
+             file://CVE-2026-111749.patch \
++            file://CVE-2026-111750.patch \
  "
  
  CVE_PRODUCT = "aiohttp:aiohttp"
