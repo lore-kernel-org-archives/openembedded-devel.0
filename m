@@ -1,152 +1,134 @@
-Received: from mail-pg1-f169.google.com (mail-pg1-f169.google.com [209.85.215.169])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.8132.1794465758677354197
+Received: from mail-pj1-f49.google.com (mail-pj1-f49.google.com [209.85.216.49])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.7987.1794465759689789228
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 11 Nov 2026 22:42:38 -0800
+ Wed, 11 Nov 2026 22:42:39 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=meluPF6i;
- spf=pass (domain: gmail.com, ip: 209.85.215.169, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f169.google.com with SMTP id 41be03b00d2f7-cdb45e96d2bso1662834a12.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 11 Nov 2026 22:42:38 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=oRdGVlmG;
+ spf=pass (domain: gmail.com, ip: 209.85.216.49, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f49.google.com with SMTP id 98e67ed59e1d1-3ae6b4c669fso390286a91.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 11 Nov 2026 22:42:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794465758; x=1795070558; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1794465759; x=1795070559; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=MsCKAJmI7IcFVj17e7A1pt1miEn0pg4TBALLVXBBJTg=;
-        b=meluPF6i4YCYMk4P2m+Q38cTRJQQHqsy8qf2LEX4E7UPYSIZLNlbARe1FAhqQLAyqK
-         hQFFnOScEAYx+zLqKjBtfzYhOV4Tlh6NC8kGZdfvr+a4xAWDByIvHRcWgolqgLL1rTdr
-         0XbL3tMpKY+Bb9KuDBCvjnL80971mnQGJSmFJygoA0SOQ27QftDGMOzi4YbLP9d+FS/g
-         Jo6e1klI5VNCTER2bJOgKSLfqMApgZpqQTBol0S+4D3BTP/mnHqbguVDmTdHA6Su5KAg
-         eZpPdK83T7W6bwqlaMv3HtGF4Y7MhaDm+Xho0mDTC38/9nlZ/x3ouofud9XrD7J8QJAD
-         cuIw==
+        bh=WTW0EIxph2gX5KJle8Wf+OJUb+n4VBCQkMtNRfQLLO0=;
+        b=oRdGVlmG8Wldy+gkiDY5YNdr3qpW9FUryRCT0yirZ3ASuE7DwpOD1LwVmeDYBn9l8B
+         cqcCMx6K3v0ysOgYi8L5Tm/olhjexJ2UH2fHI5Xe//1CMiSp41KYjexpFsajH3E6hMXm
+         vJnWQGy/0L0L/A5AC1PNrEaJc3qTC+K2zNC+otGOIWnVAZmBbgoSQ640wGDRugtJ8bw3
+         3T6bhfRqKi2ermAlCGMCWUTodul1NWghV7NzxJkyRkra8QAtcaM9NhZMKHws6COZWKW4
+         pFSyc2IPfQhYXnSskPF9FgjwnfD1tvw8r/YiaZLMl+ynCrIflYLMKQjg9XGz3Wfcmmjz
+         F7VQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794465758; x=1795070558;
+        d=1e100.net; s=20260707; t=1794465759; x=1795070559;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=MsCKAJmI7IcFVj17e7A1pt1miEn0pg4TBALLVXBBJTg=;
-        b=cifon3w50CQbQawjuzAa0H1PhGhF7G5Za9VX8LuCU7+e3cngTM0m+GPJNuyMA32iYb
-         uhQ/7HJtn41wjsjqqeas3WFi3m0tVPy3UlY9ket+djaA19E4vCMRQDdXfS+INpdT9Srr
-         IqbZmlj781vMJVeGLvirJpwdEHmkfDWCX0TARECNgQJMB3dbxyFy5OGsxU/luW7wT3xl
-         ytnH4saCJ9soWpXROUOXIoRsDn8tDyXQzyufhxHIyegXtFl9gV+h+/byiJ00BndBB2G4
-         mm9cbSNIgn+n0FNetoHj0mqkuvo0ndqjIDFSCNunfN5nYiFAzqqsgBwelisyJXpIBHXn
-         u6pQ==
-X-Gm-Message-State: APuU4Z8NZ06u4lGUovxhIRVcMmeH0JaiywSidS/8cfjnYszA10NvJSFc
-	GYYwvUlRkh9xQB4qv38P/09dH69CmevTZla/SSkvu2YzVVTD3YUfxY/cWqxuENkDvCg=
-X-Gm-Gg: AYBFou0IyOAuWcyv+3aokP2cxQTIiEz764UNVXnGtTa5MG8xkoi4lySj/VnCyrSomxh
-	1QKX7a2vrp/l769YR4yGkY2cLCQhf/owbmaIJzVtc5uCN+WqgRf/RL6/tpjTtDMTpQDJUAhpPKd
-	shm3cgfygpg5sJn7SNd8E7vXNyXTUA76dP47E1DCxPPIV1889c0PsEaI9dFq3EBQ4BEOcAesYWG
-	iDlnDEBvMyhHZ9Xitq5q6wqx9d1qqhNCSDQRzgepcWMKHq93Nv9qfGI8AsnFKUi5crBeM6Up1dO
-	e+UHmxirJswTUNx5IOimboSyc0CJ97CbVW6vv2Bf1cuOdJpCNLz7lfI/lomrc7qgJMKkUXFxlvN
-	3IgbVZoWCFYqQxjWIcAbDF2a8yPqtQ7dU0M4/VGkwVV6zw5eERxQOqa4kFnJolYGiVMr8TYwLN6
-	iki4p7/ojqGSrgZkxLgoe3flwg/yuwToqbxo5ha998zUaOrTyX8Ogw+vElvhi+svS643Lx5QW2N
-	DoMVXvZ5ReJXnjvSsTw8HBBiuRpEpYwoybkwdZochQ+IFdPSuqvOpGXSkYsuCASaVhVKAgXhj9l
-	cUyM+pVlUL54DoflKfx6W7ZkeEKSeip8G8Nc1LBlwjsUTdzaqb9kp9alAv37cE9DYg84eHJHt7o
-	i4MhZzZ7zyYVwTFAwD7S1U3IYFF0IK8rgvQ+xKEiaNyW46llo1eeKtdpHA7uIcfwT9NTNa8+OU9
-	DRLZ0ew9Sxw9KmdIwWut09M8oU7zPGdQ+bWmnOeNzGHhKnZ/Eyi8DLFMaFKJkp8NWZQlJ41Exn7
-	/DEz2XwTjvgkOfY+9JjLuDb+uZU1K5N7iRgT9cFzL7z1/xOCW36JpXyP2r5bOEaDWtYKQF9vpCD
-	5/DBrRN/ZgErw1VGr8x2sm53HA==
-X-Received: by 2002:a17:90b:1e47:b0:3ac:a521:960 with SMTP id 98e67ed59e1d1-3b182e02b3fmr4471058a91.1.1794465757989;
-        Wed, 11 Nov 2026 22:42:37 -0800 (PST)
+        bh=WTW0EIxph2gX5KJle8Wf+OJUb+n4VBCQkMtNRfQLLO0=;
+        b=WMCrLnNLOP+Sj7XvuAd3Pg3rTJTFqRSw65qdMQgyfPvDo3vPZaOs0gGz9FtTwv6scD
+         eGZUrSm/1m2Fo0avBgGrcr/H+Hd8YAMOXX0r0abVL1Z/mvq1cDmzdEfghtYdWQFR9E+U
+         7JNuzYPRJDiDdXuUxT0fkSrjv2Vc4zcYUBD7BAhQ10rM0nT9aO+caQgURhuufHXZiC3G
+         +jEr1qnVAPzspWW6QOabf0hTP+UG1kdNqPz9H7DIKczFrx6RPI3kNqkNYLuVM0reM3VX
+         n6sezYY+6KqsUQMg4HTDRuCcw8w+Qb6ZAQsl4OmqMVh13nQTusdNFgDi3U1OlPtebiIa
+         ixsw==
+X-Gm-Message-State: APuU4Z8HugGStP+2elvWIug2uHRJHdTuty/pTiACMc806vnFeI7VdaD3
+	IFLool4RrMBpTVYNy8TB4ueKnm+0+GUGmY9NSA2j+dTp3ccMGfNVTQcN0+sJRw==
+X-Gm-Gg: AYBFou0Hl9L3YnIesgt3OmU4qkjC3A0Yeb+3Npk8Xz970rlv1jgatRsEk4UlM66/Reh
+	a3+/Pjam9kAN8CY+OV74Lg4b3/jqm1IK1/3nAE2FnzIvD2E705wsvw+Y7E4GAgVRWGouLDxM7XH
+	CMDTYQzDZu4c8T4TOSsHt/pMixdQSJneI4HB77gQc28Jw9tG72CFQvv1UuR8ghBTcd4TIQ/fze+
+	JjDqvuHeP6CAYNHbM53Fn/akQmObRqL5QMPob2sVNAhlsR6HwwdTYLZ7V4N3bpbs1CKNwaYENKr
+	EefRSBBkF2PB4jg0Eh02VxrVPkWvLY8oP3Egi+l2YxnagkuozMg1VmiBQ4IlmmTRpGlF0VVtckW
+	WkKBnlrHowXnPdGEG/vNcSQkeORuHiSo11NyFmFqjMv7pJEI2iLdo9y8JA09dOl8rZQh1arnsFZ
+	D+Ri2yIecFan//yTq4OjC8e5ek4Gv9A+NkuxclH26Y3aF9htv5b3ncL29wQDiIS0gJhrDmAQPCj
+	RNr0HlfYh39h/GBeTr0meEXdmfyn/czRvEGBRfNUIECJVviUxD5AFDlluH9fkVuEvei6LuAD1KZ
+	PYJv0BEIxvKcy886mvww5ly3Z4RYQQZU2OUvFteEaJ7igxTOph5CesTrdcehTohc7d+D+cEvHsQ
+	/sHL+vu0bFBAdyoCn5xCNKIntJB0KHPIM+31fr65ybAT5BVYm76M+K8TMS62exRD+YztGFA+cK3
+	pHMMdyotGTe8jJFR9wAi4MtMetczo9403tv0WBCfZdtRT/+H7xtch9jg+QJr3BIDRO3Aftw/dbl
+	hitAFo4BGD+3Qi6ED8LeKUkaaMct8Wh23T8+mLQIDPj6Bys9xhOSJiZrWkGIT3ANC06drLCdgeU
+	X1H0jg==
+X-Received: by 2002:a17:90b:50cc:b0:3b1:6e2:3693 with SMTP id 98e67ed59e1d1-3b197c93f2fmr1108242a91.17.1794465759023;
+        Wed, 11 Nov 2026 22:42:39 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3b197c768e8sm2984715a91.11.2026.11.11.22.42.36
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3b197c768e8sm2984715a91.11.2026.11.11.22.42.38
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 11 Nov 2026 22:42:37 -0800 (PST)
+        Wed, 11 Nov 2026 22:42:38 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-networking][PATCH 08/24] tgt: upgrade 1.0.90 -> 1.0.98
-Date: Wed, 11 Nov 2026 22:42:08 -0800
-Message-ID: <20261112064225.2410019-8-khem.raj@oss.qualcomm.com>
+Subject: [meta-networking][PATCH 09/24] ettercap: upgrade 0.8.4.1 -> 0.8.5.1
+Date: Wed, 11 Nov 2026 22:42:09 -0800
+Message-ID: <20261112064225.2410019-9-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.1
 In-Reply-To: <20261112064225.2410019-1-khem.raj@oss.qualcomm.com>
 References: <20261112064225.2410019-1-khem.raj@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Thu, 12 Nov 2026 06:42:39 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132177
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Thu, 12 Nov 2026 06:42:49 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132178
 Content-Type: text/plain; charset="utf-8"
 
-Drop musl-__wordsize.patch, __WORDSIZE is no longer used.
+Refresh 0001-ec.h-do-not-strip-a-pre-existing-_GNU_SOURCE-define.patch.
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- .../tgt/files/musl-__wordsize.patch           | 41 -------------------
- .../tgt/{tgt_1.0.90.bb => tgt_1.0.98.bb}      |  3 +-
- 2 files changed, 1 insertion(+), 43 deletions(-)
- delete mode 100644 meta-networking/recipes-extended/tgt/files/musl-__wordsize.patch
- rename meta-networking/recipes-extended/tgt/{tgt_1.0.90.bb => tgt_1.0.98.bb} (97%)
+ .../ettercap/{ettercap_0.8.4.1.bb => ettercap_0.8.5.1.bb} | 2 +-
+ ...h-do-not-strip-a-pre-existing-_GNU_SOURCE-define.patch | 8 ++++++--
+ 2 files changed, 7 insertions(+), 3 deletions(-)
+ rename meta-networking/recipes-support/ettercap/{ettercap_0.8.4.1.bb => ettercap_0.8.5.1.bb} (96%)
 
-diff --git a/meta-networking/recipes-extended/tgt/files/musl-__wordsize.patch b/meta-networking/recipes-extended/tgt/files/musl-__wordsize.patch
-deleted file mode 100644
-index ac758cc39d..0000000000
---- a/meta-networking/recipes-extended/tgt/files/musl-__wordsize.patch
-+++ /dev/null
-@@ -1,41 +0,0 @@
--The definition of __WORDSIZE is found in <sys/reg.h>
--
--Upstream-Status: Pending
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
--
----- a/usr/iscsi/iscsid.h
--+++ b/usr/iscsi/iscsid.h
--@@ -22,6 +22,9 @@
-- #include <stdint.h>
-- #include <inttypes.h>
-- #include <netdb.h>
--+#if !defined(__GLIBC__)
--+#include <sys/reg.h>
--+#endif
-- 
-- #include "transport.h"
-- #include "list.h"
----- a/usr/tgtd.h
--+++ b/usr/tgtd.h
--@@ -1,6 +1,9 @@
-- #ifndef __TARGET_DAEMON_H
-- #define __TARGET_DAEMON_H
-- 
--+#if !defined(__GLIBC__)
--+#include <sys/reg.h>
--+#endif
-- #include "log.h"
-- #include "scsi_cmnd.h"
-- #include "tgtadm_error.h"
----- a/usr/util.h
--+++ b/usr/util.h
--@@ -19,6 +19,9 @@
-- #include <linux/fs.h>
-- #include <sys/types.h>
-- #include <sys/stat.h>
--+#if !defined(__GLIBC__)
--+#include <sys/reg.h>
--+#endif
-- 
-- #include "be_byteshift.h"
-- 
-diff --git a/meta-networking/recipes-extended/tgt/tgt_1.0.90.bb b/meta-networking/recipes-extended/tgt/tgt_1.0.98.bb
-similarity index 97%
-rename from meta-networking/recipes-extended/tgt/tgt_1.0.90.bb
-rename to meta-networking/recipes-extended/tgt/tgt_1.0.98.bb
-index a110d556a3..c4ceb6a76a 100644
---- a/meta-networking/recipes-extended/tgt/tgt_1.0.90.bb
-+++ b/meta-networking/recipes-extended/tgt/tgt_1.0.98.bb
-@@ -4,13 +4,12 @@ LICENSE = "GPL-2.0-only"
- LIC_FILES_CHKSUM = "file://scripts/tgtd.spec;beginline=7;endline=7;md5=21c19ea7dad04648b9c2f791b6e29b4c"
- DEPENDS = "sg3-utils libaio"
+diff --git a/meta-networking/recipes-support/ettercap/ettercap_0.8.4.1.bb b/meta-networking/recipes-support/ettercap/ettercap_0.8.5.1.bb
+similarity index 96%
+rename from meta-networking/recipes-support/ettercap/ettercap_0.8.4.1.bb
+rename to meta-networking/recipes-support/ettercap/ettercap_0.8.5.1.bb
+index 9a2090719b..8ec930d39c 100644
+--- a/meta-networking/recipes-support/ettercap/ettercap_0.8.4.1.bb
++++ b/meta-networking/recipes-support/ettercap/ettercap_0.8.5.1.bb
+@@ -25,7 +25,7 @@ SRC_URI = "gitsm://github.com/Ettercap/ettercap;branch=master;protocol=https;tag
+            file://0001-ec.h-do-not-strip-a-pre-existing-_GNU_SOURCE-define.patch \
+            "
  
--SRCREV = "df991fa788e22cd8b8e3013cfae306988c19c3d0"
-+SRCREV = "4922507af70c65e4c6e35489f1651f841d01ebaf"
+-SRCREV = "0dc8409779f3a09cbfff4434b9a4d7b33480d88d"
++SRCREV = "832524f3c4c215f1007fe9f190dbf052ee965b55"
  
- SRC_URI = "git://github.com/fujita/tgt.git;branch=master;protocol=https \
- 	      file://0001-Correct-the-path-of-header-files-check-in-Yocto-buil.patch \
-         file://0001-usr-Makefile-WARNING-fix.patch \
-         file://usr-Makefile-apply-LDFLAGS-to-all-executables.patch \
--        file://musl-__wordsize.patch \
- "
- SRC_URI += "file://tgtd.init \
-             file://tgtd.service \
+ EXTRA_OECMAKE = " \
+     -DCMAKE_SKIP_RPATH=TRUE \
+diff --git a/meta-networking/recipes-support/ettercap/files/0001-ec.h-do-not-strip-a-pre-existing-_GNU_SOURCE-define.patch b/meta-networking/recipes-support/ettercap/files/0001-ec.h-do-not-strip-a-pre-existing-_GNU_SOURCE-define.patch
+index 126d37ff50..8beb540334 100644
+--- a/meta-networking/recipes-support/ettercap/files/0001-ec.h-do-not-strip-a-pre-existing-_GNU_SOURCE-define.patch
++++ b/meta-networking/recipes-support/ettercap/files/0001-ec.h-do-not-strip-a-pre-existing-_GNU_SOURCE-define.patch
+@@ -24,13 +24,16 @@ intact for the remainder of the translation unit.
+ 
+ Upstream-Status: Pending
+ Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
++
+ ---
+  include/ec.h | 8 ++++++--
+  1 file changed, 6 insertions(+), 2 deletions(-)
+ 
++diff --git a/include/ec.h b/include/ec.h
++index 5536982..9723755 100644
+ --- a/include/ec.h
+ +++ b/include/ec.h
+-@@ -20,19 +20,23 @@
++@@ -20,20 +20,24 @@
+  
+  #if !defined (__USE_GNU)   /* for memmem(), strsignal(), etc etc... */
+     #define __USE_GNU
+@@ -44,6 +47,7 @@ Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+     #define _REENTRANT      /* for strtok_r() */
+  #endif
+  #include <string.h>
++ #include <unistd.h>        /* for setresuid() and setresgid() */
+ -#if defined (__USE_GNU)
+ +#if defined (EC_UNDEF_USE_GNU)
+     #undef __USE_GNU
+@@ -55,4 +59,4 @@ Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+ +   #undef EC_UNDEF_GNU_SOURCE
+  #endif
+  #include <strings.h>
+- #include <unistd.h>
++ #include <time.h>
