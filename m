@@ -1,65 +1,66 @@
-Received: from mail-pg1-f171.google.com (mail-pg1-f171.google.com [209.85.215.171])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.8000.1794465778772862727
+Received: from mail-pg1-f170.google.com (mail-pg1-f170.google.com [209.85.215.170])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.8001.1794465779783035446
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 11 Nov 2026 22:42:58 -0800
+ Wed, 11 Nov 2026 22:42:59 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=N7QeFWUJ;
- spf=pass (domain: gmail.com, ip: 209.85.215.171, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f171.google.com with SMTP id 41be03b00d2f7-cdb45e96d2bso1662980a12.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 11 Nov 2026 22:42:58 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=g7Gs/m3p;
+ spf=pass (domain: gmail.com, ip: 209.85.215.170, mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f170.google.com with SMTP id 41be03b00d2f7-cdb628232d2so2329531a12.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 11 Nov 2026 22:42:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794465778; x=1795070578; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=/r5v4r4Yj0Q5hQCzrc3ANHUyIxSHiR3F1FzC7e1jPoI=;
-        b=N7QeFWUJ07GTYrXgNs9RXmeKSZed6imgYGn1/kOkFobt5fRe9btKJxhtsItYod0pDU
-         jnSN4UG82jxD7fl9NFXeH9Yi94V1gwZ2ejLcwPpudNQYyWqlX04aL/l6em3u3SLiiUBy
-         R4lSPO3jF5VRD6RZU06+atWbqWftMDMsUoLMhgYfMhcCttjay2gfZYFfgU3u7QwYrkz5
-         cj2VUH23OO5iHEK5XRsziOxrzJL/I30QzUSsUOQ+SUWFchhYringSGLDbarbCD5jJGXL
-         /14Xgg9fMyPBRVOnGpTd4NKLIKFtyzskE4wUuCy7f3tLPKxRC2WihWIjKOXjQBUspqmK
-         08jA==
+        d=gmail.com; s=20260707; t=1794465779; x=1795070579; darn=lists.openembedded.org;
+        h=content-transfer-encoding:content-type:mime-version:references
+         :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=RXKMKwlwo0PraL/xpm5puUd7WZH5ttwfhvMS+Q7mnug=;
+        b=g7Gs/m3pxuUHqFkiVX42IHihutNP74y7WvnyalY1IULjfCivBTRaCNaj+qoICkp5yD
+         x0qddrEAyaPoaSSx9Bo4n67paPU9hP/3PsaLKeFERJpV9kFWH+KCih5U1Sqto1/3hyQH
+         P5jWPIHJSy3lgYRC0cW3d0waMxkH+xdKSD6z1nVh9qCNV5o/GVIls/Km/tDdq0uNItYC
+         q0xDqPMqcMt9MU+Rnh9Vyo7cOVLyWEY65rPtbwRvthC1gafVTxld5LY6fqkmV0R52bZz
+         cHr1yt6wV6fcgDWpRuiF/8ZMxIpyv9yFsfKOqHN8oKNVevxBnDvBMaN6OFEwYAEcpzCa
+         P+yg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794465778; x=1795070578;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=/r5v4r4Yj0Q5hQCzrc3ANHUyIxSHiR3F1FzC7e1jPoI=;
-        b=j+XOjibvFfNIzwlHtZdAp7tTONSiY/yNTTH9wNyckQA04LJ3kLK/achiCV2vAbJuq2
-         01LjwG3DU0BpFwH8sVNfKKfpcuTZbILCNsLKlkNrbXsT0PmVFayqMCPZrw4E5BELuspm
-         KssRKEA9unuaxB7JN/tjuuXTFiuuHuJ4g2IXOwjyn/onkDBJQpxGlm9WwFEFoiBrS/hl
-         ePoA7FWLELTRVGVJrYb7NK0owFu0N5/zwni6MNI3Itgoebfx341uiD1Xfu1IRo2EUhpo
-         uFXOxvIiLq3pw8MVjFaPYxyffgrHXvj8qs1tVuwQt7YPZdNNFkE6Ymv5EdSvCv43h6oD
-         KXlQ==
-X-Gm-Message-State: APuU4Z/FlTz6qbgJi54yeVgPT+Vl6zZJQe6EhrT5hOTgnmL2DuFd45fh
-	zXmFSU+vo8R+P9VLKk4Y3Iy3w8g89lvAOcfv7QlwbZoL0S1V3I3MEE8lUf2xBg==
-X-Gm-Gg: AYBFou2ACKCU/cUi2yH7nW8LpslfbUODF0JC0DIaX40HdoTSJHIqhNt17ODtol2kTSC
-	Ufa5UTZxTIzf7fFGAHarMsQblvAPgVVsu8hm0Q/yXqM4FTxEOpuWJpkW2kdTMNbbevxW89w8unF
-	SUY0PbfJ9jY+8LLRTFx0lVqN/014Z4S8yyIaYCL/9ksiuhtdLeFwmgs8AK/mlLYtJ10iFeMvL2z
-	Ni4KUKfU25m/wTmQBIC7hC8s3a5/pbanMcvFtNhI/5WSqzmyyuXUDJaI2wZwR56xSUnAxqyylJj
-	Pt1Uo8zkNFPc0DzQVPfy6oQk0TZ+iKLnnQ1j6gYeDU2I0jp71z54COk4TiYVFkRvBFwjNIeXDCv
-	2uJExkLqvSFMOJPFcfupcX47ECXlYN3ca+i2gfiv9uY04iyk3JuvelFlbDksmPBemFsK/56JDGC
-	fZqfw7cUCu7XEtDgXZvuwoyvV0UiM5lrrl0NaPNOF7M7MDqr8pOXRag+WWKpV4g7TFB3BJUJSAj
-	2Bczt5M+wWSYwcMUGjR/ZGkOjROPY4bE6bunrJ6eSZCxHOcvzRNjms45kN0B7fjmqffRR/8kgdI
-	j1SE0Gog8nlT6qPLZC7YavTVCKFhls/eLXDDVt2+OpsTt3K66chO5IkpZ4nEzVvYOCe/mYHPOjX
-	kVWzFhuFvftif7L7C7as3zTYsBFVks0G4hjQ1YD7lf6ztQg6uo2F7qrfdW6BIkH7TbhWJU7jriM
-	mml9rcxdzRFNNxDYU0XQUFwm8uq54KkcG9EBZbcJdX8wufexR/Z8c1WVmx83JUl13aXEXmBfqwv
-	U6VqsdkEmtxrpu+YJar7Jh8BNM42sU7c4CvhYdgGKxQ8eiHT4+U+/c4dpwbOQspnuCfSHw8gcza
-	IVo1
-X-Received: by 2002:a17:90a:e7d2:b0:3b0:91ce:672e with SMTP id 98e67ed59e1d1-3b182f65e79mr4866127a91.17.1794465777888;
-        Wed, 11 Nov 2026 22:42:57 -0800 (PST)
+        d=1e100.net; s=20260707; t=1794465779; x=1795070579;
+        h=content-transfer-encoding:content-type:mime-version:references
+         :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=RXKMKwlwo0PraL/xpm5puUd7WZH5ttwfhvMS+Q7mnug=;
+        b=T3XXBoVH85rO1ZKiLLWPVn1rknLxY9S1oJ45HnazrDB3yQq1RE+ng3B5e8zpJxsVtD
+         CTGQ+0ClC3JNYS1vsd9I2pi2zAjDD6T3fTluc0iQntG2iOXE6FdqN8mO1yyMhyJiQe26
+         v5aNNlFCX7IfzhDBXnOjJk4PiADJRLUdXG2GBNX7XkUxQfReV/sfE5RjS89NSIdxkNO3
+         am4W+bM3kdPm2yDR/z1y1REbJZnyeOfDgKaLR3xmQX0fAmGs4eT1YipY4bcBrQm/bHeZ
+         QvpRWaIhbaJcNAKKg05pPP7Lw3ZahO4V5ofdiCw1vgzFjRW2wxLXAB4//ZaTVMIFPZvG
+         gfZQ==
+X-Gm-Message-State: APuU4Z+N5rZHWb9Iuurq+m3bpyHQytqWipRaQYivZjCrk2QiT2GhoGp/
+	HK/CiocMVMpxdj08B7PwdjEfEtpR8Pdh0tQovLCnqjQIPHLyixuMhZWZQeaF/hquzoE=
+X-Gm-Gg: AYBFou1purA9CcRk9dVU1JdULs5KeX9vi4SjkbWmIfg0EUcjFDhGildcR8FVRhTTUg0
+	TV8lrom+BkKXCYI44iArknqfU1iiL5TfIJ0+8u2CLLme+R3/6XWWFfTUlEoLxI+T1AnLGSQsOpK
+	naVr7jgqDKIBYcDm78F96v11uiZt7kzIn0KgMzNi5mOZajvoZOOe1Kp9wlikQH+KDwEIExgp/r2
+	nrJW4FE8101fu7vvXSI1mw1kwbVaAU09x7a/Z/DDWSWy3PVG7HqY+pQNHK5xxPpd5NIK+ienOfL
+	4zqSccE5sDoXiBP8Jg1hX6y+nWvwMzp2xS9SbNE4NdFngcLx9ddG8mjtUKViwxQxxEe8VJuXvpu
+	DQWlwb+x7qrb6eQL4wVu+EZYQgpDxNNbn7GR0FpDN0nP26nU7IsEAzudReOLWcxeuDF2fgqteFS
+	4xs5fRW4ykcLLzEbcy2rOPERkhRl8I2bEThn7OLUuP1Qjc3ac112S/6bwQU9BjwQn/RcHAWxzRk
+	xpV/gxiPA3tC4lZviHpBuT1hideuKqEE5ySJkiCG/NlAFX0YAquIJO+umhf/CrXpETPSo2XEXGp
+	ccfGCmiKNd+T6P6aS5cvEomcgpW6EbpF6l+JskSHVFtJE06FSdqFZY8g5aSBldRD9beXrfpZSmo
+	gQDik9PTVomMgnDL7QnYsgkv/bGJDFCMZKAgQkBfAq+X18m7ZAdG52TEAfxZ1FD0N7jiEK9RRAv
+	UVN3KHBS0Q0YA+Dt4AbnJBaUZ2CqV80hsUb8ZleCkgCgOACGE4ICgCXiZ3WGQnRzUYtLW0EOte8
+	r2VmSfKqRETR7SvbhgDR9VS7I7fVPRNUkweWLusB8tlpFZSw2evckfJyUSlScafA5z4eVq1M5Fe
+	gES6
+X-Received: by 2002:a17:90b:2884:b0:3ab:e588:c2a8 with SMTP id 98e67ed59e1d1-3b182f83739mr4366390a91.64.1794465779142;
+        Wed, 11 Nov 2026 22:42:59 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3b197c768e8sm2984715a91.11.2026.11.11.22.42.56
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3b197c768e8sm2984715a91.11.2026.11.11.22.42.58
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 11 Nov 2026 22:42:57 -0800 (PST)
+        Wed, 11 Nov 2026 22:42:58 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-networking][PATCH 23/24] cloudflared: upgrade 2026.3.0 -> 2026.10.7
-Date: Wed, 11 Nov 2026 22:42:23 -0800
-Message-ID: <20261112064225.2410019-23-khem.raj@oss.qualcomm.com>
+Subject: [meta-networking][PATCH 24/24] nbdkit: Remove stale 1.33.11 recipe
+Date: Wed, 11 Nov 2026 22:42:24 -0800
+Message-ID: <20261112064225.2410019-24-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.1
 In-Reply-To: <20261112064225.2410019-1-khem.raj@oss.qualcomm.com>
 References: <20261112064225.2410019-1-khem.raj@oss.qualcomm.com>
@@ -67,221 +68,100 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Thu, 12 Nov 2026 06:43:00 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132192
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132193
 Content-Type: text/plain; charset="utf-8"
 
-Upstream removed the vendor directory (TUN-10829), so fetch the Go
-modules through go-mod-update-modules like other Go recipes, with
-cloudflared-go-mods.inc and cloudflared-licenses.inc generated by
-bitbake -c update_modules. The licenses that could not be detected
-automatically were identified by hand.
+nbdkit_1.33.11.bb and its patch were left behind next to the current
+recipe and are never selected since the newer version is preferred.
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- .../cloudflared/cloudflared-go-mods.inc       | 75 ++++++++++++++++++
- .../cloudflared/cloudflared-licenses.inc      | 79 +++++++++++++++++++
- ...d_2026.3.0.bb => cloudflared_2026.10.7.bb} |  6 +-
- 3 files changed, 158 insertions(+), 2 deletions(-)
- create mode 100644 meta-networking/recipes-connectivity/cloudflared/cloudflared-go-mods.inc
- create mode 100644 meta-networking/recipes-connectivity/cloudflared/cloudflared-licenses.inc
- rename meta-networking/recipes-connectivity/cloudflared/{cloudflared_2026.3.0.bb => cloudflared_2026.10.7.bb} (89%)
+ ...void-absolute-buildpaths-in-binaries.patch | 38 -------------------
+ .../recipes-support/nbdkit/nbdkit_1.33.11.bb  | 32 ----------------
+ 2 files changed, 70 deletions(-)
+ delete mode 100644 meta-networking/recipes-support/nbdkit/nbdkit/0001-plugins-Avoid-absolute-buildpaths-in-binaries.patch
+ delete mode 100644 meta-networking/recipes-support/nbdkit/nbdkit_1.33.11.bb
 
-diff --git a/meta-networking/recipes-connectivity/cloudflared/cloudflared-go-mods.inc b/meta-networking/recipes-connectivity/cloudflared/cloudflared-go-mods.inc
-new file mode 100644
-index 0000000000..303e88a40d
---- /dev/null
-+++ b/meta-networking/recipes-connectivity/cloudflared/cloudflared-go-mods.inc
-@@ -0,0 +1,75 @@
-+
-+# This file has been generated by go-mod-update-modules.bbclass
-+#
-+# Do not modify it by hand, as the contents will be replaced when
-+# running the update-modules task.
-+
-+SRC_URI += "\
-+    gomod://github.com/BurntSushi/toml;version=v1.2.0;sha256sum=3b06b4bbe1c1e13532894194e9cb53af0068690230029bee5ea9f527dd838415 \
-+    gomod://github.com/beorn7/perks;version=v1.0.1;sha256sum=25bd9e2d94aca770e6dbc1f53725f84f6af4432f631d35dd2c46f96ef0512f1a \
-+    gomod://github.com/cespare/xxhash/v2;version=v2.3.0;sha256sum=145a26cdc7c49db566017b807c4989ee7f7ddeb569423e9cb99f995fac3621d3 \
-+    gomod://github.com/chungthuang/quic-go;version=v0.45.1-0.20260529212404-a9fddf436fc4;sha256sum=1031354a97305aac5bc55ed36c6032dc18ddea75d0a1a372044603b8092ae30b \
-+    gomod://github.com/cloudflare/backoff;version=v0.0.0-20240920015135-e46b80a3a7d0;sha256sum=6e4994b9215457e9a8d57403eef703f8c41cf01c7bea291df25a430698fbbe35 \
-+    gomod://github.com/coreos/go-oidc/v3;version=v3.17.0;sha256sum=fba667f687448a228315d6f0cfd00a5fa9ab8ad9b511e38575a699afc0b30aeb \
-+    gomod://github.com/coreos/go-systemd/v22;version=v22.5.0;sha256sum=4c44e3a6b84de4db393e341537c7124031fa98d5f98860ad31b32b4890f2234c \
-+    gomod://github.com/cpuguy83/go-md2man/v2;version=v2.0.0;sha256sum=f2fdd06287a80f1bea5552f572d7f2314ec829285a3040b63469e0635f66fb6d \
-+    gomod://github.com/facebookgo/grace;version=v0.0.0-20180706040059-75cf19382434;sha256sum=290a23ab8ab5b0288a7817ec2e1c44dc3c2d7fb7530aff29d63ddade469d7050 \
-+    gomod://github.com/fsnotify/fsnotify;version=v1.4.9;sha256sum=fe48f570801de16bfe973dc74e7e5923ae689ba8c274437f65dbc8a63537f759 \
-+    gomod://github.com/getsentry/sentry-go;version=v0.43.0;sha256sum=f8f52c5887d7254c86a587b3b761122fc5bbd2c521a5b74c6164123d1130f1a8 \
-+    gomod://github.com/go-chi/chi/v5;version=v5.5.0;sha256sum=39f8416f36d5b177b0ce5d48cf21b3f460df9260feafab1fb8c1410fde0901dc \
-+    gomod://github.com/go-chi/cors;version=v1.2.1;sha256sum=aac22bd92071aae0616247d50391e5af993178d38fd37e4fc2b1f00f86619b87 \
-+    gomod://github.com/go-jose/go-jose/v4;version=v4.1.6;sha256sum=62506f3369fc124682356bbe8eb442f982422401dda99ace200694efc962da76 \
-+    gomod://github.com/go-logr/logr;version=v1.4.4;sha256sum=3ab107c1d280ce798eaa744efd595982fa709d4023f3f38d24189827483c1710 \
-+    gomod://github.com/go-logr/stdr;version=v1.2.2;sha256sum=9dd6893bf700198485ae699640b49bc1efbc6c73b37cb5792a0476e1fd8f7fef \
-+    gomod://github.com/gobwas/httphead;version=v0.1.0;sha256sum=a4646f1d12786fee639c489219e7c667b10f7dc19578a4e7222bd17c5d9bdf8a \
-+    gomod://github.com/gobwas/pool;version=v0.2.1;sha256sum=79b505a9f42b141affca1eedd2edc87ae922482d052e16e3b6e5e3c9dcec89e1 \
-+    gomod://github.com/gobwas/ws;version=v1.2.1;sha256sum=423d7d8b1364e1d9b0c4418905f7dfc29c092dc2db4c80fb66b695d4a002daca \
-+    gomod://github.com/google/gopacket;version=v1.1.19;sha256sum=fc8cbe2239683199e677cb39f9303ae8d4a365f3c8cd8a2dcfa1f14c41bcff88 \
-+    gomod://github.com/google/uuid;version=v1.6.0;sha256sum=d0f02f377217f42702e259684e06441edbf5140dddcc34ba9bea56038b38a6ed \
-+    gomod://github.com/gorilla/websocket;version=v1.5.3;sha256sum=dbbd31dd0f08548c5dc43e4c2f12bbba66abff5252b224b1cd06afbb72783a76 \
-+    gomod://github.com/grpc-ecosystem/grpc-gateway/v2;version=v2.29.0;sha256sum=92aa0dbc15037aeddca97ff7f8e4c61bdc3841a34a0df9bc27af30265e598f2d \
-+    gomod://github.com/ipostelnik/cli/v2;version=v2.3.1-0.20210324024421-b6ea8234fe3d;sha256sum=aca312ba74a296d714476d2fa1a10ff9a125338589d8e7731206b44f044ba0f2 \
-+    gomod://github.com/json-iterator/go;version=v1.1.12;sha256sum=d001ea57081afd0e378467c8f4a9b6a51259996bb8bb763f78107eaf12f99501 \
-+    gomod://github.com/klauspost/compress;version=v1.20.3;sha256sum=1eb710a814c44bf21332a512a19f496fb5c489ca8eb72244bb9c49f80900848f \
-+    gomod://github.com/mattn/go-colorable;version=v0.1.13;sha256sum=08be322dcc584a9fcfde5caf0cf878b4e11cd98f252e32bc704e92c5a4ba9d15 \
-+    gomod://github.com/mattn/go-isatty;version=v0.0.20;sha256sum=f2d5f89ca451577e17464b9bb596dc0d0ecececb5eaa63622c41b57cd0b7b8cc \
-+    gomod://github.com/mitchellh/go-homedir;version=v1.1.0;sha256sum=fffec361fc7e776bb71433560c285ee2982d2c140b8f5bfba0db6033c0ade184 \
-+    gomod://github.com/modern-go/concurrent;version=v0.0.0-20180306012644-bacd9c7ef1dd;sha256sum=91ef49599bec459869d94ff3dec128871ab66bd2dfa61041f1e1169f9b4a8073 \
-+    gomod://github.com/modern-go/reflect2;version=v1.0.2;sha256sum=f46f41409c2e74293f82cfe6c70b5d582bff8ada0106a7d3ff5706520c50c21c \
-+    gomod://github.com/munnerz/goautoneg;version=v0.0.0-20191010083416-a7dc8b61c822;sha256sum=3d7ce17916779890be02ea6b3dd6345c3c30c1df502ad9d8b5b9b310e636afd9 \
-+    gomod://github.com/pkg/errors;version=v0.9.1;sha256sum=d4c36b8bcd0616290a3913215e0f53b931bd6e00670596f2960df1b44af2bd07 \
-+    gomod://github.com/prometheus/client_golang;version=v1.22.0;sha256sum=ab84ebfcbae87a0cbecc01b537f73eec6047d4f016c29719feb922470f086aa2 \
-+    gomod://github.com/prometheus/client_model;version=v0.6.2;sha256sum=67017b19f220c6ab91ecfdd10a93824e2a8b09fcb6390054dbdc49df3354a9ca \
-+    gomod://github.com/prometheus/common;version=v0.64.0;sha256sum=a6127fb0e09fcee059955e1680e08c143b147c1423789f72520306a8114fd549 \
-+    gomod://github.com/prometheus/procfs;version=v0.15.1;sha256sum=d31ad13f1ae121d842ff0f243d029c247e68710edab8a358d6366a67b7feaa6d \
-+    gomod://github.com/rs/zerolog;version=v1.20.0;sha256sum=318ae491e75399d5009ca6f6fbd9818568553fb3878f3e6e3e6e33471cf019e4 \
-+    gomod://github.com/russross/blackfriday/v2;version=v2.1.0;sha256sum=7852750d58a053ce38b01f2c203208817564f552ebf371b2b630081d7004c6ae \
-+    gomod://github.com/shirou/gopsutil/v4;version=v4.26.3;sha256sum=c3212724bdf54169b0d6f4691b3f29f6629bc04e12ea59c7e1b0e7604a80c9ff \
-+    gomod://github.com/tklauser/go-sysconf;version=v0.3.16;sha256sum=d4c896f77e5934f54d772b5f6a8f8043b8d34df189f6581bc2ba84d239a6b643 \
-+    gomod://github.com/tklauser/numcpus;version=v0.11.0;sha256sum=7a7527e1f68059a77189ae875c294e5c310925fbb8ba5a6c794edd2b7e687267 \
-+    gomod://go.opentelemetry.io/auto/sdk;version=v1.2.1;sha256sum=a08a16fc0a7041cdb875f47a260a56000632212c85f65a302a043c76380c8335 \
-+    gomod://go.opentelemetry.io/contrib/propagators;version=v0.22.0;sha256sum=6fd7c359308ba4f6b81698cabdbe701b2c8d786de53387ce8ed7b69eed647e04 \
-+    gomod://go.opentelemetry.io/otel;version=v1.45.0;sha256sum=65b5fc93c93f4eaef740b4bba81fd2543f248d5df85cf4d1ddf9ab459b30f7a2 \
-+    gomod://go.opentelemetry.io/otel/exporters/otlp/otlptrace;version=v1.45.0;sha256sum=17e5b206e5ea76d8a1e4e8ef340d888894a0776fc1d66848530346347e0b47c3 \
-+    gomod://go.opentelemetry.io/otel/metric;version=v1.45.0;sha256sum=8f30ef0039306bf3a4421b8c08e3fc8922d13503dce53b3438e860b3628faecd \
-+    gomod://go.opentelemetry.io/otel/sdk;version=v1.45.0;sha256sum=ad0e63fa1cfc01dffec2a90a8f2d2c1bc0f55d0462940176dc41b7ada0d03258 \
-+    gomod://go.opentelemetry.io/otel/trace;version=v1.45.0;sha256sum=32d7d64ea5991378184b03a9ed7b7822b17691a239508a6905fdd73819cb6c6f \
-+    gomod://go.opentelemetry.io/proto/otlp;version=v1.11.0;sha256sum=790b98d472e7095511fa7feddd04e1d85bd844226e03ba482bd4105ef2217e09 \
-+    gomod://go.uber.org/automaxprocs;version=v1.6.0;sha256sum=964c6f548f7ee6df9fa3a9080d722c7950060bda0cb84ff9e2ae065f078813c4 \
-+    gomod://golang.org/x/crypto;version=v0.58.0;sha256sum=b0a45594cda20ddb4264d84aeff9b588b8570bf6a2833c51a0b821734a298d95 \
-+    gomod://golang.org/x/net;version=v0.61.0;sha256sum=f6843a98d608298e48a6ca287292c9a6fae066284050ce174d5ffb781c9b3dcf \
-+    gomod://golang.org/x/oauth2;version=v0.36.0;sha256sum=15bf65ff103e5dafc809d78cd037a1d1e88ccb8451824e851156002a13304504 \
-+    gomod://golang.org/x/sync;version=v0.24.0;sha256sum=ca3fcf3ea8259e75891f7947e1a816a5b89402c542d45d8bbbd9e061b0c58019 \
-+    gomod://golang.org/x/sys;version=v0.49.0;sha256sum=e73a06591ca0d7016ce3ccb45c36a8ed7128468aecc1a357f94d815c760c6b31 \
-+    gomod://golang.org/x/term;version=v0.47.0;sha256sum=d990d5ab94dfa41ba980645b721bba7490064337a01bb03e6cacace70e8df0bf \
-+    gomod://golang.org/x/text;version=v0.43.0;sha256sum=b75131f628f6e2e4892fd638d33127e952a5027775e0162b94ba069cb4e13863 \
-+    gomod://google.golang.org/genproto/googleapis/api;version=v0.0.0-20260720211330-0afa2a65878a;sha256sum=df4e8023b2b9efa58561b12e3177f4fb6789e2a271a9e03baf6f6501c7961694 \
-+    gomod://google.golang.org/genproto/googleapis/rpc;version=v0.0.0-20260720211330-0afa2a65878a;sha256sum=03a9f622788b07abc4873b3b57bdd9a3e2c8ca248587a2196578dda0bf74ddd5 \
-+    gomod://google.golang.org/grpc;version=v1.83.2;sha256sum=84292905a694e17862d15abc123a6f7f7efa9e1e3a77e80120982ff95b2605ea \
-+    gomod://google.golang.org/protobuf;version=v1.36.11;sha256sum=14983d36c56a814ed91b6d652f2b8f895baba1b84eb43b28a0b132c8637cd274 \
-+    gomod://gopkg.in/natefinch/lumberjack.v2;version=v2.0.0;sha256sum=8c268e36660d6ce36af808d74b9be80207c05463679703e93d857e954c637aaa \
-+    gomod://gopkg.in/yaml.v2;version=v2.4.0;sha256sum=ede49e27c4cca6cdd2ec719aed8ea4d363710cceb3d411e7a786fbdec0d391fd \
-+    gomod://gopkg.in/yaml.v3;version=v3.0.1;sha256sum=aab8fbc4e6300ea08e6afe1caea18a21c90c79f489f52c53e2f20431f1a9a015 \
-+    gomod://nhooyr.io/websocket;version=v1.8.7;sha256sum=385b1d5b5b9855e58d641a9e1eeea04ff9d3460dc2e805a34435e442f290be11 \
-+    gomod://zombiezen.com/go/capnproto2;version=v2.18.0+incompatible;sha256sum=da8e2fcaba666ef5924269df7132ade9ef5d6f3b28378da759c12060fcdf0857 \
-+"
-diff --git a/meta-networking/recipes-connectivity/cloudflared/cloudflared-licenses.inc b/meta-networking/recipes-connectivity/cloudflared/cloudflared-licenses.inc
-new file mode 100644
-index 0000000000..247f4e3fde
---- /dev/null
-+++ b/meta-networking/recipes-connectivity/cloudflared/cloudflared-licenses.inc
-@@ -0,0 +1,79 @@
-+
-+# This file has been generated by go-mod-update-modules.bbclass
-+#
-+# Do not modify it by hand, as the contents will be replaced when
-+# running the update-modules task.
-+
-+LICENSE += "AND Apache-2.0 AND BSD-2-Clause AND BSD-3-Clause AND MIT"
-+
-+LIC_FILES_CHKSUM += "\
-+    file://pkg/mod/github.com/!burnt!sushi/toml@v1.2.0/COPYING;md5=9e24c0e2a784c1d1fcabb279f4f107e0;spdx=MIT \
-+    file://pkg/mod/github.com/beorn7/perks@v1.0.1/LICENSE;md5=0d0738f37ee8dc0b5f88a32e83c60198;spdx=MIT \
-+    file://pkg/mod/github.com/cespare/xxhash/v2@v2.3.0/LICENSE.txt;md5=802da049c92a99b4387d3f3d91b00fa9;spdx=MIT \
-+    file://pkg/mod/github.com/chungthuang/quic-go@v0.45.1-0.20260529212404-a9fddf436fc4/LICENSE;md5=357080a3c7c0a7c4e23100893c301235;spdx=MIT \
-+    file://pkg/mod/github.com/cloudflare/backoff@v0.0.0-20240920015135-e46b80a3a7d0/LICENSE;md5=443e31e98597eaad0b36c4775791b195;spdx=BSD-2-Clause \
-+    file://pkg/mod/github.com/coreos/go-oidc/v3@v3.17.0/LICENSE;md5=d2794c0df5b907fdace235a619d80314;spdx=Apache-2.0 \
-+    file://pkg/mod/github.com/coreos/go-systemd/v22@v22.5.0/LICENSE;md5=19cbd64715b51267a47bf3750cc6a8a5;spdx=Apache-2.0 \
-+    file://pkg/mod/github.com/cpuguy83/go-md2man/v2@v2.0.0/LICENSE.md;md5=80794f9009df723bbc6fe19234c9f517;spdx=MIT \
-+    file://pkg/mod/github.com/facebookgo/grace@v0.0.0-20180706040059-75cf19382434/license;md5=94f0d486b3ba1dd568004dc5cccd32bc;spdx=MIT \
-+    file://pkg/mod/github.com/fsnotify/fsnotify@v1.4.9/LICENSE;md5=68f2948d3c4943313d07e084a362486c;spdx=BSD-3-Clause \
-+    file://pkg/mod/github.com/getsentry/sentry-go@v0.43.0/LICENSE;md5=40f4ea488946c62d8d257ff86d349e32;spdx=MIT \
-+    file://pkg/mod/github.com/go-chi/chi/v5@v5.5.0/LICENSE;md5=eef59fdf1c5117072cbf52b79c6ea691;spdx=MIT \
-+    file://pkg/mod/github.com/go-chi/cors@v1.2.1/LICENSE;md5=8113dfa18dd56abf2a31ffddaed783a5;spdx=MIT \
-+    file://pkg/mod/github.com/go-jose/go-jose/v4@v4.1.6/LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57;spdx=Apache-2.0 \
-+    file://pkg/mod/github.com/go-jose/go-jose/v4@v4.1.6/json/LICENSE;md5=591778525c869cdde0ab5a1bf283cd81;spdx=BSD-3-Clause \
-+    file://pkg/mod/github.com/go-logr/logr@v1.4.4/LICENSE;md5=e3fc50a88d0a364313df4b21ef20c29e;spdx=Apache-2.0 \
-+    file://pkg/mod/github.com/go-logr/stdr@v1.2.2/LICENSE;md5=86d3f3a95c324c9479bd8986968f4327;spdx=Apache-2.0 \
-+    file://pkg/mod/github.com/gobwas/httphead@v0.1.0/LICENSE;md5=6c645fd7998b851c6258e6feda6e38b1;spdx=MIT \
-+    file://pkg/mod/github.com/gobwas/pool@v0.2.1/LICENSE;md5=a031292df06f5159d11738249adc0b6f;spdx=MIT \
-+    file://pkg/mod/github.com/gobwas/ws@v1.2.1/LICENSE;md5=1d9d717a4f334cf460508e84abffe47a;spdx=MIT \
-+    file://pkg/mod/github.com/google/gopacket@v1.1.19/LICENSE;md5=b32b347fe7ed4541e05033e8b0b29001;spdx=BSD-3-Clause \
-+    file://pkg/mod/github.com/google/uuid@v1.6.0/LICENSE;md5=88073b6dd8ec00fe09da59e0b6dfded1;spdx=BSD-3-Clause \
-+    file://pkg/mod/github.com/gorilla/websocket@v1.5.3/LICENSE;md5=c007b54a1743d596f46b2748d9f8c044;spdx=BSD-2-Clause \
-+    file://pkg/mod/github.com/grpc-ecosystem/grpc-gateway/v2@v2.29.0/LICENSE;md5=c510a2a01572b82d27f28fd4d02ca318;spdx=BSD-3-Clause \
-+    file://pkg/mod/github.com/ipostelnik/cli/v2@v2.3.1-0.20210324024421-b6ea8234fe3d/LICENSE;md5=c542707ca9fc0b7802407ba62310bd8f;spdx=MIT \
-+    file://pkg/mod/github.com/json-iterator/go@v1.1.12/LICENSE;md5=0b69744b481d72d30dbf69f84a451cfd;spdx=MIT \
-+    file://pkg/mod/github.com/klauspost/compress@v1.20.3/LICENSE;md5=d0fd9ebda39468b51ff4539c9fbb13a8;spdx=BSD-3-Clause \
-+    file://pkg/mod/github.com/mattn/go-colorable@v0.1.13/LICENSE;md5=24ce168f90aec2456a73de1839037245;spdx=MIT \
-+    file://pkg/mod/github.com/mattn/go-isatty@v0.0.20/LICENSE;md5=f509beadd5a11227c27b5d2ad6c9f2c6;spdx=MIT \
-+    file://pkg/mod/github.com/mitchellh/go-homedir@v1.1.0/LICENSE;md5=3f7765c3d4f58e1f84c4313cecf0f5bd;spdx=MIT \
-+    file://pkg/mod/github.com/modern-go/concurrent@v0.0.0-20180306012644-bacd9c7ef1dd/LICENSE;md5=86d3f3a95c324c9479bd8986968f4327;spdx=Apache-2.0 \
-+    file://pkg/mod/github.com/modern-go/reflect2@v1.0.2/LICENSE;md5=86d3f3a95c324c9479bd8986968f4327;spdx=Apache-2.0 \
-+    file://pkg/mod/github.com/munnerz/goautoneg@v0.0.0-20191010083416-a7dc8b61c822/LICENSE;md5=0c241922fc69330e2e5590de114f3bf5;spdx=BSD-3-Clause \
-+    file://pkg/mod/github.com/pkg/errors@v0.9.1/LICENSE;md5=6fe682a02df52c6653f33bd0f7126b5a;spdx=BSD-2-Clause \
-+    file://pkg/mod/github.com/prometheus/client_golang@v1.22.0/LICENSE;md5=86d3f3a95c324c9479bd8986968f4327;spdx=Apache-2.0 \
-+    file://pkg/mod/github.com/prometheus/client_golang@v1.22.0/internal/github.com/golang/gddo/LICENSE;md5=4c728948788b1a02f33ae4e906546eef;spdx=BSD-3-Clause \
-+    file://pkg/mod/github.com/prometheus/client_model@v0.6.2/LICENSE;md5=86d3f3a95c324c9479bd8986968f4327;spdx=Apache-2.0 \
-+    file://pkg/mod/github.com/prometheus/common@v0.64.0/LICENSE;md5=86d3f3a95c324c9479bd8986968f4327;spdx=Apache-2.0 \
-+    file://pkg/mod/github.com/prometheus/procfs@v0.15.1/LICENSE;md5=86d3f3a95c324c9479bd8986968f4327;spdx=Apache-2.0 \
-+    file://pkg/mod/github.com/rs/zerolog@v1.20.0/LICENSE;md5=298ce0a5a34ff24389ba1355acd24929;spdx=MIT \
-+    file://pkg/mod/github.com/russross/blackfriday/v2@v2.1.0/LICENSE.txt;md5=ecf8a8a60560c35a862a4a545f2db1b3;spdx=BSD-2-Clause \
-+    file://pkg/mod/github.com/shirou/gopsutil/v4@v4.26.3/LICENSE;md5=ae6de3dee02712a1e55b280671be53bf;spdx=BSD-3-Clause \
-+    file://pkg/mod/github.com/tklauser/go-sysconf@v0.3.16/LICENSE;md5=d4eb2084b3083d2c275ec52ef4ba9ac1;spdx=BSD-3-Clause \
-+    file://pkg/mod/github.com/tklauser/numcpus@v0.11.0/LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57;spdx=Apache-2.0 \
-+    file://pkg/mod/go.opentelemetry.io/auto/sdk@v1.2.1/LICENSE;md5=86d3f3a95c324c9479bd8986968f4327;spdx=Apache-2.0 \
-+    file://pkg/mod/go.opentelemetry.io/contrib/propagators@v0.22.0/LICENSE;md5=86d3f3a95c324c9479bd8986968f4327;spdx=Apache-2.0 \
-+    file://pkg/mod/go.opentelemetry.io/otel/exporters/otlp/otlptrace@v1.45.0/LICENSE;md5=24dad3abbe7a8f390afc8ab967bfefa7;spdx=Apache-2.0+AND+BSD-3-Clause \
-+    file://pkg/mod/go.opentelemetry.io/otel/metric@v1.45.0/LICENSE;md5=24dad3abbe7a8f390afc8ab967bfefa7;spdx=Apache-2.0+AND+BSD-3-Clause \
-+    file://pkg/mod/go.opentelemetry.io/otel/sdk@v1.45.0/LICENSE;md5=24dad3abbe7a8f390afc8ab967bfefa7;spdx=Apache-2.0+AND+BSD-3-Clause \
-+    file://pkg/mod/go.opentelemetry.io/otel/trace@v1.45.0/LICENSE;md5=24dad3abbe7a8f390afc8ab967bfefa7;spdx=Apache-2.0+AND+BSD-3-Clause \
-+    file://pkg/mod/go.opentelemetry.io/otel@v1.45.0/LICENSE;md5=24dad3abbe7a8f390afc8ab967bfefa7;spdx=Apache-2.0+AND+BSD-3-Clause \
-+    file://pkg/mod/go.opentelemetry.io/proto/otlp@v1.11.0/LICENSE;md5=86d3f3a95c324c9479bd8986968f4327;spdx=Apache-2.0 \
-+    file://pkg/mod/go.uber.org/automaxprocs@v1.6.0/LICENSE;md5=513f1cf32c6e4e3236a335fa13bb1c89;spdx=MIT \
-+    file://pkg/mod/golang.org/x/crypto@v0.58.0/LICENSE;md5=7998cb338f82d15c0eff93b7004d272a;spdx=BSD-3-Clause \
-+    file://pkg/mod/golang.org/x/net@v0.61.0/LICENSE;md5=7998cb338f82d15c0eff93b7004d272a;spdx=BSD-3-Clause \
-+    file://pkg/mod/golang.org/x/oauth2@v0.36.0/LICENSE;md5=7998cb338f82d15c0eff93b7004d272a;spdx=BSD-3-Clause \
-+    file://pkg/mod/golang.org/x/sync@v0.24.0/LICENSE;md5=7998cb338f82d15c0eff93b7004d272a;spdx=BSD-3-Clause \
-+    file://pkg/mod/golang.org/x/sys@v0.49.0/LICENSE;md5=7998cb338f82d15c0eff93b7004d272a;spdx=BSD-3-Clause \
-+    file://pkg/mod/golang.org/x/term@v0.47.0/LICENSE;md5=7998cb338f82d15c0eff93b7004d272a;spdx=BSD-3-Clause \
-+    file://pkg/mod/golang.org/x/text@v0.43.0/LICENSE;md5=7998cb338f82d15c0eff93b7004d272a;spdx=BSD-3-Clause \
-+    file://pkg/mod/google.golang.org/genproto/googleapis/api@v0.0.0-20260720211330-0afa2a65878a/LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57;spdx=Apache-2.0 \
-+    file://pkg/mod/google.golang.org/genproto/googleapis/rpc@v0.0.0-20260720211330-0afa2a65878a/LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57;spdx=Apache-2.0 \
-+    file://pkg/mod/google.golang.org/grpc@v1.83.2/LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57;spdx=Apache-2.0 \
-+    file://pkg/mod/google.golang.org/protobuf@v1.36.11/LICENSE;md5=02d4002e9171d41a8fad93aa7faf3956;spdx=BSD-3-Clause \
-+    file://pkg/mod/gopkg.in/natefinch/lumberjack.v2@v2.0.0/LICENSE;md5=574cdb55b81249478f5af5f789e9e29f;spdx=MIT \
-+    file://pkg/mod/gopkg.in/yaml.v2@v2.4.0/LICENSE;md5=e3fc50a88d0a364313df4b21ef20c29e;spdx=Apache-2.0 \
-+    file://pkg/mod/gopkg.in/yaml.v3@v3.0.1/LICENSE;md5=3c91c17266710e16afdbb2b6d15c761c;spdx=Apache-2.0 \
-+    file://pkg/mod/nhooyr.io/websocket@v1.8.7/LICENSE.txt;md5=93d076e8a4d352445c34b2665b599361;spdx=MIT \
-+    file://pkg/mod/zombiezen.com/go/capnproto2@v2.18.0+incompatible/LICENSE;md5=ea3cf2b58bb56d2b1c68210aa3e4eb3b;spdx=MIT \
-+"
-diff --git a/meta-networking/recipes-connectivity/cloudflared/cloudflared_2026.3.0.bb b/meta-networking/recipes-connectivity/cloudflared/cloudflared_2026.10.7.bb
-similarity index 89%
-rename from meta-networking/recipes-connectivity/cloudflared/cloudflared_2026.3.0.bb
-rename to meta-networking/recipes-connectivity/cloudflared/cloudflared_2026.10.7.bb
-index f0b8530a69..703bfc81cd 100644
---- a/meta-networking/recipes-connectivity/cloudflared/cloudflared_2026.3.0.bb
-+++ b/meta-networking/recipes-connectivity/cloudflared/cloudflared_2026.10.7.bb
-@@ -6,12 +6,14 @@ SECTION = "networking"
- 
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://src/${GO_IMPORT}/LICENSE;md5=175792518e4ac015ab6696d16c4f607e"
-+require ${BPN}-licenses.inc
- 
- SRC_URI = "git://github.com/cloudflare/cloudflared.git;protocol=https;branch=master;destsuffix=${GO_SRCURI_DESTSUFFIX} \
-            file://cloudflared.service \
-            file://default \
-            "
--SRCREV = "d2a87e9b93456ad7f82417400f4209d513668487"
-+SRCREV = "872b241f94871665c1c157adefcf90c11f0ead96"
-+require ${BPN}-go-mods.inc
- 
- GO_IMPORT = "github.com/cloudflare/cloudflared"
- GO_INSTALL = "${GO_IMPORT}/cmd/cloudflared"
-@@ -19,7 +21,7 @@ GO_LINKSHARED = ""
- SRCREV_SHORT = "${@d.getVar('SRCREV')[:8]}"
- GO_EXTRA_LDFLAGS = "-X main.Version=${PV}-${SRCREV_SHORT}"
- 
--inherit go-mod systemd
-+inherit go-mod go-mod-update-modules systemd
- 
- SYSTEMD_SERVICE:${PN} = "cloudflared.service"
- 
+diff --git a/meta-networking/recipes-support/nbdkit/nbdkit/0001-plugins-Avoid-absolute-buildpaths-in-binaries.patch b/meta-networking/recipes-support/nbdkit/nbdkit/0001-plugins-Avoid-absolute-buildpaths-in-binaries.patch
+deleted file mode 100644
+index 75377dfb80..0000000000
+--- a/meta-networking/recipes-support/nbdkit/nbdkit/0001-plugins-Avoid-absolute-buildpaths-in-binaries.patch
++++ /dev/null
+@@ -1,38 +0,0 @@
+-From 1ccbd8fdbd2e367a702e48c8703b2f010d067b23 Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Mon, 22 May 2023 18:16:24 -0700
+-Subject: [PATCH] plugins: Avoid absolute buildpaths in binaries
+-
+-plugins seems to add CC to the plugins shared objects via compiler
+-cmdline which ends up in real code. Therefore scrub buildpaths from CC
+-and CFLAGS before passing them to plugin's build.
+-
+-Upstream-Status: Submitted [https://gitlab.com/nbdkit/nbdkit/-/merge_requests/30]
+-
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- plugins/cc/Makefile.am | 7 +++++--
+- 1 file changed, 5 insertions(+), 2 deletions(-)
+-
+-diff --git a/plugins/cc/Makefile.am b/plugins/cc/Makefile.am
+-index df8b5d15..80586a17 100644
+---- a/plugins/cc/Makefile.am
+-+++ b/plugins/cc/Makefile.am
+-@@ -44,9 +44,12 @@ nbdkit_cc_plugin_la_SOURCES = \
+- 	$(top_srcdir)/include/nbdkit-plugin.h \
+- 	$(NULL)
+- 
+-+workdir := $(shell dirname $(abs_top_builddir))
+-+cc_no_sysroot := $(shell echo \"$(CC)\"|sed -e 's#$(workdir)#<WORKDIR>#g')
+-+cflags_no_sysroot := $(shell echo \"$(CFLAGS)\"|sed -e 's#$(workdir)#<WORKDIR>#g')
+- nbdkit_cc_plugin_la_CPPFLAGS = \
+--	-DCC="\"$(CC)\"" \
+--	-DCFLAGS="\"$(CFLAGS)\"" \
+-+	-DCC=\"$(cc_no_sysroot)\" \
+-+	-DCFLAGS=\"$(cflags_no_sysroot)\" \
+- 	-I$(top_srcdir)/include \
+- 	-I$(top_builddir)/include \
+- 	-I$(top_srcdir)/common/include \
+--- 
+-2.40.1
+-
+diff --git a/meta-networking/recipes-support/nbdkit/nbdkit_1.33.11.bb b/meta-networking/recipes-support/nbdkit/nbdkit_1.33.11.bb
+deleted file mode 100644
+index 1c9db1e956..0000000000
+--- a/meta-networking/recipes-support/nbdkit/nbdkit_1.33.11.bb
++++ /dev/null
+@@ -1,32 +0,0 @@
+-SUMMARY = "nbdkit is a toolkit for creating NBD servers."
+-DESCRIPTION = "NBD — Network Block Device — is a protocol \
+-for accessing Block Devices (hard disks and disk-like things) \
+-over a Network. \
+-\
+-nbdkit is a toolkit for creating NBD servers."
+-
+-HOMEPAGE = "https://github.com/libguestfs/nbdkit"
+-LICENSE = "BSD-3-Clause"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=26250adec854bc317493f6fb98efe049"
+-
+-SRC_URI = "git://github.com/libguestfs/nbdkit.git;protocol=https;branch=master \
+-           file://0001-plugins-Avoid-absolute-buildpaths-in-binaries.patch"
+-SRCREV = "6c02c6a469d62a047f230b0ccf03f72328312d2b"
+-
+-
+-DEPENDS = "curl xz e2fsprogs zlib"
+-
+-# autotools-brokensep is needed as nbdkit does not support build in external directory
+-inherit pkgconfig python3native perlnative bash-completion autotools-brokensep
+-
+-# Those are required to build standalone
+-EXTRA_OECONF = " --without-libvirt --without-libguestfs --disable-perl"
+-
+-# Disable some extended support (not desired for small embedded systems)
+-#EXTRA_OECONF += " --disable-python"
+-#EXTRA_OECONF += " --disable-ocaml"
+-#EXTRA_OECONF += " --disable-rust"
+-#EXTRA_OECONF += " --disable-ruby"
+-#EXTRA_OECONF += " --disable-tcl"
+-#EXTRA_OECONF += " --disable-lua"
+-#EXTRA_OECONF += " --disable-vddk"
