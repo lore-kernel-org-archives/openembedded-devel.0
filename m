@@ -1,65 +1,65 @@
-Received: from mail-pj1-f53.google.com (mail-pj1-f53.google.com [209.85.216.53])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.8141.1794465777543615607
+Received: from mail-pg1-f180.google.com (mail-pg1-f180.google.com [209.85.215.180])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.7996.1794465774165502305
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 11 Nov 2026 22:42:57 -0800
+ Wed, 11 Nov 2026 22:42:54 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=JN4MegKr;
- spf=pass (domain: gmail.com, ip: 209.85.216.53, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f53.google.com with SMTP id 98e67ed59e1d1-3b0d09df973so3099723a91.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 11 Nov 2026 22:42:57 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=mlilcE/V;
+ spf=pass (domain: gmail.com, ip: 209.85.215.180, mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f180.google.com with SMTP id 41be03b00d2f7-cd6028ff33fso1956112a12.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 11 Nov 2026 22:42:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794465777; x=1795070577; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1794465773; x=1795070573; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=nyG1SV39VW4hAvKQDS6zKEp0wPylaReU3k+C8F44eiA=;
-        b=JN4MegKrUF9kZP7Cik6IrAMuvrnsvVm+4z6Q+hSjyenm9Bt08BZ2TObSYt/NDaIIWA
-         tTLswVxCiWlfbDsUxvxtJHfQ9dj16gO9CYsnK4xvrnncOHM6UkXiS7AYtV++hs05FfTt
-         eDO50QygqwjKAJGwR3pSwsoreGm0SzBul02er6iXMeFwrQxsSoJ9fyYwC9Evvbka65Xk
-         xlkaT1gHgyREK8TWgGy4Oc2FRX0u/8haCaeCghG1xyxyIxK+sfhoUj1R4KZnK1CoY6Wa
-         TW1wKs3a8ZFtvvsIb3DaNb2KPcGpSTiHLkLwOUr0nh7V9zzYW7PeZ30iQtpf6JYLgzvS
-         uUBA==
+        bh=Gs0S/S7xMDCz94nemv2+j2OzGwmqbIOXVA1sGE+Nv18=;
+        b=mlilcE/V53Thv7V+uEM7z/7xWenK/Ob3F1jCiEhrexJr+IKByZJkOEemdZfO+mbLKu
+         0fGZDBXdAtk9kLNnvfRHXXQMo625yoO4DcXs60+JRdT3mQt5i/c6kAjBpF6DEvAqq6ZH
+         6Wk4/6smYZ8LtH93W7KnXhmNvbXIJEYtxYrEBxXNJ3hTCPhtLNXOV2PiD0J7dpCgDN/u
+         z9e/OCVYTEAyk3NqHzezVu+YlShAMokrflKNlsB5jLsVcwk5Ds5Ad7RChg6gcrRDED5w
+         RGoIgMBKNOlVcS+bnKApfzMBPxmufADdJpqtYBJrK3xgwodbs0TWYeIdfvWU48nLyVxY
+         YBfg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794465777; x=1795070577;
+        d=1e100.net; s=20260707; t=1794465773; x=1795070573;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=nyG1SV39VW4hAvKQDS6zKEp0wPylaReU3k+C8F44eiA=;
-        b=D3AQLsS9FC/Gixs0mhf+/CGWvP7br9F34tBRBbNSarylg5wasHMg22s+AiNQJh7RT1
-         rh66oMRSzwkgtB5nGihMYDYbgV5kYxFAlgiH6DShn/TJJBTu+JVMsiFwroVZuIP74lpf
-         7ZZwrwHpsseY7CKWMWGA8OLUOb8VAXJ3IdZbKGWsqHoGBViqDQj6AbDVrQ52tRr4J0jt
-         StgqtTyS13aBvkqNwIAQWQkb6bru89xF3s7nIT7p4QChDaOp5Zt/dELhMzaxe7DJhFQA
-         0B9cRMWxDVN0P/6qTOAa0qhzt90ABPaFUPuSt77CseUF1TKGSUXZBlUjhDAqyt0lrLKR
-         mKTw==
-X-Gm-Message-State: APuU4Z8X2VOeQ1X8AtDJmm7ZzErdPDLAC8Ksvq2zZQLPQ9hcWlbr7pFq
-	jTqT6jOJ+wEPI2F6w/So4iKgwOQvGYyab7804qR3fY0PjwBw5p32C0DWAp1mNQ==
-X-Gm-Gg: AYBFou0XUGq/+IClSxoVriM4ntk49htOsKuyb06whFGGmL+Hcy7cq7VHCUmOb02nw0V
-	XRATMhih0tezeGQSDKfh3LpE76brvVxtbNZOZXbDdFCntz92kputcoZE5Tlj7xCnZEohyLo8G4D
-	Zf0jTI81lm6b3YHROzFBi4pgKQIKkahVk9zjKpU2qOEOkhLuXIsFxIlgQB9BnRoaX15o6bfvoe9
-	F63MDLjJujGAhbfugIgr9Yo6IxMvSimiPaCpsf3pRwlWcmOwTZN5X/JjYCt+8hfkHZSl+ej832e
-	eprxxtDUQ7VGeT8UJyDEmWC86SkzplEBkL+iQfDt1ihVlQj4PlNDy8u5W787ml5SZ1VxwkyK20W
-	05b1YSN99cZKH8xJDknU3xLqsDpowEnp36LHiJTxGu8eBQDFdfJGPpSWvAwIg/SQs1M0CaPaHGn
-	l9Khm5aplGCrFDhMA3wDBseYMOr/z7eNsK9nxE/SjMGn+cMpiNL8vQYfRMq9sr2HZ1Vb9tKCDP2
-	/Bziw56A7ARo3sf4e7jPUaYo0DWUqFnjz7QkAHpXFAEGz8gsMUcDEmwoOncumA1AGZUtUJQZg7t
-	eag+33RcbDf1dOqxmJctHZo33HR34rPbwMeIx/bbCY4zEwyXUu6CYHEP5O7988esbznzAGxM/p8
-	r4cBbC8hWdc6enmavYSJpazSnD4BXvwyKhs594ElPl3ukGSuBXoNh71vRUp6sIcA41XtDlPBmhu
-	OFVfLaTZe6vgI8mee59qTN8Ou4KwSgpkxp4XReS4n/EoZvuC6KWcClyuEx5VBdqyC7s2qC4W8MZ
-	hNk8EgFu/ioP9tWbzjnp67YwykA8NE3dzmIMUFr51mSTOSnWK/toVSgeCLJBMNFCnEAP9WuCZzq
-	hEMYrYTqWy5g7epHgN13pZFE+w==
-X-Received: by 2002:a17:90b:3ecd:b0:3b0:ae41:2706 with SMTP id 98e67ed59e1d1-3b182defae2mr4865230a91.4.1794465776717;
-        Wed, 11 Nov 2026 22:42:56 -0800 (PST)
+        bh=Gs0S/S7xMDCz94nemv2+j2OzGwmqbIOXVA1sGE+Nv18=;
+        b=BhnjcTwaJ81T31GaAU0cSa37szlUbUlJrEWz6mGx0JqXQIdrpr8JTHVXxYVoubJ/Cs
+         VMXQyCGlnr6WTXfYODAJvG1gCzrhm7skIneiEClO1JXqL3I4D2gx37YBkHQpmsOGrAsK
+         h05FoMUi7zl+b8LbP4CR8LnJmqLl2j6+rJcfS5GlW50VlKAoAX8LdDOtMjUeggIXMVbJ
+         5W4E1suQ5/M//A1WkwbXAJ5Z4S8AY07VMf6vkAjw+Ip6RVSjrX9gX0jHDCUkOwJVQRFi
+         64JIeRTXN/CEPdIGez8keJlcVHaam87u16DylWT4eULUlQ4m8+y7g2cpkKi8rG675c2h
+         zxsw==
+X-Gm-Message-State: APuU4Z8yMoDCWaZ8Ssxb5sfaL/ypcqnZ5v0abRLApA0TexHYhWHipu7j
+	JNkIHcc8rbDDvx7jA95UaNMxqOZhWE4WWRAglx2xFPOWhL4PcdxhNSJT2pGeGKnQfno=
+X-Gm-Gg: AYBFou1Jc5odNPaOLRM4WoEv5wBtNUiE651K+Tp25k2+qrlpYjFFDANsLVBDOEiey6V
+	RIcjdc8SpN85fx/z90HCfANxwRdQCUeHhGEwRiGAFY9E0JgVmst9tMSNq2jbUkC8Mf6p5fAXiHN
+	G6En1YhDUJLVRJ6HjjjgWGPVU7vz7NNSA2pfMp9fnCBdpYJ2sj8flxkSmhPm5+WyBwvQNbUpXX1
+	cxjzZG5M+IMwvJBOUNSlepgfOjVV5BgcvtgrVMSIM8hq6raDtF/HpfDcpWHQ1ShujnBkkNLoO8R
+	/H1/ldMgXdMuFOlJJjh5/YgaBQii1De/l1K3JOsojvt0uP/b3tiIb4fsycQfa3LJeTdaEn4le07
+	a3w/XUCpI91cZ7YhKg8sp4JCTwDmvpyBET/yUsYstsUY7rLTx/29eoK2G4GdBsYGeZgGbDEnB2q
+	m1tR7NZr9IgEmtN/biDEDFKz7wjp/Y4oC80FTay/g8cYkC84qqUwMx9G3VUkph1gLQOqbhldIIu
+	M9eKswZU6dZ49IXltl4lQda+rTr4BnMlhNcs3c3prDWUNNHHO/9rk+DkJI4tYoPmYpFgvZq1kbf
+	E96TzYCwEacsoI6jQPU9Tn18b6evPC207/q7oDImqStFyUVJ1/rRZfJD7xwJPRKHpI2pN743SvJ
+	5QcNROCHFBWY4URW+r7zKUwC1SB5Ccnr6aRjTjUonRLGi3vLvRosgKxBi5rv+6AbVI0e8bsEUJQ
+	4UXaa/NYld4u4Z/nSUpPPc6Z7fgnlHAnV424TIpHWwnb8jnQ7DZTk9I48NFKmuMNvrPfI22VaaY
+	B7GxcFRvC9gpEE75q7plLXTOKN8q5/RRzuN9I0p9vNgcbeKO8RskSWvFo6nNu0QyIAPm5MwFPCX
+	IFQL
+X-Received: by 2002:a17:90b:164a:b0:3ac:9259:122c with SMTP id 98e67ed59e1d1-3b182f5a30cmr4341852a91.40.1794465773245;
+        Wed, 11 Nov 2026 22:42:53 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3b197c768e8sm2984715a91.11.2026.11.11.22.42.55
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3b197c768e8sm2984715a91.11.2026.11.11.22.42.51
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 11 Nov 2026 22:42:56 -0800 (PST)
+        Wed, 11 Nov 2026 22:42:52 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-networking][PATCH 22/24] ndpi, ntopng: upgrade to 6.0 and 7.0
-Date: Wed, 11 Nov 2026 22:42:22 -0800
-Message-ID: <20261112064225.2410019-22-khem.raj@oss.qualcomm.com>
+Subject: [meta-networking][PATCH 19/24] samba: upgrade 4.23.11 -> 4.25.1
+Date: Wed, 11 Nov 2026 22:42:19 -0800
+Message-ID: <20261112064225.2410019-19-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.1
 In-Reply-To: <20261112064225.2410019-1-khem.raj@oss.qualcomm.com>
 References: <20261112064225.2410019-1-khem.raj@oss.qualcomm.com>
@@ -67,541 +67,706 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Thu, 12 Nov 2026 06:43:00 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132191
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132188
 Content-Type: text/plain; charset="utf-8"
 
-ndpi: upgrade 5.0 -> 6.0
-- Drop 0001-configure-Stop-embedding-pwd-at-configure-time.patch,
-  NDPI_BASE_DIR is gone upstream.
+Drop the memset_explicit backports, included in this release, and
+refresh 0003-Add-config-option-without-valgrind.patch.
 
-ntopng: upgrade 6.6 -> 7.0
-- Drop 0001-Fix-build-with-OpenSSL-4.0.patch, CVE-2026-84990.patch and
-  CVE-2026-86090-CVE-2026-86091.patch, included in this release.
-- Refresh the remaining patches.
-
-They are upgraded together as ntopng 7.0 is built against nDPI 6.0.
+The bundled talloc, tevent and tdb versions are unchanged (2.5.0,
+0.17.2, 1.4.15).
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- ...Stop-embedding-pwd-at-configure-time.patch | 55 ---------------
- ...Allow-dynamic-linking-against-ndpi-3.patch | 16 +++--
- ...nfigure.ac.in-fix-host-contamination.patch | 44 +++++++-----
- ...a-5.5-API-signature-for-lua_newstate.patch | 10 +--
- .../ntopng/files/CVE-2026-84990.patch         | 53 ---------------
- .../files/CVE-2026-86090-CVE-2026-86091.patch | 67 -------------------
- .../ntopng/{ndpi_5.0.bb => ndpi_6.0.bb}       |  5 +-
- .../0001-Fix-build-with-OpenSSL-4.0.patch     | 42 ------------
- .../ntopng/{ntopng_6.6.bb => ntopng_7.0.bb}   |  7 +-
- 9 files changed, 45 insertions(+), 254 deletions(-)
- delete mode 100644 meta-networking/recipes-support/ntopng/files/0001-configure-Stop-embedding-pwd-at-configure-time.patch
- delete mode 100644 meta-networking/recipes-support/ntopng/files/CVE-2026-84990.patch
- delete mode 100644 meta-networking/recipes-support/ntopng/files/CVE-2026-86090-CVE-2026-86091.patch
- rename meta-networking/recipes-support/ntopng/{ndpi_5.0.bb => ndpi_6.0.bb} (78%)
- delete mode 100644 meta-networking/recipes-support/ntopng/ntopng/0001-Fix-build-with-OpenSSL-4.0.patch
- rename meta-networking/recipes-support/ntopng/{ntopng_6.6.bb => ntopng_7.0.bb} (88%)
+ ...ib-replace-Implement-memset_explicit.patch |  91 --------
+ ...replace-Add-test-for-memset_explicit.patch | 154 --------------
+ ...3-Add-config-option-without-valgrind.patch |  17 +-
+ ...eplace-memset_s-with-memset_explicit.patch | 195 ------------------
+ .../0004-lib-replace-Remove-memset_s.patch    | 136 ------------
+ .../{samba_4.23.11.bb => samba_4.25.1.bb}     |   6 +-
+ 6 files changed, 11 insertions(+), 588 deletions(-)
+ delete mode 100644 meta-networking/recipes-connectivity/samba/samba/0001-lib-replace-Implement-memset_explicit.patch
+ delete mode 100644 meta-networking/recipes-connectivity/samba/samba/0002-lib-replace-Add-test-for-memset_explicit.patch
+ delete mode 100644 meta-networking/recipes-connectivity/samba/samba/0003-Replace-memset_s-with-memset_explicit.patch
+ delete mode 100644 meta-networking/recipes-connectivity/samba/samba/0004-lib-replace-Remove-memset_s.patch
+ rename meta-networking/recipes-connectivity/samba/{samba_4.23.11.bb => samba_4.25.1.bb} (97%)
 
-diff --git a/meta-networking/recipes-support/ntopng/files/0001-configure-Stop-embedding-pwd-at-configure-time.patch b/meta-networking/recipes-support/ntopng/files/0001-configure-Stop-embedding-pwd-at-configure-time.patch
+diff --git a/meta-networking/recipes-connectivity/samba/samba/0001-lib-replace-Implement-memset_explicit.patch b/meta-networking/recipes-connectivity/samba/samba/0001-lib-replace-Implement-memset_explicit.patch
 deleted file mode 100644
-index b8b0b04bf4..0000000000
---- a/meta-networking/recipes-support/ntopng/files/0001-configure-Stop-embedding-pwd-at-configure-time.patch
+index 331d7eae87..0000000000
+--- a/meta-networking/recipes-connectivity/samba/samba/0001-lib-replace-Implement-memset_explicit.patch
 +++ /dev/null
-@@ -1,55 +0,0 @@
--From 25129a49bd220b4668e1df474b1b1549885aaced Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Fri, 20 Mar 2026 09:47:12 -0700
--Subject: [PATCH] configure: Stop embedding pwd at configure time
+@@ -1,91 +0,0 @@
+-From fba2c1dfb3b1f474a78e2613f150a9efc6d9b6c2 Mon Sep 17 00:00:00 2001
+-From: Andreas Schneider <asn@samba.org>
+-Date: Thu, 16 Oct 2025 11:06:56 +0200
+-Subject: [PATCH 1/4] lib:replace: Implement memset_explicit()
 -
--NDPI_BASE_DIR seems to unused and currently encodes hardcoded
--absolute paths in for it breaking repeoducible builds
+-The memset_s() implementation is a bit obscure, as it requires a
+-constraint handler to be set up. You don't really find any
+-implmentations out there.
 -
--Upstream-Status: Inappropriate [OE-Specific]
+-With C23 memset_explicit() was added and this has been implemented
+-for glibc 2.43 and also in FreeBSD.
+-
+-See https://sourceware.org/bugzilla/show_bug.cgi?id=32378
+-See https://reviews.freebsd.org/D47286
+-
+-Upstream-Status: Backport [https://gitlab.com/samba-team/samba/-/commit/ef08be24e9114b4477cc2b3f7a28a816ec66802c]
+-Signed-off-by: Andreas Schneider <asn@samba.org>
+-Reviewed-by: Douglas Bagnall <douglas.bagnall@catalyst.net.nz>
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- lib/replace/README    |  1 +
+- lib/replace/replace.c | 13 +++++++++++++
+- lib/replace/replace.h |  5 +++++
+- lib/replace/wscript   |  2 +-
+- 4 files changed, 20 insertions(+), 1 deletion(-)
+-
+-diff --git a/lib/replace/README b/lib/replace/README
+-index 6612eab..bb9d008 100644
+---- a/lib/replace/README
+-+++ b/lib/replace/README
+-@@ -73,6 +73,7 @@ symlink
+- realpath
+- poll
+- setproctitle
+-+memset_explicit
+- memset_s
+- 
+- Types:
+-diff --git a/lib/replace/replace.c b/lib/replace/replace.c
+-index 68829f2..8615899 100644
+---- a/lib/replace/replace.c
+-+++ b/lib/replace/replace.c
+-@@ -952,6 +952,19 @@ void rep_setproctitle_init(int argc, char *argv[], char *envp[])
+- }
+- #endif
+- 
+-+#ifndef HAVE_MEMSET_EXPLICIT
+-+void *rep_memset_explicit(void *block, int c, size_t size)
+-+{
+-+	void *ptr = memset(block, c, size);
+-+#ifdef HAVE_GCC_VOLATILE_MEMORY_PROTECTION
+-+	/* See http://llvm.org/bugs/show_bug.cgi?id=15495 */
+-+	__asm__ volatile("" : : "g"(block) : "memory");
+-+#endif /* HAVE_GCC_VOLATILE_MEMORY_PROTECTION */
+-+
+-+	return ptr;
+-+}
+-+#endif
+-+
+- #ifndef HAVE_MEMSET_S
+- # ifndef RSIZE_MAX
+- #  define RSIZE_MAX (SIZE_MAX >> 1)
+-diff --git a/lib/replace/replace.h b/lib/replace/replace.h
+-index 25e6e14..1a8336d 100644
+---- a/lib/replace/replace.h
+-+++ b/lib/replace/replace.h
+-@@ -994,6 +994,11 @@ void rep_setproctitle(const char *fmt, ...) PRINTF_ATTRIBUTE(1, 2);
+- void rep_setproctitle_init(int argc, char *argv[], char *envp[]);
+- #endif
+- 
+-+#ifndef HAVE_MEMSET_EXPLICIT
+-+#define memset_explicit rep_memset_explicit
+-+void *rep_memset_explicit(void *block, int c, size_t size);
+-+#endif
+-+
+- #ifndef HAVE_MEMSET_S
+- #define memset_s rep_memset_s
+- int rep_memset_s(void *dest, size_t destsz, int ch, size_t count);
+-diff --git a/lib/replace/wscript b/lib/replace/wscript
+-index a22ae59..574740a 100644
+---- a/lib/replace/wscript
+-+++ b/lib/replace/wscript
+-@@ -881,7 +881,7 @@ REPLACEMENT_FUNCTIONS = {
+-                   'utime', 'utimes', 'dup2', 'chown', 'link', 'readlink',
+-                   'symlink', 'lchown', 'realpath', 'memmem', 'vdprintf',
+-                   'dprintf', 'get_current_dir_name', 'copy_file_range',
+--                  'strerror_r', 'clock_gettime', 'memset_s'],
+-+                  'strerror_r', 'clock_gettime', 'memset_explicit', 'memset_s'],
+-     'timegm.c': ['timegm'],
+-     # Note: C99_VSNPRINTF is not a function, but a special condition
+-     # for replacement
+diff --git a/meta-networking/recipes-connectivity/samba/samba/0002-lib-replace-Add-test-for-memset_explicit.patch b/meta-networking/recipes-connectivity/samba/samba/0002-lib-replace-Add-test-for-memset_explicit.patch
+deleted file mode 100644
+index 33e29533e9..0000000000
+--- a/meta-networking/recipes-connectivity/samba/samba/0002-lib-replace-Add-test-for-memset_explicit.patch
++++ /dev/null
+@@ -1,154 +0,0 @@
+-From ac2ee18b081483430b42c2cf35e423634aebbeb8 Mon Sep 17 00:00:00 2001
+-From: Douglas Bagnall <douglas.bagnall@catalyst.net.nz>
+-Date: Thu, 30 Oct 2025 16:01:36 +0100
+-Subject: [PATCH 2/4] lib:replace: Add test for memset_explicit()
+-
+-Upstream-Status: Backport [https://gitlab.com/samba-team/samba/-/commit/2b17c9816d4373eba365de803eec10435ea038d4]
+-Signed-off-by: Douglas Bagnall <douglas.bagnall@catalyst.net.nz>
+-Reviewed-by: Andreas Schneider <asn@samba.org>
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- lib/replace/tests/test_memset_explicit.c | 99 ++++++++++++++++++++++++
+- lib/replace/wscript                      |  5 ++
+- selftest/tests.py                        |  6 ++
+- 3 files changed, 110 insertions(+)
+- create mode 100644 lib/replace/tests/test_memset_explicit.c
+-
+-diff --git a/lib/replace/tests/test_memset_explicit.c b/lib/replace/tests/test_memset_explicit.c
+-new file mode 100644
+-index 0000000..4e56d7a
+---- /dev/null
+-+++ b/lib/replace/tests/test_memset_explicit.c
+-@@ -0,0 +1,99 @@
+-+#include <stdarg.h>
+-+#include <stddef.h>
+-+#include <stdint.h>
+-+#include <setjmp.h>
+-+#include <cmocka.h>
+-+
+-+#include "lib/replace/replace.h"
+-+
+-+
+-+/*
+-+ * To check that a memset_explicit string is being memset when it
+-+ * appears unused, we meed to be sneaky in our check -- otherwise the
+-+ * check counts as a use.
+-+ *
+-+ * We are sneaky by using a function that seens to take an int
+-+ * argument which is really a pointer, and we hide that it is a
+-+ * pointer by masking it.
+-+ *
+-+ * For these tests we don't use talloc because the talloc magic gets
+-+ * in the way a little bit.
+-+ */
+-+
+-+#define MASK 0x12345678
+-+
+-+__attribute__((noinline))
+-+static void check_memset_explicit(intmax_t p, const char *expected, size_t len)
+-+{
+-+	size_t i;
+-+	char *secret = (char *) (p ^ MASK);
+-+	for (i = 0; i < len; i++) {
+-+		assert_int_equal(secret[i], expected[i]);
+-+	}
+-+}
+-+
+-+
+-+__attribute__((noinline))
+-+static char *get_secret(off_t offset)
+-+{
+-+	char * secret = malloc(7 + offset);
+-+	memset(secret, 0, 7 + offset);
+-+	memcpy(secret + offset, "secret", 7);
+-+	/* avoiding *this* being elided */
+-+	print_message("secret is '%s'\n", secret);
+-+	asm("");
+-+	return secret;
+-+}
+-+
+-+
+-+static void test_memset_explicit(void ** state)
+-+{
+-+	uintptr_t p;
+-+	char zeros[7] = {0};
+-+	char *secret = get_secret(0);
+-+	p = ((uintptr_t)secret) ^ MASK;
+-+	memset_explicit(secret, 'o', 3);
+-+	check_memset_explicit(p, "oooret", 7);
+-+	memset_explicit(secret, 0, 7);
+-+	check_memset_explicit(p, zeros, 7);
+-+	free(secret);
+-+}
+-+
+-+static void test_memset_explicit_double_alloc(void ** state)
+-+{
+-+	size_t i, found;
+-+	uintptr_t p, q;
+-+	char *secret = get_secret(20);
+-+	p = (uintptr_t)secret ^ MASK;
+-+	memset_explicit(secret, 'x', 23);
+-+	free(secret);
+-+	/*
+-+	 * Now we malloc the same size again, and hope we got the
+-+	 * block we just freed.
+-+	 */
+-+	found = 0;
+-+	for (i = 0; i < 1000; i++) {
+-+		secret = malloc(27);
+-+		q = (uintptr_t)secret ^ MASK;
+-+		if (q == p) {
+-+			q = (uintptr_t)(secret + 20) ^ MASK;
+-+			check_memset_explicit(q, "xxxret", 7);
+-+			found ++;
+-+		}
+-+		free(secret);
+-+	}
+-+	print_message("found freed pointer %zu/1000 times \n",
+-+		found);
+-+}
+-+
+-+int main(void)
+-+{
+-+	const struct CMUnitTest tests[] = {
+-+		cmocka_unit_test(test_memset_explicit),
+-+		cmocka_unit_test(test_memset_explicit_double_alloc),
+-+	};
+-+	if (! isatty(1)) {
+-+		cmocka_set_message_output(CM_OUTPUT_SUBUNIT);
+-+	}
+-+	return cmocka_run_group_tests(tests, NULL, NULL);
+-+}
+-diff --git a/lib/replace/wscript b/lib/replace/wscript
+-index 574740a..9acebd3 100644
+---- a/lib/replace/wscript
+-+++ b/lib/replace/wscript
+-@@ -964,6 +964,11 @@ def build(bld):
+-                      deps='replace replace-test',
+-                      install=False)
+- 
+-+    bld.SAMBA_BINARY('test_memset_explicit',
+-+                     source='tests/test_memset_explicit.c',
+-+                     deps='cmocka replace',
+-+                     for_selftest=True)
+-+
+-     # build replacements for stdint.h and stdbool.h if needed
+-     bld.SAMBA_GENERATOR('replace_stdint_h',
+-                         rule='cp ${SRC} ${TGT}',
+-diff --git a/selftest/tests.py b/selftest/tests.py
+-index deb3c0b..3131905 100644
+---- a/selftest/tests.py
+-+++ b/selftest/tests.py
+-@@ -414,6 +414,12 @@ plantestsuite("samba.unittests.smb1cli_session", "none",
+- plantestsuite("samba.unittests.smb_util_translate", "none",
+-               [os.path.join(bindir(), "default/libcli/smb/test_util_translate")])
+- 
+-+plantestsuite(
+-+    "samba.unittests.memset_explicit",
+-+    "none",
+-+    [os.path.join(bindir(), "default/lib/replace/test_memset_explicit")],
+-+)
+-+
+- plantestsuite("samba.unittests.talloc_keep_secret", "none",
+-               [os.path.join(bindir(), "default/lib/util/test_talloc_keep_secret")])
+- 
+diff --git a/meta-networking/recipes-connectivity/samba/samba/0003-Add-config-option-without-valgrind.patch b/meta-networking/recipes-connectivity/samba/samba/0003-Add-config-option-without-valgrind.patch
+index 70e7f28cc7..bf9c0973f9 100644
+--- a/meta-networking/recipes-connectivity/samba/samba/0003-Add-config-option-without-valgrind.patch
++++ b/meta-networking/recipes-connectivity/samba/samba/0003-Add-config-option-without-valgrind.patch
+@@ -12,16 +12,19 @@ Signed-off-by: Changqing Li <changqing.li@windriver.com>
+ 
+ Rebase to 4.19.3
+ Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
++
++Rebase to 4.25.1
++Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+ ---
+  lib/replace/wscript | 5 +++--
+  wscript             | 7 +++++++
+  2 files changed, 10 insertions(+), 2 deletions(-)
+ 
+ diff --git a/lib/replace/wscript b/lib/replace/wscript
+-index 37d7759..9dd9b48 100644
++index be2a6ae..afbe16e 100644
+ --- a/lib/replace/wscript
+ +++ b/lib/replace/wscript
+-@@ -113,8 +113,9 @@ def configure(conf):
++@@ -134,8 +134,9 @@ def configure(conf):
+      conf.CHECK_HEADERS('sys/fileio.h sys/filesys.h sys/dustat.h sys/sysmacros.h')
+      conf.CHECK_HEADERS('xfs/libxfs.h netgroup.h')
+  
+@@ -34,13 +37,13 @@ index 37d7759..9dd9b48 100644
+      conf.CHECK_HEADERS('sys/extattr.h sys/ea.h sys/proplist.h sys/cdefs.h')
+      conf.CHECK_HEADERS('utmp.h utmpx.h lastlog.h')
+ diff --git a/wscript b/wscript
+-index 95ddd9e..6d9577a 100644
++index 5a98b6d..57b391f 100644
+ --- a/wscript
+ +++ b/wscript
+-@@ -131,6 +131,13 @@
+-                   help=('Disable kernely keyring support for credential storage'),
++@@ -131,6 +131,13 @@ def options(opt):
++                   help=('Disable kernel keyring support for credential storage'),
+                    action='store_false', dest='enable_keyring')
+-
++ 
+ +    opt.add_option('--with-valgrind',
+ +                   help=("Enable use of valgrind"),
+ +                   action="store_true", dest='enable_valgrind')
+@@ -49,5 +52,5 @@ index 95ddd9e..6d9577a 100644
+ +                   action="store_false", dest='enable_valgrind', default=False)
+ +
+      opt.samba_add_onoff_option('ldap')
+-
++ 
+      opt.option_group('developer options')
+diff --git a/meta-networking/recipes-connectivity/samba/samba/0003-Replace-memset_s-with-memset_explicit.patch b/meta-networking/recipes-connectivity/samba/samba/0003-Replace-memset_s-with-memset_explicit.patch
+deleted file mode 100644
+index 74ea1a7ab4..0000000000
+--- a/meta-networking/recipes-connectivity/samba/samba/0003-Replace-memset_s-with-memset_explicit.patch
++++ /dev/null
+@@ -1,195 +0,0 @@
+-From 8174382fe7a278309fc98b6e11ff99b6f41a8719 Mon Sep 17 00:00:00 2001
+-From: Andreas Schneider <asn@samba.org>
+-Date: Thu, 16 Oct 2025 11:19:51 +0200
+-Subject: [PATCH 3/4] Replace memset_s() with memset_explicit()
+-
+-Upstream-Status: Backport [https://gitlab.com/samba-team/samba/-/commit/3e81b73a050e511c658afc786478431ceef175ee]
+-Signed-off-by: Andreas Schneider <asn@samba.org>
+-Reviewed-by: Douglas Bagnall <douglas.bagnall@catalyst.net.nz>
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- lib/replace/replace.h                    | 18 +++++++++---------
+- lib/util/memory.h                        | 16 +++++++++-------
+- lib/util/tests/test_talloc_keep_secret.c | 19 ++++++++-----------
+- 3 files changed, 26 insertions(+), 27 deletions(-)
+-
+---- a/lib/replace/replace.h
+-+++ b/lib/replace/replace.h
+-@@ -811,50 +811,50 @@ typedef unsigned long long ptrdiff_t ;
+- /**
+-  * Zero a structure.
+-  */
+--#define ZERO_STRUCT(x) memset_s((char *)&(x), sizeof(x), 0, sizeof(x))
+-+#define ZERO_STRUCT(x) memset_explicit((char *)&(x), 0, sizeof(x))
+- 
+- /**
+-  * Zero a structure given a pointer to the structure.
+-  */
+- #define ZERO_STRUCTP(x) do { \
+- 	if ((x) != NULL) { \
+--		memset_s((char *)(x), sizeof(*(x)), 0, sizeof(*(x))); \
+-+		memset_explicit((char *)(x), 0, sizeof(*(x))); \
+- 	} \
+- } while(0)
+- 
+- /**
+-  * Zero a structure given a pointer to the structure - no zero check
+-  */
+--#define ZERO_STRUCTPN(x) memset_s((char *)(x), sizeof(*(x)), 0, sizeof(*(x)))
+-+#define ZERO_STRUCTPN(x) memset_explicit((char *)(x), 0, sizeof(*(x)))
+- 
+- /**
+-  * Zero an array - note that sizeof(array) must work - ie. it must not be a
+-  * pointer
+-  */
+--#define ZERO_ARRAY(x) memset_s((char *)(x), sizeof(x), 0, sizeof(x))
+-+#define ZERO_ARRAY(x) memset_explicit((char *)(x), 0, sizeof(x))
+- 
+- /**
+-  * Zero a given len of an array
+-  */
+--#define ZERO_ARRAY_LEN(x, l) memset_s((char *)(x), (l), 0, (l))
+-+#define ZERO_ARRAY_LEN(x, l) memset_explicit((char *)(x), 0, (l))
+- 
+- /**
+-  * Explicitly zero data from memory. This is guaranteed to be not optimized
+-  * away.
+-  */
+--#define BURN_DATA(x) memset_s((char *)&(x), sizeof(x), 0, sizeof(x))
+-+#define BURN_DATA(x) memset_explicit((char *)&(x), 0, sizeof(x))
+- 
+- /**
+-  * Explicitly zero data from memory. This is guaranteed to be not optimized
+-  * away.
+-  */
+--#define BURN_DATA_SIZE(x, s) memset_s((char *)&(x), (s), 0, (s))
+-+#define BURN_DATA_SIZE(x, s) memset_explicit((char *)&(x), 0, (s))
+- 
+- /**
+-  * Explicitly zero data from memory. This is guaranteed to be not optimized
+-  * away.
+-  */
+--#define BURN_PTR_SIZE(x, s) memset_s((x), (s), 0, (s))
+-+#define BURN_PTR_SIZE(x, s) memset_explicit((x), 0, (s))
+- 
+- /**
+-  * Explicitly zero data in string. This is guaranteed to be not optimized
+-@@ -863,7 +863,7 @@ typedef unsigned long long ptrdiff_t ;
+- #define BURN_STR(x)	do { \
+- 				if ((x) != NULL) { \
+- 					size_t s = strlen(x); \
+--					memset_s((x), s, 0, s); \
+-+					memset_explicit((x), 0, s); \
+- 				} \
+- 			} while(0)
+- 
+---- a/lib/util/memory.h
+-+++ b/lib/util/memory.h
+-@@ -40,7 +40,7 @@
+- #define BURN_FREE_STR(x) do { \
+- 				if ((x) != NULL) { \
+- 					size_t s = strlen(x); \
+--					memset_s((x), s, 0, s); \
+-+					memset_explicit((x), 0, s); \
+- 					free(x); (x) = NULL; \
+- 				} \
+- 			} while(0)
+-@@ -53,7 +53,7 @@
+-  **/
+- #define BURN_FREE(x, s) do { \
+- 				if ((x) != NULL) { \
+--					memset_s((x), (s), 0, (s)); \
+-+					memset_explicit((x), 0, (s)); \
+- 					free(x); (x) = NULL; \
+- 				} \
+- 			} while(0)
+-@@ -78,7 +78,7 @@
+-  * Zero a structure.
+-  */
+- #ifndef ZERO_STRUCT
+--#define ZERO_STRUCT(x) memset_s((char *)&(x), sizeof(x), 0, sizeof(x))
+-+#define ZERO_STRUCT(x) memset_explicit((char *)&(x), 0, sizeof(x))
+- #endif
+- 
+- /**
+-@@ -87,7 +87,7 @@
+- #ifndef ZERO_STRUCTP
+- #define ZERO_STRUCTP(x) do { \
+- 	if ((x) != NULL) { \
+--		memset_s((char *)(x), sizeof(*(x)), 0, sizeof(*(x))); \
+-+		memset_explicit((char *)(x), 0, sizeof(*(x))); \
+- 	} \
+- } while(0)
+- #endif
+-@@ -96,7 +96,7 @@
+-  * Zero a structure given a pointer to the structure - no zero check.
+-  */
+- #ifndef ZERO_STRUCTPN
+--#define ZERO_STRUCTPN(x) memset_s((char *)(x), sizeof(*(x)), 0, sizeof(*(x)))
+-+#define ZERO_STRUCTPN(x) memset_explicit((char *)(x), 0, sizeof(*(x)))
+- #endif
+- 
+- /**
+-@@ -104,13 +104,15 @@
+-  * pointer.
+-  */
+- #ifndef ZERO_ARRAY
+--#define ZERO_ARRAY(x) memset_s((char *)(x), sizeof(x), 0, sizeof(x))
+-+#define ZERO_ARRAY(x) memset_explicit((char *)(x), 0, sizeof(x))
+- #endif
+- 
+- /**
+-  * Zero a given len of an array
+-  */
+--#define ZERO_ARRAY_LEN(x, l) memset_s((char *)(x), (l), 0, (l))
+-+#ifndef ZERO_ARRAY_LEN
+-+#define ZERO_ARRAY_LEN(x, l) memset_explicit((char *)(x), 0, (l))
+-+#endif
+- 
+- /**
+-  * Work out how many elements there are in a static array
+---- a/lib/util/tests/test_talloc_keep_secret.c
+-+++ b/lib/util/tests/test_talloc_keep_secret.c
+-@@ -8,12 +8,11 @@
+- #include <talloc.h>
+- #include "lib/util/talloc_keep_secret.h"
+- 
+--int rep_memset_s(void *dest, size_t destsz, int ch, size_t count);
+-+int rep_memset_explicit(void *dest, int ch, size_t count);
+- 
+--int rep_memset_s(void *dest, size_t destsz, int ch, size_t count)
+-+int rep_memset_explicit(void *dest, int ch, size_t count)
+- {
+- 	check_expected_ptr(dest);
+--	check_expected(destsz);
+- 	check_expected(ch);
+- 	check_expected(count);
+- 
+-@@ -44,10 +43,9 @@ static void test_talloc_keep_secret(void
+- 	ptr1_size = talloc_get_size(ptr1);
+- 	assert_int_equal(ptr1_size, strlen(ptr1) + 1);
+- 
+--	expect_string(rep_memset_s, dest, "secret");
+--	expect_value(rep_memset_s, destsz, strlen(ptr1) + 1);
+--	expect_value(rep_memset_s, ch, (int)'\0');
+--	expect_value(rep_memset_s, count, strlen(ptr1) + 1);
+-+	expect_string(rep_memset_explicit, dest, "secret");
+-+	expect_value(rep_memset_explicit, ch, (int)'\0');
+-+	expect_value(rep_memset_explicit, count, strlen(ptr1) + 1);
+- 
+- 	talloc_free(ptr1);
+- 
+-@@ -73,10 +71,9 @@ static void test_talloc_keep_secret_vali
+- 	assert_non_null(password);
+- 	talloc_keep_secret(password);
+- 
+--	expect_string(rep_memset_s, dest, "secret");
+--	expect_value(rep_memset_s, destsz, strlen(password) + 1);
+--	expect_value(rep_memset_s, ch, (int)'\0');
+--	expect_value(rep_memset_s, count, strlen(password) + 1);
+-+	expect_string(rep_memset_explicit, dest, "secret");
+-+	expect_value(rep_memset_explicit, ch, (int)'\0');
+-+	expect_value(rep_memset_explicit, count, strlen(password) + 1);
+- 
+- 	talloc_free(mem_ctx);
+- }
+diff --git a/meta-networking/recipes-connectivity/samba/samba/0004-lib-replace-Remove-memset_s.patch b/meta-networking/recipes-connectivity/samba/samba/0004-lib-replace-Remove-memset_s.patch
+deleted file mode 100644
+index 6e01ae35e7..0000000000
+--- a/meta-networking/recipes-connectivity/samba/samba/0004-lib-replace-Remove-memset_s.patch
++++ /dev/null
+@@ -1,136 +0,0 @@
+-From 06b9291b4a351c5d3a40f6c80ee11713840b1039 Mon Sep 17 00:00:00 2001
+-From: Andreas Schneider <asn@samba.org>
+-Date: Thu, 16 Oct 2025 11:22:46 +0200
+-Subject: [PATCH 4/4] lib:replace: Remove memset_s()
+-
+-Upstream-Status: Backport [https://gitlab.com/samba-team/samba/-/commit/f3b380b8a3866286244725903287211cf54a4e74]
+-Signed-off-by: Andreas Schneider <asn@samba.org>
+-Reviewed-by: Douglas Bagnall <douglas.bagnall@catalyst.net.nz>
+-
+-Autobuild-User(master): Andreas Schneider <asn@cryptomilk.org>
+-Autobuild-Date(master): Tue Nov 11 14:51:45 UTC 2025 on atb-devel-224
 -
 -Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ----
-- configure.ac | 10 ++--------
-- 1 file changed, 2 insertions(+), 8 deletions(-)
+- lib/replace/README                      |  1 -
+- lib/replace/replace.c                   | 87 ++++++++-----------------
+- lib/replace/replace.h                   |  5 --
+- lib/replace/wscript                     |  2 +-
+- third_party/heimdal_build/roken.h       |  4 --
+- third_party/heimdal_build/wscript_build |  5 ++
+- 6 files changed, 34 insertions(+), 70 deletions(-)
 -
--diff --git a/configure.ac b/configure.ac
--index 6984b38b5..1b9aae4df 100644
----- a/configure.ac
--+++ b/configure.ac
--@@ -353,7 +353,7 @@ case "$host" in
-- 	 if test -f $PCAP_HOME/lib/libpfring.a; then :
--    	   PFRING_LIB=$PCAP_HOME/lib/libpfring.a
-- 	 fi
---	 
--+
--          PCAP_LIB="$PCAP_HOME/libpcap/libpcap.a $PFRING_LIB $LIBNUMA `$PCAP_HOME/lib/pfring_config --libs`"
--          AC_CHECK_LIB([rt], [clock_gettime],   [PCAP_LIB="$PCAP_LIB -lrt"])
--          AC_CHECK_LIB([nl], [nl_handle_alloc], [PCAP_LIB="$PCAP_LIB -lnl"])
--@@ -438,7 +438,7 @@ PCRE2_ENABLED=0
-- AC_ARG_WITH(pcre2, AS_HELP_STRING([--with-pcre2], [Enable nDPI build with libpcre2]))
-- if test "${with_pcre2+set}" = set; then :
--   AC_CHECK_LIB(pcre2-8, pcre2_compile_8, AC_DEFINE_UNQUOTED(HAVE_PCRE2, 1, [libpcre2(-dev) is present]))
---  
--+
--  if test "x$ac_cv_lib_pcre2_8_pcre2_compile_8" = xyes; then :
--    ADDITIONAL_LIBS="${ADDITIONAL_LIBS} -lpcre2-8"
--    PCRE2_ENABLED=1
--@@ -456,11 +456,6 @@ if test "${with_maxminddb+set}" = set; then :
--   fi
-- fi
+-diff --git a/lib/replace/README b/lib/replace/README
+-index bb9d008..d8431e7 100644
+---- a/lib/replace/README
+-+++ b/lib/replace/README
+-@@ -73,7 +73,6 @@ realpath
+- poll
+- setproctitle
+- memset_explicit
+--memset_s
 - 
---dnl> Use absolute source directory for NDPI_BASE_DIR
---NDPI_ABS_SRCDIR="`cd ${srcdir} && pwd`"
---AC_DEFINE_UNQUOTED(NDPI_BASE_DIR, "${NDPI_ABS_SRCDIR}", [nDPI base directory])
---AC_SUBST(NDPI_BASE_DIR, "${NDPI_ABS_SRCDIR}")
+- Types:
+- bool
+-diff --git a/lib/replace/replace.c b/lib/replace/replace.c
+-index 8615899..a419837 100644
+---- a/lib/replace/replace.c
+-+++ b/lib/replace/replace.c
+-@@ -965,37 +965,6 @@
+- }
+- #endif
+-
+--#ifndef HAVE_MEMSET_S
+--# ifndef RSIZE_MAX
+--#  define RSIZE_MAX (SIZE_MAX >> 1)
+--# endif
 --
-- dnl> Curl
-- dnl> AC_CHECK_LIB([curl], [curl_easy_perform])
-- dnl> if test ${ac_cv_lib_curl_curl_easy_perform} = "no"; then
--@@ -515,5 +510,4 @@ AC_SUBST(DISABLE_NPCAP)
-- AC_SUBST(EXE_SUFFIX)
-- AC_SUBST(NDPI_CFLAGS)
-- AC_SUBST(NDPI_LDFLAGS)
---AC_SUBST(NDPI_BASE_DIR)
-- AC_OUTPUT
-diff --git a/meta-networking/recipes-support/ntopng/files/0001-configure.ac.in-Allow-dynamic-linking-against-ndpi-3.patch b/meta-networking/recipes-support/ntopng/files/0001-configure.ac.in-Allow-dynamic-linking-against-ndpi-3.patch
-index b0cdcd8401..94ea1a81c2 100644
---- a/meta-networking/recipes-support/ntopng/files/0001-configure.ac.in-Allow-dynamic-linking-against-ndpi-3.patch
-+++ b/meta-networking/recipes-support/ntopng/files/0001-configure.ac.in-Allow-dynamic-linking-against-ndpi-3.patch
-@@ -14,12 +14,14 @@ ipe-sysroot/usr/lib/libm.a(e_logf.o): in function `logf_ifunc_selector':
- Upstream-Status: Submitted [https://github.com/ntop/ntopng/pull/6318]
- Signed-off-by: Khem Raj <raj.khem@gmail.com>
- ---
-- configure.ac.in | 6 ++----
-- 1 file changed, 2 insertions(+), 4 deletions(-)
-+ configure.ac.in | 16 +++-------------
-+ 1 file changed, 3 insertions(+), 13 deletions(-)
- 
-+diff --git a/configure.ac.in b/configure.ac.in
-+index 9d284c4..1404ccb 100644
- --- a/configure.ac.in
- +++ b/configure.ac.in
--@@ -235,8 +235,9 @@ AC_ARG_WITH(ndpi-includes,
-+@@ -232,8 +232,9 @@ AC_ARG_WITH(ndpi-includes,
-        NDPI_CUST_INC="-I$withval -I$withval/../lib/third_party/include"
-     ])
-  
-@@ -31,7 +33,7 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
-  NDPI_LIB_DEP=
-  
-  AS_VAR_IF(with_dynamic_ndpi, no, [
--@@ -267,11 +268,6 @@ AC_MSG_CHECKING(for nDPI source)
-+@@ -264,11 +265,6 @@ AC_MSG_CHECKING(for nDPI source)
-        fi
-  ])
-  
-@@ -43,7 +45,7 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
-  if test ! -z "$NDPI_CUST_INC" ; then :
-    NDPI_INC=$NDPI_CUST_INC
-  fi
--@@ -280,12 +276,6 @@ if test ! -z "$NDPI_CUST_LIB" ; then :
-+@@ -277,12 +273,6 @@ if test ! -z "$NDPI_CUST_LIB" ; then :
-    NDPI_LIB=$NDPI_CUST_LIB
-  fi
-  
-@@ -53,6 +55,6 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
- -  echo "and try again"
- -  exit 1
- -fi
-- dnl finish: nDPI handling
-  
-- AC_ARG_WITH(json-c-static,
-+ AC_MSG_CHECKING(for nDPI Pro)
-+ if test -d "../ndpi-pro"; then
-diff --git a/meta-networking/recipes-support/ntopng/files/0001-configure.ac.in-fix-host-contamination.patch b/meta-networking/recipes-support/ntopng/files/0001-configure.ac.in-fix-host-contamination.patch
-index e3c0534da8..03557d7576 100644
---- a/meta-networking/recipes-support/ntopng/files/0001-configure.ac.in-fix-host-contamination.patch
-+++ b/meta-networking/recipes-support/ntopng/files/0001-configure.ac.in-fix-host-contamination.patch
-@@ -11,12 +11,14 @@ Upstream-Status: Inappropriate [OE specific]
- 
- Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
- ---
-- configure.ac.in | 43 +++----------------------------------------
-- 1 file changed, 3 insertions(+), 40 deletions(-)
-+ configure.ac.in | 127 +++-----------------------------------------------------
-+ 1 file changed, 5 insertions(+), 122 deletions(-)
- 
-+diff --git a/configure.ac.in b/configure.ac.in
-+index b6ed6ce..9d284c4 100644
- --- a/configure.ac.in
- +++ b/configure.ac.in
--@@ -83,30 +83,6 @@ if test "$with_dynamic_ndpi" = "yes"; th
-+@@ -89,36 +89,6 @@ if test "$with_dynamic_ndpi" = "yes"; then
-    AC_DEFINE([HAVE_DYNAMIC_NDPI], [1], [Define if using dynamic linking with nDPI])
-  fi
-  
-@@ -28,14 +30,20 @@ Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
- -        CC=clang
- -        CXX="clang++ -fno-color-diagnostics -fPIE -stdlib=libc++"
- -    else
---       if test -x "/usr/bin/clang-10"; then
-+-       if test -x "$(command -v clang)"; then
-+-           CLANG_VERSION=$(echo -n | clang -dM -E - | sed  -n 's/^#define __clang_major__ \([0-9]\+\).*$/\1/gp')
-+-       elif test -x "/usr/bin/clang-10"; then
- -           CLANG_VERSION=10
- -       elif test -x "/usr/bin/clang-13"; then
- -           CLANG_VERSION=13
- -       elif test -x "/usr/bin/clang-14"; then
- -           CLANG_VERSION=14
-+-       elif test -x "/usr/bin/clang-19"; then
-+-           CLANG_VERSION=19
-+-       elif test -x "/usr/bin/clang-20"; then
-+-           CLANG_VERSION=20
- -       else
---           echo "Could not find clang. Please install clang-14 clang-tools-14"
-+-           echo "Could not find clang. Please install clang clang-tools"
- -           exit 1
- -       fi
- -
-@@ -47,7 +55,7 @@ Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
-  CFLAGS="${CFLAGS} -I${HERE} -I${HERE}/include"
-  CXXFLAGS="${CXXFLAGS} -I${HERE} -I${HERE}/include"
-  
--@@ -122,7 +98,7 @@ fi
-+@@ -134,7 +104,7 @@ fi
-  
-  if test -f /proc/device-tree/model; then
-    IS_RASPBERRY=`cat /proc/device-tree/model | grep -a -e "Orange Pi" -e Raspberry | wc -l`
-@@ -56,7 +64,7 @@ Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
-    if test "$IS_RASPBERRY" = "1"; then
-      CFLAGS="${CFLAGS} -DHAVE_EMBEDDED_SUPPORT"
-      CXXFLAGS="${CXXFLAGS} -DHAVE_EMBEDDED_SUPPORT"
--@@ -158,39 +134,6 @@ MAKE=make
-+@@ -170,39 +140,6 @@ MAKE=make
-  BIN_PATH=/usr/bin
-  LIBPCAP=-lpcap
-  
-@@ -96,7 +104,7 @@ Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
-  dnl> Remove spaces
-  OS="${OS#"${OS%%[![:space:]]*}"}"
-  
--@@ -237,31 +180,6 @@ if test "${with_nedge+set}" = set; then
-+@@ -251,31 +188,6 @@ if test "${with_nedge+set}" = set; then
-    LIBS="${LIBS} -lnetfilter_queue -lnfnetlink -lnetfilter_conntrack"
-  fi
-  
-@@ -125,10 +133,10 @@ Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
- -  fi
- -fi
- -
-- if test -d "pro"; then
--   NTOPCLOUD_LIB=
--   NTOPCLOUD_HOME="../ntopcloud"
--@@ -317,10 +235,6 @@ AC_ARG_WITH(ndpi-includes,
-+ JE=../jemalloc/lib/libjemalloc.a
-+ if ! test -f "${JE}"; then
-+  JE=
-+@@ -320,10 +232,6 @@ AC_ARG_WITH(ndpi-includes,
-        NDPI_CUST_INC="-I$withval -I$withval/../lib/third_party/include"
-     ])
-  
-@@ -139,7 +147,7 @@ Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
-  NDPI_INC=`echo $NDPI_CFLAGS | sed -e "s/[ ]*$//"`
-  NDPI_LIB=
-  NDPI_LIB_DEP=
--@@ -387,7 +301,7 @@ fi
-+@@ -399,7 +307,7 @@ fi
-  pkg-config --exists libssl
-  if test "$?" -ne 1; then
-    AC_DEFINE_UNQUOTED(NO_SSL_DL, 1, [has openssl])
-@@ -148,7 +156,7 @@ Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
-    SSL_LIB="`pkg-config --libs libssl` -lssl -lcrypto"
-  else
-    dnl Workaround for MacOS Brew
--@@ -408,10 +322,6 @@ else
-+@@ -420,10 +328,6 @@ else
-      SSL_INC="-I/usr/local/opt/openssl/include"
-      SSL_LIB="-L/usr/local/opt/openssl/lib -lssl -lcrypto"
-    dnl Workaround for FreeBSD
-@@ -159,7 +167,7 @@ Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
-    else
-      echo "Please install openssl-dev(el) package prerequisite"
-      exit -1
--@@ -433,13 +343,6 @@ fi
-+@@ -447,13 +351,6 @@ fi
-  AC_MSG_CHECKING(for ntopng professional edition)
-  
-  REDIS_SERVICE="redis.service"
-@@ -173,7 +181,7 @@ Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
-  
-  SERVICE_ALIAS=
-  SERVICE_REQUIRES=
--@@ -497,7 +400,7 @@ fi
-+@@ -514,7 +411,7 @@ fi
-  echo "Using clickhouse-cpp stored at ${CLICKHOUSE_HOME}"
-  
-  dnl> fi dnl> test $SYSTEM = "Linux"
-@@ -182,7 +190,7 @@ Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
-  AC_DEFINE_UNQUOTED(NTOPNG_PRO_GIT_RELEASE, "r${PRO_GIT_RELEASE}", [ntopng professional release])
-  AC_DEFINE_UNQUOTED(NTOPNG_PRO_GIT_DATE, "${PRO_GIT_DATE}", [ntopng professional date])
-  DUMMY=`cd ./pro; ${MAKE} build`
--@@ -531,21 +434,7 @@ if test -f ".git/index"; then
-+@@ -548,21 +445,7 @@ if test -f ".git/index"; then
-  fi
-  
-  if test $SYSTEM = "Linux"; then
-@@ -205,7 +213,7 @@ Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
-  else
-  dnl> wget -O config.guess 'http://git.savannah.gnu.org/gitweb/?p=config.git;a=blob_plain;f=config.guess;hb=HEAD'
-    if test $SYSTEM = "FreeBSD"; then
--@@ -575,7 +464,7 @@ AS_VAR_IF(with_hiredis, yes, [
-+@@ -592,7 +475,7 @@ AS_VAR_IF(with_hiredis, yes, [
-      else
-        pkg-config --exists hiredis
-        if test "$?" -ne 1; then
-diff --git a/meta-networking/recipes-support/ntopng/files/0001-luaengine-Use-lua-5.5-API-signature-for-lua_newstate.patch b/meta-networking/recipes-support/ntopng/files/0001-luaengine-Use-lua-5.5-API-signature-for-lua_newstate.patch
-index 8046d755c2..741b177c9d 100644
---- a/meta-networking/recipes-support/ntopng/files/0001-luaengine-Use-lua-5.5-API-signature-for-lua_newstate.patch
-+++ b/meta-networking/recipes-support/ntopng/files/0001-luaengine-Use-lua-5.5-API-signature-for-lua_newstate.patch
-@@ -15,17 +15,19 @@ a third parameter.
- Upstream-Status: Pending
- Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
- ---
-- src/LuaEngine.cpp | 64 +++++++++++++++++++++++------------------------
-- 1 file changed, 32 insertions(+), 32 deletions(-)
-+ src/LuaEngine.cpp | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
- 
-+diff --git a/src/LuaEngine.cpp b/src/LuaEngine.cpp
-+index 377712a..aeece85 100644
- --- a/src/LuaEngine.cpp
- +++ b/src/LuaEngine.cpp
- @@ -154,7 +154,7 @@ LuaEngine::LuaEngine() {
-    is_system_vm = false;
-    mem_used = 0;
--   
-+ 
- -  L = lua_newstate(l_alloc, this);
- +  L = lua_newstate(l_alloc, this, luaL_makeseed(NULL));
-  
-    if (!L) {
--     ntop->getTrace()->traceEvent(TRACE_ERROR, "Unable to create a new Lua state.");
-+     ntop->getTrace()->traceEvent(TRACE_ERROR,
-diff --git a/meta-networking/recipes-support/ntopng/files/CVE-2026-84990.patch b/meta-networking/recipes-support/ntopng/files/CVE-2026-84990.patch
-deleted file mode 100644
-index 0b443e3050..0000000000
---- a/meta-networking/recipes-support/ntopng/files/CVE-2026-84990.patch
-+++ /dev/null
-@@ -1,53 +0,0 @@
--From 2f36e393fc35f576d7c447af337848e81990b084 Mon Sep 17 00:00:00 2001
--From: Alfredo Cardigliano <cardigliano@ntop.org>
--Date: Fri, 17 Jul 2026 11:51:03 +0200
--Subject: [PATCH] Add admin check in conf backup listing and download
--
--(cherry picked from commit f912ee93bc143330b6ff3bb946ee7211e5ee9e1a)
--
--CVE: CVE-2026-84990
--Upstream-Status: Backport [https://github.com/ntop/ntopng/commit/f912ee93bc143330b6ff3bb946ee7211e5ee9e1a]
--Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
-----
-- .../rest/v2/get/system/configurations/download_backup.lua   | 5 +++++
-- .../v2/get/system/configurations/list_available_backups.lua | 6 ++++++
-- 2 files changed, 11 insertions(+)
--
--diff --git a/scripts/lua/rest/v2/get/system/configurations/download_backup.lua b/scripts/lua/rest/v2/get/system/configurations/download_backup.lua
--index 1603a94c48..404b09ed97 100644
----- a/scripts/lua/rest/v2/get/system/configurations/download_backup.lua
--+++ b/scripts/lua/rest/v2/get/system/configurations/download_backup.lua
--@@ -12,6 +12,11 @@ local backup_config = require("backup_config")
+--int rep_memset_s(void *dest, size_t destsz, int ch, size_t count)
+--{
+--	if (dest == NULL) {
+--		return EINVAL;
+--	}
+--
+--	if (destsz > RSIZE_MAX ||
+--	    count > RSIZE_MAX ||
+--	    count > destsz) {
+--		return ERANGE;
+--	}
+--
+--#if defined(HAVE_MEMSET_EXPLICIT)
+--	memset_explicit(dest, ch, count);
+--#else /* HAVE_MEMSET_EXPLICIT */
+--	memset(dest, ch, count);
+--# if defined(HAVE_GCC_VOLATILE_MEMORY_PROTECTION)
+--	/* See http://llvm.org/bugs/show_bug.cgi?id=15495 */
+--	__asm__ volatile("" : : "g"(dest) : "memory");
+--# endif /* HAVE_GCC_VOLATILE_MEMORY_PROTECTION */
+--#endif /* HAVE_MEMSET_EXPLICIT */
+--
+--	return 0;
+--}
+--#endif /* HAVE_MEMSET_S */
+--
+- #ifndef HAVE_GETPROGNAME
+- # ifndef HAVE_PROGRAM_INVOCATION_SHORT_NAME
+- # define PROGNAME_SIZE 32
+-diff --git a/lib/replace/replace.h b/lib/replace/replace.h
+-index 6b72c1f..24b2d8c 100644
+---- a/lib/replace/replace.h
+-+++ b/lib/replace/replace.h
+-@@ -999,11 +999,6 @@ void rep_setproctitle_init(int argc, char *argv[], char *envp[]);
+- void *rep_memset_explicit(void *block, int c, size_t size);
+- #endif
 - 
-- -- ##############################################
+--#ifndef HAVE_MEMSET_S
+--#define memset_s rep_memset_s
+--int rep_memset_s(void *dest, size_t destsz, int ch, size_t count);
+--#endif
+--
+- #ifndef HAVE_GETPROGNAME
+- #define getprogname rep_getprogname
+- const char *rep_getprogname(void);
+-diff --git a/lib/replace/wscript b/lib/replace/wscript
+-index 9acebd3..faef185 100644
+---- a/lib/replace/wscript
+-+++ b/lib/replace/wscript
+-@@ -881,7 +881,7 @@ REPLACEMENT_FUNCTIONS = {
+-                   'utime', 'utimes', 'dup2', 'chown', 'link', 'readlink',
+-                   'symlink', 'lchown', 'realpath', 'memmem', 'vdprintf',
+-                   'dprintf', 'get_current_dir_name', 'copy_file_range',
+--                  'strerror_r', 'clock_gettime', 'memset_explicit', 'memset_s'],
+-+                  'strerror_r', 'clock_gettime', 'memset_explicit'],
+-     'timegm.c': ['timegm'],
+-     # Note: C99_VSNPRINTF is not a function, but a special condition
+-     # for replacement
+-diff --git a/third_party/heimdal_build/roken.h b/third_party/heimdal_build/roken.h
+-index 3870609..4740a3d 100644
+---- a/third_party/heimdal_build/roken.h
+-+++ b/third_party/heimdal_build/roken.h
+-@@ -123,10 +123,6 @@
+- #define HAVE_SETEUID
+- #endif
 - 
--+if not isAdministratorOrPrintErr() then
--+    rest_utils.answer(rest_utils.consts.err.not_granted)
--+    return
--+end
+--#ifndef HAVE_MEMSET_S
+--#define HAVE_MEMSET_S
+--#endif
+--
+- #ifndef HAVE_DIRFD
+- #ifdef HAVE_DIR_DD_FD
+- #define dirfd(x) ((x)->dd_fd)
+-diff --git a/third_party/heimdal_build/wscript_build b/third_party/heimdal_build/wscript_build
+-index 8aea52b..1988535 100644
+---- a/third_party/heimdal_build/wscript_build
+-+++ b/third_party/heimdal_build/wscript_build
+-@@ -366,6 +366,11 @@ if not bld.CONFIG_SET('USING_SYSTEM_ROKEN'):
+-         lib/roken/getuserinfo.c
+-     '''
+- 
+-+    if not bld.CONFIG_SET('HAVE_MEMSET_S'):
+-+        ROKEN_SOURCE += '''
+-+            lib/roken/memset_s.c
+-+        '''
 -+
-- local download = _GET["download"]
-- local epoch = _GET["epoch"]
-- 
--diff --git a/scripts/lua/rest/v2/get/system/configurations/list_available_backups.lua b/scripts/lua/rest/v2/get/system/configurations/list_available_backups.lua
--index d901a876b0..8a08ad15d5 100644
----- a/scripts/lua/rest/v2/get/system/configurations/list_available_backups.lua
--+++ b/scripts/lua/rest/v2/get/system/configurations/list_available_backups.lua
--@@ -8,11 +8,17 @@ package.path = dirs.installdir .. "/scripts/lua/modules/system_config/?.lua;" ..
-- 
-- -- ##############################################
-- 
--+require "lua_utils"
-- local backup_config = require("backup_config")
-- local rest_utils = require("rest_utils")
-- 
-- -- ##############################################
-- 
--+if not isAdministratorOrPrintErr() then
--+  rest_utils.answer(rest_utils.consts.err.not_granted)
--+  return
--+end
--+
-- local rc = rest_utils.consts.success.ok
-- 
-- local order = _GET["order"] or "desc"
-diff --git a/meta-networking/recipes-support/ntopng/files/CVE-2026-86090-CVE-2026-86091.patch b/meta-networking/recipes-support/ntopng/files/CVE-2026-86090-CVE-2026-86091.patch
-deleted file mode 100644
-index a8a3ba72ac..0000000000
---- a/meta-networking/recipes-support/ntopng/files/CVE-2026-86090-CVE-2026-86091.patch
-+++ /dev/null
-@@ -1,67 +0,0 @@
--From c6f4d42e1bb029463f927532819c5f5b331ea066 Mon Sep 17 00:00:00 2001
--From: Alfredo Cardigliano <cardigliano@ntop.org>
--Date: Thu, 16 Jul 2026 14:42:29 +0200
--Subject: [PATCH] Fix user capability check for deleting notification endpoints
-- and pools
--
--(cherry picked from commit 7d830f31af367745431c5d92e2e82fc432f6bdd8)
--
--CVE: CVE-2026-86090 CVE-2026-86091
--Upstream-Status: Backport [https://github.com/ntop/ntopng/commit/7d830f31af367745431c5d92e2e82fc432f6bdd8]
--Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
-----
-- scripts/lua/modules/pools/pools_rest_utils.lua | 5 +++++
-- scripts/lua/rest/v2/delete/endpoints.lua       | 6 ++++++
-- scripts/lua/rest/v2/delete/recipients.lua      | 6 ++++++
-- 3 files changed, 17 insertions(+)
--
--diff --git a/scripts/lua/modules/pools/pools_rest_utils.lua b/scripts/lua/modules/pools/pools_rest_utils.lua
--index 9b692ea5db..73f08e0c8d 100644
----- a/scripts/lua/modules/pools/pools_rest_utils.lua
--+++ b/scripts/lua/modules/pools/pools_rest_utils.lua
--@@ -452,6 +452,11 @@ end
-- 
-- -- @brief Get all pools of all the available (currently implemented) pool instances
-- function pools_rest_utils.delete_all_instances_pools()
--+   if not auth.has_capability(auth.capabilities.pools) then
--+      rest_utils.answer(rest_utils.consts.err.not_granted)
--+      return
--+   end
--+
--    local all_instances = pools_lua_utils.all_pool_instances_factory()
-- 
--    for _, instance in pairs(all_instances) do
--diff --git a/scripts/lua/rest/v2/delete/endpoints.lua b/scripts/lua/rest/v2/delete/endpoints.lua
--index 31852cedab..6d25c01953 100644
----- a/scripts/lua/rest/v2/delete/endpoints.lua
--+++ b/scripts/lua/rest/v2/delete/endpoints.lua
--@@ -10,6 +10,12 @@ package.path = dirs.installdir .. "/scripts/lua/modules/notifications/?.lua;" ..
-- local rest_utils = require "rest_utils"
-- local endpoints = require("endpoints")
-- local recipients = require "recipients"
--+local auth = require "auth"
--+
--+if not auth.has_capability(auth.capabilities.notifications) then
--+   rest_utils.answer(rest_utils.consts.err.not_granted)
--+   return
--+end
-- 
-- endpoints.reset_configs()
-- recipients.cleanup()
--diff --git a/scripts/lua/rest/v2/delete/recipients.lua b/scripts/lua/rest/v2/delete/recipients.lua
--index cbdffcae4c..14b3956498 100644
----- a/scripts/lua/rest/v2/delete/recipients.lua
--+++ b/scripts/lua/rest/v2/delete/recipients.lua
--@@ -8,6 +8,12 @@ package.path = dirs.installdir .. "/scripts/lua/modules/notifications/?.lua;" ..
-- 
-- local rest_utils = require "rest_utils"
-- local recipients = require "recipients"
--+local auth = require "auth"
--+
--+if not auth.has_capability(auth.capabilities.notifications) then
--+   rest_utils.answer(rest_utils.consts.err.not_granted)
--+   return
--+end
-- 
-- recipients.cleanup()
-- rest_utils.answer(rest_utils.consts.success.ok)
-diff --git a/meta-networking/recipes-support/ntopng/ndpi_5.0.bb b/meta-networking/recipes-support/ntopng/ndpi_6.0.bb
-similarity index 78%
-rename from meta-networking/recipes-support/ntopng/ndpi_5.0.bb
-rename to meta-networking/recipes-support/ntopng/ndpi_6.0.bb
-index 80890b1f27..91828495f3 100644
---- a/meta-networking/recipes-support/ntopng/ndpi_5.0.bb
-+++ b/meta-networking/recipes-support/ntopng/ndpi_6.0.bb
-@@ -8,9 +8,8 @@ RDEPENDS:${PN} += " libpcap"
- LICENSE = "LGPL-3.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=b52f2d57d10c4f7ee67a7eb9615d5d24"
- 
--SRCREV = "375f99ef9fb4999d778b57bbeece171b3fa9fba6"
--SRC_URI = "git://github.com/ntop/nDPI.git;branch=5.0-stable;protocol=https;tag=${PV} \
--           file://0001-configure-Stop-embedding-pwd-at-configure-time.patch \
-+SRCREV = "1a5293396337f9a72dfee1fa070b2c4b0a0a3aaf"
-+SRC_URI = "git://github.com/ntop/nDPI.git;branch=6.0-stable;protocol=https;tag=${PV} \
-            file://CVE-2026-116744.patch \
-           "
- 
-diff --git a/meta-networking/recipes-support/ntopng/ntopng/0001-Fix-build-with-OpenSSL-4.0.patch b/meta-networking/recipes-support/ntopng/ntopng/0001-Fix-build-with-OpenSSL-4.0.patch
-deleted file mode 100644
-index 4f142092c3..0000000000
---- a/meta-networking/recipes-support/ntopng/ntopng/0001-Fix-build-with-OpenSSL-4.0.patch
-+++ /dev/null
-@@ -1,42 +0,0 @@
--From 0c9dcc44df3592d8e08b46f5dfca664de5918bc5 Mon Sep 17 00:00:00 2001
--From: Jaipaul Cheernam <jaipaul.cheernam@est.tech>
--Date: Thu, 27 Aug 2026 09:13:35 +0000
--Subject: [PATCH] HTTPserver: fix const X509_NAME for OpenSSL 4.0
--
--OpenSSL 4.0 changed X509_get_subject_name() to return const X509_NAME*.
--Update the local variable to match and cast where non-const API requires it.
--
--Upstream-Status: Backport [https://github.com/ntop/ntopng/pull/10830]
--Signed-off-by: Jaipaul Cheernam <jaipaul.cheernam@est.tech>
-----
-- src/HTTPserver.cpp | 6 +++---
-- 1 file changed, 3 insertions(+), 3 deletions(-)
--
--diff --git a/src/HTTPserver.cpp b/src/HTTPserver.cpp
--index 21895bf10e..f7b4164ab4 100644
----- a/src/HTTPserver.cpp
--+++ b/src/HTTPserver.cpp
--@@ -403,7 +403,7 @@ static bool ssl_client_x509_auth(const struct mg_connection *const conn,
-- 				 char *const group, bool *const localuser) {
--   bool ret = false;
--   X509 *cert = NULL;
---  X509_NAME *subj = NULL;
--+  const X509_NAME *subj = NULL;
--   char subject[256];
--   char key[CONST_MAX_LEN_REDIS_KEY];
-- 
--@@ -411,12 +411,12 @@ static bool ssl_client_x509_auth(const struct mg_connection *const conn,
-- 
--   if ((cert = SSL_get_peer_certificate(conn->ssl))) {
--     if ((subj = X509_get_subject_name(cert))) {
---      X509_NAME_oneline(subj, subject, sizeof(subject));
--+      X509_NAME_oneline((X509_NAME *)subj, subject, sizeof(subject));
--       
--       ntop->getTrace()->traceEvent(TRACE_INFO, "Client X.509 certificate subject name: '%s'", subject);
-- 
--       if (SSL_get_verify_result(conn->ssl) == X509_V_OK &&
---          X509_NAME_get_text_by_NID(subj, NID_commonName, username, NTOP_USERNAME_MAXLEN) >= 0) {
--+          X509_NAME_get_text_by_NID((X509_NAME *)subj, NID_commonName, username, NTOP_USERNAME_MAXLEN) >= 0) {
--         snprintf(key, sizeof(key), CONST_STR_USER_GROUP, username);
--       
--         ntop->getTrace()->traceEvent(TRACE_INFO, "Client X.509 certificate CN: '%s'", username);
-diff --git a/meta-networking/recipes-support/ntopng/ntopng_6.6.bb b/meta-networking/recipes-support/ntopng/ntopng_7.0.bb
-similarity index 88%
-rename from meta-networking/recipes-support/ntopng/ntopng_6.6.bb
-rename to meta-networking/recipes-support/ntopng/ntopng_7.0.bb
-index 808967e969..ffc3d8432e 100644
---- a/meta-networking/recipes-support/ntopng/ntopng_6.6.bb
-+++ b/meta-networking/recipes-support/ntopng/ntopng_7.0.bb
-@@ -11,16 +11,13 @@ RDEPENDS:${PN} = "bash redis"
- LICENSE = "GPL-3.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
- 
--SRCREV = "d3a1229954dd783af06c9fd2dcd9ce926826a228"
--SRC_URI = "gitsm://github.com/ntop/ntopng;protocol=https;branch=6.6-stable \
-+SRCREV = "b4f7acda2feb75b9e2b93c06898e9ed3ae4bfef5"
-+SRC_URI = "gitsm://github.com/ntop/ntopng;protocol=https;branch=7.0-stable \
-            file://0001-configure.ac.in-fix-host-contamination.patch \
-            file://0001-Makefile.in-don-t-use-the-internal-lua.patch \
-            file://0001-configure.ac.in-Allow-dynamic-linking-against-ndpi-3.patch \
-            file://0001-luaengine-Use-lua-5.5-API-signature-for-lua_newstate.patch \
-            file://ntopng.service \
--           file://0001-Fix-build-with-OpenSSL-4.0.patch \
--           file://CVE-2026-84990.patch \
--           file://CVE-2026-86090-CVE-2026-86091.patch \
+-     HEIMDAL_LIBRARY('roken',
+-         ROKEN_SOURCE,
+-         includes='../heimdal/lib/roken ../heimdal/include ../heimdal_build/include',
+diff --git a/meta-networking/recipes-connectivity/samba/samba_4.23.11.bb b/meta-networking/recipes-connectivity/samba/samba_4.25.1.bb
+similarity index 97%
+rename from meta-networking/recipes-connectivity/samba/samba_4.23.11.bb
+rename to meta-networking/recipes-connectivity/samba/samba_4.25.1.bb
+index 17d7d186aa..a5c299eef7 100644
+--- a/meta-networking/recipes-connectivity/samba/samba_4.23.11.bb
++++ b/meta-networking/recipes-connectivity/samba/samba_4.25.1.bb
+@@ -28,10 +28,6 @@ SRC_URI = "${SAMBA_MIRROR}/stable/samba-${PV}.tar.gz \
+            file://0005-Fix-pyext_PATTERN-for-cross-compilation.patch \
+            file://0006-smbtorture-skip-test-case-tfork_cmd_send.patch \
+            file://0007-Deleted-settiong-of-python-to-fix-the-install-confli.patch \
+-           file://0001-lib-replace-Implement-memset_explicit.patch \
+-           file://0002-lib-replace-Add-test-for-memset_explicit.patch \
+-           file://0003-Replace-memset_s-with-memset_explicit.patch \
+-           file://0004-lib-replace-Remove-memset_s.patch \
             "
  
- # don't use the lua under thirdparty as it supports cross compiling badly
+ SRC_URI:append:libc-musl = " \
+@@ -39,7 +35,7 @@ SRC_URI:append:libc-musl = " \
+            file://samba-4.3.9-remove-getpwent_r.patch \
+            "
+ 
+-SRC_URI[sha256sum] = "089fdeeaf83593d8f9a16847a86b6cad2fc90f7a893eb8d9d5f509bbecadc0d4"
++SRC_URI[sha256sum] = "7f367545bca69aa96897628f82f0f04d4b66b3bcb36cb978b9bb952c4b4c428d"
+ 
+ UPSTREAM_CHECK_REGEX = "samba\-(?P<pver>\d+\.\d+(\.\d+)+).tar.gz"
+ 
