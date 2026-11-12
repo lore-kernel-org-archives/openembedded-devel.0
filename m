@@ -1,91 +1,91 @@
-Received: from mail-pj1-f54.google.com (mail-pj1-f54.google.com [209.85.216.54])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.8300.1794467643448703086
+Received: from mail-pl1-f176.google.com (mail-pl1-f176.google.com [209.85.214.176])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.8436.1794467645444705927
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 11 Nov 2026 23:14:03 -0800
+ Wed, 11 Nov 2026 23:14:05 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=mTPluF12;
- spf=pass (domain: gmail.com, ip: 209.85.216.54, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pj1-f54.google.com with SMTP id 98e67ed59e1d1-3ae2b7e1e17so2506697a91.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 11 Nov 2026 23:14:03 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=Ci8Shhqs;
+ spf=pass (domain: gmail.com, ip: 209.85.214.176, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pl1-f176.google.com with SMTP id d9443c01a7336-2ed39646f04so15103135ad.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 11 Nov 2026 23:14:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794467643; x=1795072443; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1794467645; x=1795072445; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=HDlEgziNqunqggW/luFDNrufEbsRgIUzQyEFSwkgPBc=;
-        b=mTPluF1247dlNqczEmuKz0i/Qg50hpcpEGvYP4JHsLTmBZ3neWVOCbcphjuoo5W4ib
-         WBFR0RiVAtEAs0f3yb5koi+4suyBYr2b21o7EVOK54KEBkCPncwqfLUFR7aXxhfK04Am
-         GgPFpJaaT2IIup6Y/4mC7a2GbbweMldzng/DXQVhZ/t1q1unLWbSe3qniLTFbiZl9OJp
-         rnwUvEUEpfg2lbaSXgk0dVjCoIm/soekiwZgL3SUpQjsPr7YUnsFe5uepWpRN2jxWBaz
-         sCK1lEtMN0U87/ObYcdz4Kk7qM5RTgk8L/90lM+6RBGQ08xsRBn6IcKGeWpL1KGFsLBk
-         rf3w==
+        bh=2h/7Xw7QWiKqNawLALhqEGQOuq9Yggf5eN9lcwkDIwU=;
+        b=Ci8ShhqsnbrQ5uYwAkqsa0i09JtUaFrb1cz4Z2cPnTCbRcqckLPX2fn34DLHIJwSTp
+         P1MBvsynuDGsxcJrAzdsnQ8z7ltq3a1jKiCIMUZUdwDRRGwlNfT6Xfr6ZijnToBcJaQv
+         BWpZMjexVIbnjw4DIw+cv5u8qp4mu33/SxtifM1xnFvhZAT3Hh3gftGHwmh7EVGeSvMi
+         SJ+8PLemJ8R3D1GYrffxO2gvTkUK5YN8VOx4cSw7SrIVriac7SvZ3kRCjxH4IKscbM1+
+         3yCXfVaxVe+YgBvoz2YCS6SwijfgOc68N/aSZMsRx4GnBcF6EO2bAvJQGZ+Hv5B2czzl
+         twmg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794467643; x=1795072443;
+        d=1e100.net; s=20260707; t=1794467645; x=1795072445;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=HDlEgziNqunqggW/luFDNrufEbsRgIUzQyEFSwkgPBc=;
-        b=I9A1d6AR/7xojzkUqGVUvyuyzp7C8pySrC6U2RXZzYyD9Bk5GqkIDUxPCsjT//qxKU
-         Dl+qEwYwmoufEPZKI9jV+lolJniRnnMxtvazRNgv7hq3223PUOwBRT9fODFofdb9Cntb
-         6gOqcWtCtvSHuFJdtf6UkDBMyH7KDzFiRvnbpUcfiV6VirEYHO0ZSFzH+25ZJ6wwoVto
-         NWxvnzWwame5IoZ9LkhPIyqLnPgUNhIsPI59U+6LGBdlUlCaiyCNi4vo6W3uwDej8F7B
-         53Nh19P4NCAJ3qDBntpweFgtLgEwO+0oeWWe9Hmtw6+zV4INzxZkGEtozhlEtrK4lbDs
-         X7bA==
-X-Gm-Message-State: APuU4Z85tpdu+EYc61/xb7xsvbXCzvgVg4nDPNsJAMJ7snMPWPagMcQ2
-	Cr6I74BaT3Hx6zI/cPSD4WolBifo08W/aW8PRK8kP7nP446PTFJkuLVTfOwU1A==
-X-Gm-Gg: AYBFou1mLNNBG6b9fgSKsEfl4leokF62ynYAa68kH1eVowNbIKM0H+E5A4C1ONjfHeY
-	7A617GCIjX6CD1tuN022+S6C5DYnGnj4BHoyoyBGfMYokONcfYj9FocfK6g6Ov1qdOXMgi6bLBN
-	rJ1oHnl9b0OhPPN7T+gdFkd42JE7z8GHOkkcT7oSXvvcTdbRJliayyD+Jn3c+JfOtWqSpb8Ljaw
-	rhhiZfyaV0l0ajeCFSB/hVMvUbENloGsVZo/UGQlJhNX72HXoCHCZo0yj0htih11YPSdxjP+BU1
-	os2X3dcZQEiiT4upRWuMRjXWNFM6FmhR1eMyNyDV3DYZzUTMt6G3aUDKh9phwCCIDTFOi64pxJp
-	QJoFeHa6pql/IobPIJ+2b+JPEijru5NIpd7Jbx4cG1by2UVtdVP58OtAT1JKe2Bkre51B+LcwmP
-	cSXYcM4moCHcGvcuvF6p2rxCek5NAfSKjtCe8qoe8RtSusf2MLoAIVtCYvFO3yeHgLC+iTdvECZ
-	aOxwxdlH3TOohm++2z9f8b169UvepJ2QPzLo8krBfWhBQq8Vc8cQqlPdFDwOpYaw78OhSD/XJhD
-	GFCqtSMYAacBECeBwDBtOrhbvEDbQjJqmDkCZDFG0jA5itTIcaCGu0o2NLX5qA==
-X-Received: by 2002:a17:90b:2d08:b0:3ab:f2a9:cacd with SMTP id 98e67ed59e1d1-3b182f26e76mr4863208a91.49.1794467642726;
-        Wed, 11 Nov 2026 23:14:02 -0800 (PST)
+        bh=2h/7Xw7QWiKqNawLALhqEGQOuq9Yggf5eN9lcwkDIwU=;
+        b=x62ZWxIpLDQaAE+N05LD3hcHiP4YoG5ZC01Gyj8AfBw4oGsBpP/Hj2k5NwCk3VVV0h
+         x5huh4DA++poX8693kTNG+oqvq3dMAxJ0hkeb8NsYpiNH3jiyjhVLk3PxZoDlzTQGDjr
+         TSUsOgZwwbAWlL2fKVXwGx9BQ6cTA2RmwhxulsqrJIHNXyRkPnY7fu2TGeWm//cxXilU
+         gvQplh1TWRJWANWrUKi2MxMBckx/IFUlXRvtgKM5jZYmgBQW4/sEmEh7bs+qPb2ANIj/
+         YhmRw1PLu1/3sYZpQH97CoFJHf8uyidWyuvqc32BXPbM4OtUyRghDJBbwOpLDvNg1dLd
+         cHzA==
+X-Gm-Message-State: APuU4Z+X7KMMtzAnKkksXf/nPGe02J55LVZsfpxAnafsTkthF3rqQJDW
+	FX44zEzzW3hUm+WB9BjUXzQntlu6JFLEqlKTZ8SbXWRJGqxmPflRoX/qYuMQEQ==
+X-Gm-Gg: AYBFou1+YvzIOvytp0z9beOf77zdEoLQaR7TCaMTBHwd/BIGiRSJqwfQ4ZxJRw0Fp8s
+	9hjnhfofbKq4cGZo1L8UiyRv42vgtR+KmJ9DU/nmMS0vTzBrmJejpcMjl8gM28XcTsqwBh59guf
+	+YJfqz12R6HpRRkv59ClgaH3z5M5YF9HmvzkqQIUEOx25akJGR3NMnghyC2mUrg4K0eCTymY963
+	Qw4LuZpx1Bb6AloDRn89WA47X5F88iEEu2pLFInfI9HsO3K80HTXR0J1KciDeRjsuND5p5cUo20
+	O4Rzy9oeGGkfVVMsHgz0lPkOkWEsbetd7FSlZcejbLjeam+BaBHPpa3pAlIwGNvxLbbjt8ET2ZZ
+	igmlfwXsiW8mna1J8miWeVMeXw3Ijme33n4Th5dS31KQCSVAerCCVZpozNoRtG6fF7qxfg6tiHn
+	0VStrnVwSvI7WH0elbhT2wrPTApzT1Z6koawBAQpp36+rxeOmel0Uc/hg6yMifa7WNszVzF3Q4y
+	UCvJGk3F0F4LdSNR2ilp5qq8NS+oY0KC6Qu5n8emqNB2/MOwREV5I9Cu3fOAEtHJ6xoUvQvzjhx
+	NjAVW9WXZLFKzh1/4QZgLSEvuHkgjS4APss/hkKanxXtJB2J8qF0cbazqRG5Tg==
+X-Received: by 2002:a17:903:1109:b0:2e9:5714:6072 with SMTP id d9443c01a7336-2edd7a8ebb5mr48657835ad.44.1794467644714;
+        Wed, 11 Nov 2026 23:14:04 -0800 (PST)
 Return-Path: <ankur.tyagi85@gmail.com>
 Received: from NVAPF55DW0D-IPD.. ([147.161.217.9])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2edb6d7e062sm29018355ad.35.2026.11.11.23.14.01
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2edb6d7e062sm29018355ad.35.2026.11.11.23.14.03
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 11 Nov 2026 23:14:02 -0800 (PST)
+        Wed, 11 Nov 2026 23:14:04 -0800 (PST)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-webserver][PATCH 3/6] cockpit: mark CVE-2024-2947 fixed
-Date: Thu, 12 Nov 2026 20:13:45 +1300
-Message-ID: <20261112071348.4144113-3-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-oe][PATCH 4/6] brotli: set CVE_PRODUCT to "google:brotli"
+Date: Thu, 12 Nov 2026 20:13:46 +1300
+Message-ID: <20261112071348.4144113-4-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20261112071348.4144113-1-ankur.tyagi85@gmail.com>
 References: <20261112071348.4144113-1-ankur.tyagi85@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Thu, 12 Nov 2026 07:14:11 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132202
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Thu, 12 Nov 2026 07:14:12 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132203
 Content-Type: text/plain; charset="utf-8"
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
-Commit[1] also identified by Debian[2]
+cve-check class is setting default CVE_PRODUCT to 'brotli' which ignores
+the CVEs from NVD Database.
 
-Details:
-https://nvd.nist.gov/vuln/detail/cve-2024-2947
-
-[1]https://github.com/cockpit-project/cockpit/commit/9c4cc9b6df632082538b53bdc8ee9ec1c5cad4da
-[2]https://security-tracker.debian.org/tracker/CVE-2024-2947
+Reference:
+CVE-2026-111497
+https://nvd.nist.gov/vuln/detail/cve-2026-111497
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- meta-webserver/recipes-webadmin/cockpit/cockpit_366.1.bb | 1 +
- 1 file changed, 1 insertion(+)
+ meta-oe/recipes-extended/brotli/brotli_1.2.1.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-webserver/recipes-webadmin/cockpit/cockpit_366.1.bb b/meta-webserver/recipes-webadmin/cockpit/cockpit_366.1.bb
-index e12cabcd98..3aa1f155e7 100644
---- a/meta-webserver/recipes-webadmin/cockpit/cockpit_366.1.bb
-+++ b/meta-webserver/recipes-webadmin/cockpit/cockpit_366.1.bb
-@@ -202,3 +202,4 @@ do_install:append() {
+diff --git a/meta-oe/recipes-extended/brotli/brotli_1.2.1.bb b/meta-oe/recipes-extended/brotli/brotli_1.2.1.bb
+index dca16cb79b..14d7fe96e5 100644
+--- a/meta-oe/recipes-extended/brotli/brotli_1.2.1.bb
++++ b/meta-oe/recipes-extended/brotli/brotli_1.2.1.bb
+@@ -20,3 +20,5 @@ do_install:append () {
  }
  
- CVE_PRODUCT = "cockpit-project:cockpit"
-+CVE_STATUS[CVE-2024-2947] = "fixed-version: fixed since v314"
+ BBCLASSEXTEND = "native nativesdk"
++
++CVE_PRODUCT = "google:brotli"
