@@ -1,286 +1,164 @@
-Received: from mail-dl1-f41.google.com (mail-dl1-f41.google.com [74.125.82.41])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.8156.1794465927164605873
+Received: from mail-dy1-f171.google.com (mail-dy1-f171.google.com [74.125.82.171])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.8157.1794465928132999917
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 11 Nov 2026 22:45:27 -0800
+ Wed, 11 Nov 2026 22:45:28 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=Gavaieor;
- spf=pass (domain: gmail.com, ip: 74.125.82.41, mailfrom: raj.khem@gmail.com)
-Received: by mail-dl1-f41.google.com with SMTP id a92af1059eb24-1a2af4c8d00so4049229c88.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 11 Nov 2026 22:45:27 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=rVhG0AGp;
+ spf=pass (domain: gmail.com, ip: 74.125.82.171, mailfrom: raj.khem@gmail.com)
+Received: by mail-dy1-f171.google.com with SMTP id 5a478bee46e88-33fb4680717so4745143eec.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 11 Nov 2026 22:45:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794465926; x=1795070726; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1794465927; x=1795070727; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=6db1X614IUEZE9bGVC+Ehlx+GELw8WLO0u4R5jHmlfU=;
-        b=GavaieorUlbqq7CZLaK+cKdkPO6Ch0VCjf1RjNCbZuq0vk1+UD1KtWNleHCl8Nv0Az
-         wZcmdJvSUiKM1+xLu2qTQo9qvztjODddcExyPOC7YkPnLoId/RyiIC20D01oIbrdzZR9
-         TMbaIiEvZQyOi02/tBwj4HQ4V9mfw1z4NyV3QUgQncNMObiMeARFk39hgzwSxOXfwsUS
-         it+Q6X7LUUusFuWx4Q6DxB9M4YO8Bz6DGaMIYNYG+V/vmL8Ryvhmxy+wv99VkHWFEJ3w
-         eLoKiLjNRydKZI7NShjvLOUFy4Zc5+LqZCdtQMzqgxfTrGjnBdB8vrxDlxSo4cTIByJO
-         5cRA==
+        bh=o8wBnxFNCQ9F1WfXKilPNY1PoyMrdLuJUT7tBNXts30=;
+        b=rVhG0AGpEG4fgoEPcmcdpjwmAQmalNzgsG8kcGuptpuF0yPFB6VLp4v0KuRN/p8jBt
+         FLVhRBcFFB5q87KcF95ZNwhsSUkKGkIC3W9ydR7bZNsqH7rdbWqk/sD6A9Xu3bjgDmqd
+         YAK5GJ7iSe6PQGGOuZaFGDX4jEeenpaV3ecrSYu+yF1n9IOqaH5VWq04crwG3qXC+9Pn
+         bRXMVLIBonsUdIR5eIN3VTMc+ow/O4A4ZzvRDzE8tJfHwaVCARGHNHt0KuSjQ52OVs4S
+         X4nRF5ApPd67oHOV7tyyRtDY9uDUcu4pTXvmGgPM9koA2pJAk8UxrOgX33HBGn9c3gSy
+         F6Mg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794465926; x=1795070726;
+        d=1e100.net; s=20260707; t=1794465927; x=1795070727;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=6db1X614IUEZE9bGVC+Ehlx+GELw8WLO0u4R5jHmlfU=;
-        b=sYYi37MDeSWJTi5hUj+4c5NXhkUE/ToLm5vkUGifEeDUQU8U/BykmzOcG9Ph+J1jRm
-         Z5jgVf5PQxPW1z4qMvTWAQgfXLSFICOAlK99msUTuNf+YxVLPQlHBmXNbBvyNtr5lku0
-         DxJi1TSR2hhNI2kthmoPFkzSh4p1yWdX6hNS2uS9L4ZH/HpWB2Y9uHtcLfQ2l66j09ng
-         k1UAsaan9G+q+vdflkLKxLJ4JQpFami8EtZS6y6fWcBimSz7hX6faLyPAxzg6mc/rO1H
-         TgPKB1ahCXDrtQcDQ5O5qfyNvYG1MqQ5IcHMBgRmmtF8LoqF4Go25u5uArkFQy1wi5ue
-         48FA==
-X-Gm-Message-State: APuU4Z/XP+eKbbbsoX3QrgJGkN9008aH9YeZi6xczrykRvhxWNG0UV0K
-	kiyFQK7NAd7u08RfzMjDJBImZKJ3b+F6wU4gXeREPOzDAwYV04fi6bBnjj6qGN0cskk=
-X-Gm-Gg: AYBFou2DCc5qoK89p+em0LrU5iHdWFzEFDki6p/+gs6bNcriaKZOYWF+MSqpZ371Jy8
-	daBdGkyF7ah9e+jLbdIlTSiasgihfVc2lr2/oyZcLWssNDQhAx3t86mMxcJpW9Wp68sHiE4pjv9
-	2x5HHiHtan54jUkVNuwgzPKt1YpWM1wFwsUBrUkXY1FtU3MGXi1SB3qQ8yfOSpK070brXVBNymv
-	GoLeqcVWPbQVO/Il9+blaARlpt9iM3unxqJyFQ50S8f249x3lBWuEp0uu5yidYvnaUZjGNCZ9dH
-	0aGq1L9+tjt6ECVmxAxI87CNLwirQ+z1MwYmvgpZPvpszk1IV9zic8kmQ0bNIo2vTkBEBHuN1JK
-	DJa2IWf47HoN+hijnG675paDvU4ypjIvRwSVCZf2rtFdwt756R6rSKxlqsP9D3e2sG9aPXlqr5D
-	K0ZG9GbYC2CWLOu9/kzXogk+CvbVw6Mhq5NGdo+GgFwXPJMNJCmP7ilQGydPDvf9B/7wRZr7ifa
-	vAv1+eC/HmbseGc2MLrdmzwBUVK9Bz5bPeV4Aaw6QMVbNYFRsSbUiP0AqcCxkb+1T4HL3exBpIL
-	X0ZCeobNFnffl1Je9uXmoloJ0lJQhFzYkSyCNN5glnQoG46enhqPzjvRUC1jWBM+TatT8CWCEBW
-	qxnIAHKN/1G7SJSIqF+9c6kgnDFsxtU80qbYMJSAFi8N78DpqSPBQOddJIrqwbfAHH0yb2hHtkW
-	xLHqPlakwu9BBugtfklImciqeNUcTeVvaI5kh/GaTkCwNqmJot2lMYe+OjWlXRZ3cKrdyPRqaoF
-	EbYPxF9B57mFq4dzPm6FYVEqG1LIW35ZLuuOt4xnj0pR86nGRluccR3xU3PyEXk48nXXNZODkoe
-	BZPw
-X-Received: by 2002:a05:7301:5f87:b0:377:678:2309 with SMTP id 5a478bee46e88-37706782738mr3569928eec.15.1794465926094;
-        Wed, 11 Nov 2026 22:45:26 -0800 (PST)
+        bh=o8wBnxFNCQ9F1WfXKilPNY1PoyMrdLuJUT7tBNXts30=;
+        b=XVkAvWvF3M8K8fZ0IHQPCqcTJ2To3kbNIODrLrb8lU1zcqgsmcrUsYzTYaTapHIcww
+         QnV09C9OYU0kZBtCa1eXhaA/YLnTXi3LIm5kntBf/grNsMSpFbEvoXYXJfQu58MmOAlN
+         8Oaw7l6x5RVyfUgFmgNY6Iu2AKEYKU5NTTqe0aWS0EgwDN+8Gq5GIX6Gati27nA/vI/j
+         wlnzIzmDFC6akt+542zsUS4XYegKyYWDLEpff3F385UGLx2bSJEBFW97K4aQ2dacVs1u
+         SACLuyzu+XJtP/DV6l+w/4CDsJxco91EpZH4j9XbEtx/+X4mlWPJBiFWOvzKMPovtevP
+         7azg==
+X-Gm-Message-State: APuU4Z9nGT7SVCidnkMv66VTwwMcFYCPpE6frHa6ui5SsSKM+TGO1D8X
+	wgKRY5F+JqUe9ma80qBqlbIDdPUXwdIGZqGHKoUqjnk5kbmc26gLrTfFEavw/XqFcP8=
+X-Gm-Gg: AYBFou2gLm78Va3ueZsvlIQFCAj5Z7EuQYQkGpZxl7Dk37bx9dXuyLXTk43qfFDxt4h
+	ONIRpZz7Gwe6kozAuRIEI/0YzWjW/+/k/l3PIkhXBSlneaUS7awM23qolOk27HSo2234v8Jd2Tq
+	AeZ+vGFwe3XYFtK2H4PILKht1vbQmjzOudPORECZbcA015JJ7r+Lvv74DJOwGyYTnrgfe5wSLls
+	d9sqR0aKZ+lZVimWY+q1xX2jgZ1ILwXwVOfYKsy61VNUrmJ+WmNVGVw0Wy8l/6JvJPJ7hsvtNi/
+	9XBdPkcZkUq0oyTXGZ0WK9OQVyMHVQdpwVrkv0s2KuxHXkUJaBtr1/GxX2Ac79XBgjEBMp1v4/c
+	OkSXYMxjtnYABU72870wLH3nbgdQmkn6sezluViWzTlMtoLuF/sPPIf2iMTtfsjWqxTI7i32B2o
+	3/LTozccPqPqZW9tyVTtV4zy+boAUlA1g9/5iS2yV2yiAJIVl1NvRQMIsori/RkDE8Ifa9q86Sz
+	mksk5+eXWAjEfKd5irnJtkhjJNPRSHSI2EubKkcfhiX1/b3zKnA5/uWX3a74p9uaNnr3RRoYesw
+	EHR/yJPxfNnIXWRGDcvTpIxMnxte+dKFCXRD+a2auq7p18O/ZYcoyIrJm2SnPFinY4iNJCBbV0A
+	DnpXkXWZFmZ9VzlqdA/uM4okcm8ZpOdSeAvSaJ1uZ+LYeK1ikBQ9uNR+QFF1jBNvr99KpLJ7kBG
+	qZt8NTLFdq3YlLW5UklbrR7utgmk5jdshjSVCaNWoduLqtfPQNsiBJG4JtSGje02fL/Wfvptjpw
+	qhfjXf6VF5bgNkleF3J2VdwPQHpjNx9cjrbdcGxCPhaCkWhJA1oflBLSL9Mnc4T5NfhWbc1PjVt
+	TZy8
+X-Received: by 2002:a05:693c:414d:20b0:36d:dd5a:4528 with SMTP id 5a478bee46e88-376851ce396mr5755157eec.7.1794465927493;
+        Wed, 11 Nov 2026 22:45:27 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3751dae6377sm21055001eec.3.2026.11.11.22.45.24
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3751dae6377sm21055001eec.3.2026.11.11.22.45.26
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 11 Nov 2026 22:45:25 -0800 (PST)
+        Wed, 11 Nov 2026 22:45:26 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-oe][PATCH 4/5] nmap: Remove unused patches
-Date: Wed, 11 Nov 2026 22:45:14 -0800
-Message-ID: <20261112064515.2411568-4-khem.raj@oss.qualcomm.com>
+Subject: [meta-webserver][PATCH 5/5] webmin: Remove unused patches
+Date: Wed, 11 Nov 2026 22:45:15 -0800
+Message-ID: <20261112064515.2411568-5-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.1
 In-Reply-To: <20261112064515.2411568-1-khem.raj@oss.qualcomm.com>
 References: <20261112064515.2411568-1-khem.raj@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Thu, 12 Nov 2026 06:45:30 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132197
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Thu, 12 Nov 2026 06:45:31 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132198
 Content-Type: text/plain; charset="utf-8"
 
-These were dropped from SRC_URI in 13bafd2753 (nmap: upgrade 7.92 -> 7.99) but the files were left behind:
+These were dropped from SRC_URI in eb4d6ede5d (webmin: upgrade 2.641 -> 2.653) but the files were left behind:
 
-  0003-Fix-off-by-one-overflow-in-the-IP-protocol-table.patch
-  nmap-redefine-the-python-library-dir.patch
+  init-exclude.patch
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- ...ne-overflow-in-the-IP-protocol-table.patch | 165 ------------------
- ...nmap-redefine-the-python-library-dir.patch |  23 ---
- 2 files changed, 188 deletions(-)
- delete mode 100644 meta-oe/recipes-security/nmap/files/0003-Fix-off-by-one-overflow-in-the-IP-protocol-table.patch
- delete mode 100644 meta-oe/recipes-security/nmap/files/nmap-redefine-the-python-library-dir.patch
+ .../webmin/files/init-exclude.patch           | 75 -------------------
+ 1 file changed, 75 deletions(-)
+ delete mode 100644 meta-webserver/recipes-webadmin/webmin/files/init-exclude.patch
 
-diff --git a/meta-oe/recipes-security/nmap/files/0003-Fix-off-by-one-overflow-in-the-IP-protocol-table.patch b/meta-oe/recipes-security/nmap/files/0003-Fix-off-by-one-overflow-in-the-IP-protocol-table.patch
+diff --git a/meta-webserver/recipes-webadmin/webmin/files/init-exclude.patch b/meta-webserver/recipes-webadmin/webmin/files/init-exclude.patch
 deleted file mode 100644
-index bcb04250bb..0000000000
---- a/meta-oe/recipes-security/nmap/files/0003-Fix-off-by-one-overflow-in-the-IP-protocol-table.patch
+index 489318b4bd..0000000000
+--- a/meta-webserver/recipes-webadmin/webmin/files/init-exclude.patch
 +++ /dev/null
-@@ -1,165 +0,0 @@
--From 364d089250d1acf459e9e8580161e7bb06268106 Mon Sep 17 00:00:00 2001
--From: Wang Mingyu <wangmy@fujitsu.com>
--Date: Tue, 15 Oct 2024 02:47:38 +0000
--Subject: [PATCH] Fix off-by-one overflow in the IP protocol table.
--
--Fixes #2896, closes #2897, closes #2900
--
--Upstream-Status: Backport [https://github.com/nmap/nmap/commit/efa0dc36f2ecade6ba8d2ed25dd4d5fbffdea308]
--
--Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
-----
-- CHANGELOG     |  3 +++
-- portlist.cc   |  8 ++++----
-- protocols.cc  |  6 +++---
-- protocols.h   |  2 ++
-- scan_lists.cc | 10 +++++-----
-- 5 files changed, 17 insertions(+), 12 deletions(-)
--
--diff --git a/CHANGELOG b/CHANGELOG
--index f01262c..5b204bd 100644
----- a/CHANGELOG
--+++ b/CHANGELOG
--@@ -1,5 +1,8 @@
-- #Nmap Changelog ($Id: CHANGELOG 38849 2024-04-18 17:16:42Z dmiller $); -*-text-*-
--
--+o [GH#2900, GH#2896, GH#2897] Nmap is now able to scan IP protocol 255.
--+  [nnposter]
--+
-- Nmap 7.95 [2024-04-19]
--
-- o [Windows] Upgraded Npcap (our Windows raw packet capturing and
--diff --git a/portlist.cc b/portlist.cc
--index 8258853..cd08437 100644
----- a/portlist.cc
--+++ b/portlist.cc
--@@ -480,7 +480,7 @@ void PortList::setPortState(u16 portno, u8 protocol, int state, int *oldstate) {
--       state != PORT_CLOSEDFILTERED)
--     fatal("%s: attempt to add port number %d with illegal state %d\n", __func__, portno, state);
--
---  assert(protocol!=IPPROTO_IP || portno<256);
--+  assert(protocol!=IPPROTO_IP || portno<=MAX_IPPROTONUM);
--
--   bool created = false;
--   current = createPort(portno, protocol, &created);
--@@ -566,7 +566,7 @@ Port *PortList::nextPort(const Port *cur, Port *next,
--   if (cur) {
--     proto = INPROTO2PORTLISTPROTO(cur->proto);
--     assert(port_map[proto]!=NULL); // Hmm, it's not possible to handle port that doesn't have anything in map
---    assert(cur->proto!=IPPROTO_IP || cur->portno<256);
--+    assert(cur->proto!=IPPROTO_IP || cur->portno<=MAX_IPPROTONUM);
--     mapped_pno = port_map[proto][cur->portno];
--     mapped_pno++; //  we're interested in next port after current
--   } else { // running for the first time
--@@ -615,7 +615,7 @@ void PortList::mapPort(u16 *portno, u8 *protocol) const {
--   mapped_protocol = INPROTO2PORTLISTPROTO(*protocol);
--
--   if (*protocol == IPPROTO_IP)
---    assert(*portno < 256);
--+    assert(*portno <= MAX_IPPROTONUM);
--   if(port_map[mapped_protocol]==NULL || port_list[mapped_protocol]==NULL) {
--     fatal("%s(%i,%i): you're trying to access uninitialized protocol", __func__, *portno, *protocol);
--   }
--@@ -713,7 +713,7 @@ int PortList::port_list_count[PORTLIST_PROTO_MAX];
--  * should be sorted. */
-- void PortList::initializePortMap(int protocol, u16 *ports, int portcount) {
--   int i;
---  int ports_max = (protocol == IPPROTO_IP) ? 256 : 65536;
--+  int ports_max = (protocol == IPPROTO_IP) ? MAX_IPPROTONUM + 1 : 65536;
--   int proto = INPROTO2PORTLISTPROTO(protocol);
--
--   if (port_map[proto] != NULL || port_map_rev[proto] != NULL)
--diff --git a/protocols.cc b/protocols.cc
--index 76e42c7..85e55e4 100644
----- a/protocols.cc
--+++ b/protocols.cc
--@@ -79,7 +79,7 @@ struct strcmp_comparator {
--
-- // IP Protocol number is 8 bits wide
-- // protocol_table[IPPROTO_TCP] == {"tcp", 6}
---static struct nprotoent *protocol_table[UCHAR_MAX];
--+static struct nprotoent *protocol_table[MAX_IPPROTONUM + 1];
-- // proto_map["tcp"] = {"tcp", 6}
-- typedef std::map<const char *, struct nprotoent, strcmp_comparator> ProtoMap;
-- static ProtoMap proto_map;
--@@ -119,7 +119,7 @@ static int nmap_protocols_init() {
--     if (*p == '#' || *p == '\0')
--       continue;
--     res = sscanf(line, "%127s %hu", protocolname, &protno);
---    if (res !=2 || protno > UCHAR_MAX) {
--+    if (res !=2 || protno > MAX_IPPROTONUM) {
--       error("Parse error in protocols file %s line %d", filename, lineno);
--       continue;
--     }
--@@ -191,7 +191,7 @@ const struct nprotoent *nmap_getprotbynum(int num) {
--   if (nmap_protocols_init() == -1)
--     return NULL;
--
---  assert(num >= 0 && num < UCHAR_MAX);
--+  assert(num >= 0 && num <= MAX_IPPROTONUM);
--   return protocol_table[num];
-- }
--
--diff --git a/protocols.h b/protocols.h
--index 8934284..2de0aa4 100644
----- a/protocols.h
--+++ b/protocols.h
--@@ -79,6 +79,8 @@ int addprotocolsfromservmask(char *mask, u8 *porttbl);
-- const struct nprotoent *nmap_getprotbynum(int num);
-- const struct nprotoent *nmap_getprotbyname(const char *name);
--
--+#define MAX_IPPROTONUM 255
--+
-- #define MAX_IPPROTOSTRLEN 4
-- #define IPPROTO2STR(p)		\
--   ((p)==IPPROTO_TCP ? "tcp" :	\
--diff --git a/scan_lists.cc b/scan_lists.cc
--index f02e279..ebe1357 100644
----- a/scan_lists.cc
--+++ b/scan_lists.cc
--@@ -165,7 +165,7 @@ void getpts(const char *origexpr, struct scan_lists *ports) {
--       ports->udp_count++;
--     if (porttbl[i] & SCAN_SCTP_PORT)
--       ports->sctp_count++;
---    if (porttbl[i] & SCAN_PROTOCOLS && i < 256)
--+    if (porttbl[i] & SCAN_PROTOCOLS && i <= MAX_IPPROTONUM)
--       ports->prot_count++;
--   }
--
--@@ -192,7 +192,7 @@ void getpts(const char *origexpr, struct scan_lists *ports) {
--       ports->udp_ports[udpi++] = i;
--     if (porttbl[i] & SCAN_SCTP_PORT)
--       ports->sctp_ports[sctpi++] = i;
---    if (porttbl[i] & SCAN_PROTOCOLS && i < 256)
--+    if (porttbl[i] & SCAN_PROTOCOLS && i <= MAX_IPPROTONUM)
--       ports->prots[proti++] = i;
--   }
--
--@@ -388,7 +388,7 @@ static void getpts_aux(const char *origexpr, int nested, u8 *porttbl, int range_
--     } else if (isdigit((int) (unsigned char) *current_range)) {
--       rangestart = strtol(current_range, &endptr, 10);
--       if (range_type & SCAN_PROTOCOLS) {
---        if (rangestart < 0 || rangestart > 255)
--+        if (rangestart < 0 || rangestart > MAX_IPPROTONUM)
--           fatal("Protocols specified must be between 0 and 255 inclusive");
--       } else {
--         if (rangestart < 0 || rangestart > 65535)
--@@ -429,13 +429,13 @@ static void getpts_aux(const char *origexpr, int nested, u8 *porttbl, int range_
--       if (!*current_range || *current_range == ',' || *current_range == ']') {
--         /* Ended with a -, meaning up until the last possible port */
--         if (range_type & SCAN_PROTOCOLS)
---          rangeend = 255;
--+          rangeend = MAX_IPPROTONUM;
--         else
--           rangeend = 65535;
--       } else if (isdigit((int) (unsigned char) *current_range)) {
--         rangeend = strtol(current_range, &endptr, 10);
--         if (range_type & SCAN_PROTOCOLS) {
---          if (rangeend < 0 || rangeend > 255)
--+          if (rangeend < 0 || rangeend > MAX_IPPROTONUM)
--             fatal("Protocols specified must be between 0 and 255 inclusive");
--         } else {
--           if (rangeend < 0 || rangeend > 65535)
----
--2.34.1
--
-diff --git a/meta-oe/recipes-security/nmap/files/nmap-redefine-the-python-library-dir.patch b/meta-oe/recipes-security/nmap/files/nmap-redefine-the-python-library-dir.patch
-deleted file mode 100644
-index 5669ccdf6a..0000000000
---- a/meta-oe/recipes-security/nmap/files/nmap-redefine-the-python-library-dir.patch
-+++ /dev/null
-@@ -1,23 +0,0 @@
--[PATCH] redefine the python library install dir
+@@ -1,75 +0,0 @@
+-Hack in support for an "exclude" config option for the init module, so
+-we can hide certain system services that shouldn't really be configurable
+-via the web interface
 -
 -Upstream-Status: Pending
 -
--If install-lib is not defined, it is always /usr/lib/, but it
--maybe /usr/lib64 for multilib
--
--Signed-off-by: Roy Li <rongqing.li@windriver.com>
+-Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
+-Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
 ----
-- Makefile.in | 4 ++--
-- 1 file changed, 2 insertions(+), 2 deletions(-)
+- init/index.cgi   | 27 ++++++++++++++-------------
+- init/init-lib.pl |  5 +++--
+- 2 files changed, 17 insertions(+), 15 deletions(-)
 -
----- a/Makefile.in
--+++ b/Makefile.in
--@@ -383,7 +383,7 @@ build-nping: $(NPINGDIR)/Makefile build-
-- 	@cd $(NPINGDIR) && $(MAKE)
+-Index: webmin-1.850/init/index.cgi
+-===================================================================
+---- webmin-1.850.orig/init/index.cgi
+-+++ webmin-1.850/init/index.cgi
+-@@ -45,19 +45,20 @@ elsif ($init_mode eq "init" && $access{'
+- 					     : "$config{'init_dir'}/$ac[0]");
+- 		}
+- 	@runlevels = &list_runlevels();
+--	foreach $r (@runlevels) {
+--		foreach $w ("S", "K") {
+--			foreach $a (&runlevel_actions($r, $w)) {
+--				@ac = split(/\s+/, $a);
+--				if (!$nodemap{$ac[2]}) {
+--					push(@acts, $ac[1]);
+--					push(@actsl,
+--					     "1+$r+$ac[0]+$ac[1]+$ac[2]+$w");
+--					push(@actsf, "$config{'init_base'}/rc$r.d/$w$ac[0]$ac[1]");
+--					}
+--				}
+--			}
+--		}
+-+	# Assume there won't be any of these broken actions
+-+	#foreach $r (@runlevels) {
+-+	#	foreach $w ("S", "K") {
+-+	#		foreach $a (&runlevel_actions($r, $w)) {
+-+	#			@ac = split(/\s+/, $a);
+-+	#			if (!$nodemap{$ac[2]}) {
+-+	#				push(@acts, $ac[1]);
+-+	#				push(@actsl,
+-+	#				     "1+$r+$ac[0]+$ac[1]+$ac[2]+$w");
+-+	#				push(@actsf, "$config{'init_base'}/rc$r.d/$w$ac[0]$ac[1]");
+-+	#				}
+-+	#			}
+-+	#		}
+-+	#	}
 -
-- install-ndiff:
---	cd $(NDIFFDIR) && $(PYTHON) setup.py install --prefix "$(prefix)" $(if $(DESTDIR),--root "$(DESTDIR)")
--+	cd $(NDIFFDIR) && $(PYTHON) setup.py install --prefix "$(prefix)" --install-lib="${PYTHON_SITEPACKAGES_DIR}" $(if $(DESTDIR),--root "$(DESTDIR)")
--
-- NSE_FILES = scripts/script.db scripts/*.nse
-- NSE_LIB_LUA_FILES = nselib/*.lua nselib/*.luadoc
+- 	# For each action, look at /etc/rc*.d/* files to see if it is
+- 	# started at boot
+-Index: webmin-1.850/init/init-lib.pl
+-===================================================================
+---- webmin-1.850.orig/init/init-lib.pl
+-+++ webmin-1.850/init/init-lib.pl
+-@@ -124,8 +124,9 @@ List boot time action names from init.d,
+- =cut
+- sub list_actions
+- {
+--local($dir, $f, @stbuf, @rv);
+-+local($dir, $f, @stbuf, @rv, @exclude);
+- $dir = $config{init_dir};
+-+@exclude = split(/,/, $config{exclude});
+- opendir(DIR, $dir);
+- foreach $f (sort { lc($a) cmp lc($b) } readdir(DIR)) {
+- 	if ($f eq "." || $f eq ".." || $f =~ /\.bak$/ || $f eq "functions" ||
+-@@ -133,7 +134,7 @@ foreach $f (sort { lc($a) cmp lc($b) } r
+- 	    -d "$dir/$f" || $f =~ /\.swp$/ || $f eq "skeleton" ||
+- 	    $f =~ /\.lock$/ || $f =~ /\.dpkg-(old|dist)$/ ||
+- 	    $f =~ /^\.depend\./ || $f eq '.legacy-bootordering' ||
+--	    $f =~ /^mandrake/) { next; }
+-+	    $f =~ /^mandrake/ || grep {$_ eq $f} @exclude ) { next; }
+- 	if (@stbuf = stat("$dir/$f")) {
+- 		push(@rv, "$f $stbuf[1]");
+- 		}
