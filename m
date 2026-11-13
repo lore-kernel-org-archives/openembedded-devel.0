@@ -1,127 +1,91 @@
-Received: from mail-yw1-f178.google.com (mail-yw1-f178.google.com [209.85.128.178])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.1807.1794588324758180553
+Received: from mail-dy1-f179.google.com (mail-dy1-f179.google.com [74.125.82.179])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.2173.1794589405759363958
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 13 Nov 2026 08:45:24 -0800
+ Fri, 13 Nov 2026 09:03:25 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=YhDBeWTs;
- spf=pass (domain: gmail.com, ip: 209.85.128.178, mailfrom: alex.kiernan@gmail.com)
-Received: by mail-yw1-f178.google.com with SMTP id 00721157ae682-8b0d63f60bcso14222567b3.3
-        for <openembedded-devel@lists.openembedded.org>; Fri, 13 Nov 2026 08:45:24 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1794588324; cv=none;
-        d=google.com; s=arc-20260327;
-        b=geH7W4G1wgZkzxoxYhhQkk7J1wyZIWb48kMvSfgsxsKQKgTB+4gMErAElSuolNLkJx
-         9oge3xTjAL+RXeTiHv4sBIOZ/sOZycvrVH4q9xgFBbZ0goyMCFbtcVGt7C4XQU/etiOl
-         vXtZzQFnnGZexiZqDrsu5dn38X4mJkf8ID7EP/dbw95WC0Kp/V3sTFSYRY0HLKiI9CG+
-         UGsnPYFK0JVlFcAJBmBUNDvNO+XZqsCMvHSt8JCWigZfcaA7HNshDiT0TgDCVkzhWLyc
-         06igTrOV/OC0A4OdKmY9SmWMgqgCdObpUfs57uX/NziVG0gIgbYvTGakqkgxMcL6iT+s
-         15mw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=1XMLcK+NxMYmGgDO+QfrBjOTY1bPjAzfAfiGFfJXjHo=;
-        fh=kqtH9RvdTS8z4R7bH+N1q4tJTvX5kZFkdgAseXKYH84=;
-        b=dLCWxCV8g646pSrTPXmR6b7sif3dQqvz3KMSvCV6/dR3/KXmr/a8ekVq7sx93vK/qL
-         RuoF/q6n9S4kEDLskqS6WEryMvt8IShPOtEOCmBq4wlEZcNVqt1zi6YqH5JYBeVOnWfS
-         SaeeZkAtg4T7s7IMlsjrVbEYChqevYHXQhhATnNHHci7+XyMN2T/Jc2FdM6i4n43vcJS
-         9I558Kp16f5ndq7OXvMC2WBrPIUn9G3FinnOQvnhpb4UqCmT5Q/zH8qtjFW1PVEM3t9e
-         aaZ+k4RKDtPOLF2xtJE3bGsYli7Hs2QCb2eDbIOmRjaGZP7h9efXnO2JB8/DDIx07PXe
-         VKdw==;
-        darn=lists.openembedded.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=z+Ua61uu;
+ spf=pass (domain: gmail.com, ip: 74.125.82.179, mailfrom: raj.khem@gmail.com)
+Received: by mail-dy1-f179.google.com with SMTP id 5a478bee46e88-37198ed3727so2584784eec.0
+        for <openembedded-devel@lists.openembedded.org>; Fri, 13 Nov 2026 09:03:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794588324; x=1795193124; darn=lists.openembedded.org;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=1XMLcK+NxMYmGgDO+QfrBjOTY1bPjAzfAfiGFfJXjHo=;
-        b=YhDBeWTshhmFfRrrkAlXnMIE4+X3FPodtzUZC0exaiN5rAEShcpnsUPAKmGJGVwmUn
-         trntmd/QGTGY8wPSY6hP8h+ECnrBlw+1T9jywnb5sSFQd3Tqcoo9LKqAntX8rmtDDH1d
-         k/eXheRAOIm7rvrFxaLuF5A3PU+t8HORNSdRuHABtKaqTEA7ke3UEZTLe6kcRm1f1UxL
-         XIC+fXGDFLhh5URsRwAvy7eG1jr6fPkIs6TYDOqQej1ne69lY3UiXBF5lniqOUwcL1F1
-         YMdvQda7iIFIfBG/jCse47O545JRYtYcWv3jyYEJ1T7vQqAvIjBT4Ka0di46gKzgzBSb
-         OLwg==
+        d=gmail.com; s=20260707; t=1794589405; x=1795194205; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=Y4TxymbYhBrw3BbTEHCZ4xdvAvEDF+a1y/hw+qyYfz4=;
+        b=z+Ua61uufVLB2w/mygdpxfwqfkwdIALVPGcBMDHZJSr6c58JMuOPi2YYdAaBDEcQ/J
+         EiTmJ9InovZTm7gQC5zKz98CtJuJ0/Rfnk1xw/XN06cvtNfI6uTj5G8HGP7n26wN5CFE
+         LUn2zkYytdwhqNY5YCssEDzFiM/SQwrEBCrFeKNq0w8cfi9MF+g/fF7YmEJavEhHDN6J
+         gbuAhSyD2uIX09+/+T+vuDe6UIDx8kc5q3pFYXtax9UBBP6vPQy0tz7JhJqLQkYwzZH3
+         jpW/B1mYsMuaDip5sZvQjE6rxIL+YAml/Y6BD5P1lVCac4i3AQ7KZuJi8ImlzrHgZbti
+         RXnQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794588324; x=1795193124;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=1XMLcK+NxMYmGgDO+QfrBjOTY1bPjAzfAfiGFfJXjHo=;
-        b=t9a1E2WuLJXptmMqORK4kf1ifBoMLkZrwGWGzvWeH9D2FG3BtfJ8flL6tRSj9fsd/M
-         Ba7WZKTaSlGiSv30G9+3WWMnrg1dxkcPFJpZTANd+PjjWzh7Rl2YuaVm1GsmuOCjotY8
-         swiBjADI75UDjzFLdNqRGuq1k2bmiVxtLE8TIvVvJlFYIPsy4/4leafZvtH2tE6mardz
-         UXTvpb3d4MCWRE7/R7l+vew6K+vtFY1jU6uCgyoTbSFIjYI16RqJlGfXqsPrTksSm/PN
-         oCyE4DNVYnITg3WYpE9kc+l4DjC0315dKj5oC1YyRi6NISsRRtnxbQl4grFKItGbwwNi
-         z4Fw==
-X-Gm-Message-State: APuU4Z8JFPt0q8jBKGu65Hd5RSZGW9tqLEwGg/TkvZ+2XLY2PJu3WO9X
-	1tSe22Yxt/HzmL4/hm734bMaezZfzo/YS+AUepzj2c7Vq49bQEAujQ4PjRS8Dfyh1u0o7G1LfNB
-	P95omCIEU/94sjFlkmTnKEfVZ4xssiTI=
-X-Gm-Gg: AYBFou1QYjYGTzznz1J0Dqxr9icmkua6/H93xykYmqOglNqRJtsHXGBWhpe9ACw5kBZ
-	i940ckTYIoXFHd4X+rjnm5I96+xIMe5KXdbeePVw0QRyOjsG7N/G5dFJrdnFoAD6q0JAMTaHXdG
-	Qr3LpyXCpK/uyDLaauDlcXRK/2x+caCzC2gKlBktcqWdyOuZcu4yxDnD54+ksfH6BZEN2CPpWBg
-	KN+/Ndi9IEajagjc8qt3QNwDgiPkDpV9fhN3ioZOLhagzBLSBHeKut4DE8uDgg2MP1GnMU0XUF4
-	odZCU+g/RByaeHUUZAu4yg57Go6uhgywv63itrOPB9TikOMcnmrKInQESnRmX5SgB7V7QSN/qHv
-	vvueHh3/vmoyYhUrRoB8oy3Dgs+28RRBdfCWjTEylBXHoVmf3C4xtoEkl0LrOrTx4
-X-Received: by 2002:a05:690e:4383:b0:67c:3a6c:d0c3 with SMTP id
- 956f58d0204a3-67d896f9d45mr1254859d50.68.1794588323468; Fri, 13 Nov 2026
- 08:45:23 -0800 (PST)
+        d=1e100.net; s=20260707; t=1794589405; x=1795194205;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=Y4TxymbYhBrw3BbTEHCZ4xdvAvEDF+a1y/hw+qyYfz4=;
+        b=GHXTxMZm/TXDiNqirPvD+sqVk0/uPavXzu05kE9PI8eJNbC9j54SPPH4gpc39a28RX
+         0k7rjntEOrybE/m2IQe+2t5JaS6LjlorrcygEDwMJJp7RMoGk+fJycqJeU9JOx8+Hkqs
+         oGPoigABS/ISa8cscjOFyUoHyboLL5au1YdjGg7qObeakzokzOTdJpAcMd+yzdm88Pc5
+         NExlt0J2zq0Opln23GIg3gC0ZmfBFbgFYOrpBBocGdGds6w0R+E3hUqjWpTcmpWmT/rp
+         UHNTrk2HAnfZM4+0o2zm3sngRuyfZ/IbmIfXeWIuHOFJ4wSX10vuys3NCDYvPd7SrDB3
+         fmKg==
+X-Gm-Message-State: APuU4Z8x5LjLQlHKabBKu5svhKnlhiaM3hf1RC00+XPD8tIUfcOMtvfU
+	pz7qMW8eGX/BPPiDZrWfdHvnSYqbiOX3eoM7MbQOY7QPHxzjJk6+wvZQkkCAvroEMNLPb2KX
+X-Gm-Gg: AYBFou2zU2OXfqkIak4jF5xljeynsp8/UXrWVPZaP5D+sqrxwamcndq/g/8JkaC8Cyn
+	2y6UI5fEeJYDqH2UsTmUSnICRC6mIIqlUq18udHyejqnlhOvLeJlXl7rT7Wmp1nJtIBRfZj51J/
+	9USA1WNpTQLHFv3qWa/XCgAFI4Bv1vgU/DikZ5sSGM6xA5UCCMn+PXyYiAY1uzMFVIHu7Ly9Yzy
+	Av0GjWbmUvV/ciW5W6Arw9XuLlvBa6VzsLU2IeyCLVXAfHPTyqPhpXu0q+mF9ymhj0GWM2tZ5KT
+	lUYmXTXZF+XPNISgAVNlAvAASEGJ5VhoNKPZ42EcTspbpDWOpcW6plDHsBymQvse5Qw50jNxLdJ
+	dm2kHNriHmOBlFpZZPNjOnMw/k/hsCRzvArMUVFLUYhMj/6f88Z0e7AvEz2rIrZnyEmwV/0yR4g
+	AC2qcct1JhWVfwHF/ZBs/2sX85e3AsYDU/5CgzKw299V1buuTjDT98Rd6RzyHH5ffuLH6J18rLb
+	XI5tmNndK2hBQgSjvlNcWPhGIKuVqSgYo63wn7g3oS8A8Cme6Qc5vlSksJ4wvvtYpB0v/Tgbi/j
+	OEAr5PFPV7Gqe4w4W4Ylvr0boCChMm/DhhihPG/BonlxWX5Expa2tecnhz36mHNtUX/PVmHiEGm
+	LyvIUZ7rAE2kVkBDD6MsWr9kV/T7jRm9MEA/hpcNaTIhFgajkcEImx9+MLus995qLSUMOc62oid
+	GhGjIzcv0K93a5J6F0hnF0bRhLHfaTiO3qP9Niw/DAT3FRWXQE807+5Jvy/sJ5jl+saF6GHzKeT
+	r8yUYD2VM/wLNjqvJ0QeN5tWmX7Wfy/JDAjPxjrj06zvvIw2IzF2lMcbMr/uXfITSdcb5GBaWB7
+	Zio9
+X-Received: by 2002:a05:7300:148c:b0:361:a195:c46e with SMTP id 5a478bee46e88-377de5f761amr8278563eec.1.1794589404829;
+        Fri, 13 Nov 2026 09:03:24 -0800 (PST)
+Return-Path: <raj.khem@gmail.com>
+Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3795533170csm9068615eec.7.2026.11.13.09.03.23
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 13 Nov 2026 09:03:24 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
+X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <khem.raj@oss.qualcomm.com>
+Subject: [meta-networking][PATCH 1/2] python3-scapy: Point SRCREV at the v2.7.0 commit
+Date: Fri, 13 Nov 2026 09:03:21 -0800
+Message-ID: <20261113170322.1425186-1-khem.raj@oss.qualcomm.com>
+X-Mailer: git-send-email 2.56.1
 MIME-Version: 1.0
-References: <20261110-android-tools-adbd-v1-0-cc2176f381c3@gmail.com>
- <CAMKF1sqnzQEBmAnpMZoEkuHzQwVQj0zF0wYTi2nAB1EWYTckYQ@mail.gmail.com>
- <CAO5Uq5QU9QWyWt0=YN7g7BXZLhaD=eF4wpEOMr7VpvpvOoDxwg@mail.gmail.com> <CAMKF1srWhrv9=n8Teawbf2_BK+dCdw+DTDw7hWuJj4VPQD2n4Q@mail.gmail.com>
-In-Reply-To: <CAMKF1srWhrv9=n8Teawbf2_BK+dCdw+DTDw7hWuJj4VPQD2n4Q@mail.gmail.com>
-From: Alex Kiernan <alex.kiernan@gmail.com>
-Date: Fri, 13 Nov 2026 16:45:10 +0000
-X-Gm-Features: AclHuK9GIWEh5qfnLyX_hEVhxeRjaFwib9ltzdkMTOMLEpPuZNko4NhnGs8QyFY
-Message-ID: <CAO5Uq5TzwAke7ugwQtMJs5_z2fWTLejemBR2-_0VF+FK++Zwvw@mail.gmail.com>
-Subject: Re: [oe] [PATCH meta-oe 00/10] android-tools: adbd fixes and opt-in
- access control for Linux systems
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Fri, 13 Nov 2026 16:45:35 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132249
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Fri, 13 Nov 2026 17:03:35 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132250
+Content-Type: text/plain; charset="utf-8"
 
-On Fri, Nov 13, 2026 at 4:29=E2=80=AFPM Khem Raj <raj.khem@gmail.com> wrote=
-:
->
->
->
-> On Fri, Nov 13, 2026 at 2:08=E2=80=AFAM Alex Kiernan <alex.kiernan@gmail.=
-com> wrote:
->>
->> That's fair...
->>
->> I guess the right thing at this point is to drop the series as I've
->> not engaged (and really don't have the time at this point) with the
->> Debian maintainers to try and land it there and I suspect some
->> wouldn't fit with their goals (thinking things like using build.prop
->> to gate authentication) and almost certainly none of it would be able
->> to land upstream in Google as it's irrelevant to Android. Also they've
->> got significant divergence in later releases (things like libadbusb
->> look like might solve a load of problems).
->
->
-> Upgrading might be a better option here, adding patches diverges us more
->
+SRCREV was set to the v2.7.0 annotated tag object instead of the commit
+it points to, so it did not match what tag=v${PV} resolves to.
 
-Debian is still shipping 34.x, their 35.x is an experimental branch,
-Android is on 37.x (but appears to have stopped tagging it separately
-from the Android base release).
+AI-Generated: Uses Claude Code
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+---
+ meta-networking/recipes-devtools/python/python3-scapy_2.7.0.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-That said, bumping it up looks like it may not be that bad (though
-libadbusb looks like it's a dead end anway as it's host side and not
-obviously published anywhere).
-
-This is where I got to (well Claude with direction from everything I
-already had...):
-
-https://github.com/A-Squared-Projects/meta-android-platform-tools
-
-Still trying to chase down the failures on cable pulls, which I
-currently have covered with a watcher script (yuck!)
-
---=20
-Alex Kiernan
+diff --git a/meta-networking/recipes-devtools/python/python3-scapy_2.7.0.bb b/meta-networking/recipes-devtools/python/python3-scapy_2.7.0.bb
+index 4995f8e2cd..4e4eedde81 100644
+--- a/meta-networking/recipes-devtools/python/python3-scapy_2.7.0.bb
++++ b/meta-networking/recipes-devtools/python/python3-scapy_2.7.0.bb
+@@ -16,7 +16,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+ # If you want ptest support, use the git repo
+ # UTscapy does not exist in the pypi pkg
+ #
+-SRCREV = "1de09fe85fe5c9d60ea5c6de130374e170b5bc28"
++SRCREV = "40fc5ecf9e69e9bd76664d63ae133d4973fcf81b"
+ SRC_URI = "git://github.com/secdev/scapy.git;branch=master;protocol=https;tag=v${PV} \
+            file://0001-python3-scapy-skip-ICMP-regression-tests-in-ptest.patch \
+            file://0002-main-initialize-banner-for-the-default-Python-shell.patch \
