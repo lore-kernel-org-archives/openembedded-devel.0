@@ -1,91 +1,94 @@
-Received: from mail-dy1-f179.google.com (mail-dy1-f179.google.com [74.125.82.179])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.2173.1794589405759363958
+Received: from mail-dy1-f172.google.com (mail-dy1-f172.google.com [74.125.82.172])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.2174.1794589407765266431
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 13 Nov 2026 09:03:25 -0800
+ Fri, 13 Nov 2026 09:03:27 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=z+Ua61uu;
- spf=pass (domain: gmail.com, ip: 74.125.82.179, mailfrom: raj.khem@gmail.com)
-Received: by mail-dy1-f179.google.com with SMTP id 5a478bee46e88-37198ed3727so2584784eec.0
-        for <openembedded-devel@lists.openembedded.org>; Fri, 13 Nov 2026 09:03:25 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=tYs9UqsX;
+ spf=pass (domain: gmail.com, ip: 74.125.82.172, mailfrom: raj.khem@gmail.com)
+Received: by mail-dy1-f172.google.com with SMTP id 5a478bee46e88-36e795af1d4so840844eec.1
+        for <openembedded-devel@lists.openembedded.org>; Fri, 13 Nov 2026 09:03:27 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794589405; x=1795194205; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=Y4TxymbYhBrw3BbTEHCZ4xdvAvEDF+a1y/hw+qyYfz4=;
-        b=z+Ua61uufVLB2w/mygdpxfwqfkwdIALVPGcBMDHZJSr6c58JMuOPi2YYdAaBDEcQ/J
-         EiTmJ9InovZTm7gQC5zKz98CtJuJ0/Rfnk1xw/XN06cvtNfI6uTj5G8HGP7n26wN5CFE
-         LUn2zkYytdwhqNY5YCssEDzFiM/SQwrEBCrFeKNq0w8cfi9MF+g/fF7YmEJavEhHDN6J
-         gbuAhSyD2uIX09+/+T+vuDe6UIDx8kc5q3pFYXtax9UBBP6vPQy0tz7JhJqLQkYwzZH3
-         jpW/B1mYsMuaDip5sZvQjE6rxIL+YAml/Y6BD5P1lVCac4i3AQ7KZuJi8ImlzrHgZbti
-         RXnQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794589405; x=1795194205;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=gmail.com; s=20260707; t=1794589407; x=1795194207; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=Y4TxymbYhBrw3BbTEHCZ4xdvAvEDF+a1y/hw+qyYfz4=;
-        b=GHXTxMZm/TXDiNqirPvD+sqVk0/uPavXzu05kE9PI8eJNbC9j54SPPH4gpc39a28RX
-         0k7rjntEOrybE/m2IQe+2t5JaS6LjlorrcygEDwMJJp7RMoGk+fJycqJeU9JOx8+Hkqs
-         oGPoigABS/ISa8cscjOFyUoHyboLL5au1YdjGg7qObeakzokzOTdJpAcMd+yzdm88Pc5
-         NExlt0J2zq0Opln23GIg3gC0ZmfBFbgFYOrpBBocGdGds6w0R+E3hUqjWpTcmpWmT/rp
-         UHNTrk2HAnfZM4+0o2zm3sngRuyfZ/IbmIfXeWIuHOFJ4wSX10vuys3NCDYvPd7SrDB3
-         fmKg==
-X-Gm-Message-State: APuU4Z8x5LjLQlHKabBKu5svhKnlhiaM3hf1RC00+XPD8tIUfcOMtvfU
-	pz7qMW8eGX/BPPiDZrWfdHvnSYqbiOX3eoM7MbQOY7QPHxzjJk6+wvZQkkCAvroEMNLPb2KX
-X-Gm-Gg: AYBFou2zU2OXfqkIak4jF5xljeynsp8/UXrWVPZaP5D+sqrxwamcndq/g/8JkaC8Cyn
-	2y6UI5fEeJYDqH2UsTmUSnICRC6mIIqlUq18udHyejqnlhOvLeJlXl7rT7Wmp1nJtIBRfZj51J/
-	9USA1WNpTQLHFv3qWa/XCgAFI4Bv1vgU/DikZ5sSGM6xA5UCCMn+PXyYiAY1uzMFVIHu7Ly9Yzy
-	Av0GjWbmUvV/ciW5W6Arw9XuLlvBa6VzsLU2IeyCLVXAfHPTyqPhpXu0q+mF9ymhj0GWM2tZ5KT
-	lUYmXTXZF+XPNISgAVNlAvAASEGJ5VhoNKPZ42EcTspbpDWOpcW6plDHsBymQvse5Qw50jNxLdJ
-	dm2kHNriHmOBlFpZZPNjOnMw/k/hsCRzvArMUVFLUYhMj/6f88Z0e7AvEz2rIrZnyEmwV/0yR4g
-	AC2qcct1JhWVfwHF/ZBs/2sX85e3AsYDU/5CgzKw299V1buuTjDT98Rd6RzyHH5ffuLH6J18rLb
-	XI5tmNndK2hBQgSjvlNcWPhGIKuVqSgYo63wn7g3oS8A8Cme6Qc5vlSksJ4wvvtYpB0v/Tgbi/j
-	OEAr5PFPV7Gqe4w4W4Ylvr0boCChMm/DhhihPG/BonlxWX5Expa2tecnhz36mHNtUX/PVmHiEGm
-	LyvIUZ7rAE2kVkBDD6MsWr9kV/T7jRm9MEA/hpcNaTIhFgajkcEImx9+MLus995qLSUMOc62oid
-	GhGjIzcv0K93a5J6F0hnF0bRhLHfaTiO3qP9Niw/DAT3FRWXQE807+5Jvy/sJ5jl+saF6GHzKeT
-	r8yUYD2VM/wLNjqvJ0QeN5tWmX7Wfy/JDAjPxjrj06zvvIw2IzF2lMcbMr/uXfITSdcb5GBaWB7
-	Zio9
-X-Received: by 2002:a05:7300:148c:b0:361:a195:c46e with SMTP id 5a478bee46e88-377de5f761amr8278563eec.1.1794589404829;
-        Fri, 13 Nov 2026 09:03:24 -0800 (PST)
+        bh=dTaRzm9yrs0z+IPlVqjUxo8dTg/bPGdYBbSIkTguUpo=;
+        b=tYs9UqsXJ3y20CoR3L9FKVOioVEmTvUwihOVw1Qovtj2ZZvDlPPkypUPV9f0jRFS+O
+         AqpUFGH3DxEIb5vAFdqBAD0CNCSUhKLCRNYUpPHUj7RBROrp/nyMFHktpQw2RA3x2uKi
+         RR3uLgntdaClT1r3jm4Bdio8FF4/bCPDQlmsKSk0ujePEUfAQk99p8ZqQwsueNZ3ULt+
+         fMPAxov8mBOGSJcdDkzuXG2qelPKlwzTHQ1A2GcnWyVZcn3MvQiKckjuoNhQcv6rg9Tf
+         CWLvwnry+pBO2hpMvC/WiCHROJeSOm/0AJSr6wFEkTucd/Vtgm3OC6H/ECy4i7YVHPhc
+         8Umw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1794589407; x=1795194207;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=dTaRzm9yrs0z+IPlVqjUxo8dTg/bPGdYBbSIkTguUpo=;
+        b=G3/F/VK9wKQ95TH5XS0pqH9jDlJCJAIHkUJGvE9MnROWyKU0fLu9BdNqRmkMdqrznX
+         Z8emnogbqIBqtgQSpT1sIG6KPsvVIXUCgkAKG8/iUGqTAMUYaxmsu5bXboizGDvDk6TL
+         C/vdQQgDZbAPPMvkeWx12Fsz0HEDOlIRCCXEA9wXKkjy9B4BG8q5bI5J38A+kwFlu3zi
+         QxA6O1Y32N8+xNjtrF2IWJj2ODEsKvxFGThyoyfGiH20wN4GV9+oH2lMhRxpi+k/Z9E+
+         2PE2h2pHZEqcTSPRrkjzPzg8e6KcmmlSBEo0+7YAGdju03bx++YEc1rxKVZ6V6yc0o+r
+         5toQ==
+X-Gm-Message-State: APuU4Z9NFdvSPeBpF0F5fSbEEXsrHTlBeGJn21RvnnwctRxld1QyJLiH
+	EJHis+F0l8IM5B79VJ/lZtDNhSxP/OlKdZMbaMLwg97JZgwPbOqdm0IUuISd6xOm+fTQvojA
+X-Gm-Gg: AYBFou3AlAiag7CA3dFSW7dBapUXiDjbzsAHR+MMDx2QSdn24kAEt43LlkgdOuOb+dN
+	YO2aIBQbyaQ7dEJsd6YDNr7EE6u0+K2R33yl+paS/SikI1ZmMkNocZocTgTsQKD9ddHRmXgPsQx
+	nqQkrjl7ECquzp8Ftcz6UT5yf5DYMZF1re0OmBngqGeUICKgxp8NPhwq0n3/hXQIHC1RX6kxYWL
+	BjdorL9bwyrw5N7VPCZySB31aVROv9LMRWatZJCQInsn5/bmV6SbfyBrvR4REWNWOAFjZtPJ7h/
+	mXfLaiJXQQuZCMJluS7/TxangdsNVjYskwRblDmhmtnVUIp1JOn1NbrfoE3A37rFNNYeBQyU1oZ
+	m41EI5cjJJ6AIo8LbAdZ6PE5KWEH0wF+rEVDc1A7TQjR4hBKIivqBgPmS9lM0rEqjTkJHRM2CO1
+	hTYhH+v5ggVZWMV6MRs8Q42oQPE5QSoewpmIpQkWzA9L5yXVEbwQ9pNw0U+cz9IOYDKsH2Lj/ec
+	27xr2EhVaAruxGDfXLDpW+XtMnvuiwvEteV6/X6lxldUlpyMybcYpg5x9iEA6o+GAVBwkTGFo24
+	ml8nBpv/8LHZzrqQWYngNIIRjraZ8bH/38PDnRIPCboTnQMype1wW6RW16QG07EdmS+ifXXjoq1
+	LFq6O4o3bO7nKrmxzXXI7bbaZBB/3TtoFwBygxVr/kOvxZDwqhVhNWgEaNOD7uj/F3gmZUxSCE7
+	i0I4dx8n9/T3UCtNTuTvbsYuiB6B+XROJOOXTftgL3Y12NlkmOu5oB5JE1QGZ0ygjc6MVJpV2h0
+	1HtujA7k2M38tTVKzjXirtzD4Df8Difa5YTWXUu/RYb3jFw5eS2OIg/FPswJwK0sdIn4ca8Qcul
+	CFDDp5Q4l5F2bwNQuFhjrjmkBQ==
+X-Received: by 2002:a05:693c:8244:b0:375:11dc:7222 with SMTP id 5a478bee46e88-377e16e4fd6mr5997745eec.21.1794589406912;
+        Fri, 13 Nov 2026 09:03:26 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3795533170csm9068615eec.7.2026.11.13.09.03.23
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3795533170csm9068615eec.7.2026.11.13.09.03.25
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 13 Nov 2026 09:03:24 -0800 (PST)
+        Fri, 13 Nov 2026 09:03:26 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-networking][PATCH 1/2] python3-scapy: Point SRCREV at the v2.7.0 commit
-Date: Fri, 13 Nov 2026 09:03:21 -0800
-Message-ID: <20261113170322.1425186-1-khem.raj@oss.qualcomm.com>
+Subject: [meta-oe][PATCH 2/2] cli11: Point SRCREV at the v2.7.2 commit
+Date: Fri, 13 Nov 2026 09:03:22 -0800
+Message-ID: <20261113170322.1425186-2-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.1
+In-Reply-To: <20261113170322.1425186-1-khem.raj@oss.qualcomm.com>
+References: <20261113170322.1425186-1-khem.raj@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Fri, 13 Nov 2026 17:03:35 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132250
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132251
 Content-Type: text/plain; charset="utf-8"
 
-SRCREV was set to the v2.7.0 annotated tag object instead of the commit
+SRCREV was set to the v2.7.2 annotated tag object instead of the commit
 it points to, so it did not match what tag=v${PV} resolves to.
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- meta-networking/recipes-devtools/python/python3-scapy_2.7.0.bb | 2 +-
+ meta-oe/recipes-support/cli11/cli11_2.7.2.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-networking/recipes-devtools/python/python3-scapy_2.7.0.bb b/meta-networking/recipes-devtools/python/python3-scapy_2.7.0.bb
-index 4995f8e2cd..4e4eedde81 100644
---- a/meta-networking/recipes-devtools/python/python3-scapy_2.7.0.bb
-+++ b/meta-networking/recipes-devtools/python/python3-scapy_2.7.0.bb
-@@ -16,7 +16,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=b234ee4d69f5fce4486a80fdaf4a4263"
- # If you want ptest support, use the git repo
- # UTscapy does not exist in the pypi pkg
- #
--SRCREV = "1de09fe85fe5c9d60ea5c6de130374e170b5bc28"
-+SRCREV = "40fc5ecf9e69e9bd76664d63ae133d4973fcf81b"
- SRC_URI = "git://github.com/secdev/scapy.git;branch=master;protocol=https;tag=v${PV} \
-            file://0001-python3-scapy-skip-ICMP-regression-tests-in-ptest.patch \
-            file://0002-main-initialize-banner-for-the-default-Python-shell.patch \
+diff --git a/meta-oe/recipes-support/cli11/cli11_2.7.2.bb b/meta-oe/recipes-support/cli11/cli11_2.7.2.bb
+index 9f06452301..615dbb8bd0 100644
+--- a/meta-oe/recipes-support/cli11/cli11_2.7.2.bb
++++ b/meta-oe/recipes-support/cli11/cli11_2.7.2.bb
+@@ -8,7 +8,7 @@ DEPENDS = "catch2"
+ SRC_URI = "gitsm://github.com/CLIUtils/CLI11;branch=main;protocol=https;tag=v${PV} \
+            file://remove_tmpdir_from_test_binary.patch \
+            file://run-ptest"
+-SRCREV = "919ce47dad39520a6e9a695d3e2d222c6920a445"
++SRCREV = "cbd58a3696887b34c70949aef21a71735a0c2ad5"
+
+ inherit cmake ptest
+
