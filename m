@@ -1,103 +1,100 @@
-Received: from mail-dy1-f177.google.com (mail-dy1-f177.google.com [74.125.82.177])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.3142.1794685062962741360
+Received: from mail-dy1-f169.google.com (mail-dy1-f169.google.com [74.125.82.169])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.3149.1794685071179012560
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 14 Nov 2026 11:37:43 -0800
+ Sat, 14 Nov 2026 11:37:51 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=wAaSryn4;
- spf=pass (domain: gmail.com, ip: 74.125.82.177, mailfrom: raj.khem@gmail.com)
-Received: by mail-dy1-f177.google.com with SMTP id 5a478bee46e88-36f8cdd30beso2414806eec.1
-        for <openembedded-devel@lists.openembedded.org>; Sat, 14 Nov 2026 11:37:42 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=w0DC4Gca;
+ spf=pass (domain: gmail.com, ip: 74.125.82.169, mailfrom: raj.khem@gmail.com)
+Received: by mail-dy1-f169.google.com with SMTP id 5a478bee46e88-33bf40b0c8bso482139eec.0
+        for <openembedded-devel@lists.openembedded.org>; Sat, 14 Nov 2026 11:37:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794685062; x=1795289862; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1794685070; x=1795289870; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=rHm7mjRO2PJcJq74cd9sYZZLjg1vXgPuI8mY//SQo78=;
-        b=wAaSryn4nwoea9Kij+YiFkUGuR1kmqwJhN2OyTMEk6De/x/DCzLXrHs0ifjFU2AVCb
-         1pRqxUvVMYi2qiLFfYyIbgvlkHxdGoh0QwoUt9mrmhuEweYh71gXL68MYz3hSLqCGuF7
-         tAjoOdwyKfGmZ4TLCJ7ipuW55qtkXXtS2kh+czdKJbdpGcnzM4XFWULMZnDvTVOyS5Tv
-         xVA3US63p9//ylxQ3O2RI3JxWvToLFHX73c3vEAwEN+vjSmi10X3XXSJlyu4m8/Tf0c4
-         JIxFBk94F+q2M7TcExhCfgKqRohax4pdrHmtN4ZHP9JjMdUBsnQFOtsbehX3sxosSwjK
-         YEdA==
+        bh=UqU9bvWUzFEihHJLReN8Ra/gdYiUI1tSVTQtCQkZ4wk=;
+        b=w0DC4GcaoTdHdeJA2Xj8MGk1AfXsH0GaVw7Zk6GDEgxKUxavCC7lPeJCUBSCRx5vT1
+         0PDBhAHr6HJlnjg3DqchJ7m7x5t680BfifDf3qwXte+8cO1DgSVKw4epWXVrRqGDsbmW
+         EIpsMK52/NDIQzuX4dENs9hpUG88Om33y9RZTi4PVS2eDL+rO/rpcahAOkjvs2x1LY18
+         1pt+xrHqzmTYfQ8xOXCuk7HkCiQZYjo+/eESSYIxngaZnbcV7kvA4M3OiDl2iroFhF6k
+         mQzuJ/dZgYI+AX/S7t5zrRwb6VeLK+erx9nFDQj7FlFUDnWwEjG53X1ybX11GCIT8SiK
+         9WuQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794685062; x=1795289862;
+        d=1e100.net; s=20260707; t=1794685070; x=1795289870;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=rHm7mjRO2PJcJq74cd9sYZZLjg1vXgPuI8mY//SQo78=;
-        b=kN2khihOl2QAPneFcleCLciDPe7owZHq4JZe08Zpy/8C071OmY1BiRxuH+Jzlk1Zkw
-         v8OV2PZh8ExbWJwwzGCzxhy1Q8mNysT3TmwWo5xvAx1AzBu4IgOb3LmtPr3crurTrnwl
-         ySRRPH8suv+8LcxNOHxzrkGF8u9wb2Ph4623VzAnTgufhp4S0gaiVBczzLDbhQ+PjANm
-         DVAr0J1EqBzQeWTcK1CE8ywig6FgWqUTlTDSU63958DRdoWrZtjsYqCL9t5Kbh90lakP
-         PVgwiJUEL0yQir/is3yogoC/LLP4skDkSV59e3I4ILHboYVjm0O2i7wGDn9T4fCNOpKD
-         jspg==
-X-Gm-Message-State: APuU4Z+Ckz5qCKFFDrwUAM2NJayjfvUtTmuF++5FVsYn4PFNyzzPtK27
-	sICoDzCYI1SleTVHyFTALFNvrG0BZl6T3IxxQkZjzeX9dAlQXFzFSFBMFeFPeVB1
-X-Gm-Gg: AYBFou1t0at3YGG7HIF69ysQZWyHevKih4KIVX43GvCDY7W9Mi7uwF7mTQeXCsbSkjx
-	6OpCtFGowgv2jmvz5S+BTtHfQwYdjaJ7a9lIa8teh7uUyUJCEiHOwlCGy1Esw6DWNoglJIwPdf9
-	ht+ooLL+A3asoVFsgC3dTHz50Qfuqp/25T7prlEkIDfuYWPhdH3Gi7nshil4+fdLDsDS70GY/Zd
-	aiHPHEhkHHvrnzQ/VfRe0y9Qh+B5u6IYulOhNXw5rsmBNK5YGyb96+VasqRUi7S9ZS4VbeM8ps6
-	sQGWdz3HoMmRd4uvg0O7R5SMm/2R0wuFwCvSdZT20Fk7acpd5bxdKHEE2yNygcSTQZFhZUkn1Sr
-	Qqjlfi5O/an54pWVtJdE05vAIP6pwXc2EMszWdAYEVM6AuKIHRzlZlDUVx675BmhIB1YGEBybSq
-	Ipe6mJ2YjP9cOMDdCObib9+mKPrabX7h3nqhJsOjW29z3ytklt/YvHBf7swPA4hckIuSZ7WubzZ
-	n0T6nDj57iVwHtZ8NtqYjdYrzUAQ8BtRtLr5MrcOZ9Dp/HcLfGnri+JExysjzePys2mUasGS8Bw
-	SsgJtRjTg4PI7jGvilKo04Gx3Lb0jvlPyeQirl76YPTbWOMpS5V1KOlDJr7WsuYi0cRwzxbWQXi
-	fPbrfRLcZERGE+TYH1A6PJuPQ5rDoIdZtjdcK89E3hEtE6V8u5g8r3JC80ZrGtiDchQ2BQ54XMZ
-	qLv2swW/Y4rFk8qjOtxxT+k0vw7Oc/2Af10eeeBXnD5GSLwo4cECSk+XPqIyjFrvHWAEu04JHeZ
-	lzj6FWMi9gNRy8add2anWNfgjiYNFtdioV5hmQUoM3CYk2utsFsMmuT0iRMJ+59QHUNMB+8uSzE
-	E6bH
-X-Received: by 2002:a05:7301:4604:b0:376:703c:8819 with SMTP id 5a478bee46e88-379681c6998mr6774445eec.38.1794685062107;
-        Sat, 14 Nov 2026 11:37:42 -0800 (PST)
+        bh=UqU9bvWUzFEihHJLReN8Ra/gdYiUI1tSVTQtCQkZ4wk=;
+        b=ULijD65uVkd1G7Ibw+ZfWMmi9sQ5tUjTqtNRZYz1k2ykf+HQqPPGYA8J7jy0w8/ih+
+         jLjUK/jTxYyIjezK5LhLHQsm6KE0EjPD45WLrR6YvcT5py+G6t+F3zAWv9Wo2EganCFS
+         VnG85ndraodE4h6eNYab2HSG3XCIWotVpfk/zgr2JlonPJC7XrGccy9oTZ2a2pGGe6WA
+         +9So+aaqjcI23FHDr3t2hJANIuo4qdU5kp/OOnOZqS5sExpDmRQpDii1KSdETA4OX264
+         BOOTHPL4zhrZ2gTX8GOpfLA7K4TrO6eTwFqJZVQj33rqqFu2pAdNi4cwtDhDQE/5mlPT
+         JjkQ==
+X-Gm-Message-State: APuU4Z/5laePzxpbDUQNBq7wkkDAfWPqsuKgY2O8MPONLUaOI45jANy7
+	4jdWousvEH5k3vZCRBlch7Ajp2HJD9DPhjT7XUqg4yDwQmPSDbzChD7ybId9v6ko
+X-Gm-Gg: AYBFou030qoUqOeuUIjcVEgoZeG6jyWTq83Pzbr11vCY+p4r/qqlORdeRwqeWDqfLPj
+	KWDW7obbTbW59bE5ficAemMf+7UHCp3MyUPZnqvg7UYmD/YL0uUen7EXOHosCJbG1V/5PLXM9nb
+	b7Ou6t0ZB1/Pguho3FWVMTBQD8JaAZgSTzu1hvc7jHE/GneMC5i9bdbLikaKx6VMmW3c//0lMU3
+	JaYAJYKMDIH+M5Z3Wl8sIZfkWkNlStvU4A1aHxsc3kTiBed4t9D06f3RuI2moBBw0Nj2AkaoLwy
+	MXblN3uUUGhCZfymDDsoVJpQGw435hkV/0T7S5i7UAhaf3RYmecvPBvH0P7MHHPhThGORwQFBIi
+	QgtDyou5Pb61NvaEdfINdNcjsHaGwki0KSyMJpCfyGN0+pg83/wCKWucAp8pUTkC0dlZ5JJo3ic
+	DA+oZarY8T//Lbi6O9D4gce+li1zzEuW8iC5bMqf5Yo5TrLL3FPpIUPX362wLonBO+sClOOA3H9
+	SF8YML0fd+MvdbBFcA0tWzWx78voKVZxOELlkTzwejkcEd7OerUk35gOdJShBH3h/zfNb06N8E1
+	GcqskJ6ckZfbAE6vythDa3wYFrG3UtNBYIronQfP8kVxJTvy4nV52BCvyqL5slmwBKwDJ9Vbah8
+	O3Qw5Mo1dTROmtm+21ApPYCnuUqFEXAxCr2Qb98Jw1zChAxr+TTfBs9BgHENU/gBi+jo6DDLerX
+	VZyJLwkzX+zOasbnoggdiE7wdtw/84uAMCu7JWdVdbB4K4LCMYJZ3gFL7hN9uQmuHyu5UX6Fgub
+	N1hvvxy8TcyUCJMN9maGvSFkSLUBtFtYTxpm+bz5MdjpNamWCUgCwsOtFG4+Gj1tmM7QnvxYA1l
+	1rsWDIlxmVXJkKS7NKA0kewqLQ==
+X-Received: by 2002:a05:693c:4150:10b0:36a:1f8:a5a4 with SMTP id 5a478bee46e88-3796731697fmr6943212eec.38.1794685070503;
+        Sat, 14 Nov 2026 11:37:50 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-37955332a77sm16855164eec.4.2026.11.14.11.37.41
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-37955332a77sm16855164eec.4.2026.11.14.11.37.49
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 14 Nov 2026 11:37:41 -0800 (PST)
+        Sat, 14 Nov 2026 11:37:49 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-oe][PATCH 05/13] libkcapi: Fix build with lld
-Date: Sat, 14 Nov 2026 11:37:25 -0800
-Message-ID: <20261114193733.1743149-5-khem.raj@oss.qualcomm.com>
+Subject: [meta-networking][PATCH 12/13] ot-br-posix: Do not error on sign-compare with musl and clang
+Date: Sat, 14 Nov 2026 11:37:32 -0800
+Message-ID: <20261114193733.1743149-12-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.1
 In-Reply-To: <20261114193733.1743149-1-khem.raj@oss.qualcomm.com>
 References: <20261114193733.1743149-1-khem.raj@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Sat, 14 Nov 2026 19:37:44 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132262
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Sat, 14 Nov 2026 19:37:54 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132269
 Content-Type: text/plain; charset="utf-8"
 
-The version script lists all APIs, including the asymmetric cipher and
-KPP ones that are only built with --enable-lib-asym/--enable-lib-kpp, so
-lld fails with:
+musl's CMSG_NXTHDR compares a size_t with a ptrdiff_t, which clang
+reports under -Wextra when the macro is expanded in openthread's posix
+platform code, and -Werror turns it into:
 
-  error: version script assignment of 'LIBKCAPI_0.12.0' to symbol 'kcapi_akcipher_init' failed: symbol not defined
+  infra_if.cpp:275:31: fatal error: comparison of integers of different signs: '__size_t' (aka 'unsigned long') and '__ptrdiff_t' (aka 'long') [-Wsign-compare]
 
-Upstream prefers to keep a single version script for all configurations
-[1], so allow undefined versioned symbols with lld.
-
-[1] https://github.com/smuellerDD/libkcapi/issues/191
+This used to be handled by meta-clang's nonclangable.conf. Do the same
+as oe-core's seatd recipe.
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- meta-oe/recipes-crypto/libkcapi/libkcapi_1.5.1.bb | 3 +++
- 1 file changed, 3 insertions(+)
+ .../recipes-connectivity/openthread/ot-br-posix_git.bb          | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-oe/recipes-crypto/libkcapi/libkcapi_1.5.1.bb b/meta-oe/recipes-crypto/libkcapi/libkcapi_1.5.1.bb
-index c4f5010058..c9983f3bd8 100644
---- a/meta-oe/recipes-crypto/libkcapi/libkcapi_1.5.1.bb
-+++ b/meta-oe/recipes-crypto/libkcapi/libkcapi_1.5.1.bb
-@@ -11,6 +11,9 @@ inherit autotools
- 
- CACHED_CONFIGUREVARS += "ac_cv_prog_cc_c23=no"
- 
-+# The version script lists the APIs that can be disabled at configure time
-+LDFLAGS += "${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-lld', ' -Wl,--undefined-version', '', d)}"
-+
- PACKAGECONFIG ??= ""
- PACKAGECONFIG[testapp] = "--enable-kcapi-test,,,bash"
- PACKAGECONFIG[apps] = "--enable-kcapi-speed --enable-kcapi-hasher --enable-kcapi-rngapp --enable-kcapi-encapp --enable-kcapi-dgstapp,,,"
+diff --git a/meta-networking/recipes-connectivity/openthread/ot-br-posix_git.bb b/meta-networking/recipes-connectivity/openthread/ot-br-posix_git.bb
+index 59e1dae2a3..5006b253fe 100644
+--- a/meta-networking/recipes-connectivity/openthread/ot-br-posix_git.bb
++++ b/meta-networking/recipes-connectivity/openthread/ot-br-posix_git.bb
+@@ -27,6 +27,8 @@ inherit pkgconfig cmake systemd
+ # Use -std=c++20 for fixing
+ # recipe-sysroot/usr/include/c++/15.1.0/ciso646:46:4: error: #warning "<ciso646> is deprecated in C++17, use <version> to detect implementation-specific macros" [-Werror=cpp]
+ CXXFLAGS += "-std=c++20 -Wno-error=attributes"
++# musl CMSG_NXTHDR mixes size_t and ptrdiff_t
++CXXFLAGS:append:libc-musl:toolchain-clang = " -Wno-error=sign-compare"
+ LDFLAGS:append:riscv32 = " -latomic"
+
+ EXTRA_OECMAKE = "-DBUILD_TESTING=OFF \
