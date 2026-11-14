@@ -1,112 +1,98 @@
-Received: from mail-qv1-f54.google.com (mail-qv1-f54.google.com [209.85.219.54])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.638.1794595811505344993
+Received: from mail-pj2-f3.google.com (mail-pj2-f3.google.com [74.125.227.131])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.7400.1794642862031632809
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 13 Nov 2026 10:50:11 -0800
+ Fri, 13 Nov 2026 23:54:22 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=I/jSQv/q;
- spf=pass (domain: gmail.com, ip: 209.85.219.54, mailfrom: philip.balister@gmail.com)
-Received: by mail-qv1-f54.google.com with SMTP id 6a1803df08f44-91c6ce60697so36052596d6.3
-        for <openembedded-devel@lists.openembedded.org>; Fri, 13 Nov 2026 10:50:11 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=PfYNS76f;
+ spf=pass (domain: gmail.com, ip: 74.125.227.131, mailfrom: kowshika365@gmail.com)
+Received: by mail-pj2-f3.google.com with SMTP id 98e67ed59e1d1-3ada6c66964so416954a91.0
+        for <openembedded-devel@lists.openembedded.org>; Fri, 13 Nov 2026 23:54:21 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1794642861; cv=none;
+        d=google.com; s=arc-20260327;
+        b=WElfBmpsdGuKFvZwj594meXpyNE9xm8kCkERiGV8/DE3Or/mnQ1gU4cxXBXwIkGMHv
+         +DatP37bST/x+YnqL1ccPZ4XuxxzrmIFCNM9LCHgKaHksGafAeuqWceMRRAm1l7pebjc
+         SdV1K37YMmXMNtS0SAy0izCStuBmKanK1mgJxo5hcGdCOMDjf1/pyK5ltIbmUwCiq998
+         OoaytTapDVCXyxE781MrXklAIZ4NKZa+V00lP859xW7w5ksY/9v964tBJC56DYNIn8UH
+         fn4WmGOVRi+2p12U38MgEEHgJCUs32vC5hhOijc6Yy49I/eSzmhoeterWPtvKY8Di7jv
+         k1AQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=to:subject:message-id:date:from:mime-version:dkim-signature;
+        bh=yyO7bJauA+xIlYGBVlxhVacOVtcAJ9wzumb2Q3I9NNg=;
+        fh=pgSuNtBd9WV+mTof3gYKFZAQkk03g+8G5+Acac4ed14=;
+        b=pBiwjrMYHU+O4Qn2dIYUiP8OnDMY8k24W/S8aY2jUXyw6hENV0Rc2SwT0Q47dhpoYC
+         sIIlM3BWL8uI1LedZchIa5leoPZUUb39wfsF1sAkdaXvIOV9VzhK44naT4hCRvQFJNz8
+         Z7L/vy4eEzDhb6A3tJe/evWVP1o71sYyGciSI/11jOLyF4eXrrWsIvbIXqssu2hIbxxA
+         6JvOQbrP4gTtS3x5Hhb8GCKutS1CsDKSfVjf9VRN0XfUMRRLUCM7zrcWqoRunMf4A8Ct
+         2RNZ2WdBrtcpXAOmHZObrLpBn0ZuFaFK0gdmPHNOKjM6EpbgxAEpZc2vyVOjb2XRoK3P
+         AJTg==;
+        darn=lists.openembedded.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794595810; x=1795200610; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:sender:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=2duldus6EnQy3UWegfoRZbCuf9u6sGlsgWwlHjlmUFg=;
-        b=I/jSQv/q/WBVLHws6Vrf8LWVH3l8QoOSQFIn0USK/i7Si9GXmEEdLl042b5e6G/kUp
-         GpzlHnFH5mNuo+ccnZM7f6Cvhh6tfHUnhyDq8A370roXBWkCEigziEO65jP2JsEqLMrG
-         Dh40a9iBxD9na0BUPXVI6Ko9jsjVO3DAq03kc1I8tvL6SXNIA0XDr87E6S9c0OYD0uNS
-         iHQslxKen86cx9ZQAthqYFonzRTVKswLWn0PME5m+zi3AB5bxuKyeH3wdLdoVqrfGZ/T
-         xrZTfBYU4n6V26oBJ8AhIc3XDgkNtZYu/Pdw7wk1MsfhDtOGeOvGc38Oz6zg/zCzfGVi
-         DRFg==
+        d=gmail.com; s=20260707; t=1794642861; x=1795247661; darn=lists.openembedded.org;
+        h=content-type:to:subject:message-id:date:from:mime-version:from:to
+         :cc:subject:date:message-id:reply-to:content-type;
+        bh=yyO7bJauA+xIlYGBVlxhVacOVtcAJ9wzumb2Q3I9NNg=;
+        b=PfYNS76f/q0/qAisU4+Myii62GPC7TsJZfoBqE7yTapBZMQwSRUdYXw9fMbpmQYTxg
+         HgnZ3PY9pqm+LHj8hbJ4mg5rCGH5mJRZOXrwR0zulgInW061qzl/lV6a40N3Im2h08Ib
+         vZu4vigpI6ZdR/nggTMbQ/HOHwCz4vY2rCkScggrz+yOymslH5EEMPDnInVM2rJm9bqQ
+         H7h+phRjQK2taPXWkw08j1B/75yM7Eo6YjF7EdV1SpPiXlzeYgJuA8y4mkkh2Vj1fYp2
+         cv6LXrt3pUKy5SVDfncMitXQQ0kgxfM3mWKFUpnPdxur642ZUmlLMShTd12rMF7YnkDi
+         7g4w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794595810; x=1795200610;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:sender:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=2duldus6EnQy3UWegfoRZbCuf9u6sGlsgWwlHjlmUFg=;
-        b=her6CXaGlZgt8buWuEMzA2Ie54NsMS3HsksGPoFj0yvlch2w33emp50Lz3pNgRZbiX
-         GFkX2glrZNHgJUoq3TRWrg0wSBsFFubv190TJcx3uZLX5ktZdxVIcP5cY3Cbc9g2zLLh
-         /oEUQhUxZEH6+PbdvvytbUjIJlGKQGHoDyEyooD414oXdXsq/2xi6m1s4DgKiwwlYoNP
-         MnM+5erlQMZ78ftBW6RXxOMVKkjnn6vgu3/PD4JFKdg6qgfBT+gPMLBHUm9P0lDt7tTs
-         Y8b7tvb7F0RTaZBOxp1Xjurps6FLq8A5t22QHwtXXrneIhWuwN1ee5JbensFcAZNmL5s
-         S25A==
-X-Gm-Message-State: APuU4Z+V+6v6IkpmAWvciiQlLRatfkWzIgFzToSZ1FIPtl4Sx0rJ/P26
-	8/m+h/MP2gRGousfzJ0CyCfZBOGDr61SPNtL4T233i2tEqybN8GDA45XbDILUA==
-X-Gm-Gg: AYBFou2G2/wk47vSZptpaLxLiev4JDSDybEjQfkjSn3s/5d6CYO0UMevA+LRNJm8aD8
-	EL0Sp/yj9v3cOI9b03rRE9A7/V5SqYvgFXD048KmTPrswB4aqE3kcZ+W6jP8cj5ZynaWYQVP7a1
-	CWBw/F1i0gqT0y5AIMJsn5xwS0Br6ebmstQWgvYFJna1o3rcT1BCHENrhLBAGDCqXaxqFbW40La
-	5ceWhWjqFyrnf7zfzLFkWt9qjeOnSTZuZpVo7GMuhC0Idva9h1kTTBiGqYRXO0nFRjFhjNFjGXB
-	LaUkQ1+Nkh5mUzGbGNRGaISJNY4lZfskrzJp42V7EEsEv3tcZ1LKZeMlj8cxbFJx0Xej2wpxNyA
-	WiN1KT1+UkfOjQYy5PiQoM5VWq0Hg5OlNToTK4BNrYnjW4LcuAuXeVopPOK+95un2gI9BNbjHLY
-	bD3ei86w8fomas4/r8hQARSsc/6RVyabjgO5u3CwDIfk2KmsCdo6QG746qaIkP24PQVAlnP2INy
-	D/nCOuXF7Mtio1eJhTR3Ia8ODytWU70ayIVGlGpyVjS+BGbcWBGhOO9t2ZFouAM+CEnxmHga/20
-	nCFzPTPh3oe0ln/X9vusuuX/TkkvZyhHJXvnXslMlJasX+64miiT
-X-Received: by 2002:a05:6214:3211:b0:91e:ac55:fe72 with SMTP id 6a1803df08f44-91f24201eaamr56749216d6.36.1794595810189;
-        Fri, 13 Nov 2026 10:50:10 -0800 (PST)
-Return-Path: <philip.balister@gmail.com>
-Received: from bushey.hsd1.va.comcast.net ([2601:5c0:c200:483f:8478:e47c:fbe6:4bdc])
-        by smtp.gmail.com with ESMTPSA id 6a1803df08f44-91f23db3a99sm26051796d6.40.2026.11.13.10.50.09
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 13 Nov 2026 10:50:09 -0800 (PST)
-Sender: Philip Balister <philip.balister@gmail.com>
-From: Philip Balister <philip@balister.org>
-To: openembedded-devel@lists.openembedded.org
-Cc: Philip Balister <philip@balister.org>,
-	"Claude Opus 5.5" <noreply@anthropic.com>
-Subject: [meta-python][PATCH] python3-pyzmq: Don't search the host's pkg-config directories
-Date: Fri, 13 Nov 2026 13:50:05 -0500
-Message-ID: <20261113185005.2307591-1-philip@balister.org>
-X-Mailer: git-send-email 2.56.0
+        d=1e100.net; s=20260707; t=1794642861; x=1795247661;
+        h=content-type:to:subject:message-id:date:from:mime-version:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=yyO7bJauA+xIlYGBVlxhVacOVtcAJ9wzumb2Q3I9NNg=;
+        b=o731DM/viq8ZSrSt2yzz1K8rxSC9p+9io6xZTqJ01EGzs1YwROxFusKJz5wgqSh/+7
+         vXf5eRP9m3KVURzFrSWfBATEcf0BTX7VS5AmPLriKGpcZQ3rPKvLTIjJjqU1Wiq3tKbh
+         V30VVxSpQhceMGzk2zTXLcJXQyr4yxXYRh0XQzfDYWUMWisCwFBmzilEtXLH3axu45Qt
+         qhnYgfxdDHd+DEhchZXmCoztIAM0qEqGiNCOFGK1pRFfw+5hrgPQL745lYe8KMa2Q3w1
+         ZXXRHfnin1HQBZVKxC9ZP4mI5owUXY/goKDLKLE3PkFY96HRbBAJhpg/LybBqP+Q66+r
+         Xy0A==
+X-Gm-Message-State: APuU4Z/3k7QVSLx8ila9JQtoOAVCHaj14Xe+3OnqFMGCmcpE0OeRUG9E
+	4bAk1pMrLgXyZWIUYt8gWFAYUpdhRIiWGQeuqY/fi+29Yiw4blcX74iFdcKR4yqULYyR5lVeT7q
+	GGibW5rCe4A1l/tDc3NLUoizVbl8S3p8Nxm4wRjI=
+X-Gm-Gg: AYBFou0UunRiZ474OcdvrTygwVdh+wkxLctRhvPCGZ2pTJbthfVRuhFYZa+C0/wkPP0
+	NPV9nhOKj29mFeNSZSzhdC6slCdKYGO4VaUnqPLemA4dVN7sFR7Tm2zTLZpEw0PwLaoR/EMphmT
+	WnDm6vgI/8MUIBry5ZyIjRkh8QAnNJDaIZ9coHAQWGe2Fk3zdkRBKl73sQ6uvJfwlYmZrkOzA0t
+	E1pAcuj1N9SSAKvfNd92iGhsn+v3kq1ztEZqje3+qqhUMWmnf/aAhRKNKX/tQtGUL6UOZVxbzPx
+	I7DMxGHKcnrrY1RGElHNpWDpZSdgbS7CmL0Ctr6263YC+HnRZscq5Cko8GnWaXBSAB1HI8zFD4Y
+	3TqDHh5I5YRrxAjtJXjXxuZDvphZtZ+uKxNWKxQ3KFVuujrXnBlsQf4xcXH53txz7p8h9h+lmrA
+	YYmvo/uj9gL9dI7EnlrmQ155UlhYEUXgspEhxj1nGa
+X-Received: by 2002:a05:6a00:148e:b0:89f:7a1b:2bf4 with SMTP id
+ d2e1a72fcca58-8beb5ba8d80mr5020751b3a.16.1794642860990; Fri, 13 Nov 2026
+ 23:54:20 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+From: Kowshika <kowshika365@gmail.com>
+Date: Sat, 14 Nov 2026 13:24:09 +0530
+X-Gm-Features: AclHuK8W_1z0QEqFgcKsTF4FYbH3HMmxHfs8hSa-igeNMz7XHYY4XjOomJ6sFmk
+Message-ID: <CABLpS_4ZfQMHogM2MfE_qY-8na+ByA9+P5pFTg6bsASHB43oDg@mail.gmail.com>
+Subject: [meta-oe][PATCH] lirc: include lircd.conf.d configs in default config
+To: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Fri, 13 Nov 2026 18:50:15 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132253
-Content-Type: text/plain; charset="utf-8"
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Sat, 14 Nov 2026 07:54:27 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132254
 
-pyzmq's CMakeLists.txt appends the host's /usr (and /usr/local,
-/opt/local, /opt/homebrew when present) to CMAKE_PREFIX_PATH. Since
-PKG_CONFIG_USE_CMAKE_PREFIX_PATH defaults to on, pkg_check_modules()
-turns that into PKG_CONFIG_PATH=/usr/lib64/pkgconfig:/usr/share/pkgconfig,
-which pkg-config searches before PKG_CONFIG_LIBDIR, i.e. before the
-sysroot.
+Allow users to add remote configurations under lircd.conf.d without
+replacing the packaged lircd.conf.
 
-On a build host with the zeromq development package installed, pyzmq
-then reads the host's libzmq.pc instead of the target's. Fedora's
-libzmq.pc carries -DZMQ_BUILD_DRAFT_API=1 in Cflags, so pyzmq is built
-against the libzmq draft API, but the target libzmq is built without
-it. The module then fails to import on the target:
-
-  ImportError: .../zmq/backend/cython/_zmq.cpython-314-aarch64-linux-gnu.so:
-  undefined symbol: zmq_poller_destroy
-
-Set PKG_CONFIG_USE_CMAKE_PREFIX_PATH=OFF so pkg-config only sees the
-sysroot.
-
-Tested on a Fedora 43 host with zeromq-devel installed, building for
-qemuarm64: before, _zmq.so referenced zmq_poller_{new,add,fd,destroy}
-and "import zmq" failed on the target; after, it references none of
-them and the gnuradio gr-zeromq ptests that import zmq pass.
-
-Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
-Signed-off-by: Philip Balister <philip@balister.org>
+AI-Generated: Uses ChatGPT (GPT-6)
+Signed-off-by: Kowshika Kumar <kowshika365@gmail.com>
 ---
- meta-python/recipes-devtools/python/python3-pyzmq_27.2.0.bb | 1 +
+ .../meta-python/recipes-connectivity/lirc/lirc/lircd.conf        | 1 +
  1 file changed, 1 insertion(+)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pyzmq_27.2.0.bb b/meta-python/recipes-devtools/python/python3-pyzmq_27.2.0.bb
-index 4cbf46cf0a..c2230a49b4 100644
---- a/meta-python/recipes-devtools/python/python3-pyzmq_27.2.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-pyzmq_27.2.0.bb
-@@ -22,6 +22,7 @@ PEP517_BUILD_OPTS = "--skip-dependency-check \
-                      -Ccmake.define.CMAKE_FIND_ROOT_PATH_MODE_LIBRARY=ONLY \
-                      -Ccmake.define.CMAKE_FIND_ROOT_PATH_MODE_INCLUDE=ONLY \
-                      -Ccmake.define.CMAKE_FIND_ROOT_PATH="${STAGING_DIR_NATIVE}" \
-+                     -Ccmake.define.PKG_CONFIG_USE_CMAKE_PREFIX_PATH=OFF \
-                      -Ccmake.build-type="RelWithDebInfo" \
-                      -Cbuild-dir="${B}" \
- "
+diff --git a/meta-oe/dynamic-layers/meta-python/recipes-connectivity/lirc/lirc/lircd.conf
+b/meta-oe/dynamic-layers/meta-python/recipes-connectivity/lirc/lirc/lircd.conf
+index 29b03c72a0..2ae1ebbdb4 100644
+--- a/meta-oe/dynamic-layers/meta-python/recipes-connectivity/lirc/lirc/lircd.conf
++++ b/meta-oe/dynamic-layers/meta-python/recipes-connectivity/lirc/lirc/lircd.conf
+@@ -1,3 +1,4 @@
++include "lircd.conf.d/*.conf"
+ # contributed by angelo castello
+ #
+ # note: this config file has been deduced starting from the
 -- 
-2.56.0
-
+2.34.1
