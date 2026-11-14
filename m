@@ -1,173 +1,154 @@
-Received: from mail-yw1-f172.google.com (mail-yw1-f172.google.com [209.85.128.172])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.13314.1794673084610599109
+Received: from mail-dy1-f175.google.com (mail-dy1-f175.google.com [74.125.82.175])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.3100.1794685059961104446
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 14 Nov 2026 08:18:04 -0800
+ Sat, 14 Nov 2026 11:37:40 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=NOP3Crhn;
- spf=pass (domain: gmail.com, ip: 209.85.128.172, mailfrom: schonm@gmail.com)
-Received: by mail-yw1-f172.google.com with SMTP id 00721157ae682-8b0d63f60bcso22633037b3.3
-        for <openembedded-devel@lists.openembedded.org>; Sat, 14 Nov 2026 08:18:04 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=Rhrm0WPq;
+ spf=pass (domain: gmail.com, ip: 74.125.82.175, mailfrom: raj.khem@gmail.com)
+Received: by mail-dy1-f175.google.com with SMTP id 5a478bee46e88-33bf40b0c8bso481875eec.0
+        for <openembedded-devel@lists.openembedded.org>; Sat, 14 Nov 2026 11:37:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794673083; x=1795277883; darn=lists.openembedded.org;
-        h=content-transfer-encoding:content-type:mime-version:message-id:date
-         :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=ACY0/5AuhF6xcc5xMdD83ueI8jtmkDTjN5QnCq18cRY=;
-        b=NOP3Crhnl3CYcyIRnlfCunRlXfNzwrPVF0VbEgV5zMiodDFDgf6F7heWQjxBgCfqwf
-         3WjUlTsFA2dLpoQMHYFKpsjFDDHmaXmr5PZFOq6KFtYqL8dfwRk9RHxFrfQ4VkHPI7ai
-         j5EOLykW4m/UDviCbp8sqBupcs6D51MW1cbpz5+1fTe3Slaih3NHQa+Vk2sPIWBjv640
-         i9v9NTaF5PzHReELKIj2tlf4HqWZNJvF6C9h5pDkYrfzrtfCIFIMtVdjv23PmO80XpJJ
-         BqmQJWRpN0fjXo9rKL5AkzWyPbzocvuBrV69XQ60hLjJFzgBGYk1ada52u1uHu6SMdQt
-         4hZw==
+        d=gmail.com; s=20260707; t=1794685059; x=1795289859; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=4LW5YhS1TeG1TmoRdTKhmF2G6dWk8IHZ3Me7ZfKIOqs=;
+        b=Rhrm0WPqe5I0IjcnDeinU4Dx3L2HYmbU0HY06C7cQ9JBaKqz4DKRfbkA42Qg9RB8B/
+         ATNq1j02HAUMD7QZlW3yBp711TZ0GZEVIaKB58d7xT3LiaJkhLBtJkgSSak0oo1ZruxE
+         +QO1ZGJ53rrUxS3O50KIDDXAAF+DbXLLn5pvo2lyt3a51IuM8ahd3L/z9OZTYxx+bn9Z
+         M+d1tdVO0ELbHgszj7rieBWdn/sIg6xWxu1KMtjceKZnBfiB07aoFhqxvws8YGl8tdlN
+         Suou8ADfc91e/h5K/gSITEvCTXR8EInHIZ0dHfWaPORaKmPHzSQ/CdKEnBvZH1Qd8wAO
+         8wNA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794673083; x=1795277883;
-        h=content-transfer-encoding:content-type:mime-version:message-id:date
-         :subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=ACY0/5AuhF6xcc5xMdD83ueI8jtmkDTjN5QnCq18cRY=;
-        b=ygPcUOAqtsbc7SwQLxXYHNL1PPv1vcrcxEyOVQ+5Ts65nGTo4dVYNnvCojToHMlLUJ
-         CxS2oQYfRHg6/ccBr7wQ7t2XrPQomiX6lFN2tyyi+T0cKh8gPbc7fCWkUYNgZIzfAfcl
-         +rZJonmaWx3I4fgv2LiQowugeANzcznC/MgaDo0stfnFa2s+LLiFbC60B+cSAgQSJWLz
-         NXPnACZ06AjngjC7uDNbxCx915MRs0oURhyzpPq5Pa8ZLoSRhcJ0UZ0h2je0C/Hg1YFc
-         1Ks/+hvQNElf0H+k7p9y9jpWrhDa8zBYxisJfSxyg+SRELfaaENghX+pcJq9kDFeMpO2
-         JGVA==
-X-Gm-Message-State: APuU4Z9bdtqbODHqbWYr11F3m4YUV6cM499lA8JV44Ug+xHtQR7HqIKw
-	D1bOA30tn5F2fOP2t83Ee2zZrtKUgO9+ujf6QiR+RFt/Q2CUwd/UGT/FLpiO5jhJ
-X-Gm-Gg: AYBFou2u4ZMZUy4QG7Zc3QDMIyCAZmSuj1C6g3iYT4VGw3mcea2Y38Bw1oo6biBCBr5
-	yvx2tIHygQviiakpvvj6I79LUHrZ9EL5Pfg1LCiMRTSt7kKc+Q8lIUGT94f+1Hifqywpm+6e+Ot
-	eHRKghut6vgX2i7lt+33XokRkrtF7XAjvLVT310VtoRg8Qv6mZQoQA1kAMK5+JlLhLX74wEffvs
-	O5G/hXbg1B+RBTEVdJV9NXf29GXAKZWKBkP19mfJcVjZ1XIQsYefJvWPqlaTqMt6IQpzANn8mv+
-	jCyNZmMxvwaecPnPhiLZY5eR5oFwWpfRGaIVNrogvsFm5Dvfl0KKK1w3aaIY+usfrT1wWEmtL/5
-	wkhROhGn6XlMWMy7J4eLcuapVI3Oi3rfxOs3YS8USI2DZY0ZlweQ3TgLfFWOea01pvOuVJIvj7V
-	wzW2JXzFRksXhW7l+kLozRHaAEzfu3j8KUyHW16bT6FT60dz13WlTo8gjwjvUzp4wAs8XRnyxMU
-	33TXTLvGZUBiTFj3p89vL5xRF54XGpVJmmd8D9lc+GSw+JYajmSb941x2hso/g7gQRJa7XrCfkk
-	OGOhcja411TK+5dlUWF+ayde73dgOE4PdY2vpwk29+PXH7RgqaljxQZ1ykPLFDxmPHeum9p+rFb
-	hwt+MDzHcXrn9hs+Lsa3486oEbLc1oMcMeHIb2DbvvIhqJQmhOy3N
-X-Received: by 2002:a05:690c:ec5:b0:8ab:4c8f:2844 with SMTP id 00721157ae682-8b4aa2a0f51mr38746447b3.39.1794673083350;
-        Sat, 14 Nov 2026 08:18:03 -0800 (PST)
-Return-Path: <schonm@gmail.com>
-Received: from localhost.localdomain ([71.3.193.106])
-        by smtp.gmail.com with ESMTPSA id 00721157ae682-8b4aa9f4ad4sm47352917b3.40.2026.11.14.08.18.02
+        d=1e100.net; s=20260707; t=1794685059; x=1795289859;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=4LW5YhS1TeG1TmoRdTKhmF2G6dWk8IHZ3Me7ZfKIOqs=;
+        b=0hfuPePCBHAxnWfVLmQxEqhMZ9NVw0HL9Ug1PQ9qaex8dKwrIjy0Gm+V++hcf8xDdP
+         xQbEaDsuh3kimpZM6lUnmTjjiafsSFMflYoup6dmO0aaYVMWRzKBfzs9LboG7C34YsMI
+         UShoV6zxhf3S+Dhzk7C8liV4xQJZeUcRmvlg/kltxLHcqZRiMk2wKRMwHxX6EuyZcd/r
+         L/GLcAQekheMeMn6YlniXt99WnH+9djOeRGdclDmFynIoYYwEdFHFXxktiFkSlnpfZLh
+         DqdKzkjtl2TFwXY1Az82h8yQRU7JY/xfAMvg3s+93qthrNQCKFsobHaIpkNcCJIFgqo3
+         RZJw==
+X-Gm-Message-State: APuU4Z8Q1fMP/PyghXIHrTWcSYEOY6Tdi4tYXt79HWaYobM0NwyHmlfN
+	fsOuyBfcPkno6Q13E9eVID6ToMcYZ3+VYu1GzsrvA4Mlr4SYWgpuiRAIW3bWrqFy
+X-Gm-Gg: AYBFou3r7MTVlVGkNigcIM4eQIVsBFCXFRHIFwPsRtCXNq8hg5Q8ewqYw6HcCQhB1mW
+	/ByYSqPwEPtFUdq11swlrXxiFAuWESpAU68Rt9OtLBhA+5xVfKy5Pyb+QVUN8Q4kEsycvyl/Bod
+	xGEsYzFhm900kUm1zTagulvr/XjYDTiTP0wtvXHE4Q6S/Sn3my5JBAFGM2UNrAEGy42/DZUvKxD
+	67EsFfmvZi2I6Bq5IQ4wUSCarOpWO0mjsYp8bLAaHIuCkxVn6zwWZLel4dk69p9EIMbm2QH+wSU
+	wEkKr0TEQN4IQ28uvug/+0m4HcyQY4fO1tUBskbdM1EHeI46GbFcOSv3qbzKx7CjnPvKOUnGTqx
+	KJSlXouARNI7n1xQlj5u3SMF+UC7m1Yt2vQUHicWAlA4s/Ngp5A82noYHvB7D5U6zrjcv6zn0Jv
+	zEFPmYl/41CttInjPqbTXv+NtgSLtyDApjUk2UIqQe97MduDHkZhEMtJmQ3cvyfig2qYODNsH0k
+	8VepjQE+JemJPla2VMvgBYbLSVdI30YCjYFOAxLaapWvnykrAo7P3pYXmHgRdVaXhNQrpeRjNOH
+	Mre9qJ7C5lXIrt1wIM56LswCZvPA7kRN8PC42wmpKnWRpP5uQNUXcuX5AKkcFYKqs6eq+PMO5zz
+	RMOpY/U/yf5lPnRTaw8V/8HSaxJRdy0l/rrB95I37jYXIGUSNF2iuTLlHmfxtQz0PJa4fb3pJyB
+	d0oOTPtknDRzE68eIOKZDPrNE05TCQ61ezHhsQhGFSIcdHQvLzX8Iw8YN5XWLRgrhGNlbEdhbQS
+	ZXRbjU8j/KiwlV65Fm3gjFiAWAyO/fsgsrKpaqwagfCCkBUNpGuMR7f4e80+yzocxTWlxQFvZ+c
+	/7z6
+X-Received: by 2002:a05:693c:41c1:20b0:375:c862:34e with SMTP id 5a478bee46e88-37966193789mr6301826eec.20.1794685059038;
+        Sat, 14 Nov 2026 11:37:39 -0800 (PST)
+Return-Path: <raj.khem@gmail.com>
+Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-37955332a77sm16855164eec.4.2026.11.14.11.37.37
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 14 Nov 2026 08:18:02 -0800 (PST)
-From: Jason Schonberg <schonm@gmail.com>
+        Sat, 14 Nov 2026 11:37:38 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
+X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Jason Schonberg <schonm@gmail.com>
-Subject: [meta-webserver][PATCH v2] apache2: upgrade 2.4.70 -> 2.4.71
-Date: Sat, 14 Nov 2026 11:17:53 -0500
-Message-ID: <20261114161753.15793-1-schonm@gmail.com>
-X-Mailer: git-send-email 2.43.0
+Cc: Khem Raj <khem.raj@oss.qualcomm.com>
+Subject: [meta-networking][PATCH 02/13] dante: Fix build with lld
+Date: Sat, 14 Nov 2026 11:37:22 -0800
+Message-ID: <20261114193733.1743149-2-khem.raj@oss.qualcomm.com>
+X-Mailer: git-send-email 2.56.1
+In-Reply-To: <20261114193733.1743149-1-khem.raj@oss.qualcomm.com>
+References: <20261114193733.1743149-1-khem.raj@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Sat, 14 Nov 2026 16:18:14 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132257
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Sat, 14 Nov 2026 19:37:44 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132259
 Content-Type: text/plain; charset="utf-8"
 
-Fix [buildpaths] qa issue in config_vars.mk
-  ERROR: apache2-2.4.71-r0 do_package_qa: QA Issue:
-  File /usr/libexec/apache2/build/config_vars.mk in package
-  apache2-dev contains a reference to the build host HOME directory.
+getipnodebyname() and freehostent() are only interposed when the
+platform has getipnodebyname(), which glibc and musl do not, but they
+are always exported, so lld fails with:
 
-Changes with Apache 2.4.71
+  error: version script assignment of 'global' to symbol 'freehostent' failed: symbol not defined
 
-  *) SECURITY: CVE-2026-119618: mod_http2: heap corruption and RCE in
-     assign_headers (cve.mitre.org)
-     Concurrent Execution using Shared Resource with Improper
-     Synchronization vulnerability in Apache HTTP Server's mod_http2
-     in assign_headers() can lead to RCE.
-     This issue affects Apache HTTP Server: from 2.4.55 through
-     2.4.70.
-     Affected releases of mod_h2 from GitHub: from 2.0.8 through
-     2.0.42.
-     Credits: Anthropic's OSS Scanner, as vulnerability
-     ANT-2026-MAPKT6MZ
+Only export them when configure finds getipnodebyname().
 
-  *) SECURITY: CVE-2026-109163: mod_vhost_alias 1 byte stack buffer
-     overwrite (after CVE-2026-63292) (cve.mitre.org)
-     Stack-based buffer overflow vulnerability in Apache HTTP
-     Server's mod_vhost_alias (afterÂ CVE-2026-63292)
-     This issue affects Apache HTTP Server: 2.4.69 and 2.4.70.
-     Credits: Gustavo Aiello
+Do not export rresvport where it does not exist
 
-  *) SECURITY: CVE-2026-106023: mod_md NULL pointer dereference leads
-     to child process crash (cve.mitre.org)
-     NULL pointer dereference vulnerability in Apache HTTP Server's
-     mod_md during HTTP request processing.
-     This issue affects Apache HTTP Server: from 2.4.30 through
-     2.4.70.
-     Credits: hexb1n, Yang Song, and JiaSheng He of 360 Vulnerability
-     Research Institute, working with 360 TuLongFeng.
-
-  *) mod_md: MDHttpProxy and MDCACertificateFile can now be set per MDomain.
-     New directive MDHttpProxyCACertificateFile sets the CA certificates
-     used to verify an HTTPS proxy.
-     [Michael Kaufmann <mail michael-kaufmann.ch>]
-
-  *) mod_deflate: Read the gzip extra-field (FEXTRA) length as unsigned so a
-     length byte with the high bit set is no longer sign-extended, fixing
-     inflation of gzip streams that carry an extra field.
-     [arshiya tabasum <arshi bugqore.com>]
-
-  *) mod_remoteip: Apply RemoteIP{Trusted,Internal}ProxyList to the virtual host
-     they are configured in, and merge the proxy entries of the main server
-     and of the virtual host, logging a warning when both have some.
-     PR 70207.  [Arturo Bernal]
-
-  *) mod_dav: Fix handling of invalid or overflowing "Timeout:"
-     request headers, which could silently grant a lock with an
-     already-expired timeout instead of the RFC 4918 maximum.
-     PR 65788 [Arturo Bernal]
-
-  *) mod_http2: Correctly handle the asterisk-form of OPTIONS requests
-     instead of rejecting them as malformed.  PR 70195.
-     [Arturo Bernal <abernal apache.org>]
-
-  *) mod_http2: Fix duplicate logging of header limit violations.
-     [Michael Kaufmann <mail michael-kaufmann.ch>]
-
-  *) mod_http2: Fix a crash creating an HTTP/2 session with
-     "H2PushDiarySize 0" and debug logging enabled.  [Joe Orton]
-
-  *) mod_dav_lock: Fix dav_generic_load_lock_record() reading the
-     indirect-lock key length with the wrong width, which could read
-     back a wrong length on big-endian platforms. PR 70299
-     [Arturo Bernal]
-
-  *) mod_remoteip: Log a connection closed before a complete PROXY protocol
-     header was received at info level rather than as an error.  PR 63893.
-     [Joe Orton]
-
-Signed-off-by: Jason Schonberg <schonm@gmail.com>
+AI-Generated: Uses Claude Code
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- .../apache2/{apache2_2.4.70.bb => apache2_2.4.71.bb}           | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
- rename meta-webserver/recipes-httpd/apache2/{apache2_2.4.70.bb => apache2_2.4.71.bb} (99%)
+ ...rposed-functions-that-exist-on-the-p.patch | 44 +++++++++++++++++++
+ .../recipes-protocols/dante/dante_1.4.4.bb    |  3 +-
+ 2 files changed, 46 insertions(+), 1 deletion(-)
+ create mode 100644 meta-networking/recipes-protocols/dante/dante/0001-Only-export-interposed-functions-that-exist-on-the-p.patch
 
-diff --git a/meta-webserver/recipes-httpd/apache2/apache2_2.4.70.bb b/meta-webserver/recipes-httpd/apache2/apache2_2.4.71.bb
-similarity index 99%
-rename from meta-webserver/recipes-httpd/apache2/apache2_2.4.70.bb
-rename to meta-webserver/recipes-httpd/apache2/apache2_2.4.71.bb
-index f34d622495..35c4b2f8b9 100644
---- a/meta-webserver/recipes-httpd/apache2/apache2_2.4.70.bb
-+++ b/meta-webserver/recipes-httpd/apache2/apache2_2.4.71.bb
-@@ -27,7 +27,7 @@ SRC_URI:append:class-target = " \
-            "
- 
- LIC_FILES_CHKSUM = "file://LICENSE;md5=bddeddfac80b2c9a882241d008bb41c3"
--SRC_URI[sha256sum] = "1eefd7dc95836c5872894ce8e6a37f773d5a6764f0766869d39b8bcf0b1bafc3"
-+SRC_URI[sha256sum] = "2bc5da5a33c247341de082717d4ebcb5cb49e8b73a05b7fddf7d5d6dc2f8de62"
- 
- S = "${UNPACKDIR}/httpd-${PV}"
- 
-@@ -134,6 +134,7 @@ do_install:append:class-target() {
-            -e 's,-fdebug-prefix-map[^ ]*,,g; s,-fmacro-prefix-map[^ ]*,,g; s,-ffile-prefix-map[^ ]*,,g' \
-            -e 's,${HOSTTOOLS_DIR}/,,g' \
-            -e 's,APU_INCLUDEDIR = .*,APU_INCLUDEDIR = ,g' \
-+           -e 's,${HOME},,g' \
-            -e 's,APU_CONFIG = .*,APU_CONFIG = ,g' ${D}${libexecdir}/${PN}/build/config_vars.mk
- 
-     sed -i -e 's,--sysroot=${STAGING_DIR_TARGET},,g' \
--- 
-2.43.0
+diff --git a/meta-networking/recipes-protocols/dante/dante/0001-Only-export-interposed-functions-that-exist-on-the-p.patch b/meta-networking/recipes-protocols/dante/dante/0001-Only-export-interposed-functions-that-exist-on-the-p.patch
+new file mode 100644
+index 0000000000..ea7c3e03ff
+--- /dev/null
++++ b/meta-networking/recipes-protocols/dante/dante/0001-Only-export-interposed-functions-that-exist-on-the-p.patch
+@@ -0,0 +1,44 @@
++From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
++From: Khem Raj <khem.raj@oss.qualcomm.com>
++Date: Mon, 9 Nov 2026 08:37:30 -0800
++Subject: [PATCH] Only export interposed functions that exist on the platform
++
++dlib only interposes getipnodebyname() and freehostent() when the
++platform has getipnodebyname() (Solaris), and rresvport() when it is
++available (not on Android or musl), but they are always listed in the
++exported symbols, so linkers that check the version script, like lld,
++fail with:
++
++  error: version script assignment of 'global' to symbol 'freehostent' failed: symbol not defined
++  error: version script assignment of 'global' to symbol 'rresvport' failed: symbol not defined
++
++Leave them out of the symbol list when configure did not find them.
++
++Upstream-Status: Pending
++Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
++---
++ mapfile.m4 | 10 +++++++++-
++ 1 file changed, 9 insertions(+), 1 deletion(-)
++
++diff --git a/mapfile.m4 b/mapfile.m4
++index 644a94b..dc964f8 100644
++--- a/mapfile.m4
+++++ b/mapfile.m4
++@@ -12,8 +12,16 @@ PLDDIRS="dlib/" #preloading (standard, non-Rfoo functions)
++ if test x"$sol64" = xt; then
++    PLDDIRS="$PLDDIRS dlib64/"
++ fi
+++#only export interposed functions that exist on this platform
+++PLDEXCLUDE="-e ^$" #skip blank lines
+++if test x"$ac_cv_func_getipnodebyname" != xyes; then
+++    PLDEXCLUDE="$PLDEXCLUDE -e ^freehostent$ -e ^getipnodebyname$"
+++fi
+++if test x"$ac_cv_func_rresvport" != xyes; then
+++    PLDEXCLUDE="$PLDEXCLUDE -e ^rresvport$"
+++fi
++ for symdir in $PLDDIRS; do
++-    cat include/symbols_preload.txt >> $symdir/$MAPFILE
+++    grep -v $PLDEXCLUDE include/symbols_preload.txt >> $symdir/$MAPFILE
++
++     #platform dependent symbols
++     case $host in
+diff --git a/meta-networking/recipes-protocols/dante/dante_1.4.4.bb b/meta-networking/recipes-protocols/dante/dante_1.4.4.bb
+index 6a1eed3edb..e15f7c4d41 100644
+--- a/meta-networking/recipes-protocols/dante/dante_1.4.4.bb
++++ b/meta-networking/recipes-protocols/dante/dante_1.4.4.bb
+@@ -12,7 +12,8 @@ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=b3a8e7dc09bb720460f28c9d3796afa5"
 
+ SRC_URI = "https://www.inet.no/dante/files/dante-${PV}.tar.gz \
+-          "
++           file://0001-Only-export-interposed-functions-that-exist-on-the-p.patch \
++           "
+ SRC_URI[sha256sum] = "1973c7732f1f9f0a4c0ccf2c1ce462c7c25060b25643ea90f9b98f53a813faec"
+
+ # without --without-gssapi, config.log will contain reference to /usr/lib
