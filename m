@@ -1,65 +1,65 @@
-Received: from mail-dy1-f169.google.com (mail-dy1-f169.google.com [74.125.82.169])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.3796.1794728966336769092
+Received: from mail-dy1-f177.google.com (mail-dy1-f177.google.com [74.125.82.177])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.3843.1794728968101420499
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 14 Nov 2026 23:49:26 -0800
+ Sat, 14 Nov 2026 23:49:28 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=JyMS36MC;
- spf=pass (domain: gmail.com, ip: 74.125.82.169, mailfrom: raj.khem@gmail.com)
-Received: by mail-dy1-f169.google.com with SMTP id 5a478bee46e88-36dbde64409so3565472eec.0
-        for <openembedded-devel@lists.openembedded.org>; Sat, 14 Nov 2026 23:49:26 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=03PAEXp3;
+ spf=pass (domain: gmail.com, ip: 74.125.82.177, mailfrom: raj.khem@gmail.com)
+Received: by mail-dy1-f177.google.com with SMTP id 5a478bee46e88-37f14feca60so18887eec.1
+        for <openembedded-devel@lists.openembedded.org>; Sat, 14 Nov 2026 23:49:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794728966; x=1795333766; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1794728967; x=1795333767; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=4+ntavfsgKSPegECUPfqg2LMKnkkJAmrF2Iv4XToLps=;
-        b=JyMS36MCWK01WsbIKTf8oZB3AVsVWRQ/wbYDnZ52ARqymRSr/n01ZizJyigXStqDbT
-         wwVsjhXW4zOiGPW5EH0U9lwx3r2t/bl6JnHAjhGYYZI55SFEZ9vZ2YRmUJOFjwPPGmtg
-         BMV0YuFZNzWeRtPbzhHM7yNGGjmj0kKCvYdhZI+q7jHT2I+3AowL23uxHoQplUjo1Qku
-         bCxtxqXCMhDmoWu20lQEdnrIKUpkDacFeNXud2hgLe1hE5KehQCUxcTJvvl3SX3gthqY
-         wGiL6KvnFnKp4JnvMprn/Cbmz6Qx8guvbd2eBdLzaF/TFPcorRCPIxw5uMtOrrSFkxbU
-         ZNDg==
+        bh=8y+eu3y1KZG4UohppoFuq3H9sFb/XOq8zZzIMlx3jKw=;
+        b=03PAEXp3B9R0HXK/zE1H7afkGApiQK5oJHPIig96Yp89urzkg0wVZGc+aaqiU1iSxE
+         Fp3c3dLB0ltGKkW2Tp7oxvmgE72q+yyco1WqlUgDR+z0FZTud4m5CmgShgRGY3jE7YEh
+         OfVgkL/C2CrxKrBi8CQ9f0PdhwZwZb2oWFCpfPY/wyc4f62QREaM3bKH7V1/+Riq040V
+         u02rHNxXS8lUoC3d5BXZuuG/yi+ZsOlvEXb1LvP86bKLRY+K3MFT42lAJ9Q8D4bS0mtc
+         mZrtbCeoR53K+CO9tfgGFB384r3w8AmjBStUPySEh/FMm9b+EH6i7w2Guj1Vrt87AgpU
+         gL7w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794728966; x=1795333766;
+        d=1e100.net; s=20260707; t=1794728967; x=1795333767;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=4+ntavfsgKSPegECUPfqg2LMKnkkJAmrF2Iv4XToLps=;
-        b=sE5bm6Gf/tI9x1Z+VNnpcbLs0ZMRGup6AHkVVgr+RAGFBv9QmYg2hjnBxvEkd0cPw5
-         YAFeaJ5NwkfaV2t6X1lQmYIecu13A9+9USAy9u5oByIUSeqdfgSCDkUrQfkc7MdsTZvM
-         vo/aPoSMjjzHeVQXd7DEwlrrLifAJ1cmn+hRf6cefyKLHvkvIoD8Ix3LznrOBSFM7fpA
-         ZEDqpoWwqXeJ2aGacFOvIztJGihW8AR+PD4dnsl8P2NCwX4fJv96B8iuYRs9ufaaATww
-         XzzqtCGRtAZ7JWw4Fg//vG8VNobZoK6nPkaB2ONo5TiW2JRThB5oYtG7c4DlRhPc/reA
-         WhEg==
-X-Gm-Message-State: APuU4Z/CA4vqrFnwGX573WEp5O2heYTDjnBDCNXrq5l1dIP8yNNH6Fuh
-	igAnNkEi5HBfrNFFk6tYXt7biVzuAv3OXdhxY6gq9ZwVzmM6rKGKSfzPnTsQJySY
-X-Gm-Gg: AYBFou3zzJUy5sYp1CnJsESLjyUWOWpnnXR3mJl9YfsQ0vVcdfYwvGVufcCZRTmsCgT
-	ntiZuW3ijj6A0uAHbWnMTS4zjreFMbeEuO/FMVkRZaQNwY3vb9iPVUl8JJW22GQYQ16lt/BLvio
-	iR/XgqNPAk71K+sGRxk4sJs/Ag0Mxb+2f+TebkhewcHjtDjbx3uYXp5eqTEUYjViSmHkREsdon/
-	UVo42RFZegk6AnsJCRZof4LmnKtALXANBfhae7ncNlOLzMgEKqKSfIiu+Vh0UcH39GjfG2S8Bxl
-	CeQKdNbAtTfmJ6RQGrwnq2tGEg6k9Q1wVlZVbnRT1Wpn0jJmHgUHQWAuPeUzfbh/Bo2DADGgJWz
-	BjN2rXqweub9LX/jMuIit2P4Ry32iaJEkFpB3qNbGNicfjQBgaceJfLxhW9LHvjCz4cPE7zGI45
-	499E/opTNi9iZEWgzSdNg5pVa1vUdPlzFO1YrEtwZ6PR4X1BrERkBkBbjUwFuHzHI4uQ16UMaJT
-	rKTbsx+b1t2yeuYBZ3W1Wchj4nu/OMEeCNkjg9O2UHmmfLU2OchE9mxSpklEOAia4IQ/THxNWTE
-	k6QAdAgPPGupvjgwCWnqySIMNzrkv1eXTizl+RJUt+XIcYaL5T4oi+1ML9nQOhRBRkc4Kt11dwW
-	nN8pP3W4W0MnG3FTFMK/7IEtJyavp7dYsA5OfdyoGUIux7uAMqI/uj6V3DbsPEuPCaYBI+N7+tQ
-	U5UV9+xWQf37/A4Fzb1OtuzoIC4q92ArH7zGk+YNrUHMtkV36lztUneWdaUwVRzEMQztfBG5lxO
-	dUtfOfqgLVFo6PWxaEdruMT6oDEAEleDQeMMklkWswXg4sFMzJxlvjD/0WRq1OuMrUl2tZZrcJ/
-	9rye
-X-Received: by 2002:a05:7301:7193:b0:376:19bd:2af9 with SMTP id 5a478bee46e88-3796366047bmr7556286eec.5.1794728965664;
-        Sat, 14 Nov 2026 23:49:25 -0800 (PST)
+        bh=8y+eu3y1KZG4UohppoFuq3H9sFb/XOq8zZzIMlx3jKw=;
+        b=LhBjFwdzgkoqgEbYoslPs8WMoBHA24+YvpRB+cMA355MIt3yMwNVDNhV1YAYhN6+6W
+         JIDo+ffDeZq0OKd5QjYMcxrgN8UtuyMVL5Mo2SjVpGj9tgbKHrNIoMtfkzUsjWdnTMmC
+         OjUp3ViWDa4G5AS4DSEM7FQHL03bJr23lFpOJfSQLT1v5GyM9M/8XNhNS6J2WYnx3cku
+         qL3ZJFCBzg95dNx+SUy2aPcqsKQphiaVt4fuauS0iZpa8RMfQLNtAvEDeteTmRZ7LJXK
+         xtWVJaXcJ4LGvj3DIDbFSgmXnVECMRkTDV+bwwi89CfPq1LECGAdcVn7DF3K/U9MXeKb
+         tHdw==
+X-Gm-Message-State: APuU4Z/cKjjIz3tYNL+t5jc1DM0TbaD0uKHTCWfrkkCkLXy+AIFUnTLG
+	XbLmCe+yqpUohTIqnfwLhKsaT2Ye5uzx6XOjzJ/xoP4A21Or45RV7pNlaxhoo+UH
+X-Gm-Gg: AYBFou14so1R09trC7LF5dA4jTL/fdlD9mCPeZ59yDh+RGdS3dF0cc/gmFB0zMFD2VG
+	ZdMQaREP6QDdd3BsHReoUNF4w6l46A2T/7TC0b+CY0ttU2g2cyCohMDH02HXgihpolRsCh+8MK0
+	dPQTfp0R9dlUVmLBsD3qzqSWLmLMWLYO8ZjKzSOLtqndi2Zpd01WI2xGNEkF2f+xdyhYcAJ3eZ3
+	7bMgPUgWLVlKK2k5ZCYTsLTUzLfj11I+cLylT0kEjUzQEfVfFOq8b3SOwU6vaCDxmbVzVrt4YtM
+	qPNfaKj5hMRoPVV+f1hqflQyjrXYca91gB1U5Dd02TpRj2fE/jckhyCoXvwB/+6RyMYlH0u2RTW
+	h6tFQXm3/7SdIuFfvr3lOOfteRpKy/dpZ+eDVneIbBaSteZRPJGX+Qb//WE82ZEKO1/qazzbr01
+	baWDj8FG5MlbIzLJqZHyyXJxpj+o1v+PClTX7faobrM+8AQsb4oxTODQYCap2vm39cqMa9k0qYo
+	veyxs5L7LKbkA74sA8YxPKwAf2uixyoQVcnZsnvOUOSHMEW4r+EQOu/OBqYYj+TVkxEMhHG9fa2
+	evLCGAzg1UHlQKPxbZpeY15AYCu8YxDe7laA7JXi3ibYGELJe2w6dj4FdT1+snWa3BSnie81nr3
+	wNt8GXgXQ50WMO6NORvlQk5TO0K0sZZsNgkho9PqeFLWsnxaO+u7t1uDOYbNOzHmezVf+2+nvbS
+	6wTBvvHuGrJOPVg2vZ/wUf1Vs8z1dxqKjnOVaTXdFjgRR7AcEXm7RePCml3xqIU8t7l3N8dhL3P
+	YJIVTeL758qyw6LnJvUdLsVOj0uPIeFKePAf+d+AZxzPShhL4oCVJTHoWiW3novhydSeWcsN6nh
+	4SeQ
+X-Received: by 2002:a05:693c:26c9:b0:377:66aa:3e94 with SMTP id 5a478bee46e88-3796676acffmr6627665eec.18.1794728967318;
+        Sat, 14 Nov 2026 23:49:27 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3795591f4f8sm23112817eec.13.2026.11.14.23.49.24
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3795591f4f8sm23112817eec.13.2026.11.14.23.49.25
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 14 Nov 2026 23:49:24 -0800 (PST)
+        Sat, 14 Nov 2026 23:49:26 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-oe][PATCH 03/96] dash: upgrade 0.5.13.5 -> 0.5.13.6
-Date: Sat, 14 Nov 2026 23:47:41 -0800
-Message-ID: <20261115074918.2932593-3-khem.raj@oss.qualcomm.com>
+Subject: [meta-oe][PATCH 04/96] exiftool: upgrade 13.59 -> 13.63
+Date: Sat, 14 Nov 2026 23:47:42 -0800
+Message-ID: <20261115074918.2932593-4-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.1
 In-Reply-To: <20261115074918.2932593-1-khem.raj@oss.qualcomm.com>
 References: <20261115074918.2932593-1-khem.raj@oss.qualcomm.com>
@@ -67,29 +67,29 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Sun, 15 Nov 2026 07:49:36 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132273
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132274
 Content-Type: text/plain; charset="utf-8"
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- .../recipes-shells/dash/{dash_0.5.13.5.bb => dash_0.5.13.6.bb}  | 2 +-
+ .../perl/{exiftool_13.59.bb => exiftool_13.63.bb}               | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-shells/dash/{dash_0.5.13.5.bb => dash_0.5.13.6.bb} (90%)
+ rename meta-oe/recipes-devtools/perl/{exiftool_13.59.bb => exiftool_13.63.bb} (94%)
 
-diff --git a/meta-oe/recipes-shells/dash/dash_0.5.13.5.bb b/meta-oe/recipes-shells/dash/dash_0.5.13.6.bb
-similarity index 90%
-rename from meta-oe/recipes-shells/dash/dash_0.5.13.5.bb
-rename to meta-oe/recipes-shells/dash/dash_0.5.13.6.bb
-index 438d712e9a..0be7ec7cc7 100644
---- a/meta-oe/recipes-shells/dash/dash_0.5.13.5.bb
-+++ b/meta-oe/recipes-shells/dash/dash_0.5.13.6.bb
-@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b5262b4a1a1bff72b48e935531976d2e"
- inherit autotools update-alternatives
+diff --git a/meta-oe/recipes-devtools/perl/exiftool_13.59.bb b/meta-oe/recipes-devtools/perl/exiftool_13.63.bb
+similarity index 94%
+rename from meta-oe/recipes-devtools/perl/exiftool_13.59.bb
+rename to meta-oe/recipes-devtools/perl/exiftool_13.63.bb
+index 224741cce4..8372a5f153 100644
+--- a/meta-oe/recipes-devtools/perl/exiftool_13.59.bb
++++ b/meta-oe/recipes-devtools/perl/exiftool_13.63.bb
+@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://perl-Image-ExifTool.spec;beginline=5;endline=5;md5=ff
  
- SRC_URI = "http://gondor.apana.org.au/~herbert/${BPN}/files/${BP}.tar.gz"
--SRC_URI[sha256sum] = "40090101a2a491f13e901d3d48e90414f26634628b9bfff35ff540363c227a7d"
-+SRC_URI[sha256sum] = "26aac476f476cef391c600cb064417d82a5465d8fc7c4fd56158c276e86538c1"
+ inherit cpan
  
- CVE_PRODUCT = "dash:dash"
+-SRCREV = "2200871d9cef988051d2a99d67df3bda6cbb30a8"
++SRCREV = "1da714924f67763b6a8a7013dd2aa1983a16f87b"
+ SRC_URI = "git://github.com/exiftool/exiftool;protocol=https;branch=master;tag=${PV}"
  
+ RDEPENDS:${PN} = " \
