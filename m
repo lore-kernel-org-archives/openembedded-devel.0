@@ -1,65 +1,65 @@
-Received: from mail-dy1-f176.google.com (mail-dy1-f176.google.com [74.125.82.176])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.3798.1794728971287612539
+Received: from mail-dy1-f177.google.com (mail-dy1-f177.google.com [74.125.82.177])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.3845.1794728972804022103
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 14 Nov 2026 23:49:31 -0800
+ Sat, 14 Nov 2026 23:49:32 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=uEYveLUI;
- spf=pass (domain: gmail.com, ip: 74.125.82.176, mailfrom: raj.khem@gmail.com)
-Received: by mail-dy1-f176.google.com with SMTP id 5a478bee46e88-37f14feca60so18913eec.1
-        for <openembedded-devel@lists.openembedded.org>; Sat, 14 Nov 2026 23:49:31 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=CtpMXKI1;
+ spf=pass (domain: gmail.com, ip: 74.125.82.177, mailfrom: raj.khem@gmail.com)
+Received: by mail-dy1-f177.google.com with SMTP id 5a478bee46e88-37000e7234bso1044742eec.1
+        for <openembedded-devel@lists.openembedded.org>; Sat, 14 Nov 2026 23:49:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794728971; x=1795333771; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1794728972; x=1795333772; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=PNbYywGFqHW+wWPqRKnmCDizvH6d6vepRdcS50gDVlk=;
-        b=uEYveLUIeie9SsjV67oi039OGrNslxWn3dd+BVifyB1S9b/nlD+WmQgz7BA4MsJuhB
-         tR2XnuAfc7zX8SSIkWR7pEYTjZlsb70L6lBbx1FgYYKCy0oJ+GDhfnDPTQfItEVUiFGT
-         e7u0B51mfaLa35OYswrVIvRH8DfGJLocevXM5bXP8N7gDi4p/COyayI5G/a5C+YMRx9a
-         53Ai++AnledkDu5XrBx9OmOhqdJoWTKwyjfH2McLj6Tz3nsuo3R/RTjMUSgjbqwkDcod
-         H1h+uibC7MpkeWL0GlMbW1pzxPc7YMKoiiiJ2LA0U2rCE2BvbN0YFpCTL9DS8a3AobAB
-         cxFQ==
+        bh=qixTN4qwTHog331O++n3O2rpTerS1VmdF+ZrZJO49/o=;
+        b=CtpMXKI1KfFi05hDRBGV1pBo6z/7jgABE3nzQfxgFURP9hDQ4s3QpZeUH8slSjzayT
+         7QkWnOOnkGt4b8z8zKQfBa8VVBKimBY0hSwdm1wonG4HI7dgR108o9dsLUD+R6cBXhyf
+         YLFg3qU7LgVJPixoFpZCK0lRCyOQjU/0QIFNpcauO5DukmFgfSw6naScgSlBGGXg97Up
+         AVmEb/7b3QC2LA0F1zS79aRQgVaxkhR8Q/x6spSp607dB7uaehpann0s9iWN8uw4Gthi
+         j6sg0aR8NYfMt4HNMEEAp7uUanUE1PB2j9esHy3R/vQ+AYNUhrVTWJcIZTWFDATtp+2s
+         2cZw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794728971; x=1795333771;
+        d=1e100.net; s=20260707; t=1794728972; x=1795333772;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=PNbYywGFqHW+wWPqRKnmCDizvH6d6vepRdcS50gDVlk=;
-        b=L6+mMpCxlYnxyeWWZvGM44HNOQSeEKyS4dxZLNm9IQh+/oBaBn88ZhOgFGziq8Tueb
-         ulACBx9KGw9TdiWB8osYJkfH+D5ROZK0Mw8I6io//uocWMajAVDFrXh16DTtPV78e7s/
-         4FSh8UHvOfdrhtE+SIaM+V0flDKPd2MnnnQ+HoSn201WRYQibln6tnITf3qu+YOJqgZf
-         kfC7hxNBzkmqygjLhiQJQpPmyeKQmDl3wh+orsIDlmEstDkBoCnuPuYJrQjPfO4ozsnb
-         CVyEfpu4sLw030/UD7H/vyWqmXtbhQvfwLT67UxFnmzLOHYwHC9DRiwlqBMSW55pP9zu
-         l4Lw==
-X-Gm-Message-State: APuU4Z8ubpPziYyViMNYV9ip/I5KH/kP23rUyl53YTqZ/Qw6JqP2eEoz
-	XekLir6J7hUmwegiRdTGD16Fr5+ZtwD9+eJufWYZ9BAf3qJxAOgAfJeLP00zQHzq
-X-Gm-Gg: AYBFou0VvVpcupqTGnjLh2PQtSHGaAbsilqQcvnnhcSE7wFfjKYXqXtNa9F8gjCorZO
-	C7c8omIgHWBpqaz79AyIvhaPzegkmXBMLqcPRKETxU3YQ76i+I1QAxIf6syV/Mgj7O1c/3h3x0+
-	7PBIXnbFKRH1OLthn7ohktXAq8Ln2wUhpyZfi8xvKCqyLATnr1S4qkKGiAVWtDAjc5nqUgySDCv
-	ptgJh+5fTw2jz0lAswhs+YcZXYyYR7umPHNbLohO3AT5ARGJUAzRSeh53xdWXsmG76MZvXj9MPL
-	9jbwv/B+e49V3D7LwxYzA0QgHQwt4qWtjIcl0xWI9ciCe7gAeZA0AXSWV8xvEnN2uhhk+fI3tQZ
-	7XY0nvZVqcwJb0VEiXxJVPfXiNQ9Xhac9lztUjTJDV2apTewu3jcUGBQiKJyKacnMIB1cj9orb/
-	KTs5xt6VzzoC/QfoSkcOWrKzxMf60/amuWB8aGPttBUvDIgr5BW9WIjES6xIy8rsMmtXv6phblR
-	eNfQK7kHEf4NP5BA0CSZjGWoPzuk3AUWH8eLuSke7Eq/p355REGVAymZWioCBP5rrZKm9JykAkM
-	xIZvEefAF+V8c0c+SfduYAnj4Ae7YBkGiUsHBcL2HrvRPTM+kk86ERE01FwXLLY4I5mEnCtgkjn
-	02rNE6WUEmFzlJHIj7YOtEvddXpRIIRZxE8t6jR4Cvj9uuPbkl3yqtgqv2SDQRXL6sy3ANbJCaE
-	/dEEQd156+BJZgBgM1dMGf9zK4X7wVldfNC5WNnpujxxEiaVa+Gyq+w/g/hUdPz30Jga7TLHcuU
-	p9bPwgxUTBnQHEIeoRiQFB2HrJOqmfwgjdzopOsMr7wZuiyMCrUbvVXkPsjn+4Fw1UDlQw6gBxP
-	RyNp
-X-Received: by 2002:a05:7300:c88:b0:36d:7f5f:7e97 with SMTP id 5a478bee46e88-37967dd734emr10586230eec.40.1794728970543;
-        Sat, 14 Nov 2026 23:49:30 -0800 (PST)
+        bh=qixTN4qwTHog331O++n3O2rpTerS1VmdF+ZrZJO49/o=;
+        b=a7ScWbAm2vlqFxPs2Cg04kSA3lfUqwwwYGP0b31PD7KXc5ePlpkDZK1aKQYAfBi3ou
+         tvHbe9FLPZreJoISlzPsjCGaUU4ORBiSvctyIZ0OEUXXixgtEZLQ0bJKNvl+qsosszc+
+         MTbdELXhn4RoSs4Q7s10IE7ZbCC5yFhO5xV2pR8eyvFEI3Zrpg8Q7GDxWkkBJ0RSiPgt
+         R932O7unr3Blgm/Jp4JfiWA32r1KS2IxD9U6RGNDK05lVnLFoKxvSu5z53IWTFKAWXbh
+         EhwMEjRDp2UT5JFheFNMIIMvKtEFRlewXNMkfrB5b97qpxMFSrlYDftt2olhErGhsGZk
+         xtKw==
+X-Gm-Message-State: APuU4Z8L4CcLTYY20CzEQMXwCF0nM1Lf+92D2KrJXANPkB/uXWFb+RqU
+	vlKtrAyyQ9mI5o7H53BTM8PXgR3fPGBlqCjZMSRI523Xp2jHA+THV+RRkELL7wag
+X-Gm-Gg: AYBFou2VZFP7OppANmM0hft0PCThuGquQT0/JpxGDuv85oVQA4xaVlx8RHmepXwfq2y
+	DEIoTDTWhDA8xun3AlAELhpyrGG1IIWQWM9gQfPE/k4B2+z0eLrVd9hPvh5VcV65qcM6shu90YH
+	dpVpmDIU7H+A9IX1aAJIj1AdRkd6GVxLtfdaZycz6e7bD/wJhK8haxkgPqBjYcCFZA39SZt8ugn
+	RoVKpGBfbZRluoUHzAp83I4vQUZaf7tuYLh5HMws0sHHSXxONG9KTsUVTI01RU195RTTROJgm+R
+	Lhsov/vWGM1M31DzhlGoIowsE27QVMdToKcyDqGoX+MOlEL6KmP29K6geSCK6ggSVO5qRfeI0aE
+	oW/tAkcmpTq0ZeS57OXgnuT9nI48lMuEOdedapA9F96Ci3KKaxQKZlUvHAxh9N82BLqPMZgKYNN
+	f7KCcN/q08Xx1NwkztDnUUmNYm7NvVEsAkIHrMV68L+DM8cATBdve+8h9GV7EIsg/HTc2zyKJiZ
+	/repQ6CEAiZYHzLZ3wv0+ZfUpjck6HrqHKLCd4PF8sFzuNgfrf70dvvjevReo/3zg3mcWBrfcMM
+	lKNyLOv9vgSmi+TzaJ8toaoXPfUvnP2rt9WPwLWS776bpnn9dzAXSTaCcf17ETKQ1KDwNRDCivb
+	7JpWvem3SPnmugc5Q0OIOC85tLruNjo1gnurA2+rklv6mKbBbRdpIRWFHCt4wTLp+/zNXPpvsxW
+	PMfipGafmvro2J6dCc9jkLb7rHqstmSoJMooOrYWKddSngp7tam1XAVpUduyA0CJ1fGZGDQrwkg
+	1hgPYZzQwW9XhZ1Qnv6g4kJf/kFWBXU9yAqJA/5hLhiqPecCSfjv6nqprKkdwBU2s+X9yEJ/vcJ
+	iRB9w8xgXy+c73KegChIDw1v+g==
+X-Received: by 2002:a05:7022:1701:b0:1b4:f5cb:ebe3 with SMTP id a92af1059eb24-1b50311597dmr7209038c88.16.1794728972097;
+        Sat, 14 Nov 2026 23:49:32 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3795591f4f8sm23112817eec.13.2026.11.14.23.49.29
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3795591f4f8sm23112817eec.13.2026.11.14.23.49.30
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 14 Nov 2026 23:49:29 -0800 (PST)
+        Sat, 14 Nov 2026 23:49:31 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-oe][PATCH 06/96] gosu: upgrade 1.19 -> 1.20
-Date: Sat, 14 Nov 2026 23:47:44 -0800
-Message-ID: <20261115074918.2932593-6-khem.raj@oss.qualcomm.com>
+Subject: [meta-oe][PATCH 07/96] gperftools: upgrade 2.18.1 -> 2.19.3
+Date: Sat, 14 Nov 2026 23:47:45 -0800
+Message-ID: <20261115074918.2932593-7-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.1
 In-Reply-To: <20261115074918.2932593-1-khem.raj@oss.qualcomm.com>
 References: <20261115074918.2932593-1-khem.raj@oss.qualcomm.com>
@@ -67,35 +67,29 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Sun, 15 Nov 2026 07:49:36 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132276
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132277
 Content-Type: text/plain; charset="utf-8"
-
-Update github.com/moby/sys/user to v0.4.1 as required by go.mod.
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- meta-oe/recipes-support/gosu/{gosu_1.19.bb => gosu_1.20.bb} | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-support/gosu/{gosu_1.19.bb => gosu_1.20.bb} (89%)
+ .../gperftools/{gperftools_2.18.1.bb => gperftools_2.19.3.bb}   | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-support/gperftools/{gperftools_2.18.1.bb => gperftools_2.19.3.bb} (97%)
 
-diff --git a/meta-oe/recipes-support/gosu/gosu_1.19.bb b/meta-oe/recipes-support/gosu/gosu_1.20.bb
-similarity index 89%
-rename from meta-oe/recipes-support/gosu/gosu_1.19.bb
-rename to meta-oe/recipes-support/gosu/gosu_1.20.bb
-index 937c45b96e..3b9b10c89b 100644
---- a/meta-oe/recipes-support/gosu/gosu_1.19.bb
-+++ b/meta-oe/recipes-support/gosu/gosu_1.20.bb
-@@ -9,9 +9,9 @@ SRC_URI = "git://${GO_IMPORT}.git;destsuffix=src/${GO_IMPORT};branch=master;prot
-            git://github.com/moby/sys;name=user;destsuffix=src/github.com/moby/sys;branch=main;protocol=https \
-            git://github.com/golang/sys;name=sys;destsuffix=src/golang.org/x/sys;branch=master;protocol=https \
- "
--SRCREV = "6456aaa0f3c854d199d0f037f068eb97515b7513"
--#v0.1.0
--SRCREV_user = "c0711cde08c8fa33857a2c28721659267f49b5e2"
-+SRCREV = "29b939aa5bd4dc588af765b8248f6e39150d2565"
-+#v0.4.1
-+SRCREV_user = "85a71bbe1faa36c552a960e6a5f3d0cfb632fbbe"
- #v0.1.0
- SRCREV_sys = "95e765b1cc43ac521bd4fd501e00774e34401449"
+diff --git a/meta-oe/recipes-support/gperftools/gperftools_2.18.1.bb b/meta-oe/recipes-support/gperftools/gperftools_2.19.3.bb
+similarity index 97%
+rename from meta-oe/recipes-support/gperftools/gperftools_2.18.1.bb
+rename to meta-oe/recipes-support/gperftools/gperftools_2.19.3.bb
+index e4b7060c78..22cb19c0bd 100644
+--- a/meta-oe/recipes-support/gperftools/gperftools_2.18.1.bb
++++ b/meta-oe/recipes-support/gperftools/gperftools_2.19.3.bb
+@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=762732742c73dc6c7fbe8632f06c059a"
  
+ DEPENDS:append:libc-musl = " libucontext"
+ 
+-SRCREV = "d837a42788ba591d5d791c3b686f2738e7a93562"
++SRCREV = "f21715726a385adba7ce3a9db2df6e18b5b6bc5c"
+ SRC_URI = "git://github.com/gperftools/gperftools;branch=master;protocol=https;tag=gperftools-${PV}"
+ 
+ inherit autotools
