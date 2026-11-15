@@ -1,65 +1,65 @@
-Received: from mail-dy1-f172.google.com (mail-dy1-f172.google.com [74.125.82.172])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.3863.1794729013497560755
+Received: from mail-dy1-f180.google.com (mail-dy1-f180.google.com [74.125.82.180])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.3864.1794729014857058552
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 14 Nov 2026 23:50:13 -0800
+ Sat, 14 Nov 2026 23:50:14 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=KfQVPpxS;
- spf=pass (domain: gmail.com, ip: 74.125.82.172, mailfrom: raj.khem@gmail.com)
-Received: by mail-dy1-f172.google.com with SMTP id 5a478bee46e88-37986eb6fa2so2504008eec.0
-        for <openembedded-devel@lists.openembedded.org>; Sat, 14 Nov 2026 23:50:13 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=MJtC9j5m;
+ spf=pass (domain: gmail.com, ip: 74.125.82.180, mailfrom: raj.khem@gmail.com)
+Received: by mail-dy1-f180.google.com with SMTP id 5a478bee46e88-3712b6d9843so1902863eec.1
+        for <openembedded-devel@lists.openembedded.org>; Sat, 14 Nov 2026 23:50:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794729013; x=1795333813; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1794729014; x=1795333814; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=hg8XhqGcBR1E2FRnQzFYC0HtquhpNCH6g6E/iap/oEE=;
-        b=KfQVPpxSue36zXboNYx/e7M5d9P46edYquzgUxo2xOq0qV5HdNThXOFeFgMmwD2Hsf
-         +SQEL7z3ixFROm0+fPdboo6L4xdfzNhraqbFnoDGQFwpdbAkv/FTZSpp6DhEF4UHb37d
-         a6NPRbp+oZMtVsZIwYkwcreLPoTyIf8Y6WxCFgrGPlb1rkdFZbfsvKnMfZvw0h5uyKqY
-         mGDC+9RlHwfQUVFAs17WtGZFPXIVw4qiPIx0B17q1D1Lle8JYzyk4kDgeVX4XHYG1qf/
-         xAkqp8V7fpYK5JrpXMI/LGP4s0DI47LIQsBVAj/6LPXQBoLcRtr6Hu8JdHXAHhvqrB/p
-         DFiA==
+        bh=ltnPhRagSHVSqnQOchn2DnsY2W4Zg2G2X3ZBG78ndRE=;
+        b=MJtC9j5mfK4QBbYAfcjIK9eozbjWQT9vCQ+gj7FXhEnzjQ2RdImQrJhP6eg4slwOEU
+         v/dNHZxjKdyjPjueWmxO7/Sr3/c5AbZWw1FjUJbJ1l97mm7tdYCmPEBQUV+eRN8MWrda
+         MJbirH/jrbr2990w5QryaZ689HnBsWDnVVnWxpGjliPK61b4nV3q6rxk50lnjiWAOaNd
+         Rvi880sKLlDmiT5MrkYXuHT6r7wTSjKBNXWYwSPDslrlb6wB+SfoOF/iuzghNtJf3+tx
+         tk2jN8rimX714iGhgO0iGjXCYMO/ufazv44JcV1kaAmfrZdj3CaX38oWQgtWtru45CRZ
+         M0aA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794729013; x=1795333813;
+        d=1e100.net; s=20260707; t=1794729014; x=1795333814;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=hg8XhqGcBR1E2FRnQzFYC0HtquhpNCH6g6E/iap/oEE=;
-        b=ga9VNKoWku9xWyLmeqCe0Ia25fbk3Z6BpCmpA98qErUu2W4Jd5o9QzBvQHymhUl+Gu
-         LRYKiZYxdV8hwTG0CJqeVoPbEXMI2AS1qo0gHAftYAVIJ9xnr5LgD5+i+6IevD48o4vy
-         kABe7+nH7ZH3O1Wyd+qfvV53LDpYefC1C+vkyXmMOYsmFTwFCNzCb+OVHGD0renlKcOl
-         lPadjX5xC7fYXfKLW0lmCC6blL0OKMgUZY68zDGbumDdgZETPPGaEmAwWoGC4C72kfQT
-         PbNZJcZLGUP2SSf73NIg9Rv76Fsl+/p7+0todgN1/VMy5HOVfKm7SVc1sgDFd9/v1F5J
-         9tKA==
-X-Gm-Message-State: APuU4Z/hW35LDFOajKgYS4pMfFIFZb6CGMrof7rkDcNCwjDBshX7l4mE
-	qf222yxEdwkeRAruU/pu8RSw9pAKEnHWKWawp0UVEwk7TEJXSsXdfJOkMDeFlqtS
-X-Gm-Gg: AYBFou0MVkDXWTHGs2IgyI6i6cbpOqSBv0Pm7YkvACl50KWnkt5pjev5MZEAW4icWCN
-	TGCcY83cbWVoRH7iumxbLLlc2wTOTT9EP2XRplRaJORaaJszOwEH4IHRl0BISvdh0nvSw70B0ta
-	3FCWCfafu4X5iO2A87DC1aN5XljvaA/U4KSzpBUSYd7f1Bbp3RaAlyK65lz8q2YmAGzRfxPGn1L
-	40Vya3XZFmzEDiwBZhvNSk4hWeTI4C84bddAVPqZ+xqDenbivzYA6PJmI+P6oIFKFB8RYYB4NzF
-	9GHvQT8rxbeo2sOwt5dMXoqZRGj5QAMtN4KhjOgOvPy5j0O9I/+89zU8jn+JMhAVX6Y8rxE6HHN
-	fz+wd5tcXwraUKo28HVNGaa7yL3RO2Ex0ruwFxBUK6kWNj90MOLA2iaVx2iBogkVeCQ6qKMxfso
-	6+V/VgenU0wg0Ol49hXHuHf5RCN0si6PWQKYqyIk8+gph9AM+pmk6XqvgMm/5W8OMEPlTPSJZ0l
-	eke1zJkytbT5542cE5JX+jNN8AdotfG6LkIAYKhD9ewZxcrws2UbmOfEUbX3lpbi+yv4RG2BMK4
-	372aJSUQUWxWjrg3zUb9iHfuL3Z4xW6DxXMUl5fFZTt/zn6wdtmWAsXdo0hSYVGSLqNqeafsrDe
-	MAz1xHStCruNWnylRLwT0rEb0Bty4VBm1FkGQne6o5/PTimYleal8+rIMwmP0LGqkHsa3QwCfkn
-	JM6MYRzP4oU1w1Vkj1LgJIccvlLaVQEwl/Lus0smwvjzq6FH88/Y+0AZJBvl8EXzMmTLxXxgkkm
-	DZRdTzK9Pvchinnde68Khr3gcdp5PVJxejEW7ZyzcSrJwU32P59B/ca2v2P13iY8gBQ4a6jBdG7
-	eyDz
-X-Received: by 2002:a05:7300:d946:b0:36e:2626:4ace with SMTP id 5a478bee46e88-3796365edc4mr7827520eec.5.1794729012786;
-        Sat, 14 Nov 2026 23:50:12 -0800 (PST)
+        bh=ltnPhRagSHVSqnQOchn2DnsY2W4Zg2G2X3ZBG78ndRE=;
+        b=vfxCdGHgHdvcZKLT2qB3OHl8NQFCeI5TA6FPAF05lFy8mnECr092NJMqwdO7UJ+UJx
+         sbqmrPpDHwYU5jU9L35q1fPlkT2+maBZ7rRpDdI4QVYLOLNeMVpmPLkvSymnMpwkAzNm
+         piC+FcMAbZ9h3w0ZYcSAKYtMQ5zoD2L9s4X1ZkKx3yklUmBkp/nOEzuC12XG3Au2gWOF
+         uaR4AzJ90MJDSUsOF6vmerqWfc3138KQRIWz8N2lz/sSz8eJmFSpllNfrs03FQTUx99H
+         Xsc9q3MPzxqvY9Hk0shmfcY4WzD7OgWVs1zuFrdXT1nXXWgOms14SJelanz6t2ZpfmUm
+         D8Yg==
+X-Gm-Message-State: APuU4Z9v4mP3QA990wTygHgAfxT203AMZVxBOZxHhF/0oEQGF2Fdv/6I
+	sVRCxSraVXOPMJsPWUFROJJcW775uvLRH9bs0Ev5y12OLF2tpxUuQzB4mQEfXaGw
+X-Gm-Gg: AYBFou1i2sGBhhuVKEQVzm2ps7C9G+HUl8akyvTbIHZ/YOdo6G0hCf+o1VtRneG7BVc
+	lxo6PbyXaFsBO/WPc7ZE+W5GuFPcT1Nb95YM2BCmnHXtEidFU6LViRon00iCvPGLAxQP53y3ZZ7
+	uhkManBbdYsqESZ1Vhnt4ta+8kvbJX/6HTyfpdzPbrHHntYbZGUrO/ZQhVpCyjaENeYqhHvjSh0
+	5hCyACGbIPk46zbGeNwv6s0KGjTLdiuhjZyf9XCk0Wsoemd3ay7FbeJdgf5FLtmmrIq7pDcOwmJ
+	EW0XKJNiDwi966a6rA5u5JfmClYHiKNwFovQcadzYRSwazuZjPu3B3dP9CAuxBkgOsbYD8YgwO1
+	QU8T6DjSmTwz6BJE5w/G6e1MJxnPNw51EOnygisA7Xyz70cnUqGt11Ft3xSMSKjNprdEQKnhIQ8
+	QpYhCB2CNveiG7UMSUQjhFt03EcNBGHLyaxtxTSEZwyZOLhgguu+ADW5ZgqWVwsXjaDEzN1fn5d
+	OnCFc3aZi7nBJ2LR0toZ1yQ44ES1YD7uZAxhIZk7GHv5STLneouNnUhw2MLBmdo1T557Mn748iu
+	zFJ6lN38iNDOcols1+HG9PcfmpT9oEPFLCcxwFBRGXPVlrMLel2yXg71vWZ4U3O68YcMcM2ZIuK
+	qn8t1AWDxBJADh8PagLknZqOCz7xcdLxrKFbUd2Dz/+ttKd3UmKWjJdt7sdp+GIUhS+YbGyXaL3
+	4hhs7xUwtkXiWBhaCRcKtzBWfPxu0fHsaR8BsGW1+M3Y6hrfeIYp/bBo6DT1Ii0j1VK5sxXVTmD
+	w0luvtZHjktOKXOi33vniJcYdDYXu8ST3hdG6+HehrpPOLynOB8AhuMUKTtRHVHQ9G1hil03g/i
+	gOuy
+X-Received: by 2002:a05:7300:fb17:b0:36f:6d81:3f99 with SMTP id 5a478bee46e88-3796676fd59mr7248420eec.7.1794729014195;
+        Sat, 14 Nov 2026 23:50:14 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3795591f4f8sm23112817eec.13.2026.11.14.23.50.10
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3795591f4f8sm23112817eec.13.2026.11.14.23.50.12
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 14 Nov 2026 23:50:11 -0800 (PST)
+        Sat, 14 Nov 2026 23:50:13 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-oe][PATCH 32/96] linuxconsole: upgrade 1.7.1 -> 1.8.1
-Date: Sat, 14 Nov 2026 23:48:10 -0800
-Message-ID: <20261115074918.2932593-32-khem.raj@oss.qualcomm.com>
+Subject: [meta-oe][PATCH 33/96] md4c: upgrade 0.5.3 -> 0.6.0
+Date: Sat, 14 Nov 2026 23:48:11 -0800
+Message-ID: <20261115074918.2932593-33-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.1
 In-Reply-To: <20261115074918.2932593-1-khem.raj@oss.qualcomm.com>
 References: <20261115074918.2932593-1-khem.raj@oss.qualcomm.com>
@@ -67,84 +67,41 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Sun, 15 Nov 2026 07:50:20 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132302
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132303
 Content-Type: text/plain; charset="utf-8"
 
-Drop 0001-utils-Use-name-of-the-first-prerequisite-in-rule.patch, the
-Makefile no longer passes headers to the compiler.
+Upstream now tags releases as vX.Y.Z. LICENSE.md only changed the
+copyright years.
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- ...me-of-the-first-prerequisite-in-rule.patch | 37 -------------------
- ...console_1.7.1.bb => linuxconsole_1.8.1.bb} |  3 +-
- 2 files changed, 1 insertion(+), 39 deletions(-)
- delete mode 100644 meta-oe/recipes-extended/linuxconsole/linuxconsole/0001-utils-Use-name-of-the-first-prerequisite-in-rule.patch
- rename meta-oe/recipes-extended/linuxconsole/{linuxconsole_1.7.1.bb => linuxconsole_1.8.1.bb} (95%)
+ .../recipes-support/md4c/{md4c_0.5.3.bb => md4c_0.6.0.bb}   | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-oe/recipes-support/md4c/{md4c_0.5.3.bb => md4c_0.6.0.bb} (61%)
 
-diff --git a/meta-oe/recipes-extended/linuxconsole/linuxconsole/0001-utils-Use-name-of-the-first-prerequisite-in-rule.patch b/meta-oe/recipes-extended/linuxconsole/linuxconsole/0001-utils-Use-name-of-the-first-prerequisite-in-rule.patch
-deleted file mode 100644
-index bbfed0fd82..0000000000
---- a/meta-oe/recipes-extended/linuxconsole/linuxconsole/0001-utils-Use-name-of-the-first-prerequisite-in-rule.patch
-+++ /dev/null
-@@ -1,37 +0,0 @@
--From 25f54c3359a0fa34890030662e9b02e0a9745f4f Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Wed, 13 Apr 2022 20:57:38 -0700
--Subject: [PATCH] utils: Use name of the first prerequisite in rule
--
--Use $< instead of $^ because the latter will specify both pre-requisite
--inputattach.c serio-ids.h files on same compiler cmdline and clang does
--not like that and errors out like below
--
--clang-14: error: cannot specify -o when generating multiple output files
--
--Upstream-Status: Pending
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- utils/Makefile | 4 ++--
-- 1 file changed, 2 insertions(+), 2 deletions(-)
--
--diff --git a/utils/Makefile b/utils/Makefile
--index 1fc51ab..a7434a9 100644
----- a/utils/Makefile
--+++ b/utils/Makefile
--@@ -46,10 +46,10 @@ endif
-- evdev-joystick: evdev-joystick.c
-- 
-- inputattach: inputattach.c serio-ids.h
---	$(CC) $(CFLAGS) $(CPPFLAGS) -funsigned-char $^ $(LDFLAGS) $(SYSTEMDFLAGS) -lm -o $@
--+	$(CC) $(CFLAGS) $(CPPFLAGS) -funsigned-char $< $(LDFLAGS) $(SYSTEMDFLAGS) -lm -o $@
-- 
-- ffcfstress: ffcfstress.c bitmaskros.h
---	$(CC) $(CFLAGS) $(CPPFLAGS) -funsigned-char $^ $(LDFLAGS) -lm -o $@
--+	$(CC) $(CFLAGS) $(CPPFLAGS) -funsigned-char $< $(LDFLAGS) -lm -o $@
-- 
-- ffmvforce.o: ffmvforce.c
-- 	$(CC) $(CFLAGS) $(CPPFLAGS) -c $^ -o $@ `$(PKG_CONFIG) --cflags sdl2`
---- 
--2.35.2
--
-diff --git a/meta-oe/recipes-extended/linuxconsole/linuxconsole_1.7.1.bb b/meta-oe/recipes-extended/linuxconsole/linuxconsole_1.8.1.bb
-similarity index 95%
-rename from meta-oe/recipes-extended/linuxconsole/linuxconsole_1.7.1.bb
-rename to meta-oe/recipes-extended/linuxconsole/linuxconsole_1.8.1.bb
-index 7ad8549420..24b2c58b6a 100644
---- a/meta-oe/recipes-extended/linuxconsole/linuxconsole_1.7.1.bb
-+++ b/meta-oe/recipes-extended/linuxconsole/linuxconsole_1.8.1.bb
-@@ -12,14 +12,13 @@ DEPENDS = "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
+diff --git a/meta-oe/recipes-support/md4c/md4c_0.5.3.bb b/meta-oe/recipes-support/md4c/md4c_0.6.0.bb
+similarity index 61%
+rename from meta-oe/recipes-support/md4c/md4c_0.5.3.bb
+rename to meta-oe/recipes-support/md4c/md4c_0.6.0.bb
+index 12bcf15a87..2d7f2e2fe9 100644
+--- a/meta-oe/recipes-support/md4c/md4c_0.5.3.bb
++++ b/meta-oe/recipes-support/md4c/md4c_0.6.0.bb
+@@ -3,14 +3,14 @@ DESCRIPTION = "MD4C is Markdown parser implementation in C."
+ HOMEPAGE = "http://github.com/mity/md4c"
  
- SRC_URI = "\
-     ${SOURCEFORGE_MIRROR}/linuxconsole/linuxconsoletools-${PV}.tar.bz2 \
--    file://0001-utils-Use-name-of-the-first-prerequisite-in-rule.patch \
-     file://51-these-are-not-joysticks-rm.rules \
-     file://60-joystick.rules \
-     file://inputattachctl \
-     file://inputattach.service \
+ LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://LICENSE.md;md5=383f39920f391605af6e8e46e60e2378"
++LIC_FILES_CHKSUM = "file://LICENSE.md;md5=f63468506b3d106579df14c9ffd34df8"
+ 
+ 
+ 
+ SRC_URI = " \
+-        git://github.com/mity/md4c.git;protocol=https;branch=master;tag=release-${PV} \
++        git://github.com/mity/md4c.git;protocol=https;branch=master;tag=v${PV} \
  "
  
--SRC_URI[sha256sum] = "bd4d4b7e37da02fc67e47ddf20b6f1243c0a7af7b02b918d5e72138ea8727547"
-+SRC_URI[sha256sum] = "4da29745c782b7db18f5f37c49e77bf163121dd3761e2fc7636fa0cbf35c2456"
- UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/linuxconsole/files/"
- UPSTREAM_CHECK_REGEX = "linuxconsoletools-(?P<pver>\d+(\.\d+)+)\.tar"
+-SRCREV = "472c417005c2c71b8617de4f7b8d6b30411d78f4"
++SRCREV = "7fc1815a5eeba2af7d6120a76202bf59f3b6e6e4"
  
+ inherit cmake
