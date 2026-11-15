@@ -1,95 +1,95 @@
-Received: from mail-dy1-f181.google.com (mail-dy1-f181.google.com [74.125.82.181])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.3795.1794728964752748643
+Received: from mail-dy1-f177.google.com (mail-dy1-f177.google.com [74.125.82.177])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.3846.1794728974522603535
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 14 Nov 2026 23:49:24 -0800
+ Sat, 14 Nov 2026 23:49:34 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=feJ5DOQc;
- spf=pass (domain: gmail.com, ip: 74.125.82.181, mailfrom: raj.khem@gmail.com)
-Received: by mail-dy1-f181.google.com with SMTP id 5a478bee46e88-33bf40b0c8bso1428544eec.0
-        for <openembedded-devel@lists.openembedded.org>; Sat, 14 Nov 2026 23:49:24 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=UQ4AYLy9;
+ spf=pass (domain: gmail.com, ip: 74.125.82.177, mailfrom: raj.khem@gmail.com)
+Received: by mail-dy1-f177.google.com with SMTP id 5a478bee46e88-36fc0a3fe93so4584013eec.0
+        for <openembedded-devel@lists.openembedded.org>; Sat, 14 Nov 2026 23:49:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794728964; x=1795333764; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1794728974; x=1795333774; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=zLRq3YOSO+R/0/GMZT0rSDG3VNV5/0Xp3yugQmjvYn0=;
-        b=feJ5DOQcUkqdzn4wXJOYiXbqEK+FhTabvHPJLMB++lYLsENfocIWl5pMqqN9Mxns50
-         NW3gNYfT48//PoabkPRwfYNjzWtlHUbXJK05WJYAPu6jKUc374Ddv18hJC2/yE1i+7lq
-         wCDydscvplt1Q5JKGiqkgv40lsboqQ3o3G2Lo3WXXg6MsTA/jg+CH/eFipx5oLvfHuGW
-         FHTjNTaKdZ+PGyimacI6ZqzBRfvaw32RhbdlE53wPALTBEIubJuS2sy5iWnRgZYD/ip2
-         RGGBYDN/0MrCcxZnbiG+j4VlvPEwVR1ClpsWhkaaWuXzErxL+RNxoYnnfxuWGFZjCw7A
-         zhcA==
+        bh=7JUAxO8ILZQ9frEgCa2O+qRmIYDSFy++SiKj4sqXyiA=;
+        b=UQ4AYLy9NQIyINPxC2HsQUoyDUheDzZA5LaVJuUGiWkbvj5suKcpzT0G9Tn8l+tqQB
+         y5tp8MSB2WvaX3VQ93VBp7o7nCPmPdSo79IZu2kcL6PvX+pZqXSziBa6XvHWql/IRWza
+         nXINynICLbcZn/2p/9Em9tkKtcwRl2vzNiamNg9VgtqG7qdsKIPvjMLjKrZoULUIkS9/
+         9SXgLCfu0uO5IPC6qZcnFFDQEqZR8t7lmMp2TJ8t8XXBI0Ob3bHYkoIR9+o8oRcw2aN8
+         87UaGQC0OTnXXdJjkuoLERW39AjfOZYkQ1Qqr+eWXchFsePESuz8F5gea48TZ2k9fnop
+         1ddg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794728964; x=1795333764;
+        d=1e100.net; s=20260707; t=1794728974; x=1795333774;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=zLRq3YOSO+R/0/GMZT0rSDG3VNV5/0Xp3yugQmjvYn0=;
-        b=PnGCxBBbLryUahhzLzUwfAeWTUwnD1d7tYRBVTpnWj464dZzhPFnmTaQM4nmyIP1TI
-         4ynMr6wrz14SGmO/GKyzssZkBX32BKFB0C1AhrSmKSikvxL6rAbIKB/V2wwl3YOoOqdx
-         BcPBUtK0aXZbTGD9XQCTLoe5OekVRxxaxoynysxUWFvndDmwqneVI4eoGj124IDgxOyr
-         v4+Slmezo3H3SgiebPk8opxN6TGHQZtItL+7OVEqZQrzBNssamlgFWaFIq8G19CkbXTW
-         1tZV6dliWzsXYzHnDMRFdV6ZsyifZa3RO8YnGbKXXHdg+NWbTNn+L8AecoHAJWxxJgNA
-         9p9g==
-X-Gm-Message-State: APuU4Z/Ky8bx+ibhtSobNGdRTBUmnCK8dS/qpkbthC2c9Wp0u1kK3r6n
-	2CK9t0Kg9RxEeqIh1ONljBb75LgqCQVGp7sNTAh/k/TC5Ti10jPCTe1Ka0ONz+fe
-X-Gm-Gg: AYBFou3iPBMqajDSxcLVHTJseE6GO6EgXRaZOM+Of0QDT347KGaj4r/RVS5QOhB4oAS
-	szvYg+wueR6uWEWKpORiEnkCxlNI9qxj0cU78if/pPyUeITEJFElOR/Mpcfvq7jjqQiO+yJxjqC
-	tcCtdbxaA1rZY04itYh7fItLNLaLcT0srueM8WNX/B9DdSxxXo5mB+mtmpc7HnJ84iWjgMtM5oq
-	53QP1TbshOffi28C7FmCM6c+HttSBuWG2fEHCBOYnxt7WHoqQ4U8EFV1gZ0Sv4GF0Ibtz7AbSoq
-	2ctPpEvdZocvjK3G9Vr2VkQBtC3x7y+hTL8HoL56+yJFhvdKMVpwr9RtGy3S5QRRTHylrHjkG3t
-	kj2FX3Nn2XfTVdqp5zRU/G9v5eyEGtO0YcM120vn/CqWRNp4+X7w09Q97CIDwZ9l0iUDNyRXCg5
-	77CvvPIxQRyce3UROVsq14SfecH1F/BasMUfMUype3zlO8BeXn5RNYpNJ9G5tTIYnZoR4UzlM+g
-	bm1vQqQEPv0jo/kB5Dx6a5a5DX9Vgyj7Z4oY03r3/UOUq+B685+pKH+FJEHx0hkuUxAiJD+Ibta
-	GksYng3r9hBZ4IvvTeEzyBA6YKJD6R5WTk3KV4FjB4fk0mJEFBZiMp6ZPGAm1LOB652dNdVjJLN
-	NhCoSzDERNVOcMneWE7r4ZgS9+DkIwwqw7iks4d3+r6IvLoJEPMfxPwPSpfjSmvx+P1ijDfmTKP
-	DKlTtgjYtIi40uf8chmQ+DcGiIdlfREIB/ReUJbBk2p5RKUK+RZZhoCACeNzWVS25RxzEk2C8kn
-	4fiJmwqPB4YE8wCY+wZ9TFIZ0fEjVdXt2qrhYVTCNDNQIQFi20RAJZj04bUw4on5WLcH5UsViqs
-	VUXv
-X-Received: by 2002:a05:7300:6b28:b0:376:bcc4:774b with SMTP id 5a478bee46e88-3796638ab4emr7639937eec.23.1794728963886;
-        Sat, 14 Nov 2026 23:49:23 -0800 (PST)
+        bh=7JUAxO8ILZQ9frEgCa2O+qRmIYDSFy++SiKj4sqXyiA=;
+        b=Yg0+H5DTqw8p9alcCoy4wqrcSqoJLLCJoyw6cnE6BV09wikPfNioJZY74q4vdaYtSL
+         MwUMP4TgPRMTvnCwC7lCUiQ2nSxHbbc4JRseNTSyHnjncKt9m6yhBQlkxS2QDGbSao66
+         EO8P0Kreq48CLnBBc46K/6im04wn+G6IQlWoSPejdQjusjUql+w0L5L934AHAts88Obn
+         xmDdT4SnEdf/VCr/RlOUbtcwF9bc/H9lS1lK2SRW4WAiqm+NEe4CXb1ugs5aGxKFZbRQ
+         t+rjzSkJx0GLPCGLlwR0ZB9przywItkQ7i2L4+suckgu3cjoo8ZzztJUOO4lxCil0qnz
+         lKZw==
+X-Gm-Message-State: APuU4Z9H9J7WAtNtxNmB1EN7IcZfR4BsbOjLs43cUi/+38KfpU8DQ0pu
+	Kc6Miy24L3k8pF0RPFoGmRvOWiLLvY14fe7txF2qYGKpbkGF2yvlS2f5QG66/zLD
+X-Gm-Gg: AYBFou0x/QtKQ5PfqRGgWX/Q1mVTfq93hb7DeSKSQFldYkEXHhdjW3U2NUpWmx42QtQ
+	8fwAFDuoiRUroj5NkCJbYpiwScf8RagMSqACnW5UYYP9zGW3OXBogb83h4Me0K9oqEctwQnIQa4
+	FEktmDT1JmoshEoRvywMdgpUWOdCslwogw5qgHYh5VnHwQAEuMz1O57aKoWvc9t1xCUNXzYDwSq
+	3pJZPNM+8WlkkqsBqqz50CmA2yAW6+/YTesaOBB2LpT5xclbSCINTUgn7lqekrqgdFKH5xyHtTv
+	JpzfT01oT1i1k2nW2sLVDxTxRjvBRk7UAMOi/NzOuUME2d5JqDXrBVh2H6pM1MPJz+0ystBNAim
+	235TbKcrZlW/mwq431VSkIMrG04xRJvRDeKJ49a4v59eMfBnJBQO6CzDO2JMYwb3AZs36kNhBYp
+	1OSD+9+uvUB0cpRU/gaVQxtOvEao2/UzyuPUW733Owin5BXfusEaRmY3G3oR9CDzVCauJjbY1wT
+	pFNnmLgxSTQBjpHWnDP4zFBNVe1xuqKCt9chRrAsseEKAgFw54Q4gy7mG+F8ESW7Zxyaa+1+ygo
+	sen1fT0Et9PkdwsBmcDdSJYl9WoNM0iFuv0hxGiHF6niRyk0oztav6oojuaGO5oy3AdYIRyDFmW
+	5nenaS2P+IH4UAcQOAY6IEVaF+nI2SC3J8Z42RQfLAAmMqSzsR7s6cSQRAiMf7+NEMFtjkvT56z
+	31ot4J2QSP+cKu7D12gJqlAQXdOWt4oP1etgIDed00tUQD4lAgGD3qfMoKVgi93/KTfkR6egKaJ
+	SbBYeJUnlWRRb3cCXlZ0HcvrpN6LfALUS3hxdrYJ0YIv8xhg5vaeuU0KkL/W/CnPu3Fjpb4fRWn
+	iYNb
+X-Received: by 2002:a05:7300:d58a:b0:376:feb:2df3 with SMTP id 5a478bee46e88-37966766dc0mr7368701eec.20.1794728973678;
+        Sat, 14 Nov 2026 23:49:33 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3795591f4f8sm23112817eec.13.2026.11.14.23.49.22
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3795591f4f8sm23112817eec.13.2026.11.14.23.49.32
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 14 Nov 2026 23:49:22 -0800 (PST)
+        Sat, 14 Nov 2026 23:49:32 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-oe][PATCH 02/96] ctags: upgrade 6.2.20261101.0 -> 6.2.20261108.0
-Date: Sat, 14 Nov 2026 23:47:40 -0800
-Message-ID: <20261115074918.2932593-2-khem.raj@oss.qualcomm.com>
+Subject: [meta-oe][PATCH 08/96] graphviz: upgrade 16.1.0 -> 16.1.1
+Date: Sat, 14 Nov 2026 23:47:46 -0800
+Message-ID: <20261115074918.2932593-8-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.1
 In-Reply-To: <20261115074918.2932593-1-khem.raj@oss.qualcomm.com>
 References: <20261115074918.2932593-1-khem.raj@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Sun, 15 Nov 2026 07:49:26 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132272
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Sun, 15 Nov 2026 07:49:36 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132278
 Content-Type: text/plain; charset="utf-8"
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- .../ctags/{ctags_6.2.20261101.0.bb => ctags_6.2.20261108.0.bb}  | 2 +-
+ .../graphviz/{graphviz_16.1.0.bb => graphviz_16.1.1.bb}         | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-devtools/ctags/{ctags_6.2.20261101.0.bb => ctags_6.2.20261108.0.bb} (96%)
+ rename meta-oe/recipes-graphics/graphviz/{graphviz_16.1.0.bb => graphviz_16.1.1.bb} (97%)
 
-diff --git a/meta-oe/recipes-devtools/ctags/ctags_6.2.20261101.0.bb b/meta-oe/recipes-devtools/ctags/ctags_6.2.20261108.0.bb
-similarity index 96%
-rename from meta-oe/recipes-devtools/ctags/ctags_6.2.20261101.0.bb
-rename to meta-oe/recipes-devtools/ctags/ctags_6.2.20261108.0.bb
-index db0718748e..f7502f0774 100644
---- a/meta-oe/recipes-devtools/ctags/ctags_6.2.20261101.0.bb
-+++ b/meta-oe/recipes-devtools/ctags/ctags_6.2.20261108.0.bb
-@@ -14,7 +14,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
+diff --git a/meta-oe/recipes-graphics/graphviz/graphviz_16.1.0.bb b/meta-oe/recipes-graphics/graphviz/graphviz_16.1.1.bb
+similarity index 97%
+rename from meta-oe/recipes-graphics/graphviz/graphviz_16.1.0.bb
+rename to meta-oe/recipes-graphics/graphviz/graphviz_16.1.1.bb
+index 99ee0b088a..abfcb96316 100644
+--- a/meta-oe/recipes-graphics/graphviz/graphviz_16.1.0.bb
++++ b/meta-oe/recipes-graphics/graphviz/graphviz_16.1.1.bb
+@@ -23,7 +23,7 @@ SRC_URI = "https://gitlab.com/api/v4/projects/4207231/packages/generic/${BPN}-re
+ SRC_URI:append:class-nativesdk = "\
+            file://graphviz-setup.sh \
+ "
+-SRC_URI[sha256sum] = "0f661718f3e5268dc3bad0fb53ab646605d26db70f4080799aff1dc2f61783c3"
++SRC_URI[sha256sum] = "52e7fb9a57b52b5c67f41dba6504ba3231e118258779421cb8f4f99104de71f6"
  
- inherit autotools-brokensep pkgconfig manpages
- 
--SRCREV = "692cde832a9b0bc74ad5bebdbed4768b00435436"
-+SRCREV = "394badef3b67abfab30841ec1ecc541b030fff13"
- SRC_URI = "git://github.com/universal-ctags/ctags;branch=master;protocol=https;tag=p${PV}"
- 
- 
+ UPSTREAM_CHECK_URI = "https://graphviz.org/download/"
+ UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
