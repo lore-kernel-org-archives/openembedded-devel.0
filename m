@@ -1,65 +1,65 @@
-Received: from mail-dy1-f170.google.com (mail-dy1-f170.google.com [74.125.82.170])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.3856.1794729113692483174
+Received: from mail-dy1-f178.google.com (mail-dy1-f178.google.com [74.125.82.178])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.3858.1794729118015925158
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 14 Nov 2026 23:51:53 -0800
+ Sat, 14 Nov 2026 23:51:58 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=PHDN5Ct1;
- spf=pass (domain: gmail.com, ip: 74.125.82.170, mailfrom: raj.khem@gmail.com)
-Received: by mail-dy1-f170.google.com with SMTP id 5a478bee46e88-37071c0f42aso3571718eec.0
-        for <openembedded-devel@lists.openembedded.org>; Sat, 14 Nov 2026 23:51:53 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=H6Oad46c;
+ spf=pass (domain: gmail.com, ip: 74.125.82.178, mailfrom: raj.khem@gmail.com)
+Received: by mail-dy1-f178.google.com with SMTP id 5a478bee46e88-33fb4680717so6973397eec.1
+        for <openembedded-devel@lists.openembedded.org>; Sat, 14 Nov 2026 23:51:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794729113; x=1795333913; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1794729117; x=1795333917; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=QXsMAAD+uAB81slAMaTHbPVyWLKMkIREBcyTvFjh0hM=;
-        b=PHDN5Ct1OAAWnEZ9ZU21Cryx63pIh8TZbvcU0w+qwcA2JGlqiEf+izXA68MgTRBUuR
-         bjiXV3mmTCn3Y7k4f3RUdDa5LEF0B02Ku8GYLiZFW5BUnCRbG81tPZriBSmOq8ychHer
-         efQ7rYKsMB/Xu0H9Q2PQkHBvwndUr21r7K8TGFhR3MUWt6sPLJRtBfeRFRYnD82eexoP
-         4eBlYoqX/4hPcZQNLVvExSO4N1TCS4vkC/Es8p/PT32vAPc00tpWmVkp2I+oOaCydiYG
-         h3OC2KTKwzshTlYzSq9uAP4TwUuYspq7eG37bqCXUXq1eQjBI/08bVdbRRP0c6aJyTNN
-         g8iw==
+        bh=5HjQpNfB8xJvApidTb9WF8FFcEQxsWy04RnVqNyWwic=;
+        b=H6Oad46cdGwyO9LQqcytM4fgaE1dZuA5+C55BBBviy5bFsSbcDd8Ip0TvkeWr8xZxo
+         X3vWrzeNtsI2+HYuc7LBYVqaCI3Z4XvYuqTsBzlkqLXLzc6l9fc8bqDMfqR2tmI3+IAD
+         ubJMC76Ht3Kvbh51b5Whl2sMnqCsRbRkkRNLXzMnstP4kEogwTLVMrPWJ+0MEBaP/fzv
+         MH8vEGeUH8byhBH/gTTrBwvfjBopn/oCra4PWHQykOXfwWlmClKRtOjFuo+BjwKovu30
+         LaSf0fcWDwhk0imu1NScsvtxqwaRPWeqQYWurxpXrOqelgN3R6B0Di0uKXNcoQKRPsB+
+         qZdQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794729113; x=1795333913;
+        d=1e100.net; s=20260707; t=1794729117; x=1795333917;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=QXsMAAD+uAB81slAMaTHbPVyWLKMkIREBcyTvFjh0hM=;
-        b=ylRhlhr3970lqoStKcsMwu/oqQzwtNlJjRyyugFm/aJglpvWr2ZBPp1yXuxhp1yDQB
-         Nbhr5cFLeXpOhRVYGHdg6rGmMcSPrc4ROEO7/L9rTQupz/B7GnAKcitxXRZlgXMYRKXF
-         oAkT0eeooBs1qk3ZHNTeOwcDE+ERjzbXGQGqGnHzaZDrHo9QJPD0sLwtfr2CicIsRGyS
-         TlqXq6UxKs9kQuN/u7TopIX7cYlizusswAVY9X76yvmDgBeiHpSoB/5TJSxW/Dne/+zv
-         /Ei50TO+WbGjy7iopXnA/y7htHfCrvVMSiiZEqnS81Rr9AGrbnM0zmhb8XIszUw75m7C
-         PlRA==
-X-Gm-Message-State: APuU4Z9Rv/DbyALejrXSAtR6eaX80viQa2Lp8Bla2FYQ2EYIlXz/AX9H
-	2lASbpDDRLBpPDSp1rBe0HPXXKhI84aY/VEL6J381h6OLFrEhMY5W3GnwjvLy6RS
-X-Gm-Gg: AYBFou0RrmUMrWOEl3KttDd1uqnKm+Nih6JbTHC0WCubvwF1SjA1erK0Uqc7OKtmimc
-	tA9QluFyFXBR7FumjroXjuok1JEe7DTA9PPx+2aTAA11WMdhkimdRE5S5XUuNknjrBDr7WNZAsB
-	UMq/0xEipVgBRsWA22lZq05hdC2EDI7AwypxP2PdpuRDAUNpwGuFMCMJmZ/PyzLNUFskELKV+B8
-	YdBDiFqQGHK7H4uYsJbiTyPZbAAyTNwHt+VCxwZB5T5OxBp/hTqXZEwVR0k1vKVACfiXABu4cxG
-	2mHvnJ1H7IfVJqwySfLQ0C4UevGGLHbnXfGqpG4oHQF9LJYy+YhEDXJRIA5LyEjBicSwwMbEWCi
-	c8AkFC1dV2glI1kQGn89skRE7qcYEhfvLXxfuFguiP4yA8nXnoW3XzXpR+I6k9KsBwiJqT26Ay+
-	53WUao3FAWfcHuVtZRIcm0V8ySfOMXHb6+mE3kOPA/pCAUGGBpZelg+Q1zJDxdaXA+Mvbq9GFq6
-	1XRheKnkksOt+lCLrJ3jd6MDU+GFI5LWNLpp5sU9F8B1Q1tfAUIKCtpNgyuSBtnV+Tc6FEGv2hv
-	NzKw41ziO6tv0Ae8VXCu7jqBB+tLZQaAypVA794gDuK7kdR9D+OHTp3qnh/q8TyNjYSg+2AgiFV
-	ieXMH0yyAbi32mLIgG7sy1SMFdCDLO7MGdEWoG1jM+JwzOCRa+N6olpmbBykk5PUAM2o4poPj9A
-	vAfuOtYUjfbPHTvr8w6FiYdlnXKj8F57BBJ8fv+zvsLerUln3hlNWG2/111XUH8K/Qeb9buP6xB
-	KKrbsDxy61LXP9Y08opnX4OcphcLERVZ5kmao6WItwDVMaYRjDljcak/YQ04ft3kqi+OUp1H0B5
-	tS9r
-X-Received: by 2002:a05:7301:f2b:b0:35d:2633:ff79 with SMTP id 5a478bee46e88-37968d8b5c6mr7404834eec.40.1794729112988;
-        Sat, 14 Nov 2026 23:51:52 -0800 (PST)
+        bh=5HjQpNfB8xJvApidTb9WF8FFcEQxsWy04RnVqNyWwic=;
+        b=wy8atS33wta+aUcJr62lT5vldhpVTU5yivDv8f3hVRlC9Ar/ENopgAmFcH3lNcGpp6
+         iNxWLGJjMxSNT83/vmUTS/U0oMTztj3Q1GNxEnAp9wb6fx29ec05+eOfak5ENUcJiP6Y
+         dVjWoQUOp6y3hMdyisja0t4prj8uvvVGlgDr85jbFNdsXSFvgubB1taNI+jbRQrprC5h
+         yXj9Cd3rlITmVhRsaSPcYCK6td/lm7MEf3tKvXFQprm0j32OxshyB3gpZ+VtjiNn94ts
+         ww4c6B50oMFZOU80Vg3kh7Ag1h4ctyyydml8raPQH47b7wSjGmPh0GI9fBcTCexMIOZt
+         WbWg==
+X-Gm-Message-State: APuU4Z8PiH/5BKumXuwJBiQtIPevqoY+aObptGKBoq5ID2nXGI/hqM0P
+	jjrK8z4JNtrpHeJ7Epu0HF3Mv5Z6Lh5/wjRL6upsJn/JCUQaSIuKgoFBSV4tfBnx
+X-Gm-Gg: AYBFou1IyqpsvUplSR4hPZc2M1mFe3Eh7QNTkEAxIzcgCE4HINmIr7I5RifdKYwfJaj
+	e4P1k85NeH9wrKQBMZZfMWGaukUE67NqTVDv1wuOXvokjCJRmb4sb+QnIl2RFscWTl8ReayDQXD
+	AYCqXjVrbCj6QR3gQgEm3aNHjn6QWpFHepHY1+4N6aYQhwCE5BppfiGbKG0Mj6IbqbXLtONX8Id
+	eY2h0fbe/h/zdDqe7IOnAJRtTW/h8HEIVq7TcwMtbIL5I9QpzspZlgXY438Y/k+q0SIJwhbZVMU
+	CT8D144FYxtFbAcvnL7klX6WLkrxzayEidHNooB7+D4mFTw3U4NRspPQD6A6YOScYFyHASEFw6Y
+	hNRlkVjygCiiNleficE0n3IaxH6c3sKRNlJLsZsv0nO0Bg67/vgshFt6T9qpZ3cpGUyJEGG/YXf
+	DEBU5Ak1kZuSVq9w4uVGBjHZbCtnJo7Un5Uq/xZA5SdHF7IwbYBCQ+QecDjtJyrxG1KUhtz8kVT
+	DLqdNBjq5XIy3Qd1jaWh5XX6r2Y0aIj8r6NkOltb2XfEZMhV8nI9jAZ1Q2aE3eMKyzRVHe2NFxX
+	vG95SnKlKiCv+6I9ZPP35+sWonyR+2Dgyx1Jxk/vk+ePYYKcr3wPaQI+yQBiV9bEAWnwLETi6jg
+	LQfChP5zwddWhGddKcE1rvbtUscE62FuyhQUqUlSeKK9OySOANxXIAweSOB3ZfRHliTpKGCCtaC
+	tf5mESdiJsemHDpmeTPGL7fkIok+QNlDm7UXjJyEXsftA5c28OISyW93MNKT8jTM/Lrw3HypDuO
+	UhjnnJYaLXxu2oLkEjVD4bIT+K/6R7RaZ8jhud/RKwAh3Xxki5LgxPElbNvIwlNNRDqDh6NrFzm
+	+Jd+6w==
+X-Received: by 2002:a05:7300:d718:b0:36a:12c1:3adb with SMTP id 5a478bee46e88-37966b52740mr10950038eec.20.1794729117375;
+        Sat, 14 Nov 2026 23:51:57 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3795591f4f8sm23112817eec.13.2026.11.14.23.51.51
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3795591f4f8sm23112817eec.13.2026.11.14.23.51.56
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 14 Nov 2026 23:51:52 -0800 (PST)
+        Sat, 14 Nov 2026 23:51:56 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-oe][PATCH 93/96] libcupsfilters: Fix build dependencies for 2.2.1
-Date: Sat, 14 Nov 2026 23:49:11 -0800
-Message-ID: <20261115074918.2932593-93-khem.raj@oss.qualcomm.com>
+Subject: [meta-python][PATCH 96/96] python3-pyzmq: Fix racy test_log ptests on loaded hosts
+Date: Sat, 14 Nov 2026 23:49:14 -0800
+Message-ID: <20261115074918.2932593-96-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.1
 In-Reply-To: <20261115074918.2932593-1-khem.raj@oss.qualcomm.com>
 References: <20261115074918.2932593-1-khem.raj@oss.qualcomm.com>
@@ -67,51 +67,144 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Sun, 15 Nov 2026 07:51:58 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132363
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132366
 Content-Type: text/plain; charset="utf-8"
 
-2.2 replaced qpdf with pdfio and added JPEG-XL support, which is
-enabled by default and makes configure fail without libjxl. Depend on
-pdfio instead of qpdf and poppler (only pdftoppm is used, at runtime),
-and add a jpegxl PACKAGECONFIG.
+test_blank_root_topic publishes right after adding a subscription, so
+on a loaded host the message is dropped and the test hits its 60s
+timeout. It then leaves a handler with a closed socket on the shared
+logger, and all following TestPubLog tests fail with ENOTSOCK.
 
-Also strip the recipe sysroot from libcupsfilters.pc; it embeds the
-cups pkg-config cflags (dbus include paths) since 2.2.
+Wait for the subscriptions with XPUB sockets instead of sleeping, and
+remove leftover handlers in tearDown.
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- meta-oe/recipes-printing/cups/libcupsfilters_2.2.1.bb | 9 ++++++++-
- 1 file changed, 8 insertions(+), 1 deletion(-)
+ ...or-subscriptions-instead-of-sleeping.patch | 104 ++++++++++++++++++
+ .../python/python3-pyzmq_27.2.0.bb            |   1 +
+ 2 files changed, 105 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-pyzmq/0001-test_log-wait-for-subscriptions-instead-of-sleeping.patch
 
-diff --git a/meta-oe/recipes-printing/cups/libcupsfilters_2.2.1.bb b/meta-oe/recipes-printing/cups/libcupsfilters_2.2.1.bb
-index 3e773715d5..5fa268295f 100644
---- a/meta-oe/recipes-printing/cups/libcupsfilters_2.2.1.bb
-+++ b/meta-oe/recipes-printing/cups/libcupsfilters_2.2.1.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/OpenPrinting"
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://COPYING;md5=aab2024bd2a475438a154cd1640c9684"
-
--DEPENDS = "cups fontconfig libexif dbus lcms qpdf poppler libpng jpeg tiff"
-+DEPENDS = "cups fontconfig libexif dbus lcms pdfio libpng jpeg tiff"
-
- SRC_URI = "https://github.com/OpenPrinting/${BPN}/releases/download/${PV}/${BP}.tar.xz \
-            "
-@@ -11,6 +11,9 @@ SRC_URI[sha256sum] = "0a22b849d5068c4c86b20fbb4192d3faa3dabcc9ee844c8fd73710ed82
-
- inherit autotools gettext pkgconfig github-releases
-
-+PACKAGECONFIG ??= "jpegxl"
-+PACKAGECONFIG[jpegxl] = "--with-jpegxl,--without-jpegxl,libjxl"
+diff --git a/meta-python/recipes-devtools/python/python3-pyzmq/0001-test_log-wait-for-subscriptions-instead-of-sleeping.patch b/meta-python/recipes-devtools/python/python3-pyzmq/0001-test_log-wait-for-subscriptions-instead-of-sleeping.patch
+new file mode 100644
+index 0000000000..6ee1a1b91f
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-pyzmq/0001-test_log-wait-for-subscriptions-instead-of-sleeping.patch
+@@ -0,0 +1,104 @@
++From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
++From: Khem Raj <khem.raj@oss.qualcomm.com>
++Date: Sat, 14 Nov 2026 08:57:25 -0800
++Subject: [PATCH] test_log: wait for subscriptions instead of sleeping
 +
- # github-releases defaults GITHUB_BASE_URI to github.com/<BPN>/<BPN>, which 404s
- # for this project; releases live under the OpenPrinting org.
- GITHUB_BASE_URI = "https://github.com/OpenPrinting/${BPN}/releases/"
-@@ -18,3 +21,7 @@ UPSTREAM_CHECK_REGEX = "releases/tag/(?P<pver>\d+(\.\d+)+)"
-
- FILES:${PN} += "${datadir}"
- RDEPENDS:${PN} += "ghostscript"
++The PUBHandler tests rely on short sleeps for the SUB subscriptions to
++reach the PUB socket, and test_blank_root_topic and test_root_topic
++publish right after adding a subscription without waiting at all. On a
++loaded machine the subscription arrives after the message is published,
++the message is dropped, and recv_multipart() blocks until the test
++timeout.
 +
-+do_install:append() {
-+    sed -i -e 's:${RECIPE_SYSROOT}::g' ${D}${libdir}/pkgconfig/libcupsfilters.pc
-+}
++Because handlers are removed from the shared 'zmqtest' logger only at
++the end of each test, such a failure also leaves a handler whose socket
++is closed in tearDown attached, and every following test fails with
++ENOTSOCK when it logs.
++
++Use XPUB sockets where the test creates the socket and wait for the
++subscription messages before publishing, and remove leftover handlers
++in tearDown.
++
++Upstream-Status: Submitted [Pending]
++
++Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
++---
++ tests/test_log.py | 29 +++++++++++++++++++++++------
++ 1 file changed, 23 insertions(+), 6 deletions(-)
++
++diff --git a/tests/test_log.py b/tests/test_log.py
++index a9cd40e..43d24d3 100644
++--- a/tests/test_log.py
+++++ b/tests/test_log.py
++@@ -21,16 +21,33 @@ class TestPubLog(BaseZMQTestCase):
++         logger.setLevel(logging.DEBUG)
++         return logger
++
+++    def tearDown(self):
+++        # don't leave handlers with closed sockets behind if a test fails
+++        logger = logging.getLogger('zmqtest')
+++        for handler in logger.handlers[:]:
+++            logger.removeHandler(handler)
+++        super().tearDown()
+++
+++    def wait_for_subscriptions(self, xpub, n=1):
+++        """Wait until n new subscriptions have reached the XPUB socket
+++
+++        Subscriptions are delivered asynchronously, so messages published
+++        before they arrive are dropped.
+++        """
+++        for _ in range(n):
+++            msg = xpub.recv()
+++            assert msg[:1] == b'\x01'
+++
++     def connect_handler(self, topic=None):
++         topic = self.topic if topic is None else topic
++         logger = self.logger
++-        pub, sub = self.create_bound_pair(zmq.PUB, zmq.SUB)
+++        pub, sub = self.create_bound_pair(zmq.XPUB, zmq.SUB)
++         handler = handlers.PUBHandler(pub)
++         handler.setLevel(logging.DEBUG)
++         handler.root_topic = topic
++         logger.addHandler(handler)
++         sub.setsockopt(zmq.SUBSCRIBE, topic.encode())
++-        time.sleep(0.1)
+++        self.wait_for_subscriptions(pub)
++         return logger, handler, sub
++
++     def test_init_iface(self):
++@@ -62,7 +79,7 @@ class TestPubLog(BaseZMQTestCase):
++         logger.removeHandler(handler)
++
++     def test_init_socket(self):
++-        pub, sub = self.create_bound_pair(zmq.PUB, zmq.SUB)
+++        pub, sub = self.create_bound_pair(zmq.XPUB, zmq.SUB)
++         logger = self.logger
++         handler = handlers.PUBHandler(pub)
++         handler.setLevel(logging.DEBUG)
++@@ -73,9 +90,7 @@ class TestPubLog(BaseZMQTestCase):
++         assert handler.ctx is pub.context
++         assert handler.ctx is self.context
++         sub.setsockopt(zmq.SUBSCRIBE, self.topic.encode())
++-        import time
++-
++-        time.sleep(0.1)
+++        self.wait_for_subscriptions(pub)
++         msg1 = 'message'
++         logger.info(msg1)
++
++@@ -91,6 +106,7 @@ class TestPubLog(BaseZMQTestCase):
++         self.sockets.append(sub2)
++         sub2.connect(self.iface)
++         sub2.setsockopt(zmq.SUBSCRIBE, b'')
+++        self.wait_for_subscriptions(handler.socket)
++         handler.root_topic = b'twoonly'
++         msg1 = 'ignored'
++         logger.info(msg1)
++@@ -109,6 +125,7 @@ class TestPubLog(BaseZMQTestCase):
++         self.sockets.append(sub_only_info)
++         sub_only_info.connect(self.iface)
++         sub_only_info.setsockopt(zmq.SUBSCRIBE, b'INFO')
+++        self.wait_for_subscriptions(handler.socket, 2)
++         handler.setRootTopic(b'')
++         msg_debug = 'debug_message'
++         logger.debug(msg_debug)
+diff --git a/meta-python/recipes-devtools/python/python3-pyzmq_27.2.0.bb b/meta-python/recipes-devtools/python/python3-pyzmq_27.2.0.bb
+index c2230a49b4..539d610317 100644
+--- a/meta-python/recipes-devtools/python/python3-pyzmq_27.2.0.bb
++++ b/meta-python/recipes-devtools/python/python3-pyzmq_27.2.0.bb
+@@ -28,6 +28,7 @@ PEP517_BUILD_OPTS = "--skip-dependency-check \
+ "
+
+ SRC_URI:append = " \
++    file://0001-test_log-wait-for-subscriptions-instead-of-sleeping.patch \
+     file://run-ptest \
+ "
+ SRC_URI[sha256sum] = "54d4259d1bfae24ecdb5ca79f7acc2eac6c286a02d6a0ae617797cb45f0726d3"
