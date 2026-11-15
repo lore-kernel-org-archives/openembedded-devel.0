@@ -1,102 +1,201 @@
-Received: from mail-dl1-f42.google.com (mail-dl1-f42.google.com [74.125.82.42])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.3855.1794729104411954472
+Received: from mail-dy1-f172.google.com (mail-dy1-f172.google.com [74.125.82.172])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.3907.1794729107918489265
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 14 Nov 2026 23:51:44 -0800
+ Sat, 14 Nov 2026 23:51:47 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=ZzdF14fm;
- spf=pass (domain: gmail.com, ip: 74.125.82.42, mailfrom: raj.khem@gmail.com)
-Received: by mail-dl1-f42.google.com with SMTP id a92af1059eb24-15ea896ddc8so3487342c88.0
-        for <openembedded-devel@lists.openembedded.org>; Sat, 14 Nov 2026 23:51:44 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=EOXO/lGX;
+ spf=pass (domain: gmail.com, ip: 74.125.82.172, mailfrom: raj.khem@gmail.com)
+Received: by mail-dy1-f172.google.com with SMTP id 5a478bee46e88-37986eb6fa2so2505178eec.0
+        for <openembedded-devel@lists.openembedded.org>; Sat, 14 Nov 2026 23:51:47 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794729104; x=1795333904; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1794729107; x=1795333907; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=x2mDGCs1UBZggljUoMLK57alljnYneNhRtOn6nj3Knc=;
-        b=ZzdF14fmUvF7tUnQ8l1o1DZA/cDRieLxe5rCcelZrtR1hB8K2hHuw7rPReqWAICqt2
-         xP8mO6Re6KKpYAc9f4UIpqkG9Wqw9v5tykpjKnFvtg+EiAkGE5+pk0/fBHHi/9No7R29
-         FpPGqegG9yAIKYBZHRH16ka5G8Fn0uuiHyucqxWd7s4+o8GFKg7LlMUGoUwAiV4/UOSu
-         JRJqA5+WT2Xb02EkqLwQ2x/AMfTCbfqYrH1VEJ/a9HrFaHl8xVxpgNKgYIYrcr4qertP
-         NBupMEB5eb5XbDFcAcJ6c1Ad9IrcN8Zec+nJCvVjVa0vIkj5JgUthYqTg/YFaiGaUNFo
-         ng/w==
+        bh=WVJHvYfeUXcuhcRpLGFhbEz1qOknbFU4UR4ojLCK/AE=;
+        b=EOXO/lGXyDFTyCejYL1P9sSagPT/SdqBolX/SF5bXxbjYrg0ofkIPUG+Bwdo3MkWnx
+         S3fbcG2GPflHcWWM1WCRD0EddJCMM2b7RrKXU+wJ0bSU1CE3h7ZV7qkYr1p9L123l1Md
+         zeW0czOQhoJ5K0gNTky/eS5iZWzpaLzh6a7ehyO4fmyMqnJ1+nQCPQnRPnMjDzVPYTkg
+         we/0qaccgqL71K5xJRsLjUOd1GOmG2K5pqCqRgOVI8LvnBY5PJvhBHtvCn2BNei3AXZP
+         wwblVyZMmBfxbKozmb8TQLMC8acn2LZ1gKCAhc1Vuvf5G5Q+/z7NLPKPGOLX7GbO3jyb
+         KlQQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794729104; x=1795333904;
+        d=1e100.net; s=20260707; t=1794729107; x=1795333907;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=x2mDGCs1UBZggljUoMLK57alljnYneNhRtOn6nj3Knc=;
-        b=F8UAegFdGDOAeOrb8TTcM3e8IWb2H7YmdHi1HZtu5qpQViCnzRztnRMBP/z+pExyBM
-         H1gMLPs660FqG4Ygd2ZrWxE0QykJ+FE1vpd+inMfDxhJPsgwlgfYDgB3YQKRLIqMpwMG
-         AIz92oO6FbTwGugErWl/HSD6OussK355k1gvuypqZVYprBWuG368IMMj5JiN2eMCE2zy
-         KJUXIap3/RDv4GBj+QPqj/XJ3yLUz9rJB4jBoY/RHGn5QZ5grr30Sy6mQyyJjGmRsCaw
-         UHyIsPAAhHb8kd7sAXMUMx8BTzIelmncnvHQQY2eQzPqBOwtfoXcffbV8cxraqKu7/pa
-         +i3w==
-X-Gm-Message-State: APuU4Z97Uo9GYbP8FX2UAYXjfBECGtG2wIZikZCVCc/gw5H8gI3dgm5H
-	PwDQGR+6BqIzZe23XZMROn/0e2j2ClJ/qsHeCqIp6MJX1/y2ynIZlFRq8jLp//eJ
-X-Gm-Gg: AYBFou1/ahmsLKI8AThKUWKWYYtDFy93vl8h1jZIoNC7rkG2r09xBAWH3XHg8ueg/Rg
-	m5F6BrvmG3XwvxRNEC2Idjf1bHnS5iiHfg3ErMt1AcNRD1Kd5PcicOEkKJ4Ggswv7fOQ9QKcFLS
-	QEl0ueTl7rJuvuEnn3CWRkVnBBEf5N+43TBVxX88SVO7zQpUyj11oo24uW7UIw2OTaGmL4y+ths
-	yr4VcngPyEkMLcDvbIt/D1tQ1ApiYFVCJDI2egLN9LK20TETAhLjKtNaSccSN56thWsoUJGcu7p
-	WDkrrwQY9fizc6fiMLaDamz2uVk+GRB+3ghxNyjgk5FuvOI9M/jKSheZt9HapmD6r5jzqv1EGqw
-	iyBwA4O11qU/i8uYAZhdIFA4cm96jOrKwqYISOuwkOWSv6F9pQknXBLBSvS9qMQco/M3hrDjbd9
-	XUl57jZGSzreBvWqmo3pY0xNWhfxs6X0vgIzJdQtfGPR25NaITl8pRx2cQA/9Oli+K9KYa/dGOE
-	zGFFKWbtSlvAqwNV84KmPciDKsd/BBJDr/NGhHSd4HZfcx6I+tDMahESqdvAkw7lPCXVF1Vv1is
-	yMMQhOLk+1QdYd/1OLCZoAy/yylCij/L63KaHvGRUDqO0bAxoDj+R2PTrYoOcM9CA5O0UAya/GJ
-	SAP+oRqdkmd1ve517mUVBqVq4OxjDlEa7gO3zEAjWLBhpjjhJx23B0v9e6N2G57BmnfHV2pHr8/
-	j5mWUKi6Iz+Ao7434zML37/++aWp+uvMbhE/HbGWlIJtVgv5v16kvQTCNF38CIFbuaT0gL13hSu
-	gH0Mncl9d+BmNHh7v17elxesXBda6y3LoJjGuZNVe8/gBx6fZB2e3BjLrei7cQ45MCudnCAwUuL
-	KW3lcvXI8ylCehQZLcBzCukqXQ==
-X-Received: by 2002:a05:693c:8852:b0:36a:1452:8dad with SMTP id 5a478bee46e88-37966f32039mr7422545eec.20.1794729103691;
-        Sat, 14 Nov 2026 23:51:43 -0800 (PST)
+        bh=WVJHvYfeUXcuhcRpLGFhbEz1qOknbFU4UR4ojLCK/AE=;
+        b=mevVvddIw4vagSttlwIuf3f1jIhUDIkc4CJa8vMmNI7WP6iCp+AwD68TQXMFXMq9Wq
+         mNji7BgUP7cpxAmTelatVDWJKDRuBbx3kVhzzh5uCo1EGhz4zfIF2laebdZBP1m6MPGV
+         5xLTE5XjW7ybEigBzKdOMad2iZaUICmxott0+fUXgt6KVAkILmFxi1YFMunvfK7ztEbR
+         kci4ItIpZh+h8AoVaHU1jylJ3FJTzWjsBy38Ja6ecl41KVkS9rbxUSFB7KIobZy/PKoQ
+         iGsxnDMiCvNwnI+jm+0TJ912Nn+OgzQtH127q1Af1Vk1z0Lnqk8I9vWo4ovawEOqKGoW
+         Qa/g==
+X-Gm-Message-State: APuU4Z9FwpX8z5RW8leUIkhM/kblHpIUaFa7EBdXE1H96YKXjQ2jW00Y
+	+HeSTYdBLV5nY2BDIVDA4SvX3HVhLDcjtCL95ETZ6NmdkIBkJLId6f82B81UPvpE
+X-Gm-Gg: AYBFou0vDeJ948B8yKk0Y9IjfG2wr00o4lHIeC0KMywYPKQFWDEqxOZu/NDx5RBaDnY
+	44FZ2SCkeORGOwe2MHO3jIFdC+4R83c5oWbT7JrEZWLUhF3AcF9XZHwzHGbvIrWa1V5I9sIQnMp
+	SaPJzUSWlOBfZSmZIIZ8D7qV/DF7n5j0Ucm+EFuvFCcg49PjHfYutM6OW0TSH5XLAEHUvSDGOy2
+	VBRilXxe8MgUT4XWNq9iBg5P5tcGDpwSgrhTXmfd4CtgLx5kzetG+kbhldrs88Ex9XNNzGR5LK3
+	yPKURGfDqU16GsPortD/cgun7lcC/exzhxuaWxlg60J+BMf9fjGaC9D2FIq6YVmVpFPZDekSnFA
+	w8+MQF7zik9vHtjTq1Wy2AfsNIThUrpySwYHFetoFboJewrSWvLl3FKYDtJgySBb54HwRb2lcc7
+	js19Ws8SBOSKKNw0U8h+EJkERzDp87O8SNpEiGmlngMddPAd6r1eKdA3kNh7qlj8dvqJpalTn0w
+	7p5SqPLIX671kMWn9Dd6rfTnnA5JUeTVgdo2NLO+spTUOESvevXTNS+DTEOO1AMh100PfZoplyV
+	Ja+TbicHu77NJKnWAleSsyqCv7oO4sILgdxlBpkrV2ZT/9UzfcVLRBKNC4yoSWfa+LaEVO3X/+L
+	pXX2anFQuqglHLV/t77Io0jaChkxq5dTV3uBdlRrGdXO57khsEfduGwHyju09iTUYE1z+29lHei
+	Fq+YrhCs02gIndCIUPzfLVoU63nUbjh4VU4kdpmwYaCYqM/GMatZnv+G80LAogH8F6otXVTXcef
+	RfE8YFJx3mdkOHUjct3cTk73J0/4O94bnVYcyZaK9KT+2ANR88XVMBBy558VZ/qNym7mcWp7Lqn
+	Bwab
+X-Received: by 2002:a05:7300:f694:b0:375:fb27:2c59 with SMTP id 5a478bee46e88-37966c4a50emr11889999eec.20.1794729107179;
+        Sat, 14 Nov 2026 23:51:47 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3795591f4f8sm23112817eec.13.2026.11.14.23.51.42
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3795591f4f8sm23112817eec.13.2026.11.14.23.51.45
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 14 Nov 2026 23:51:42 -0800 (PST)
+        Sat, 14 Nov 2026 23:51:45 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-oe][PATCH 87/96] cyaml: upgrade 1.4.1 -> 1.4.2
-Date: Sat, 14 Nov 2026 23:49:05 -0800
-Message-ID: <20261115074918.2932593-87-khem.raj@oss.qualcomm.com>
+Subject: [meta-oe][PATCH 89/96] libcupsfilters: upgrade 2.1.1 -> 2.2.1
+Date: Sat, 14 Nov 2026 23:49:07 -0800
+Message-ID: <20261115074918.2932593-89-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.1
 In-Reply-To: <20261115074918.2932593-1-khem.raj@oss.qualcomm.com>
 References: <20261115074918.2932593-1-khem.raj@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Sun, 15 Nov 2026 07:51:47 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132357
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Sun, 15 Nov 2026 07:51:57 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132359
 Content-Type: text/plain; charset="utf-8"
 
-Upstream moved the 1.x releases to main-v1; main is now the 2.x
-development branch and does not contain v1.4.2. Add tag=v${PV} so the
-fetcher checks SRCREV against the release tag.
+Drop 0001-use-noexcept-false-instead-of-throw-from-c-17-onward.patch and
+CVE-2025-64503.patch, pdftoraster.cxx was removed and the CVE is fixed
+in this release.
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- .../recipes-support/cyaml/{cyaml_1.4.1.bb => cyaml_1.4.2.bb}  | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-support/cyaml/{cyaml_1.4.1.bb => cyaml_1.4.2.bb} (89%)
+ ...se-instead-of-throw-from-c-17-onward.patch | 36 --------------
+ .../cups/libcupsfilters/CVE-2025-64503.patch  | 47 -------------------
+ ...lters_2.1.1.bb => libcupsfilters_2.2.1.bb} |  4 +-
+ 3 files changed, 1 insertion(+), 86 deletions(-)
+ delete mode 100644 meta-oe/recipes-printing/cups/libcupsfilters/0001-use-noexcept-false-instead-of-throw-from-c-17-onward.patch
+ delete mode 100644 meta-oe/recipes-printing/cups/libcupsfilters/CVE-2025-64503.patch
+ rename meta-oe/recipes-printing/cups/{libcupsfilters_2.1.1.bb => libcupsfilters_2.2.1.bb} (77%)
 
-diff --git a/meta-oe/recipes-support/cyaml/cyaml_1.4.1.bb b/meta-oe/recipes-support/cyaml/cyaml_1.4.2.bb
-similarity index 89%
-rename from meta-oe/recipes-support/cyaml/cyaml_1.4.1.bb
-rename to meta-oe/recipes-support/cyaml/cyaml_1.4.2.bb
-index 5f33c27c52..a3bdcfe245 100644
---- a/meta-oe/recipes-support/cyaml/cyaml_1.4.1.bb
-+++ b/meta-oe/recipes-support/cyaml/cyaml_1.4.2.bb
-@@ -7,9 +7,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=fe6f0e49348c87bddd5d27803dceaaf0"
- DEPENDS = " \
-     libyaml \
- "
--SRCREV = "07ff8654a270ec9b410acd3152b60de9e9f941af"
-+SRCREV = "d05365e474e56d34c8d4b25599a333c0635eeebf"
+diff --git a/meta-oe/recipes-printing/cups/libcupsfilters/0001-use-noexcept-false-instead-of-throw-from-c-17-onward.patch b/meta-oe/recipes-printing/cups/libcupsfilters/0001-use-noexcept-false-instead-of-throw-from-c-17-onward.patch
+deleted file mode 100644
+index 0e0eb731a5..0000000000
+--- a/meta-oe/recipes-printing/cups/libcupsfilters/0001-use-noexcept-false-instead-of-throw-from-c-17-onward.patch
++++ /dev/null
+@@ -1,36 +0,0 @@
+-From 104fba23b1c0c67c92777b3165c6dca99558a656 Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Mon, 6 Feb 2023 18:13:52 -0800
+-Subject: [PATCH] use noexcept(false) instead of throw() from c++17 onwards
+-
+-C++17 removed dynamic exception specifications [1]
+-they had been deprecated since C++11, replace
+-throw(whatever) with noexcept(false).
+-
+-[1] https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2016/p0003r5.html
+-
+-Upstream-Status: Backport [https://github.com/OpenPrinting/cups-filters/commit/2076627d33477212f21352ad39e9d305adb63af3]
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- filter/pdftoraster.cxx | 4 ++++
+- 1 file changed, 4 insertions(+)
+-
+-diff --git a/cupsfilters/pdftoraster.cxx b/cupsfilters/pdftoraster.cxx
+-index e8af184fb..e91e22459 100755
+-@@ -2199,11 +2199,11 @@
+- // For compatibility with g++ >= 4.7 compilers _GLIBCXX_THROW
+- // should be used as a guard, otherwise use traditional definition
+- #ifndef _GLIBCXX_THROW
+--#  if __cplusplus >= 201103L
+--#    define _GLIBCXX_THROW(_EXC)
+--#  else
+--#    define _GLIBCXX_THROW(_EXC) throw(_EXC)
+--#  endif
+-+#if __cplusplus < 201703L
+-+#define _GLIBCXX_THROW throw
+-+#else
+-+#define _GLIBCXX_THROW(x) noexcept(false)
+-+#endif
+- #endif
+- 
+- void * operator new(size_t size) _GLIBCXX_THROW (std::bad_alloc)
+diff --git a/meta-oe/recipes-printing/cups/libcupsfilters/CVE-2025-64503.patch b/meta-oe/recipes-printing/cups/libcupsfilters/CVE-2025-64503.patch
+deleted file mode 100644
+index b70586296e..0000000000
+--- a/meta-oe/recipes-printing/cups/libcupsfilters/CVE-2025-64503.patch
++++ /dev/null
+@@ -1,47 +0,0 @@
+-From da9a7db3b9125c87b11c43b05354ca2eb21ed684 Mon Sep 17 00:00:00 2001
+-From: Gyorgy Sarvari <skandigraun@gmail.com>
+-Date: Mon, 10 Nov 2025 21:10:56 +0100
+-Subject: [PATCH] Fix out-of-bounds write in cfFilterPDFToRaster()
+-
+-From: Till Kamppeter <till.kamppeter@gmail.com>
+-
+-PDFs with too large page dimensions could cause an integer overflow and then a too small buffer for the pixel line to be allocated.
+-
+-Fixed this by cropping the page size to the maximum allowed by the standard, 14400x14400pt, 200x200in, 5x5m
+-
+-https://community.adobe.com/t5/indesign-discussions/maximum-width-of-a-pdf/td-p/9217372
+-
+-Fixes CVE-2025-64503
+-
+-CVE: CVE-2025-64503
+-Upstream-Status: Backport [https://github.com/OpenPrinting/libcupsfilters/commit/fd01543f372ca3ba1f1c27bd3427110fa0094e3f]
+-Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+----
+- cupsfilters/pdftoraster.cxx | 14 ++++++++++++++
+- 1 file changed, 14 insertions(+)
+-
+-diff --git a/cupsfilters/pdftoraster.cxx b/cupsfilters/pdftoraster.cxx
+-index 0235b54..09583df 100644
+---- a/cupsfilters/pdftoraster.cxx
+-+++ b/cupsfilters/pdftoraster.cxx
+-@@ -1606,6 +1606,20 @@ out_page(pdftoraster_doc_t *doc,
+-   l = inputPageBox.height();
+-   if (l < 0)
+-     l = -l;
+-+
+-+  //
+-+  // Maximum allowed page size for PDF is 200x200 inches (~ 5x5 m), or 14400x14400 pt
+-+  // https://community.adobe.com/t5/indesign-discussions/maximum-width-of-a-pdf/td-p/9217372
+-+  //
+-+  if (doc->header.cupsPageSize[0] > 14400) {
+-+    fprintf(stderr, "ERROR: Page width is %.2fpt, too large, cropping to 14400pt\n", doc->header.cupsPageSize[0]);
+-+    doc->header.cupsPageSize[0] = 14400;
+-+  }
+-+  if (doc->header.cupsPageSize[1] > 14400) {
+-+    fprintf(stderr, "ERROR: Page height is %.2fpt, too large, cropping to 14400pt\n", doc->header.cupsPageSize[1]);
+-+    doc->header.cupsPageSize[1] = 14400;
+-+  }
+-+
+-   if (rotate == 90 || rotate == 270)
+-     doc->header.cupsPageSize[0] = l;
+-   else
+diff --git a/meta-oe/recipes-printing/cups/libcupsfilters_2.1.1.bb b/meta-oe/recipes-printing/cups/libcupsfilters_2.2.1.bb
+similarity index 77%
+rename from meta-oe/recipes-printing/cups/libcupsfilters_2.1.1.bb
+rename to meta-oe/recipes-printing/cups/libcupsfilters_2.2.1.bb
+index 1b8b9c8fe6..3e773715d5 100644
+--- a/meta-oe/recipes-printing/cups/libcupsfilters_2.1.1.bb
++++ b/meta-oe/recipes-printing/cups/libcupsfilters_2.2.1.bb
+@@ -6,10 +6,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=aab2024bd2a475438a154cd1640c9684"
+ DEPENDS = "cups fontconfig libexif dbus lcms qpdf poppler libpng jpeg tiff"
  
--SRC_URI = "git://github.com/tlsa/libcyaml.git;protocol=https;branch=main"
-+SRC_URI = "git://github.com/tlsa/libcyaml.git;protocol=https;branch=main-v1;tag=v${PV}"
+ SRC_URI = "https://github.com/OpenPrinting/${BPN}/releases/download/${PV}/${BP}.tar.xz \
+-           file://0001-use-noexcept-false-instead-of-throw-from-c-17-onward.patch \
+-           file://CVE-2025-64503.patch \
+            "
+-SRC_URI[sha256sum] = "6c303e36cfde05a6c88fb940c62b6a18e7cdbfb91f077733ebc98f104925ce36"
++SRC_URI[sha256sum] = "0a22b849d5068c4c86b20fbb4192d3faa3dabcc9ee844c8fd73710ed821d4860"
  
+ inherit autotools gettext pkgconfig github-releases
  
- inherit pkgconfig
