@@ -1,65 +1,65 @@
-Received: from mail-dy1-f175.google.com (mail-dy1-f175.google.com [74.125.82.175])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.3831.1794729051116808494
+Received: from mail-dl1-f49.google.com (mail-dl1-f49.google.com [74.125.82.49])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.3832.1794729052895455595
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 14 Nov 2026 23:50:51 -0800
+ Sat, 14 Nov 2026 23:50:52 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=qCFaaXc+;
- spf=pass (domain: gmail.com, ip: 74.125.82.175, mailfrom: raj.khem@gmail.com)
-Received: by mail-dy1-f175.google.com with SMTP id 5a478bee46e88-37f14feca60so19803eec.1
-        for <openembedded-devel@lists.openembedded.org>; Sat, 14 Nov 2026 23:50:51 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=WhfUHy/y;
+ spf=pass (domain: gmail.com, ip: 74.125.82.49, mailfrom: raj.khem@gmail.com)
+Received: by mail-dl1-f49.google.com with SMTP id a92af1059eb24-170135e43c7so3693471c88.0
+        for <openembedded-devel@lists.openembedded.org>; Sat, 14 Nov 2026 23:50:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794729050; x=1795333850; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1794729052; x=1795333852; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=3CWQAL0tpxfRyUvEv8brIadrPAd83w8uiVfGA1fbtdM=;
-        b=qCFaaXc+KwOAOEuBlaqXA3tHBXKggeCYLO77MSRV0nKHGDRzmpkWDKREfeOL1TAyWa
-         e8Csr2NBAKbCuv0U7lpdBxAEYsdfs8Mk8MA7Dekk+PQJ8yigGvWbmRYT7Pzn1SBX/Y8q
-         KGJd1M4Ox6gMWmBwraiZLxNk/SoPzYjh71lMDB1W3PaZQHR2T3VSzrkil9qMF2C75in/
-         N9QxjqTSEz7qpbqbUFxIlq4FdU+rYNEsnRFkATqG3S1BSL47SVn7AxILiGRXfa06CWyU
-         z0Oydgx2pNOTdutFXtDvR0hodF22wi2ERH/3tuu/KdQsKdvVp2tXWe7WRNdsM6ZxIF0r
-         rUKg==
+        bh=lz85/KcfDyrlbVJmZYgaoTd5Ce7xR4yzStuF3Xh2xTs=;
+        b=WhfUHy/yoWivAS6Fikfg8Mh4fZOCuzZDBK/2WH7IVLZHEC4AAniYCfDfQ7c9Wh+LYb
+         FtGpea8j8jzerTFzgqJZcxTmy0n1oWw/U7hun4jP7qp6o8gwzek7OC6iHRAOth5Nwf+4
+         W3Ndau5aa/JSu1jRe4sR+NUuBFovQCwYQ6lMhI7Uq8XGngrDjARscQ4kurVeLEl8EvvP
+         7tZaoqy7o3PA3VYPa+yPWpjTJ5BaieJa7DrDPfCrfAXyL5vValoy9H1O4WR7mmvgT9rC
+         O7Vh4JwkFbNm+3vp+JXg3QnqseEXCruow2TQoEhr6jqxEHQohzFcNrcEOMf+hinszsET
+         lybA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794729050; x=1795333850;
+        d=1e100.net; s=20260707; t=1794729052; x=1795333852;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=3CWQAL0tpxfRyUvEv8brIadrPAd83w8uiVfGA1fbtdM=;
-        b=pIIYiKrUOl7AvprhFbKhIhTHrf3Pg1dNwmvWk8zO9z2Y1n2WTYsHQBW7Q5x1muVjSK
-         jCcEj81gSqAsrEcAUCJiHsmK/4wSTfEdGDatvVJuRoRlGtMK4QqqxQ/WfXVCwLbk4vMv
-         xIa8Y45kzo/SGK1jcWsL9eRLwjdk+SnaWzuvdPSjRbmoLujmw1USosKLrl1VcuPkJ5aM
-         0CoR5v3SM0Ce7Ih1hM4kV8JWTWCYXoR3DZyZ6PxAEHEyB/3/vMkr/XiSwbuRSWY1zDcm
-         AMizGdFceJPA0A64JhyWbMZBbQSWg1uvZdFfXv6dxY/1jsJVl3L9MiLJHN5E5X/N4cpf
-         wIiQ==
-X-Gm-Message-State: APuU4Z9l33A/2Ih0sp2vOvx7I4N4rlip2yzqESTP1yFxYGZUpLN8Krd7
-	/lBAN9os9SO5a84XsmU/FkP+JCwnzOe4UVanmkxKCS8t71qC5wCcnH5vjwGP08z4
-X-Gm-Gg: AYBFou0R7+FZQxuH3cco3j7cgl5oPHWLgBtXBLK8zimdCG3/Nb+RIlr2ZRVyvaLiHNK
-	bmuOohl7uQxXlNKtlIahvah44EKkAwXYwVChH4G8jlfDAK0l+tFVtFrRgrxxrcv/S2rIUxj7rPa
-	ry57j62tI2ta1y1QPUx4IKfkve+kL97iroB0CJrsd0E3sqgE8zvwY0GL0t+tWc1T+6Yuu8pVxv0
-	yQKlrtLDnR8bDobT/zOTRAjZ2frnwegKZ3Z3Fxn4MNC7yXmjzmOULG3h58O1Z1Tjxj8yXjDaK3D
-	p/sNLrwN1FiNhb+BOrZbgMdDhNGia1MVaYvt+ld2TV9U+nYv2kobWG0D3OoF0scSpL1O0VbDR5x
-	HaNKypQLt0prQ6g2OBwkwpvtyIPorvewID4aplpdFBteL1ean7IQwimyIjztaButjXe1KAwWT5S
-	41fifno4e9Q2UizYUqJpIJgSnHEyqe2uFhnATN0gdkAm+UcP1opz0HeE7vxXvrDMi+WHFtjcyZQ
-	py3FHrs0siDsSh/zC25FFE3fKHtNHLUspSg75XGcZYevCcFBuqn14A53xUk245G1GC1T+EUxQJ4
-	G2b8/nTxWz4BtYdY9dyQovQwCXX4PG6dT9xTMfrtISDcigYeRe5qqE9Y8vajA6xpAhyRP3yacUl
-	/5WNkTo9gQI2oyHLCI1aXtI2I54ngSOQOlC0SZ8kkb1HO8Vln10ICsIYMxytVb0xxPwChz/LzWL
-	yGk3zn248YNWFLxeNiB+OlZ3vavZGHzbR+a0GYU/2B0KNQOZesz2lwRHWlyJAsjsW/1PxOlOj2+
-	6agALano/qagtANASpmTIYVBF+rGQ/509zOpA6lKemzsQx/I5yYk44ltzF1V47crYOEjBPBF9q8
-	sE8S
-X-Received: by 2002:a05:693c:4153:10b0:37b:e40:397e with SMTP id 5a478bee46e88-37b0e403d73mr4531154eec.14.1794729050380;
-        Sat, 14 Nov 2026 23:50:50 -0800 (PST)
+        bh=lz85/KcfDyrlbVJmZYgaoTd5Ce7xR4yzStuF3Xh2xTs=;
+        b=XWCDIw+ri1QvT3z0YtnW2czR1Kb+nZ8ckS1TuPKbIvVUHyzpS6FaZOerBBqdvynEE2
+         nmNh0QYdUKeqMbWpbRIeYlVGhzLtxuBVf+AFEoI24VQEpvUi06wPkYMFHhdDqzpLHksU
+         yZJvP7Q6BCsY6/0dGnSKMW6nwms6gWFyJV9eUwghY3K+JhkkY8Z9mz+dvExUzdrw3UFi
+         WQAzh2xyldz0Mlhq2xIUsClYYvCjeBWh0pqGwHIYIZtWJCA3h+39iRi83E2SSjGy8pJx
+         eOZRJhyL4y27arSHtsKwxrnoFcSASDv2UzPOFYN0FINW5imptPR9ymFb0O6uTl45lOdx
+         oIKQ==
+X-Gm-Message-State: APuU4Z9VzuibUL69Biq//WFpZmECzBcqX/H9au07Yh2IYvYNYlKEN7UD
+	UI/h6vlN/yOiGpKeAFr6QHYuN/gs9crgyJ4Pxj9j1NCHP4ryfJx9oMSf2gdUoRTs
+X-Gm-Gg: AYBFou1gX8B97HzasgalYR7ej+fdsuE7dRoJa5dPLlHdmjw6SbnAO0ZwxKEnlJdmbBQ
+	WzUoGkgkJi/amnsgV/BHwWUcE1SXDw4ATofiK6SoBdjCND8xKXWgy3Sn5CESckmHbAq6nRLfumk
+	eG3tO4A6g1lcdndoY7zx+dgReVoSENXtoubhuzZ13E6WEoAbCsYBQjhEZxWXbpSlKQ6MPQ6EDnc
+	nVRIr7ucrWW6QSBouPJw2qj7Cu9i8jjTRWUsifMkx7T3tw+ximjc2qy46ca/RDKaehDqOVLIbQg
+	zLKmMQWkt04c0RSNNY3wn9aAteCjkauAUS77sk929UU25YPaq6pbU9QAbI4ehpPzlXQDHNnRjNL
+	X6y+nKLi1d1Z+zcADuJKz7ulBAavDQyR75CSdKGD16aL7nZKyY0BHo5dibOQ1mUMYxFMdbeCVEE
+	VK3jnQGJEGmzz6d+Kmj8edtGrVWH6wfbdkLIKpfj1EVbW93jrkCdGrT4Ur0lzB2RZkwmiRK4KD+
+	Hqn0MvzH2362XyM02EkzXfceCX0m75mxy1MUdlbYkWX/26ZVLtZ8Ubeh8+Ed8enchM5UN6jF2kA
+	hdm5DZlKClO2hr78mDnZaikFQ1PSbVGswR1cwuk1cmuRxnD2fDJJcvzEFjlax0tI0u/WdvU2aae
+	EoX2PHUhs8+5B5c8O+SKnFazHWubYnpVFi1lS8gp1vQ+b8cfqjDgR6dxyXcmkm7bpleS2EY16Sp
+	UvcgxcQPqx7ZsarwkYBni6VaJLjerjSKI5m2+9Ul/0voqdMwaOdTKV3ZXC7aved06KJFI/9gO16
+	+PPzEiN+4Ml2gQCsssfEoQz2ogI+kERH3jbSvjU8dCeujD6jkNWFBgHvC+A4DLp/KdKGBzePyNd
+	Q/A6pOItMMXB6wcOKszXIxT+cJQ=
+X-Received: by 2002:a05:701b:4248:10b0:1b3:b455:93db with SMTP id a92af1059eb24-1b503131b06mr8005030c88.24.1794729051997;
+        Sat, 14 Nov 2026 23:50:51 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3795591f4f8sm23112817eec.13.2026.11.14.23.50.48
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3795591f4f8sm23112817eec.13.2026.11.14.23.50.50
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 14 Nov 2026 23:50:49 -0800 (PST)
+        Sat, 14 Nov 2026 23:50:51 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-oe][PATCH 56/96] libtorrent-rasterbar: upgrade 2.0.12 -> 2.1.2
-Date: Sat, 14 Nov 2026 23:48:34 -0800
-Message-ID: <20261115074918.2932593-56-khem.raj@oss.qualcomm.com>
+Subject: [meta-oe][PATCH 57/96] gammu, python3-gammu: upgrade to 1.45.2 and 3.5.1
+Date: Sat, 14 Nov 2026 23:48:35 -0800
+Message-ID: <20261115074918.2932593-57-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.1
 In-Reply-To: <20261115074918.2932593-1-khem.raj@oss.qualcomm.com>
 References: <20261115074918.2932593-1-khem.raj@oss.qualcomm.com>
@@ -67,152 +67,186 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Sun, 15 Nov 2026 07:50:53 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132326
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132327
 Content-Type: text/plain; charset="utf-8"
 
-Drop both patches: the Python site-packages path and the OpenSSL 4.0
-ASN1_STRING accessors are handled upstream.
+gammu: upgrade 1.42.0 -> 1.45.2
+- Releases are now only published on GitHub.
+- Drop 0001-allow-build-with-cmake-4.patch, upstream requires CMake 3.10.
 
-2.1 adds WebTorrent support, enabled by default, which needs the
-libdatachannel submodule; keep it disabled as before.
+python3-gammu: upgrade 3.2.4 -> 3.5.1
+- Requires gammu >= 1.44.0.
+- The sdist is now python_gammu-<version>.tar.gz and builds with
+  setuptools.build_meta.
+- Drop 0001-setup.py-StrictVersion-packaging.version.patch, upstream
+  uses packaging.version.
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- ...-packages-path-to-fix-package-QA-Iss.patch | 27 --------
- .../0001-Add-support-for-OpenSSL-4.0.patch    | 61 -------------------
- ....0.12.bb => libtorrent-rasterbar_2.1.2.bb} |  6 +-
- 3 files changed, 2 insertions(+), 92 deletions(-)
- delete mode 100644 meta-oe/recipes-connectivity/libtorrent-rasterbar/files/0001-Fix-Python3-site-packages-path-to-fix-package-QA-Iss.patch
- delete mode 100644 meta-oe/recipes-connectivity/libtorrent-rasterbar/libtorrent-rasterbar/0001-Add-support-for-OpenSSL-4.0.patch
- rename meta-oe/recipes-connectivity/libtorrent-rasterbar/{libtorrent-rasterbar_2.0.12.bb => libtorrent-rasterbar_2.1.2.bb} (82%)
+ .../gammu/0001-allow-build-with-cmake-4.patch | 43 ----------------
+ .../{gammu_1.42.0.bb => gammu_1.45.2.bb}      |  9 ++--
+ ...p.py-StrictVersion-packaging.version.patch | 49 -------------------
+ ...-gammu_3.2.4.bb => python3-gammu_3.5.1.bb} |  8 +--
+ 4 files changed, 9 insertions(+), 100 deletions(-)
+ delete mode 100644 meta-oe/recipes-connectivity/gammu/gammu/0001-allow-build-with-cmake-4.patch
+ rename meta-oe/recipes-connectivity/gammu/{gammu_1.42.0.bb => gammu_1.45.2.bb} (88%)
+ delete mode 100644 meta-oe/recipes-connectivity/gammu/python3-gammu/0001-setup.py-StrictVersion-packaging.version.patch
+ rename meta-oe/recipes-connectivity/gammu/{python3-gammu_3.2.4.bb => python3-gammu_3.5.1.bb} (67%)
 
-diff --git a/meta-oe/recipes-connectivity/libtorrent-rasterbar/files/0001-Fix-Python3-site-packages-path-to-fix-package-QA-Iss.patch b/meta-oe/recipes-connectivity/libtorrent-rasterbar/files/0001-Fix-Python3-site-packages-path-to-fix-package-QA-Iss.patch
+diff --git a/meta-oe/recipes-connectivity/gammu/gammu/0001-allow-build-with-cmake-4.patch b/meta-oe/recipes-connectivity/gammu/gammu/0001-allow-build-with-cmake-4.patch
 deleted file mode 100644
-index 2ed6ab8500..0000000000
---- a/meta-oe/recipes-connectivity/libtorrent-rasterbar/files/0001-Fix-Python3-site-packages-path-to-fix-package-QA-Iss.patch
+index 5ab63b809f..0000000000
+--- a/meta-oe/recipes-connectivity/gammu/gammu/0001-allow-build-with-cmake-4.patch
 +++ /dev/null
-@@ -1,27 +0,0 @@
--Subject: [PATCH] Fix Python3 site packages path to fix package QA Issue
+@@ -1,43 +0,0 @@
+-From ea068ac152b9b375be51611ca04d0f833e2f6856 Mon Sep 17 00:00:00 2001
+-From: Alper Ak <alperyasinak1@gmail.com>
+-Date: Tue, 8 Jul 2025 22:52:11 +0300
+-Subject: [PATCH] cmake: Set minimum required version to 3.5 for CMake 4+
+- compatibility
 -
--libtorrent-rasterbar-2.0.12-r0 do_package: QA Issue: libtorrent-rasterbar: Files/directories were installed but not shipped in any package:
--  /lib/python3.14/site-packages/libtorrent.so
+-Fix:
 -
--Upstream-Status: Inappropriate [ OE specific ]
--Signed-off-by: Liu Yiding <liuyd.fnst@fujitsu.com>
+-| CMake Error at CMakeLists.txt:5 (cmake_minimum_required):
+-|   Compatibility with CMake < 3.5 has been removed from CMake.
+-|
+-|   Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+-|   to tell CMake that the project requires at least <min> but has been updated
+-|   to work with policies introduced by <max> or earlier.
+-|
+-|   Or, add -DCMAKE_POLICY_VERSION_MINIMUM=3.5 to try configuring anyway.
+-|
+-|
+-| -- Configuring incomplete, errors occurred!
+-
+-Upstream-Status: Pending
+-
+-Signed-off-by: Alper Ak <alperyasinak1@gmail.com>
 ----
-- bindings/python/CMakeLists.txt | 2 +-
+- CMakeLists.txt | 2 +-
 - 1 file changed, 1 insertion(+), 1 deletion(-)
 -
--diff --git a/bindings/python/CMakeLists.txt b/bindings/python/CMakeLists.txt
--index 4e8ee816b..ee9566afc 100644
----- a/bindings/python/CMakeLists.txt
--+++ b/bindings/python/CMakeLists.txt
--@@ -96,7 +96,7 @@ else()
-- 	execute_process(
-- 		COMMAND "${Python3_EXECUTABLE}" -c [=[
-- import sysconfig
---print(sysconfig.get_path('platlib', vars={'platbase': '', 'base': ''}))
--+print(sysconfig.get_path('platlib', vars={'platbase': '/usr', 'base': ''}))
-- ]=]
-- 		OUTPUT_VARIABLE _PYTHON3_SITE_ARCH
-- 		OUTPUT_STRIP_TRAILING_WHITESPACE
+-diff --git a/CMakeLists.txt b/CMakeLists.txt
+-index d0a79b3..23dba35 100644
+---- a/CMakeLists.txt
+-+++ b/CMakeLists.txt
+-@@ -2,7 +2,7 @@
+- # Copyright (c) 2007 - 2018 Michal Cihar
+- # vim: expandtab sw=4 ts=4 sts=4:
+- 
+--cmake_minimum_required (VERSION 3.0)
+-+cmake_minimum_required (VERSION 3.5)
+- INCLUDE (CMakeForceCompiler)
+- 
+- project (Gammu C)
 --- 
 -2.43.0
 -
-diff --git a/meta-oe/recipes-connectivity/libtorrent-rasterbar/libtorrent-rasterbar/0001-Add-support-for-OpenSSL-4.0.patch b/meta-oe/recipes-connectivity/libtorrent-rasterbar/libtorrent-rasterbar/0001-Add-support-for-OpenSSL-4.0.patch
+diff --git a/meta-oe/recipes-connectivity/gammu/gammu_1.42.0.bb b/meta-oe/recipes-connectivity/gammu/gammu_1.45.2.bb
+similarity index 88%
+rename from meta-oe/recipes-connectivity/gammu/gammu_1.42.0.bb
+rename to meta-oe/recipes-connectivity/gammu/gammu_1.45.2.bb
+index 353ee37f46..d787a75ba4 100644
+--- a/meta-oe/recipes-connectivity/gammu/gammu_1.42.0.bb
++++ b/meta-oe/recipes-connectivity/gammu/gammu_1.45.2.bb
+@@ -4,15 +4,16 @@ LICENSE = "GPL-2.0-only"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+ HOMEPAGE = "https://wammu.eu/"
+ 
+-SRC_URI = "https://dl.cihar.com/${BPN}/releases/${BP}.tar.xz \
++SRC_URI = "https://github.com/gammu/gammu/releases/download/${PV}/Gammu-${PV}.tar.gz \
+     file://gammurc \
+     file://gammu-smsdrc \
+-    file://0001-allow-build-with-cmake-4.patch \
+ "
+ 
+-SRC_URI[sha256sum] = "d8f152314d7e4d3d643610d742845e0a016ce97c234ad4b1151574e1b09651ee"
++S = "${UNPACKDIR}/Gammu-${PV}"
+ 
+-UPSTREAM_CHECK_URI = "https://dl.cihar.com/${BPN}/releases"
++SRC_URI[sha256sum] = "92478c1c6d8df193f3d5e36648fd05fc3eff26254034f025cad2a0ffba5aec23"
++
++UPSTREAM_CHECK_URI = "https://github.com/gammu/gammu/releases"
+ 
+ DEPENDS = "cmake-native virtual/libiconv libdbi mysql5 glib-2.0 udev libgudev unixodbc"
+ 
+diff --git a/meta-oe/recipes-connectivity/gammu/python3-gammu/0001-setup.py-StrictVersion-packaging.version.patch b/meta-oe/recipes-connectivity/gammu/python3-gammu/0001-setup.py-StrictVersion-packaging.version.patch
 deleted file mode 100644
-index 5b3407fc52..0000000000
---- a/meta-oe/recipes-connectivity/libtorrent-rasterbar/libtorrent-rasterbar/0001-Add-support-for-OpenSSL-4.0.patch
+index 23fe4441dc..0000000000
+--- a/meta-oe/recipes-connectivity/gammu/python3-gammu/0001-setup.py-StrictVersion-packaging.version.patch
 +++ /dev/null
-@@ -1,61 +0,0 @@
--From 50bd3a46c2c5ccd7298415d1a66ef27c96d0fa2b Mon Sep 17 00:00:00 2001
--From: Chocobo1 <Chocobo1@users.noreply.github.com>
--Date: Sun, 19 Apr 2026 01:01:53 +0800
--Subject: [PATCH] Add support for OpenSSL 4.0
+@@ -1,49 +0,0 @@
+-From 96e8f0b2d13e890d9ffff8673f18dcc94290efb2 Mon Sep 17 00:00:00 2001
+-From: Tim Orling <tim.orling@konsulko.com>
+-Date: Thu, 13 Jan 2022 20:06:33 -0600
+-Subject: [PATCH] setup.py: StrictVersion -> packaging.version.*
 -
--The accessor functions for `ASN1_STRING` are available since OpenSSL 1.0.1 so we are free to use
--them without conditional guards.
--See: https://openssl-library.org/post/2026-04-13-asn1_string/
+-distutils is deprecated in Python 3.10 and will be removed in Python
+-3.12 [1]
 -
--Closes #8268.
--Upstream-Status: Backport [https://github.com/arvidn/libtorrent/commit/50bd3a46c2c5]
--Signed-off-by: Jaipaul Cheernam <jaipaul.cheernam@est.tech>
+-The recommended replacement for distutils.version is to use
+-packaging.version
+-
+-StrictVersion can be replaced by packaging.version.Version and helpers
+-like packaging.version.parse()
+-
+-[1] https://www.python.org/dev/peps/pep-0632/
+-[2] https://packaging.pypa.io/en/latest/version.html
+-
+-Upstream-Status: Submitted [https://github.com/gammu/python-gammu/pull/67]
+-
+-Signed-off-by: Tim Orling <tim.orling@konsulko.com>
 ----
-- src/torrent.cpp | 20 ++++++++++++--------
-- 1 file changed, 12 insertions(+), 8 deletions(-)
+- setup.py | 6 +++---
+- 1 file changed, 3 insertions(+), 3 deletions(-)
 -
--diff --git a/src/torrent.cpp b/src/torrent.cpp
--index c6564b67f82..7fcc75b3ed4 100644
----- a/src/torrent.cpp
--+++ b/src/torrent.cpp
--@@ -1630,9 +1630,9 @@ aux::vector<download_priority_t, piece_index_t> file_to_piece_prio(
-- 			GENERAL_NAME* gen = sk_GENERAL_NAME_value(gens, i);
-- 			if (gen->type != GEN_DNS) continue;
-- 			ASN1_IA5STRING* domain = gen->d.dNSName;
---			if (domain->type != V_ASN1_IA5STRING || !domain->data || !domain->length) continue;
---			auto const* torrent_name = reinterpret_cast<char const*>(domain->data);
---			auto const name_length = aux::numeric_cast<std::size_t>(domain->length);
--+			if (ASN1_STRING_type(domain) != V_ASN1_IA5STRING || !ASN1_STRING_get0_data(domain) || !ASN1_STRING_length(domain)) continue;
--+			auto const* torrent_name = reinterpret_cast<char const*>(ASN1_STRING_get0_data(domain));
--+			auto const name_length = aux::numeric_cast<std::size_t>(ASN1_STRING_length(domain));
+-diff --git a/setup.py b/setup.py
+-index a458181..bffb09d 100755
+---- a/setup.py
+-+++ b/setup.py
+-@@ -30,7 +30,7 @@ import os
+- import platform
+- import subprocess
+- import sys
+--from distutils.version import StrictVersion
+-+from packaging.version import parse, Version
 - 
-- #ifndef TORRENT_DISABLE_LOGGING
-- 			if (i > 1) names += " | n: ";
--@@ -1654,18 +1654,22 @@ aux::vector<download_priority_t, piece_index_t> file_to_piece_prio(
+- from setuptools import Extension, setup
 - 
-- 		// no match in the alternate names, so try the common names. We should only
-- 		// use the "most specific" common name, which is the last one in the list.
--+#if OPENSSL_VERSION_NUMBER >= 0x30000000L
--+		X509_NAME const* name = X509_get_subject_name(cert);
--+#else
-- 		X509_NAME* name = X509_get_subject_name(cert);
--+#endif
-- 		int i = -1;
---		ASN1_STRING* common_name = nullptr;
--+		ASN1_STRING const* common_name = nullptr;
-- 		while ((i = X509_NAME_get_index_by_NID(name, NID_commonName, i)) >= 0)
-- 		{
---			X509_NAME_ENTRY* name_entry = X509_NAME_get_entry(name, i);
--+			X509_NAME_ENTRY const* name_entry = X509_NAME_get_entry(name, i);
-- 			common_name = X509_NAME_ENTRY_get_data(name_entry);
-- 		}
---		if (common_name && common_name->data && common_name->length)
--+		if (common_name && ASN1_STRING_get0_data(common_name) && ASN1_STRING_length(common_name))
-- 		{
---			auto const* torrent_name = reinterpret_cast<char const*>(common_name->data);
---			auto const name_length = aux::numeric_cast<std::size_t>(common_name->length);
--+			auto const* torrent_name = reinterpret_cast<char const*>(ASN1_STRING_get0_data(common_name));
--+			auto const name_length = aux::numeric_cast<std::size_t>(ASN1_STRING_length(common_name));
+-@@ -112,9 +112,9 @@ class GammuConfig:
+-         with open(self.config_path(self.path)) as handle:
+-             for line in handle:
+-                 if line.startswith("#define GAMMU_VERSION "):
+--                    version = line.split('"')[1]
+-+                    version = parse(line.split('"')[1])
 - 
-- #ifndef TORRENT_DISABLE_LOGGING
-- 			if (!names.empty()) names += " | n: ";
-diff --git a/meta-oe/recipes-connectivity/libtorrent-rasterbar/libtorrent-rasterbar_2.0.12.bb b/meta-oe/recipes-connectivity/libtorrent-rasterbar/libtorrent-rasterbar_2.1.2.bb
-similarity index 82%
-rename from meta-oe/recipes-connectivity/libtorrent-rasterbar/libtorrent-rasterbar_2.0.12.bb
-rename to meta-oe/recipes-connectivity/libtorrent-rasterbar/libtorrent-rasterbar_2.1.2.bb
-index 726bb059ef..dac8c6cfc6 100644
---- a/meta-oe/recipes-connectivity/libtorrent-rasterbar/libtorrent-rasterbar_2.0.12.bb
-+++ b/meta-oe/recipes-connectivity/libtorrent-rasterbar/libtorrent-rasterbar_2.1.2.bb
-@@ -8,11 +8,9 @@ DEPENDS = "boost openssl"
+--        if version is None or StrictVersion(version) < StrictVersion(GAMMU_REQUIRED):
+-+        if version is None or version < parse(GAMMU_REQUIRED):
+-             print("Too old Gammu version, please upgrade!")
+-             sys.exit(100)
+- 
+diff --git a/meta-oe/recipes-connectivity/gammu/python3-gammu_3.2.4.bb b/meta-oe/recipes-connectivity/gammu/python3-gammu_3.5.1.bb
+similarity index 67%
+rename from meta-oe/recipes-connectivity/gammu/python3-gammu_3.2.4.bb
+rename to meta-oe/recipes-connectivity/gammu/python3-gammu_3.5.1.bb
+index f8dfa7c926..b312b7eb05 100644
+--- a/meta-oe/recipes-connectivity/gammu/python3-gammu_3.2.4.bb
++++ b/meta-oe/recipes-connectivity/gammu/python3-gammu_3.5.1.bb
+@@ -6,12 +6,12 @@ LICENSE = "GPL-2.0-or-later"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
  
- SRC_URI = "git://github.com/arvidn/libtorrent.git;branch=master;protocol=https;tag=v${PV} \
- 	git://github.com/arvidn/try_signal.git;branch=master;protocol=https;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/deps/try_signal;name=try_signal \
--           file://0001-Fix-Python3-site-packages-path-to-fix-package-QA-Iss.patch \
--           file://0001-Add-support-for-OpenSSL-4.0.patch \
-            "
+ PYPI_PACKAGE = "python-gammu"
+-PYPI_PACKAGE_SDIST = "python-gammu"
++PYPI_PACKAGE_SDIST = "python_gammu"
  
--SRCREV = "740a0b9aeabe00e762cc0efe4a0f27593db2550b"
-+SRCREV = "6da363d2994f17c0b3c0450d124cf73a31a73847"
- SRCREV_try_signal = "105cce59972f925a33aa6b1c3109e4cd3caf583d"
- SRCREV_FORMAT .= "_try_signal"
+-inherit pypi setuptools3 pkgconfig
++inherit pypi python_setuptools_build_meta pkgconfig
  
-@@ -21,7 +19,7 @@ inherit cmake pkgconfig python3targetconfig
+-SRC_URI += "file://0001-setup.py-StrictVersion-packaging.version.patch"
+-SRC_URI[sha256sum] = "49fc70f01bc192c43ff3ec815e082df5261ea4c8d36a695e977734c4eb4df868"
++SRC_URI += ""
++SRC_URI[sha256sum] = "d6082d685983d898f9ab6b401b96a620857bf337bf07e38b80f6b8ab08fe459a"
  
- CVE_PRODUCT = "libtorrent"
+ DEPENDS += "gammu python3-packaging-native"
  
--EXTRA_OECMAKE = "-DCMAKE_BUILD_TYPE=Release"
-+EXTRA_OECMAKE = "-DCMAKE_BUILD_TYPE=Release -Dwebtorrent=OFF"
- 
- PACKAGECONFIG ??= "python3"
- PACKAGECONFIG[python3] = "-Dpython-bindings=ON,-Dpython-bindings=OFF,python3-distutils-extra-native"
