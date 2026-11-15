@@ -1,252 +1,200 @@
-Received: from mail-dl1-f49.google.com (mail-dl1-f49.google.com [74.125.82.49])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.3832.1794729052895455595
+Received: from mail-dy1-f170.google.com (mail-dy1-f170.google.com [74.125.82.170])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.3882.1794729053985484543
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 14 Nov 2026 23:50:52 -0800
+ Sat, 14 Nov 2026 23:50:54 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=WhfUHy/y;
- spf=pass (domain: gmail.com, ip: 74.125.82.49, mailfrom: raj.khem@gmail.com)
-Received: by mail-dl1-f49.google.com with SMTP id a92af1059eb24-170135e43c7so3693471c88.0
-        for <openembedded-devel@lists.openembedded.org>; Sat, 14 Nov 2026 23:50:52 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=z0BSbK0Q;
+ spf=pass (domain: gmail.com, ip: 74.125.82.170, mailfrom: raj.khem@gmail.com)
+Received: by mail-dy1-f170.google.com with SMTP id 5a478bee46e88-3704d30b84fso2949030eec.1
+        for <openembedded-devel@lists.openembedded.org>; Sat, 14 Nov 2026 23:50:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794729052; x=1795333852; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1794729053; x=1795333853; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=lz85/KcfDyrlbVJmZYgaoTd5Ce7xR4yzStuF3Xh2xTs=;
-        b=WhfUHy/yoWivAS6Fikfg8Mh4fZOCuzZDBK/2WH7IVLZHEC4AAniYCfDfQ7c9Wh+LYb
-         FtGpea8j8jzerTFzgqJZcxTmy0n1oWw/U7hun4jP7qp6o8gwzek7OC6iHRAOth5Nwf+4
-         W3Ndau5aa/JSu1jRe4sR+NUuBFovQCwYQ6lMhI7Uq8XGngrDjARscQ4kurVeLEl8EvvP
-         7tZaoqy7o3PA3VYPa+yPWpjTJ5BaieJa7DrDPfCrfAXyL5vValoy9H1O4WR7mmvgT9rC
-         O7Vh4JwkFbNm+3vp+JXg3QnqseEXCruow2TQoEhr6jqxEHQohzFcNrcEOMf+hinszsET
-         lybA==
+        bh=GwD5f7Nzb48G6oiMM+nmeHHueCqG78N7vZEK7Fm1KVY=;
+        b=z0BSbK0QTZ1zWpmbjOUfaRgHUrVdvVvxU2sWWInXbz1IfHBfa/8ZPH3H91X1UU8rdz
+         QLsS0YMoC9hE+PQ/G3+YUdyJF0INUtRt3TkBHyXZyVwCWl0VSzQt43GxQlybWqOBOQux
+         Q5GnjtBtxk3+PcfvO869TzgcVAmcxQQNaw2jRqWuZZ4kyp+qaWig3L9yWnTk7d4Dw//Z
+         zPcHRQuyKbegYZMsBJRu+wWWNt1p1UNLAw1hMESi/rvu9oaKAb5ZWWrbdSWkaBSY8VPL
+         Qy0y5JRG5yENBtZibGkuNV90C+N91qsXyGqUpDSgcUD96d7J3MeM/x1G+91tDtXyBsDu
+         +5WA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794729052; x=1795333852;
+        d=1e100.net; s=20260707; t=1794729053; x=1795333853;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=lz85/KcfDyrlbVJmZYgaoTd5Ce7xR4yzStuF3Xh2xTs=;
-        b=XWCDIw+ri1QvT3z0YtnW2czR1Kb+nZ8ckS1TuPKbIvVUHyzpS6FaZOerBBqdvynEE2
-         nmNh0QYdUKeqMbWpbRIeYlVGhzLtxuBVf+AFEoI24VQEpvUi06wPkYMFHhdDqzpLHksU
-         yZJvP7Q6BCsY6/0dGnSKMW6nwms6gWFyJV9eUwghY3K+JhkkY8Z9mz+dvExUzdrw3UFi
-         WQAzh2xyldz0Mlhq2xIUsClYYvCjeBWh0pqGwHIYIZtWJCA3h+39iRi83E2SSjGy8pJx
-         eOZRJhyL4y27arSHtsKwxrnoFcSASDv2UzPOFYN0FINW5imptPR9ymFb0O6uTl45lOdx
-         oIKQ==
-X-Gm-Message-State: APuU4Z9VzuibUL69Biq//WFpZmECzBcqX/H9au07Yh2IYvYNYlKEN7UD
-	UI/h6vlN/yOiGpKeAFr6QHYuN/gs9crgyJ4Pxj9j1NCHP4ryfJx9oMSf2gdUoRTs
-X-Gm-Gg: AYBFou1gX8B97HzasgalYR7ej+fdsuE7dRoJa5dPLlHdmjw6SbnAO0ZwxKEnlJdmbBQ
-	WzUoGkgkJi/amnsgV/BHwWUcE1SXDw4ATofiK6SoBdjCND8xKXWgy3Sn5CESckmHbAq6nRLfumk
-	eG3tO4A6g1lcdndoY7zx+dgReVoSENXtoubhuzZ13E6WEoAbCsYBQjhEZxWXbpSlKQ6MPQ6EDnc
-	nVRIr7ucrWW6QSBouPJw2qj7Cu9i8jjTRWUsifMkx7T3tw+ximjc2qy46ca/RDKaehDqOVLIbQg
-	zLKmMQWkt04c0RSNNY3wn9aAteCjkauAUS77sk929UU25YPaq6pbU9QAbI4ehpPzlXQDHNnRjNL
-	X6y+nKLi1d1Z+zcADuJKz7ulBAavDQyR75CSdKGD16aL7nZKyY0BHo5dibOQ1mUMYxFMdbeCVEE
-	VK3jnQGJEGmzz6d+Kmj8edtGrVWH6wfbdkLIKpfj1EVbW93jrkCdGrT4Ur0lzB2RZkwmiRK4KD+
-	Hqn0MvzH2362XyM02EkzXfceCX0m75mxy1MUdlbYkWX/26ZVLtZ8Ubeh8+Ed8enchM5UN6jF2kA
-	hdm5DZlKClO2hr78mDnZaikFQ1PSbVGswR1cwuk1cmuRxnD2fDJJcvzEFjlax0tI0u/WdvU2aae
-	EoX2PHUhs8+5B5c8O+SKnFazHWubYnpVFi1lS8gp1vQ+b8cfqjDgR6dxyXcmkm7bpleS2EY16Sp
-	UvcgxcQPqx7ZsarwkYBni6VaJLjerjSKI5m2+9Ul/0voqdMwaOdTKV3ZXC7aved06KJFI/9gO16
-	+PPzEiN+4Ml2gQCsssfEoQz2ogI+kERH3jbSvjU8dCeujD6jkNWFBgHvC+A4DLp/KdKGBzePyNd
-	Q/A6pOItMMXB6wcOKszXIxT+cJQ=
-X-Received: by 2002:a05:701b:4248:10b0:1b3:b455:93db with SMTP id a92af1059eb24-1b503131b06mr8005030c88.24.1794729051997;
-        Sat, 14 Nov 2026 23:50:51 -0800 (PST)
+        bh=GwD5f7Nzb48G6oiMM+nmeHHueCqG78N7vZEK7Fm1KVY=;
+        b=Wr2oNCpjdFJpYJTLzoXdtbmXZ58vT1i9wTx1/fx2qu4DZuqkU0WoFNKcswIiC9AcDv
+         +7NyySAG0/dKHNb08hG64LPBxTzmdZzrodBqDGGpECCzxxb5kXE8ekTYrzJJVdZoXGxC
+         Wla08p3BubxEJKgzZ3Nu+0/4Pk4pSVhHbn5OQdk26LmAXXhXOdXOmsIFqA8gALPEqBV6
+         SzZhGXxjEKDgEF4deQQi8ahIEbNYf7LCfV+B7u4zVQQIvex2la6jvWVVvoqkRd7Bg3NS
+         9qWuWt+mbWtIAcTUtsRKI9GvO2mFg3YoaIbDnPf3nJ+tFSoKIdKfH/RzEbLynBmOHG1K
+         9BAg==
+X-Gm-Message-State: APuU4Z97LPFNQl31jdYewQOWnkgOKk6roLEXqaZYHlM4Z4ituZNfrZkA
+	/as7xFO96WGVK/DbdQ4VfLZEhSPzClB/GpAQCfIyMgEUZg8THLrYa3VgaUug55tQ
+X-Gm-Gg: AYBFou0qmDz+B9yFC4nDUMYp2nNoF8h7Zhmg5tSz1AEAJ4jl2jd5twnRVKhzly6EJwQ
+	eV7paz9LUOTN4pglgVfTMw4NZoc4XY0XCjAxR/rfJdBc5TzvnjC5m57Lca8PtzM/XggL8Gng4Og
+	ZmIzbLC0OqjHcq5ZnUYEwI5hLcd8e1zZ4h0HtB+j58DOm+Lih2ctSt4JwdEC177IKEyQJcwKOwF
+	a4pDpf1lR/0PYF8p87rKC4YyV4Z8kylJKRbqNa/+XPvtRwQ2Szmmcub1rtsM27VLaFrGCuO/i+r
+	sY4KUECHxFwjMHJnMMfi9qmYFUoJgCa6sbTJjcACcGcUVAmHnRwr1/acymJiqFdKmQZqqXUdVny
+	iZ3W0WEdWgJTVPtzypbDfc/NzPwrUsxhgo543OcosLhA2lifLeadgaECdPVVs5Hg4frFBVIvVzl
+	w3mn4zeYY8K++BOPX0cyn8kW8HrQ/QlMXgiipebUZV8aHbbKmJheYJyno27Wp8ZIiezuZmRJJDs
+	U3C3ezlZ/2Ct8vyOn4RuC5To6++gk9ZiNJi7q2nuWzh0G/9pKTKWZnb/yxGYzE79BUvU+J2Ysv2
+	HDGKvuoZxWLqFBKPQP4vBqVzvuvRqQZhcfqDyQjrKFDMK6gHGC0/e/aT4r+f2WSM/K7guGUOYjZ
+	gH1UpWO3hiawK7lML4Ohq2tusQQfrLOG2osseEkrcbxuBUnFVq7iwiyWKu437Al3wmmnhABfQsx
+	EovpQACGdmemzmcqfz2+FTI5gGSROZHj7NaeUWF6gyET97UfkNPjnUK2tJGmHWgV04qIelW8MXD
+	CPOwCgbpk7rslBRhOYYPgc5rud63bUVyfMRdd2C0L4IqYnemTVrEn4QOPmp5fFbwlSCjX9hyOwN
+	nI4m
+X-Received: by 2002:a05:7301:5416:b0:375:7be3:1bbd with SMTP id 5a478bee46e88-37967ae6b5bmr7584631eec.23.1794729053231;
+        Sat, 14 Nov 2026 23:50:53 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3795591f4f8sm23112817eec.13.2026.11.14.23.50.50
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3795591f4f8sm23112817eec.13.2026.11.14.23.50.52
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 14 Nov 2026 23:50:51 -0800 (PST)
+        Sat, 14 Nov 2026 23:50:52 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-oe][PATCH 57/96] gammu, python3-gammu: upgrade to 1.45.2 and 3.5.1
-Date: Sat, 14 Nov 2026 23:48:35 -0800
-Message-ID: <20261115074918.2932593-57-khem.raj@oss.qualcomm.com>
+Subject: [meta-oe][PATCH 58/96] perfetto, libperfetto: upgrade 57.2 -> 59.1
+Date: Sat, 14 Nov 2026 23:48:36 -0800
+Message-ID: <20261115074918.2932593-58-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.1
 In-Reply-To: <20261115074918.2932593-1-khem.raj@oss.qualcomm.com>
 References: <20261115074918.2932593-1-khem.raj@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Sun, 15 Nov 2026 07:50:53 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132327
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Sun, 15 Nov 2026 07:51:03 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132328
 Content-Type: text/plain; charset="utf-8"
 
-gammu: upgrade 1.42.0 -> 1.45.2
-- Releases are now only published on GitHub.
-- Drop 0001-allow-build-with-cmake-4.patch, upstream requires CMake 3.10.
+Update the zstd revision to the one install-build-deps pins for v59.1,
+fetched from the GitHub repository it is mirrored from; the other
+third-party revisions are unchanged.
 
-python3-gammu: upgrade 3.2.4 -> 3.5.1
-- Requires gammu >= 1.44.0.
-- The sdist is now python_gammu-<version>.tar.gz and builds with
-  setuptools.build_meta.
-- Drop 0001-setup.py-StrictVersion-packaging.version.patch, upstream
-  uses packaging.version.
+Refresh 0001-Remove-check_build_deps-build-steps.patch. LICENSE only
+changed a source path.
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- .../gammu/0001-allow-build-with-cmake-4.patch | 43 ----------------
- .../{gammu_1.42.0.bb => gammu_1.45.2.bb}      |  9 ++--
- ...p.py-StrictVersion-packaging.version.patch | 49 -------------------
- ...-gammu_3.2.4.bb => python3-gammu_3.5.1.bb} |  8 +--
- 4 files changed, 9 insertions(+), 100 deletions(-)
- delete mode 100644 meta-oe/recipes-connectivity/gammu/gammu/0001-allow-build-with-cmake-4.patch
- rename meta-oe/recipes-connectivity/gammu/{gammu_1.42.0.bb => gammu_1.45.2.bb} (88%)
- delete mode 100644 meta-oe/recipes-connectivity/gammu/python3-gammu/0001-setup.py-StrictVersion-packaging.version.patch
- rename meta-oe/recipes-connectivity/gammu/{python3-gammu_3.2.4.bb => python3-gammu_3.5.1.bb} (67%)
+ .../recipes-devtools/perfetto/libperfetto.bb  |  2 +-
+ meta-oe/recipes-devtools/perfetto/perfetto.bb |  6 +++---
+ .../recipes-devtools/perfetto/perfetto.inc    |  4 ++--
+ ...-Remove-check_build_deps-build-steps.patch | 21 +++++++++----------
+ 4 files changed, 16 insertions(+), 17 deletions(-)
 
-diff --git a/meta-oe/recipes-connectivity/gammu/gammu/0001-allow-build-with-cmake-4.patch b/meta-oe/recipes-connectivity/gammu/gammu/0001-allow-build-with-cmake-4.patch
-deleted file mode 100644
-index 5ab63b809f..0000000000
---- a/meta-oe/recipes-connectivity/gammu/gammu/0001-allow-build-with-cmake-4.patch
-+++ /dev/null
-@@ -1,43 +0,0 @@
--From ea068ac152b9b375be51611ca04d0f833e2f6856 Mon Sep 17 00:00:00 2001
--From: Alper Ak <alperyasinak1@gmail.com>
--Date: Tue, 8 Jul 2025 22:52:11 +0300
--Subject: [PATCH] cmake: Set minimum required version to 3.5 for CMake 4+
-- compatibility
--
--Fix:
--
--| CMake Error at CMakeLists.txt:5 (cmake_minimum_required):
--|   Compatibility with CMake < 3.5 has been removed from CMake.
--|
--|   Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
--|   to tell CMake that the project requires at least <min> but has been updated
--|   to work with policies introduced by <max> or earlier.
--|
--|   Or, add -DCMAKE_POLICY_VERSION_MINIMUM=3.5 to try configuring anyway.
--|
--|
--| -- Configuring incomplete, errors occurred!
--
--Upstream-Status: Pending
--
--Signed-off-by: Alper Ak <alperyasinak1@gmail.com>
+diff --git a/meta-oe/recipes-devtools/perfetto/libperfetto.bb b/meta-oe/recipes-devtools/perfetto/libperfetto.bb
+index 0693c18166..3256978588 100644
+--- a/meta-oe/recipes-devtools/perfetto/libperfetto.bb
++++ b/meta-oe/recipes-devtools/perfetto/libperfetto.bb
+@@ -1,5 +1,5 @@
+ LICENSE = "Apache-2.0"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=3b06e43f2e368eb8663632d529232353"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=0b17e8eda713c18363c16102cacd41f3"
+ 
+ require perfetto.inc
+ 
+diff --git a/meta-oe/recipes-devtools/perfetto/perfetto.bb b/meta-oe/recipes-devtools/perfetto/perfetto.bb
+index f21b983a2b..02db461783 100644
+--- a/meta-oe/recipes-devtools/perfetto/perfetto.bb
++++ b/meta-oe/recipes-devtools/perfetto/perfetto.bb
+@@ -1,6 +1,6 @@
+ LICENSE = "Apache-2.0 AND BSD-3-Clause AND MIT AND Zlib"
+ 
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=3b06e43f2e368eb8663632d529232353 \
++LIC_FILES_CHKSUM = "file://LICENSE;md5=0b17e8eda713c18363c16102cacd41f3 \
+                     file://buildtools/libcxx/LICENSE.TXT;md5=55d89dd7eec8d3b4204b680e27da3953 \
+                     file://buildtools/libcxxabi/LICENSE.TXT;md5=7b9334635b542c56868400a46b272b1e \
+                     file://buildtools/libunwind/LICENSE.TXT;md5=f66970035d12f196030658b11725e1a1 \
+@@ -23,7 +23,7 @@ SRC_URI:append = " \
+            git://android.googlesource.com/platform/bionic.git;branch=master;protocol=https;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/buildtools/bionic;name=bionic \
+            git://chromium.googlesource.com/chromium/src/third_party/zlib.git;nobranch=1;protocol=https;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/buildtools/zlib;name=zlib \
+            git://android.googlesource.com/platform/external/lzma.git;branch=master;protocol=https;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/buildtools/lzma;name=lzma \
+-           git://android.googlesource.com/platform/external/zstd.git;branch=master;protocol=https;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/buildtools/zstd;name=zstd \
++           git://github.com/facebook/zstd.git;nobranch=1;protocol=https;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/buildtools/zstd;name=zstd \
+            git://chromium.googlesource.com/external/github.com/google/re2.git;nobranch=1;protocol=https;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/buildtools/re2;name=re2 \
+            \
+            file://0001-Remove-check_build_deps-build-steps.patch \
+@@ -43,7 +43,7 @@ SRCREV_libcxx = "852bc6746f45add53fec19f3a29280e69e358d44"
+ SRCREV_libcxxabi = "a37a3aa431f132b02a58656f13984d51098330a2"
+ SRCREV_libunwind = "419b03c0b8f20d6da9ddcb0d661a94a97cdd7dad"
+ SRCREV_zlib = "6f9b4e61924021237d474569027cfb8ac7933ee6"
+-SRCREV_zstd = "77211fcc5e08c781734a386402ada93d0d18d093"
++SRCREV_zstd = "f8745da6ff1ad1e7bab384bd1f9d742439278e99"
+ SRCREV_re2 = "927f5d53caf8111721e734cf24724686bb745f55"
+ 
+ SRCREV_FORMAT .= "_bionic_core_lzma_libprocinfo_logging_unwinding_protobuf_abseil_libbase_libcxx_libcxxabi_libunwind_zlib_zstd_re2"
+diff --git a/meta-oe/recipes-devtools/perfetto/perfetto.inc b/meta-oe/recipes-devtools/perfetto/perfetto.inc
+index 188472b27d..bb5e152a80 100644
+--- a/meta-oe/recipes-devtools/perfetto/perfetto.inc
++++ b/meta-oe/recipes-devtools/perfetto/perfetto.inc
+@@ -5,6 +5,6 @@ HOMEPAGE = "https://github.com/google/perfetto"
+ SRC_URI = "git://github.com/google/perfetto.git;protocol=https;name=perfetto;nobranch=1 \
+ 	"
+ 
+-SRCREV_perfetto = "da1d152cff27890903d158fe96751de3aab883cc"
++SRCREV_perfetto = "1e9c61e9844affd7dccd3d42d9ea9f3a3d10cf6d"
+ SRCREV_FORMAT = "perfetto"
+-PV = "57.2"
++PV = "59.1"
+diff --git a/meta-oe/recipes-devtools/perfetto/perfetto/0001-Remove-check_build_deps-build-steps.patch b/meta-oe/recipes-devtools/perfetto/perfetto/0001-Remove-check_build_deps-build-steps.patch
+index 67720ea227..1956273cbc 100644
+--- a/meta-oe/recipes-devtools/perfetto/perfetto/0001-Remove-check_build_deps-build-steps.patch
++++ b/meta-oe/recipes-devtools/perfetto/perfetto/0001-Remove-check_build_deps-build-steps.patch
+@@ -12,14 +12,18 @@ rather than the Bitbake-generated one.
+ 
+ Signed-off-by: Sui Chen <suichen6@gmail.com>
+ Signed-off-by: Etienne Cordonnier <ecordonnier@snap.com>
 ----
-- CMakeLists.txt | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
--diff --git a/CMakeLists.txt b/CMakeLists.txt
--index d0a79b3..23dba35 100644
----- a/CMakeLists.txt
--+++ b/CMakeLists.txt
--@@ -2,7 +2,7 @@
-- # Copyright (c) 2007 - 2018 Michal Cihar
-- # vim: expandtab sw=4 ts=4 sts=4:
+ Upstream-Status: Pending
++---
++ gn/BUILD.gn                  |  1 -
++ gn/standalone/BUILD.gn       | 20 ++++++++++----------
++ gn/standalone/BUILDCONFIG.gn |  5 +++--
++ 3 files changed, 13 insertions(+), 13 deletions(-)
+ 
+ diff --git a/gn/BUILD.gn b/gn/BUILD.gn
+-index 6f2ad9fd..05e4030b 100644
++index 24204c14..27fb036b 100644
+ --- a/gn/BUILD.gn
+ +++ b/gn/BUILD.gn
+-@@ -137,7 +137,6 @@ group("default_deps") {
++@@ -139,7 +139,6 @@ group("default_deps") {
+    deps = [ ":gen_buildflags" ]
+    if (perfetto_build_standalone) {
+      public_deps = [
+@@ -28,10 +32,10 @@ index 6f2ad9fd..05e4030b 100644
+        "//gn/standalone/sanitizers:deps",
+      ]
+ diff --git a/gn/standalone/BUILD.gn b/gn/standalone/BUILD.gn
+-index 7ecaae60..3edb470b 100644
++index 4c7a09e8..26fdbec1 100644
+ --- a/gn/standalone/BUILD.gn
+ +++ b/gn/standalone/BUILD.gn
+-@@ -541,16 +541,16 @@ config("android_liblog") {
++@@ -602,13 +602,13 @@ config("android_liblog") {
+  }
+  
+  # Checks that tools/install-build-deps has been run since it last changed.
+@@ -55,11 +59,8 @@ index 7ecaae60..3edb470b 100644
+ +#    "--android",
+ +#  ]
+ +#}
 - 
---cmake_minimum_required (VERSION 3.0)
--+cmake_minimum_required (VERSION 3.5)
-- INCLUDE (CMakeForceCompiler)
-- 
-- project (Gammu C)
+- # TODO(https://github.com/google/perfetto/issues/5353): Remove this after
+- # updating emscripten.
+ diff --git a/gn/standalone/BUILDCONFIG.gn b/gn/standalone/BUILDCONFIG.gn
+-index 2e27f2f1..7037d35e 100644
++index 88fff1b5..a05a92ab 100644
+ --- a/gn/standalone/BUILDCONFIG.gn
+ +++ b/gn/standalone/BUILDCONFIG.gn
+ @@ -64,8 +64,9 @@ declare_args() {
+@@ -74,5 +75,3 @@ index 2e27f2f1..7037d35e 100644
+  }
+  default_configs = [
+    "//gn/standalone:default",
 --- 
 -2.43.0
--
-diff --git a/meta-oe/recipes-connectivity/gammu/gammu_1.42.0.bb b/meta-oe/recipes-connectivity/gammu/gammu_1.45.2.bb
-similarity index 88%
-rename from meta-oe/recipes-connectivity/gammu/gammu_1.42.0.bb
-rename to meta-oe/recipes-connectivity/gammu/gammu_1.45.2.bb
-index 353ee37f46..d787a75ba4 100644
---- a/meta-oe/recipes-connectivity/gammu/gammu_1.42.0.bb
-+++ b/meta-oe/recipes-connectivity/gammu/gammu_1.45.2.bb
-@@ -4,15 +4,16 @@ LICENSE = "GPL-2.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
- HOMEPAGE = "https://wammu.eu/"
- 
--SRC_URI = "https://dl.cihar.com/${BPN}/releases/${BP}.tar.xz \
-+SRC_URI = "https://github.com/gammu/gammu/releases/download/${PV}/Gammu-${PV}.tar.gz \
-     file://gammurc \
-     file://gammu-smsdrc \
--    file://0001-allow-build-with-cmake-4.patch \
- "
- 
--SRC_URI[sha256sum] = "d8f152314d7e4d3d643610d742845e0a016ce97c234ad4b1151574e1b09651ee"
-+S = "${UNPACKDIR}/Gammu-${PV}"
- 
--UPSTREAM_CHECK_URI = "https://dl.cihar.com/${BPN}/releases"
-+SRC_URI[sha256sum] = "92478c1c6d8df193f3d5e36648fd05fc3eff26254034f025cad2a0ffba5aec23"
-+
-+UPSTREAM_CHECK_URI = "https://github.com/gammu/gammu/releases"
- 
- DEPENDS = "cmake-native virtual/libiconv libdbi mysql5 glib-2.0 udev libgudev unixodbc"
- 
-diff --git a/meta-oe/recipes-connectivity/gammu/python3-gammu/0001-setup.py-StrictVersion-packaging.version.patch b/meta-oe/recipes-connectivity/gammu/python3-gammu/0001-setup.py-StrictVersion-packaging.version.patch
-deleted file mode 100644
-index 23fe4441dc..0000000000
---- a/meta-oe/recipes-connectivity/gammu/python3-gammu/0001-setup.py-StrictVersion-packaging.version.patch
-+++ /dev/null
-@@ -1,49 +0,0 @@
--From 96e8f0b2d13e890d9ffff8673f18dcc94290efb2 Mon Sep 17 00:00:00 2001
--From: Tim Orling <tim.orling@konsulko.com>
--Date: Thu, 13 Jan 2022 20:06:33 -0600
--Subject: [PATCH] setup.py: StrictVersion -> packaging.version.*
--
--distutils is deprecated in Python 3.10 and will be removed in Python
--3.12 [1]
--
--The recommended replacement for distutils.version is to use
--packaging.version
--
--StrictVersion can be replaced by packaging.version.Version and helpers
--like packaging.version.parse()
--
--[1] https://www.python.org/dev/peps/pep-0632/
--[2] https://packaging.pypa.io/en/latest/version.html
--
--Upstream-Status: Submitted [https://github.com/gammu/python-gammu/pull/67]
--
--Signed-off-by: Tim Orling <tim.orling@konsulko.com>
-----
-- setup.py | 6 +++---
-- 1 file changed, 3 insertions(+), 3 deletions(-)
--
--diff --git a/setup.py b/setup.py
--index a458181..bffb09d 100755
----- a/setup.py
--+++ b/setup.py
--@@ -30,7 +30,7 @@ import os
-- import platform
-- import subprocess
-- import sys
---from distutils.version import StrictVersion
--+from packaging.version import parse, Version
-- 
-- from setuptools import Extension, setup
-- 
--@@ -112,9 +112,9 @@ class GammuConfig:
--         with open(self.config_path(self.path)) as handle:
--             for line in handle:
--                 if line.startswith("#define GAMMU_VERSION "):
---                    version = line.split('"')[1]
--+                    version = parse(line.split('"')[1])
-- 
---        if version is None or StrictVersion(version) < StrictVersion(GAMMU_REQUIRED):
--+        if version is None or version < parse(GAMMU_REQUIRED):
--             print("Too old Gammu version, please upgrade!")
--             sys.exit(100)
-- 
-diff --git a/meta-oe/recipes-connectivity/gammu/python3-gammu_3.2.4.bb b/meta-oe/recipes-connectivity/gammu/python3-gammu_3.5.1.bb
-similarity index 67%
-rename from meta-oe/recipes-connectivity/gammu/python3-gammu_3.2.4.bb
-rename to meta-oe/recipes-connectivity/gammu/python3-gammu_3.5.1.bb
-index f8dfa7c926..b312b7eb05 100644
---- a/meta-oe/recipes-connectivity/gammu/python3-gammu_3.2.4.bb
-+++ b/meta-oe/recipes-connectivity/gammu/python3-gammu_3.5.1.bb
-@@ -6,12 +6,12 @@ LICENSE = "GPL-2.0-or-later"
- LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
- 
- PYPI_PACKAGE = "python-gammu"
--PYPI_PACKAGE_SDIST = "python-gammu"
-+PYPI_PACKAGE_SDIST = "python_gammu"
- 
--inherit pypi setuptools3 pkgconfig
-+inherit pypi python_setuptools_build_meta pkgconfig
- 
--SRC_URI += "file://0001-setup.py-StrictVersion-packaging.version.patch"
--SRC_URI[sha256sum] = "49fc70f01bc192c43ff3ec815e082df5261ea4c8d36a695e977734c4eb4df868"
-+SRC_URI += ""
-+SRC_URI[sha256sum] = "d6082d685983d898f9ab6b401b96a620857bf337bf07e38b80f6b8ab08fe459a"
- 
- DEPENDS += "gammu python3-packaging-native"
- 
