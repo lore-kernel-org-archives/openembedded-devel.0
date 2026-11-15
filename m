@@ -1,65 +1,65 @@
-Received: from mail-dy1-f171.google.com (mail-dy1-f171.google.com [74.125.82.171])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.3812.1794729001066488196
+Received: from mail-dy1-f169.google.com (mail-dy1-f169.google.com [74.125.82.169])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.3814.1794729002570829619
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 14 Nov 2026 23:50:01 -0800
+ Sat, 14 Nov 2026 23:50:02 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=y+HbLa/0;
- spf=pass (domain: gmail.com, ip: 74.125.82.171, mailfrom: raj.khem@gmail.com)
-Received: by mail-dy1-f171.google.com with SMTP id 5a478bee46e88-3712b6d9843so1902819eec.1
-        for <openembedded-devel@lists.openembedded.org>; Sat, 14 Nov 2026 23:50:01 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=sCN1mo+L;
+ spf=pass (domain: gmail.com, ip: 74.125.82.169, mailfrom: raj.khem@gmail.com)
+Received: by mail-dy1-f169.google.com with SMTP id 5a478bee46e88-3791619605cso4879080eec.0
+        for <openembedded-devel@lists.openembedded.org>; Sat, 14 Nov 2026 23:50:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794729000; x=1795333800; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1794729002; x=1795333802; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=IbFta4l1J0BA1jbYqd0iUo7PnMxz9vE8couUmiY/m50=;
-        b=y+HbLa/0Vc+Vk1nvmGJGBaJ70xfpQcwIsNB1xPYIwvlzXrWFYu6HqAlZoUUBdEnx1b
-         n8tKS62wZ9LLEQoapDqbslEv/w7aQ+BJeb9IeOmTYiJ8JrL+VKM61wjdORkodO9kjxRk
-         DDY18X8lCdaAxPuHHstXN4Gm8kxBrKrUHcEQkoJJOda6Iw8fwDtRSJR6UI7HMIymozq0
-         /vUIr49ub7aHOl9TCWioKcDFlosTgW/JbmLrLDVUvGkm890ogxlN7qq8bn4vpcAzMR/0
-         VUiFeQ/fzaUf5MZUVKdNwY857lpAX/VNgRcUOBbL+JZdYZ974kOAoZGK8j0brQZS3Y+E
-         ZNXg==
+        bh=Wzvna3oT9h+YEb3nr6HZbMBm4GoWTjNwJoI6G0eby+M=;
+        b=sCN1mo+LsmmbP3uUU9KocR2KQOuxfV+nAlGdlCA/EI2LYKySByqQcGR+QeonJ5oT1C
+         mV/tKtOQo7q6ZR+HLV5dYnxnE1SAinVADRJNnAZmxxIpQiE8RnVSmHahRN+tIYgxylga
+         A3dRjkokBWb7sx5gwl4yiJP/MRzFUDcKjsvI2WXBfiKy3XwrXRyHjBEoM+jkuEQ/HMuK
+         EYVg1cOC3Elsj4eBG49z0G9wXCF8aqteFMk+Hn8NM7xpQfkMjNuHhwMNINa2cPdlRXz6
+         DSHIdx9rTaN312IszXTOmOaJqIeYDi2RvG9kvilcSZk6CMDycIrzMjs8Ueuk+y4b2Qaq
+         oqvg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794729000; x=1795333800;
+        d=1e100.net; s=20260707; t=1794729002; x=1795333802;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=IbFta4l1J0BA1jbYqd0iUo7PnMxz9vE8couUmiY/m50=;
-        b=FAy+RP6PC8nKKMh1ae+EnwVZkZDNQWFDwjuicncdIbPn0h4fWynpDVhwZn/BazwNM1
-         Iz61/B7NPQwGergRFe/G9UZzgs008lhZ1MlK63RdKZoCNjH4X9JbWjmNA06+CkDO6YvX
-         RdYIV8+x8kz877qAJVZ0wbDbkdF2yWVyWb5rUhftqXg2udKCu/DKyezsS4x7W5LyPRCq
-         tpa99uQxguB2y1F9qtRmU4ue17bWi9vQGbMDxj3ScPBqzmRckWldFmB9bVM+nwIqj3NQ
-         qtQqjBjHwPKUjptJr8xYqXhwvHcmMRotUUAnG0fSab6tcY3k/rUG5c+1Goz1hvaSY40P
-         ZODQ==
-X-Gm-Message-State: APuU4Z8K5D3ujoXfNdWzr9T5Sgwjp+vGhE3l4pBB2fMvuDZA38h9ewEh
-	/xLSbjgXozc5ZcA6nzTU+IUcCnBkNMJJcpnMgvI3yjTlAnit5Cs8o5Z/6V4r6+2t
-X-Gm-Gg: AYBFou1b2b19lFyehLId/2LgYqrudfVRheeWKaCgq+iHSfFW1XzsVXgi6/t1YzdUjJL
-	6fijzFiQ0W/y3kEck07owHsevnhW5A1XGHLE5tOntd2MKy6k6uQLKPy9GzItUgIcjWTXuEmqDw1
-	szS2Qmv4qTGvwksFxQdbsGFcfpPfZH+V9D3Nog71Tj8U9w/1IgM/BjzO9yzz5+GK1KA7l4HqnC0
-	pD42UGqmDI4aodRE/8yq0pMZ+MgJuGSRzt1OxBifhUDLHLsYtf34ySUtZO9tSLTd7OowkSxr1oE
-	rsN2LN8bB6bTfSbj18a+jRlVNqij38N/U9o/YcD6n/S3VZnTalSW76VYkQI7qPdSQ8by4tNRDr1
-	gJu0SXCT/wRr+F3aGQ2+c0wqq8xZ/tlfudxQX+nwgtR7a6CkP9xuxlUWbrVToklBdY/Y1JkJcKO
-	Oxadu+DteLsNRuaz5dBqn2M8rE8/VmITOfLyuNjnVQNZutKalKs2dnG80lU/Gbsw82lCxz8G2aj
-	IBeU+be9reqFR3KoqZ/7R7zlcRiCjVDIVYu7RCPm1X1mmU6Gk2BRyddNz9eDZycKuG1sonkxFxH
-	9Rc6oaKPhZnrHc6u/hanyizLxlgpnU1o2NsL3lUhpx4a6sCMxp9JEhv6HH6NjIIKkFPfhaEG/MK
-	sUaQmjUSAxmoi40e680iKuSvnF5btTBgOcRCukniq8VHY+VEfESFamUCQmbSnXiu5fEGfIAi74F
-	3SQDtkULSN05v4E9CJcdR/d6CZwG+E1vVfcXKLSSNE2d4zytNkrHI2nkQdSD3KZacn8dtOXDMjq
-	pXXaRaMDf2taCNmeioQdtHKRA+swzIGSPJJgnjbHYJPraqO4HREcJ6L8PbRUdaVoGpt8H77ipr4
-	NpjF/MIQwHSbVpWPoU1QyMwxEw==
-X-Received: by 2002:a05:7301:4206:b0:369:535f:4d12 with SMTP id 5a478bee46e88-37963a53df5mr6551058eec.3.1794729000390;
-        Sat, 14 Nov 2026 23:50:00 -0800 (PST)
+        bh=Wzvna3oT9h+YEb3nr6HZbMBm4GoWTjNwJoI6G0eby+M=;
+        b=sdBSqO7RmGv6cyvGa/k8kYZB/Nsx/BsBjcgL8G61Gc7Ry3P4rBv1nOvelmJQaw4/Pv
+         fkmZucWpG6gJc0wE6ssGVa3QTzp19SA2nz0PgsOhNw2EIs3hehS0nX+gLdOVK2prTS0N
+         kwXPPmcZZ2tq1oF5cE7f3FDUtd3WiMIjHh5Kji/8xo/PXNz1aIXQ36dZ2RsMSk9TsNZG
+         vHH8kDS9bMAEhfgLG5jBlKXAfAXEwdw7SJkHEz9UpIfNUlTL0JYnNJM+LLnjUG8NtJiN
+         +4Cg5ASeFM7h0vGahWtVjFdBgb7P27+hpfrA4XHuyjl/5U1xnyBAHyjqnQwYsP0W5NaM
+         I9gQ==
+X-Gm-Message-State: APuU4Z/kJd9INAnT0U62MOkg+1lZVP4jgOWErYCHWLXLXVEvEY8wkqRz
+	LKss3+UQdt8lis67rqQ/K9oAyw0sr4roJ4SxM2MAYDvfCFeJkS4naV7zTLQwDt7l
+X-Gm-Gg: AYBFou2FjbLjZLo1L7TWa3DLGrcu0wjbL3DJpidl4PmMI+hKfxA2bYRa3vjcSfU3Den
+	BVLs5BFX2eBc4SvyQhLgSfyZrHDyBzY82cmy/P1OofC1H3ykIZalNaoxfCp9ucSLs0FIjAgxy+0
+	H+Az8xKfsMx2lqTrm7b50uMO5AiGfqN3Vatw+r93G9wff132yvTmM9oTVT7ctZMZ/nOF6E0g9Dd
+	yDGWMn2lCfwR+iB4NLJT01GOCgxT2foel2ywZetOj0HQ80X1hds3J24G3VJsOjeIKkPk/2xA1UF
+	vxUdur1+xFRCGPzWlqCgJpv4Tz0Milutwbehwwu1UM7H1fIcIDzzv8HzR/ZDNdkr7YfYlRw3bH9
+	7MQISISNK3yQEPfnTwps/EzEdky8YAq8JSFu00DcEl6fpTqN+SvCqYrOAFrPaCEW4QwEKzsTBIB
+	rDYFxCRNqrf7QuE6PJqsCLIu+nyeX5RD3LYZHSx7tvU5bWEgJsiVhs2CfVNLcJ/ifbonUq0Dh+k
+	fOt2TxHiL40cdNOJfMBSIt3TLu2S6Ge2DeMevGt9qTwxyhWsF7JR1oNTB7bu4Fh27hFK+NRIXKZ
+	vTKH7Jw4olJAmhx9J9zgIcBuOq2fi5UwQbCQefB4nDPN2TS40L1IE7/e4HbxslvCWx6L7QZossJ
+	10Z0cgO6mVYIluwhirtI68fAXjVCAVvdtFH3L6oGgeJddYjeldq/gypyBe9RJ0v1mc2e/49zh8o
+	4j+0ZFMI91r49HO1pJAkwMHhXG4NifvPaqxIIZATvSStXQC+I7Y/YDRy5dIw0bGG3smp1zdW9qb
+	l1tpOgbxH2IVKa5JKn9SW0srE5gnSNQt+R/xCmiIv5/3qEgkJgH87Vw3n4i9RDwgmSjU01TjLzT
+	/dpNdeAcx+KCh1mbxFPIftn4we4=
+X-Received: by 2002:a05:693c:2a16:b0:369:fa21:ba0b with SMTP id 5a478bee46e88-3796721cfc1mr6751337eec.33.1794729001833;
+        Sat, 14 Nov 2026 23:50:01 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3795591f4f8sm23112817eec.13.2026.11.14.23.49.58
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3795591f4f8sm23112817eec.13.2026.11.14.23.50.00
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 14 Nov 2026 23:49:59 -0800 (PST)
+        Sat, 14 Nov 2026 23:50:00 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-oe][PATCH 25/96] libqrtr-glib: upgrade 1.2.2+git -> 1.4.0
-Date: Sat, 14 Nov 2026 23:48:03 -0800
-Message-ID: <20261115074918.2932593-25-khem.raj@oss.qualcomm.com>
+Subject: [meta-oe][PATCH 26/96] librdkafka: upgrade 2.15.1 -> 2.16.0
+Date: Sat, 14 Nov 2026 23:48:04 -0800
+Message-ID: <20261115074918.2932593-26-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.1
 In-Reply-To: <20261115074918.2932593-1-khem.raj@oss.qualcomm.com>
 References: <20261115074918.2932593-1-khem.raj@oss.qualcomm.com>
@@ -67,32 +67,29 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Sun, 15 Nov 2026 07:50:09 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132295
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132296
 Content-Type: text/plain; charset="utf-8"
-
-Switch to the qrtr-1-4 branch and the 1.4.0 release tag.
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- .../recipes-connectivity/libqrtr-glib/libqrtr-glib_git.bb   | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ .../librdkafka/{librdkafka_2.15.1.bb => librdkafka_2.16.0.bb}   | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-support/librdkafka/{librdkafka_2.15.1.bb => librdkafka_2.16.0.bb} (92%)
 
-diff --git a/meta-oe/recipes-connectivity/libqrtr-glib/libqrtr-glib_git.bb b/meta-oe/recipes-connectivity/libqrtr-glib/libqrtr-glib_git.bb
-index f195008650..94cce4b2f0 100644
---- a/meta-oe/recipes-connectivity/libqrtr-glib/libqrtr-glib_git.bb
-+++ b/meta-oe/recipes-connectivity/libqrtr-glib/libqrtr-glib_git.bb
-@@ -5,10 +5,10 @@ HOMEPAGE = "https://gitlab.freedesktop.org/mobile-broadband/libqrtr-glib"
- LICENSE = "LGPL-2.1-or-later"
- LIC_FILES_CHKSUM = "file://LICENSES/LGPL-2.1-or-later.txt;md5=4fbd65380cdd255951079008b364516c"
+diff --git a/meta-oe/recipes-support/librdkafka/librdkafka_2.15.1.bb b/meta-oe/recipes-support/librdkafka/librdkafka_2.16.0.bb
+similarity index 92%
+rename from meta-oe/recipes-support/librdkafka/librdkafka_2.15.1.bb
+rename to meta-oe/recipes-support/librdkafka/librdkafka_2.16.0.bb
+index 887541efbc..95e287d427 100644
+--- a/meta-oe/recipes-support/librdkafka/librdkafka_2.15.1.bb
++++ b/meta-oe/recipes-support/librdkafka/librdkafka_2.16.0.bb
+@@ -8,7 +8,7 @@ LICENSE = "BSD-2-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=40b04809b5d6f648f20f45143cbcb1ad"
  
--SRC_URI = "git://gitlab.freedesktop.org/mobile-broadband/libqrtr-glib.git;protocol=https;branch=qrtr-1-2"
-+SRC_URI = "git://gitlab.freedesktop.org/mobile-broadband/libqrtr-glib.git;protocol=https;branch=qrtr-1-4"
+ SRC_URI = "git://github.com/edenhill/librdkafka;protocol=https;branch=master;tag=v${PV}"
+-SRCREV = "c58bbed850ebe1cc493259d11e4de6ca930d5120"
++SRCREV = "c6c9973cf1b25394c58e0cade13a36f386856f77"
  
--PV = "1.2.2+git"
--SRCREV = "8991f0e93713ebf4da48ae4f23940ead42f64c8c"
-+PV = "1.4.0"
-+SRCREV = "69791f8f2a092d0ec8eb83cbe51dfc3d157c3079"
+ UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
  
- 
- inherit meson pkgconfig gobject-introspection
