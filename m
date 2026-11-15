@@ -1,65 +1,65 @@
-Received: from mail-dl1-f41.google.com (mail-dl1-f41.google.com [74.125.82.41])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.3843.1794729082477747277
+Received: from mail-dy1-f176.google.com (mail-dy1-f176.google.com [74.125.82.176])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.3895.1794729085587108635
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 14 Nov 2026 23:51:22 -0800
+ Sat, 14 Nov 2026 23:51:25 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=Sd7IhOFL;
- spf=pass (domain: gmail.com, ip: 74.125.82.41, mailfrom: raj.khem@gmail.com)
-Received: by mail-dl1-f41.google.com with SMTP id a92af1059eb24-15ea896ddc8so3487096c88.0
-        for <openembedded-devel@lists.openembedded.org>; Sat, 14 Nov 2026 23:51:22 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=proWXgBY;
+ spf=pass (domain: gmail.com, ip: 74.125.82.176, mailfrom: raj.khem@gmail.com)
+Received: by mail-dy1-f176.google.com with SMTP id 5a478bee46e88-3791619605cso4880215eec.0
+        for <openembedded-devel@lists.openembedded.org>; Sat, 14 Nov 2026 23:51:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794729082; x=1795333882; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1794729085; x=1795333885; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=rvN7U7cS8Vq2lp/Dw8xi59pFMkv1aMt8h2BkOJXstsg=;
-        b=Sd7IhOFLK9xfMHJpvlwUGlZmKe8RqfWUfh+J2lgPfoW9d8vvgz2JySrAYHQS6zjFsq
-         lhSSicIjlxMQ1ndkCv5ILmeSgmlPxkcNJ96VqQI/DdJ4UWdv9kTqctNjUFyS885gHDiT
-         fvHlMiL8kXT34UCGJF5orPRRCOg+7MV7CqgazgRN7MxMqIjFmcr3WgVefUOhq3PUv/aw
-         BtsusqbanamvF5iLx2T6l+lz7JJ8OdlJkIQ1oStETbZGI6nafp9DE2nB+w6PrH5k/MDe
-         w4tBWggAHq30K96KJGCbDBmlfuvwU8ij1D31FrruAEXRiM6oYu1ZoTRIoujQEHU/TDjb
-         TeNQ==
+        bh=BpudN5TdiU5BTc1sH4WCPMgPcVEbJLqbNTytZWMWR9M=;
+        b=proWXgBYEPJlxfyHD0TrEcudOktExSS7O5WCBOMIEJ9BgRndTq4f7ShIotkwwn9SWr
+         6W+4q1XIRgUc4Ll8p0HzsRW+Zyge+wGoOxyAtutDoWdAEwYfIXhZZ/X4q4ii+V/Z04sI
+         fcMVQX7saelz0cwE9mjaLN41ZLnQjh0jnl59Mewmwu2jDiWbZnFC6gXqM4sQCZ+6ITun
+         7TY+uddCxJBxMVrJpEi0gOv9QAqILaxEVyTHBIFdX5DhELtEMGXqys9Ky991oU3E3eZv
+         C9Zwn9Xp/caXaeXRwLMLlajj/fhq79u/vfKaPxDNmZ/abkyKIDgpyDnh4/GO8aPRJNM4
+         ViTw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794729082; x=1795333882;
+        d=1e100.net; s=20260707; t=1794729085; x=1795333885;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=rvN7U7cS8Vq2lp/Dw8xi59pFMkv1aMt8h2BkOJXstsg=;
-        b=FEsQa7yFUia4GnC55LRe2nX3PMYwhPNSs1DSJC/IyDpB3KBrbSA8s9sZ2x65WxVGe8
-         QbOnvhCK10EQyjfd/h/XVoEofwvaM/mVVNbLK+76sX21BLpDO4JYSTN9B+imzWVL56eM
-         8roM+ndC/uJUfWOTDsRN2LxJtVCIv8GICfiYPWUPfIUUAjPpzoFRgu8aj/QlKF4bMar4
-         Ph/MXkRr4Qs+dxcN3uEATZfFDTmGyJZQUenPo7XkGyYF8fHMQOSTokGz06rOH2GJ2VLW
-         Sb3YhXOTR4KpBWhCUtjWs3RnuTtMePSrT3MEVomGip6Nk4Bo3FoDrczOhJggmVtuKxpP
-         q5yA==
-X-Gm-Message-State: APuU4Z+acq9ZBjRP9Ur8YtfXZKWf3ZfjMojzK4cV7rUd4WUpONqdBjWh
-	GLzOzfb56PUn1/MWxVFkrHTUGsE/ocQq/LLFqGetfYerKx27NVDgHViLe2DPcd9Y
-X-Gm-Gg: AYBFou0Ok8jHztOV9xD2eKVrbc+dCBeWj0cemrsYBaocxt+0KhH1TDh/er28ntfEsu1
-	KvK7S+k5DRlucMdOhqf4UzLwDtL0qvvn77wy6BQQ5oCVosozdcnd+p9oLgBV1FP4l8dclcf9KQZ
-	NXx3LiKbAwfnvLq2C9U45QWNknzqYpj8Mi4IwVErL39VFIR2x5tqakjjCSwwKPdaD11x0I11ic7
-	vWGzOUdt64G9OiHkie4R2esf9P2rfgaBWS7ZXZquE+P9EimoCnFpW7pECsjhywRE2f43jpZ8see
-	HyLX7NjhDeOQG5X/sr6SuMBnNEO4LJm5P0FFsVpXus3oztNABsoL7kxrMGlilxSl3NuN0fEmXTZ
-	qLOTTwbZGaW8/5+nvQt6RIKkPAeSeHzddkKNIWxzaGM/Uqs61Ep4Gu+AdyvbskHy22TBbBJP2vm
-	dyEqNvM7bLALfplBKus7VXkeIpmAXo+/+LKnYoQPDpS6HwAM+EyiXzfjWTqlA6W/t+r1NBRcU8d
-	QvpcT/yuE46My1SEWn3qcub3UdpW2ClyX3g/1raoBEluTDSo6fb6uyndczvOQzFm09gn55YC0p3
-	EqWCkM4686XdeGkIQT/foFJur6O6z3m7SlPqEar2GsHksTMUinqKBBDrFM0EhxyNJXVcDSprDlc
-	/wSKeJAkKd+ToTGdb1hMVMj2VlIBvAcwMDJqhPE7LuBwPaI7NlI+kxdZj67sCNhjJRjrdfqfWOE
-	wuZdZnDs7rMALDAxQZlsVdZWtnamco0O035C0PyVzqHQ3f4yXooPAoYhMpHFIv11ffbtxrr7J+D
-	1hbUOotkvYuXuDpzOzZCbSPRZOdwoCoyFaKHt/Bu+XAjQCdlWaAuVPqKpL+RmsEMQuZDSLAQR37
-	2Ha9
-X-Received: by 2002:a05:693c:4153:10b0:36c:9af3:22eb with SMTP id 5a478bee46e88-379681c99b3mr8597830eec.34.1794729081685;
-        Sat, 14 Nov 2026 23:51:21 -0800 (PST)
+        bh=BpudN5TdiU5BTc1sH4WCPMgPcVEbJLqbNTytZWMWR9M=;
+        b=WwPc4KXk9Q3AwugeSHPty5srWtH6+dWTYV4zrwzX8BFxbwaODBGjraaTlwGAaJqiMQ
+         tHpl9cHTQJeFavokNg4Jcwqh+zfQiD42wySZ0ampw82TjqnKipAKTizwt9Selrt3xIVC
+         7LgmMiqOXvE30oepjVcyAsoEjYPuJ/2bFxzQwPfJlrNrCFsjY8vcqeChhMPkukLXnLWt
+         4XWrNUIME3jAuIo0NizYSz7WO6Y5o2LgqO2PZXPZ1MFRkEWdfaw0lddtpyeJtHI5ioAQ
+         7w/2uEG1BLZJGIUgJeDOGm5kuDYweaHLvruHtnZGaEI29Ii4T7/o423FyX8Mnyx0GNmj
+         6tWg==
+X-Gm-Message-State: APuU4Z8YvF84yS/IkMandxJA8zDWd/DCpIHqsYIdZb0Yi6LHeQP7Qk7V
+	79IZ82+qMqglzXKQQ6ClNKS9IbGP5yskH3VeD4geqRir8obnEKLEahIGEOD2SzZb
+X-Gm-Gg: AYBFou2ZEy8xZKrXKbd25c6WksN2Ixip2GVt/c7ih7dJfGwK6Sq+ncwj0ExbZmMqCF3
+	2gcDgwthIFCqq8gcdkHk9wJudjJDFbHrRyVO+hr+vmD2AdHsoyATE3bKFkZ3xUCKa42FcxZesZs
+	394TuSJXRCQdkb7nbp9giurZCijrkI7yWo3h5WX97CRDmu8W6Rzyg3TWUpNrnsaX8JG7yofm0ym
+	7B1990VjZ82snTQCPlwE/1NjnVRvWiNZeBnkm9uEio6s4fvmzsOpmug/TUC/NXgwVnTSeQpLGB3
+	joVhKnQMzcyvwjwve946mYDqlVh2kwnDWalezXIfWMNDc5n+W/eoZJRSjL4FGSN5TZoQkZi+DFE
+	pgRuFUIXhdwlLSDKlDwSCTfD4M0vlrTUQcQVkUJBEQp/Ly6HjUkSDqelGr1t6Nz2QfAsKbqT8jI
+	JD4xT2CxQ7VPQaeln38lJwJKNR1mMzBO1WE77Xc+bJJvXmla+b+p732lXkYjsEusz/8VUIsmk1u
+	QU2xJz+j7QDEnjeanNElMzkPjK8kgG1K9K6VFgVFivrZEwt0LOHQvk0uC7680RYATJHNeqTw9gI
+	H79ynQRKwSerueFb/4zttqtjVHwQWf9Txm4alxehkDr3Jwa2Q99QIusk4EkBAYodfSOC9IU/ehR
+	fZ0XThv6UlfNTCSGbXigldhJ1Qq1w9amyLH0qewEAOPlrk2NzQUW3JR47ERrR9qcQ9knVR3a7X2
+	sUujV3Ozp5UPmc4+vDYQsy1CvJo8l/MAQTSGpBVjZaUxiqJjdiUR+HzwZWE3oPhPSc733hEQVuv
+	VmAziP6jzJrrddXtnlP7ixwaGmeYpbjq4CCQxo37HrhG3iJEaoDZoAMVcwITkogq+U8W7tX2dAI
+	YJ9Y
+X-Received: by 2002:a05:693c:87d7:20b0:35f:8c5d:5928 with SMTP id 5a478bee46e88-37967125e78mr6464155eec.30.1794729084893;
+        Sat, 14 Nov 2026 23:51:24 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3795591f4f8sm23112817eec.13.2026.11.14.23.51.20
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3795591f4f8sm23112817eec.13.2026.11.14.23.51.23
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 14 Nov 2026 23:51:20 -0800 (PST)
+        Sat, 14 Nov 2026 23:51:24 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-oe][PATCH 74/96] freerdp3: upgrade 3.32.2 -> 3.33.1
-Date: Sat, 14 Nov 2026 23:48:52 -0800
-Message-ID: <20261115074918.2932593-74-khem.raj@oss.qualcomm.com>
+Subject: [meta-oe][PATCH 76/96] poppler: Add brotli and harfbuzz PACKAGECONFIGs
+Date: Sat, 14 Nov 2026 23:48:54 -0800
+Message-ID: <20261115074918.2932593-76-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.1
 In-Reply-To: <20261115074918.2932593-1-khem.raj@oss.qualcomm.com>
 References: <20261115074918.2932593-1-khem.raj@oss.qualcomm.com>
@@ -67,31 +67,30 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Sun, 15 Nov 2026 07:51:25 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132344
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132346
 Content-Type: text/plain; charset="utf-8"
 
-ptests pass on qemux86-64.
+poppler 26.11 enables brotli and HarfBuzz (font subsetting) support by
+default and fails to configure when they are not found, so the result
+depended on what happened to be in the sysroot. Make both explicit
+options, disabled by default as before.
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- .../freerdp/{freerdp3_3.32.2.bb => freerdp3_3.33.1.bb}          | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-support/freerdp/{freerdp3_3.32.2.bb => freerdp3_3.33.1.bb} (99%)
+ meta-oe/recipes-support/poppler/poppler_26.11.0.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-oe/recipes-support/freerdp/freerdp3_3.32.2.bb b/meta-oe/recipes-support/freerdp/freerdp3_3.33.1.bb
-similarity index 99%
-rename from meta-oe/recipes-support/freerdp/freerdp3_3.32.2.bb
-rename to meta-oe/recipes-support/freerdp/freerdp3_3.33.1.bb
-index 2a985522c0..483017ae6a 100644
---- a/meta-oe/recipes-support/freerdp/freerdp3_3.32.2.bb
-+++ b/meta-oe/recipes-support/freerdp/freerdp3_3.33.1.bb
-@@ -8,7 +8,7 @@ RDEPENDS:${PN}-ptest += "cmake coreutils"
+diff --git a/meta-oe/recipes-support/poppler/poppler_26.11.0.bb b/meta-oe/recipes-support/poppler/poppler_26.11.0.bb
+index aa6a0f85b0..e7858a10e8 100644
+--- a/meta-oe/recipes-support/poppler/poppler_26.11.0.bb
++++ b/meta-oe/recipes-support/poppler/poppler_26.11.0.bb
+@@ -25,6 +25,8 @@ PACKAGECONFIG[openjpeg] = "-DENABLE_LIBOPENJPEG=openjpeg2,-DENABLE_LIBOPENJPEG=n
+ PACKAGECONFIG[qt5] = "-DENABLE_QT5=ON,-DENABLE_QT5=OFF,qtbase qttools-native"
+ PACKAGECONFIG[nss] = "-DENABLE_NSS3=ON,-DENABLE_NSS3=OFF,nss"
+ PACKAGECONFIG[gpgme] = "-DENABLE_GPGME=ON,-DENABLE_GPGME=OFF,gpgme"
++PACKAGECONFIG[brotli] = "-DENABLE_BROTLI=ON,-DENABLE_BROTLI=OFF,brotli"
++PACKAGECONFIG[harfbuzz] = "-DENABLE_HARFBUZZ=ON,-DENABLE_HARFBUZZ=OFF,harfbuzz"
+ PACKAGECONFIG[qt6] = "-DENABLE_QT6=ON,-DENABLE_QT6=OFF,qtbase"
  
- inherit pkgconfig cmake ptest
- 
--SRCREV = "97eff6ddfbbfaa8e42a126d362686bd001ff8bdc"
-+SRCREV = "65bcca1913a28cbdd7eb913599f692bd2b707991"
- SRC_URI = "git://github.com/FreeRDP/FreeRDP.git;nobranch=1;protocol=https;tag=${PV} \
-            file://run-ptest"
- 
+ # surprise - did not expect this to work :)
