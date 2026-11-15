@@ -1,65 +1,65 @@
-Received: from mail-dl1-f48.google.com (mail-dl1-f48.google.com [74.125.82.48])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.10706.1794762015199022327
+Received: from mail-dl1-f41.google.com (mail-dl1-f41.google.com [74.125.82.41])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.10710.1794762020755196972
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 15 Nov 2026 09:00:15 -0800
+ Sun, 15 Nov 2026 09:00:20 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=hCuKaddz;
- spf=pass (domain: gmail.com, ip: 74.125.82.48, mailfrom: raj.khem@gmail.com)
-Received: by mail-dl1-f48.google.com with SMTP id a92af1059eb24-1aefd1bf74aso1978937c88.1
-        for <openembedded-devel@lists.openembedded.org>; Sun, 15 Nov 2026 09:00:15 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=o1dBzvxG;
+ spf=pass (domain: gmail.com, ip: 74.125.82.41, mailfrom: raj.khem@gmail.com)
+Received: by mail-dl1-f41.google.com with SMTP id a92af1059eb24-15ea896ddc8so3883427c88.0
+        for <openembedded-devel@lists.openembedded.org>; Sun, 15 Nov 2026 09:00:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794762014; x=1795366814; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1794762020; x=1795366820; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=Mf8nGvlgjIHRRiH+CyGZdbZrebgX8lavKp9iZ/21VEM=;
-        b=hCuKaddzP2M9wqsCUU65XM+xGZInxkkEkiDVbvuRBHCRYdyPNbbN/AryzD+gIsvECj
-         pgmKXLUX1K/gKHI7xULzVz0Ttjb5g1etWppUmb0Wpu1j5A2gj6RxiCjG0LFKrFJJWbf4
-         IpQL/Ofa35eZMMapr7/hIWEmRLuizcz8MJUg795uIz7YlosZNDp0WtflaQawn2z6uAfY
-         MEUd45HmAiyqAUOBccaizOg9z+SwpUXeRHNlP2futsvbA+xWOLtqbNZuh4EGpAlz4fMl
-         d9EsDCiV0yQFc+OlJQO+Up9CUKu+8KEt5cCr5BAM37ZDB82iecUYHe/fWctWvayldqw1
-         WlsQ==
+        bh=PxYPezS6P4Msl7cytIefLiejGTt3zagT+XOwayylBrs=;
+        b=o1dBzvxGVkmx4RpSc0ZzdSZDdWW0wLqdC5PL26YblB1JQZtmM6XOkTT5lPLzDYD6yz
+         1FPZGhVf4I3wZCHyzIlW7+v3M8dZdEodFQOE2EHxMA4E2DouDSGeBD+P2+ppU6QHJ9pA
+         m4ZxWoMTxi5R/n2bA3eCpUlBM8fsvOaTuWn0pATCa9yPaPiMsFdCat6KcNvnoJxbtklo
+         /eIBgWVQ34PCnu5TPN4TAW1/78Q58G9kA96NWlf950tC+Aur+KkJ2oRnOnH3PNADqV2F
+         7JNHLKc9/oIT0UCbL9SeRZpWQZd6k2sVDPyhvQUxXN2wIO0vMq3Z5h7oaHeAS08SBVs/
+         ZKsw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794762014; x=1795366814;
+        d=1e100.net; s=20260707; t=1794762020; x=1795366820;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=Mf8nGvlgjIHRRiH+CyGZdbZrebgX8lavKp9iZ/21VEM=;
-        b=qZAxOaodzV1RWiiFXyD110T0IvwLvF6UKubuiWJnf8qeyInMeQ9MPgnCqykssvGArU
-         AbCUnRlF+jeeaFAuIjU2YmN48pCvbiefNDuG+DvXbnWk9BjTxkav35XlgzVq3uIma5gC
-         3gRj4B0a63Rfamd3UpdLfi6che+xieujukA1L8Fv0PTt5JdVXqLWQsvgdxNR9u7UPnrT
-         7K9lq4U8av16foY7KH5vQJTkUd9SeSaidphJPzIGazSPS4CbU5f4s74NXorKzREyVX/x
-         1JqRUAizY8tZaKhbgnAV99CX6p6xpyja6GmHCgJfed5aE+MX2NF3J+ciYk/SlsMQOldQ
-         H+TQ==
-X-Gm-Message-State: APuU4Z9OKQVtn9ExEgw4nDpSEvNOtD4dU77spDCTw2E+nqp+iu3msHZi
-	3kMP/dhzajFcgktEGP5KcpkyLcBubQI2lKBeTqzkJv61T+0r62Ll1LZQXizVv/hF
-X-Gm-Gg: AYBFou2+aA0fDo+BRZ1kxqZAKu0Z/2Hh7TwwlNqKB4HNrLQ2Esc+F4u9xjeaBOm9zIo
-	z0W7RfjTVhvkR5uzsDD/wg9zdY5NdPyxaG6+NCkx7NSSW8KNJRabZCzzjF8GV4uz2s8FinGngW7
-	DK1JhVtWf7/PM1kthQCYPSga42KXBvDFVWRsVykP1LGjYt6xIVNeJEZ80p1Vq5mAsZquinqZ4pz
-	2rePjXstez+/vc5EScqevH66KyIL7YsXIkmKjK2GMDGH1+LbS6gJQwDKFu6M2mi0VdqsVCqhtP9
-	0rfqAb4l9akiQipNLM/lPt1oj2JXh6YVPh3mUsX+XrUdZ30HkSeiVal9sTFFZvqcXCiW6RxIBVm
-	jXG1TFFARMQuN3KTymqC3RDo6X/0AlMEAXl5bpJsyRLTxF76uk5qdxe2V5pg2gwj3HmqkreSrZg
-	ViE7tx8olfKDwTMNch9JNT4aC0F7Fz2euvs/1T6oC6JnoMIXDdmoGSIUPn0JNN7rtVZNYE9bqhy
-	zi+QPS7w2RCIcHuwfonp0GbhH7g4RFM+A6rtB3eIAiSIpXoI0x+beqYQwvTleohiL2tuBSII2Ph
-	lzDHhVntcPGfPwQ08Y+KJqAPu1ZO73q3j3lYwdbQAIOgo5q3HjbvC92iOW/+thYyLlAbdBYRPSz
-	59hmMWJ+uTH1eaLD6bLlqeH60erEzcU4hhlD8DwxmkCaoxefSbw4f8dGdSOvqHTPJxywmZlDEbt
-	VQ+I325zF4ZbRHGvraCX5t6Xz8u7FmUL1A0M7SDfIuwojm8buC9aLcCxIfxhmRL+CsxdtIEAmpo
-	KPL47FP2aIZ9d0y22CKrC0dtnp11agENibqGXnlTviWRuiH0RRVTAIEogoXxI2YogJIXKUxwk/D
-	uMvI
-X-Received: by 2002:a05:7022:f20f:b0:1a9:4d51:8c33 with SMTP id a92af1059eb24-1b5030b1230mr8467149c88.18.1794762014275;
-        Sun, 15 Nov 2026 09:00:14 -0800 (PST)
+        bh=PxYPezS6P4Msl7cytIefLiejGTt3zagT+XOwayylBrs=;
+        b=mywT1vs8JOMZ/j4FWrIvI5Wx9R9W4wRMw4deMTEgCeXT+J7CPz7ZnFWq9pAQkSnIZf
+         B8npMEQ3/yMMMDAr9fPl8XWyqCGjj145HIcMzMax5l5TjkHmvuNyYp1rIK5ggeYOm16z
+         Eu4ZL6rkPzV6q+IZ8gtBQ1kqphBQHjUcdZDQW8RmeICWCgVwVWG1MhwqQgMGn/Ud0vPZ
+         lofLZDogXghc580FPVie+H5prX0G2oLvl37PQf831O4oB/ji0gu8LqFRITnFIncO9umE
+         ud7RG/DA72tc4RowDv2++DMdrkFw3yVVW03BtL3DtiqqE3kNMf+b7J5E/CgQ0Vun5X5r
+         2VCg==
+X-Gm-Message-State: APuU4Z9yZqnr02Qpxv4Kl8nKhAA6onIL4ISkvt4hdWoe+X1xR3G99fOq
+	NtRjfX0qZI+O4husEEXlxGx3cQphU/3P0rdAdmtYq+M5I2SbiK/pY+lDTeuSC311
+X-Gm-Gg: AYBFou0ajCgPBIiWf1fd9yBrrmpxt+PxSqJg5r0BLKEXu+uoxPBvJ+dAd3dGODzuLzp
+	zG6VkfL6/xHqjJNg3vQ5OkqzFojQsnb3SiwII1J5K0EEBkbLe7fIZCutdk+nn15vayVif5MwYnL
+	/z/v5IMyYASjOub+2rb9bmjhGl9FTggiO/1TpY+vc8y7LD6OqkH+vOEFr+JROAMCFq2gUk0xT9k
+	aBc3hk6UpwaMF2e8zJXbtv7AEMYdCG9f/tpie2T0pfp5z66urgd3R5GI7gLrP2bynEV2HtS/n6d
+	NoPSqOhjzJinrEfZexc5kBq3ZdSw8EVVMmwj+AUtdB8DHOckwBzXhJUmZcrde8MSesREnJYU+OS
+	tzlcL19A0qp6QJe0GH8zxkhPzD3/Vaibzc1W//Vv4zRbRK2y9MJlayIEzFyHsAyC/+SqyQB+mD8
+	s+p33lEFsvlfoxc5oxFG/BMlBIPCcB/Yr0D2BEgXCLJfa0RHoyogYVB2YbyIiKwBAjsdrHMhyNe
+	eFVM+ZvcLln7xq09n4WHHr0grN7f6tjFgMkbQ7roNsSBzThxWZrNk2bOE1jH9C7vuIIZTiAfcjV
+	bMGUOt4hIvTvMvugPBcdkcyEu0un0dlZOQONIxPzVTlD3LQGObL77qE9le9tEZ7GZdLUAjcobqe
+	H1z+ovSCab0PHNKksNX5uyFg9rt1ReBVgTa5ez0mvBswjWSPOW7SsVrZ9H3d/V4PNEWXRk3m8Jj
+	QgJej0esKHONtIxRBbC8igr+/l7h68RGtWPbE1XAInBHudgd40z2x7ODmIWFGGW9jpjHOzEn10F
+	Lt6XJ8s6Ob6dnATvAdTLZgWwwNdZE6oA0Ouj3R3qla38xGGCcOeAAfdvPKLckowajnCrpCpV1B3
+	yp/vlNhrxpuoq0a5mOx3573Pyw==
+X-Received: by 2002:a05:7022:1603:b0:199:4f68:7710 with SMTP id a92af1059eb24-1b50302f24emr9420619c88.2.1794762019893;
+        Sun, 15 Nov 2026 09:00:19 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1b5031468b7sm29442397c88.5.2026.11.15.09.00.12
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1b5031468b7sm29442397c88.5.2026.11.15.09.00.18
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 15 Nov 2026 09:00:12 -0800 (PST)
+        Sun, 15 Nov 2026 09:00:19 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-multimedia][PATCH 10/15] svt-av1: upgrade 4.2.0 -> 4.3.0
-Date: Sun, 15 Nov 2026 08:59:49 -0800
-Message-ID: <20261115165955.3485789-10-khem.raj@oss.qualcomm.com>
+Subject: [meta-filesystems][PATCH 14/15] exfatprogs: upgrade 1.4.3 -> 1.4.4
+Date: Sun, 15 Nov 2026 08:59:53 -0800
+Message-ID: <20261115165955.3485789-14-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.1
 In-Reply-To: <20261115165955.3485789-1-khem.raj@oss.qualcomm.com>
 References: <20261115165955.3485789-1-khem.raj@oss.qualcomm.com>
@@ -67,29 +67,29 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Sun, 15 Nov 2026 17:00:25 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132376
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132380
 Content-Type: text/plain; charset="utf-8"
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- .../svt-av1/{svt-av1_4.2.0.bb => svt-av1_4.3.0.bb}              | 2 +-
+ .../exfatprogs/{exfatprogs_1.4.3.bb => exfatprogs_1.4.4.bb}     | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-multimedia/recipes-multimedia/svt-av1/{svt-av1_4.2.0.bb => svt-av1_4.3.0.bb} (88%)
+ rename meta-filesystems/recipes-utils/exfatprogs/{exfatprogs_1.4.3.bb => exfatprogs_1.4.4.bb} (93%)
 
-diff --git a/meta-multimedia/recipes-multimedia/svt-av1/svt-av1_4.2.0.bb b/meta-multimedia/recipes-multimedia/svt-av1/svt-av1_4.3.0.bb
-similarity index 88%
-rename from meta-multimedia/recipes-multimedia/svt-av1/svt-av1_4.2.0.bb
-rename to meta-multimedia/recipes-multimedia/svt-av1/svt-av1_4.3.0.bb
-index 826928fe4e..771d7b4c95 100644
---- a/meta-multimedia/recipes-multimedia/svt-av1/svt-av1_4.2.0.bb
-+++ b/meta-multimedia/recipes-multimedia/svt-av1/svt-av1_4.3.0.bb
-@@ -8,7 +8,7 @@ inherit cmake
- DEPENDS = "nasm-native"
+diff --git a/meta-filesystems/recipes-utils/exfatprogs/exfatprogs_1.4.3.bb b/meta-filesystems/recipes-utils/exfatprogs/exfatprogs_1.4.4.bb
+similarity index 93%
+rename from meta-filesystems/recipes-utils/exfatprogs/exfatprogs_1.4.3.bb
+rename to meta-filesystems/recipes-utils/exfatprogs/exfatprogs_1.4.4.bb
+index 65e93b2e00..294126a350 100644
+--- a/meta-filesystems/recipes-utils/exfatprogs/exfatprogs_1.4.3.bb
++++ b/meta-filesystems/recipes-utils/exfatprogs/exfatprogs_1.4.4.bb
+@@ -14,7 +14,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+ SRC_URI = "https://github.com/${BPN}/${BPN}/releases/download/${PV}/${BP}.tar.xz \
+            file://0001-tests-upcase_table-use-dd-printf-instead-of-truncate.patch \
+            file://run-ptest"
+-SRC_URI[sha256sum] = "57226a8ec1bfbce06d68a42cde8cd980414a9457882e691fbce4a4f86c8d5f08"
++SRC_URI[sha256sum] = "102bbdfd934776c12c6d83743a31ec648f8c2f1ddfa1832b6e13b6efd09412cb"
 
- SRC_URI = "git://gitlab.com/AOMediaCodec/SVT-AV1.git;protocol=https;nobranch=1;tag=v${PV}"
--SRCREV = "9292ec8e32bce26f781f277ec8739b53426c4300"
-+SRCREV = "e3d63405f9ba8219913a7276c2c47d10e5d022fe"
-
- INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
-
+ UPSTREAM_CHECK_URI = "https://github.com/${BPN}/${BPN}/releases"
+ UPSTREAM_CHECK_REGEX = "releases/tag/(?P<pver>\d+(\.\d+)+)"
