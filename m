@@ -1,65 +1,65 @@
-Received: from mail-dy1-f174.google.com (mail-dy1-f174.google.com [74.125.82.174])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.15.1794851772308569168
+Received: from mail-dy1-f173.google.com (mail-dy1-f173.google.com [74.125.82.173])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.24.1794851777884695967
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 16 Nov 2026 09:56:12 -0800
+ Mon, 16 Nov 2026 09:56:17 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=mER/ltsy;
- spf=pass (domain: gmail.com, ip: 74.125.82.174, mailfrom: raj.khem@gmail.com)
-Received: by mail-dy1-f174.google.com with SMTP id 5a478bee46e88-36e99cf7bb3so4893266eec.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 16 Nov 2026 09:56:12 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=pekR1vql;
+ spf=pass (domain: gmail.com, ip: 74.125.82.173, mailfrom: raj.khem@gmail.com)
+Received: by mail-dy1-f173.google.com with SMTP id 5a478bee46e88-36f8cdd30beso6024937eec.1
+        for <openembedded-devel@lists.openembedded.org>; Mon, 16 Nov 2026 09:56:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794851772; x=1795456572; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1794851777; x=1795456577; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=1mWXvO24+hQ1dWUBEM/Ch0YEFG3LZjMjkJ9eUo6fwJs=;
-        b=mER/ltsyzJIOuM6JitdW2pdTZWqqEEaK7viYSHRjpyQ3wOyuOHnVhhjz9XPhaxVlF0
-         9NHWCOTJNkoNbI1P5yYFLbMkGUT8LAHD73mhPgtamgspiOxP1KfgevFjlzSIwSTsvP0H
-         otC9fdraqDAok/L7b4S2BXuINKkLvfJSEz2GC5l4HC8A1tIJpME+Npyn/vVfCvG01HGS
-         dq35o8GKix+drJ2cdEPQJ5BTRT/qNDtYwa+KG5cwCDIB9L5rbfzvBlYA1sm8NNtEEOlZ
-         PdS4tYOV5+L2Av/DOeeFrODaWqX3bJyJy64R1XcdS+JHmsAqoaQpI+R3Y7avsZB3JvsC
-         Rhdw==
+        bh=7wFMIXMrqFNJSdBczucUAX2KG94BDS+WxREh5532NkU=;
+        b=pekR1vql88W0yWi3hv7mc966IC6jysWleKUpfYXcULdeiZM4x7YnliMuqyp9WGyuJ3
+         pr9ONPPIqmbLN1OGDO0y2CRIIUZMWANEryTURoy+drQ1idtlxiWaeaBXPpK4k453KJvS
+         Z/cD1Su6J+VMNAzo9AaavWDOXYESdtOdi/86WN7574iL4PB9NBtoEt/Yc8Cx5juR7fKL
+         WrqsaxG7O3vZsAtlpf32SHugxbJBKpmqdjCKdJNxZ1lo8iak8qAMrEi1tPDB+vG/bKbt
+         bdFyKDUKsbqu9J1tqwCuzRnHSvFlJtLDZLRNh0PsCP3htdLrmHOX2B6zdi43PrGHPu6d
+         g8BQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794851772; x=1795456572;
+        d=1e100.net; s=20260707; t=1794851777; x=1795456577;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=1mWXvO24+hQ1dWUBEM/Ch0YEFG3LZjMjkJ9eUo6fwJs=;
-        b=JpnBK/5nSey25ZpkdMID1Rd5DT0hicgAHlbe41ViIaYCrl6dLfsSkXnhAw6fbNPsIR
-         HyVAnONEghCv8Y3KFDqkq6VRCZxnfuEkm2qNm+Owhohd1A1eu7lJIad/OB4OoBgGgDL7
-         W01L6gy7UKv7ETJmotUfUXD1Y6ldd2sSruuaw1WWyxFV9Hj7NtM2Ni92KLYnHZqTHYlt
-         UGODbeD+Dq9HgerQTQD1gNteJxWb+yYCB469Bt3zsvnrTSSNFDjy6JodyYuCawTT/eTC
-         /NBbRZV6fT5JARu/XueSXPczeDRg+mwhx3fCHzPsxBmXqAkm/RTWyn1s2uiFce6RNSu3
-         A6Mg==
-X-Gm-Message-State: APuU4Z/LH6qIcc8McKj+WdNozHnEoefT75EjHNykhtdToHqDlPiFYYaw
-	maebxI2teRtDPHzhm8uzAXVFV/kqkRwwbTO8mSQcEx9gh8+ROtrQ98yQ3fmvpt1r
-X-Gm-Gg: AYBFou2Q3I+ol5WE5XelOD7iLJBSnB3heDWDC6RXT34xElPz96fpI2bnoKJ58em/EKq
-	if+WgMFWHetGv6hg0K5+nV2lthRs7QKTjLcFvrDFLC5Kj7BhXMKLg3ElQkseNMwTM1F6xu4uJXt
-	EyiRnjs6L96g4Xz/nkh4kSI5JIKNu8qy7UHbPnTM5TbMpKIhQ7W8IF0UA6FFi+0qZa2himkmoIx
-	Dyx5fXwX9Lgk1AAjuWeR1KrzLUO+wKZSbGjltNYFLDAHmubFQk3/ObmrvnWhazDMdZLKgUMIHHG
-	H9bHArFPdpFQFBDs+0snmxdkpEU24V9WBIGmPEQKsF1WwL2pNzYzSC2RBNSvcwlJ3Pbj8U/y+Os
-	bcZiFtXPhRpz5Kd3jHG4MIpfC2cm1ViwkgzK9JwiWMgH9xpTWP9kgPfmdPjpYVSDglatrBV3Ry8
-	81M5eLfwX8LQihHgEwKv4AMt2DZXV5vNiDpJUHWLtYfBqJWzQD41cJ/4A19M/qnQjbk/ZxFMPVw
-	YxMzI1pdWHa9TaF9HUH2E6ZsuRxj5KAzpRzR3oiJdm7h+w5Suc1kRF9zF4DlIfva81rpSjC86R4
-	we9lSCIQOH1+jtiwXZk57ehuZ4qoIHKvPsqtxyNW3HfBtu/yjRdSmrF/Cy7dR++dw1gaFR3egGM
-	WKPcf0oAStKRJ679Akjg+ESenucft5387F/EzSGNf/JXWwya83dml1WAQLU+ABjxPYjlTlLGuLe
-	hNNoE+nd+bd+7EpIPDaIlhc1ZB4LMSZSGcjgmQL28TlNDcHeU+M7Xou2bIcBoqbOSijJuYyCcrh
-	461v8Y2eVApeJKN96rmxOgxu5qFWzUjBsNAH5X5qu5wCbTntRhO7kf0MQDJ/L7N5ikVRJSEcqtc
-	ndiH
-X-Received: by 2002:a05:7300:72cc:b0:372:598d:c0bb with SMTP id 5a478bee46e88-37966e3ad18mr17429378eec.13.1794851771559;
-        Mon, 16 Nov 2026 09:56:11 -0800 (PST)
+        bh=7wFMIXMrqFNJSdBczucUAX2KG94BDS+WxREh5532NkU=;
+        b=bhmehKrpx7IlgHytAr/0bhjauPfvsuuokRfcLH3Nao9SZDGOXNBROzSXRiTnQRT4IU
+         hWQTwhqaCSICDh9dOxgUpD+7E2QBxl39ARg2w9vc5gjnsVutSnEdVsdkTF8yo0bYXir/
+         wgFx80Sjq6gbEIjqES14JkIgd3BtW+ZZNM4saa2vWez5cSZK0jN9AoFX4dY+U2PkSm2I
+         12X1znBr1MfcgY0B8VWLI066ZKGCC4H8x6HB3lb/sx5hihvfNHXMvU3LOOSwOQdvSR8i
+         Hb1D/UQ8r5aD3x1C/AosvWRAdQHAhCnZIEyFRsgV1CmkPPoyXriV8+ouCLlNn2O92unF
+         SZkw==
+X-Gm-Message-State: APuU4Z+X93ZXSMYoOSvFVLcq/uBNCLGXw0DDWT2Isdgsx1L1sI8Yl/4x
+	ruMLYn9k3BrVbY9/VEtEnQ8E1Opeu3wkhJQhdauFJGhMl+CFQU7G69a5P8+OELKi
+X-Gm-Gg: AYBFou3etxldUrM9gUuEyi50eIRteg6cB0KUbt1L9t00FZ56eQxK6SdhJmrw5CR0xr9
+	Qbf25IQf9RGCO+AQmHYYPjoz0DWtrJPSh3D0rdBvpOS0CtGWS94MNxLOwXjT/CUpdxEIFR3wlzv
+	bOKXSQ+0GzG/GYL/zy//ZiGJR4mWTawVSVaiLfJVVMGMSSMQPR4Q4EzlnKdqiYaM1Ux8mSqxMfo
+	fgcuBf4DnCCXUmWxochRl/eKrYeNqeEgCs3dxT2tUZcUnfy60TWDdcVAKieKCdy7E7dg+PmvZJc
+	ltG/VUGqS09DxVLAQkCcfCTmaaZVeofTScMm9WSXXzqRtMyoQiS0439drn25/9wk64O77YmC0/E
+	rhKQrX8rIaCB3SrVfY+3a2hKGOky2tOu5uc0B5n/yo4wjBbFo6T1+d6bnlE/pEyjiiDGGna7ShC
+	3Ee0H+zjCfYXik/Go80/+Gw4TNvkDdgY8MfVsKO+tN9CiwymCFV/7nVMVzSyYv1jn0/Vq8iIREK
+	6dunXMbP7CIbIMvxlUBe/gA1FAYyzTZUDB5FmiED0gUeeTgVGgFKyaqN0xM4jMTEDXQ3m2KAcEk
+	CDIYpTzua2FzVWeyWrd/U/dfLF+MFx0r7u0NQ0UCwHa3/9rFwXqDBfUsL6RRDW1uNhcBUia3X9C
+	b2J1ZnNdgzVwCP25rVHc22gA/6sxshMyKhCJdSHRQShBhW4TH6NqzMYga+KuMsMq27IQb0lswQl
+	6b5vsU2XsUKmJrRGCC1mGfqBRkFSleS5rJpLodYIlvCG9QspuK5QYIxyEOAgavdf6o5LssGd6HP
+	+Z0PLiaWyLeedsl1yf2ukSPoN8MHzEYCbbDBN12Rv3kQw1ugSRXAp0mRsi0k9Ns3F6vMOMXkt2/
+	EpfF
+X-Received: by 2002:a05:7301:1c18:b0:375:b560:a323 with SMTP id 5a478bee46e88-3796365f033mr10769231eec.1.1794851777046;
+        Mon, 16 Nov 2026 09:56:17 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-379560f5e06sm48391884eec.19.2026.11.16.09.56.09
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-379560f5e06sm48391884eec.19.2026.11.16.09.56.16
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 16 Nov 2026 09:56:10 -0800 (PST)
+        Mon, 16 Nov 2026 09:56:16 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-python][PATCH 096/105] python3-types-python-dateutil: upgrade 2.9.0.20241003 -> 2.9.0.20261104
-Date: Mon, 16 Nov 2026 09:53:48 -0800
-Message-ID: <20261116175359.342679-96-khem.raj@oss.qualcomm.com>
+Subject: [meta-python][PATCH 100/105] python3-uvicorn: upgrade 0.49.0 -> 0.54.0
+Date: Mon, 16 Nov 2026 09:53:52 -0800
+Message-ID: <20261116175359.342679-100-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.1
 In-Reply-To: <20261116175359.342679-1-khem.raj@oss.qualcomm.com>
 References: <20261116175359.342679-1-khem.raj@oss.qualcomm.com>
@@ -67,58 +67,188 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Mon, 16 Nov 2026 17:56:21 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132551
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132555
 Content-Type: text/plain; charset="utf-8"
 
-Upstream dropped setup.py; inherit python_setuptools_build_meta.
-
-License-Update: PKG-INFO line 6 is now "License-Expression: Apache-2.0"
-(metadata 2.4).
+Refresh the ptest skip patches. The tests moved from httpx to httpx2;
+update the ptest RDEPENDS.
 
 Changes:
-- Typing stubs only: stubs completed (parser, rrule/rrulestr, gettz
-  cache control, relativedelta fixes, UnknownTimezoneWarning).
-- parser.parse(fuzzy_with_tokens=True) now returns a tuple; ISO
-  parsers accept bytearray; datetime stubs generic over tzinfo.
-- Added __slots__ and missing parameter annotations.
+- 0.50: --ws auto now selects websockets-sansio (needs websockets
+  >=13.0); legacy websockets implementation deprecated. Startup
+  failures exit with code 3 and stop the multiprocess supervisor.
+- 0.51: workers restarted one at a time on SIGHUP; colorama removed
+  from the "standard" extra. click.style replaced by internal helper.
+- 0.52 to 0.54: experimental HTTP/1.1 and HTTP/2 via the new optional
+  zttp package (--http zttp [--http2]), zuvloop support, HTTP/2
+  trailers and 103 Early Hints.
+- Fixes: WebSocket closing handshake, write flow control, duplicate
+  headers, IPv6 loopback trusted in default FORWARDED_ALLOW_IPS,
+  memory regression with --reload/--workers.
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- .../python3-types-python-dateutil_2.9.0.20241003.bb    | 10 ----------
- .../python3-types-python-dateutil_2.9.0.20261104.bb    |  9 +++++++++
- 2 files changed, 9 insertions(+), 10 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python3-types-python-dateutil_2.9.0.20241003.bb
- create mode 100644 meta-python/recipes-devtools/python/python3-types-python-dateutil_2.9.0.20261104.bb
+ .../0001-ptest-disable-failing-tests.patch    | 24 +++++++----------
+ .../0002-ptest-skip-test_headers.patch        | 27 +++++++++----------
+ ...rn_0.49.0.bb => python3-uvicorn_0.54.0.bb} |  4 +--
+ 3 files changed, 24 insertions(+), 31 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-uvicorn_0.49.0.bb => python3-uvicorn_0.54.0.bb} (88%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-types-python-dateutil_2.9.0.20241003.bb b/meta-python/recipes-devtools/python/python3-types-python-dateutil_2.9.0.20241003.bb
-deleted file mode 100644
-index 17c710aeca..0000000000
---- a/meta-python/recipes-devtools/python/python3-types-python-dateutil_2.9.0.20241003.bb
-+++ /dev/null
-@@ -1,10 +0,0 @@
--SUMMARY = "Typing stubs for python-dateutil"
--HOMEPAGE = "https://github.com/python/typeshed"
--LICENSE = "Apache-2.0"
--LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=6;endline=6;md5=c2d9643b4523fdf462545aeb1356ad23"
+diff --git a/meta-python/recipes-devtools/python/python3-uvicorn/0001-ptest-disable-failing-tests.patch b/meta-python/recipes-devtools/python/python3-uvicorn/0001-ptest-disable-failing-tests.patch
+index 54e8c21aca..ba00b12c56 100644
+--- a/meta-python/recipes-devtools/python/python3-uvicorn/0001-ptest-disable-failing-tests.patch
++++ b/meta-python/recipes-devtools/python/python3-uvicorn/0001-ptest-disable-failing-tests.patch
+@@ -9,16 +9,15 @@ Upstream-Status: Pending [https://github.com/Kludex/uvicorn/discussions/2759]
+ 
+ Signed-off-by: Jan Vermaete <jan.vermaete@gmail.com>
+ ---
+- tests/protocols/test_websocket.py      | 3 +++
+- tests/supervisors/test_multiprocess.py | 2 ++
+- tests/test_config.py                   | 5 +++--
++ tests/protocols/test_websocket.py      |    3 +++
++ tests/supervisors/test_multiprocess.py |    2 ++
++ tests/test_config.py                   |    5 +++--
+  3 files changed, 8 insertions(+), 2 deletions(-)
+ 
+ diff --git a/tests/protocols/test_websocket.py b/tests/protocols/test_websocket.py
+-index 2e1a33a..ae1e041 100644
+ --- a/tests/protocols/test_websocket.py
+ +++ b/tests/protocols/test_websocket.py
+-@@ -685,6 +685,9 @@ MAX_WS_BYTES = 1024 * 1024 * 16
++@@ -694,6 +694,9 @@
+  MAX_WS_BYTES_PLUS1 = MAX_WS_BYTES + 1
+  
+  
+@@ -29,30 +28,28 @@ index 2e1a33a..ae1e041 100644
+      "client_size_sent, server_size_max, expected_result",
+      [
+ diff --git a/tests/supervisors/test_multiprocess.py b/tests/supervisors/test_multiprocess.py
+-index e1f594e..43002c3 100644
+ --- a/tests/supervisors/test_multiprocess.py
+ +++ b/tests/supervisors/test_multiprocess.py
+-@@ -75,6 +75,7 @@ def test_multiprocess_run() -> None:
+-     supervisor.join_all()
++@@ -86,6 +86,7 @@
++     thread.join()
+  
+  
+ +@pytest.mark.skip(reason="fails on OpenEmbedded/Yocto")
+  @new_console_in_windows
+  def test_multiprocess_health_check() -> None:
+      """
+-@@ -121,6 +122,7 @@ def test_multiprocess_sigbreak() -> None:  # pragma: py-not-win32
++@@ -151,6 +152,7 @@
+      supervisor.join_all()
+  
+  
+ +@pytest.mark.skip(reason="failing on Yocto/OpenEmbedded")
+  @pytest.mark.skipif(not hasattr(signal, "SIGHUP"), reason="platform unsupports SIGHUP")
+- def test_multiprocess_sighup() -> None:
++ def test_multiprocess_sighup(monkeypatch: pytest.MonkeyPatch) -> None:
+      """
+ diff --git a/tests/test_config.py b/tests/test_config.py
+-index 9c80ca4..fe4c2e8 100644
+ --- a/tests/test_config.py
+ +++ b/tests/test_config.py
+-@@ -303,8 +303,9 @@ def test_asgi_version(app: ASGIApplication, expected_interface: Literal["2.0", "
++@@ -309,8 +309,9 @@
+  @pytest.mark.parametrize(
+      "use_colors, expected",
+      [
+@@ -64,6 +61,3 @@ index 9c80ca4..fe4c2e8 100644
+          pytest.param(True, True, id="use_colors_enabled"),
+          pytest.param(False, False, id="use_colors_disabled"),
+      ],
+--- 
+-2.47.3
 -
--SRC_URI[sha256sum] = "58cb85449b2a56d6684e41aeefb4c4280631246a0da1a719bdbe6f3fb0317446"
+diff --git a/meta-python/recipes-devtools/python/python3-uvicorn/0002-ptest-skip-test_headers.patch b/meta-python/recipes-devtools/python/python3-uvicorn/0002-ptest-skip-test_headers.patch
+index 6b921db579..931f682106 100644
+--- a/meta-python/recipes-devtools/python/python3-uvicorn/0002-ptest-skip-test_headers.patch
++++ b/meta-python/recipes-devtools/python/python3-uvicorn/0002-ptest-skip-test_headers.patch
+@@ -38,17 +38,16 @@ parametrized tests based on only some combinations failing.
+ Upstream-Status: Inappropriate (embedded specific)
+ Signed-off-by: Khem Raj <raj.khem@gmail.com>
+ ---
+- tests/protocols/test_websocket.py | 19 +++++++++++++++++++
++ tests/protocols/test_websocket.py |   19 +++++++++++++++++++
+  1 file changed, 19 insertions(+)
+ 
+ diff --git a/tests/protocols/test_websocket.py b/tests/protocols/test_websocket.py
+-index 87a151d..85eb362 100644
+ --- a/tests/protocols/test_websocket.py
+ +++ b/tests/protocols/test_websocket.py
+-@@ -204,6 +204,11 @@ async def test_close_connection(ws_protocol_cls: WSProtocol, http_protocol_cls:
++@@ -206,6 +206,11 @@
+          assert not is_open
 -
--inherit pypi setuptools3
 -
--PYPI_PACKAGE_SDIST = "types-python-dateutil"
-diff --git a/meta-python/recipes-devtools/python/python3-types-python-dateutil_2.9.0.20261104.bb b/meta-python/recipes-devtools/python/python3-types-python-dateutil_2.9.0.20261104.bb
-new file mode 100644
-index 0000000000..6b027a8492
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-types-python-dateutil_2.9.0.20261104.bb
-@@ -0,0 +1,9 @@
-+SUMMARY = "Typing stubs for python-dateutil"
-+HOMEPAGE = "https://github.com/python/typeshed"
-+LICENSE = "Apache-2.0"
-+LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=6;endline=6;md5=320eb2c24b8d2e890b6800000ce9352c"
-+
-+SRC_URI[sha256sum] = "5d0495702a5f7343741f5d842c531bcd1c941da8b4a85307d52ef43ba80252db"
-+
-+inherit pypi python_setuptools_build_meta
-+
++ 
++ 
+ +# FAIL: tests/protocols/test_websocket.py:test_headers[websockets-httptools]
+ +# FAIL: tests/protocols/test_websocket.py:test_headers[websockets-h11]
+ +# FAIL: tests/protocols/test_websocket.py:test_headers[websockets-sansio-httptools]
+@@ -57,10 +56,10 @@ index 87a151d..85eb362 100644
+  async def test_headers(ws_protocol_cls: WSProtocol, http_protocol_cls: HTTPProtocol, unused_tcp_port: int):
+      class App(WebSocketResponse):
+          async def websocket_connect(self, message: WebSocketConnectEvent):
+-@@ -758,6 +763,13 @@ async def test_send_binary_data_to_server_bigger_than_default_on_websockets(
+-                 assert ws.close_code == expected_result
+-
+-
++@@ -762,6 +767,13 @@
++         assert disconnect_code == expected_result
++ 
++ 
+ +# FAIL: tests/protocols/test_websocket.py:test_fragmented_message_exceeding_max_size[wsproto-httptools]
+ +# FAIL: tests/protocols/test_websocket.py:test_fragmented_message_exceeding_max_size[wsproto-h11]
+ +# FAIL: tests/protocols/test_websocket.py:test_fragmented_message_exceeding_max_size[websockets-httptools]
+@@ -71,10 +70,10 @@ index 87a151d..85eb362 100644
+  async def test_fragmented_message_exceeding_max_size(
+      ws_protocol_cls: WSProtocol, http_protocol_cls: HTTPProtocol, unused_tcp_port: int
+  ):
+-@@ -782,6 +794,13 @@ async def test_fragmented_message_exceeding_max_size(
++@@ -784,6 +796,13 @@
+      assert exc_info.value.rcvd.code == 1009
+-
+-
++ 
++ 
+ +# FAIL: tests/protocols/test_websocket.py:test_fragmented_message_reassembly[wsproto-httptools]
+ +# FAIL: tests/protocols/test_websocket.py:test_fragmented_message_reassembly[wsproto-h11]
+ +# FAIL: tests/protocols/test_websocket.py:test_fragmented_message_reassembly[websockets-httptools]
+@@ -82,6 +81,6 @@ index 87a151d..85eb362 100644
+ +# FAIL: tests/protocols/test_websocket.py:test_fragmented_message_reassembly[websockets-sansio-httptools]
+ +# FAIL: tests/protocols/test_websocket.py:test_fragmented_message_reassembly[websockets-sansio-h11]
+ +@pytest.mark.skip(reason="failing on Yocto/OpenEmbedded")
++ @pytest.mark.parametrize("opcode", [Opcode.TEXT, Opcode.BINARY])
+  async def test_fragmented_message_reassembly(
+-     ws_protocol_cls: WSProtocol, http_protocol_cls: HTTPProtocol, unused_tcp_port: int
+- ):
++     ws_protocol_cls: WSProtocol, http_protocol_cls: HTTPProtocol, unused_tcp_port: int, opcode: Opcode
+diff --git a/meta-python/recipes-devtools/python/python3-uvicorn_0.49.0.bb b/meta-python/recipes-devtools/python/python3-uvicorn_0.54.0.bb
+similarity index 88%
+rename from meta-python/recipes-devtools/python/python3-uvicorn_0.49.0.bb
+rename to meta-python/recipes-devtools/python/python3-uvicorn_0.54.0.bb
+index 7f5c91ff3a..e238c4a0ba 100644
+--- a/meta-python/recipes-devtools/python/python3-uvicorn_0.49.0.bb
++++ b/meta-python/recipes-devtools/python/python3-uvicorn_0.54.0.bb
+@@ -4,7 +4,7 @@ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE.md;md5=5c778842f66a649636561c423c0eec2e"
+ RECIPE_MAINTAINER = "Tom Geelen <t.f.g.geelen@gmail.com>"
+ 
+-SRC_URI[sha256sum] = "ebf4271aa580d9de97f93192d4595176df6e91f9aae919ca73e4fc07df1e66a3"
++SRC_URI[sha256sum] = "a2e33cbfaa0306f8e6b0c13e0cb89d7d7a2da3e62b90c66e18c33d9807b28620"
+ 
+ SRC_URI += "file://0001-ptest-disable-failing-tests.patch \
+             file://0002-ptest-skip-test_headers.patch \
+@@ -27,7 +27,7 @@ RDEPENDS:${PN} = "\
+ 
+ RDEPENDS:${PN}-ptest += "\
+     python3-a2wsgi \
+-    python3-httpx \
++    python3-httpx2 \
+     python3-pytest-mock \
+     python3-pyyaml \
+ "
