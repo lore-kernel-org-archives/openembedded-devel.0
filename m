@@ -1,108 +1,129 @@
-Received: from mail-wm1-f49.google.com (mail-wm1-f49.google.com [209.85.128.49])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.22785.1794814536698652955
+Received: from mail-wr1-f41.google.com (mail-wr1-f41.google.com [209.85.221.41])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.22788.1794814540468219372
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 15 Nov 2026 23:35:37 -0800
+ Sun, 15 Nov 2026 23:35:40 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=Q2fbRHc3;
- spf=pass (domain: konsulko.com, ip: 209.85.128.49, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-wm1-f49.google.com with SMTP id 5b1f17b1804b1-4bb6c7b6dbdso9781595e9.0
-        for <openembedded-devel@lists.openembedded.org>; Sun, 15 Nov 2026 23:35:36 -0800 (PST)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=EOgZxRBR;
+ spf=pass (domain: konsulko.com, ip: 209.85.221.41, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-wr1-f41.google.com with SMTP id ffacd0b85a97d-492f0a1b685so2188796f8f.0
+        for <openembedded-devel@lists.openembedded.org>; Sun, 15 Nov 2026 23:35:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1794814535; x=1795419335; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=dqkGe9B6dDn3WprUrP6URoY96ZxAa0H9Ayu01SUDaRw=;
-        b=Q2fbRHc3q3WZYcNxq3kTotY4nD7I5ofYFgXHDVyJzgSqf5Yzu2NMZX3DQckymCMiGr
-         R27jQxFcy0yYwa4gHcfp3QmpwmL5TEX1y2sXXakdEs2gJIguampfu+Up5izDwxNuoJpU
-         AaWaCzR2z3uSQEBkI74Nf7w5tPr5i/G9g/cSA=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794814535; x=1795419335;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=konsulko.com; s=google; t=1794814538; x=1795419338; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=dqkGe9B6dDn3WprUrP6URoY96ZxAa0H9Ayu01SUDaRw=;
-        b=rhrqlPBJDDY2azRFy/j4+73qQPYb/WzfRMzgfWiEwMG+dZ+EMNregK9wnByDmG/XC1
-         9QcELWUkVQzEAeuhDDU+kz01weGAWUXNEkLl5knYBTgAwMFBMryVOJdOHCQeyDVyYoVP
-         bG2BPfZdroou9IVjqdMGIysuneNtVxXFzD23h2SQZVEnOAOVe6aloORyjFL/17mJw3Su
-         NCmR+idya/l1WHWk1ipHHzSjk2nzJ8PzyyWB2Jk2HdGloJBQdZUsMEzmaolSVFk0Yuw+
-         HqG3uctHKYoP/4fHkWR7i7/ZS33wms9qCLPnScfeERxxlfUtl5/G4AptN01e+qWR33jC
-         vowA==
-X-Gm-Message-State: APuU4Z85xUnl3l3LBG2oJcfQKeJu8cgmPviA9gzyb9TbgLrQzzvufiCX
-	/OioEE582dEimH3skj0ut9n3ZtjfqQmABv2yii+Tk6GpDF1fitELD2xQOmC82SMRHbHVy1M0xq/
-	D46y2
-X-Gm-Gg: AYBFou3WEXhQCMg58tjQGMzTc4Duurg/OIZdSDZJbuIM24luVzzK4ATAqCfrwRxDlH2
-	hX3/0KI0LmGRYpnKPfdmx4877m3SaE+QH+tB4Qtodg+Wf+OfGp4/S3pXoDyfXoKuBP9TmCVk3xi
-	dC6oAQuDYYbWRZkoMvwpOudyeW0WcgUuzAv8axG3adDXYfIk/Z2L+b33EO4NH2kIrKk4XFT8nu0
-	UZY2OgrZ5zaQAFDZT6QyyNcSBKTeBogsk2GNQx24TOmoYsr2QKGGr412zLOA1UYFM75Mu1exk6h
-	I5uizpy0kVHwys84LBdEpWimhP7XzE80+Oy4cgvqOk0yCc8haCktg0rQ4ChIOXy26eRe4Sqd2Ch
-	NFyNCHd7aNkZiKB6Ub5bQsxQYZ2rdjfWqz+SSRsg/QbWt2mAMe68I3COdAVAYAqiB5xJB4TnvZB
-	GSx6nLjSy6xBKPC80TBLaXrrzwkBDdsh+EWyw7qUvTgcV9DBOj76NXPkiTVl+5gvhsNDU5Ari7X
-	VWR0nvDMesyL7MHPJdlDOJ3fhqfbcaX08im7Qua7zoNNFcNkqdJ0XGZC4BlpcMcM/5uRpmMOCOh
-	6vj37i41zA4MKncy20SydqJcwZ41+FI/i1GGTaGNQOTF/Xdbxx6Vucqsv3mgItHcnq1teQPSWr8
-	AN4/MkFLo6+avPoU49ox5+FCz2iXHL3YiWoqzO3KDDeiS2+AcLPUIVA==
-X-Received: by 2002:a05:600c:3495:b0:4bb:6848:d433 with SMTP id 5b1f17b1804b1-4bb6848d5bemr96658655e9.26.1794814534590;
-        Sun, 15 Nov 2026 23:35:34 -0800 (PST)
+        bh=/f7UJchEQESEH3VIFhNqo4/ZRSPHI67jEt/Qy2bkeiA=;
+        b=EOgZxRBR0UvothdtPCh/aFt8BD2MNZdPfW17GHvxTHFOhZ0cWu7JpXlFHeae61Qxue
+         qJ4TZAeZykNTZLH0Vl3Yg67XVI9NbUNgBsPGAThvmC6UIRbm6VH4aZ1YR/cxHx1MELNN
+         TeCCU0/dmfTb7SkjKoM+17IKpFYAr71x3zzCY=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1794814538; x=1795419338;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=/f7UJchEQESEH3VIFhNqo4/ZRSPHI67jEt/Qy2bkeiA=;
+        b=fIddaoYlvykA1TjTAZ3JnO4OxV35JDcFzM8RuhXsDZilN8sb/SFVPIrrk7uUDmXvao
+         kSc/uzLKuKCz+MVxBnoOeI2Mcc2z3n0cJbYp8B4+RbE+6EKhXZribcfGUanOA2AF/KUG
+         6eGz9fwvztotg0ln1FPxWBoIwjKo+LcDUSBjg8TnoAJCUymrfWM8Tsn2VsfQIh2a0dOp
+         8sBZnMCBPl6BRGGIJ9tO+Bk1dblARz0L5ws+PxiOOB2Un6XWKVuyEaLqlRIp12PeXV5K
+         kTe4AYIfImPozpdMG5xUvkatZ0/3OvDoWod0G6BfYOaB7d4J4PFm6GxRvoR2rx8jOXfn
+         ZhwQ==
+X-Gm-Message-State: APuU4Z9ioLGGq8RnF2u12QIn/HKVCoVEV0CFrNdz6+VY4+nl9TTh8FnL
+	BSZWzTAJjQWrfuqkFVVmTixvFLJ6CuRqMf1Q2rHMVEcwpE5kJ21RwE2IJQFx+wp4lWyY2rMJaRJ
+	4qiR9
+X-Gm-Gg: AYBFou1oBnAOaUSrhU+1EGK9hSnu+FgkdjqqPvVjBi/BQYoJrg7Kp1R2kxRysL+Y8WQ
+	7bmSbjPkjQf8bZvEsQFQO6T1BH3bMfBY/O7KWg7QP6kgt+UPKcR8H6fV84qhetkxTgvpE8f8ol5
+	H1pj1j/IeJ1MX50gY7V8Wj0Qb9q9zPOJ3YvI0p3hmF+R3vqx1s66UbW/fYh05a9ruwceX15lH0M
+	ZiJjnIm4hrfhdK500BytojTqCGLsDTyRaMinLRI4U9m+E1poK/jYGLsK2GbhUuQt+q+/+K5QaRd
+	spb7/+DinV5028hi6a+xj5nujThR9pY5HCxhIlg52pQ/CD/hMK3umdRG3p/soDA9G6Ig3gu9Nx1
+	Ycx+iH4AvO8cvLJsrXmrRXnZIVhW5evO5uAgdCexYFKSumHKyuXTgF0zQMN2c3PhumWMcLonyGv
+	AmNC0RljCzWc1vcXSiCjKi7J+HlHUmZlMsAtcatVFW+WiOMkRWRlGFlstdVmVIaQPEsqgzKW4Vq
+	4TsWT/21soXVTmxtFIGVYfewiD8hempin/Tw5ucpw9F3t640C2cjfM/Chf7lKN5VzylMHOVxSJv
+	n2o8j4UUi60vF/I3Kl0SLgDPEL+12rNy7DLNAVikL5oCab7p6XfQhsjoO5sh8976aXzMAFRUUaj
+	2z/Im4TQRL1wHvCcVw1d1P6RiGQaXFg04UgYG2dS6A231r0mcMIsxxQ==
+X-Received: by 2002:a05:600c:6090:b0:4bb:6752:8413 with SMTP id 5b1f17b1804b1-4bb67528699mr109312925e9.8.1794814538034;
+        Sun, 15 Nov 2026 23:35:38 -0800 (PST)
 Return-Path: <leon.anavi@konsulko.com>
 Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4bb55ae501bsm289781975e9.10.2026.11.15.23.35.33
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4bb55ae501bsm289781975e9.10.2026.11.15.23.35.37
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 15 Nov 2026 23:35:34 -0800 (PST)
+        Sun, 15 Nov 2026 23:35:37 -0800 (PST)
 From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 01/24] python3-coverage: Upgrade 7.17.2 -> 7.17.3
-Date: Mon, 16 Nov 2026 09:35:08 +0200
-Message-ID: <20261116073532.880420-1-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 05/24] python3-humanize: Upgrade 4.16.0 -> 4.17.0
+Date: Mon, 16 Nov 2026 09:35:12 +0200
+Message-ID: <20261116073532.880420-5-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.47.3
+In-Reply-To: <20261116073532.880420-1-leon.anavi@konsulko.com>
+References: <20261116073532.880420-1-leon.anavi@konsulko.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Mon, 16 Nov 2026 07:35:41 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132429
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132433
 Content-Type: text/plain; charset="utf-8"
 
-Upgrade to release 7.17.3:
+Upgrade to release 4.17.0:
 
-- Fix: using patch = fork, a child process wasn't measured unless
-  patch = subprocess was also used. This is now fixed.
-- Fix: the JSON report keys functions and classes by name, but
-  names can repeat, for example a property getter and setter. Only
-  the last one was kept, so the others were missing from the
-  report. Now repeated names get a @<line number> suffix, as in the
-  LCOV report.
-- Fix: when combining parallel data files, a file that disappears
-  after it has been listed (for example, when the process writing
-  it is still finishing its write) is now reported with a warning,
-  instead of stopping the combine with a DataError. This was a
-  regression in 7.17.1.
-- Fix: with patch = subprocess on Python 3.13, a measured
-  subprocess that was stopped with SIGINT would exit with status 1
-  instead of dying from the signal. This was a regression in
-  7.17.1, and is now fixed.
-- Performance: on Python 3.13 and later, using the C tracer should
-  result in test suites running about 8% to 12% faster.
+Added:
+
+- Add Sinhala (si_LK) locale
+- Add support for Python 3.16
+
+Changed:
+
+- Drop support for EOL Python 3.10
+- Omit .po line numbers to prevent churn when code shifts
+- Defer importing math in filesize.py
+
+Fixed:
+
+- Correct clamp annotations for callable formatters and None
+- Complete missing Simplified Chinese translations
+- Correct Chinese quadrillion translations
+- Fix untranslated filesize units and compile catalogs in tox
+- Fix OverflowError in naturaltime/precisedelta for far-future
+  dates
+- Use "sonra" for future times in Turkish
+- Use Turkish numeric separators
+- Fix Persian future-time wording and locale metadata
+- Translate byte-size labels into Persian
+- Complete and fix the Bengali (bn_BD) translation
+- Fix naturaldelta truncating years instead of rounding
+- Fix intword() rounding carry for very large numbers
+- Fix naturaldelta doctest
+- Support general iterables in natural_list
+- Fix translation loss during catalog updates
+- Fix metric() showing an extra significant digit on rounding carry
+- Fix intcomma overflow for large Python integers
+- Remove the leftover format placeholder from intword units
+- Use a comma as the fr_FR decimal separator
+- Return non-finite floats unchanged from naturaldelta
+- Fix fractional() emitting degenerate output when the fraction
+  rounds to a whole
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../{python3-coverage_7.17.2.bb => python3-coverage_7.17.3.bb}  | 2 +-
+ .../{python3-humanize_4.16.0.bb => python3-humanize_4.17.0.bb}  | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-coverage_7.17.2.bb => python3-coverage_7.17.3.bb} (84%)
+ rename meta-python/recipes-devtools/python/{python3-humanize_4.16.0.bb => python3-humanize_4.17.0.bb} (82%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-coverage_7.17.2.bb b/meta-python/recipes-devtools/python/python3-coverage_7.17.3.bb
-similarity index 84%
-rename from meta-python/recipes-devtools/python/python3-coverage_7.17.2.bb
-rename to meta-python/recipes-devtools/python/python3-coverage_7.17.3.bb
-index 836388afd0..6582369ca5 100644
---- a/meta-python/recipes-devtools/python/python3-coverage_7.17.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-coverage_7.17.3.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "https://coverage.readthedocs.io"
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=2ee41112a44fe7014dce33e26468ba93"
+diff --git a/meta-python/recipes-devtools/python/python3-humanize_4.16.0.bb b/meta-python/recipes-devtools/python/python3-humanize_4.17.0.bb
+similarity index 82%
+rename from meta-python/recipes-devtools/python/python3-humanize_4.16.0.bb
+rename to meta-python/recipes-devtools/python/python3-humanize_4.17.0.bb
+index faed62db8d..9d3d51ce8c 100644
+--- a/meta-python/recipes-devtools/python/python3-humanize_4.16.0.bb
++++ b/meta-python/recipes-devtools/python/python3-humanize_4.17.0.bb
+@@ -5,7 +5,7 @@ SECTION = "devel/python"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENCE;md5=4ecc42519e84f6f3e23529464df7bd1d"
  
--SRC_URI[sha256sum] = "d05a1bef52f4d7f1b484a1cf46a8929e50963f910e51396373f06cd3b6248f38"
-+SRC_URI[sha256sum] = "6695d1bb2a9a2fbd7806d69d78cf30f35eb0f65045da0ec5b5045242fadd6a78"
+-SRC_URI[sha256sum] = "7dc2244a2f84a4bfb1d36c37bac80cd78e35cdc5c119206d87b018e1445f3a3f"
++SRC_URI[sha256sum] = "1d6a36c453dbfbb3f0b34601d2e0b4ce5d48d780305cd45714843f0068fde6ac"
  
- inherit pypi python_setuptools_build_meta
+ inherit pypi python_hatchling
  
 -- 
 2.47.3
