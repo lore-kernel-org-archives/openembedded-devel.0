@@ -1,65 +1,65 @@
-Received: from mail-dl1-f45.google.com (mail-dl1-f45.google.com [74.125.82.45])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.34311.1794851688101059480
+Received: from mail-dy1-f171.google.com (mail-dy1-f171.google.com [74.125.82.171])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.33649.1794851690759089289
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 16 Nov 2026 09:54:48 -0800
+ Mon, 16 Nov 2026 09:54:50 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=Or1V00t1;
- spf=pass (domain: gmail.com, ip: 74.125.82.45, mailfrom: raj.khem@gmail.com)
-Received: by mail-dl1-f45.google.com with SMTP id a92af1059eb24-1b3beeaf6f9so4393264c88.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 16 Nov 2026 09:54:48 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=chVkz2Rd;
+ spf=pass (domain: gmail.com, ip: 74.125.82.171, mailfrom: raj.khem@gmail.com)
+Received: by mail-dy1-f171.google.com with SMTP id 5a478bee46e88-37198ed3727so120042eec.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 16 Nov 2026 09:54:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794851687; x=1795456487; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1794851690; x=1795456490; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=1Q41Ry9mtpiCtGy6/qEfMDSH6eqtzMJp3xUjjR/vts4=;
-        b=Or1V00t1wwSmqjZO2SAW5BVzCEy2b5FWbwjQ/lyhkgouOfY4jeMrG0F/A1PGX5MXIi
-         VYTKaUS/dl3ZORvwANeRhqcGUAiyg1Q70LUWpvgNPlncZipSiaTACL0lMwINTci2u64I
-         LM56AjpgA1//KZsEgX3Jx6No7JKaWgUJF0e+eeuUIPt3LoyQ4sxmdTTXbjAymZyoijw+
-         1kE6nO6xDMD4wNv1kPbWFLKlADpVJXsWxfnWhuCNq/zSvLqBUWoTAuZ59VPZLZW+ImT3
-         pPfz7C+wwE2grHThRIEk4GxeX3nEAuZP5wvXLjzuwmWTjgQU0sMGr9HyUfH8pFD+DlKe
-         Oxvg==
+        bh=49kmxFnQugvsK6zIn1gtShlXLcbgCgWK/76ImzuISOQ=;
+        b=chVkz2Rd0yIMqCHMWuEQje8wZlFMWxxEtpeHRKzX0qccc9fLG8yK2/eL0a8BCe4SDF
+         yb9JGPQQKbkfpZNqzIg2yjb42E65XMUwmJWcTvj1Ug1ctgUOy49yEsjl61FId1Id/f+e
+         YtWBZaijEMniY8h7oRwOGHsXj8TS7jk/haIFt3Ta0wU+7fn08B1SAMaWKx5NGvvE1fxH
+         Sg9+wJrjranXOva6VsKo8ERt3gfOWCqAyq72iLZnAyC87FukxPRV+7HhKQddE6qlI7S4
+         5eT867c60GBATSuJDuZqd4Ogh2HGsfI0ZEz/1WeZG9gidmpzEJifHQz8Ha9evXVPed6X
+         FP5A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794851687; x=1795456487;
+        d=1e100.net; s=20260707; t=1794851690; x=1795456490;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=1Q41Ry9mtpiCtGy6/qEfMDSH6eqtzMJp3xUjjR/vts4=;
-        b=rL6QXAihprJnHHNGoEkO/eoP8bVIWZ3LXFqxYMIBL2oJLRnnGTi6mIjZYglEeEpj+c
-         1M/nN9R/0qAm9OrmgK5BhHI1XqCnbk+VeP0um7YItL6gRO2P+gu5dWn5zODhZKKi5GDM
-         nr+ULjVSZ/YTs6hIkd50zBS/UxDjrhnTpi9cJdA6KrAMKmd68pZJSFqvjYwG/GKP0t42
-         ebbbPZRCmxbKJOqWckdoR7xzxnXMfY+iVCdEnXddE1nkAjnclCLn+1bteklWUcJ0eM+H
-         goXu2qV0VfoeubXmIP07ka8IhsqH/EuiyCrPOTV6CiRxhG1ZrfCEm3D3281ZgZYJn76r
-         SPcQ==
-X-Gm-Message-State: APuU4Z93a1bwgx23cJjhTKzzXgQvzRSq95dFkXgZ6Y0VBkwhkt6VWN8d
-	vK1/4rWYRVCfVUHlS0iyrCJYn8adXfBP1qRAojKxvNtlV6UJRHoPmccGduXDTRln
-X-Gm-Gg: AYBFou1YMFX0HH5sxX+nTL21uDHtQeZCoC/msaGw9WJx1gpq2akZKi+y/3JHIcjpona
-	QHmIR71dBtZskyZ+LhGqsoGH+hs0MGwhVKes9rGIxXb2wFNd61m0grY8uW90NNv+26nwyNSr3RW
-	+IWvOxauSZiAaBtFnJrmqZ6JTU5vM6StEZcQqnkELTtDAl4C6cTcEPnBrMlnZXI2uaBdovZDqgv
-	/KGM0d0JmT/KO1T2NqYPmxG7+8yZg2a2ZOWh6BhWbOjiJRNwTxbVqlenu49IkmwW4wrfxoFrRg4
-	ScuAVgD5TgQfKh4r4fnt1w3Bxag1KJ4OOksf9gzl3uwQwDGjiZ+49ORNfaniJxDb4dxBQoaNa5t
-	Zq7TguWgAOEJhDF8yBffqPBmLdIjAnF3OfLpls30I/ZnOCM35odvkasyGgVMwEGEIaRZWHNWQb7
-	gVwCXHsmj8fWgy1dR/otmdFgePXumraGwJQ/6uxSzHI631veAejsvZO+iogvS3S7QSpxq44Er40
-	s3Dr1n606XHoSJ4P7n6IUjd7zDJWHiMRU7TxBXXTsMLYNFWUR46064J4opIgh8a6Ki1kVoVHFjV
-	YRSZpbTfoNuG5FlVOWNxj9g94irZGOpO2KezUvwELeIXk3hKO5ANlKE0kV6djBFIv8H9fUNTXu5
-	CNZ3q5kgn9ljvDOS5iEpl2YiRcHswm6a+APMpZJtG4oNj1CvLMVJfCXIoKV4C7kLTigbhXjJcyf
-	EYoAKF3uc7USBkQFjsInLZ+ohtgKLwcoD1dCNUWaYlJOHdvjCYi0d4XG7lFhdk1n79LDBp196VS
-	vzrtGbLLR+zxfwmzT0riU3UQtdJ7T0Xc4qTKPPanPMnEbz+l8gWOkkDx29gYOLOHpdVHBl1+l/A
-	SS7F
-X-Received: by 2002:a05:701b:271c:b0:1b2:43b0:4794 with SMTP id a92af1059eb24-1b5030d4941mr8470491c88.9.1794851687410;
-        Mon, 16 Nov 2026 09:54:47 -0800 (PST)
+        bh=49kmxFnQugvsK6zIn1gtShlXLcbgCgWK/76ImzuISOQ=;
+        b=N9h6X8FQo+BAcpJPtwVHbu9/fahCIJFwSXUk/SERDCGXXtuSGMq0tO0NokN2cSgJqy
+         5YW5Cl1lH1CM7qRSs2VPpcIgCFFV5siILy2fN7dfBje3KKD34xVK6hoV+9fJN5B+RXRn
+         h3EOqLFoT6G/3ca61coLtcimTrZefi/icsxfFGUyGlKF7JbzT1NsDSIPqMMwyJW1w4Q+
+         M+y/FUy/RMZZWBY+GIV5k8F/G6F3nFTCk1CD96NeCaniN7iiqTadflxzw81Ab/odPX/A
+         eWOJ6WDvFbFM4TYdl8DVdgRVqF1S02ZTvH8sqt42IJQhCXLFVUPvlbqdgDKJkCzieU91
+         fyUw==
+X-Gm-Message-State: APuU4Z9azTKx8pIYtQ67V8NgHn3L3PjbaNNMBBt99aGj7+Gu2EsjZ4Sr
+	THKRKZTGq46YCmkDb8uRI+ULDCREzaVVoNNwfPuRXd0OajSHpp7VFi/XLZ9dKdMB
+X-Gm-Gg: AZFdTZdu8S617gvgnz5le9bDvCaToOY6+1EESW3+B40MbIOVUeHohAPTwgW5LP2G2aG
+	A3uOQ59urOoAbvz/n2VaS/JXTYbIZrYBT/EgFez/u95+ZGAJiev++Q7riQJmLDlz4klGU0VPzTJ
+	XRY2Js8T4ur4vz7rnBmjmG9C3pkGAR0jwCkWL4bJi1sDO5UfTEM0ZuTPU0IOzgKS/8DKTs4VOxr
+	PEXgvsb9WwLtURomkwicW0tKP/QvnmEWdac1RBoi0MTUlMJ+i/lJ94u/H7bx2gGItswMwUOh4lM
+	O7RQ+Zzgsuhq/rBHTTleh0dIoYVskWw5Lt8cmz47TtHja8KYKZ2TFtET5lhoKQPo0MvSkmCdRp+
+	fnxICG5o3MfI0kJ/aZKK7mVSy5eNb+HV/67e0w7K1VUcTUY11i6z5Gn8NaC/6scvCDdtYzF1h+A
+	YxFgEJ7RCjHmliHSinGQDrQIEsZSz5T/tyFzKBWx0fn6vFRUHT8Y404JRqI4XA3FqpRQ8jgPeFX
+	PoRIcezchuSlbzDdI/fmzLCB+BrFnDo/qk86HovsnRtRh95ZzuntPAfE4SK1aMpDxlu4uchPYj0
+	ORV6pX7XhaId5G1dI8oxlDw18qdx1DwpBCpeHMKh/GY4q/BymX/w6yE9uUBTLviudSebXNCZMzH
+	jAylZYIfEd91fMdCFOadHzoXU6Ny1jnfQTgQG8hqitACuI3NVFMc1gCU2qLtzxeUf0gRx/55YP7
+	gR8VOlt75xPtUWo1lU7A5N20tHUmbZ1CXqmTURyit52Lw4iXkg1ldeZCh3R3HHg/xy1MeAQDeiP
+	AmXhAqvmbk3eOUYzYDggeWp6wljk+oR7KSqV9OyZKJ6j1GuBRos/zfqw/rrAwipGmkBWE21jnVV
+	81LR
+X-Received: by 2002:a05:7300:2a93:b0:359:27e6:b684 with SMTP id 5a478bee46e88-3810bf5360amr211652eec.3.1794851689943;
+        Mon, 16 Nov 2026 09:54:49 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-379560f5e06sm48391884eec.19.2026.11.16.09.54.46
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-379560f5e06sm48391884eec.19.2026.11.16.09.54.48
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 16 Nov 2026 09:54:46 -0800 (PST)
+        Mon, 16 Nov 2026 09:54:49 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-python][PATCH 031/105] python3-filelock: upgrade 4.2.9 -> 4.2.10
-Date: Mon, 16 Nov 2026 09:52:43 -0800
-Message-ID: <20261116175359.342679-31-khem.raj@oss.qualcomm.com>
+Subject: [meta-python][PATCH 033/105] python3-flask-user: upgrade 0.6.19 -> 1.0.2.2
+Date: Mon, 16 Nov 2026 09:52:45 -0800
+Message-ID: <20261116175359.342679-33-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.1
 In-Reply-To: <20261116175359.342679-1-khem.raj@oss.qualcomm.com>
 References: <20261116175359.342679-1-khem.raj@oss.qualcomm.com>
@@ -67,50 +67,76 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Mon, 16 Nov 2026 17:54:57 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132487
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132489
 Content-Type: text/plain; charset="utf-8"
 
-The build now requires the python-sbom hatch plugin, which only adds
-SBOM metadata and isn't packaged in OE; drop it from pyproject.toml.
+Drop Flask-Login from setup_requires, which made setuptools try to fetch
+it from PyPI at build time, and add the new runtime dependencies
+(bcrypt, cryptography, Flask-SQLAlchemy).
+
+License-Update: Upstream relicensed from BSD-2-Clause to MIT in 1.0;
+LICENSE updated to MIT.
 
 Changes:
-- Fix contended FileLock/SoftFileLock acquisition retrying forever with
-  zero-length sleeps when the clock lands exactly on the timeout
-  deadline; it now raises Timeout (4.2.10).
-- Add a PEP 770 CycloneDX SBOM to every wheel.
+- BREAKING: v1.0 is not compatible with 0.6; UserManager properties and
+  methods are now overridden or extended by subclassing. Custom form
+  class attributes renamed (register_form -> RegisterFormClass).
+- Password hashing is configurable through passlib CryptContext
+  settings; minimum passlib raised from 1.6 to 1.7.
+- TokenManager accepts parts of the password so tokens are invalidated
+  after a password change; it also accepts non-integer user IDs.
+- Add MongoDB (Flask-MongoEngine) and DynamoDB (Flask-Flywheel) support
+  and an EmailAdapter interface (SMTP, sendmail, SendGrid, custom).
+- Remove callbacks/auth0; drop Python 2.6 and 3.3; add Slovak, Polish
+  and Ukrainian translations; fix crashes with USER_ENABLE_INVITE_USER
+  and with username change when USER_ENABLE_EMAIL is false.
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- ...ython3-filelock_4.2.9.bb => python3-filelock_4.2.10.bb} | 7 ++++++-
- 1 file changed, 6 insertions(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-filelock_4.2.9.bb => python3-filelock_4.2.10.bb} (83%)
+ ...ser_0.6.19.bb => python3-flask-user_1.0.2.2.bb} | 14 +++++++++++---
+ 1 file changed, 11 insertions(+), 3 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-flask-user_0.6.19.bb => python3-flask-user_1.0.2.2.bb} (53%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-filelock_4.2.9.bb b/meta-python/recipes-devtools/python/python3-filelock_4.2.10.bb
-similarity index 83%
-rename from meta-python/recipes-devtools/python/python3-filelock_4.2.9.bb
-rename to meta-python/recipes-devtools/python/python3-filelock_4.2.10.bb
-index 442ac4ae82..0e10014d6a 100644
---- a/meta-python/recipes-devtools/python/python3-filelock_4.2.9.bb
-+++ b/meta-python/recipes-devtools/python/python3-filelock_4.2.10.bb
-@@ -9,7 +9,7 @@ CVE_PRODUCT = "tox-dev:filelock"
+diff --git a/meta-python/recipes-devtools/python/python3-flask-user_0.6.19.bb b/meta-python/recipes-devtools/python/python3-flask-user_1.0.2.2.bb
+similarity index 53%
+rename from meta-python/recipes-devtools/python/python3-flask-user_0.6.19.bb
+rename to meta-python/recipes-devtools/python/python3-flask-user_1.0.2.2.bb
+index 5faf74b03d..42bd50b95f 100644
+--- a/meta-python/recipes-devtools/python/python3-flask-user_0.6.19.bb
++++ b/meta-python/recipes-devtools/python/python3-flask-user_1.0.2.2.bb
+@@ -3,10 +3,10 @@ DESCRIPTION = "Customizable User Account Management for Flask; Register \
+ Confirm email, Login, Change username, Change password, Forgot Password \
+ and more."
+ HOMEPAGE = "https://github.com/lingthio/Flask-User"
+-LICENSE = "BSD-2-Clause"
+-LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=97de97cd9d6e23c88129d884588ce71a"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=5aabce758ead32427c145173bc555403"
  
- SRC_URI += "file://run-ptest"
+-SRC_URI[sha256sum] = "601abcc0343dfbae0c56273d98362d5cdc266ac84d20b3f65a212e4a2c83b302"
++SRC_URI[sha256sum] = "c9785febc2fc7ca15c69cfff1c8dabc2788f25043b54a33f73a6c2a9daf7fbe4"
  
--SRC_URI[sha256sum] = "96530b7c538d4ea08493ab067247aab7948c54d8cd622cce711c97cccc5d9896"
-+SRC_URI[sha256sum] = "fcc3c0cb8bfe7f4b3bb0e231c04b15dbad068cb3c2515f343d8fde4dce93bd5d"
+ PYPI_PACKAGE_SDIST = "Flask-User"
  
- BBCLASSEXTEND = "native nativesdk"
+@@ -14,12 +14,20 @@ CVE_PRODUCT = "flask-user_project:flask-user"
  
-@@ -20,6 +20,11 @@ DEPENDS += "\
-     python3-hatch-vcs-native \
- "
+ inherit pypi setuptools3
  
-+# python-sbom (an SBOM metadata hatch hook) isn't packaged in OE
++# setup_requires would make setuptools fetch Flask-Login from PyPI at build time
 +do_configure:prepend() {
-+    sed -i -e '/python-sbom\[hatch\]/d' -e '/build.hooks.python-sbom/d' ${S}/pyproject.toml
++    sed -i -e "s/setup_requires=\['Flask-Login',\] + pytest_runner/setup_requires=pytest_runner/" ${S}/setup.py
 +}
 +
- RDEPENDS:${PN} += " \
-     python3-core \
-     python3-crypt \
+ RDEPENDS:${PN} = " \
+     python3-babel \
++    python3-bcrypt \
+     python3-blinker \
++    python3-cryptography \
+     python3-flask \
+     python3-flask-login \
+     python3-flask-mail \
++    python3-flask-sqlalchemy \
+     python3-flask-wtf \
+     python3-passlib \
+ "
