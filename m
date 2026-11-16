@@ -1,65 +1,65 @@
-Received: from mail-dy1-f172.google.com (mail-dy1-f172.google.com [74.125.82.172])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.34331.1794851715449422956
+Received: from mail-dl1-f52.google.com (mail-dl1-f52.google.com [74.125.82.52])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.33666.1794851711083884007
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 16 Nov 2026 09:55:15 -0800
+ Mon, 16 Nov 2026 09:55:11 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=qKyLnE/O;
- spf=pass (domain: gmail.com, ip: 74.125.82.172, mailfrom: raj.khem@gmail.com)
-Received: by mail-dy1-f172.google.com with SMTP id 5a478bee46e88-37628596783so6271208eec.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 16 Nov 2026 09:55:15 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=jrlZaTRJ;
+ spf=pass (domain: gmail.com, ip: 74.125.82.52, mailfrom: raj.khem@gmail.com)
+Received: by mail-dl1-f52.google.com with SMTP id a92af1059eb24-1a2761c69fbso5335861c88.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 16 Nov 2026 09:55:10 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794851715; x=1795456515; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1794851710; x=1795456510; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=vJWZzvoHwnrHErSydOKEDj49NkPSOwQQzkloXd54mwI=;
-        b=qKyLnE/O1/g0+BlDptU0XL4/aCPiiWCmc1vLfUO69+jbvzHYx0m5reB1wADr4orCJg
-         WCiGppKkZnItUSyJrCvzj3C61Sxf4sFpjA+P8T1jAJISazSav7BB1sHDkavB89RFFg5u
-         3fp6rVhw33hbKykxzfIZFnkwwBzoyVdaE+bRdzJV2BqYSJucRViq5B8E2Kttd+HZkjos
-         mwglNWj537uLMuc4JxMewFD8XyF9eoVy7IUZYP5tm0Q7nOJGv84yJlNXhoquyM88m6Lr
-         s6qFb0yEptxYeSZy5V8VSS72uzy0rdydavK/KD774H4ebq1McXx93arfk3/winXSMezd
-         zv+A==
+        bh=wl4IFuOdWQH+30dLq442vRAaEkZlV7ovW2lsOVF36hM=;
+        b=jrlZaTRJyY0j2yardVWa8VebgIlEKNdJFvemom60T1VVrlB7FIsqCZEP7qE+LVsszp
+         XWWB+ok9x7TIErlgyVYdUhfZmOLNvSbCNucA6HFvwyofzW2HGEcp5zjfTbxXE0DXQkD6
+         CcstZXQNWSqSI0JOfv4wjG8O5RySsygGGEyR+voAcVmIa2wzV/XDV3l584ebm8OlB6oh
+         sXqyrGLD7BXQBLikMUeb7/Lsj3Lx0uQugt4cIk9N2H0xSt/yK6jZ8oYwnzW32BaczzJP
+         qd11OGmtrIgNJzhyj2SHoRdGhFAfEQHRuMBK+0PevMnNX8I3ifwWpdSn6M2vj/KSF2NC
+         F6Pw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794851715; x=1795456515;
+        d=1e100.net; s=20260707; t=1794851710; x=1795456510;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=vJWZzvoHwnrHErSydOKEDj49NkPSOwQQzkloXd54mwI=;
-        b=AM8frhZBLxWYi8nuO/wpG1QjZDw6hidzDmldvPy5hhsc1zFWpgleaVNlgT+vGGZsXu
-         fmx9vpW3stkMNtBE9kC0ICOAg6BFOgebcCHSab49uS2gFIxRAPUEnE2yjdAf1nQ+F8Zc
-         2eLSnndc0CNGlgEZKKQ6I/T/o3jGJHS1YVG1EG1Nc1j5QJIfuKlhY/zbbyktb+rUvEPs
-         +Em+1zXdQcEf2yaO2jtCA5Gg9csZ6DEaQV81UWTU8+khXW8BdWURywhUBQ9k67r4LXit
-         VJaQpYCGqKRTcEuGNucFls4NOXWzEvVYIeQAZYO3B2uOEhTU20O7bRp1Ds33lPgFywWT
-         M08Q==
-X-Gm-Message-State: APuU4Z+eshsW3u0eFnaBjCOSVNJw2i6z+vWMSvCA5fSbs9K+Ug66ajf1
-	5+p26q4uvE+XrhTNf0RuBegbnRfmu7LbzwFo+26KnOeuBlL7h4IdHem1vfQLZnj+
-X-Gm-Gg: AZFdTZcM0fenmhau3IeTYusnhrD9LXTRyuiWf0rA/GVCYgGfsQyPmQrUs0YmiRlhwRQ
-	euLULmrCjZggI/UEMe370SVB4wmUnNyuJVob47/7TXm1U+iY2Y8Cj1ydRjBijFHOwjvkEw9PtP1
-	rFX9O08aT8fyXbcW8464s3F+E1RSupGJ1jobBeu1cQoNzj+11xGGVN5ivPkKQkxfqESWZ6i6nK3
-	yiAnuR3qQBPzBu7bMiwAmo14yp5b/CB3lXVlJy5Vs7Lwh1TOrz6EvnfBcfx3Gi9UFac92C0E2mw
-	TbTjaEx+180YWmCS86q/PE/zz+eqQGx3QgVPSlN/IIClw0+SSPHomZ3eFStB5B7n6OiKLxsCMJh
-	rHHHPq1biN8oSJX/x6jS2oO+ZxP0XQIvkJslTCv4sdRCdOhtW51YHfWy/SLGG6gMJBDzVc1i83U
-	3me4lIXLkzvraeYnjzeaIeGN1ysx0l0DoDkPvULMM4sV4i8RjvOwjcIU/2Hcjz6T65reqUX1Xze
-	KHMi+fpB6YqaFqyP/a6MNOw+ZNjcvyC5PK0tSA0jXiNQYiFs844Mpa20pUy7j3z8N6vqz/o9yIa
-	JkUrZvyuZ8KvIqrP6vrSjF/JDIfH0XrTRXvO1bGDdoTpgfWcWmXrmm5dujWe1JX/j6SqGxeimAQ
-	uhXABhccj/d/dr+9XehTVBVn19sD41k83PhoQcc9X3lBEGKQ4eSx32QvFHAdkG1b3Rk/hpETFKW
-	pueNK7l/oshrGpZsVe0NpegCY9PMQ7/+znFkxEORcuvwjLJ9Oa47T91Z4hWaLNcA6cbNQc+K72G
-	XMdKcfvRjY95//+Jhh72bnmgNYQDhJOyQU4NBiyI8ZyuiHS4/klZyYBshZoca+k/jISj+LFh1e6
-	Hjg1C6urxMHWhdXuSgmfF9rfUbY=
-X-Received: by 2002:a05:693c:6383:20b0:379:8df3:d2c9 with SMTP id 5a478bee46e88-3798df3d361mr10427252eec.13.1794851714742;
-        Mon, 16 Nov 2026 09:55:14 -0800 (PST)
+        bh=wl4IFuOdWQH+30dLq442vRAaEkZlV7ovW2lsOVF36hM=;
+        b=Yr6lo5Ec8s6+GfiqxdWp2qZYg4CWJSqfvwxh9JSO9/42gbibeupfVSXlVvJEO2ldWy
+         W2c5oab9h4dwW1//8vFLc8cxvzYEte5FqdOqWo57KbxH3DakGR3eym+WjbWqT1rkPpEg
+         Y/6bGJ9xkNcrz8xr7D7LILG+rkma71GfTnZN580cDzchqbBCwMJxSAPsyNsUndLkG0vK
+         /Hl9xi5Z5niTMsEyZPDe90TP7sTh5B6aMz+Hj/k35DSLRNHn/49j/+NmR7vFz58aESOu
+         us0M2AOxAYkN/woWadzy4nMgc1nNVPy0EPOTy9tXMpiczKQv9CHOpCZuuTqghlaMDaSu
+         XWVA==
+X-Gm-Message-State: APuU4Z9O85v1/F57251WUA5yHEiwxXHoz3Erm7BA+Hx52XKkwoNCA7Qp
+	xSGYUlhKpy271Jb3IW6P+bjjB/d36rLSYxrr7qsd0FxRA/HVzDdmFRzdkyAWvTNF
+X-Gm-Gg: AYBFou310XyyjDe85tvcr2hFcUJUlSX6szfTk1TmdE9Zpd4l2bsqRPxI7FdntEr+RAu
+	Qi5MnTzpnNVw9jrgEPjPkVcV6feXral+d4wPE95RauOuZ8GkVHyNTNlg4MMhEO1nlIrnv6GEzzn
+	z4Jmig1KyB2cWA7o8KpCwTAqdK10HWXSSHaeRPzL7WJW4/g8IEMUD/amMISp7Q+OJ+slCXrRbWA
+	w1uphGB2TLvRtbs0npswTqfr1k+cJL39CBhrnSXNKs+kP9QcevtRnRf/zetxQ9BR1k2uKCDgo4M
+	BcJ69o4LUPXaOlLxu/4Adq5AMXBS1DZrUpwHaidcxnK+UJjY0Ii/KwQV9leVsBilLR2AZiqlQRW
+	f8D8p2cXqzBLf/7YY17donXDIiDJhdShoWNUMJJWczzozDy3wxnFRbAy7uYp3JQbtwXe4yV1fKx
+	Ug09ct0qZGPnr37Dh7Jy1XRaTHJLm3fCMRyBU5TgwSkwd8dfu692V2yPBw290Uvk4FSr9W8W0yU
+	9wccyq7aQ0s57+KtyxzmDdK2ZOC/QKvs8EZqFpeO5jqTkFoRRcvrBm0fWkBKChNlABZfHacceN6
+	JKriReF1/Dng2TyZxqFvR+RFDISZ5XuBhTQsMXRtMryNBtVXglc4bdOL5JY/duhtDyDwluU66jr
+	dvMTaMNypRUcsdbe6GrjkO0WDs+hgU15KmV8dDQg/Rvzw51DMOnp58DkW0xGzm/Mq2MAtpnqO4i
+	MLlA7aPpcbeVuPJ09XMliD/KP+EzWWsF+88Mjz1S/gE6dbHCSqKC/GaqLqw6mkcoFsbKFTwkMZq
+	Irs7NxHMuHHWhHuQK+xuSbZWsFfwk0hNbl78VPDhickwhAf86FJQlqpJusVhp+1kOZ2r/9sdp60
+	Bqw=
+X-Received: by 2002:a05:701b:208d:b0:151:d6e5:596b with SMTP id a92af1059eb24-1b50314cae9mr9380963c88.9.1794851709738;
+        Mon, 16 Nov 2026 09:55:09 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-379560f5e06sm48391884eec.19.2026.11.16.09.55.13
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-379560f5e06sm48391884eec.19.2026.11.16.09.55.08
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 16 Nov 2026 09:55:14 -0800 (PST)
+        Mon, 16 Nov 2026 09:55:08 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-python][PATCH 050/105] python3-m2crypto: upgrade 0.49.0 -> 0.51.0
-Date: Mon, 16 Nov 2026 09:53:02 -0800
-Message-ID: <20261116175359.342679-50-khem.raj@oss.qualcomm.com>
+Subject: [meta-python][PATCH 047/105] python3-jsonrpcclient: upgrade 4.0.3 -> 4.2.1
+Date: Mon, 16 Nov 2026 09:52:59 -0800
+Message-ID: <20261116175359.342679-47-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.1
 In-Reply-To: <20261116175359.342679-1-khem.raj@oss.qualcomm.com>
 References: <20261116175359.342679-1-khem.raj@oss.qualcomm.com>
@@ -67,73 +67,44 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Mon, 16 Nov 2026 17:55:18 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132506
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132503
 Content-Type: text/plain; charset="utf-8"
 
-Refresh the setup.py patch.
+4.2.1 is tagged on the release/4.x branch.
 
 Changes:
-- Security (0.51.0): SSL.Checker no longer splits subjectAltName on
-  commas; a URI/email/otherName SAN containing ",DNS:<host>" was
-  accepted as a DNS identity (CVE-2026-109087, as listed upstream).
-  Hostname checks now use X509_check_host()/X509_check_ip_asc().
-- Fix regex injection in TLS hostname verification (no CVE) and
-  out-of-bounds reads in BIGNUM conversions.
-- BREAKING (0.50.0): TLS 1.0 and 1.1 disabled by default; RC4 emits a
-  DeprecationWarning; legacy ENGINE bindings disabled with OpenSSL 3;
-  OpenSSL providers isolated in private contexts.
-- Add AES-GCM (AEAD) and AuthorityKeyIdentifier support; OpenSSL 4.0
-  and SWIG 4.5 compatibility; many memory-leak/ownership fixes.
+- 4.1.0 behavior changes: parse()/parse_json() raise InvalidResponse
+  on an empty batch; a response with both result and a non-null error
+  now returns Error (was Ok); a malformed error member raises
+  InvalidResponse; bytes input to parse() raises; notification()
+  sends tuple params as a list. InvalidResponse messages are specific.
+- 4.2.0/4.2.1: FutureWarnings announcing 5.0 changes (5.0 will need
+  Python 3.11+, raise TypeError on bad method/params types).
+- 4.0.4: PyPI project links fixed (old domain was hijacked).
+- Build backend is flit_core (>=3.12,<5); no runtime dependencies.
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- .../0001-setup.py-Make-the-cmd-available.patch           | 9 ++-------
- ...on3-m2crypto_0.49.0.bb => python3-m2crypto_0.51.0.bb} | 2 +-
- 2 files changed, 3 insertions(+), 8 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-m2crypto_0.49.0.bb => python3-m2crypto_0.51.0.bb} (95%)
+ ...-jsonrpcclient_4.0.3.bb => python3-jsonrpcclient_4.2.1.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-jsonrpcclient_4.0.3.bb => python3-jsonrpcclient_4.2.1.bb} (84%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-m2crypto/0001-setup.py-Make-the-cmd-available.patch b/meta-python/recipes-devtools/python/python3-m2crypto/0001-setup.py-Make-the-cmd-available.patch
-index 12216ce46a..ba03134414 100644
---- a/meta-python/recipes-devtools/python/python3-m2crypto/0001-setup.py-Make-the-cmd-available.patch
-+++ b/meta-python/recipes-devtools/python/python3-m2crypto/0001-setup.py-Make-the-cmd-available.patch
-@@ -22,14 +22,12 @@ Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
-  setup.py | 6 ++++--
-  1 file changed, 4 insertions(+), 2 deletions(-)
+diff --git a/meta-python/recipes-devtools/python/python3-jsonrpcclient_4.0.3.bb b/meta-python/recipes-devtools/python/python3-jsonrpcclient_4.2.1.bb
+similarity index 84%
+rename from meta-python/recipes-devtools/python/python3-jsonrpcclient_4.0.3.bb
+rename to meta-python/recipes-devtools/python/python3-jsonrpcclient_4.2.1.bb
+index 99f583e717..aac74c403d 100644
+--- a/meta-python/recipes-devtools/python/python3-jsonrpcclient_4.0.3.bb
++++ b/meta-python/recipes-devtools/python/python3-jsonrpcclient_4.2.1.bb
+@@ -3,8 +3,8 @@ HOMEPAGE = "https://github.com/explodinglabs/jsonrpcclient"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=10f3d7679914df805c98fb351172e677"
  
--diff --git a/setup.py b/setup.py
--index 792d7365b6ed..5b8a5d791793 100644
- --- a/setup.py
- +++ b/setup.py
--@@ -208,8 +208,10 @@ class _M2CryptoBuildExt(build_ext.build_ext):
-+@@ -234,8 +234,10 @@
-          if sys.platform != "win32":
-              # generate src/SWIG/x509_v_flag.h to overcome weaknesses of swig
--             # https://todo.sr.ht/~mcepl/m2crypto/298
-+             # https://codefloe.com/mcepl/m2crypto/issues/298
- -            with open("src/SWIG/x509_v_flag.h", "w", encoding="utf-8") as x509_v_h:
- -                cmd = [shutil.which(os.environ.get("CC", "gcc"))]
- +            with open(
-@@ -39,6 +37,3 @@ index 792d7365b6ed..5b8a5d791793 100644
-                  cflags = os.environ.get("CFLAGS")
-                  if cflags is not None:
-                      cmd += cflags.split()
---- 
--2.34.1
--
-diff --git a/meta-python/recipes-devtools/python/python3-m2crypto_0.49.0.bb b/meta-python/recipes-devtools/python/python3-m2crypto_0.51.0.bb
-similarity index 95%
-rename from meta-python/recipes-devtools/python/python3-m2crypto_0.49.0.bb
-rename to meta-python/recipes-devtools/python/python3-m2crypto_0.51.0.bb
-index 454893884d..edf38afd2a 100644
---- a/meta-python/recipes-devtools/python/python3-m2crypto_0.49.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-m2crypto_0.51.0.bb
-@@ -4,7 +4,7 @@ HOMEPAGE = "https://gitlab.com/m2crypto/m2crypto"
- LICENSE = "BSD-2-Clause"
- LIC_FILES_CHKSUM = "file://LICENSES/BSD-2-Clause.txt;md5=8099b0e569f862ece05740aef06c82a2"
+-SRCREV = "e5dd11736925a9a8e463fc9420eab95235f181e3"
+-SRC_URI = "git://github.com/explodinglabs/jsonrpcclient.git;branch=main;protocol=https"
++SRCREV = "0de0775557275f93b660f05d9946f10f3ca66726"
++SRC_URI = "git://github.com/explodinglabs/jsonrpcclient.git;branch=release/4.x;protocol=https"
  
--SRC_URI[sha256sum] = "604b9cdd7c1bb9e73e54a189643d56d08bf841691775122962430ee2ca3506fe"
-+SRC_URI[sha256sum] = "5428f6601086a8f5e41aa70248b3b983443e7badf263551c5104ba2ec0c9d955"
+ inherit python_setuptools_build_meta
  
- SRC_URI += "file://0001-setup.py-Make-the-cmd-available.patch"
- SRC_URI += "file://0002-_m2crypto.i-add-py2-py3-C-API-compat-macros.patch"
