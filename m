@@ -1,65 +1,65 @@
-Received: from mail-dy1-f171.google.com (mail-dy1-f171.google.com [74.125.82.171])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.33624.1794851654611077176
+Received: from mail-dy1-f173.google.com (mail-dy1-f173.google.com [74.125.82.173])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.33626.1794851659011592513
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 16 Nov 2026 09:54:15 -0800
+ Mon, 16 Nov 2026 09:54:19 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=gUk4QDPO;
- spf=pass (domain: gmail.com, ip: 74.125.82.171, mailfrom: raj.khem@gmail.com)
-Received: by mail-dy1-f171.google.com with SMTP id 5a478bee46e88-36fc0a3fe93so7088209eec.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 16 Nov 2026 09:54:14 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=WH5cybI/;
+ spf=pass (domain: gmail.com, ip: 74.125.82.173, mailfrom: raj.khem@gmail.com)
+Received: by mail-dy1-f173.google.com with SMTP id 5a478bee46e88-36dbde64409so5472241eec.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 16 Nov 2026 09:54:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794851654; x=1795456454; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1794851658; x=1795456458; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=RZ+CHYnqhOZeOMxNW1T625eXeQvmHMhSuOzEzFMT4UM=;
-        b=gUk4QDPOKl68kv/NP4HfNh1iND7E6kXuAXODoxSk/IAQ8HNluU855az9e+GuKXnA4J
-         +8jCOSI8f14BI0SZcCYDQNFzAGp95sS8RMOn8aw/pA/5sILh9Il6hcUwqG4eJJOXWjlh
-         Z27qIA6L/CGpvPId0WbsGyDdjEo0hS95SsXgBcpiXJ1pBDBMWUoPuPvXhQViNkKEkW2x
-         xquabgaj576GhrsgpOGJ+GK/+8fx7te2GC9AcT0IbD/LB9/2p8L3ZK7q4pl+vbmm8hkr
-         qcR9YwOtCXc4SzDHw9QwY+6drCzF/xEi9rIrmFI2vzTwj3lo32ZZcpZVc2FbWEf6hKIf
-         U7cA==
+        bh=a4CHa2Nps850IHkR8hC3KxX4IuIKvKEZmFnSHcqi3SQ=;
+        b=WH5cybI/21G8enKt/NnOCZLSdlv4FWETuIB7JCgLbEP4Dgn4qIUCjNQhjU+fAD5049
+         cfFtmj2S/dIuNsEGToFhkm7DEeabp6HuV/EjArG0VgnW4djId0WFV7M+93IaVvIrgRX4
+         ZAWLOy+7IMnpuVqzltJMgUhPLb/3q4x2/BCDWxd/Humfw8cx3Og83VA7zlfRt1MkADD0
+         5pEZtb8jDq3Wz/PBhLH93DAmvKgp/3TtKyrFY0RvRkSgXTE86mXY4SoBSOL9itV71QIC
+         gmgeP5P50BfeQwNNh3rAB1LGVqethCxvW2GBScNJFibHw9m6NpZK9aH31LC7CqTSfIqX
+         3cOA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794851654; x=1795456454;
+        d=1e100.net; s=20260707; t=1794851658; x=1795456458;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=RZ+CHYnqhOZeOMxNW1T625eXeQvmHMhSuOzEzFMT4UM=;
-        b=CLVjielrO0Z5vkfzW+zDiPfo0sbhh0D9lEU/9Ib9z/rpkGa8e1PEz3nX/dWijlvEiJ
-         s9NcPwDyeGxcMxEx1UcTRZ4XWu8iev9sRWmk/Ce4LwKt6NyLU/7J/HMqKtU+qp1tY30d
-         +vgTwNDlm/2jRtukj0MYr4eB7t8PRFMQLh+/JSLLDvFhhULc4a4Sd3UdVErT/Y7PZm27
-         KFGwao9nMq/CGiNx1jZQypeeqL/aStm0FDv02rNQwFiUiDbANAytObDMb3FReOjkpw1H
-         081IdyqJS3mmVvNUrqV/yKOnrz0aatm1pGGpUddr8jOmFYqEvO91yiOmZycEZwOxE+Hi
-         lbaA==
-X-Gm-Message-State: APuU4Z9ItcOkDMVrMxyGj3e/np8VkRTokNVY5QDxo2T+WF4alGtISqja
-	psYNlfrZEx/JY8N5UYLwykEX0kkrWYIVXREMUDtLKlQUUVzEuUz0Tq+GHESb7FqC
-X-Gm-Gg: AYBFou21rGEBlKFSLk8pUypT+/d/9a2ujt9m7BiNH8GSzFoASeCa84pXBCorkR6ZAb3
-	xJ+IVMJ14QHJnpyWrymJWtwBuZYSDTeGVfkQnBNMapZEdt4PE0DEmC3Ok3MAEdzIQ9BDyxN6B+H
-	1cuu59YmDKAtHoxUUg5agc6lcudTEGZ6G1w98gKgjCpuWWR2jFPiw7GaDrWGoWIzZw5sLWK/N1W
-	oP9glnqduMPM9dB5oCV6H3Q6ByNluAENoWBDwUkTKI8oAvqldJPYZEgNJNLlO8HuR/nOfMLBtmH
-	k+Axvcz/OvW6GbCOKswh71caH+P7oBqk3dtfUeoMwcH+sd79Cvp3q/+Ce9FjeXJTwEQrszkGXpO
-	rVGqKTSjyGQC5nzxWHf5uAxfsoPkN69w6mCiOXwaGYxCpmupBdRkj7Uubr6sQjXLsu3Rt65oAq+
-	OP+mkZUQ64hlDKr8oCzMAB+RUVYCm7UTM3vuAXcZ+n6+6m+ZqSmen6INpEh1SzxEZAfxF80L4Og
-	Ej+bLuL0j5VdxZXDPUv4/Lg6eJcy1XivQeoHXywfYH9pG+LXN0IzECGZBZJxjaOJy14uGtu26fP
-	qKQk55H7PnTSaY3Pi6MXj6i9YyhQc46jJIqJ7Vaxn5yFImhHbsDybHRdOBZl+krhFNC8POOXWA/
-	otezr2oEQks1tHyyKXRwPWYV99BQb2BLJgMHaCkRVOoUpjPliC0mf730hfHqTCbtPpLLxI0wv0u
-	M9+xpe0Q2b5bSd4GJoKXYRRVBveaExGydDsf/RVO4DR8xsiXUNYinokluAm0raMrg2UhHCjzahT
-	SALgnOOon4jS52R7ldWjAuOTKdPUDF7SLmPS8oZydvXE6b2HV+si7VFV29a/l8UHu7udYtOex9N
-	wb9I
-X-Received: by 2002:a05:693c:8817:20b0:373:5561:8d06 with SMTP id 5a478bee46e88-379679df137mr10045977eec.37.1794851653879;
-        Mon, 16 Nov 2026 09:54:13 -0800 (PST)
+        bh=a4CHa2Nps850IHkR8hC3KxX4IuIKvKEZmFnSHcqi3SQ=;
+        b=kzdjIMtYuZEgkpmcYKIGb5JF7H8nsSNjojfliz0b5zLE0KRVcek1x0qu9s9w14r8jI
+         lljTTHi5I9ZSGRjj7l/n7MRnDDJ9Zt6+g3b3xvqkvuWu/UT1FewfVqmGC5eDchk5BrtU
+         k4p+drxKQ0XdPU+mbYnhMPnjVJ3F/+rHkLI9JOm9vGETfWTy+JPRoqC0PEMmLm49jIvF
+         E+aZ9cDsZpP+E/pIkrEIBlGiXip7b2cHVtfr8ig66keNO5LKMKaf4+tldVTXr53MBHDe
+         J5xr+WiP3Y+U5uex2XjA8qrvlty8a3xkXgqvkkLVkuF+fpkdCFgnwVaKU9gRyJd1uh4u
+         EL6w==
+X-Gm-Message-State: APuU4Z8nFIRr/qQidNFXPDTEkXkEQD455WCAN5OfX13/shhQk830tau7
+	9j0Zw/snlYGMQO/Jvcg445/S96hYPMXjRfg9Zqmelug/NDg6mI8LtTyrgaytQ9qJ
+X-Gm-Gg: AYBFou0XxOuAqTU7j1Zf6Q6oro4EUJmBn1304K7f4NagbDqad/vSUGHu6Oi3InG0Rre
+	4v1s6Mxc+x5YFtP7YtreMQjxqS7dEcCKQZNxubxa2d6zUpS6OicFs5Z6VeOVP8chLNgX6N+bWgk
+	R1pHQzb6tkdYWuq642nO8dpxb9SpNxkch+XyV0upTcWM3dkgqOAr1N4+66TaCjqUIQFBqzGDwk6
+	rYgARi9U9CGt7bfM1KFIg9zJKyKWs2B8teKiEKMd03eayMEN/GOPgBg0pLqUJsSDMPVFCidAd4D
+	33yEfzAR2lTrMPW5OPfOw0EWO5BZ4G+/Np6IclyKsMwxyj+PGqQeMwe6aQvR4yMObpn7kEX1j0A
+	+GmgYW3FbLZ0efb7mYh+mNq50UqbDNWy51OwsOAJ16mvuR/YhMwS3vxQgAynRwNFXENwTIJ8fPb
+	ImY9wMEkPqc/D1mH0vGOwAnGktysA8jMJTmiQrE7V9wjvc9B3c10zVdAgzFcoGMmhfxf7b5kBoU
+	PegL/f1rTRerHy+ExryMYC1fmZxyObF/M+OP8fqtiGc5IQThui46CI5VmfwFYPmaNL5+jAAUO1p
+	1n1G3Iis0g+/lOmno0SmbCBDhMBOHYWH3wwxAQolFlRu86wmXpiYRNY3ws7WwD+NG3UlFTR5/Lr
+	Ig+o1E7L6hv88NxEtSeSafJcWIDG3T7U2Q6sfNyi4tc9WIDJd7a9EbbyVyN59zaYrZ8/uVVdMiD
+	s/7v+Iis6PlkVKFb9J12MsLwyC+P02LLK4ig9Geu/75FYi6D0i3BRFUsBVHZXntmDa7V1yURwfl
+	u8nQl1WccXHZbis5s+Q9e10S4wVbsnFxPpxjoUgcucWAxq637o6A8r0x5iAh0HNeyJj/gLvHsOI
+	cUCh
+X-Received: by 2002:a05:693c:894f:20b0:36d:5102:9974 with SMTP id 5a478bee46e88-379636607famr10736102eec.2.1794851658101;
+        Mon, 16 Nov 2026 09:54:18 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-379560f5e06sm48391884eec.19.2026.11.16.09.54.12
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-379560f5e06sm48391884eec.19.2026.11.16.09.54.16
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 16 Nov 2026 09:54:12 -0800 (PST)
+        Mon, 16 Nov 2026 09:54:17 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-python][PATCH 008/105] python3-bleak: upgrade 3.0.2 -> 3.1.0
-Date: Mon, 16 Nov 2026 09:52:20 -0800
-Message-ID: <20261116175359.342679-8-khem.raj@oss.qualcomm.com>
+Subject: [meta-python][PATCH 011/105] python3-cbor2: upgrade 6.2.1 -> 6.3.0
+Date: Mon, 16 Nov 2026 09:52:23 -0800
+Message-ID: <20261116175359.342679-11-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.1
 In-Reply-To: <20261116175359.342679-1-khem.raj@oss.qualcomm.com>
 References: <20261116175359.342679-1-khem.raj@oss.qualcomm.com>
@@ -67,81 +67,35 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Mon, 16 Nov 2026 17:54:24 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132464
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132467
 Content-Type: text/plain; charset="utf-8"
 
-Refresh the uv_build bound patch for the new <0.12.0 cap.
-
 Changes:
-- New: BleakAdapter.get_connected_devices() to list already-connected
-  devices without scanning; new Android backend for BeeWare/Briefcase
-  apps (needs Python 3.13+).
-- Minimum dbus-fast raised to 4.0.0 on Linux.
-- BlueZ: detects D-Bus connection loss, recovers from InProgress on
-  StopDiscovery, fixes disconnect() leaks, device-removed matching
-  on adapters like hci10, and empty AcquireNotify payloads.
-- CoreBluetooth: fixed memory leaks, address data leak with
-  use_bdaddr, start_notify() ValueError after reconnect.
-- WinRT: GATT I/O raises BleakError on disconnect; fixed crash after
-  event loop closed.
+- 6.3.0: add --format=json CLI option to encode JSON as CBOR; encoder
+  performance improved significantly.
+- Security: fix segfault when encoding self-referential or deeply
+  nested CBORTag (GHSA-ffh5-vwcq-7ccw, no CVE ID listed).
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- ...0001-bleak-Support-newer-uv_build-versions.patch | 13 ++++---------
- ...ython3-bleak_3.0.2.bb => python3-bleak_3.1.0.bb} |  2 +-
- 2 files changed, 5 insertions(+), 10 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-bleak_3.0.2.bb => python3-bleak_3.1.0.bb} (95%)
+ .../python/{python3-cbor2_6.2.1.bb => python3-cbor2_6.3.0.bb}   | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-cbor2_6.2.1.bb => python3-cbor2_6.3.0.bb} (88%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-bleak/0001-bleak-Support-newer-uv_build-versions.patch b/meta-python/recipes-devtools/python/python3-bleak/0001-bleak-Support-newer-uv_build-versions.patch
-index 043d7887c0..c131b5e236 100644
---- a/meta-python/recipes-devtools/python/python3-bleak/0001-bleak-Support-newer-uv_build-versions.patch
-+++ b/meta-python/recipes-devtools/python/python3-bleak/0001-bleak-Support-newer-uv_build-versions.patch
-@@ -3,7 +3,7 @@ From: Leon Anavi <leon.anavi@konsulko.com>
- Date: Mon, 15 Jun 2026 17:53:47 +0300
- Subject: [PATCH] bleak: Drop the uv_build upper version bound
+diff --git a/meta-python/recipes-devtools/python/python3-cbor2_6.2.1.bb b/meta-python/recipes-devtools/python/python3-cbor2_6.3.0.bb
+similarity index 88%
+rename from meta-python/recipes-devtools/python/python3-cbor2_6.2.1.bb
+rename to meta-python/recipes-devtools/python/python3-cbor2_6.3.0.bb
+index e7856adf6c..73c9e92f42 100644
+--- a/meta-python/recipes-devtools/python/python3-cbor2_6.2.1.bb
++++ b/meta-python/recipes-devtools/python/python3-cbor2_6.3.0.bb
+@@ -3,7 +3,7 @@ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=a79e64179819c7ce293372c059f1dbd8"
+ DEPENDS += "python3-setuptools-scm-native"
  
--bleak 3.0.2 requires uv_build<0.11.0. OE builds wheels with
-+bleak 3.1.0 requires uv_build<0.12.0. OE builds wheels with
- "pyproject-build --no-isolation" against whatever python3-uv-build is in
- the sysroot, and that check is enforced:
+-SRC_URI[sha256sum] = "086c1588bd407a46739da704b5ee7d15225dc998d9582a0519fc6c9a114b25f7"
++SRC_URI[sha256sum] = "fd4d6b3533e966eec3fb33ce0f17e925fc09b512500ab7770867ebec7d7d5dc1"
  
-@@ -27,19 +27,14 @@ Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
-  pyproject.toml | 2 +-
-  1 file changed, 1 insertion(+), 1 deletion(-)
+ inherit pypi python_setuptools3_rust cargo-update-recipe-crates ptest-python-pytest
  
--diff --git a/pyproject.toml b/pyproject.toml
--index 3224afc..4be6da7 100644
- --- a/pyproject.toml
- +++ b/pyproject.toml
--@@ -66,7 +66,7 @@ dev = [
-+@@ -78,7 +78,7 @@
-  ]
-  
-  [build-system]
---requires = ["uv_build>=0.10.9,<0.11.0"]
-+-requires = ["uv_build>=0.10.9,<0.12.0"]
- +requires = ["uv_build>=0.10.9"]
-  build-backend = "uv_build"
-  
-- [tool.uv.build-backend]
---- 
--2.47.3
--
-+ [tool.uv]
-diff --git a/meta-python/recipes-devtools/python/python3-bleak_3.0.2.bb b/meta-python/recipes-devtools/python/python3-bleak_3.1.0.bb
-similarity index 95%
-rename from meta-python/recipes-devtools/python/python3-bleak_3.0.2.bb
-rename to meta-python/recipes-devtools/python/python3-bleak_3.1.0.bb
-index 4d1e0b1666..4f5e6f9881 100644
---- a/meta-python/recipes-devtools/python/python3-bleak_3.0.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-bleak_3.1.0.bb
-@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=bcbc2069a86cba1b5e47253679f66ed7"
- # The PyPI sdist ships no tests/ directory at all, so ptest has nothing to
- # run from it (pytest exits 5, "no tests collected"). Fetch the matching
- # git tag instead, which does include tests/, mirroring python3-pydantic.
--SRCREV = "bb49377d38afb3a9fac9022aaf2c8f59d4ef7cfe"
-+SRCREV = "3075468a7c511b2b771a6aa50a896120f2a3a3de"
- PV .= "+git"
- SRC_URI = "git://github.com/hbldh/bleak;protocol=https;branch=develop \
- 	file://run-ptest \
