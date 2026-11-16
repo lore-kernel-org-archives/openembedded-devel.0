@@ -1,132 +1,205 @@
-Received: from mail-dl1-f47.google.com (mail-dl1-f47.google.com [74.125.82.47])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.468.1794852902483843899
+Received: from mail-dy1-f180.google.com (mail-dy1-f180.google.com [74.125.82.180])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.469.1794852903812351783
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 16 Nov 2026 10:15:02 -0800
+ Mon, 16 Nov 2026 10:15:03 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=z1ydYGOJ;
- spf=pass (domain: gmail.com, ip: 74.125.82.47, mailfrom: raj.khem@gmail.com)
-Received: by mail-dl1-f47.google.com with SMTP id a92af1059eb24-1b244fb7fffso4461128c88.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 16 Nov 2026 10:15:02 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=qG3WGh3F;
+ spf=pass (domain: gmail.com, ip: 74.125.82.180, mailfrom: raj.khem@gmail.com)
+Received: by mail-dy1-f180.google.com with SMTP id 5a478bee46e88-380b40319bdso904004eec.1
+        for <openembedded-devel@lists.openembedded.org>; Mon, 16 Nov 2026 10:15:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794852902; x=1795457702; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=hpksioRKUsFFJo7vnE7WgqrHaNhBuMvMuC1puOVP3G4=;
-        b=z1ydYGOJqkUBx0WeIfyOldoJAVF75PKuUhV1RlGyCqrUclEaSNolleMw/HxZRYBQ11
-         ohMqDWrTm/j4dzD+k+fprE0g6KpdZMV8ZvHBUPo5z8t2w1VWKmdxEBNR6meZpXeLB11y
-         BRUQ/wWNsNFSOmrYHB+yyEtrUgFYtzmnjCj7KsozPxCmZTPkwBQT6x1YALXjeBX6qptA
-         oq4GfmUL1EHZ6fTvQGzR5Wgc+gbuGr5rYLqcqo5CfL2878VuXn7cz49p5wc8LAn64S0e
-         nsQk8Ts8gmqEYJLcJx/GGNefFkN16TI2RdjdyiYeJxU/AbbJoJ3zamAclxrFpU9TIhhS
-         T52A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794852902; x=1795457702;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=gmail.com; s=20260707; t=1794852903; x=1795457703; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=hpksioRKUsFFJo7vnE7WgqrHaNhBuMvMuC1puOVP3G4=;
-        b=JAJubvOlLpBJ+hXTnOMnK5fASArba9s6Z/o8WmljByybIN2X4DtBEUbpZYlbo4luLM
-         NtmLFbLgc2shkXDfQee1UPXbhk4UBDpgfWrYncB1fBcaM3xGlq6lmz2zifuKs7zBNfsY
-         BxwXWxol672VEw018VBDu2mNoSlOXYCGqgd6KhfOMlAlwI4nJRzxCeLLqv70RVkLl1u6
-         1PsKlCWkkwUXaJRAVb+uq9jLpmJ+l/hBYN8S1ojX9HpsBXUjvdJ4doVGMiB77AKm9ji3
-         hsIX6Shp9dJ7O7pdgnZdO8p4muXQN6Go/WWz5wmOfQMtS9yrs3CDSCtz/43RYlKqsE4O
-         ko6Q==
-X-Gm-Message-State: APuU4Z8pmQzzYdEWa0OSbH/mtSmqWAkMLDnBOC30x8XHbsLxhGr2DIdu
-	58sJy13aA8vWEjsi3WTZtfJgKMc9v55z8rkzI8n2kaOGMzH5J4K7T1PJfkbNI5aE
-X-Gm-Gg: AYBFou0Q+bdTnr26EI0UWnLc3pHyhi9/6mIfcEkELyq2GivgebZYFCCI2eWVHD+T7d2
-	TSaW3qH9djuvkhmRGCltNdzO5zAJud+gk8oP0I3YjtTK1Swiuh3n8/L3yMGKijmxutNvVV57WIk
-	eVnyxpsFWuwsfjSPdqJyDQaoVt1nCnhz75P5dlW2hKXXPEp9HMy7krwsJgNNGjohZoGEy8nH9Vk
-	pOdcM6/Nz1W+zUF0SMBqI3MlWo5TzriAEKRhz3UgcV/7W8NJ0rdAfdxzASoUZupiS0e4YzVQZbZ
-	VRqlH2GoSSh1I5sgi6sXMRQ4D8GUQQCsK4516lzy7QuWFuCTy93M7twRexol0YW9VP/B2Rt3fQD
-	FFY18nMFPbOgoukUtenWXwZwyYqf3kT9vhz3gPN+E7SP7fzFr7vBBFYuphLcFRT6dbAxuym6PwS
-	yi5C0zMyz6H/YAEWL90tb2ojs0wdpjZ6oCB8kQ2pZI/EUPiIEEaNg+4ON1V4pN0bwRWQaVUXjT/
-	vS8lkyhhwrYUMkumFAlOy5ly2zLvryMFvVaqgJ/4gc8ThiQsifnjQ04V178WQatuv2Kw9AWrLdZ
-	z8VVV6RSVaag6slvuwqDEnBPVQJ5wRKDQFex5y1iPWfHJAPE8q91ohp4SyesSJeu4Dr/4OjR8dz
-	/xo4psV2dWAE3L6t5C1OwVvgB5gU0JKpm+BbOXayjdrYiX4eZfWzZBDln49QC7DyZ+AweojRAD6
-	v42NsXMSw8bLd5+dLsVEuG6DaGAU5b1MvyTzD11pQ7ar4NsyS7ztW8dJYJ+dGK7S6Nx4qjQg1lw
-	t1rhjWJEHgCXrPcUACnJGuQQPqYS5q8MPe3Jb761R6BpsrPFJUQZMrtdu7wXmTQQ7jJr4lep+kt
-	85EdPq6nqJq4fYSwcxaJ7xN/yw==
-X-Received: by 2002:a05:7022:c46:b0:1b0:c224:5bdc with SMTP id a92af1059eb24-1b5030e703emr10948033c88.14.1794852901658;
-        Mon, 16 Nov 2026 10:15:01 -0800 (PST)
+        bh=3NIJVn7yM9YBTCS8fNdz6xzS5Ovq7ZMdFKEDP6H8+j8=;
+        b=qG3WGh3F/vRaqYlLKERDq2wDPQz9Xrd4BLaen+rpRrIni08qVr0DjIIgrdwqfFh5IL
+         Ayy5jfxOSVIz2j47gZRXTxNTSQTHzCKnLq3t85zzXr1h8+KJoiF20ZMim7hgdGg9DWxH
+         bJOeSxu/nURfzBurYa3MtcrqVuVx/+yRyqY8PmOnTJVTw4IOSUsbUT+KhkfNe2I8BWzd
+         cGGrwMoxd0XeMPKlXIoHxj8Zb8EQ8shElmuHEzl2lbRKCp98X6BJITVaSo/wFrPOoV64
+         DMcuKx+71GG60daPJnF5ahD9nWzMrZIqINFbKt5gsU0D/AqP+RD1uXj39RbKze+Nwl6W
+         HAEw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1794852903; x=1795457703;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=3NIJVn7yM9YBTCS8fNdz6xzS5Ovq7ZMdFKEDP6H8+j8=;
+        b=MGj3DxvNXbxKxCK2ZeA2W2De7GOHS8o0IiXy2fHHltJ3waQh8cYWWmsD7FfxjBNmYE
+         mH5drs2fezbKxP4TXuv8WYoY+9kfYd01TZiQvoZAos3CIY+kYuQVbkjOfHsdFgVPDKbS
+         oUw/NXkQsEmWMVtdIrbZtKvR9CDh+nFeVUHs/s5P0YZxoRuDw6XJmYqrVQUtJxhmHdCV
+         5KrkdHCayp2RPPkXidR2aH5bgD5sOwM3Ntt974gG3X5HuVZTgo/8QGbI5VM7oLSriB4w
+         80Bl3qzKKj0Q05ZAyucDjjxL9SVVOJTV5jig2Or1cKAvjPEPhPhOvKHE7T+yy8InrM1y
+         uCvw==
+X-Gm-Message-State: APuU4Z9glYfGzIZ+r9VYzjt00PMiqyNR9DkU+LLWjcv1nrw/9kJk6PUN
+	XbMfcsp6yB1JQs1IpnwcjH4ywA9EYNcLsoGHMmw+BffJsSuogWkrEI9GrIot4jc1
+X-Gm-Gg: AYBFou3rd7tUJQfJqW0xbEw0tNgSdxj5bYUA7/gKHLPLCOJwdkthxXgLKOELI6tSwBU
+	32Dr14zwQNEvMA5owffZ+icfojAL6dnY6tntiKanfoLe4jtORkJqCfEu1C6qs4V9BdI2TvLKxec
+	e6F2z2lrm4xiCNmrBMvRsFHbkx0mq567haTs1LXlOa64wU4mbBbvl6In6EpTvZBDqhE/hiDZreD
+	2rvPwNGPyZWiauDfvW9mvwE2NipCdiwzXXIIb8PyIY2NMNHp05SyFQrecBN4NB5tOOt7m0ZVwnI
+	uNILfdFZ9EYYRQ5bYYidjIe7s3n1BrBdIp+65GypU+IyGgMNv0d739P+/u5d1Zzjb0YII5wXu3F
+	AE05t9jlqwq9oXvy2A+oIipMormGNZzoYPjH3bQcckSqbOt/RZtZnSDosVbzdrz1aKlW8CMeO1Q
+	7xBhJeSGYhcgCpdQQKhO1ECPixrHOyXTMFqOLaa00Ihg+BUGTJTzHqJbpNCa66ywa1gxSp2+nVV
+	dnaN7du4ytnjrjP2W9nz9rNqDhCRupPL1cwFVbdkT8M8+mnEBbLWAwdRPPy6NZOhmMZ5rATCKrJ
+	Xz44xqCYFSlJ44+AS8eTcyEnsm5ksTYktkE1vmrHAgKl4mysBOuHVo5i5OgK5GPzoJFLaEUug3G
+	y+EMzHLF01VMKAp/mITZsVDWwEJtdzshT4x1zmdOaCujlBWRWA2u/fuiYKVAeTjDZ7bCAlPwAjm
+	NfNXYOyj9SQk3ovw5ehAWp4ZS3BBGXxocGsgeWzoCtlHKQc/jvfJihlcDUk2TX5j1mXZJyjBVXB
+	2TmwpVQ3RQuZmTdE3csxU33Tt4SQq5bws/PUqYK/yEoKl3Ft1plODFQMkUou4Hj91oRiOZJkIMi
+	vi4r
+X-Received: by 2002:a05:7301:182a:b0:377:d6e5:e64a with SMTP id 5a478bee46e88-37965f9bfdamr11240029eec.7.1794852902734;
+        Mon, 16 Nov 2026 10:15:02 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-37955822d58sm35841020eec.10.2026.11.16.10.15.00
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-37955822d58sm35841020eec.10.2026.11.16.10.15.01
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 16 Nov 2026 10:15:01 -0800 (PST)
+        Mon, 16 Nov 2026 10:15:02 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-multimedia][PATCH 1/2] libupnp: upgrade 1.14.31 -> 22.2.2
-Date: Mon, 16 Nov 2026 10:14:57 -0800
-Message-ID: <20261116181458.351824-1-khem.raj@oss.qualcomm.com>
+Subject: [meta-multimedia][PATCH 2/2] libupnp: Add ptest
+Date: Mon, 16 Nov 2026 10:14:58 -0800
+Message-ID: <20261116181458.351824-2-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.1
+In-Reply-To: <20261116181458.351824-1-khem.raj@oss.qualcomm.com>
+References: <20261116181458.351824-1-khem.raj@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Mon, 16 Nov 2026 18:15:12 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132562
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132563
 Content-Type: text/plain; charset="utf-8"
 
-Move from the 1.14.x maintenance branch to the current 22.x series.
-22.x keeps the same COPYING, but bumps the soname to
-libupnp.so.22/libixml.so.22, and upstream dropped autotools in
-favour of CMake, so switch to the cmake class.
+Run upstream's test suite (ixml and upnp unit tests, googletest
+regression tests and the Python ctypes tests) with ctest on the
+target and turn its results into ptest PASS/FAIL/SKIP lines.
 
-Upstream defaults CMAKE_BUILD_TYPE to Debug, which also exports a
-public -DDEBUG to consumers, so pass Release explicitly. Keep
-SO_REUSEADDR on the miniserver socket (replaces --enable-reuseaddr),
-and disable samples, static libraries, tests and the FetchContent
-dependency download. Add an openssl PACKAGECONFIG for the optional
-SSL support.
+Most of the regression tests use internal symbols and link only
+against the static libraries. Upstream puts the static and shared
+targets in one CMake export set, so building static libraries would
+make the -dev CMake config require the .a files from -staticdev.
+Instead, configure and build a second tree with static libraries and
+tests enabled in do_configure_ptest/do_compile_ptest, and install the
+tests from there. The shipped packages are the same with or without
+ptest.
 
-The large-file CFLAGS are dropped: upstream now detects and sets
-_FILE_OFFSET_BITS itself and exports it to users via its CMake
-config.
+The Python tests and the symbol visibility check look for the
+library in the build tree, so point them at the installed one.
+The visibility check needs nm and is skipped on images without
+binutils.
 
-Reverse dependencies gerbera and mpd (upnp enabled) build and link
-against libupnp.so.22.
+On qemux86-64: 198 pass, 1 skipped (visibility check), ~50s, so
+list it with the slow ptests.
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- .../{libupnp_1.14.31.bb => libupnp_22.2.2.bb} | 22 ++++++++++++-------
- 1 file changed, 14 insertions(+), 8 deletions(-)
- rename meta-multimedia/recipes-connectivity/libupnp/{libupnp_1.14.31.bb => libupnp_22.2.2.bb} (57%)
+ .../ptest-packagelists-meta-multimedia.inc    |  1 +
+ .../libupnp/libupnp/run-ptest                 | 18 +++++++
+ .../libupnp/libupnp_22.2.2.bb                 | 50 ++++++++++++++++++-
+ 3 files changed, 68 insertions(+), 1 deletion(-)
+ create mode 100755 meta-multimedia/recipes-connectivity/libupnp/libupnp/run-ptest
 
-diff --git a/meta-multimedia/recipes-connectivity/libupnp/libupnp_1.14.31.bb b/meta-multimedia/recipes-connectivity/libupnp/libupnp_22.2.2.bb
-similarity index 57%
-rename from meta-multimedia/recipes-connectivity/libupnp/libupnp_1.14.31.bb
-rename to meta-multimedia/recipes-connectivity/libupnp/libupnp_22.2.2.bb
-index 6ba21971d0..252f5cf478 100644
---- a/meta-multimedia/recipes-connectivity/libupnp/libupnp_1.14.31.bb
-+++ b/meta-multimedia/recipes-connectivity/libupnp/libupnp_22.2.2.bb
-@@ -8,15 +8,21 @@ HOMEPAGE = "http://pupnp.sourceforge.net/"
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://COPYING;md5=394a0f17b97f33426275571e15920434"
+diff --git a/meta-multimedia/conf/include/ptest-packagelists-meta-multimedia.inc b/meta-multimedia/conf/include/ptest-packagelists-meta-multimedia.inc
+index 0b1b4afba8..483786e617 100644
+--- a/meta-multimedia/conf/include/ptest-packagelists-meta-multimedia.inc
++++ b/meta-multimedia/conf/include/ptest-packagelists-meta-multimedia.inc
+@@ -18,6 +18,7 @@ PTESTS_FAST_META_MULTIMEDIA = "\
  
--SRCREV = "79ff958ed1012e60faba84981481f76cea43c7f2"
--SRC_URI = "git://github.com/pupnp/pupnp.git;protocol=https;branch=branch-1.14.x;tag=release-${PV} \
-+SRCREV = "fac0494691434c35243131f66a0b27ea0c29f700"
-+SRC_URI = "git://github.com/pupnp/pupnp.git;protocol=https;branch=main;tag=release-${PV} \
+ PTESTS_SLOW_META_MULTIMEDIA = "\
+     gupnp \
++    libupnp \
+ "
+ 
+ PTESTS_PROBLEMS_META_MULTIMEDIA = "\
+diff --git a/meta-multimedia/recipes-connectivity/libupnp/libupnp/run-ptest b/meta-multimedia/recipes-connectivity/libupnp/libupnp/run-ptest
+new file mode 100755
+index 0000000000..6735fff5be
+--- /dev/null
++++ b/meta-multimedia/recipes-connectivity/libupnp/libupnp/run-ptest
+@@ -0,0 +1,18 @@
++#!/bin/sh
++
++cd "$(dirname "$0")"
++
++ctest --timeout 300 --output-on-failure 2>&1 | awk '
++/Test +#[0-9]+: / {
++    name = $0
++    sub(/.*Test +#[0-9]+: /, "", name)
++    sub(/ .*/, "", name)
++    if ($0 ~ /Passed/)
++        print "PASS: " name
++    else if ($0 ~ /Skipped/)
++        print "SKIP: " name
++    else
++        print "FAIL: " name
++    next
++}
++{ print }'
+diff --git a/meta-multimedia/recipes-connectivity/libupnp/libupnp_22.2.2.bb b/meta-multimedia/recipes-connectivity/libupnp/libupnp_22.2.2.bb
+index 252f5cf478..9d81805d90 100644
+--- a/meta-multimedia/recipes-connectivity/libupnp/libupnp_22.2.2.bb
++++ b/meta-multimedia/recipes-connectivity/libupnp/libupnp_22.2.2.bb
+@@ -10,9 +10,10 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=394a0f17b97f33426275571e15920434"
+ 
+ SRCREV = "fac0494691434c35243131f66a0b27ea0c29f700"
+ SRC_URI = "git://github.com/pupnp/pupnp.git;protocol=https;branch=main;tag=release-${PV} \
++           file://run-ptest \
            "
  
-+inherit cmake pkgconfig
+-inherit cmake pkgconfig
++inherit cmake pkgconfig ptest python3native
  
--inherit autotools pkgconfig
-+EXTRA_OECMAKE = "\
-+    -DCMAKE_BUILD_TYPE=Release \
-+    -DUPNP_BUILD_STATIC=OFF \
-+    -DUPNP_BUILD_SAMPLES=OFF \
-+    -DUPNP_ENABLE_TESTING=OFF \
-+    -DUPNP_ENABLE_TESTING_INTEGRATION=OFF \
-+    -DUPNP_MINISERVER_REUSEADDR=ON \
-+    -DDOWNLOAD_AND_BUILD_DEPS=OFF \
-+"
+ EXTRA_OECMAKE = "\
+     -DCMAKE_BUILD_TYPE=Release \
+@@ -26,3 +27,50 @@ EXTRA_OECMAKE = "\
  
--EXTRA_OECONF += "--enable-reuseaddr"
--
--# Enable LFS support ( for samples )
--CFLAGS += "-D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE"
--CXXFLAGS += "-D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE"
-+PACKAGECONFIG ??= ""
-+PACKAGECONFIG[openssl] = "-DUPNP_ENABLE_OPEN_SSL=ON,-DUPNP_ENABLE_OPEN_SSL=OFF,openssl"
+ PACKAGECONFIG ??= ""
+ PACKAGECONFIG[openssl] = "-DUPNP_ENABLE_OPEN_SSL=ON,-DUPNP_ENABLE_OPEN_SSL=OFF,openssl"
++
++DEPENDS += "${@bb.utils.contains('PTEST_ENABLED', '1', 'googletest python3-pytest-native', '', d)}"
++
++# Most tests use internal symbols and only link against the static
++# libraries, which share a CMake export set with the shared ones, so the
++# tests get a separate build tree and the installed library stays
++# shared-only.
++PTEST_B = "${B}/ptest"
++
++do_configure_ptest() {
++    mkdir -p ${PTEST_B}
++    cd ${PTEST_B}
++    cmake ${OECMAKE_GENERATOR_ARGS} ${OECMAKE_SOURCEPATH} ${OECMAKE_ARGS} \
++        ${EXTRA_OECMAKE} -Wno-dev \
++        -DUPNP_BUILD_STATIC=ON \
++        -DUPNP_ENABLE_TESTING=ON \
++        -DPython3_EXECUTABLE=${PYTHON}
++}
++
++do_compile_ptest() {
++    cmake --build ${PTEST_B} -- ${EXTRA_OECMAKE_BUILD}
++}
++
++do_install_ptest() {
++    cd ${PTEST_B}
++    find . -name CTestTestfile.cmake | while read f; do
++        install -D -m 0644 $f ${D}${PTEST_PATH}/$f
++        sed -i -e 's# _BACKTRACE_TRIPLES "[^"]*"##' \
++            -e 's#${PTEST_B}#${PTEST_PATH}#g' -e 's#${S}#${PTEST_PATH}#g' \
++            -e 's#${PYTHON}#${bindir}/python3#g' ${D}${PTEST_PATH}/$f
++    done
++    find . -path '*/CMakeFiles' -prune -o -type f -perm -u+x ! -name '*.so*' -print | while read f; do
++        install -D -m 0755 $f ${D}${PTEST_PATH}/$f
++    done
++
++    install -d ${D}${PTEST_PATH}/ixml/test ${D}${PTEST_PATH}/tests ${D}${PTEST_PATH}/upnp/inc
++    cp -r ${S}/ixml/test/testdata ${D}${PTEST_PATH}/ixml/test/
++    install -m 0644 ${S}/tests/*.py ${D}${PTEST_PATH}/tests/
++    install -m 0755 ${S}/upnp/test/check_symbol_visibility.sh ${D}${PTEST_PATH}/upnp/test/
++    # The Python and symbol visibility tests look for the library in the
++    # build tree; point them at the installed one.
++    install -m 0644 ${PTEST_B}/upnp/inc/upnpconfig.h ${D}${PTEST_PATH}/upnp/inc/
++    ln -sf ${libdir}/libupnp.so.${PV} ${D}${PTEST_PATH}/upnp/libupnp.so
++    ln -sf ${libdir}/libupnp.so.${PV} ${D}${PTEST_PATH}/upnp/libupnp.so.${PV}
++}
++
++RDEPENDS:${PN}-ptest += "cmake python3-core python3-ctypes python3-fcntl python3-io python3-pytest"
