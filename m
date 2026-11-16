@@ -1,173 +1,150 @@
-Received: from mail-dy1-f180.google.com (mail-dy1-f180.google.com [74.125.82.180])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.33625.1794851657186315882
+Received: from mail-dy1-f173.google.com (mail-dy1-f173.google.com [74.125.82.173])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.33639.1794851673751019831
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 16 Nov 2026 09:54:17 -0800
+ Mon, 16 Nov 2026 09:54:33 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=GHxKGtkU;
- spf=pass (domain: gmail.com, ip: 74.125.82.180, mailfrom: raj.khem@gmail.com)
-Received: by mail-dy1-f180.google.com with SMTP id 5a478bee46e88-37071c0f42aso5532400eec.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 16 Nov 2026 09:54:17 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=iKMLQ+xH;
+ spf=pass (domain: gmail.com, ip: 74.125.82.173, mailfrom: raj.khem@gmail.com)
+Received: by mail-dy1-f173.google.com with SMTP id 5a478bee46e88-37071c0f42aso5532781eec.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 16 Nov 2026 09:54:33 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794851657; x=1795456457; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1794851673; x=1795456473; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=1iOKp/LICdzKX/x/PQIpFa8CnI0bmYs9tO0ziI1NsLs=;
-        b=GHxKGtkUhdulAl5kQ9Qt0hfsR3lonJ5gQTBTGhSP8IdGfCOhqezLaZSGGn59FCWTRF
-         pUHAC058lz0MdZOnwAUS4b8LXXZ56zhGFzVX/v4iVyKvW6/Sni577roLCePbWEcMFCbe
-         XjG0C87GIK6ysTfJt9TQny+ZV+GJj28eL5WZ6TdkgzLGQEBHck6zw5yN+hokcjp9Fwt+
-         RQ/6YmUHb/L27qgcf0racFWOCdDOfanIh98zalx/Ci09ypYZhk9KrX58Git71QFI6GKH
-         yhcqr2Qo8zxpfgDnY7hFT0Zu2z/LpxoJ+a0CtIC85taAckB9x3PU/vRZ2xWnYmrMbEe1
-         LmLg==
+        bh=w441t9PSKTlPViePSc4eh/+91k197yafWf0Bv7Cuimk=;
+        b=iKMLQ+xHNLcVgxM5pD4WyhDmJ2yVsjYGoaNweqZiEYYHMQbLlZLdt2PWKkotg4a+zb
+         WydwQtWPNx+drt3JoRNP8aTZI8fLMb8gTdv0NtP+CqWNqxzysIwMHTU79WN++WNDh7qQ
+         uEqfAE6OtuUWXW9+ohxykDBZMh1/GDq30tKLphUG7lP4KPzCGoezszcXfBSI6XkO4CHz
+         L1GW/2N7Yc8gqeecHcFZ80AjJubbuP/7LEJ7mBtHiiD3/9ZmA0xVkYwE20XJN5Vx2+mz
+         0SazDQOwpZsFkFKhAvbSuU/YZTTSCKO9yUrMo8qt99IwhYnVXDhc/ZFnr289WHsNMj9E
+         8lZg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794851657; x=1795456457;
+        d=1e100.net; s=20260707; t=1794851673; x=1795456473;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=1iOKp/LICdzKX/x/PQIpFa8CnI0bmYs9tO0ziI1NsLs=;
-        b=LX4ILkPpbkPZSXJeHK5F++JQkQJK3W5H/Sf5ggxCH17Zi3O+2OkQgTNQiP6NwoTlfQ
-         oDvSpYkcwUd9XaEfHZ1akYrxC5x2yU7EQxU8Y30ULWAqD8OMUvU1Obsq6B0nmgvTRs52
-         4lcf0J9qJnrV4DD7+/VlpRrAdfa0FkyayJ8hSzs92muCq7r6FdQass5UvIeUJ7ABUlLC
-         QNKWW3OW3SRwB0XNOJPTmV3h/uLuC0bfbWCp00An4ARvcu3UFMivzSJ20hApDPM2ac6w
-         LkLkIbcNF/NV/X9M5GIJak3EbirXpeEAAJDwdcO9GYTcN+01neZk0KLhvEcGiCIt7aoj
-         CABg==
-X-Gm-Message-State: APuU4Z/GfiVA0+F1vzM50gH64OT9ElIdbv/abGmPuMbpq89DrJooBPUt
-	4yZbTahcGnQW6l/LtJsA8PVjgd5cu+0CGLaczWD6G66Jnnp+B+pJmUS83aKgFS4T
-X-Gm-Gg: AZFdTZcpOmmR1UHJTg8CPBlN2gloJKo5X5AnmPt/O249c5P3EvTTtFtLMGNC1f96ZSd
-	xU9OCHqzs5C0EwAexyd5/VMOEnairGd0ccGT7YsUb7fhpAZMQRcujWtmUP4Zsy2T7cEmpoOmQDX
-	SdCr/i08Dp6igtWeJAyF67val0DpMRF/ejjHugPuuMqMAPWcgo8zKAszAap+XAJlzHoWLhnfXSD
-	d2KlGI7wCP6NY2iDMPv9hHjl6gNe3CtsnNd1JadStNnAvGS6xZ1CQR2+gjKT4hWGOxH4jwN4ho0
-	2Q2IneiHUOdx/UgoU1somqJ+N4gPXlREcWEXOohLpAwUq18NWgReyYaqghubpvQc7KI0LSeJkwU
-	huTNfsPxke2vyNl2hIfpQCv7Ta9+AJ3PxL43yilkUCBaTwDsV7XB5ZfMVJeg5Rtq99Mdzc1MZZv
-	8JzUyZMbvvOHVj8/bNE51dBDWCFrHUv2uWiipMsIC0+QjTMCS5eoXTqHFCxM1XlGDZlqhXxHhZW
-	mA1DYPIGfrxO+Vbu2AlTh3F/Q6d/aP5mUU9g9vc+u/37Ah8ZDqP/QB0bg9vYpHhdbMUEBumV7Gi
-	rOOInjT2as9cxxScDvmS5wUW8R8AO2whAAMjjFUhhE5gbmRhxaBpKEBwK1Wyt/CCcFdfGN1TWqp
-	lr78vdHnsFOweDl7+b370CBZk5ocEiopmt8v/zB1pYJ2pa4DAeCGMs7Yl6RqVO88HipmKvMTkhc
-	KvQg9yQFlU1clQBfsPU+t+FJBz3Z2E5ZvGMNkx0BbuwfBWUL9r09a/5PTlCu03edJs0A7oACNHo
-	8NXeuq1kOSjyRMmen+8oG4WP71aLmLZcFv1j8pIDO57sDuOuaD3G6StnELUcRO7nITZF7uq+kKc
-	yvB7pg==
-X-Received: by 2002:a05:7300:81:b0:378:2e89:3958 with SMTP id 5a478bee46e88-379676fc09cmr11575326eec.19.1794851656369;
-        Mon, 16 Nov 2026 09:54:16 -0800 (PST)
+        bh=w441t9PSKTlPViePSc4eh/+91k197yafWf0Bv7Cuimk=;
+        b=SOX20e9J2fdyROx3KNyFGkuMwDhzSqOkZB4Bq60DmbU6eRgqinLf2OJtT/AZWvvbk3
+         pPW0d091CLoK7H4rkEyYy2vXbPbhiVXVlQe3fpM9r51ExlSwQmA2kVYQdcRFywMtaoJP
+         XHW7Y2cDac6ROXQdGWq/+9U6sKgx2Qa0xicz0DEbHckS6C2aAsiVjOeU/K9Bxqv/n4xk
+         PXQr7I34zIFjCwosGk20TTXJm6QLsHqRkDdzxPcUDUybzMdq6i3rXq91kTS2PGc/tYj6
+         A4cN3Ju+di7B7C3PqZ4ulEQ2whRHUhMdh/rMbW2SPMFZqohysTGCdGoiozwKthmWjmjN
+         eZHw==
+X-Gm-Message-State: APuU4Z+CeTrFO2WmXV/2il78r2KVgiOdNp2qlubarJZCbX31CVWUf8Ut
+	YgUVKpBYZq94kYybm4UdwvHCqR+E19fifuP0DSuiK9Dyz1kraHZqdYgEu3t9n1lO
+X-Gm-Gg: AZFdTZf7GBbWuZXahRpg5zkbM6Lm2zH0vKUrNN/grQEdtci+0o0bbSOG1zq+xVSOPuy
+	BMA247jD+/joXdJ9bWFw6jWniCXHxJuwgdYLQ507ML98oPj/KH6YJkbcccGziV8yGUdC3NMZZ9z
+	7QuImqcxr1ze4rfBTkSBl5f9YN9aLtRSSyfZthO5lvc1tTJHxG/JQLbf0gPWUDbM92bMDyXIW54
+	nW7zcpih00yLCE88dS+eykOnXq756grpLYBNE5yoAVE1G6+e9N3MSjmlhcAXKWmcH9JuNFR5At4
+	FWAwfH1DcLcxhrcC2KZ/zP34R9zQ5u+QvLbQHhleSFoTfbX2rRTrJ/Q3nJhXLZRgr+zTlAr2lYd
+	jgs3EIAzpDf1MAO9ZLeBhxjAkuBGElrNB+HbbMz/GdX6OgJRJlnTEOA4lU7RMRGHT/tbyLZmXf4
+	u4LPuDGsSj65lVf4sR1Qu4E8pdtKbastWhNJBsjgjnGSZsSpTUeIRncoI6tXUfYzn5ItjDzMktC
+	seb5U9QT4HwOumoyFVGA9tcq7xqL1o8AumacsLZn0iEex89L5kS3RePqIpKGFGhcEhQvsMkGaCu
+	1JHzBIbMc/fNj1O/9VxEv/nmpk6RF6BoRvF+ZcGis8pw5PxjXsL6LDP2hpUb3hH0ZmwZ8ZGk/fc
+	zvfuCPhRgVvorp/yO0RjUnQwssul/9n9MZk1LlfYE1djWftOK94syhO8bI+2hEx6QymyWfeo4XS
+	CmVZnbmYzJ67TT5DA4tI0xU+r6DEIjh8QpzzdsNA08DDmG4TAx6IO7PxCVXnsrNxfBUnoUlAes2
+	GR3xuCUIbluH0fVI2tBeDlFVVbZnYaHgW1utcqzJdL6LsRye6fg2FOYgGlvuCB7+5NQZJp46MR0
+	bCFq
+X-Received: by 2002:a05:7301:4206:b0:376:7d39:33a0 with SMTP id 5a478bee46e88-37967edda60mr10239292eec.26.1794851672837;
+        Mon, 16 Nov 2026 09:54:32 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-379560f5e06sm48391884eec.19.2026.11.16.09.54.15
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-379560f5e06sm48391884eec.19.2026.11.16.09.54.31
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 16 Nov 2026 09:54:15 -0800 (PST)
+        Mon, 16 Nov 2026 09:54:32 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-python][PATCH 010/105] python3-cassandra-driver: upgrade 3.29.3 -> 3.30.1
-Date: Mon, 16 Nov 2026 09:52:22 -0800
-Message-ID: <20261116175359.342679-10-khem.raj@oss.qualcomm.com>
+Subject: [meta-python][PATCH 018/105] python3-cucumber-tag-expressions: upgrade 9.1.0 -> 11.2.0
+Date: Mon, 16 Nov 2026 09:52:30 -0800
+Message-ID: <20261116175359.342679-18-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.1
 In-Reply-To: <20261116175359.342679-1-khem.raj@oss.qualcomm.com>
 References: <20261116175359.342679-1-khem.raj@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Mon, 16 Nov 2026 17:54:24 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132466
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Mon, 16 Nov 2026 17:54:35 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132474
 Content-Type: text/plain; charset="utf-8"
 
-Drop the ez_setup patch (upstream builds with setuptools.build_meta
-now), build with native Cython and tomli, and build the libev extension
-against the sysroot libev instead of host paths. The driver now depends
-on Deprecated; add it to RDEPENDS.
+Drop the uv_build bound patch; the new <0.14.0 cap allows the uv_build
+in OE.
 
 Changes:
-- 3.30.0: add pyproject.toml declaring build dependencies; drop Python
-  3.9, add 3.14; eventlet, gevent and Twisted event loops deprecated.
-- 3.30.0: fixes for missing C extension .so files and win32 libev in
-  wheels, and execute_concurrent timeout handling; remove ez_setup for
-  setuptools 82 compatibility.
-- 3.30.1: wheels no longer ship Cython-generated .c files, mark md5
-  usage as non-security for FIPS, fix crash at interpreter exit.
+- No Python-specific changes listed upstream between 9.1.0 and 11.2.0.
+  The shared changelog covers other language ports only: C++ added
+  (11.1.0), Java OSGi bundle name and jspecify range, JavaScript ESM
+  (10.0.0), Ruby minimum 3.1 (11.0.0), .NET test dependency updates.
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- ...fying-the-availability-of-setuptools.patch | 34 -------------------
- ....bb => python3-cassandra-driver_3.30.1.bb} | 14 ++++++--
- 2 files changed, 11 insertions(+), 37 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python3-cassandra-driver/0001-skip-verifying-the-availability-of-setuptools.patch
- rename meta-python/recipes-devtools/python/{python3-cassandra-driver_3.29.3.bb => python3-cassandra-driver_3.30.1.bb} (61%)
+ ...ax-required-version-of-uv-to-be-0.12.patch | 38 -------------------
+ ...ython3-cucumber-tag-expressions_11.2.0.bb} |  3 +-
+ 2 files changed, 1 insertion(+), 40 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python3-cucumber-tag-expressions/0001-pyprojects-Relax-required-version-of-uv-to-be-0.12.patch
+ rename meta-python/recipes-devtools/python/{python3-cucumber-tag-expressions_9.1.0.bb => python3-cucumber-tag-expressions_11.2.0.bb} (66%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-cassandra-driver/0001-skip-verifying-the-availability-of-setuptools.patch b/meta-python/recipes-devtools/python/python3-cassandra-driver/0001-skip-verifying-the-availability-of-setuptools.patch
+diff --git a/meta-python/recipes-devtools/python/python3-cucumber-tag-expressions/0001-pyprojects-Relax-required-version-of-uv-to-be-0.12.patch b/meta-python/recipes-devtools/python/python3-cucumber-tag-expressions/0001-pyprojects-Relax-required-version-of-uv-to-be-0.12.patch
 deleted file mode 100644
-index b58fd04752..0000000000
---- a/meta-python/recipes-devtools/python/python3-cassandra-driver/0001-skip-verifying-the-availability-of-setuptools.patch
+index 7016aaa4b1..0000000000
+--- a/meta-python/recipes-devtools/python/python3-cucumber-tag-expressions/0001-pyprojects-Relax-required-version-of-uv-to-be-0.12.patch
 +++ /dev/null
-@@ -1,34 +0,0 @@
--From ebee090ac020c5a4e4194788fc2f53d7a4e30b40 Mon Sep 17 00:00:00 2001
--From: Gyorgy Sarvari <skandigraun@gmail.com>
--Date: Sun, 15 Mar 2026 21:28:07 +0100
--Subject: [PATCH] skip verifying the availability of setuptools
+@@ -1,38 +0,0 @@
+-From 5cf10b111d61f00db2b3d9c8c6635fc31f3ceefd Mon Sep 17 00:00:00 2001
+-From: Khem Raj <khem.raj@oss.qualcomm.com>
+-Date: Thu, 14 May 2026 06:43:36 -0700
+-Subject: [PATCH] pyprojects: Drop the uv_build upper version bound
 -
--The setup script checks is setuptools is available (with the correct minimum
--version), using setuptool's pkg_resouces modules. Setuptools has dropped
--this module in version 82, making this import fail.
+-Core builds wheels with "pyproject-build --no-isolation" against whatever
+-python3-uv-build is in the sysroot, and the build-system requirement is
+-enforced:
 -
--This patch skips the availability check of Setuptools, it is expected to be
--always available from oe-core - the patch itself is oe-specific.
+-| * Getting build dependencies for wheel...
+-|
+-| ERROR Missing dependencies:
+-|       uv_build<0.11.0,>=0.10.0
 -
--Upstream has already prepared a solution to rework their setup script to
--work with the latest Setuptools, however that patch builds on several other
--patches.
+-Raising the bound only defers the problem to the next uv-build upgrade;
+-the 0.11.32 -> 0.12.1 upgrade in oe-core has already invalidated the
+-previous <0.12.0 bound. Since there is only ever one uv-build in the
+-sysroot, drop the upper bound instead.
 -
--Upstream-Status: Inappropriate [oe-specific]
--Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+-Upstream-Status: Inappropriate [OE Specific]
+-
+-Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ----
-- ez_setup.py | 1 +
-- 1 file changed, 1 insertion(+)
+- pyproject.toml | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
 -
--diff --git a/ez_setup.py b/ez_setup.py
--index 76e7105..c668e5d 100644
----- a/ez_setup.py
--+++ b/ez_setup.py
--@@ -107,6 +107,7 @@ def _do_download(version, download_base, to_dir, download_delay):
+-diff --git a/pyproject.toml b/pyproject.toml
+-index b0f253e..b39d0fd 100644
+---- a/pyproject.toml
+-+++ b/pyproject.toml
+-@@ -1,6 +1,6 @@
+- [build-system]
+- build-backend = "uv_build"
+--requires = ["uv_build>=0.10.0,<0.11.0"]
+-+requires = ["uv_build>=0.10.0"]
 - 
-- def use_setuptools(version=DEFAULT_VERSION, download_base=DEFAULT_URL,
--                    to_dir=os.curdir, download_delay=15):
--+    return
--     # making sure we use the absolute path
--     to_dir = os.path.abspath(to_dir)
--     was_imported = 'pkg_resources' in sys.modules or \
-diff --git a/meta-python/recipes-devtools/python/python3-cassandra-driver_3.29.3.bb b/meta-python/recipes-devtools/python/python3-cassandra-driver_3.30.1.bb
-similarity index 61%
-rename from meta-python/recipes-devtools/python/python3-cassandra-driver_3.29.3.bb
-rename to meta-python/recipes-devtools/python/python3-cassandra-driver_3.30.1.bb
-index 5c15769e74..a3c7ffe0d9 100644
---- a/meta-python/recipes-devtools/python/python3-cassandra-driver_3.29.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-cassandra-driver_3.30.1.bb
-@@ -8,13 +8,19 @@ LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=2ee41112a44fe7014dce33e26468ba93"
- SRCNAME = "cassandra-driver"
+- [project]
+- name = "cucumber-tag-expressions"
+diff --git a/meta-python/recipes-devtools/python/python3-cucumber-tag-expressions_9.1.0.bb b/meta-python/recipes-devtools/python/python3-cucumber-tag-expressions_11.2.0.bb
+similarity index 66%
+rename from meta-python/recipes-devtools/python/python3-cucumber-tag-expressions_9.1.0.bb
+rename to meta-python/recipes-devtools/python/python3-cucumber-tag-expressions_11.2.0.bb
+index 1efe5f4d70..ea7c278b9b 100644
+--- a/meta-python/recipes-devtools/python/python3-cucumber-tag-expressions_9.1.0.bb
++++ b/meta-python/recipes-devtools/python/python3-cucumber-tag-expressions_11.2.0.bb
+@@ -4,7 +4,6 @@ HOMEPAGE = "https://github.com/cucumber/tag-expressions"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=134f1026f0de92fd30e71976590a2868"
  
--SRC_URI += "file://0001-skip-verifying-the-availability-of-setuptools.patch"
--SRC_URI[sha256sum] = "ff6b82ee4533f6fd4474d833e693b44b984f58337173ee98ed76bce08721a636"
-+SRC_URI[sha256sum] = "0c6a3e1428f7c6a9aa6c944b9c47a37cd2cdbeb5b5a82d42c33afdd56f14e398"
+-SRC_URI += "file://0001-pyprojects-Relax-required-version-of-uv-to-be-0.12.patch"
+-SRC_URI[sha256sum] = "d960383d5885300ebcbcb14e41657946fde2a59d5c0f485eb291bc6a0e228acc"
++SRC_URI[sha256sum] = "7de37ff754acd8a09a62ce37183ba235d7d1bcbfde17ea1bdbb2de517b689273"
  
- inherit pypi python_setuptools_build_meta
- 
-+# Look for libev in the sysroot rather than in host directories
-+do_configure:prepend() {
-+    sed -i -e 's|^libev-includes = .*|libev-includes = ["${STAGING_INCDIR}"]|' \
-+        -e 's|^libev-libs = .*|libev-libs = ["${STAGING_LIBDIR}"]|' ${S}/pyproject.toml
-+}
-+
- RDEPENDS:${PN} += "\
-     python3-cython \
-+    python3-deprecated \
-     python3-geomet \
-     python3-json \
-     python3-misc \
-@@ -24,5 +30,7 @@ RDEPENDS:${PN} += "\
- "
- 
- DEPENDS += "\
--    python3-cython \
-+    python3-cython-native \
-+    python3-tomli-native \
-+    libev \
- "
+ inherit pypi python_uv_build
