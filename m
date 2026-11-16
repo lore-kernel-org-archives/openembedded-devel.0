@@ -1,65 +1,65 @@
-Received: from mail-dy1-f171.google.com (mail-dy1-f171.google.com [74.125.82.171])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.33649.1794851690759089289
+Received: from mail-dy1-f181.google.com (mail-dy1-f181.google.com [74.125.82.181])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.34315.1794851696727049597
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 16 Nov 2026 09:54:50 -0800
+ Mon, 16 Nov 2026 09:54:56 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=chVkz2Rd;
- spf=pass (domain: gmail.com, ip: 74.125.82.171, mailfrom: raj.khem@gmail.com)
-Received: by mail-dy1-f171.google.com with SMTP id 5a478bee46e88-37198ed3727so120042eec.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 16 Nov 2026 09:54:50 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=vDoEIhaG;
+ spf=pass (domain: gmail.com, ip: 74.125.82.181, mailfrom: raj.khem@gmail.com)
+Received: by mail-dy1-f181.google.com with SMTP id 5a478bee46e88-380b40312e2so1300676eec.1
+        for <openembedded-devel@lists.openembedded.org>; Mon, 16 Nov 2026 09:54:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794851690; x=1795456490; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1794851696; x=1795456496; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=49kmxFnQugvsK6zIn1gtShlXLcbgCgWK/76ImzuISOQ=;
-        b=chVkz2Rd0yIMqCHMWuEQje8wZlFMWxxEtpeHRKzX0qccc9fLG8yK2/eL0a8BCe4SDF
-         yb9JGPQQKbkfpZNqzIg2yjb42E65XMUwmJWcTvj1Ug1ctgUOy49yEsjl61FId1Id/f+e
-         YtWBZaijEMniY8h7oRwOGHsXj8TS7jk/haIFt3Ta0wU+7fn08B1SAMaWKx5NGvvE1fxH
-         Sg9+wJrjranXOva6VsKo8ERt3gfOWCqAyq72iLZnAyC87FukxPRV+7HhKQddE6qlI7S4
-         5eT867c60GBATSuJDuZqd4Ogh2HGsfI0ZEz/1WeZG9gidmpzEJifHQz8Ha9evXVPed6X
-         FP5A==
+        bh=pI4UW4ZbN358f6jZPppYU8VHTv6giO0VdRPO+QBkQ9c=;
+        b=vDoEIhaGK0+ZRVQ+5jqBIfHEZdJx6pJX/0ztd4RB79vNiICpZ+fLjLbXvjp9nqlnvi
+         gxb0Xp9PH2wJmxjDIXO5mlE/8BLOZcVMF9g8oqvuTFrAnInUKiccvsOhpF707y9nKxSU
+         cgktws66ZYC7h5LJbZyIEUhZEPCK7gAGL5eB3aVa6qu24KMPJkIhsXV67XcNd6b8Dx+n
+         PSg6GES8uR0IAD1NImfHa2n3bqvuFPceUbjKIcVAFdb7OZeKSAnFGfKGn6NHJUs940QW
+         GEZ2WpMv2JaQaVpGXznBQqwoJw8kl2gpCcF4Zx49VL+Mnm+NbL32m5t1AgJC08A359S4
+         n4rg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794851690; x=1795456490;
+        d=1e100.net; s=20260707; t=1794851696; x=1795456496;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=49kmxFnQugvsK6zIn1gtShlXLcbgCgWK/76ImzuISOQ=;
-        b=N9h6X8FQo+BAcpJPtwVHbu9/fahCIJFwSXUk/SERDCGXXtuSGMq0tO0NokN2cSgJqy
-         5YW5Cl1lH1CM7qRSs2VPpcIgCFFV5siILy2fN7dfBje3KKD34xVK6hoV+9fJN5B+RXRn
-         h3EOqLFoT6G/3ca61coLtcimTrZefi/icsxfFGUyGlKF7JbzT1NsDSIPqMMwyJW1w4Q+
-         M+y/FUy/RMZZWBY+GIV5k8F/G6F3nFTCk1CD96NeCaniN7iiqTadflxzw81Ab/odPX/A
-         eWOJ6WDvFbFM4TYdl8DVdgRVqF1S02ZTvH8sqt42IJQhCXLFVUPvlbqdgDKJkCzieU91
-         fyUw==
-X-Gm-Message-State: APuU4Z9azTKx8pIYtQ67V8NgHn3L3PjbaNNMBBt99aGj7+Gu2EsjZ4Sr
-	THKRKZTGq46YCmkDb8uRI+ULDCREzaVVoNNwfPuRXd0OajSHpp7VFi/XLZ9dKdMB
-X-Gm-Gg: AZFdTZdu8S617gvgnz5le9bDvCaToOY6+1EESW3+B40MbIOVUeHohAPTwgW5LP2G2aG
-	A3uOQ59urOoAbvz/n2VaS/JXTYbIZrYBT/EgFez/u95+ZGAJiev++Q7riQJmLDlz4klGU0VPzTJ
-	XRY2Js8T4ur4vz7rnBmjmG9C3pkGAR0jwCkWL4bJi1sDO5UfTEM0ZuTPU0IOzgKS/8DKTs4VOxr
-	PEXgvsb9WwLtURomkwicW0tKP/QvnmEWdac1RBoi0MTUlMJ+i/lJ94u/H7bx2gGItswMwUOh4lM
-	O7RQ+Zzgsuhq/rBHTTleh0dIoYVskWw5Lt8cmz47TtHja8KYKZ2TFtET5lhoKQPo0MvSkmCdRp+
-	fnxICG5o3MfI0kJ/aZKK7mVSy5eNb+HV/67e0w7K1VUcTUY11i6z5Gn8NaC/6scvCDdtYzF1h+A
-	YxFgEJ7RCjHmliHSinGQDrQIEsZSz5T/tyFzKBWx0fn6vFRUHT8Y404JRqI4XA3FqpRQ8jgPeFX
-	PoRIcezchuSlbzDdI/fmzLCB+BrFnDo/qk86HovsnRtRh95ZzuntPAfE4SK1aMpDxlu4uchPYj0
-	ORV6pX7XhaId5G1dI8oxlDw18qdx1DwpBCpeHMKh/GY4q/BymX/w6yE9uUBTLviudSebXNCZMzH
-	jAylZYIfEd91fMdCFOadHzoXU6Ny1jnfQTgQG8hqitACuI3NVFMc1gCU2qLtzxeUf0gRx/55YP7
-	gR8VOlt75xPtUWo1lU7A5N20tHUmbZ1CXqmTURyit52Lw4iXkg1ldeZCh3R3HHg/xy1MeAQDeiP
-	AmXhAqvmbk3eOUYzYDggeWp6wljk+oR7KSqV9OyZKJ6j1GuBRos/zfqw/rrAwipGmkBWE21jnVV
-	81LR
-X-Received: by 2002:a05:7300:2a93:b0:359:27e6:b684 with SMTP id 5a478bee46e88-3810bf5360amr211652eec.3.1794851689943;
-        Mon, 16 Nov 2026 09:54:49 -0800 (PST)
+        bh=pI4UW4ZbN358f6jZPppYU8VHTv6giO0VdRPO+QBkQ9c=;
+        b=vDZJOVopAu8cg08Fa2eVol7hVTLnia6owrpTyz+5g4Vqb/ncVfHzqXGOZFir7CBOkM
+         X4r+I87ESXGIUQq26c/iUMLAv0q+ujX6ie3GXweFp1+IHtrWs1GAInD6ckZST9guD5EK
+         7CrnwrRKu5ed/JBHMyPDSjlvJA5lVPzG/30tQSvHAeMLvV+p9HQfwgyqWTpGUUzedgMO
+         ORulQ5P6kqy6MfOfdPeC7yHu10bQO3CTQCvD8MGXTCF//nhdqfnpv8eL3wbGAzvrfE6s
+         wOYQXvZtWBforksr7lWhMx19vztz22GBdt0CEVSlGTWZrFdxaQcqi5hIvsKSS6h6GbdH
+         OCuQ==
+X-Gm-Message-State: APuU4Z8n6Hw0ejmCUb52oY4N4RCmXLuNDYoqxv3BLNDZ5h3OYLBQuYN6
+	7edz1NDsgyAC3k+pSgptwor5qE6aarsNwZNmvia5cfWfhYhbS3eevbPsiQv8d1B6
+X-Gm-Gg: AZFdTZcq5Q6yEJCFUxzHRuO/MhzSUs0Ufcn7u27Z0r5o8Y8+4dYh0v3/K0GgUJ+E/Pm
+	xmMnw3JURfbk8LbcQUA9o3FtYeMlc88QEn/EEQlZkbzLM2Y0z7wK4wg+FFNhbv90QA1QANa4BhU
+	0zW8loXolaJ7KLLgM4tp2p/vApNdPE8VUqfYiDqJVcrhO+eEOrZwu9RdPka0knGetQQLSs6qocJ
+	ySAg2SKW5ai0tzmjfP7j6aBKpJRJh5lubbngB3oMXWXUU/NHW138Qc3LAqJXVOoI1kr49gIhu4Z
+	hiAqJAIEli3Tb6zhdRXJWSs8ZQq0rmll5iL7l8ZaOgG1rGnKO899WOapM1Hl8SooWbEslJgiNL8
+	7Bm7/q3JhbZWUAPvpjsWAxfVqV0kCGqp+JZgfqVcuPegyl/NtmvPagIpySduflLCwtVHIYPLFzb
+	1Jrky5BSOZRDegjUWyrQp+NTTDENt6lWcWJsbuBlBaS01kZ/P7NbivFeiZDhTR4DFjNC1T025DH
+	y8M0hMLELsQ9oSqJ8C00QHy+poAamFctXM7gUvu2hlM0IOIo93taX5WJZhGY6LawmS/WTebbVGP
+	twIFWGzhpHX3ioXOTbAww59pxFCS1LB7bb/IVch01oaupZYJsYNhyhCusGRG5RZWekGo1LXV9GZ
+	k71m+Y+PGjWJ3VLWorQSPEkVjko737bKOLuwG9OvgtMFLEwD6Didoc4OlEiLbHOocQlcg4jPiae
+	dAfd0s9ncopCNO/KrUGQKSGaoK2Bcy5a+W67HpgCnfxVkqmwL/2bpCmv7tkJEVSRgTaSznwQ6YN
+	lNYcJ3aNR2jQcEmZB0f30d8k66dCT0aCTVum3vGvarufyh/m5RF+1Wc+ro1YFMhNLVMd/j7nXrO
+	2036
+X-Received: by 2002:a05:693c:895a:20b0:369:f97f:72c1 with SMTP id 5a478bee46e88-3796721d051mr10887676eec.36.1794851695868;
+        Mon, 16 Nov 2026 09:54:55 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-379560f5e06sm48391884eec.19.2026.11.16.09.54.48
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-379560f5e06sm48391884eec.19.2026.11.16.09.54.54
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 16 Nov 2026 09:54:49 -0800 (PST)
+        Mon, 16 Nov 2026 09:54:54 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-python][PATCH 033/105] python3-flask-user: upgrade 0.6.19 -> 1.0.2.2
-Date: Mon, 16 Nov 2026 09:52:45 -0800
-Message-ID: <20261116175359.342679-33-khem.raj@oss.qualcomm.com>
+Subject: [meta-python][PATCH 037/105] python3-google-auth: upgrade 2.57.0 -> 2.62.2
+Date: Mon, 16 Nov 2026 09:52:49 -0800
+Message-ID: <20261116175359.342679-37-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.1
 In-Reply-To: <20261116175359.342679-1-khem.raj@oss.qualcomm.com>
 References: <20261116175359.342679-1-khem.raj@oss.qualcomm.com>
@@ -67,76 +67,161 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Mon, 16 Nov 2026 17:54:57 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132489
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132493
 Content-Type: text/plain; charset="utf-8"
 
-Drop Flask-Login from setup_requires, which made setuptools try to fetch
-it from PyPI at build time, and add the new runtime dependencies
-(bcrypt, cryptography, Flask-SQLAlchemy).
-
-License-Update: Upstream relicensed from BSD-2-Clause to MIT in 1.0;
-LICENSE updated to MIT.
+Rework the mTLS test skip patch for the reorganized tests. The transport
+tests import zoneinfo; add python3-zoneinfo to the ptest RDEPENDS.
 
 Changes:
-- BREAKING: v1.0 is not compatible with 0.6; UserManager properties and
-  methods are now overridden or extended by subclassing. Custom form
-  class attributes renamed (register_form -> RegisterFormClass).
-- Password hashing is configurable through passlib CryptContext
-  settings; minimum passlib raised from 1.6 to 1.7.
-- TokenManager accepts parts of the password so tokens are invalidated
-  after a password change; it also accepts non-integer user IDs.
-- Add MongoDB (Flask-MongoEngine) and DynamoDB (Flask-Flywheel) support
-  and an EmailAdapter interface (SMTP, sendmail, SendGrid, custom).
-- Remove callbacks/auth0; drop Python 2.6 and 3.3; add Slovak, Polish
-  and Ukrainian translations; fix crashes with USER_ENABLE_INVITE_USER
-  and with username change when USER_ENABLE_EMAIL is false.
+- oauth2.verify_firebase_token now validates the Firebase issuer and
+  subject and warns when the audience is omitted (2.62.2).
+- mTLS: fix races during certificate rotation on 401 responses, use an
+  unencrypted key for rotation, support mTLS in requests.Request
+  refresh/impersonation, and add aiohttp reconfiguration on cert
+  mismatch.
+- Add bound access and ID tokens for GKE and Cloud Run; sync
+  credentials in AsyncAuthorizedSession; strip -fips from the AWS
+  service name in SigV4 signing; declare Python 3.15 support.
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- ...ser_0.6.19.bb => python3-flask-user_1.0.2.2.bb} | 14 +++++++++++---
- 1 file changed, 11 insertions(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-flask-user_0.6.19.bb => python3-flask-user_1.0.2.2.bb} (53%)
+ ...uth-Skip-mTLS-tests-in-ptest-environ.patch | 65 +++++++++----------
+ ....57.0.bb => python3-google-auth_2.62.2.bb} |  3 +-
+ 2 files changed, 32 insertions(+), 36 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-google-auth_2.57.0.bb => python3-google-auth_2.62.2.bb} (90%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-flask-user_0.6.19.bb b/meta-python/recipes-devtools/python/python3-flask-user_1.0.2.2.bb
-similarity index 53%
-rename from meta-python/recipes-devtools/python/python3-flask-user_0.6.19.bb
-rename to meta-python/recipes-devtools/python/python3-flask-user_1.0.2.2.bb
-index 5faf74b03d..42bd50b95f 100644
---- a/meta-python/recipes-devtools/python/python3-flask-user_0.6.19.bb
-+++ b/meta-python/recipes-devtools/python/python3-flask-user_1.0.2.2.bb
-@@ -3,10 +3,10 @@ DESCRIPTION = "Customizable User Account Management for Flask; Register \
- Confirm email, Login, Change username, Change password, Forgot Password \
- and more."
- HOMEPAGE = "https://github.com/lingthio/Flask-User"
--LICENSE = "BSD-2-Clause"
--LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=97de97cd9d6e23c88129d884588ce71a"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=5aabce758ead32427c145173bc555403"
+diff --git a/meta-python/recipes-devtools/python/python3-google-auth/0001-python3-google-auth-Skip-mTLS-tests-in-ptest-environ.patch b/meta-python/recipes-devtools/python/python3-google-auth/0001-python3-google-auth-Skip-mTLS-tests-in-ptest-environ.patch
+index 345c25cfb3..73678c4160 100644
+--- a/meta-python/recipes-devtools/python/python3-google-auth/0001-python3-google-auth-Skip-mTLS-tests-in-ptest-environ.patch
++++ b/meta-python/recipes-devtools/python/python3-google-auth/0001-python3-google-auth-Skip-mTLS-tests-in-ptest-environ.patch
+@@ -18,31 +18,30 @@ in the embedded ptest runtime without external certificate infrastructure.
+ Upstream-Status: Inappropriate [ptest environment limitation]
+ Signed-off-by: Khem Raj <raj.khem@gmail.com>
+ ---
+- tests/transport/test_requests.py | 6 ++++++
+- tests/transport/test_urllib3.py  | 2 ++
++ tests/transport/test_requests.py |    6 ++++++
++ tests/transport/test_urllib3.py  |    2 ++
+  2 files changed, 8 insertions(+)
  
--SRC_URI[sha256sum] = "601abcc0343dfbae0c56273d98362d5cdc266ac84d20b3f65a212e4a2c83b302"
-+SRC_URI[sha256sum] = "c9785febc2fc7ca15c69cfff1c8dabc2788f25043b54a33f73a6c2a9daf7fbe4"
- 
- PYPI_PACKAGE_SDIST = "Flask-User"
- 
-@@ -14,12 +14,20 @@ CVE_PRODUCT = "flask-user_project:flask-user"
- 
- inherit pypi setuptools3
- 
-+# setup_requires would make setuptools fetch Flask-Login from PyPI at build time
-+do_configure:prepend() {
-+    sed -i -e "s/setup_requires=\['Flask-Login',\] + pytest_runner/setup_requires=pytest_runner/" ${S}/setup.py
-+}
-+
- RDEPENDS:${PN} = " \
-     python3-babel \
-+    python3-bcrypt \
-     python3-blinker \
-+    python3-cryptography \
-     python3-flask \
-     python3-flask-login \
-     python3-flask-mail \
-+    python3-flask-sqlalchemy \
-     python3-flask-wtf \
-     python3-passlib \
+ diff --git a/tests/transport/test_requests.py b/tests/transport/test_requests.py
+-index f14ccea..6a1cc55 100644
+ --- a/tests/transport/test_requests.py
+ +++ b/tests/transport/test_requests.py
+-@@ -178,6 +178,7 @@ class TimeTickAdapterStub(AdapterStub):
++@@ -504,6 +504,7 @@
++ 
++ 
+  class TestMutualTlsAdapter(object):
+++    @pytest.mark.skip(reason="mTLS requires certificates not available in ptest")
+      @mock.patch.object(requests.adapters.HTTPAdapter, "init_poolmanager")
+      @mock.patch.object(requests.adapters.HTTPAdapter, "proxy_manager_for")
+-+    @pytest.mark.skip(reason="mTLS requires certificates not available in ptest")
+      def test_success(self, mock_proxy_manager_for, mock_init_poolmanager):
+-         adapter = google.auth.transport.requests._MutualTlsAdapter(
+-             pytest.public_cert_bytes, pytest.private_key_bytes
+-@@ -189,6 +190,7 @@ class TestMutualTlsAdapter(object):
+-         adapter.proxy_manager_for()
+-         mock_proxy_manager_for.assert_called_with(ssl_context=adapter._ctx_proxymanager)
++@@ -530,6 +531,7 @@
++         assert adapter._ctx_poolmanager.verify_mode == ssl.CERT_NONE
++         assert adapter._ctx_proxymanager.verify_mode == ssl.CERT_NONE
+  
+ +    @pytest.mark.skip(reason="mTLS requires certificates not available in ptest")
+      def test_invalid_cert_or_key(self):
+          with pytest.raises(exceptions.MutualTLSChannelError):
+              google.auth.transport.requests._MutualTlsAdapter(
+-@@ -408,6 +410,7 @@ class TestAuthorizedSession(object):
++@@ -750,6 +752,7 @@
+              "https://{}/".format(default_host)
+          )
+  
+@@ -50,35 +49,34 @@ index f14ccea..6a1cc55 100644
+      def test_configure_mtls_channel_with_callback(self):
+          mock_callback = mock.Mock()
+          mock_callback.return_value = (
+-@@ -432,6 +435,7 @@ class TestAuthorizedSession(object):
++@@ -771,6 +774,7 @@
++             google.auth.transport.requests._MutualTlsAdapter,
++         )
++ 
+++    @pytest.mark.skip(reason="mTLS requires certificates not available in ptest")
+      @mock.patch(
+          "google.auth.transport._mtls_helper.get_client_cert_and_key", autospec=True
+      )
++@@ -1671,6 +1675,7 @@
++ 
++ 
++ class TestMutualTlsOffloadAdapter(object):
+ +    @pytest.mark.skip(reason="mTLS requires certificates not available in ptest")
+-     def test_configure_mtls_channel_with_metadata(self, mock_get_client_cert_and_key):
+-         mock_get_client_cert_and_key.return_value = (
+-             True,
+-@@ -888,6 +892,7 @@ class TestMutualTlsOffloadAdapter(object):
+-         google.auth.transport._custom_tls_signer.CustomTlsSigner,
+-         "attach_to_ssl_context",
+-     )
+-+    @pytest.mark.skip(reason="mTLS requires certificates not available in ptest")
+-     def test_success(
+-         self,
+-         mock_attach_to_ssl_context,
+-@@ -921,6 +926,7 @@ class TestMutualTlsOffloadAdapter(object):
+-         google.auth.transport._custom_tls_signer.CustomTlsSigner,
+-         "attach_to_ssl_context",
+-     )
++     @mock.patch.object(requests.adapters.HTTPAdapter, "init_poolmanager")
++     @mock.patch.object(requests.adapters.HTTPAdapter, "proxy_manager_for")
++     @mock.patch.object(
++@@ -1701,6 +1706,7 @@
++         adapter.proxy_manager_for()
++         mock_proxy_manager_for.assert_called_with(ssl_context=adapter._ctx_proxymanager)
++ 
+ +    @pytest.mark.skip(reason="mTLS requires certificates not available in ptest")
+-     def test_success_should_use_provider(
+-         self,
+-         mock_attach_to_ssl_context,
++     @mock.patch.object(requests.adapters.HTTPAdapter, "init_poolmanager")
++     @mock.patch.object(requests.adapters.HTTPAdapter, "proxy_manager_for")
++     @mock.patch.object(
+ diff --git a/tests/transport/test_urllib3.py b/tests/transport/test_urllib3.py
+-index 3367403..88d0963 100644
+ --- a/tests/transport/test_urllib3.py
+ +++ b/tests/transport/test_urllib3.py
+-@@ -94,12 +94,14 @@ class ResponseStub(object):
++@@ -94,12 +94,14 @@
+  
+  
+  class TestMakeMutualTlsHttp(object):
+@@ -93,6 +91,3 @@ index 3367403..88d0963 100644
+      def test_crypto_error(self):
+          with pytest.raises(exceptions.MutualTLSChannelError):
+              google.auth.transport.urllib3._make_mutual_tls_http(
+--- 
+-2.43.0
+-
+diff --git a/meta-python/recipes-devtools/python/python3-google-auth_2.57.0.bb b/meta-python/recipes-devtools/python/python3-google-auth_2.62.2.bb
+similarity index 90%
+rename from meta-python/recipes-devtools/python/python3-google-auth_2.57.0.bb
+rename to meta-python/recipes-devtools/python/python3-google-auth_2.62.2.bb
+index 7965a2e2b4..3883345f68 100644
+--- a/meta-python/recipes-devtools/python/python3-google-auth_2.57.0.bb
++++ b/meta-python/recipes-devtools/python/python3-google-auth_2.62.2.bb
+@@ -9,7 +9,7 @@ SRC_URI += " \
+         file://0001-python3-google-auth-Skip-mTLS-tests-in-ptest-environ.patch \
+         file://run-ptest \
  "
+-SRC_URI[sha256sum] = "9b4f96d6a1feb5f7201231f47cfb3de08d8f176f8a61f9e461555116e95a8789"
++SRC_URI[sha256sum] = "046c61a72d3a847d6df6417a7f0d5cf054e3b82bbcb54fb1e69d47880964049c"
+ 
+ RDEPENDS:${PN}-ptest += " \
+         python3-aioresponses \
+@@ -28,6 +28,7 @@ RDEPENDS:${PN}-ptest += " \
+         python3-responses \
+         python3-unittest-automake-output \
+         python3-unixadmin \
++        python3-zoneinfo \
+ "
+ 
+ do_install_ptest() {
