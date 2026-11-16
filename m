@@ -1,65 +1,65 @@
-Received: from mail-dy1-f179.google.com (mail-dy1-f179.google.com [74.125.82.179])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.25.1794851778959662224
+Received: from mail-dy1-f175.google.com (mail-dy1-f175.google.com [74.125.82.175])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.23.1794851779932418858
  for <openembedded-devel@lists.openembedded.org>;
  Mon, 16 Nov 2026 09:56:19 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=NrA3thvV;
- spf=pass (domain: gmail.com, ip: 74.125.82.179, mailfrom: raj.khem@gmail.com)
-Received: by mail-dy1-f179.google.com with SMTP id 5a478bee46e88-33bf40b0c8bso1143394eec.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 16 Nov 2026 09:56:18 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=IKjKjDth;
+ spf=pass (domain: gmail.com, ip: 74.125.82.175, mailfrom: raj.khem@gmail.com)
+Received: by mail-dy1-f175.google.com with SMTP id 5a478bee46e88-36fc0a3fe93so7093100eec.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 16 Nov 2026 09:56:19 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794851778; x=1795456578; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1794851779; x=1795456579; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=rPE+IA3cGwRwWfbIRsGYhQzeKyjpklVgYGNgfp+kql8=;
-        b=NrA3thvVJZE4La/Go372ty4NWYdRjNVb5wHlPjG6SyfmFHcWz53K/2rbFYxAup03/g
-         5EaAtY7YbuEor+jn/KxZjgUSuEa9XbiqbtaHVpwH+uoDTN4cS+b8XfbYuk0Z4Tbbxzw4
-         YLLIOH/lkbgOUdiLL6342PwJBlrmMgbR68Nk7eHZgshzWjPuTukz1Tzj1N2x06AJfGQd
-         xXYSNfxCU/7MS/ti/+VKVYVR4hMtk9Bx7KP5h3J/mtNjtOcy5stdFZ5qb+x5HQKPT66v
-         UyhqHjAPbkhn7jC8BLnl+1P5mCn9wHCnrM8UEnTER9QMI7MlFn3e76WG1vrDezlizOuH
-         Y/AQ==
+        bh=oYT612+AEMJkZjiY3NHu06tOKmtssnk96WJmGFFk9sw=;
+        b=IKjKjDthFr98MN+xOrIZrmf69nHGLVHVyIAtDNUgsUKwqKlB3k+ytyPEHNwYUbJFe8
+         9VRNv4GF9Pgm/9Du4MHu20EK5X0Zd+c9xWp6OZ7HxcKuMpSldQXjK2yHDfq6bOo3IeN8
+         GJh0mMOriCd/bUmMZ19TETvBIgjydrMhh95OtQ4XwUBOLdOxT/ddVlEM0biP3tiCkNcK
+         WHbwC6UwFDtqHcThVdBVgdA+blUEC8v+pfYrg81EwhjBdA/IB3kmz9vRQcSvtlVRUY2J
+         LxhtyUW3aM8/tECV09tBPdG0PjaSwlUIXCDNZ3muPvqo8hR8wEkfFdbBO8NB+6qQnoCs
+         kQfA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794851778; x=1795456578;
+        d=1e100.net; s=20260707; t=1794851779; x=1795456579;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=rPE+IA3cGwRwWfbIRsGYhQzeKyjpklVgYGNgfp+kql8=;
-        b=fw2VdBexShnKZra0K9MPd0Z+Rg7MuD0qSEEZywt+qFNNhHeHwro+Vp4r5/K12RECNF
-         oASaeKfcuI1XF4fx6UjWKs3PK3JJhB14IF1Ktzi9UND8GsGl1bb29lGhN/UNgDPVCAFF
-         SFTFirSf5n+JmSUkVZ5c3oLMdYoPXpjEPwJ29T+dzdtI+GvTEA+ULlPWkUPEPOxxc6Vk
-         UXtEEt0mQan/jrXsMb2/yi9ZolfnTJfMuWLsKU/uXS76tbcx8NMZ1nGVISdhkJMfgF5M
-         cKZswANipsIXEqq4si+2r69ydnRuK9DhL1UPE5TYd5VzvlRYgIRfaeqc638Psyq1BlsU
-         eRRw==
-X-Gm-Message-State: APuU4Z+7O/hCbjJEcGCmpSfh41dO/NzqCrfF5U1WNAgih2B/5wCl80YW
-	yZ9aDSI91MYLS4RP91KUiieYjm5iWAoxmKzqW+loh4cFP46EuOjNKpnpn6B/ZcL+
-X-Gm-Gg: AZFdTZdtH7dClqU8Y8MGp9/CDS4s95DmJTrCB9oglzKGy5kE3xjY7cIaC2yz2812BaX
-	ztkmlg4qDAJWNrZ3zmnRTe1B7+nQ7J/tXDkAxKMrZfjR+/1Mwd86JQwHu3tuJ+dycSUBHkypN9y
-	+1jWzc+RBNtrI4pXixZVHftBsHjcG0LsLM86r+0SYX9OZFARHO3D0yxwQp7rusxJ1/UgY9keMt9
-	NzYEpAhxsvQ61jJWROz+GuGtIKsZViBeXOOjkCt+w9n0bjh4yzLvp7bncASv3kdSU9eCHp9ljtM
-	hKjtFksoqBKqKf695ellwxux56EIETvJcEN9az8F9b+YAMYJ5fl0oFeAsSrb9ReiBpXdJf+kud9
-	Rmx9niwijbctrVsBLpT2l8hyEzv2Onj3+SUZoJBpj5lfn6SyhjYWyu1BSppda9oktudh8Fl+MXZ
-	V7bdOHfMMVNf1ilZcHXVcuwBq3Au7l4Vq9VpK5DKILbsK1Ec+0daMsf09n4bz4O3sjerKvVIVqj
-	Hpy1zu7RpyBkiJ8Qs6A2ZCIuwuPbQaT3d0p+t6LiNSP4XKPEJ9qojoFwmRc+8DILlkhVtVFzB4t
-	QUJAABYztFV3GdwfYzWD2ojPttQeQ7y/scnycaFanF4e3CvT/2sWJN7dVU41jaQ1BA1GLSkvnpk
-	QVmkqN/t/pxrp06h/ojjBcduIMs2krEs7QFE6qqQKI4lDJw6/J/KKBOJfUZyT1lBVkAyu57aPPV
-	lkwkMKhmjFfKhrwfApNug9qSWEu4sjLdLYm8pH9FG3XQNsTkMNpNLOP8V/ryxHgdG+n3GBTH+TW
-	rTOYHhfAmIBGoSKET4+1CIL/GARlm00dWlOf8e6QQ+hcuS6FfoOYRACc5Urkd74GdQp98AIeorT
-	7OX1
-X-Received: by 2002:a05:693c:811a:b0:36e:9763:9268 with SMTP id 5a478bee46e88-3796695b721mr11314678eec.26.1794851778260;
-        Mon, 16 Nov 2026 09:56:18 -0800 (PST)
+        bh=oYT612+AEMJkZjiY3NHu06tOKmtssnk96WJmGFFk9sw=;
+        b=VOqq849mD2YTQCE4VbQZ7R4EgeAZ5McLkQF/Wx3pumNE6/LLcUjcggLCNOcmLP552c
+         ahYEKsrYM9JUlt73ZYabbfBL20bJuzpcKNvk3DZ21EGQBMpaTXhPjlJZF8lBIXFcmFxa
+         Qdynxp27DNNZ8QW54dZc7vczBmFatR9qKGn3F5OpbxCefbjDb0RXiVOty8OYKZNTs3w0
+         uQDloBM7qdgrqhTzo2/jaFmnc77mgZC179pbCiwvxk85izumCudNlrFCMzme9UZ53i0s
+         f9+IyQg/YyIGlHaVeTZb2PuN/eQWMHVILuqh9q08dlL7BlVOAdmJ6UO2MRJDQJuBg4b8
+         COvQ==
+X-Gm-Message-State: APuU4Z9yS5aAQTzQwK7avhg2yj7OUPEvs/9AGoUVuuE7o50YXEp8lslx
+	M/i47C5pIO57b9mDan5vNjGsXlG/mZ/cqc7hOC55nf+wOxMZ48i22yFjGg4mbwMk
+X-Gm-Gg: AZFdTZelsXGVA2r5X2WS4oaz5zkwfTBqsh/XRTnqQodd5LBKU5R615+u28MKT3I7itl
+	QbCfRBdDnDNjoQdImfevMIqXbsDOMcL+f467HF5IV6nSqSEQ0uQlbxjsrsn6xMGVthaX4inZh0Z
+	9gDWJ73B+jNnEYlQtQapvPt94p3jVOD7/zJz4VPb+BydR7rcgig/iOhxURoKFLJ14YihryJtZEg
+	HsboTf5jhncZRdKR89IEUvIjdz52n6lJpfeAli1WyRLGGnm5Xz5moPRIWdd1vATlH9wyX/f68GQ
+	AErP4vIVgBzuSkRpv6HkyubT4CbYNFm09JcjPFskfF0LQ1HdWmjmM4iAGvlbnSOJgMqPof/3wgY
+	x2Aue0mG3mOj5/nt9oX8WB9rfLq46Mc6vKaaNeeGCqIELyZ0TvYt3EqomUMAQkpgHl/BexTeFI3
+	3luI5kU5t6cCsyFhW0dL9WmzH79gcODX2diEr8dZuqCzPFCP0Rn4+dzsiv9JR6lnjfGF7Own/H5
+	zu30l4X++153x8TLhJHnZS7/rds6ozGuQCU19VnKibL5w5N+nqBVz0/ooqiy8ZtcvgJ+Wgf766B
+	hIqpLwISnK7sgS3eTaN8SaoO/qtRxBMubKIE4qF/BLbCUnmLr4lpmSKuLBQO4JqY+d1seLJc3jU
+	wPz7EN89jlK6/WmBkldi2vM4HwFDRzbtK7oTYaGbTfgGGnC9qwLQAr9CvrmuReZn8uEXMcRIMB/
+	SlIMsvcSdFHJ5dM6FwqhBPDi72aITYvKMPjxY7EUktTuyxT/wrKn4TythNMKs45UtHTWeOqLZf3
+	ruyrPpkulCOCz7RiZjwiPuIBqVxXilK+JfPg4Pch/U04EwGxesGxUmIOlqcE7COG0/P7u18dmx9
+	z86e9cBUUO9rVcSGDcFe3AVydg==
+X-Received: by 2002:a05:693c:2585:b0:36c:a1ef:f8f7 with SMTP id 5a478bee46e88-37963371df1mr9793859eec.4.1794851779247;
+        Mon, 16 Nov 2026 09:56:19 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-379560f5e06sm48391884eec.19.2026.11.16.09.56.17
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-379560f5e06sm48391884eec.19.2026.11.16.09.56.18
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 16 Nov 2026 09:56:17 -0800 (PST)
+        Mon, 16 Nov 2026 09:56:18 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-python][PATCH 101/105] python3-virtualenv: upgrade 21.14.13 -> 21.15.6
-Date: Mon, 16 Nov 2026 09:53:53 -0800
-Message-ID: <20261116175359.342679-101-khem.raj@oss.qualcomm.com>
+Subject: [meta-python][PATCH 102/105] python3-watchdog: upgrade 6.0.0 -> 7.1.0
+Date: Mon, 16 Nov 2026 09:53:54 -0800
+Message-ID: <20261116175359.342679-102-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.1
 In-Reply-To: <20261116175359.342679-1-khem.raj@oss.qualcomm.com>
 References: <20261116175359.342679-1-khem.raj@oss.qualcomm.com>
@@ -67,52 +67,41 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Mon, 16 Nov 2026 17:56:21 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132556
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132557
 Content-Type: text/plain; charset="utf-8"
 
-Add hatch-fancy-pypi-readme to DEPENDS, now required by the build.
-
 Changes:
-- 21.15.0: zipapp bundles dependencies for Python 3.15 and no longer
-  bundles Python 3.8.
-- Embedded pip upgraded to 26.3.
-- Reject an empty or whitespace-only destination (an unset VENV in
-  "virtualenv --clear $VENV" could delete the working directory).
-- -p/--python and --try-first-with now replace configured values
-  instead of merging; --app-data handling and seed wheel staging
-  made more robust.
-- Activation: PYTHONHOME cleared/unset (PowerShell, Nushell, csh),
-  empty PATH entries removed, xonsh sets PKG_CONFIG_PATH,
-  virtualenv.ini read without % interpolation.
-- Fixed seeded console_scripts names such as python3-config
-  overwriting the environment's python executable.
+- 7.0.0 BREAKING: dropped Python 3.9 and 3.10; added Python 3.15.
+- inotify: instance created lazily, recursive watches reconciled
+  after queue overflow, directories moved into a watched tree are
+  watched, fixed thread dying with KeyError on tree copies.
+- DirectorySnapshotDiff no longer reports new symlinks as moves.
+- case_sensitive=False matching fixed on Python <3.13; debounce_
+  interval_seconds and DelayedQueue.delay_sec deprecated.
+- watchmedo: runnable via "python -m watchdog"; AutoRestartTrick stop
+  signal works on Windows; generate-tricks-yaml output loadable.
+- fsevents extension builds on PyPy 3.12.
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- ...n3-virtualenv_21.14.13.bb => python3-virtualenv_21.15.6.bb} | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-virtualenv_21.14.13.bb => python3-virtualenv_21.15.6.bb} (81%)
+ .../{python3-watchdog_6.0.0.bb => python3-watchdog_7.1.0.bb}    | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-watchdog_6.0.0.bb => python3-watchdog_7.1.0.bb} (76%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-virtualenv_21.14.13.bb b/meta-python/recipes-devtools/python/python3-virtualenv_21.15.6.bb
-similarity index 81%
-rename from meta-python/recipes-devtools/python/python3-virtualenv_21.14.13.bb
-rename to meta-python/recipes-devtools/python/python3-virtualenv_21.15.6.bb
-index e3a3a109af..4f11ed9333 100644
---- a/meta-python/recipes-devtools/python/python3-virtualenv_21.14.13.bb
-+++ b/meta-python/recipes-devtools/python/python3-virtualenv_21.15.6.bb
-@@ -4,12 +4,13 @@ HOMEPAGE = "https://github.com/pypa/virtualenv"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=36ef9437b761b314fa717c786c5ca460"
+diff --git a/meta-python/recipes-devtools/python/python3-watchdog_6.0.0.bb b/meta-python/recipes-devtools/python/python3-watchdog_7.1.0.bb
+similarity index 76%
+rename from meta-python/recipes-devtools/python/python3-watchdog_6.0.0.bb
+rename to meta-python/recipes-devtools/python/python3-watchdog_7.1.0.bb
+index 40abfbfa38..e206e93c5f 100644
+--- a/meta-python/recipes-devtools/python/python3-watchdog_6.0.0.bb
++++ b/meta-python/recipes-devtools/python/python3-watchdog_7.1.0.bb
+@@ -3,7 +3,7 @@ SUMMARY = "Filesystem events monitoring"
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
  
--SRC_URI[sha256sum] = "de5307ba4b9a0001d9c8ea02832d38f63ca432880f416c1bface61c4323fd905"
-+SRC_URI[sha256sum] = "c8b65c7d206ca6ef18de9352c160b3f04f66fff9f6b0ec8fd31f14688eba52c4"
+-SRC_URI[sha256sum] = "9ddf7c82fda3ae8e24decda1338ede66e1c99883db93711d8fb941eaa2d8c282"
++SRC_URI[sha256sum] = "d3861e255416f49a1384474cb2efa097de165fb330d4c5432ce6708b509ed922"
  
- BBCLASSEXTEND = "native nativesdk"
- inherit pypi python_hatchling
- 
- DEPENDS += "\
-+    python3-hatch-fancy-pypi-readme-native \
-     python3-hatch-vcs-native \
- "
+ inherit pypi setuptools3
  
