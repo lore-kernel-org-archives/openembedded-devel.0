@@ -1,65 +1,65 @@
-Received: from mail-dy1-f173.google.com (mail-dy1-f173.google.com [74.125.82.173])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.33635.1794851669983607687
+Received: from mail-dy1-f170.google.com (mail-dy1-f170.google.com [74.125.82.170])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.33637.1794851672106015591
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 16 Nov 2026 09:54:30 -0800
+ Mon, 16 Nov 2026 09:54:32 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=Y0ERlP6E;
- spf=pass (domain: gmail.com, ip: 74.125.82.173, mailfrom: raj.khem@gmail.com)
-Received: by mail-dy1-f173.google.com with SMTP id 5a478bee46e88-33bf40b0c8bso1139261eec.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 16 Nov 2026 09:54:29 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=mTW0+vL/;
+ spf=pass (domain: gmail.com, ip: 74.125.82.170, mailfrom: raj.khem@gmail.com)
+Received: by mail-dy1-f170.google.com with SMTP id 5a478bee46e88-33bf40b0c8bso1139332eec.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 16 Nov 2026 09:54:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794851669; x=1795456469; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1794851671; x=1795456471; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=48d5KGDgIxtP1oOO6kLkdnHNtcKxW/ilxeglqdiiBSU=;
-        b=Y0ERlP6EenT6lqL9EAJVhRyXhHboQAmcmReeN5yZrS8Pn94sE1OCJ7adSvv6hH+DKB
-         CiNamaPeulhpgMTWf1Ko9lVnsBgnjPJVPkWTZDcGDdwE7pxnCxQoL8YftyMeDi+TU4ec
-         YvDW73MFatz43z8SS999P/29IoOStmfXzNI7zXjElH4tDpy2D5hqRbzBn7pHJNmqG+HG
-         DkSbNufKuglStHWM8N1BkzKHmN/QgrACBUxD+n8PdeZmS/ibkNMKI+A2fyxaaJIoqdWY
-         6SHY8pXLSuNzcF1uh+F/dcoRSXUcJIOBpVXGEP3wA2N6NXlC5rtFQhxjwS3Ng4I8Ntay
-         cPgg==
+        bh=IpdnBreGeaJhGL7JvR5W1YQEqw06nELyOpIfH1upRfM=;
+        b=mTW0+vL/X1IhGrdKJmhiiMalnRtG8w1N2Vt4L4wzWqb+T/m8e2Z71+P47kwl3gSAgl
+         tei86ud+7d6QcR8dGCxgVTQ4to1DmCc3pVPt+/PGGvje8TN12Q/5iAGutvB/PpQf18ON
+         8QrzH5dBaqY4q7IcZsfa8TGNuLDQ5TiJ7cCTDF7cdqo9u9seDCr0Eg8F7nEsNHnpigGN
+         p+vAbHDYx2qKwRFO7fONEXbVZopaRc4inTPkpTO/m6H+riLqssgQgVij80dV5IPd9LSV
+         Cy+bZBqrybBsC/g0mRYVYAWz6zSycxeqaYXO8TJN2AQMUGFJ5LSnd9YIz2zl8N/xzCaW
+         NyGA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794851669; x=1795456469;
+        d=1e100.net; s=20260707; t=1794851671; x=1795456471;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=48d5KGDgIxtP1oOO6kLkdnHNtcKxW/ilxeglqdiiBSU=;
-        b=RXcD/jECpVkbmh+LYqYwMC9gMj3z2u4C/c3pAW/oaQDhREnIlNxLp4y/fPPqmuk7vE
-         BC2WlPEQ6gYKKWCcbdpi5CEWiByJbWD4cEZtx3CkjzkqVClukrV3DPFjokAYYffAFUiW
-         aD2wIM8p5Sj587FsKvEaZPOZDXvgrMABpAtvpDsVGh4foQ0VUKJI20Js/zg+HrHKmx1F
-         YDq4lllQPPr2oGnrJXDdqQ2iEmlJ3r2whJoHOqJsT7FZrJ6OymfnHGD5OkDhl/WcIx0y
-         xd089dmmUTWbMKTBS/IHWeNJ0Q2sJyAwCVKEzf6NuJaDUvrbgMcSa3HM8nSVlonxDxfi
-         MQdw==
-X-Gm-Message-State: APuU4Z/yCyD0sJO2Vmg0o6R/Hm0TffgNXNvyhkl0jFTgqSBDC+X1Szi1
-	yzWMSBVhcaQ8C3DH+kS9NdWdK+d8YyqkSnXwOWeKe9bBhY0nKuVJVorqg2iWqpaL
-X-Gm-Gg: AYBFou1DjJzZjcGMj6DFD9Y3bbo/Ku7zozB3fp+a1sQEtScA5a0d8QnoB0UJ+w5iA5r
-	s/JrBRJwuauNzzGb6shGK0YDkiA2mI5LpikODqeVhhQJ0cCiP/552UPMeH34kZOjbwQtRYUsRL0
-	ICrtxkEglzRyam52G98NG9vpZPFvFcSvhK7xNutUaePMNnGvz1VaItUoWHwz03yjuCOSQP1R12M
-	279y4kqxS1/OlaucqYWL1/2t1kllVAlrBmy8bNMqfxomo/sW+TCcaVlQ7K7ZBFgzklRLE4pAYY1
-	di7H13knqwM6eJSCohINctEMlo7KaqwGw24WmBlLz9tSYm+CgF+lrrDFLaCwdrCLtte9jhXg19L
-	8b7I3Errsdas0678Joh86vGoIX5L+f6n9n7tNRZ7IrNYJBiMziNcTzloaNcm47UgyKjHUMxMkh3
-	5Wk7GEs6iLhsog+R4HdOxtB2l1BeQfMci+B4a8pM9qE0R+7ONm9Asvw9+N6+YUOecQaZbr3qxYo
-	HQRJCOF0zUPFfWQtmwRT2Rzq7JQbugvTX7OG8bAc+TOWf9sOqqrTsori2wASOihudZpqHE8DQBC
-	XZhsIehBbLxrmABi9mIkWA03UQEKOtklFTKI/4jpG+OwbnFGCje2NaqQ0gXchaeJhR7Yrkkb7eE
-	0iifqv4JwCH5wsU7ImGktDBTMJgC9vqUPNfffUVfrnF8rIPo2Yi13Q5ww8gjL3eNGQ0qE6bjAHh
-	0IfD7kUBy/ZSqaYChvg4TEDaNJrBbJfBdIScQJSo60GmkT2SYI5rWqlZDWPdFogJ7+7p/pv/Yre
-	dp+EBD3sQy5iYMs3L8aIcRbyXnE6UKEyGn5fU35eHcPSNYzfqoBWpHr6e2h/8WisWtMyGGOQHur
-	ZWvj
-X-Received: by 2002:a05:7022:ea8b:b0:1b2:60ab:1e9d with SMTP id a92af1059eb24-1b503179d36mr10365820c88.37.1794851669333;
-        Mon, 16 Nov 2026 09:54:29 -0800 (PST)
+        bh=IpdnBreGeaJhGL7JvR5W1YQEqw06nELyOpIfH1upRfM=;
+        b=tOEaC/sDUP5AA3QriKZmDwHxAT8IK4pfRfBUWikeqJpFCiQh+/x1PfQNazmAoPvqK4
+         rb9yyTbX/h1E8IPl2wrSVrnjyL1XjKUuJv4YMhb1tVh+qaplYC4QnWPxERBnLnzkglxm
+         sn7IRZGx5kXWSDvSYx7SM4GtwQE80F769pbLYVFXyA8SApelsiJeApwR9UK8zMhDlUp1
+         kO3dBdwEBV5FXuDeF0NU5AxUJM4yEJsfBzLYrG0n4d7sWBuUWbg20iRE373W5f6q36Mz
+         LCBp8BExawIQTLxdCOe1fHkCze1Z4NJLel58Jgv+hl5KJ7JjDbhfVJO3ry01ziYGJaWK
+         RIRw==
+X-Gm-Message-State: APuU4Z/om2NioIumBbaPsLPq07RiunlJdCjovSxN8a2b/4EyTmVqT/W4
+	lLRMuuuGz1cydyfLWoU24psm4hXfULTsbGwEDyYO7Kssny4DKqE5ByBLg+8aHEyC
+X-Gm-Gg: AZFdTZdUXUjt7GsQ8KEy2U+rc7KROIqyCDICQ9CL413VGexvoGjWUjlOtZXpLY65lYS
+	wbNUsnCQtxuQHV0TZ+e0RckuUcSSh3LuCJWAaTJoTVs8aQcjoCThcIxq8udfy5NhD/QNsHGQjTc
+	NAYNnjiwvb1Kc4Gt9vq/w9hYFP3KaNtt8pYKYXKXxl0teDfLuKbKFvE0rODwk3o+tb0hh4KmOig
+	29TS4gnq/mceYfiTLlQS3L46uWKPs51nQnFm+mfb6dd4vKWQXoQQkzF7FjQ3pfJmrpPRtcCJJoq
+	co+y0AxSiJzhonWNNIKqSMSxHSjUXWJFVPoYV/6OC0aBt44UdIaAFZXX76eiJOMyPCg6ejFI7Hg
+	xwpBc9VvF5+LB9e2Z5OyfnNeek5RcKvlG2ZZQuMLmJDGDVLqveBLvlOeHU7iZAAMB9LTLeJdP1R
+	4PTVxicvQd6GNAgBAjfC3BDHGufL0X0/JzblHvNsy/zYeRlNJsnsffX7K/HXbKdBtUOoFSHAhm1
+	uDEvQMUbkNNJ25fYF5RnlOrvVKFcowitCyI8V+27p+x/WLde2jufQcUXvC1bqmjZQvMSk4oatlb
+	7yylGneANSR9gSOtAu/O4M33q2jbrTTrwtu2DVzF9Vb0n3RWyKo9vfSUKtj8Fm4+GQLgdX7sv58
+	ExsWnhRC5Np+eYC/7bq+JRlbpboTYsaLu86c9JC/gNNZDQpzjWP8Zb3tthcoXr4GmRdZTgddbrY
+	WTJrhdQfB4/5yrjIVFL4FfHKxq7LByBwrNaRXv6L+pJ/yYwmttyzqcWT9Iv4HSaaJgS8jTnQi5R
+	Mo7G8CTVqQX+lfsB7MUCwc4kgosUaMhbGzTh5bMAecfqobIxWNavjDGjflK7XGfDNQ+7f5c8ipU
+	O8xC8Nj5Uh1cWLYXAZjB+5NF3A==
+X-Received: by 2002:a05:7301:658a:b0:381:1eb7:938e with SMTP id 5a478bee46e88-3811eb7b15bmr60296eec.4.1794851671304;
+        Mon, 16 Nov 2026 09:54:31 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-379560f5e06sm48391884eec.19.2026.11.16.09.54.28
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-379560f5e06sm48391884eec.19.2026.11.16.09.54.29
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 16 Nov 2026 09:54:28 -0800 (PST)
+        Mon, 16 Nov 2026 09:54:29 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-python][PATCH 016/105] python3-crc32c: upgrade 2.3 -> 2.9.post0
-Date: Mon, 16 Nov 2026 09:52:28 -0800
-Message-ID: <20261116175359.342679-16-khem.raj@oss.qualcomm.com>
+Subject: [meta-python][PATCH 017/105] python3-croniter: upgrade 6.2.4 -> 7.0.0
+Date: Mon, 16 Nov 2026 09:52:29 -0800
+Message-ID: <20261116175359.342679-17-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.1
 In-Reply-To: <20261116175359.342679-1-khem.raj@oss.qualcomm.com>
 References: <20261116175359.342679-1-khem.raj@oss.qualcomm.com>
@@ -67,61 +67,101 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Mon, 16 Nov 2026 17:54:35 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132472
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132473
 Content-Type: text/plain; charset="utf-8"
 
-Inherit python_setuptools_build_meta, and drop the setup.cfg "platform"
-hack: the custom build_ext option is gone and the C code picks the
-implementation itself.
-
-License-Update: crc32c_adler.c moved to src/crc32c/ext/; header
-unchanged.
+Rework the build dependency pin patch to drop the pins; upstream now
+pins hatchling==1.33.0, newer than OE has.
 
 Changes:
-- 2.5: package now PEP 561 typed with sources under src/; GIL is
-  released during hashing (gil_release_mode argument); Python 2.7
-  support dropped.
-- 2.6: add CRC32CHash class modelled on hashlib objects; 2.7: free-
-  threaded build and sub-interpreter support, CRC32C_SKIP_HW_PROBE.
-- 2.7: import no longer fails with CRC32C_SW_MODE=none and no HW
-  support; a RuntimeWarning is issued and checksums raise RuntimeError.
-- 2.7.1.post0: project metadata moved to pyproject.toml (setuptools
-  backend). 2.8: add crc32c.cli command line tool.
-- 2.9: drop Python < 3.8, add crc32c.__version__. 2.9.post0: RISC-V
-  wheels. 2.4.1: fix big-endian signed-char platforms.
+- 7.0.0 is a major release: bug fixes change what some valid
+  expressions mean; read the upstream "Upgrading to 7.0" section.
+- Breaking: a step starting at the field maximum ("59/15") now means
+  that single value, not the whole field; expand_from_start_time=True
+  now keeps range bounds and reads phase in the start time's zone.
+- Breaking: more invalid expressions raise CroniterBadCronError
+  (non-ASCII digits, out-of-range H()/R() ranges, "1#0"); schedules
+  with no match raise CroniterBadDateError.
+- max_years_between_matches must now be an int >= 1 or None.
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- ...on3-crc32c_2.3.bb => python3-crc32c_2.9.post0.bb} | 12 +++---------
- 1 file changed, 3 insertions(+), 9 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-crc32c_2.3.bb => python3-crc32c_2.9.post0.bb} (57%)
+ ...r-versions-of-trove-classifiers-and-.patch | 31 +++++++++----------
+ ...ter_6.2.4.bb => python3-croniter_7.0.0.bb} |  2 +-
+ 2 files changed, 16 insertions(+), 17 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-croniter_6.2.4.bb => python3-croniter_7.0.0.bb} (83%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-crc32c_2.3.bb b/meta-python/recipes-devtools/python/python3-crc32c_2.9.post0.bb
-similarity index 57%
-rename from meta-python/recipes-devtools/python/python3-crc32c_2.3.bb
-rename to meta-python/recipes-devtools/python/python3-crc32c_2.9.post0.bb
-index d3328733a1..0207c46b1e 100644
---- a/meta-python/recipes-devtools/python/python3-crc32c_2.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-crc32c_2.9.post0.bb
-@@ -6,17 +6,11 @@ LIC_FILES_CHKSUM = " \
-     file://LICENSE;md5=4fbd65380cdd255951079008b364516c \
-     file://LICENSE.google-crc32c;md5=e9ed01b5e5ac9eae23fc2bb33701220c \
-     file://LICENSE.slice-by-8;md5=6b3bc7709d6b2db6646ec2467310ff6b \
--    file://crc32c_adler.c;beginline=9;endline=24;md5=9c8bd2afd2d340fd37c038759cd4eff8 \
-+    file://src/crc32c/ext/crc32c_adler.c;beginline=9;endline=24;md5=9c8bd2afd2d340fd37c038759cd4eff8 \
- "
+diff --git a/meta-python/recipes-devtools/python/python3-croniter/0001-Allow-using-newer-versions-of-trove-classifiers-and-.patch b/meta-python/recipes-devtools/python/python3-croniter/0001-Allow-using-newer-versions-of-trove-classifiers-and-.patch
+index 9d8e400b3a..2c8170d8c5 100644
+--- a/meta-python/recipes-devtools/python/python3-croniter/0001-Allow-using-newer-versions-of-trove-classifiers-and-.patch
++++ b/meta-python/recipes-devtools/python/python3-croniter/0001-Allow-using-newer-versions-of-trove-classifiers-and-.patch
+@@ -5,15 +5,14 @@ Subject: [PATCH] Allow using newer versions of build dependencies
  
--SRC_URI[sha256sum] = "17ce6c596ad0d53df52dcd72defb66984aeabd98fbefea7ba848a6b6bdece36a"
-+SRC_URI[sha256sum] = "6a089e0340de8438e836a09e613c6b541675d0f3aa92b3fe34295aaba62f014f"
+ The pyproject.toml pins exact (==) versions of all build-system
+ requirements. When building with --no-isolation (as OE does), pip uses
+-the build dependencies already present in the sysroot, which are newer
+-than the pinned versions, e.g.:
++the build dependencies already present in the sysroot, which differ
++from the pinned versions, e.g.:
  
--inherit pypi setuptools3
--
--do_compile:prepend() {
--    if ! grep 'platform =' setup.cfg; then
--        printf "[build_ext]\nplatform = ${TARGET_ARCH}" >> setup.cfg
--    fi
--}
-+inherit pypi python_setuptools_build_meta
+   ERROR Missing dependencies:
+-        packaging==26.0
+-        hatchling==1.29.0
++        hatchling==1.33.0
  
- RDEPENDS:${PN} += "python3-core"
+-Relax the exact pins to >= so that the (newer) provided versions
+-satisfy the requirements.
++Drop the exact pins so that the provided versions satisfy the
++requirements.
+ 
+ Upstream-Status: Pending
+ 
+@@ -24,21 +23,21 @@ Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+  1 file changed, 4 insertions(+), 4 deletions(-)
+ 
+ diff --git a/pyproject.toml b/pyproject.toml
+-index 657cc21..d1b9ce3 100644
+ --- a/pyproject.toml
+ +++ b/pyproject.toml
+ @@ -1,10 +1,10 @@
+  [build-system]
+  requires = [
+--    "hatchling==1.30.1",
+--    "packaging==26.2",
++-    "hatchling==1.33.0",
++-    "packaging==26.3",
+ -    "pathspec==1.1.1",
+--    "pluggy==1.6.0",
+--    "trove-classifiers==2026.6.1.19",
+-+    "hatchling>=1.30.1",
+-+    "packaging>=26.2",
+-+    "pathspec>=1.1.1",
+-+    "pluggy>=1.6.0",
+-+    "trove-classifiers>=2026.6.1.19",
++-    "pluggy==1.7.0",
++-    "trove-classifiers==2026.9.21.13",
+++    "hatchling",
+++    "packaging",
+++    "pathspec",
+++    "pluggy",
+++    "trove-classifiers",
+  ]
+  build-backend = "hatchling.build"
++ 
+diff --git a/meta-python/recipes-devtools/python/python3-croniter_6.2.4.bb b/meta-python/recipes-devtools/python/python3-croniter_7.0.0.bb
+similarity index 83%
+rename from meta-python/recipes-devtools/python/python3-croniter_6.2.4.bb
+rename to meta-python/recipes-devtools/python/python3-croniter_7.0.0.bb
+index 2058ec39b2..d691249dfa 100644
+--- a/meta-python/recipes-devtools/python/python3-croniter_6.2.4.bb
++++ b/meta-python/recipes-devtools/python/python3-croniter_7.0.0.bb
+@@ -4,7 +4,7 @@ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=b8ee59850b882cbf623188489ea748e2"
+ 
+ SRC_URI += "file://0001-Allow-using-newer-versions-of-trove-classifiers-and-.patch"
+-SRC_URI[sha256sum] = "fc124f751b1b04805c2a04b061898b436b45ab2320b045e1e052ea895de65189"
++SRC_URI[sha256sum] = "a0b2568303c774f6a4ea2d4ce2e72b1ee911029c7070d64a1befe05cdb107f5a"
+ 
+ inherit pypi python_hatchling
+ 
