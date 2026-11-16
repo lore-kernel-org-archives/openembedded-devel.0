@@ -1,65 +1,65 @@
-Received: from mail-dy1-f182.google.com (mail-dy1-f182.google.com [74.125.82.182])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.22041.1794808944854017867
+Received: from mail-dy1-f171.google.com (mail-dy1-f171.google.com [74.125.82.171])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.22038.1794808941017295030
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 15 Nov 2026 22:02:24 -0800
+ Sun, 15 Nov 2026 22:02:21 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=FdvKJq9c;
- spf=pass (domain: gmail.com, ip: 74.125.82.182, mailfrom: raj.khem@gmail.com)
-Received: by mail-dy1-f182.google.com with SMTP id 5a478bee46e88-37071c0f42aso4512384eec.0
-        for <openembedded-devel@lists.openembedded.org>; Sun, 15 Nov 2026 22:02:24 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=H98zdBhb;
+ spf=pass (domain: gmail.com, ip: 74.125.82.171, mailfrom: raj.khem@gmail.com)
+Received: by mail-dy1-f171.google.com with SMTP id 5a478bee46e88-36e795af1d4so2197793eec.1
+        for <openembedded-devel@lists.openembedded.org>; Sun, 15 Nov 2026 22:02:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794808944; x=1795413744; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1794808940; x=1795413740; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=bAWkDoNVdzhXz/YkG7mY1Qag9SzPoO6jH+Y6/6wF1Tc=;
-        b=FdvKJq9c7ETcojnxgj0QNNeJSFRUadvhEwwTxWTkiabMVjnTzcY7PXKdMWrRMcm4GE
-         3rPNGnAlO++uxQMi/W+92tzDQEmRbZPo+DbLlLeQS4G7M0IsHIX7n6BR5r8b+snynQau
-         uLv4ssoTJEZWCBi13wb8n6jQVG8wOuvW7lWO7I0u6est4NV8DFIFJIlzaLPYbg+U0xJv
-         N4Gk14J8H/7CoUDsYuJljDvdqDugu+ZN/yap0GKrjxL0a5jv2aXNQJnjsY7EcM39KufJ
-         5J+4TSjBmcgRsY+QbZP+OeG5lWAoOJORPSqsD/zVk1f54QWub7UVQUL9nEq0RTsdFXeY
-         w8Hw==
+        bh=ZIoywkcL5Bo5yWmyqB2o110L1S1/CPqPXUALky0YawU=;
+        b=H98zdBhbg4aV6HKsQYIe1YkI2AV6p0UYlXQFxckuCUkrQadi9Po2kvIX2PNjhkybRJ
+         2y5aPfog39yD168S2EKecjoA4VYAz6RYgNkGUO1/hmp1+YwXSwRPjGOxe68PPzU8xgW1
+         yMDwxtLTYD/tkixP++t761B7RWgRx6on2AK5lPqpyKqaEV55o1FDp/ZuRpjzgjBTkb77
+         OGA/XhPcCHUhJ7+wsqhOb/uHennO43bLCis+9z3idjTTYJGrFHk/KSViaPrU6vMx3B3z
+         K7ya9Bka9ClFGL5DsEYGHFCEy/ISh6OH9wNHsFNmySYbWh3LcTuF0CCW44OjjFlvHtih
+         cCNA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794808944; x=1795413744;
+        d=1e100.net; s=20260707; t=1794808940; x=1795413740;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=bAWkDoNVdzhXz/YkG7mY1Qag9SzPoO6jH+Y6/6wF1Tc=;
-        b=plYOEte+Y4RoQ/AAGEg01NR9/NkSUBOaip0v1M9CG7Q6ug0Y2f1mCjSu/ihivN4PKr
-         AyXQcvD2h9d/NJIwfBjhEKrOyZsPSbvqd0Dt1MabG9ge3GExHj5ZUy4VlDW/Q2qeUGmC
-         i3ooqy7AdrLYEV72YscBz5W5Lbgwcqqx0vvNvKpV2FJfjyxegZI3uxeHC38kcFr7SOYI
-         iHvCZCkS5zjjvOtP5Yp8zfBOlLg6M+Ec1SxjBbn/HrKO+hGsP62m59dnW/yJgJ3A8zlc
-         avMOBtFvhXehXm3gGOFdyzgZjBf/ce50Sffb20+GXXuhpanmz+jXy+3OpXeB+TTdf25D
-         wQ8Q==
-X-Gm-Message-State: APuU4Z+1dxDNEKyuGgxDyoffKi88gGEHYTqhSDxwozCYuxmf0PvUUqlZ
-	IL9ZhmqWFpfS4YY4jnpk4NX4LOZKLz3FrKWzZ12tdf8MI4bk3KGZ1rYXx3oR+fUn
-X-Gm-Gg: AYBFou11iOMrzdEqJEvJT4r8trgmdIMygxrzBpLSLA9hj+RkULcSbFU0Dfu/ZP370jL
-	c3+/DNqYoIu7AHe+31Ncg7MSNDJbFEN4QiNisGoIKIoNGvi2ft6kPMC9jzNyEup0no9tP2a32JQ
-	2pVyaFTdPvL9IfqfVE4/9p25bsUTgEVdgnzmpSzqzsNcGeDu5kXvmqoR3zo268useZVwzs+9/VM
-	XLo+ljAQ7a2UJ4Uq8Lm5og06qI7UokFCqZyITf6HBjGDLtJZmK7xs0O+KIEchhO9VAogXbcfyg8
-	oK5zjOOVklmzO6QvxWlp3HLwe/6dJPlEpvVo76rAbfbv8Y0/jBXd2u4ngY7HSjt/enQdJB9j6Mi
-	mpOkpQ9k9mv+QvIO0OiJ4J2lt3F8Gefm08s8RjTO4GV4FaVwjtWfSO48dENu7kOyMx3R6TolIKp
-	GFZVWysV3vbUTsgAx5Y33+LyOfRVOUl13gPt/V3ZegH9wLIyxd/VtoZLtymLHXXAGFF2AKmFZWI
-	KCJh+XTNyV4TGnz/sGqBtagiOQrq5ziyPrtWoovYy70MRULiUuKt/RLaacgtZ3fdbo0KX/VEArB
-	h8KliiVg41dWcqZI9WWfga8YVUOhk9FnUjoQmPqDySnwFnRIOi5bZc8nGmOn990HBjC73YAGkvK
-	qFODkTa0jCAiSjT9bMpoesAE20f/KvXaqfIYGHNtIR0b/6xMGdI1SyDJuSXUJKb68U2fqDyRnfH
-	UJ+QS/1e4KrW/U2KetMkwOovmoGCYG+jx2DZu500rwUda50Prqv0pIA8eByKBg4YcxrlsUFbKup
-	lWoFqsFrayXUbMWmx/RgcAg+lhWHRnqfabEIfOn4LtBE/WYSxXjxWh61LbLGO2anlisf4KA46we
-	KHQc
-X-Received: by 2002:a05:693c:8813:20b0:376:77e6:a66 with SMTP id 5a478bee46e88-37967315a29mr9212282eec.16.1794808944125;
-        Sun, 15 Nov 2026 22:02:24 -0800 (PST)
+        bh=ZIoywkcL5Bo5yWmyqB2o110L1S1/CPqPXUALky0YawU=;
+        b=bFLU0S+Mjj6ZcUYxL88B7P76YmQZFz5QaQVFauV1EuH0GKQYE4wNwgJjI/TiGe1gUC
+         WpnQoSVJiS6lUz+JU4qDOFv+6hB7EfZpLspgotPaCy8a+e8V7XStEE9CXw7N15IWqcyK
+         JIlJ1gJG/qsIpC5/NmsZciXxKyxn5vpBa7Zi49ZCOy3xwjg8Ye6x33qKvZhIGyJcFcpi
+         OubMRtRVsSAyHtqdYZ8xNR0qoOl5/BVreBSv/d+VjYdGQHLAg3X1qkLovzs4fFsooiWD
+         5QIe53/l9LRNHKjsn7gJ9wqkFNbBuSSY2tE+Kqd+7lJYu8f5cWAXhrhKgm2RJU7k84Zp
+         YCDw==
+X-Gm-Message-State: APuU4Z8lqYPaFkytfeSecs1A6AEIZFSxanc1cVG3anpDCZL/3azgkg4e
+	oFISivlbaG1klJHxiKdHYnIl7auwqFmP7HGmpO8PxDcfrJ9N6KK9ulslE4Z0Q3Rq
+X-Gm-Gg: AYBFou2Ai9r0TQPxXchGcZjyS3LeizTsTxoMkAAriLQDO7gvslUmSfpYJnMJM6yOLT1
+	D8Y3IA1U/TMxV5xu3QudUOxAzTXKVKrY2fQqsEuDen2VP/55QtwLgRQAq7fGQvswjElYiI3TxqT
+	GpYa0NEoI1lZUujdmJVGf46D7nlqWQ+upCF/JqWDKJm0OAivbyhh5uuZxlGkJxbmKX+iilSGOZJ
+	pMg7yK6c4RK21u6WDC3XVY1O3I1WdOlv+sqXYqO38aGEHETEc9LQxc89iI0KOnYsNosMSUzCfXO
+	fnsTI+mjmTfXWGDwucebMDfDOsvzIddZU+avXWBsqw7B0pXQpQhvbYipR871dRowDzydQn+L22L
+	VQuc6H0/3i0T9pG1lOrQ5oCXjCsm0f+kNisF+qqCyYwIjitJwAZZPL92R6vXt/3U+rKAcqb3Fo7
+	+ZlQXK91y80W9gNyxhrE09NZAMmzcwfCeGjXUWwjiEB30DBE1BQ/l4s1r9Zu76HuwVIvL4Xux32
+	oUqqesWUNHDUYnQMdFC4CRpT6vLns8hk3+t48n0WTOv3IBhzJlVwfJcHf06DfJc2Xa2Mu+sFhnw
+	Wo1YNko/KS0tvVn56w9XnUrCXeT0WHA4F3relntUJUcXS7HKv15b35wWROLo/5B4w4Jn3ti66cD
+	nw8GeswIZ+iY5zArYIq8443Z4Qp+umZ2oYCaQT75bi9B5OonI5/TbNF4zu8ZieQq8tKCBvyyun7
+	aWJ1IsHRIEiC1eFyYvnCGv383pGFxOlY4wNP6kMV+RBraEqQBmHCLTJ2LdwLAe3xh9520qUH3fC
+	VaKCNTzvO/8jUMHI22yXw4xRxQ6wGgyHBdw5N6Ewv2jzmX7bbgYj+Z7H7M4dxce2ErVXQ5IAYhq
+	Upw+m5UZvL3LQnMBeJu/gDCfLA==
+X-Received: by 2002:a05:7300:c38f:b0:36a:79cd:12df with SMTP id 5a478bee46e88-3796676ad9cmr9136230eec.9.1794808940245;
+        Sun, 15 Nov 2026 22:02:20 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-379553316fdsm31410262eec.5.2026.11.15.22.02.22
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-379553316fdsm31410262eec.5.2026.11.15.22.02.19
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 15 Nov 2026 22:02:23 -0800 (PST)
+        Sun, 15 Nov 2026 22:02:19 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-perl][PATCH 11/30] libhtml-parser-perl: upgrade 3.85 -> 3.86
-Date: Sun, 15 Nov 2026 22:01:49 -0800
-Message-ID: <20261116060209.2916444-11-khem.raj@oss.qualcomm.com>
+Subject: [meta-perl][PATCH 08/30] liberror-perl: upgrade 0.17030 -> 0.17031
+Date: Sun, 15 Nov 2026 22:01:46 -0800
+Message-ID: <20261116060209.2916444-8-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.1
 In-Reply-To: <20261116060209.2916444-1-khem.raj@oss.qualcomm.com>
 References: <20261116060209.2916444-1-khem.raj@oss.qualcomm.com>
@@ -67,58 +67,29 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Mon, 16 Nov 2026 06:02:29 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132409
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132406
 Content-Type: text/plain; charset="utf-8"
-
-Add the perl modules the ptest needs (threads, utf8, ExtUtils::MakeMaker),
-and remove t/headparser-http.t, it needs HTTP::Headers which is not
-packaged. Most tests failed with missing modules before.
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- ...arser-perl_3.85.bb => libhtml-parser-perl_3.86.bb} | 11 ++++++++++-
- 1 file changed, 10 insertions(+), 1 deletion(-)
- rename meta-perl/recipes-perl/libhtml/{libhtml-parser-perl_3.85.bb => libhtml-parser-perl_3.86.bb} (76%)
+ .../{liberror-perl_0.17030.bb => liberror-perl_0.17031.bb}      | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-perl/recipes-perl/liberror/{liberror-perl_0.17030.bb => liberror-perl_0.17031.bb} (93%)
 
-diff --git a/meta-perl/recipes-perl/libhtml/libhtml-parser-perl_3.85.bb b/meta-perl/recipes-perl/libhtml/libhtml-parser-perl_3.86.bb
-similarity index 76%
-rename from meta-perl/recipes-perl/libhtml/libhtml-parser-perl_3.85.bb
-rename to meta-perl/recipes-perl/libhtml/libhtml-parser-perl_3.86.bb
-index 34e8cc6de8..2b76eb74a2 100644
---- a/meta-perl/recipes-perl/libhtml/libhtml-parser-perl_3.85.bb
-+++ b/meta-perl/recipes-perl/libhtml/libhtml-parser-perl_3.86.bb
-@@ -9,7 +9,7 @@ DEPENDS += "perl"
+diff --git a/meta-perl/recipes-perl/liberror/liberror-perl_0.17030.bb b/meta-perl/recipes-perl/liberror/liberror-perl_0.17031.bb
+similarity index 93%
+rename from meta-perl/recipes-perl/liberror/liberror-perl_0.17030.bb
+rename to meta-perl/recipes-perl/liberror/liberror-perl_0.17031.bb
+index 3dc456eac9..fe9647c4b8 100644
+--- a/meta-perl/recipes-perl/liberror/liberror-perl_0.17030.bb
++++ b/meta-perl/recipes-perl/liberror/liberror-perl_0.17031.bb
+@@ -33,7 +33,7 @@ RDEPENDS:${PN}-ptest += " \
  
- SRC_URI = "${CPAN_MIRROR}/authors/id/O/OA/OALDERS/HTML-Parser-${PV}.tar.gz"
+ SRC_URI = "${CPAN_MIRROR}/authors/id/S/SH/SHLOMIF/Error-${PV}.tar.gz"
  
--SRC_URI[sha256sum] = "fd42ba6abe07241cf0ad57be246c3980065f683e4465e59b46af9efebc8e0c71"
-+SRC_URI[sha256sum] = "5305e1d5faa70ee0aa282d85a5c9aa93911e8c7afa590ad1ced5703a544e20f6"
+-SRC_URI[sha256sum] = "34d382276c0fb0d6b38355b94c96a30b12d834d5662eb53f088ee25e3e712924"
++SRC_URI[sha256sum] = "0a85374cf9cbde5a5075f16e62246e5d36abde63ec08c5c5694f128f4546852f"
  
- S = "${UNPACKDIR}/HTML-Parser-${PV}"
+ S = "${UNPACKDIR}/Error-${PV}"
  
-@@ -30,15 +30,24 @@ RDEPENDS:${PN} += "\
-     libhtml-tagset-perl \
- "
- 
-+do_install:prepend() {
-+    # needs HTTP::Headers, which is not packaged
-+    rm -f ${B}/t/headparser-http.t
-+}
-+
- RDEPENDS:${PN}-ptest += "\
-     liburi-perl \
-     perl-module-config \
-+    perl-module-extutils-makemaker \
-+    perl-module-extutils-mm-unix \
-     perl-module-file-spec \
-     perl-module-filehandle \
-     perl-module-io-file \
-     perl-module-selectsaver \
-     perl-module-test \
-     perl-module-test-more \
-+    perl-module-threads \
-+    perl-module-utf8 \
- "
- 
- BBCLASSEXTEND = "native"
