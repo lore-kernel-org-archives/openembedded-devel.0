@@ -1,65 +1,65 @@
-Received: from mail-dy1-f172.google.com (mail-dy1-f172.google.com [74.125.82.172])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.22040.1794808943447639355
+Received: from mail-dy1-f173.google.com (mail-dy1-f173.google.com [74.125.82.173])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.22462.1794808948940777691
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 15 Nov 2026 22:02:23 -0800
+ Sun, 15 Nov 2026 22:02:28 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=VY5nNZ8X;
- spf=pass (domain: gmail.com, ip: 74.125.82.172, mailfrom: raj.khem@gmail.com)
-Received: by mail-dy1-f172.google.com with SMTP id 5a478bee46e88-36e795af1d4so2197826eec.1
-        for <openembedded-devel@lists.openembedded.org>; Sun, 15 Nov 2026 22:02:23 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=jwzdgN7W;
+ spf=pass (domain: gmail.com, ip: 74.125.82.173, mailfrom: raj.khem@gmail.com)
+Received: by mail-dy1-f173.google.com with SMTP id 5a478bee46e88-37198ed3727so4627779eec.0
+        for <openembedded-devel@lists.openembedded.org>; Sun, 15 Nov 2026 22:02:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794808943; x=1795413743; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1794808948; x=1795413748; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=J04u40Fd/bWspeKDYb1NT/xNc3Olo0npCqotz1D6IUk=;
-        b=VY5nNZ8X7SKiWIRGxeMQBxH9d2ADb+Hl4b9ONzss2AakuSj2krVhP5dnVS9mNXngs4
-         h9khjfA66IQKnpmigXoIYu/OgGLrQ07yLC/K8czfDB/TBARHrJlcBjl4srWQadd/JFM8
-         qeL0mmeDSJMWlfIM0kVJK+zxkJ3Y9geMvniWzozMnCON6oJ/oBXLXryR8LK50366v0Zv
-         kTxuOMJIWMLASdKZTQCkV4qTFzuPoEdRFU8yp+PsdYAVcRBKrlTrh9EWQ/oXEyGIEdJn
-         iAPimA8v8pFvcgPzCiK/n7hQXs1JIYmP/y/zoU1IDmTKvHBWnkfJ9ogoIE2/v16rxtc0
-         t1rg==
+        bh=hKpSTMY1e7qMborttnfZyO0uqQb59jV5MdW/2OoT03Y=;
+        b=jwzdgN7WTJ7cv1JRFPOEnP9FG3uwUA5eODo/Kn17nfdXKNy7dawxZyS05lBoYDjVOR
+         TdKFws3X++RknT3FV56gJ1gHVqCaemcoL+DeSuq6enMTedbHVsgp9AcOFdyacLim6Km9
+         r/fZpakjqEXtbItIxZcpzBFcwkUtu5jOb2nU0oXU+9qHKhhbMqBII5q1G7/D5LKzS01n
+         9QoAPi6vZzyojqZA4hz5ufs+gqfI2QoCmoKKv5j5mOY6kU8pf1OSkJ7e+8TXR1u6P9PO
+         8PjTlZifLgIf2QpdwVHKw3lzXX//1ZKoH4OvJ5KIbsVDituRD/JZx1IdxLy6cnZL4b+i
+         +9rw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794808943; x=1795413743;
+        d=1e100.net; s=20260707; t=1794808948; x=1795413748;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=J04u40Fd/bWspeKDYb1NT/xNc3Olo0npCqotz1D6IUk=;
-        b=wlKH2MKtyv585vyjB9SXSvbpKN/ng4MwDtCmQnyQlDFpWK+SqdJ30DwCmlSDSjlWDL
-         jLuXTtIoC1THTHEU41gJGXrVBvya+awTbuJsLIaSRZQ7xWhCJ2FJW0n4OP0ILo6sPnzS
-         RT2WDQk01PTkowh7J7LMRNpkBh9IdYe+NXLaYfm2Lu7otmc4nYkXW/PFk9RDk4m0Z0wT
-         oi4m87Bi+e+HpiY0zvkzWTg4nsn/SBdGifVNqM7CBxMXWWVBPk38sqFhq9kTUSCPdIxn
-         weEZK5Xh7NMfIT27Dl3B3sfkufC+cYLts1+C/uA2kC+jEMTC6PraCKfrS77jTW6FYLb3
-         xmjg==
-X-Gm-Message-State: APuU4Z/omxEdRstgGCud335amc/R5AD3TiSVdaQKHt2oWcRbJPTtSybO
-	BXKrHy6vn89setKHzAOU1SmNZF9C+/TA0SGxtgRVMmhWOfDoGMuS2THaGRvzIAfp
-X-Gm-Gg: AYBFou3uALzf35nwKDzfes6A68VxP8uqegcr8CIfpVGDTOYeLGaTDsIl0xvzHPtBwv2
-	Ui6pkPZzk/tt3hC+QwOHHCrhNEoQdepnEKYJjTH3rg5iTDoQodi8/liNrtJmWSIbYjqBf0OVVGV
-	RO3ZmCYc4ZRqUi2PDWY1n6UVKaX1KV7MwWrOlzrdJ+z7dkrv3djA2p8H5vDl/ypk+ECev1zzmtJ
-	0ZfFzEwBTaPQiu96/p34yfzGLUS/Sm1xrSMtheoRxPoQGc1FXqf2wrfOgZrSYAk+WW4OqvZL0Bf
-	9t/hHWzZuhaJ44f0C/qnMdMda0cseb9ATASGaLiRSF3RbgTvetsGDa4nPuRPhM7J7mTOGwVPiRA
-	hemDkuDQyDjDmwiLZPMsDXuiDycGrNFdKTCYiM6wmb7leSbUammY6mFVgmjHyymrqxiqMNyI7t5
-	qlBTOec+5P5TjcCmh0HNfMMcSlAV5q6+HMNSJicjW8dzzLxBf6UoQU5nJDmKLtz5k57IqLYTdsu
-	VdYR7VBuQN9Oak+V1C6jEaD4TWFJmFfrhiUnGMBDLBQNWfqT+x1fegACQc/Ix59d2T02/9AunSX
-	Y9WAv4RlT1gVKBT3qHDa95Ih0/uye2vXQAd9j6LnFGRw3RIotSJZOFYDltGGC+hIQxihYkBLJ1k
-	kWq12GcH3XNZeVOxgEWD+y96D7qUopkzt+6o5to3cOPk13OcjT9JCgdXT+o95FICwtPNuYdif7T
-	A0IX85Q6u7EcDkCtDKiWo2HSqojshvyczuFZuDTIZ24Mvz9quck7VU4ae3JPYH4lCRj/qz1JF5B
-	4J5QMoyIWJGCbwT/knCQ7XeaKfW03im0GROcKqyx8RosuKwtKayMJ4rqEs1QMJCXV1vG8vvPQap
-	GN8s
-X-Received: by 2002:a05:7300:e9cc:20b0:36d:158c:e31d with SMTP id 5a478bee46e88-377e15f05e1mr14089940eec.18.1794808942726;
-        Sun, 15 Nov 2026 22:02:22 -0800 (PST)
+        bh=hKpSTMY1e7qMborttnfZyO0uqQb59jV5MdW/2OoT03Y=;
+        b=Wuye6FAESLfAwKGuLA22dd2++k69IIHpTLi/opgbvrB+09xEodh/qH91i1wD5OrhHw
+         ZRpkeq3rmcbtkC0QUG46Egwq9z8RIjZn/xrv9D2xiIEl1FMs3zgJ/f51Ht1TeU5YdXz6
+         CwTMM4RUDNntVIplmBoTjIYfQZ53icXjLPLJLXopOQEwpJIEsGj1dvraLTKJjcDRpfPD
+         VRZ+YxHM4CE3WElpVneGjTTv6OCbUoku0/HJ/K62XKToDAEu2MUxwZl0AliCseZcJwvY
+         JUt9WJK8hC3may1yP7Fkq+URwaLjleM5NK6glVaVXJDuZhUas6Yf7FhedL4mPBwmxGNR
+         F1fA==
+X-Gm-Message-State: APuU4Z/iO+DU0l1SWzNfDxp+tAtZC4CNeH6zqnn9x/BjynMCAAukSUeO
+	/GUaWrxzdP+UkwPeT1M2F042IrXCHLrBU/ofH2RTGHmR3+z3Aw5dAPs7GNzJ0RYb
+X-Gm-Gg: AYBFou270Y6k5AqOh3XtBpE6306JyapJJB+d+73r3j0iXxdY410IMZcEM8VMUS9jCPT
+	zZj0lvGrWPxb40yrYMclkcq44L+f9d3s+RgUYa7kxIUlG2i+ievQ7KHRsYwn73RuUmuiEGNxrkn
+	GV49F57Pdb27vOHsUK4vmsyqQszPoDzhm2AFtC+s0lQUCUzJLBEkVxmx3kkhCLjmhHCHHV5DeuQ
+	Tjaalt/lGlKGp/PWH/BKoc1NCR+pUBj6Up8dtIEtthAmnmzK5oKXKzEPAKTVzdimqfw9u/31wsI
+	EkQT8OF1OGMcW0hw7oJhr3fLRfMy68mxL2eWjwufdD0EjoMnYu4VWhAfAgWhi35xpcRT5VDcTIy
+	Z0mW04wOZZH/EPBq2GhwtMhGGvoMWxtWkfTAr6QUB8W2jAIUmmk4TadX7uCKuAMFMI54Cef0dSv
+	xXD9AP+7PP61ScdJ0vLQNpX68O43XTP9kEzRhf7MZS0elTxkuoNpL7rzgSl3o/8l6R/Wcp1hY/n
+	agdtAmbeQxEyGpkUPPrC8A4G15KvDvTJmUEESh08A46YO5h3AtcfGjMZ1WVg6LDnIODgQHx8LgL
+	atL4MgCENa44jJWPYtu8KS03UK1DYase3VC845fmvyCyJkMDj8taq4H0H9PVws1X7yNFnq3Gz6x
+	xK3Ra2//RZnUQHPPTsK81mj/XjWNNmMc0c6hyQBhrjIOBOz5cLKtcGqIKCZhLaH3o/zb3rmMw1f
+	RXteKhsgaqk/DkLeA719wntMk4+ZlBTehdbcrVG1gk7rR2tR64IM67CIIoMnXWozwoGTkssi57M
+	Y7EDYms88AmVtq/ii2C/B4iwdgvMPd/96t9SAA/hCgnrVdPj5MIk8MJGocmBrrh8UXwNpE/6b7q
+	tqoh
+X-Received: by 2002:a05:7301:1527:b0:36c:a26f:83c4 with SMTP id 5a478bee46e88-377e101681cmr12213925eec.13.1794808948203;
+        Sun, 15 Nov 2026 22:02:28 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-379553316fdsm31410262eec.5.2026.11.15.22.02.21
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-379553316fdsm31410262eec.5.2026.11.15.22.02.27
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 15 Nov 2026 22:02:22 -0800 (PST)
+        Sun, 15 Nov 2026 22:02:27 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-perl][PATCH 10/30] libextutils-parsexs-perl: upgrade 3.63 -> 3.64
-Date: Sun, 15 Nov 2026 22:01:48 -0800
-Message-ID: <20261116060209.2916444-10-khem.raj@oss.qualcomm.com>
+Subject: [meta-perl][PATCH 15/30] libmodule-pluggable-perl: upgrade 6.3 -> 6.4
+Date: Sun, 15 Nov 2026 22:01:53 -0800
+Message-ID: <20261116060209.2916444-15-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.1
 In-Reply-To: <20261116060209.2916444-1-khem.raj@oss.qualcomm.com>
 References: <20261116060209.2916444-1-khem.raj@oss.qualcomm.com>
@@ -67,29 +67,29 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Mon, 16 Nov 2026 06:02:29 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132408
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132413
 Content-Type: text/plain; charset="utf-8"
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- ...ls-parsexs-perl_3.63.bb => libextutils-parsexs-perl_3.64.bb} | 2 +-
+ ...le-pluggable-perl_6.3.bb => libmodule-pluggable-perl_6.4.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-perl/recipes-perl/libextutils/{libextutils-parsexs-perl_3.63.bb => libextutils-parsexs-perl_3.64.bb} (94%)
+ rename meta-perl/recipes-perl/libmodule/{libmodule-pluggable-perl_6.3.bb => libmodule-pluggable-perl_6.4.bb} (93%)
 
-diff --git a/meta-perl/recipes-perl/libextutils/libextutils-parsexs-perl_3.63.bb b/meta-perl/recipes-perl/libextutils/libextutils-parsexs-perl_3.64.bb
-similarity index 94%
-rename from meta-perl/recipes-perl/libextutils/libextutils-parsexs-perl_3.63.bb
-rename to meta-perl/recipes-perl/libextutils/libextutils-parsexs-perl_3.64.bb
-index a1066bc5c7..c81643b2f9 100644
---- a/meta-perl/recipes-perl/libextutils/libextutils-parsexs-perl_3.63.bb
-+++ b/meta-perl/recipes-perl/libextutils/libextutils-parsexs-perl_3.64.bb
-@@ -14,7 +14,7 @@ LIC_FILES_CHKSUM = "file://README;beginline=120;endline=129;md5=eb858f0e3b1b0bee
+diff --git a/meta-perl/recipes-perl/libmodule/libmodule-pluggable-perl_6.3.bb b/meta-perl/recipes-perl/libmodule/libmodule-pluggable-perl_6.4.bb
+similarity index 93%
+rename from meta-perl/recipes-perl/libmodule/libmodule-pluggable-perl_6.3.bb
+rename to meta-perl/recipes-perl/libmodule/libmodule-pluggable-perl_6.4.bb
+index a7751cf818..2035f13508 100644
+--- a/meta-perl/recipes-perl/libmodule/libmodule-pluggable-perl_6.3.bb
++++ b/meta-perl/recipes-perl/libmodule/libmodule-pluggable-perl_6.4.bb
+@@ -17,7 +17,7 @@ LIC_FILES_CHKSUM = "file://README;beginline=322;endline=325;md5=086450ce010f6fda
  
- SRCNAME = "ExtUtils-ParseXS"
- SRC_URI = "${CPAN_MIRROR}/authors/id/L/LE/LEONT/${SRCNAME}-${PV}.tar.gz"
--SRC_URI[sha256sum] = "d19a3f29288f0950ef8f1838db99270284ba475758246f0e5ab1113a9d9a7548"
-+SRC_URI[sha256sum] = "014b7d1bac86616e0ad7c8476e0a6b6c21d98615ec10cb5bc400ba06ebc288ac"
+ SRCNAME = "Module-Pluggable"
+ SRC_URI = "${CPAN_MIRROR}/authors/id/S/SI/SIMONW/${SRCNAME}-${PV}.tar.gz"
+-SRC_URI[sha256sum] = "58512bb9c654746d0937770b98b559b30872d85ac24073485e5830890dd1b2a0"
++SRC_URI[sha256sum] = "970fd13accd3d538e637db080ebbd9898020c8b5591837c8493a39edd737922d"
  
- S = "${UNPACKDIR}/${SRCNAME}-${PV}"
  
+ UPSTREAM_CHECK_REGEX = "Module\-Pluggable\-(?P<pver>(\d+\.\d+))"
