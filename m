@@ -1,65 +1,65 @@
-Received: from mail-dy1-f173.google.com (mail-dy1-f173.google.com [74.125.82.173])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.24.1794851782755157040
+Received: from mail-dy1-f179.google.com (mail-dy1-f179.google.com [74.125.82.179])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.29.1794851783683266802
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 16 Nov 2026 09:56:22 -0800
+ Mon, 16 Nov 2026 09:56:23 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=KObGSkKY;
- spf=pass (domain: gmail.com, ip: 74.125.82.173, mailfrom: raj.khem@gmail.com)
-Received: by mail-dy1-f173.google.com with SMTP id 5a478bee46e88-380b40312e2so1305986eec.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 16 Nov 2026 09:56:22 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=Dge+frXD;
+ spf=pass (domain: gmail.com, ip: 74.125.82.179, mailfrom: raj.khem@gmail.com)
+Received: by mail-dy1-f179.google.com with SMTP id 5a478bee46e88-36e795af1d4so70728eec.1
+        for <openembedded-devel@lists.openembedded.org>; Mon, 16 Nov 2026 09:56:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794851782; x=1795456582; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1794851783; x=1795456583; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=W7xXphLpBn1DH3EDb5eTpg9KnM/5FdljOOIAvZQ3Iq0=;
-        b=KObGSkKYwsaYY+8zC5c3Vs1g2tnbCZlRuYQs0lXXwVYu2WXDAMeMYNA8QqI2cU1+bg
-         KAdhbiRO1eZFWfSMOyXG2uc1SoV28kcbCWsxyKLFzeKToNN2qrucJQrkBglmk+GKE94t
-         ZO7qrMhqKgkS5/tnUwSVABbWbWDVadLN4WTDRsBp6bd5IU79vKBaRbO2qIAwVWRXefRI
-         1L6cyoMx438VxHySXXWlJ0rDLqbOc1boObvmZuG/wh+G3cJiSFsf14ubgNiLPNuLXLNr
-         KxU9a8dNeTAPjYGDiyxGBYBqIGwMDPfxNp1IgMCKIbdm7e+sb741CfNEV5a4zaRmTkpR
-         Cc/Q==
+        bh=uX0Mc1BEZOnl5YiiExrS0RDC3B1UcyLYzgrfIK0C/2s=;
+        b=Dge+frXDyLrR7fdVoF0UEVVV6GmhyZ5/tX9t1vHmZFjI3Ovqynjp+9+TLlaPOErvdL
+         is+1g/sIayYzl6tXISwzGF+e97dW2YULqaIy1EOm7dVtrX0GjSN3yz20kjEpihk3xrqk
+         xJxbclGBRet8NrPam7nCcaWJoDMmmiOdUmHCfOkKh6MUenbOwzh6ohA0T7mBepcxbh8L
+         XHGVCkFS3iixMVejir+O1uY4rYW6zzA+hnXcS1zRTJrUt9dzT6NBg3vTQYtGcXzOvix0
+         FboSHMArFagJ7LPGW9P7u3tONZodcs/fLhOuFRmA/bdAhQDnfC1o+20+GHSEcL+BvZYx
+         o5Sw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794851782; x=1795456582;
+        d=1e100.net; s=20260707; t=1794851783; x=1795456583;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=W7xXphLpBn1DH3EDb5eTpg9KnM/5FdljOOIAvZQ3Iq0=;
-        b=AZ3ZoqeGa1oQfzBPlONq6TapSIovXFcy2FxKaRuD0y5BEtjPuRAiGf7iuFl7N1K24f
-         e/Hbt41oxDVZ0sgkmtSQxXU95v7hAniGiw3N6QROEIRc+R5Kxn5yreTEdAT0so9Dq86c
-         3bfbz5ZDKhA3p80g+JYNVutQMO8TeS0NWkLZd4k5TwrDm+tBFymbkijh/GPM0RFn5JDj
-         oPnpccBGx7kWSvEdggocTf1Mkh+30Aq6mrZYGEO8fJeKHm5lVNAoOfZmnyppvtl32UOY
-         +A87YrmmlsmoqMIMrOjxX4ZmXakGQnrXl7Pv1oMkv9huw9kZTWhDboLM3O3+50fZHdQ7
-         QEPg==
-X-Gm-Message-State: APuU4Z86ZUNK5KJUG93np+lze282bMM959kPgKY80T/aVDQBEoDxl3D8
-	lpvfdAjsKWhmF4GnUOFFgAlIrVan8Q3q6TnghmdarhRn+XZjo/u5zTo7wOkbukwh
-X-Gm-Gg: AZFdTZexBuojVvV28V0/zEkDIvsUADMwOlFRSrhroFgVpnznlu7oMKiO3mpuXJjSy9V
-	BXqjNQDihAaHR/75GULwYKnn+3sQJZTCDIrUjwaMKmpRqhqMP1aJtHqnaEfCAwctLtFVoDAtt12
-	g1Oh17opQbd5+TRJ/QlA2Vb20MGWN/fBXmR4VF9LONcChYG8QdBqkx0zRWM40WffXzBFRtnuepN
-	ppZz1f/s+TyrDZHf3B8nvS6Cx89v6nIYyii5LV7D5BpUqxAGz9UYkEuAAIQ5W7iAluhVX/XdkuR
-	vGnCzsWntuBRo+UnpdLN+fCdFv1XigjpIT5QBaJXwCjRp7rDG5wfoktbJwpyfsZrvuqELAlUhmT
-	NPQqMI1NeD+SGIXleFWOr6DalCgzNjkdnQTW5rxcyfFy1p+zZel+zQmYrWMS8RIk+hAjTqCgqXI
-	oYBVHyocLUKHhrUyvAupgrIJI/hvEVZBwKNa7mv63FMNQDACPgkqOF+qeFo7h/8+6Ft5RoICxE0
-	nqITbuHnYbYqznckmxbshzb47xUt7+cY30OEXm1PkffLLNeerRz1be79q1fC2QZculI/IpzyDtX
-	oUdg/2f8xIqlftiG1Xyvdw8DlhlKUGZdUku2mlIQe/xSCwECgUFurm3+GAJ6hOvfLVTf80n0mh5
-	aWFfy7Qt29xu00mxWUpJ0/QL3eJsBieci3lrH6bCYCs3C5H5GF0tRBOG8gZ/oIotjPglWGDeouJ
-	+sbqLu0AyuYcS980MBg0lEg75twasblk5k4vQe0bi36qlA7lQ5rBBdA1/MpMOs6ba7mlaOqq7Xn
-	07S7R6O4cIahAUPquNBX//ZMl0puEwZt/vM/WqVZb3r5vc9FlsxMKC59vzidDAp8bm7u4AbFVWv
-	0afY
-X-Received: by 2002:a05:693c:80cb:b0:36a:1bd4:628a with SMTP id 5a478bee46e88-379655d4342mr10744870eec.9.1794851782040;
+        bh=uX0Mc1BEZOnl5YiiExrS0RDC3B1UcyLYzgrfIK0C/2s=;
+        b=lg/ddbewlBWELdjGBsucubaTlJPD74U1GLMFM6f+gJaCsRbcjPTXDl6wxtukiLtpuo
+         +owDQ852zZfBpP3gXin9EFl175/ZeQT93mtUAV1+Ise/NZ5bsP3FO+tZsEiULMXqXGOO
+         Wfj046D5oOFbZemsYTdMSOx2kXlAmIlWZ/837Caqz5YjtW39LLhS1GWetrTcSRa2+jYP
+         QXRaw5VqGxT52T136LNTjnGt0UEaWQ0y/HW6tN5hftRXmJnS+d/l5Z4yWvdNry8/Io0r
+         nNJq8wFEZlOJ+ESuZZRWwNe0uuEjINbFho1JrQsb7lUR05lCvS44V31kia6jD7jKibiz
+         ZBvA==
+X-Gm-Message-State: APuU4Z/3uZ1E38o6Jta1Ebuy351eUzWi/Fiz58NQIl4yz/ZU4L1ItuBN
+	+Jda4hQ2UMGfg5bT08zpmOonhKNnd2bRzI7RO16IbhKIq+EgTlYmK4BdOnGaVwlO
+X-Gm-Gg: AZFdTZd2tHcEHpfXfAZlRdINkAuYXRMUvFEDm6q6Bnr/omw2+M30wjNNgWPkYot700u
+	OqeXHg7QuKQNepHMdNCXLvyYSJGP7TKBJNo2TDCrkpRCbct3W9Zd2RkxHR0OzTJnKwWkYNA/g3k
+	hRUfaKS5pOMABIk74GESTTQ3q3iYC4fmsDMTvZKrNgT33qZ4u+0IY0kFThV8WpVLwXIs7hm1pRw
+	G8ZylXWlfbhsc4Fmr1IPYweWMKUCsmB28DOZg42nE0pDFIB/78K4w8bm1kH1WZeCBchzAmLMv+T
+	tRWszvfCeF1TKrON8lCC/sSO7P9ii0zPyJs7SVsZTEWy3ENKVCucwgpCdiQ/OsVhacsbsHcJ9tr
+	+ICg5tPrKCe/ZwtE86mggD59a+RM5wUpmmhOlQDewblXCTlrGnfp4ilriSmgBLB8Kkksf1nuQnt
+	hP2e/emlXSy2IIj+gAlveYX98QwVFi6js3rwbz5EKRwAJSkNkYSN7a4lmkUHTUUBafLK0KKfaR4
+	AMX5Kwd31ueoB/M4/ic3FnDpjUlmc3BuC0oShRGzh6/DYEr6FDRiijsA0h1TW4jzbGtEedaKYFw
+	SLl3IUw3OFjxNRFa800fytmSaCjiBEn748hZ1BkIwEcy07ylO4oxiRzr/kQu3R46x1HgvgvYKiH
+	u3QwNN2sJDVFP39qi6etfyhaifz8V6nJ5H9ynWFldoqvWCveC8Jz+6pYRqFlQCgCNVTCVhuNzrc
+	CxKnRzbnraqaCnTiShis55DE6gfqfJJgUDRss3Ief2vqfy7UBn9cf1A85Venz4QpTfe4Rfl11ol
+	3y8Chutg8ZN8BgRFcZH+oHKmIeQ1nQNT05SLHn464Cu6UiMGoMI0h4KkAKXGobguT4TRokwPo+d
+	voI8
+X-Received: by 2002:a05:7300:8289:b0:373:64ef:5dfe with SMTP id 5a478bee46e88-3810c8462d7mr169396eec.8.1794851782999;
         Mon, 16 Nov 2026 09:56:22 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-379560f5e06sm48391884eec.19.2026.11.16.09.56.20
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-379560f5e06sm48391884eec.19.2026.11.16.09.56.22
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 16 Nov 2026 09:56:21 -0800 (PST)
+        Mon, 16 Nov 2026 09:56:22 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-python][PATCH 104/105] python3-xlsxwriter: upgrade 3.2.1 -> 3.3.1
-Date: Mon, 16 Nov 2026 09:53:56 -0800
-Message-ID: <20261116175359.342679-104-khem.raj@oss.qualcomm.com>
+Subject: [meta-python][PATCH 105/105] python3-zopeevent: upgrade 5.0 -> 6.2
+Date: Mon, 16 Nov 2026 09:53:57 -0800
+Message-ID: <20261116175359.342679-105-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.1
 In-Reply-To: <20261116175359.342679-1-khem.raj@oss.qualcomm.com>
 References: <20261116175359.342679-1-khem.raj@oss.qualcomm.com>
@@ -67,60 +67,60 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Mon, 16 Nov 2026 17:56:31 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132559
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132560
 Content-Type: text/plain; charset="utf-8"
 
-Upstream dropped setup.py; inherit python_setuptools_build_meta.
-
-License-Update: Copyright year bump.
+License-Update: PKG-INFO no longer has the License line at line 8; point
+at LICENSE.txt (ZPL-2.1) instead.
 
 Changes:
-- 3.3.0 migrated packaging from setup.py to pyproject.toml (PEP 639
-  SPDX license); 3.2.3 dropped Python 3.6/3.7 (minimum is now 3.8).
-- New: insert_checkbox(), Color() type with theme colors, chartsheet
-  set_zoom_to_fit(), use_custom_theme() for .thmx/.xlsx themes, table
-  alt text, data label positioning, chart title formatting.
-- Image() and use_custom_theme() raise TypeError (was ValueError) for
-  unsupported source/theme types.
-- Fixes: autofilter range limits, conditional format priorities and
-  "future" function prefixes, autofit hiding columns, set_column()
-  widths, add_table() duplicate headers, GIF/BMP size detection,
-  object positioning performance, Excel string length checks.
-- py.typed removed in 3.2.9; typing annotations added in 3.2.x.
+- 6.0: replaced the pkg_resources namespace with a PEP 420 native
+  namespace package.
+- 6.1: no longer needs setuptools at runtime; added Python 3.14.
+- Dropped Python 3.7, 3.8 (5.1) and 3.9 (6.1); added 3.12/3.13.
+- 6.2: package metadata moved from setup.py to pyproject.toml; build
+  allows setuptools <82. 5.1.1 requires setuptools >=75.8.2.
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- ...on3-xlsxwriter_3.2.1.bb => python3-xlsxwriter_3.3.1.bb} | 7 +++----
- 1 file changed, 3 insertions(+), 4 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-xlsxwriter_3.2.1.bb => python3-xlsxwriter_3.3.1.bb} (57%)
+ .../recipes-devtools/python/python3-zopeevent_5.0.bb  | 11 -----------
+ .../recipes-devtools/python/python3-zopeevent_6.2.bb  | 11 +++++++++++
+ 2 files changed, 11 insertions(+), 11 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python3-zopeevent_5.0.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-zopeevent_6.2.bb
 
-diff --git a/meta-python/recipes-devtools/python/python3-xlsxwriter_3.2.1.bb b/meta-python/recipes-devtools/python/python3-xlsxwriter_3.3.1.bb
-similarity index 57%
-rename from meta-python/recipes-devtools/python/python3-xlsxwriter_3.2.1.bb
-rename to meta-python/recipes-devtools/python/python3-xlsxwriter_3.3.1.bb
-index e3a8cab12e..ce21db265d 100644
---- a/meta-python/recipes-devtools/python/python3-xlsxwriter_3.2.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-xlsxwriter_3.3.1.bb
-@@ -2,11 +2,10 @@ SUMMARY = "Python 2 and 3 compatibility library"
- HOMEPAGE = "https://xlsxwriter.readthedocs.io"
- SECTION = "devel/python"
- LICENSE = "BSD-2-Clause"
--LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=a4bab8df34a9a138b4e0ca56b8559a05"
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=5249ec013d324b4f1e23d5b019e679ca"
- 
+diff --git a/meta-python/recipes-devtools/python/python3-zopeevent_5.0.bb b/meta-python/recipes-devtools/python/python3-zopeevent_5.0.bb
+deleted file mode 100644
+index 1c378ec544..0000000000
+--- a/meta-python/recipes-devtools/python/python3-zopeevent_5.0.bb
++++ /dev/null
+@@ -1,11 +0,0 @@
+-DESCRIPTION = "The zope.event package provides a simple event system"
+-
+-LICENSE = "ZPL-2.1"
+-LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=72092419572155ddc2d4fb7631c63dd3"
+-
+-SRC_URI[sha256sum] = "bac440d8d9891b4068e2b5a2c5e2c9765a9df762944bda6955f96bb9b91e67cd"
+-
+-PYPI_PACKAGE = "zope.event"
+-PYPI_PACKAGE_SDIST = "zope.event"
+-
 -inherit pypi setuptools3
-+inherit pypi python_setuptools_build_meta
- 
--PYPI_PACKAGE_SDIST = "XlsxWriter"
- 
- RDEPENDS:${PN} += " \
- 	python3-crypt \
-@@ -16,6 +15,6 @@ RDEPENDS:${PN} += " \
- 	python3-io \
- "
- 
--SRC_URI[sha256sum] = "97618759cb264fb6a93397f660cca156ffa9561743b1823dafb60dc4474e1902"
-+SRC_URI[sha256sum] = "0867761912cceac76f97ffa76eeda18c623ae9217f601be8512f55b1af4bdb6e"
- 
- BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-python/recipes-devtools/python/python3-zopeevent_6.2.bb b/meta-python/recipes-devtools/python/python3-zopeevent_6.2.bb
+new file mode 100644
+index 0000000000..eace9d0e2a
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-zopeevent_6.2.bb
+@@ -0,0 +1,11 @@
++DESCRIPTION = "The zope.event package provides a simple event system"
++
++LICENSE = "ZPL-2.1"
++LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=78ccb3640dc841e1baecb3e27a6966b2"
++
++SRC_URI[sha256sum] = "b97d5d6327067ee6b9dfcbdf606ade9ade70991e19c162e808ea39e5fcf0f8d3"
++
++PYPI_PACKAGE = "zope.event"
++PYPI_PACKAGE_SDIST = "zope_event"
++
++inherit pypi setuptools3
