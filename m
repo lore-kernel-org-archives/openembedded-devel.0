@@ -1,195 +1,192 @@
-Received: from flow-b3-smtp.messagingengine.com (flow-b3-smtp.messagingengine.com [202.12.124.138])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.23383.1794818147046756462
+Received: from AS8PR04CU009.outbound.protection.outlook.com (AS8PR04CU009.outbound.protection.outlook.com [52.101.70.3])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.30087.1794841782008750383
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 16 Nov 2026 00:35:47 -0800
+ Mon, 16 Nov 2026 07:09:42 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@zhukoff.net header.s=fm1 header.b=YEJoFp8d;
- dkim=pass header.i=@messagingengine.com header.s=fm3 header.b=bWuQZdpR;
- spf=pass (domain: zhukoff.net, ip: 202.12.124.138, mailfrom: pavel@zhukoff.net)
-Received: from phl-compute-11.internal (phl-compute-11.internal [10.202.2.51])
-	by mailflow.stl.internal (Postfix) with ESMTP id 17FBF1302E96
-	for <openembedded-devel@lists.openembedded.org>; Mon, 16 Nov 2026 03:35:46 -0500 (EST)
-Received: from phl-frontend-03 ([10.202.2.162])
-  by phl-compute-11.internal (MEProxy); Mon, 16 Nov 2026 03:35:46 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=zhukoff.net; h=
-	cc:cc:content-transfer-encoding:content-type:content-type:date
-	:date:from:from:in-reply-to:message-id:mime-version:reply-to
-	:subject:subject:to:to; s=fm1; t=1794818145; x=1794825345; bh=hS
-	WNqs4j6a7guGDcjRCZz5bvU2MD9xr2tzcWDOhPhhc=; b=YEJoFp8djaMKBwGcdl
-	Fc4WyvMaw19pG7kVvmHlpx0d3w18Z25VeUijhfOkgf+zl5kOrclzMkBGmPa0UxQo
-	V+L2vmDTfdnc970fjRZKdEgKfdau6Zw/IpsUmBWINezXQ1hxX0d/JHyo2I6E3wYD
-	QiUWeNwuaOxkNSCA6lETKenViJmPUW7Dy4RkeXCJdM2UlJs9T8UdyBUH06Ip4OOb
-	xbJO59yNwRk7aexpZ7XRE5tcsVUuUzc3tKcRik0ZwucY1f2PxV3Doc4laVj6CHs1
-	lwcB1XcfzaQ6f8X7yES53U6pfi4/fW969s7am4LZ2ZVIkX0ZbUOR9K09RjNUTH87
-	nPBw==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=cc:cc:content-transfer-encoding
-	:content-type:content-type:date:date:feedback-id:feedback-id
-	:from:from:in-reply-to:message-id:mime-version:reply-to:subject
-	:subject:to:to:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=
-	fm3; t=1794818145; x=1794825345; bh=hSWNqs4j6a7guGDcjRCZz5bvU2MD
-	9xr2tzcWDOhPhhc=; b=bWuQZdpROfFE4zw6xP7lQLCrUQfqMX8ECpSalGwqv2Z6
-	h/7Ja49wFRRdTqThs9QJe+yexazJ1rILiivXWlQeUjTrzK9UPzzvSx3B339yLk9P
-	QIUVrfN1npeDm7W8/nFtexfEvLnOPjZ8FJZQOuQP4q9hv491L81ShWd7vlaMX6DW
-	5qMhYHtoE5jJUXX1T2zG4eBxpjHuLMD7Q20SivaX9W6DUMt+8afU+8Ou0uCLL70D
-	HeWZsCUMWtTeYVvyC2eL2m5qwk9SwPn57CcmwwPcAJcXwIvhN0mCp3VxxoE8/xOL
-	/a1uNKj9lRRnWIiFEeTSFOg+mgkTyWqXDXKYLL8hSg==
-X-DKIM2-Info: draft=ietf-dkim-dkim2-spec-09;
-	repo=github.com/dkim2wg/interop; date=2026-11-03; sw=lmtpprox;
-	action=sign d=zhukoff.net a=rsa-sha256;
-DKIM2-Signature: i=1; m=1; t=1794818145; d=zhukoff.net;
-	mf=PHBhdmVsQHpodWtvZmYubmV0Pg==;
-	rt=PG9wZW5lbWJlZGRlZC1kZXZlbEBsaXN0cy5vcGVuZW1iZWRkZWQub3JnPg==;
-	s=fm1:rsa-sha256:NHB7A5i+ywhnZJ7/8yCwBCiHxpiDWo8MqwljwoTWN/sz11F
-	87GTEnF0SSj1XeESQxbXnNOoVXfMp0tZZmKWuraNPHOtpxUmouSY+HE/PVPTsxNx
-	38HCOPEsJI3uHa1UVIm1ffhxTMRwj6KV+ZJFDEkP2Ryb4hKeUvASdRfIcKBajj+z
-	PfyRVLdLExqnMk/sw7/ZLaMZvrPWQukmfvoKX38ZowUqBRhq8vId3/fieAQkdwN2
-	Du8Tg6pLfPGV+5C7Y1h6v1d0nF83CIYH+JOUIhfO83NuL0EQKro4sxi7Lqe9Qrbw
-	mzkG7kIyXq3Hu1B1Z4X1+bvUrq+UXEy8U2oBY4w==;
-X-DKIM2-Info: draft=ietf-dkim-dkim2-spec-09;
-	repo=github.com/dkim2wg/interop; date=2026-11-03; sw=lmtpprox;
-	action=mi-m=1; hc=10;
-	hn=cc,content-transfer-encoding,content-type,date,feedback-id,
-	from,message-id,mime-version,subject,to;
-Message-Instance: m=1; h=sha256:AO8blgUkAyAuleUKAffnlwqq4FDLFUwxSGfSj0hRVW8=:fNAhRkbgUg9nVdrzPLSxh09JT5XlAjzG5HK2R1TH/co=;
-X-ME-Sender: <xms:YcD6auHXMNcVdQhMF96CPdD0vQL7xpqCFVegubi_UuQrWNHx-TqE5w>
-    <xme:YcD6alWwv3sjTpr1idZ9h8Ki3cH6RYLV69RiwNSy4tVyH7aJAXz3vX-vBYrKsPoUX
-    MDs98p0zbz8gSgtkkuACZqlEegK8-H4bCrp2iv7wa6b6NeZS44qhD9E>
-X-ME-Received: <xmr:YcD6alxor2HePGaAhMIXIpPhy4YPwFxWofDKDzmzrinKKE3fhnThO-iHO7su1N-wEbV7jsQ>
-X-ME-Proxy-Cause: dmFkZTEaTLPZUSSF32M/tW8kgZ/hl9u0cpjXvpZpNbOngBPKPnZG0b4+aNu2hvS0G7BYAJ
-    8fsHggwPsam265gk3oNm9FD8IAyAoAPvUCJpf5NyrrvGMUN78RHP9j21x9KEmUlzERcUIr
-    PzG9BCbiq1yyqmKG6cLZ42wlJkanAqZP3X9M+VSt00QNpfOnbxfEb0bgDSnkt11TGfQOfx
-    lnJYEaTYCDXhpwWkESb31XiQ1sUiXiDFBaNp8ezcUN851St/weGESTMOG8bQnA7S83aUVu
-    QkRV/Xc/uJ/TWmSSNucCZYl0WjVsaoftfEiW+iJJEfbHy6xgPrzNKmsQxmn9jK1aUb5KY9
-    UWDDsCES18dUzopsM29v+PChYb3PH+7NP8iB2aTfNMfnx+Ibiyl0LN8fHIl1LoPODcvbxQ
-    A/RAzqk3c5jJjeNwupu4rHi/tnp/i6/fCm4f6agfT1cr6MQityumj+d9WKyHeM8cowwqGO
-    e13sLDIVk+Qa5tJp+dY3AHILsf3f8tKBcHCaOqxDVyAsX9cLQRFatUUEPZpuD3me/89CC/
-    TkEL8Kqx0w4Tj/9gDpamUq6ZDHpKTsMM9hRo5F1QFw0eVhqvG6Qml/4+PIUvLKie0iPdjj
-    ucm+FIYbS/cWy5a4ZDuUNsGjOsjLCZZKCQLSjQAndADLCQs8pIfZlFs4m1GA
-X-ME-Proxy: <xmx:YcD6ajNgHFS6usBEHnTeKcNsolXJ9irO0JR-n2pBelAooJJZhAInHg>
-    <xmx:YcD6am5FTSFHYhDnIxnyBaF2mDkzlvMre6ChBVwGgH6wKEAhXA5lDw>
-    <xmx:YcD6akNPR51ZVFU1rYNy7Bqp77q3GFxFbzrnljmM00klQpX4hJGcRg>
-    <xmx:YcD6akmk6w_nvAzf2KH3DLWS5RP3Bcwp7s5o-3Q3QSGSNWG8fZsMiw>
-    <xmx:YcD6an56wLNDzNISBTVJfCT5lhDKcVF_F1td9mJScQa27v4KMYVq0uzN>
-Feedback-ID: ib94946c9:Fastmail
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Mon,
- 16 Nov 2026 03:35:44 -0500 (EST)
-From: "Pavel Zhukov" <pavel@zhukoff.net>
+ dkim=fail reason="dkim: body hash did not verify" header.i=@est.tech header.s=selector1 header.b=Gbuz/Qjz;
+ spf=pass (domain: est.tech, ip: 52.101.70.3, mailfrom: yunseong.kim@est.tech)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=P1N/QkGSV2yW6Nmwy+/zpxSf3i3ZiV+mQCA3f8GWj004L5EdtcoumEHvhUUhLiiDqDgx5W8CtnnwDQI+ag4oaKrmk1PPv6K+AKmK5JajBTVSO6Y0VXe/Rpka5aqWRs1K0Hn7KMESXbkqxvKPKnEMPM0r/1+2p7j4ZzyKejTuq6AZBH9AniWT1kQv1a1Rq28nRUd7z4wqv7yjFQyQFKuQodZYxO0JQdSwMVLcXtXcvpbCvbYT3R114IkEGxYMTmaZOgWrBczFVsWqiUGfHBuFf41TMq4A+eTXS+LT0+Ejxbgkd/uFbUh0D5q3hIrnTA/ah+oPXJg6EyRt+wFTPFzFIw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=YUh6WzXJfBFFMSa2geQUnUs5q3sYrpG7gH00qakb1RI=;
+ b=srYAu4OOacGH7Dka5dmuhDIYGJJUQyXfcX88L4K9PIYD5W9pUVwx63m8dG463g9ebJjyPQrq0ypxHves2oli74ZUr3AV4ckmIeD5SFh9E8wY1v5E85YN5f8jVw7z0j1lq0JcwazwL54QP3ZWYrSInQvVSo4+cIrgyIGZXT02fZL16cIWHUTeUHPZ+R4T/CD618uJvv+HVCK03VFjBYNjnfd6B14LkABdSpmylRA5HVVvlsoUkrWsYGykHlaNsZiQha/pz7o/EEUhoxY5dkfzdWWAPdktGYlcfzOpRvKrOx+Ou7zH2YqZ3IFBbV4g33uFsHx8H2cm7Vw9I16E+aRGgw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=est.tech; dmarc=pass action=none header.from=est.tech;
+ dkim=pass header.d=est.tech; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=est.tech; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=YUh6WzXJfBFFMSa2geQUnUs5q3sYrpG7gH00qakb1RI=;
+ b=Gbuz/Qjz9NU1TgpCoyn2eoxPvJEe36e15udUKHYM91nHSdQmu98SEp3q0dckrYKvwTxynRZCWTkqy1w0w6HEVj450+tonQs//8VZEhgVUKIhALtDqbiMVuBKtQWLbPUw2pD+heff9B2ICUyNg0MuKi4nnV7ULLFtb15igGFkWAZ1TRzBUnA0w3tH78CWINoPoz37rBplyhvQ2vPrCNGpTVXgUsjRVZ5AbB+G/0Q/IOjRHX+wVWekx088TXfwtqu34vMP2qSb53LAaSRgy20hs0AFNNUwuKSSvn+0QyVm1Dkvk2ERr0JL5Exd84yKHZpcolbIsveToGwcj5QyY/mgUQ==
+Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=est.tech;
+Received: from FRWP189MB3398.EURP189.PROD.OUTLOOK.COM (2603:10a6:d10:1a3::22)
+ by PAXP189MB1903.EURP189.PROD.OUTLOOK.COM (2603:10a6:102:28f::10) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.615.14; Mon, 16 Nov
+ 2026 14:55:31 +0000
+Received: from FRWP189MB3398.EURP189.PROD.OUTLOOK.COM
+ ([fe80::4658:dbd6:d572:896a]) by FRWP189MB3398.EURP189.PROD.OUTLOOK.COM
+ ([fe80::4658:dbd6:d572:896a%4]) with mapi id 15.21.0615.013; Mon, 16 Nov 2026
+ 14:55:31 +0000
+From: Yunseong Kim <yunseong.kim@est.tech>
 To: openembedded-devel@lists.openembedded.org
-Cc: Pavel Zhukov <pavel@zhukoff.net>
-Subject: [meta-oe][PATCH] libcamera: upgrade 0.7.2 -> 0.8.0
-Date: Mon, 16 Nov 2026 09:35:33 +0100
-Message-ID: <20261116083536.1130487-1-pavel@zhukoff.net>
-X-Mailer: git-send-email 2.56.0
+CC: Yunseong Kim <ysk@kzalloc.com>,
+	Yunseong Kim <yunseong.kim@est.tech>
+Subject: [meta-oe][PATCH] vock: add recipe
+Date: Mon, 16 Nov 2026 15:55:17 +0100
+Message-ID: <20261116145516.11115-2-yunseong.kim@est.tech>
+X-Mailer: git-send-email 2.47.3
+X-ClientProxiedBy: LO4P123CA0244.GBRP123.PROD.OUTLOOK.COM
+ (2603:10a6:600:1a7::15) To FRWP189MB3398.EURP189.PROD.OUTLOOK.COM
+ (2603:10a6:d10:1a3::22)
+Return-Path: yunseong.kim@est.tech
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: FRWP189MB3398:EE_|PAXP189MB1903:EE_
+X-MS-Office365-Filtering-Correlation-Id: a06c9163-e3e9-4c28-f0dc-08df43f1a92d
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|366016|23010399003|1800799024|18002099003|6133799003|261009223027099003|3023799007|11063799006|56012099006|260925022911599003|260925021911599003|260925021311599003|261028144727099003|261102123227099003|261026121527099003|261026140227099003|261022105027099003|261022075727099003|261022113327099003|261022115727099003|261021121427099003|10067099003;
+X-Microsoft-Antispam-Message-Info: fJUlROHD8wpJ4oS/pfGPDzTTj/htHogexXlAMHiDzsOUnWqXmyHI/iTDUnRv+sN0a5lUYtHwJW7ROqhsHT20myG6Zk40lDWjw0JnmZPpmdWlLTKvsUrGy0hDGkwAMeh0CZ4pWpmDdZCG+gO0VkDRkHz5VfWOkeg8BtdFZ2naXQ15LQ7aXfDFVMJQAb2b7SXfMaWGrnPj1No9XW0JUAPWaSz/1iqWNuzcv7U/PQ9UCxiLOXDhkx3xLyrEAaKH7Q74v5JaLRdtXqAqnc3TIts+BdrQjG4oL1eeR/0MrbvMDgj6JDXIL6lKOTrKUqUA7SSeML9ACcLH5AK4KUii2HISxS9qRLqOzxobbQBweRlfH0Yvupsih2LDa3EAHHOhKJ0ThSV5e5857ryBnGVrjwNkR/89HCuwvkdcZUmlfP+t/FiUtD7O3QD8wG8dPd7hu7HPAdQbaR23rtDXo1NvB6f8SbV5aOfMHHj4SJnShoPEsRk+761oSDJlo8d9AQYtVYwyCRGhxluUv8qsYIsJYqcIo6HdoHMbdQfV4s04Dq8hMekzQf+QBC9JG/jpBn6UvfTzfgzFnr2xij+Fi+OOyEIfaUHXHh/mzxrBX55xhFs32srkUzRgCdKqJqs+bmgZOe0qjz3UJNanyRfUtIX1btwnW35et4FzUv6vpscTzZ0a2Nc=
+X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:FRWP189MB3398.EURP189.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(376014)(366016)(23010399003)(1800799024)(18002099003)(6133799003)(261009223027099003)(3023799007)(11063799006)(56012099006)(260925022911599003)(260925021911599003)(260925021311599003)(261028144727099003)(261102123227099003)(261026121527099003)(261026140227099003)(261022105027099003)(261022075727099003)(261022113327099003)(261022115727099003)(261021121427099003)(10067099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?TRh+wMsYLyIL5sEtkTs4yIEaPhGIocUntarl7jt62EzwiJYNIycwvBxjbUeG?=
+ =?us-ascii?Q?T4n7ktmtbfJKdHxEz66aR2HcHzBJ9xXBYz8308SpLzldRlaDvJ/v/FJyCMu8?=
+ =?us-ascii?Q?tuueO0WGcuqot5O03UMin7ebLvIh4f//OrcSRPJ/CpSlhX6RYjnYAqIqDhVm?=
+ =?us-ascii?Q?SO6FO+l2a+Uxlkty5N3NGZxtWZ0yFvJtrX1Wubjgrg/BBBzZXwkgmI2JL+Iu?=
+ =?us-ascii?Q?bH8P7W0mP0DrcUGolc+gEU7eE/urxtQYA45DRx3hWLWNoIZXii5hBn8dksT+?=
+ =?us-ascii?Q?+x+BbuRfkkI9QxhwExHxzD+HeAPF28U1z+O/O5t231SALbeYK0bV8TR9IBfs?=
+ =?us-ascii?Q?+vpPVLwTLOTMI3+vHe6FOebDQjkPepj6KUw1ZPPEntv5aOmwzSur/PLlKUqV?=
+ =?us-ascii?Q?BJxIWYo8X2hsVKniqrom/Ib0AlusUWfzupTykjP54w34iEMfYBRToAYWsJRO?=
+ =?us-ascii?Q?FPjWQc/f8m1K0v7yGJKwNoP2e3iaNwfJ1qgB2VjebLu6B6ndl3SImb9rC+zw?=
+ =?us-ascii?Q?04OfbK2H0wvNZrUXXmD0M4LflkA1kVXTXRSB/MqnagfypPBmAN/51yztjczX?=
+ =?us-ascii?Q?73tHP1aU+UmWpmDPWjpqefIAOl4xJnRmwWg1rKF1kabcHy9vreE57WNVHLfB?=
+ =?us-ascii?Q?yl8dxFuJSJhnUxCvh9ooXGv0arjCdAYMjjRn9763MKyVGXFtNUnQ+Vl55PeU?=
+ =?us-ascii?Q?Njv17chDPwhORLueLnUC4Y+Hcs9sC58IrxX6e35CTV8raG5vnZ0SvBHfx/F8?=
+ =?us-ascii?Q?JdlfCTxYboj3QBH88zF5zDX41NMIH99kU9zbhd0j6iwXtZQZkbKNUiKSO3nZ?=
+ =?us-ascii?Q?eY1w+frufw31zLmw6Y0J+JOzNkXQBHbrPbr1J8YIoMJs8eQHGBYge7AOPHzg?=
+ =?us-ascii?Q?PPb7ECaJozfeNtdm75bUj9+YxHTuGgtqCFjbHOF98yc1kOCYXRHBK0gb8NCX?=
+ =?us-ascii?Q?AAVK5EKX1OTj+/wjp4sA9ucF7Txqtn1FiiLJszdhrNa5X3/rPHETndrfp4ou?=
+ =?us-ascii?Q?Uv8tlpaDhfMQKgubj+vg7EtZF5wZ/SXeJ0AVOC/5u1bb6zr1nEtLPsr3tbGu?=
+ =?us-ascii?Q?sXxfk1SXL7WMEoWvk2sYkAwLoBVH33bwlN6VhmUwYBM3WPWI68PxHJPypt+i?=
+ =?us-ascii?Q?imNAR/DXPBXlcGhL0Nx9CBFvECu8IsuvjrBi7zGO7ClfjIhZ9VhC+f4/NpQq?=
+ =?us-ascii?Q?MB+eLgh2uF+Zli5yd+aaaUB0pkqyS9qnR2UQ/JXYVthb+ZGJhXUrvf28nsLy?=
+ =?us-ascii?Q?oypNHCvTfm99fMV9xLa6WCvZg8ft5WD0uW+i/2bNQw/gNkknj90K5nlhyhFG?=
+ =?us-ascii?Q?zhC1d6VA4tB3Ce0QH2jbR70w56X9ah4RAExHZAD/7MHJCgMeaubsyDMAvmkF?=
+ =?us-ascii?Q?l0WcxCyPYoRV2lz8PsASTMK5go1BzDK1YK9qJLdDa4y99VyOYtep0P6CVitx?=
+ =?us-ascii?Q?bStllJ5E+calGcNMiig+PLo8TuYiyvjBEJ4wOdlnquTDpLpMr8Gyzd+kFiiY?=
+ =?us-ascii?Q?EqK0bPNuoeXX+l+dkvsSHK1zewiHGBtD+zZY1X6j2YDeFu6WHcZy2+VegU47?=
+ =?us-ascii?Q?hKSBC1UAmRi4O9EllU0hO/oF6wDdoWGdN3FmbRj3K03SlDExt9Z9YufrXIwv?=
+ =?us-ascii?Q?Pv7XsPR4gpGDi9z19G1q6P2v2AMGfR9wj0vf5Em8QuG6lZjWluj5J6mEkwov?=
+ =?us-ascii?Q?Eqkb9fNayO88jKdi/ML9yAqvE8rVdhCakHd2EGvG5D4wSrnVFwJTnxxrL0JG?=
+ =?us-ascii?Q?wwACR5JPrw=3D=3D?=
+X-OriginatorOrg: est.tech
+X-MS-Exchange-CrossTenant-Network-Message-Id: a06c9163-e3e9-4c28-f0dc-08df43f1a92d
+X-MS-Exchange-CrossTenant-AuthSource: FRWP189MB3398.EURP189.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Nov 2026 14:55:31.5840
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: d2585e63-66b9-44b6-a76e-4f4b217d97fd
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: D+sfg7Zj1K58s6bZrSmSeo9XUOg0BP+HgPwjgh/6bv62IQMcLvCK1+nJrUdf+xzCLmgkUfO1z+tg0mUMZRIreA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAXP189MB1903
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Mon, 16 Nov 2026 08:45:45 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132453
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Mon, 16 Nov 2026 15:12:11 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132454
 Content-Type: text/plain; charset="utf-8"
 
-The abi-compliance checker reports both ABI and API updates
-in this release, as expected so the SONAME is increased to 0.8.
+vock reports the kernel code a userspace command executes, using KCOV
+or hardware tracing (Intel PT, AMD LBR/IBS and Arm Coresight ETMv4),
+symbolized against a vmlinux and annotated with kernel source.
+Forked children and threads are followed through an LD_PRELOAD library
+in KCOV mode and through inherited per-CPU perf events in hardware mode.
+It is useful to see which kernel paths a workload reaches when testing or
+debugging an embedded system.
 
-Validating ABI compatibility between v0.7.2 and v0.8.0
-Binary compatibility: 97.4%
-Source compatibility: 82.4%
-Total binary compatibility problems: 30, warnings: 14
-Total source compatibility problems: 170, warnings: 17
+COMPATIBLE_HOST is limited to x86_64 and aarch64, the only architectures
+with syscall decoding and trace backends.
 
-Signed-off-by: Pavel Zhukov <pavel@zhukoff.net>
+Tested with poky on qemux86-64 and qemuarm64 (build, packaging,
+update_crates) and by running KCOV coverage, fork following and
+syscall tracing in core-image-minimal on qemux86-64 with a KCOV kernel.
+
+Signed-off-by: Yunseong Kim <yunseong.kim@est.tech>
 ---
- ...camera-egl-Don-t-redefine-EGL_NO_X11.patch | 46 -------------------
- ...{libcamera_0.7.2.bb => libcamera_0.8.0.bb} |  9 +---
- 2 files changed, 2 insertions(+), 53 deletions(-)
- delete mode 100644 meta-multimedia/recipes-multimedia/libcamera/libcamera/0002-libcamera-egl-Don-t-redefine-EGL_NO_X11.patch
- rename meta-multimedia/recipes-multimedia/libcamera/{libcamera_0.7.2.bb => libcamera_0.8.0.bb} (90%)
+ meta-oe/recipes-kernel/vock/vock-crates.inc |  8 +++++
+ meta-oe/recipes-kernel/vock/vock.bb         | 33 +++++++++++++++++++++
+ 2 files changed, 41 insertions(+)
+ create mode 100644 meta-oe/recipes-kernel/vock/vock-crates.inc
+ create mode 100644 meta-oe/recipes-kernel/vock/vock.bb
 
-diff --git a/meta-multimedia/recipes-multimedia/libcamera/libcamera/0002-libcamera-egl-Don-t-redefine-EGL_NO_X11.patch b/meta-multimedia/recipes-multimedia/libcamera/libcamera/0002-libcamera-egl-Don-t-redefine-EGL_NO_X11.patch
-deleted file mode 100644
-index eace529b06..0000000000
---- a/meta-multimedia/recipes-multimedia/libcamera/libcamera/0002-libcamera-egl-Don-t-redefine-EGL_NO_X11.patch
-+++ /dev/null
-@@ -1,46 +0,0 @@
--From 998b5c7ee5cabd51292ac216ccb390c35f989a78 Mon Sep 17 00:00:00 2001
--From: Joel Winarske <joel.winarske@linux.com>
--Date: Mon, 12 Oct 2026 18:20:01 -0700
--Subject: [PATCH] libcamera: egl: Don't redefine EGL_NO_X11
--
--Mesa built without the X11 platform exports -DEGL_NO_X11 via egl.pc
--Cflags, from mesa!2226 (19.3) until mesa!18848 (22.3) moved Xlib
--inclusion behind USE_X11. This affects non-glvnd builds, where egl.pc
--comes from Mesa rather than libglvnd, e.g. the PowerVR mesa-pvr (22.1)
--used on StarFive JH7110.
--
--The -D defines the macro as 1, so the unconditional empty define in
--egl.h is a redefinition, which is an error with -Werror:
--
--  include/libcamera/internal/egl.h:23:9: error: 'EGL_NO_X11' redefined [-Werror]
--
--The define is still needed for EGL headers predating
--KhronosGroup/EGL-Registry#130, which otherwise pull in Xlib.h, so only
--define it when it isn't already set.
--
--Upstream-Status: Submitted [https://patchwork.libcamera.org/patch/28452/]
--
--Signed-off-by: Joel Winarske <joel.winarske@linux.com>
--Reviewed-by: Kieran Bingham <kieran.bingham@ideasonboard.com>
--Reviewed-by: Barnabás Pőcze <barnabas.pocze@ideasonboard.com>
-----
-- include/libcamera/internal/egl.h | 2 ++
-- 1 file changed, 2 insertions(+)
--
--diff --git a/include/libcamera/internal/egl.h b/include/libcamera/internal/egl.h
--index 1e31d490b..aeb4da80d 100644
----- a/include/libcamera/internal/egl.h
--+++ b/include/libcamera/internal/egl.h
--@@ -20,7 +20,9 @@
--  * Workaround for build issues on Mesa <= 22.2, see
--  * https://github.com/KhronosGroup/EGL-Registry/pull/130
--  */
--+#ifndef EGL_NO_X11
-- #define EGL_NO_X11
--+#endif
-- 
-- #define EGL_EGLEXT_PROTOTYPES
-- #include <EGL/egl.h>
---- 
--2.56.0
--
-diff --git a/meta-multimedia/recipes-multimedia/libcamera/libcamera_0.7.2.bb b/meta-multimedia/recipes-multimedia/libcamera/libcamera_0.8.0.bb
-similarity index 90%
-rename from meta-multimedia/recipes-multimedia/libcamera/libcamera_0.7.2.bb
-rename to meta-multimedia/recipes-multimedia/libcamera/libcamera_0.8.0.bb
-index 624ca1e33e..257db1f052 100644
---- a/meta-multimedia/recipes-multimedia/libcamera/libcamera_0.7.2.bb
-+++ b/meta-multimedia/recipes-multimedia/libcamera/libcamera_0.8.0.bb
-@@ -10,12 +10,11 @@ LIC_FILES_CHKSUM = "\
- "
- 
- SRC_URI = " \
--        git://git.libcamera.org/libcamera/libcamera.git;protocol=https;branch=master;tag=v${PV} \
-+        git://gitlab.freedesktop.org/camera/libcamera.git;protocol=https;branch=master;tag=v${PV} \
-         file://0001-ipa_data_serializer-Mark-vector-readPOD-overload-as-m.patch \
--        file://0002-libcamera-egl-Don-t-redefine-EGL_NO_X11.patch \
- "
- 
--SRCREV = "191e202178f02430b5942397c70d215cdd2056fa"
-+SRCREV = "df8e348d64b4932a0676256ed24f0da3ee9438bc"
- 
- PE = "1"
- 
-@@ -65,10 +64,6 @@ RDEPENDS:${PN} = "${@bb.utils.contains('DISTRO_FEATURES', 'wayland qt', 'qtwayla
- 
- inherit meson pkgconfig python3native
- 
--do_configure:prepend() {
--    sed -i -e 's|py_compile=True,||' ${S}/utils/codegen/ipc/mojo/public/tools/mojom/mojom/generate/template_expander.py
--}
--
- do_install:append() {
-     chrpath -d ${D}${libdir}/libcamera.so
-     chrpath -d ${D}${libexecdir}/libcamera/v4l2-compat.so
--- 
-2.56.0
+diff --git a/meta-oe/recipes-kernel/vock/vock-crates.inc b/meta-oe/recipes-=
+kernel/vock/vock-crates.inc
+new file mode 100644
+index 0000000000..9ddbda00cd
+--- /dev/null
++++ b/meta-oe/recipes-kernel/vock/vock-crates.inc
+@@ -0,0 +1,8 @@
++# Autogenerated with 'bitbake -c update_crates vock'
++
++# from Cargo.lock
++SRC_URI +=3D " \
++    crate://crates.io/libc/0.2.189 \
++"
++
++SRC_URI[libc-0.2.189.sha256sum] =3D "3eaf3ede3fee6db1a4c2ee091bf8a8b4dccdc=
+6d17f656fb07896ee72867612f2"
+diff --git a/meta-oe/recipes-kernel/vock/vock.bb b/meta-oe/recipes-kernel/v=
+ock/vock.bb
+new file mode 100644
+index 0000000000..530ca6dd16
+--- /dev/null
++++ b/meta-oe/recipes-kernel/vock/vock.bb
+@@ -0,0 +1,33 @@
++SUMMARY =3D "Kernel code coverage of a user-space command (KCOV, Intel PT,=
+ AMD LBR and Arm Coresight ETMv4)"
++DESCRIPTION =3D "vock runs a command and reports which kernel code it exec=
+uted, \
++using KCOV or hardware tracing (Intel PT, AMD LBR/IBS and Arm Coresight ET=
+Mv4), \
++optionally with an strace-style syscall trace and syzkaller-compatible out=
+put. \
++Coverage is symbolized against a vmlinux (DWARF or BTF) and annotated with=
+ kernel source."
++HOMEPAGE =3D "https://github.com/yskzalloc/vock"
++BUGTRACKER =3D "https://github.com/yskzalloc/vock/issues"
++SECTION =3D "devel"
++
++LICENSE =3D "Apache-2.0"
++LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Ddaf2426a488a4a2b68a88bd7cf6410e=
+4"
++
++SRC_URI =3D "git://github.com/yskzalloc/vock.git;protocol=3Dhttps;branch=
+=3Dmain"
++SRCREV =3D "db50863d4d70038738a157379d24a9d9e5e4ce2a"
++PV =3D "0.1.0+git"
++
++inherit cargo cargo-update-recipe-crates
++
++require ${BPN}-crates.inc
++
++# Syscall decoding, ptrace register access and the hardware-trace backends
++# are implemented for x86_64 and aarch64 only.
++COMPATIBLE_HOST =3D "(x86_64|aarch64).*-linux"
++
++do_install:append() {
++    # LD_PRELOAD shim used by --mode kcov to follow forks and threads. voc=
+k
++    # looks it up next to its binary as ../lib/vock/kcov.so, i.e. under
++    # ${nonarch_libdir} regardless of multilib.
++    install -Dm 0755 ${B}/target/${CARGO_TARGET_SUBDIR}/libkcov_preload.so=
+ \
++        ${D}${nonarch_libdir}/vock/kcov.so
++}
++
++FILES:${PN} +=3D "${nonarch_libdir}/vock"
+--=20
+2.55.0
 
