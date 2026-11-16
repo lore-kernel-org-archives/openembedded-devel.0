@@ -1,160 +1,132 @@
-Received: from mail-oa1-f45.google.com (mail-oa1-f45.google.com [209.85.160.45])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.155.1794852074718555197
+Received: from mail-dl1-f47.google.com (mail-dl1-f47.google.com [74.125.82.47])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.468.1794852902483843899
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 16 Nov 2026 10:01:14 -0800
+ Mon, 16 Nov 2026 10:15:02 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=bybZiPFF;
- spf=pass (domain: gmail.com, ip: 209.85.160.45, mailfrom: raj.khem@gmail.com)
-Received: by mail-oa1-f45.google.com with SMTP id 586e51a60fabf-4adea5b7a2fso2012511fac.2
-        for <openembedded-devel@lists.openembedded.org>; Mon, 16 Nov 2026 10:01:14 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=z1ydYGOJ;
+ spf=pass (domain: gmail.com, ip: 74.125.82.47, mailfrom: raj.khem@gmail.com)
+Received: by mail-dl1-f47.google.com with SMTP id a92af1059eb24-1b244fb7fffso4461128c88.1
+        for <openembedded-devel@lists.openembedded.org>; Mon, 16 Nov 2026 10:15:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794852074; x=1795456874; darn=lists.openembedded.org;
-        h=content-transfer-encoding:content-type:mime-version:references
-         :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=2+lw+lAhIKUxGd3baBgUB7x2FIYbS9zQOZ6MPQ/qVKQ=;
-        b=bybZiPFFv2wKN9cQ186BSzm8v8g2f9FuOEtbY0veA53G25CfGmtfjmmDjI5bxMPt54
-         /YhZo5UoYmcpdYJwtfk6XR6BvqNqY/gGgv3ob/Ke7bdhSGwq2yMlysqX/NL249poyH+T
-         mK0eZq7YPdp0p2cnu3qp96lK8agMAYylKwk7fq9TziMQWbXePxPPL4iGSA1up8ELf+nU
-         5WhIGn10+XdMb1G93AYOVkPM4rK+5tLWq7AaRKozDkd8MAKtXuTmTxDUhZkLoIDgcIcq
-         Bqw7dB6S0YQqoOx3pLkbdbcS13vyu/fAqn+pt0NlnUVM/v5fCVmyPceReSvWy8WrfvOy
-         Jy+g==
+        d=gmail.com; s=20260707; t=1794852902; x=1795457702; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=hpksioRKUsFFJo7vnE7WgqrHaNhBuMvMuC1puOVP3G4=;
+        b=z1ydYGOJqkUBx0WeIfyOldoJAVF75PKuUhV1RlGyCqrUclEaSNolleMw/HxZRYBQ11
+         ohMqDWrTm/j4dzD+k+fprE0g6KpdZMV8ZvHBUPo5z8t2w1VWKmdxEBNR6meZpXeLB11y
+         BRUQ/wWNsNFSOmrYHB+yyEtrUgFYtzmnjCj7KsozPxCmZTPkwBQT6x1YALXjeBX6qptA
+         oq4GfmUL1EHZ6fTvQGzR5Wgc+gbuGr5rYLqcqo5CfL2878VuXn7cz49p5wc8LAn64S0e
+         nsQk8Ts8gmqEYJLcJx/GGNefFkN16TI2RdjdyiYeJxU/AbbJoJ3zamAclxrFpU9TIhhS
+         T52A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794852074; x=1795456874;
-        h=content-transfer-encoding:content-type:mime-version:references
-         :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=2+lw+lAhIKUxGd3baBgUB7x2FIYbS9zQOZ6MPQ/qVKQ=;
-        b=1n7PmY8op0ElaN0uRbpUj6gEitF6EYivCE+C4mXuFCHNCBT/3qJPXDjanF8J2NH1DS
-         l1qGol5wlq1dqI4eBj1l0x+RutPwGMVRaT1A8a+VzjQRpO4PRyDwKA7bk1Ck5eeMzd0X
-         tBJjEjFdCIbRXxg+3bszDNTy1DtEf99P2beSMz7jk1VJyQuGaFsS2hkWa6E8JAfp6P/q
-         C11Tq8rKk+lsn502y+a7GV+9MZJf5NNxAApm8YBeABBuS/R3TOlywodHQmzH3D/cYV6u
-         32LEJQsk66gEZXgvmVO6dP/ibktJ3oEq2rojaDTHYuF94zYSesvJdEK8pfYBU2Y0rL5S
-         7SnA==
-X-Gm-Message-State: APuU4Z/yngiN3WSPBTFx8+nCbCaGPtWfNoaZ8ddL5fjKzr1fN+CdDyY+
-	NHHVKvQU5wkVSgTpVr04AnxSEpKbU81Z+7/q/RDFwmWvCjF5KwymnK5a2dYw6J30
-X-Gm-Gg: AYBFou1zbMmS+NeE18jSrLgW/zAl2zManN33LpgHpaxygSGcbirNW/oYqZIpczJcHAf
-	vYRVIgt0iu9Z96tt9wDF4d3YMeyixSoFYT5PK/JMWAmPKl8wI+iodbbFsnsHoS4F6+ou5AK6Pb3
-	3cNfho/hTQQLL5RcpuBtaAgBUYkQeZKtA2vu++3tP39sYZZsjrdLJv8MTzeX98du9TxhlcZrc1B
-	lVMzStuKMT5yLFiOKa8Ra+HttsiUvNRYNBdZI4vauwLFGbcg3zNOM4Ns6wtPwKJQJZDQ9mc3ebQ
-	90bYcgHHDGT74IiJ7zMq5zzGrNTYz5BpBMhM0MUmzoGPsCCJR6kO38wN9xx1HIQMnsZFywsrbCu
-	BaeuXnLTtyjfaCgcTjiih012E9HfboezUHJeJvhTQVa8H2W1NAhafL2/dALepN6NQZoh8uQPNsJ
-	Sppz4sCjQNVP5bRceMxiHvRHY6IpT+4gVfPpTO0B80UUzTEW5QupSMz4jHJmKCNpytnL/D7vh/a
-	4JqNfC/UHEWQCArVIO/RwBXjgzu9OUohdkuPbvfrb9mALjhCY8QQk6XvcgMsHMT49l6MTlDWgju
-	qy0btbuROZhoVEhgZc29ncGm/I9nAuBo/5oWO2VhiPyFl8r4pMiqW6aRWIlZ/BdxX0t0sE+mnTx
-	CfK21gD2NZ9RUqAcKMmH0xG7f2xmzm81GPDzOBV/EXa8bc7qqxwbh799kVTwp4ljH8pxMsegf+6
-	nYQRT1YSaRjVMaYBrfMsqq9Nw6bQ9G9Qvkr8yrpcqkawSgrlXjBNT5U3/IKhJcaR1sY8Rr7NErS
-	36mZpRSfwTJw9NKYbpuSzJCMyE+22AUvNlbnMAtTsQsdnFAw4GXwDKEo8ggGms1RUC6bUNBlrDj
-	iiqE
-X-Received: by 2002:a05:7300:72cc:b0:372:598d:c0bb with SMTP id 5a478bee46e88-37966e3ad18mr17428429eec.13.1794851747067;
-        Mon, 16 Nov 2026 09:55:47 -0800 (PST)
+        d=1e100.net; s=20260707; t=1794852902; x=1795457702;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=hpksioRKUsFFJo7vnE7WgqrHaNhBuMvMuC1puOVP3G4=;
+        b=JAJubvOlLpBJ+hXTnOMnK5fASArba9s6Z/o8WmljByybIN2X4DtBEUbpZYlbo4luLM
+         NtmLFbLgc2shkXDfQee1UPXbhk4UBDpgfWrYncB1fBcaM3xGlq6lmz2zifuKs7zBNfsY
+         BxwXWxol672VEw018VBDu2mNoSlOXYCGqgd6KhfOMlAlwI4nJRzxCeLLqv70RVkLl1u6
+         1PsKlCWkkwUXaJRAVb+uq9jLpmJ+l/hBYN8S1ojX9HpsBXUjvdJ4doVGMiB77AKm9ji3
+         hsIX6Shp9dJ7O7pdgnZdO8p4muXQN6Go/WWz5wmOfQMtS9yrs3CDSCtz/43RYlKqsE4O
+         ko6Q==
+X-Gm-Message-State: APuU4Z8pmQzzYdEWa0OSbH/mtSmqWAkMLDnBOC30x8XHbsLxhGr2DIdu
+	58sJy13aA8vWEjsi3WTZtfJgKMc9v55z8rkzI8n2kaOGMzH5J4K7T1PJfkbNI5aE
+X-Gm-Gg: AYBFou0Q+bdTnr26EI0UWnLc3pHyhi9/6mIfcEkELyq2GivgebZYFCCI2eWVHD+T7d2
+	TSaW3qH9djuvkhmRGCltNdzO5zAJud+gk8oP0I3YjtTK1Swiuh3n8/L3yMGKijmxutNvVV57WIk
+	eVnyxpsFWuwsfjSPdqJyDQaoVt1nCnhz75P5dlW2hKXXPEp9HMy7krwsJgNNGjohZoGEy8nH9Vk
+	pOdcM6/Nz1W+zUF0SMBqI3MlWo5TzriAEKRhz3UgcV/7W8NJ0rdAfdxzASoUZupiS0e4YzVQZbZ
+	VRqlH2GoSSh1I5sgi6sXMRQ4D8GUQQCsK4516lzy7QuWFuCTy93M7twRexol0YW9VP/B2Rt3fQD
+	FFY18nMFPbOgoukUtenWXwZwyYqf3kT9vhz3gPN+E7SP7fzFr7vBBFYuphLcFRT6dbAxuym6PwS
+	yi5C0zMyz6H/YAEWL90tb2ojs0wdpjZ6oCB8kQ2pZI/EUPiIEEaNg+4ON1V4pN0bwRWQaVUXjT/
+	vS8lkyhhwrYUMkumFAlOy5ly2zLvryMFvVaqgJ/4gc8ThiQsifnjQ04V178WQatuv2Kw9AWrLdZ
+	z8VVV6RSVaag6slvuwqDEnBPVQJ5wRKDQFex5y1iPWfHJAPE8q91ohp4SyesSJeu4Dr/4OjR8dz
+	/xo4psV2dWAE3L6t5C1OwVvgB5gU0JKpm+BbOXayjdrYiX4eZfWzZBDln49QC7DyZ+AweojRAD6
+	v42NsXMSw8bLd5+dLsVEuG6DaGAU5b1MvyTzD11pQ7ar4NsyS7ztW8dJYJ+dGK7S6Nx4qjQg1lw
+	t1rhjWJEHgCXrPcUACnJGuQQPqYS5q8MPe3Jb761R6BpsrPFJUQZMrtdu7wXmTQQ7jJr4lep+kt
+	85EdPq6nqJq4fYSwcxaJ7xN/yw==
+X-Received: by 2002:a05:7022:c46:b0:1b0:c224:5bdc with SMTP id a92af1059eb24-1b5030e703emr10948033c88.14.1794852901658;
+        Mon, 16 Nov 2026 10:15:01 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-379560f5e06sm48391884eec.19.2026.11.16.09.55.46
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-37955822d58sm35841020eec.10.2026.11.16.10.15.00
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 16 Nov 2026 09:55:46 -0800 (PST)
+        Mon, 16 Nov 2026 10:15:01 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-python][PATCH 077/105] python3-python-dotenv: upgrade 1.2.1 -> 1.2.4
-Date: Mon, 16 Nov 2026 09:53:29 -0800
-Message-ID: <20261116175359.342679-77-khem.raj@oss.qualcomm.com>
+Subject: [meta-multimedia][PATCH 1/2] libupnp: upgrade 1.14.31 -> 22.2.2
+Date: Mon, 16 Nov 2026 10:14:57 -0800
+Message-ID: <20261116181458.351824-1-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.1
-In-Reply-To: <20261116175359.342679-1-khem.raj@oss.qualcomm.com>
-References: <20261116175359.342679-1-khem.raj@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Mon, 16 Nov 2026 18:01:21 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132561
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Mon, 16 Nov 2026 18:15:12 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132562
 Content-Type: text/plain; charset="utf-8"
 
-Drop the root skip patch; upstream skips the permission test as root now
-and removed the other test.
+Move from the 1.14.x maintenance branch to the current 22.x series.
+22.x keeps the same COPYING, but bumps the soname to
+libupnp.so.22/libixml.so.22, and upstream dropped autotools in
+favour of CMake, so switch to the cmake class.
 
-Changes:
-- Breaking (1.2.2): set_key/unset_key and the CLI set/unset no longer
-  follow symlinks unless follow_symlinks=True; the original file mode
-  is preserved instead of being reset to 0600. Python 3.9 dropped.
-- 1.2.2: Python 3.14 (incl. free-threaded) support; dotenv run
-  forwards flags to the command.
-- 1.2.3: strip leading UTF-8 BOM; set_key escapes backslashes; friendly
-  error for dotenv run without a command.
-- 1.2.4: dotenv get no longer exits 1 for empty values; fix parsing of
-  empty unquoted value followed by comment; dotenv run --no-override
-  expansion precedence fixed.
+Upstream defaults CMAKE_BUILD_TYPE to Debug, which also exports a
+public -DDEBUG to consumers, so pass Release explicitly. Keep
+SO_REUSEADDR on the miniserver socket (replaces --enable-reuseaddr),
+and disable samples, static libraries, tests and the FetchContent
+dependency download. Add an openssl PACKAGECONFIG for the optional
+SSL support.
+
+The large-file CFLAGS are dropped: upstream now detects and sets
+_FILE_OFFSET_BITS itself and exports it to users via its CMake
+config.
+
+Reverse dependencies gerbera and mpd (upnp enabled) build and link
+against libupnp.so.22.
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- ...y-skip-two-test-when-running-as-root.patch | 39 -------------------
- ....2.1.bb => python3-python-dotenv_1.2.4.bb} |  3 +-
- 2 files changed, 1 insertion(+), 41 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python3-python-dotenv/0001-test_main.py-skip-two-test-when-running-as-root.patch
- rename meta-python/recipes-devtools/python/{python3-python-dotenv_1.2.1.bb => python3-python-dotenv_1.2.4.bb} (79%)
+ .../{libupnp_1.14.31.bb => libupnp_22.2.2.bb} | 22 ++++++++++++-------
+ 1 file changed, 14 insertions(+), 8 deletions(-)
+ rename meta-multimedia/recipes-connectivity/libupnp/{libupnp_1.14.31.bb => libupnp_22.2.2.bb} (57%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-python-dotenv/0001-test_main.py-skip-two-test-when-running-as-root.patch b/meta-python/recipes-devtools/python/python3-python-dotenv/0001-test_main.py-skip-two-test-when-running-as-root.patch
-deleted file mode 100644
-index 154ab559a4..0000000000
---- a/meta-python/recipes-devtools/python/python3-python-dotenv/0001-test_main.py-skip-two-test-when-running-as-root.patch
-+++ /dev/null
-@@ -1,39 +0,0 @@
--From 68e4f05ece6b20e8a7d914d047185483373db759 Mon Sep 17 00:00:00 2001
--From: Jan Vermaete <jan.vermaete@gmail.com>
--Date: Mon, 10 Nov 2025 18:04:27 +0100
--Subject: [PATCH 1/1] test_main.py: skip two test when running as root
--
--Upstream-Status: Inappropriate [oe-specific]
--
--The patch will only work for Linux and not for Windows.
--And it's not common to run the tests of a Python module as root in the
--not Yocto world.
--
--Signed-off-by: Jan Vermaete <jan.vermaete@gmail.com>
-----
-- tests/test_main.py | 2 ++
-- 1 file changed, 2 insertions(+)
--
--diff --git a/tests/test_main.py b/tests/test_main.py
--index 4496111..182bc33 100644
----- a/tests/test_main.py
--+++ b/tests/test_main.py
--@@ -61,6 +61,7 @@ def test_set_key_encoding(dotenv_path):
--     assert dotenv_path.read_text(encoding=encoding) == "a='é'\n"
-- 
-- 
--+@pytest.mark.skipif(os.geteuid() == 0, reason="Skipping becuase user is root")
-- def test_set_key_permission_error(dotenv_path):
--     dotenv_path.chmod(0o000)
-- 
--@@ -167,6 +168,7 @@ def test_unset_encoding(dotenv_path):
--     assert dotenv_path.read_text(encoding=encoding) == ""
-- 
-- 
--+@pytest.mark.skipif(os.geteuid() == 0, reason="Skipping becuase user is root")
-- def test_set_key_unauthorized_file(dotenv_path):
--     dotenv_path.chmod(0o000)
-- 
---- 
--2.47.3
--
-diff --git a/meta-python/recipes-devtools/python/python3-python-dotenv_1.2.1.bb b/meta-python/recipes-devtools/python/python3-python-dotenv_1.2.4.bb
-similarity index 79%
-rename from meta-python/recipes-devtools/python/python3-python-dotenv_1.2.1.bb
-rename to meta-python/recipes-devtools/python/python3-python-dotenv_1.2.4.bb
-index 416dec3a17..7b59ad5a13 100644
---- a/meta-python/recipes-devtools/python/python3-python-dotenv_1.2.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-python-dotenv_1.2.4.bb
-@@ -4,9 +4,8 @@ LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=e914cdb773ae44a732b392532d88f072"
- RECIPE_MAINTAINER = "Tom Geelen <t.f.g.geelen@gmail.com>"
+diff --git a/meta-multimedia/recipes-connectivity/libupnp/libupnp_1.14.31.bb b/meta-multimedia/recipes-connectivity/libupnp/libupnp_22.2.2.bb
+similarity index 57%
+rename from meta-multimedia/recipes-connectivity/libupnp/libupnp_1.14.31.bb
+rename to meta-multimedia/recipes-connectivity/libupnp/libupnp_22.2.2.bb
+index 6ba21971d0..252f5cf478 100644
+--- a/meta-multimedia/recipes-connectivity/libupnp/libupnp_1.14.31.bb
++++ b/meta-multimedia/recipes-connectivity/libupnp/libupnp_22.2.2.bb
+@@ -8,15 +8,21 @@ HOMEPAGE = "http://pupnp.sourceforge.net/"
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=394a0f17b97f33426275571e15920434"
  
--SRC_URI[sha256sum] = "42667e897e16ab0d66954af0e60a9caa94f0fd4ecf3aaf6d2d260eec1aa36ad6"
-+SRC_URI[sha256sum] = "f0d53e69935a851c0dcc78f3ab7aaccd8cabef0b92382b576b824212902873c0"
+-SRCREV = "79ff958ed1012e60faba84981481f76cea43c7f2"
+-SRC_URI = "git://github.com/pupnp/pupnp.git;protocol=https;branch=branch-1.14.x;tag=release-${PV} \
++SRCREV = "fac0494691434c35243131f66a0b27ea0c29f700"
++SRC_URI = "git://github.com/pupnp/pupnp.git;protocol=https;branch=main;tag=release-${PV} \
+           "
  
--SRC_URI += "file://0001-test_main.py-skip-two-test-when-running-as-root.patch"
++inherit cmake pkgconfig
  
- inherit pypi python_setuptools_build_meta ptest-python-pytest
+-inherit autotools pkgconfig
++EXTRA_OECMAKE = "\
++    -DCMAKE_BUILD_TYPE=Release \
++    -DUPNP_BUILD_STATIC=OFF \
++    -DUPNP_BUILD_SAMPLES=OFF \
++    -DUPNP_ENABLE_TESTING=OFF \
++    -DUPNP_ENABLE_TESTING_INTEGRATION=OFF \
++    -DUPNP_MINISERVER_REUSEADDR=ON \
++    -DDOWNLOAD_AND_BUILD_DEPS=OFF \
++"
  
+-EXTRA_OECONF += "--enable-reuseaddr"
+-
+-# Enable LFS support ( for samples )
+-CFLAGS += "-D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE"
+-CXXFLAGS += "-D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE"
++PACKAGECONFIG ??= ""
++PACKAGECONFIG[openssl] = "-DUPNP_ENABLE_OPEN_SSL=ON,-DUPNP_ENABLE_OPEN_SSL=OFF,openssl"
