@@ -1,65 +1,65 @@
-Received: from mail-dy1-f172.google.com (mail-dy1-f172.google.com [74.125.82.172])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.34288.1794851652990450495
+Received: from mail-dy1-f182.google.com (mail-dy1-f182.google.com [74.125.82.182])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.34282.1794851648546610145
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 16 Nov 2026 09:54:13 -0800
+ Mon, 16 Nov 2026 09:54:08 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=ufHoQz3M;
- spf=pass (domain: gmail.com, ip: 74.125.82.172, mailfrom: raj.khem@gmail.com)
-Received: by mail-dy1-f172.google.com with SMTP id 5a478bee46e88-380b40312e2so1298064eec.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 16 Nov 2026 09:54:12 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=k5EGNl6+;
+ spf=pass (domain: gmail.com, ip: 74.125.82.182, mailfrom: raj.khem@gmail.com)
+Received: by mail-dy1-f182.google.com with SMTP id 5a478bee46e88-36a315ed211so103921eec.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 16 Nov 2026 09:54:08 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794851652; x=1795456452; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1794851648; x=1795456448; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=pKKjMINjwHLbPxP5hplK5rLAILCFnXJxtFOhpp5m8jE=;
-        b=ufHoQz3M9lqK69aBntK8z1GyIxTMjJ+hNduma+06RjJhcUYtFy9Aa0DtGjz/hGNVG5
-         X4LvQW1jX2o4tnf/OfUwS7yyVddKFKOulN6OiIx7LISnKyBQnX2fcx6tKp5SWptgsKxs
-         NzzQB7HdrNpcf17dDdoNPjNec06pk0h43aHoGi4egS6lsEOuzzEorci1Xmu+zyDK3j1t
-         h+TdR2GYWMydh/F31+g174bIrNQSPP04WrCQ6K83rWGSAR34iPI7h1IV4Xh5s0FQQD8/
-         HHJlr2A83q9HIoVpDue7uiE2uhJHnOtRRewI9qQYgolIymCV0DQG9VgH3yg2J46NAppX
-         2maA==
+        bh=MZHTOYpPWzzQcvE6RrBd2wj2gWV0ll/64BAg3ybEYXY=;
+        b=k5EGNl6+nE+/SsxU6sUOH5tZbcO1PajR3nictk5TeLJAtBNkggF460nw7nUPdG/LL/
+         HCiIh+v0uOHdQU/vXFy62MSnVds/7kU6J20pb7iCHGsgRYKg9GXhHuryOidXnUNGceQ9
+         eNwOcw0JKXDSiX5rJd8wJwakj2lKcJbA1GblwWJVvuxDOk+izv+4zv1Jph936ZYm35n/
+         VierxWlriX8k8vM95hhOgChDTirAsFnGWCrT6tCaIDGAjxReJdl77VHY9RNvZMcpvnAj
+         vkv7AO0D5vDlZyU8gwXv6KXb9PX41FduYATCDYhC6LAdHcgt8Coru8bMQO63uY0y+5TL
+         We8g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794851652; x=1795456452;
+        d=1e100.net; s=20260707; t=1794851648; x=1795456448;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=pKKjMINjwHLbPxP5hplK5rLAILCFnXJxtFOhpp5m8jE=;
-        b=npeb90VH+KqLv1NXnBznv7TAPmxdpC3amJ3Hfkcnz351+E5c5Cf0hgIQh/tTLhSa73
-         pKUxMi/SlCdKooVulufL2vJf6xavuz5kLXA/G9/5Ji/m7Nrc3TH482KpmTbmFqrSQT2j
-         pOfo40iOcG+h7ghzf6XJ5yx78kP4i54QA224d4W7eJyAp1SYDAFg4oMMFLEjrPXbf3EE
-         w5BORLDmJ/XwSjA5mU05HzSHU8jwVStwfzccW+woA48NUepjUfRp15ckOhwTOuiT1izD
-         u7No13ZHin/PJOs16yhrArpqjw15r2AoNtx4V5G+vCaRHtyLJVEyGRiAE5dD5rKoCL84
-         QOzQ==
-X-Gm-Message-State: APuU4Z9W3oupUZIEL+7Fk0hwI93NiwhtWAxeUkOhCoWYt3I9qJaT6PiW
-	WQMzqQ21u15ZVJbCXGi84tedxZ5LM5HYoly5h9neQo4SqbKhoNIyst8DdK7hwXXk
-X-Gm-Gg: AZFdTZcc9lry2FUBASOhmmYnXHNoDI0PwL0UAJjEgJBIoQC1TCk/ccD3D+dp4Fcoadc
-	VUsQdeaJF+3JbKRg9xAmPrjbZKHT4XYnQutGKY2bZhi2dscyACRojaAjwq1uD3NZu3TGh3MWTWV
-	/kEt1kT04e0u5W/EHrLDEnkXvzeLvM3ddXewbKl5eqepf5v6rKMd5r0oqX+ZcytF64ZGVotYuaG
-	/MGRB3g3bM9orOqFb8G+Go7+qBvKKICwBJDhdOT6w6xgwmKrYAXTfXnX1I+Ugadzvszb1qt0SDm
-	uVfSEDmzBjsHJAyBSu8aX0oVXls6/PnRGdEOaTC5OKR+664cNnTS9L7JR0DuqIClQqmaxwJxIfo
-	FIn/Dk+eUVJrMdSN6xgxQ9WGRcvrKH6nrPetCH5HzhWQ7Heo53kajTBKtcC1iPf1hT4ceoQyNOJ
-	ehdqxrxu99fTIkGgyPtW/IdmiuvbJiw6ldULQhjgJYwBwjChHHdQjCSNoL4pURFydS6Gd355m4M
-	t5K3bHfiz9vcPfloa76mXlfO6EfwbX3AeTFOz6uCkDoSpHogrGuuhFGQpIwW2OH9hXyD4loApDA
-	R/HCRBbAelgga/DF+S9UZOLsBooL1zjdwABDQrk7BV5xZLJ2JmH/5rc1l8+Go7ntqmndW4p06A7
-	2N6cabvYg2VIZ58pDTpPJsJVpJxFCvRDdkAFhgdSz0Z0E2aqSSuVVZnneSOom3tADm7LsF6pNRZ
-	FywQmR72n1je5tbQCCa2BwMfWZAjHU2ZcSb8hdJMPkLhXtig8RhOKdpR8eLCYvr304DcGlqTk8W
-	IAkuiI0gBuaurGjxIQrvIDjrXtIESZZeaeFbFd8n+LnWdy7BSsSmCz9yV+Wy33MASmMdcidaQh0
-	eas0
-X-Received: by 2002:a05:7300:f797:b0:378:d42c:5064 with SMTP id 5a478bee46e88-379676f55ecmr11408272eec.41.1794851652226;
-        Mon, 16 Nov 2026 09:54:12 -0800 (PST)
+        bh=MZHTOYpPWzzQcvE6RrBd2wj2gWV0ll/64BAg3ybEYXY=;
+        b=kWbR2riz0ru9BqaN/zcy5dVmE9DbKplGd/NyqcuwRkoUaABxRPa7E7k/ZmWt7l0S68
+         j6rH/NR80zfQKAL3EAq363nHtvrbRJJ7VXIa8VoL4IKM3Y8pLfbMuHqTYyBjBiF9guLf
+         qv8xlZ1pGcqiabDulBGePWsdLgkj8jTDrJgfY1rnjgQJZfc6cSYemQisL8VK622O5Q5F
+         DQB1merIhtlKybNybLPP5JACHuFKdnw9O+5sVdQfh/Opf6c89IIPYz0CI5lBCHmGNL7n
+         88ZqJNcNT0Njre+imztzhYSipq0/x0MNWiftG9ZesAF57th8A+AUwe4+JwDFrsAyLd3p
+         ik3w==
+X-Gm-Message-State: APuU4Z+9Bb8khU0VipJzj03+ulhW2aO/NK8Cpi6Edx1aiuRwoLQ63E59
+	gxw1RUWlg4oYDhfreDDBpcNCDZklGylGdeQsAg3Ja0caQizTNBMvn3NkvcRRDmwc
+X-Gm-Gg: AZFdTZfrBfjKvzDO9hlpacs9Ncwulz8EJL9tiLEP0hs0/Pa5Dpe7NAaSqg8/zOm0RyT
+	XooovqZx4ueado1MHCFbbUbjLewy3IPW+74Rvlt3rmG9yHCrHTvgdKc0twJiBvoDWyRPdCF3LXW
+	t6gHRQXlfz+hOYPLe1GrWErGOhdw26t2aCx4a6dv+q+uUZRIQW48pZbBr+SsNSgLEwtalCZzQRV
+	i6W5IbYYlUnZkBNAg7wrBF23tIv35Gyzlbepe+DIHWYCRuBTScEDGQ5o3nPX5ZB+GE6L9sDnkxV
+	dxkjTRm54Cr+uO9c3f58z5ebUPewGwE9edG30LBF7wCw75jIZkbA5qYuAB4VzAZyWiY8KyQ+HTd
+	HAWRoJgRNg0PD/59+Ik6cLAGkfhHEoPd8BeqzemSLSy5a3IOZawvofY+sRRoFm2iRwtUWvK8X2m
+	JmjoCyeR81FQoiQclIJk8nVpHAU0YZc429E3ODUImFtdV7QbSAWA2HUw9QardDrmUW+fXXcGsxq
+	bCdqfrO9g1huqpJYHzwKXz7+6jV7u7tNx8hp9IyXQI2rfSkCXp5ZeGWgzkqVemaxXSCrD/cuPr8
+	/PiQ93uYsqSVb8rFneZ37CrLbfMssIXOZMkra+NhTU1igX+zPkfWPs1+luapvQ3qqsWTGRKC7pg
+	YfIo2nfND0e7lu6VthrITk85uUhvByoEpVK0FG/TgOVQc1jGypAD4r60cwvWPYo7j7L88/f8RN9
+	Ov4G04OI6NgwGNfK6Qz95sOjjaDaf1k3SF2xHpiLfUsyl1BfOhe1T4kBQTM5PO/Dp0ivvqd1Gzo
+	O6KpPVDuyVPzRTwWE+i6aYi4VxhsMmt0c37QAEdLnX0GnqFNZGK9Dzu5yOxW9FcyssilmtSC4Ks
+	++oy
+X-Received: by 2002:a05:7300:e922:b0:381:120a:c7e6 with SMTP id 5a478bee46e88-381121a0e13mr164377eec.26.1794851647627;
+        Mon, 16 Nov 2026 09:54:07 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-379560f5e06sm48391884eec.19.2026.11.16.09.54.11
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-379560f5e06sm48391884eec.19.2026.11.16.09.54.05
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 16 Nov 2026 09:54:11 -0800 (PST)
+        Mon, 16 Nov 2026 09:54:06 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-python][PATCH 007/105] python3-bitarray: upgrade 3.12.3 -> 3.12.4
-Date: Mon, 16 Nov 2026 09:52:19 -0800
-Message-ID: <20261116175359.342679-7-khem.raj@oss.qualcomm.com>
+Subject: [meta-python][PATCH 004/105] python3-async-timeout: upgrade 4.0.3 -> 5.0.1
+Date: Mon, 16 Nov 2026 09:52:16 -0800
+Message-ID: <20261116175359.342679-4-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.1
 In-Reply-To: <20261116175359.342679-1-khem.raj@oss.qualcomm.com>
 References: <20261116175359.342679-1-khem.raj@oss.qualcomm.com>
@@ -67,34 +67,40 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Mon, 16 Nov 2026 17:54:14 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132463
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132460
 Content-Type: text/plain; charset="utf-8"
 
 Changes:
-- Free-threaded CPython support is now considered stable.
-- Require PyPy 7.3.23 or higher.
-- Linux wheels built in parallel; RISC-V wheels added.
+- 5.0.0: asyncio_timeout is now fully compatible with the standard
+  asyncio.Timeout while keeping the old asyncio_timeout.Timeout API.
+- Breaking: drop the deprecated sync context manager support; use
+  "async with timeout(...)" instead.
+- 5.0.1: miscellaneous fix only (issue 423).
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- .../{python3-bitarray_3.12.3.bb => python3-bitarray_3.12.4.bb}  | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-bitarray_3.12.3.bb => python3-bitarray_3.12.4.bb} (81%)
+ ...3-async-timeout_4.0.3.bb => python3-async-timeout_5.0.1.bb} | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-async-timeout_4.0.3.bb => python3-async-timeout_5.0.1.bb} (83%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-bitarray_3.12.3.bb b/meta-python/recipes-devtools/python/python3-bitarray_3.12.4.bb
-similarity index 81%
-rename from meta-python/recipes-devtools/python/python3-bitarray_3.12.3.bb
-rename to meta-python/recipes-devtools/python/python3-bitarray_3.12.4.bb
-index dff01f0aa9..e25bfb82fb 100644
---- a/meta-python/recipes-devtools/python/python3-bitarray_3.12.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-bitarray_3.12.4.bb
-@@ -4,7 +4,7 @@ HOMEPAGE = "https://github.com/ilanschnell/bitarray"
- LICENSE = "PSF-2.0"
- LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=6abe80c028e4ee53045a33ae807c64fd"
+diff --git a/meta-python/recipes-devtools/python/python3-async-timeout_4.0.3.bb b/meta-python/recipes-devtools/python/python3-async-timeout_5.0.1.bb
+similarity index 83%
+rename from meta-python/recipes-devtools/python/python3-async-timeout_4.0.3.bb
+rename to meta-python/recipes-devtools/python/python3-async-timeout_5.0.1.bb
+index 33a8bc7896..699bcea711 100644
+--- a/meta-python/recipes-devtools/python/python3-async-timeout_4.0.3.bb
++++ b/meta-python/recipes-devtools/python/python3-async-timeout_5.0.1.bb
+@@ -8,11 +8,10 @@ HOMEPAGE = "https://github.com/aio-libs/async-timeout"
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=4fa41f15bb5f23b6d3560c5845eb8d57"
  
--SRC_URI[sha256sum] = "919e35a951c0a551631b94bf568f3f5e38d004e0c60866cb2ca51bd8c4778fec"
-+SRC_URI[sha256sum] = "1f8bdf27eea32ab5783e32d3df105bab429e8097adc95d6307635238cfb5d366"
+-SRC_URI[sha256sum] = "4640d96be84d82d02ed59ea2b7105a0f7b33abe8703703cd0ab0bf87c427522f"
++SRC_URI[sha256sum] = "d9321a7a3d5a6a5e187e824d2fa0793ce379a202935782d555d6e9d2735677d3"
  
- inherit python_setuptools_build_meta pypi
+ inherit pypi python_setuptools_build_meta
+ 
+-PYPI_PACKAGE_SDIST = "async-timeout"
+ 
+ DEPENDS += "python3-wheel-native"
  
