@@ -1,126 +1,171 @@
-Received: from mail-dy1-f182.google.com (mail-dy1-f182.google.com [74.125.82.182])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.22468.1794808959747431811
+Received: from mail-dy1-f180.google.com (mail-dy1-f180.google.com [74.125.82.180])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.22056.1794808967653587932
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 15 Nov 2026 22:02:39 -0800
+ Sun, 15 Nov 2026 22:02:47 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=OyYvHymO;
- spf=pass (domain: gmail.com, ip: 74.125.82.182, mailfrom: raj.khem@gmail.com)
-Received: by mail-dy1-f182.google.com with SMTP id 5a478bee46e88-37986eb6fa2so3626263eec.0
-        for <openembedded-devel@lists.openembedded.org>; Sun, 15 Nov 2026 22:02:39 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=fukKQ3+z;
+ spf=pass (domain: gmail.com, ip: 74.125.82.180, mailfrom: raj.khem@gmail.com)
+Received: by mail-dy1-f180.google.com with SMTP id 5a478bee46e88-37071c0f42aso4512697eec.0
+        for <openembedded-devel@lists.openembedded.org>; Sun, 15 Nov 2026 22:02:47 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794808959; x=1795413759; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1794808967; x=1795413767; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=RKtnidX9F8tXCxy7X3lDylidvm81ngfvjVm1SyEg8jw=;
-        b=OyYvHymOmQL0X7lkKzcqRMFX27T5CzC+qEPMAEpYDmVryC0ggz63CrIDhBEv8uPFDN
-         yiyiwzs2vScyD51t2woGpGqW8BtQC+prjj739oSbM7vxzXiUsIjaiW6KpV9zSbHmwVtX
-         EFn7+XwwnXwj89zq5I2TkFsT9WBxKSHffS8lXmVKdU5ANVWLKGwx2sVQL56fmITCJVmg
-         auFHNuhb1qs6YHQV0sV7wWgsz0VU77XHRrHWzA4NxgljI3YQQivBUlZG+TbpuSbg8Gnx
-         3+TjSAaO01N14F2oXjS9YW1dYOvC0w/r+Mjt59f5INIWWfCbCWwgCw5Gz0X+jPJ2f9GO
-         3NKg==
+        bh=wHmzvzmOrHET4FqHYlt5GpAwVWQBF14zXy4fipkWg+g=;
+        b=fukKQ3+zhlhNl5Zv56oB72EysOxUSsZcNr97Nf7BjGwyfCdFojUuhu6M0pdUcelw82
+         xoJwWIr4PiCYsdy/Zuliyw+lSac4FwmD7ALFvTPSBqIWVtSLlvLB0IKXzvEwQPmPySEN
+         nKIaCmHKMrRr2sItDi4IbyemYozape6K5IxbRF0m6cUvg1gLXa2wAR8ocMiEbrB7A9Li
+         Xf3j7I+uf5HKCp/ngZuNryhHnU4eBjV9GKQZRUIAz0XXCKdZPLpmpw0p2VCayfsmVgNo
+         JVBVLWGC9/YEIULRv12/Y7S6HeqoFa36TRKvfk0/Vn1NrICEHFltKKVahfgQe/nBn02c
+         cS2Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794808959; x=1795413759;
+        d=1e100.net; s=20260707; t=1794808967; x=1795413767;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=RKtnidX9F8tXCxy7X3lDylidvm81ngfvjVm1SyEg8jw=;
-        b=FIht2/AzyTYo0dFtpGejuWeDrHuVvzhqdaobUWZFe6bobOarqpiSllYXvEH/YcFhDS
-         YrFLg4Ea/xoSUyPFoUlzXZYp24qsGfS7jGF0gUghgGzDO1O/fCXBsy4i3SVzOW0F0p6Y
-         iAS1chWExppGd98TOwSuaTfw4Yj9i8//rE+XyvfVI3ThNvHem3u136T0FEsL0/Cp30l5
-         yMlG5URIYtBQDvgOKrccG3CGS2GCIMxf2EqL5k4C2GFiZ5uoUfR8GVUbGEvP3Suav8Ph
-         5STLbpkycNAQ219O9cXODqIbVP2Z3xSAvlQRCZhkyyr9afxBnljkmxxFymXmfQl0wFFK
-         M3eA==
-X-Gm-Message-State: APuU4Z+vjqSYROmiS2zJOU+mqni0ShTnmBqd9fjBC/BeEhydwQbqmiIi
-	SE6iV24U3znO1IHjNEuQTiX0IlocXbdDv57bkjvnzmj7IfXepg4ukKOtOyNrIPD9
-X-Gm-Gg: AYBFou1FgJDqFZzpZdCYAwx8m7n7UahbTlUBie65hkOpFu6ol2WF5BHFa/dz7bQJk9l
-	XkZMPz1H6yrrv5xYIaZulXqgGvK3vBs/QRP5ahZk5ykMKS+v6DzoGpcSI0F2ldiHfe0EHs+GZR+
-	4IZFpjpOikpWgoi1Lmg3nfVqD72uB0+NR1jlNdyOYxhDN48EOpkXKTdsQyZA9tZp8clgqrpt8P5
-	ISkFuFEjPQUUonmWWrvFig5w1/p8CPyQrQa2hzE+ZlQL3ZhT0EEPrnGoiGW/4EVwxqA7gjLpdQ/
-	2mHWhQ2Ui2OGJDI4lGF3SEcQ4yqRkunQG4NhFI3I0anxAH4T+Rkh0Zpgg8Zxse+JKmijM/qe0A3
-	1I+2A7go+Fgk5wZ43AI13XOAlEsMyTbE29TsyJ7vW1RiyyBuHOgpZQFHgDbBNt4sirFzkuaZeIk
-	A+uOfnY28lkmn+t2Ku4pudmiafKqrlE6USltQlVUz46Km6ffqbQt2LWbkhkcuEFb+py3baSRhgB
-	SKy9uioORdfLIByUF00F5eFJeLWVhKsa1gnyRizTUorCj+Pq1d8LTekIU+aqqIhI/7ClFnbF6SO
-	UitpkSbi1+Kbz0bLgCStQxuhGIU+b+O/5GmdhCYt2yyt6ZKH9eHxJGg7eLFyMaSnbuA1iW2a6vK
-	V5antCvJ3dNNSTFdlSFYK6te5PsA/FSpGJHXIQpm7WQccXCscGMPt+zW5xNUaJFmJSd5w1BEm7h
-	5y0mtyhz47P1OLZ6RM9GLsVsr7AMRs2yf8L7yRXwc5AzNCX3rrYd/dP7zZ8qsYPqMJ957IjMLLi
-	zRleqjF9h911V3GqPSyuBs/ym2K/8Bhy5V70OFCOPMDxXz+hyqISx1aQrZjVnDgguoZKYQE91sw
-	uXPg
-X-Received: by 2002:a05:693c:41c7:20b0:371:ede8:3e9b with SMTP id 5a478bee46e88-379680cf32amr9647195eec.36.1794808958888;
-        Sun, 15 Nov 2026 22:02:38 -0800 (PST)
+        bh=wHmzvzmOrHET4FqHYlt5GpAwVWQBF14zXy4fipkWg+g=;
+        b=q+7Ut4t51oHTEMtyl26qGAlkd6TszfZskpNXJnt/SnYpsKfsGuoxclyC5htFBeqAi0
+         aCvfY/FKmyal92044T2ufsvcL/YCoJnfdmIloBzcMc19RrZqdTPCz6QEu92CMkf93ewg
+         95eFSBqbIiRPfzmLk0TETz3qWTXR5cu1cJC2CSb6XPfR0x8sM9XioUhZDzsmQp4/7UVC
+         L1w0rDr4aR07JI58jc0aSHBUJpGKx+sppH6fR18MALXr4sHulROEOLXKdb1WRX6Xmbb0
+         x286QtXNxp3/vGg+vxxlB1x4En6F7tLUTPodvTbppbjmFMSOlE2Gyy7FqQZ0k61hn3dL
+         xNKQ==
+X-Gm-Message-State: APuU4Z/TaBre5lVBNdMV+fxe2O++FAAvGefVLQQIK5TAHJfxr1v+nQdq
+	obL61Ra6tg7JmW6oguR2tgDgg1wX6mGAcUhTlKuzJr1h48spFr3OLbtYY2NDRhbI
+X-Gm-Gg: AYBFou0LJcFOAAgoNRqXodC4Cyt6k2YN3hBkz1zH60+g+aEmCMStQ27z9aIWOo5RGb0
+	QoM1Y4Mhpp3wlKm53NEDeuWL/og6BEHkPdaqL+CZ2/1OmOJ31jYHqUFHsRMgj18+/VZCK80ZsOB
+	n2DtLRl4Z3Jdsjhd13JTWIjhvXApYmsBJgVr40SYlYTrJT34/K+wX5aAcYtw4ko4ygwVLR/rlGU
+	I4aqEiJhStTXaMwYROCwhCqw0H2+OHkwW+dfLFgTrD9xmhITj0JuYvjWRzEkX1Xr7D0LBRqFW7p
+	B3RvXeifoD+oZxS/FG9J/eY9js3kyEVNzAAgMdmZGxeL14ny/uB4WaunDmJtHI9X4HEqhydcvki
+	j/HnT0fULqAuJefspWpQBMP/bi+CYeyjNHPrDdK1ewPtRpNY4GZ2Qn9qB8J3wejPA8srDhAuGXG
+	nP7nJ1dfB98i+X0WCWMY0ae+j9dC68fjpZaQRoYmj1vmttCb5pzFUd666IUH34GCkPZzZ3Ryoio
+	9xUdahcbSs/1q1iDg7lTU2rFAmA8hCmyed8rjw7bHiC6g7QoXxKNGp4Z/ioeDhisYU1spf9EQHA
+	Lv5V2oY+EOVW7TTOG9KzuWjY4wHmYGidjyLOhD0kUg9mvxTNYgJO49eggxfGj7Dyu8zk/xuJNFH
+	30kUwECh1vugaerj/77jSqoCFt2Md8Y17tj8YL0cDNAUYshARlTAvVNoZUR43eUm9ighgIM2dT4
+	O3xzr3D/2LMhJQ1uVPOYF9SRo/IGo7IRASZ1GMNUszr4ZOFaA7J58CLCz58uwTLHLAgFGVogpOd
+	xsRNK74NkWjzOHbEWtRti9bZ19hHwtvCSvOCgQj6Ok9LlV+lcWsJNyN0SiQnnEwJAjvzX8cfKEZ
+	gzoDNAndes0NknQoxX5HtAbWNw==
+X-Received: by 2002:a05:7300:231c:b0:36f:3c7e:3c13 with SMTP id 5a478bee46e88-37967ae7f85mr14433528eec.22.1794808966679;
+        Sun, 15 Nov 2026 22:02:46 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-379553316fdsm31410262eec.5.2026.11.15.22.02.38
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-379553316fdsm31410262eec.5.2026.11.15.22.02.45
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 15 Nov 2026 22:02:38 -0800 (PST)
+        Sun, 15 Nov 2026 22:02:45 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-xfce][PATCH 24/30] libxfce4util: upgrade 4.20.1 -> 4.21.0
-Date: Sun, 15 Nov 2026 22:02:02 -0800
-Message-ID: <20261116060209.2916444-24-khem.raj@oss.qualcomm.com>
+Subject: [meta-xfce][PATCH 30/30] parole: upgrade 4.18.2 -> 4.20.0
+Date: Sun, 15 Nov 2026 22:02:08 -0800
+Message-ID: <20261116060209.2916444-30-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.1
 In-Reply-To: <20261116060209.2916444-1-khem.raj@oss.qualcomm.com>
 References: <20261116060209.2916444-1-khem.raj@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Mon, 16 Nov 2026 06:02:40 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132422
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Mon, 16 Nov 2026 06:02:50 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132428
 Content-Type: text/plain; charset="utf-8"
 
-The 4.21 series is built with meson only and released as .tar.xz.
-Switch to meson, drop the autotools vapigen.m4 workaround and
-intltool-native, and use the gtk-doc meson option name.
+The release tarball is .tar.xz and is made for meson, the autotools
+build cannot find a native glib-compile-resources. Switch to meson,
+map the PACKAGECONFIGs to the meson options, add x11 and wayland, drop
+clutter which is gone and the Makefile.am patch, and add
+dbus-glib-native for dbus-binding-tool.
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- .../libxfce4util/libxfce4util_4.20.1.bb           | 15 ---------------
- .../libxfce4util/libxfce4util_4.21.0.bb           | 14 ++++++++++++++
- 2 files changed, 14 insertions(+), 15 deletions(-)
- delete mode 100644 meta-xfce/recipes-xfce/libxfce4util/libxfce4util_4.20.1.bb
- create mode 100644 meta-xfce/recipes-xfce/libxfce4util/libxfce4util_4.21.0.bb
+ ...0001-Makefile.am-fix-compile-failure.patch | 31 -------------------
+ .../{parole_4.18.2.bb => parole_4.20.0.bb}    | 18 ++++++-----
+ 2 files changed, 11 insertions(+), 38 deletions(-)
+ delete mode 100644 meta-xfce/recipes-multimedia/parole/files/0001-Makefile.am-fix-compile-failure.patch
+ rename meta-xfce/recipes-multimedia/parole/{parole_4.18.2.bb => parole_4.20.0.bb} (51%)
 
-diff --git a/meta-xfce/recipes-xfce/libxfce4util/libxfce4util_4.20.1.bb b/meta-xfce/recipes-xfce/libxfce4util/libxfce4util_4.20.1.bb
+diff --git a/meta-xfce/recipes-multimedia/parole/files/0001-Makefile.am-fix-compile-failure.patch b/meta-xfce/recipes-multimedia/parole/files/0001-Makefile.am-fix-compile-failure.patch
 deleted file mode 100644
-index 44a4308899..0000000000
---- a/meta-xfce/recipes-xfce/libxfce4util/libxfce4util_4.20.1.bb
+index f84f6e5388..0000000000
+--- a/meta-xfce/recipes-multimedia/parole/files/0001-Makefile.am-fix-compile-failure.patch
 +++ /dev/null
-@@ -1,15 +0,0 @@
--SUMMARY = "Basic utility library for Xfce4"
--HOMEPAGE = "https://docs.xfce.org/xfce/libxfce4util/start"
--SECTION = "x11/libs"
--LICENSE = "LGPL-2.0-or-later"
--LIC_FILES_CHKSUM = "file://COPYING;md5=4cf66a4984120007c9881cc871cf49db"
--DEPENDS = "intltool-native xfce4-dev-tools-native glib-2.0"
+@@ -1,31 +0,0 @@
+-From 34ff86795396c320a9e19641d9d226190b7fdfc6 Mon Sep 17 00:00:00 2001
+-From: Changqing Li <changqing.li@windriver.com>
+-Date: Sun, 12 Apr 2026 19:30:23 +0800
+-Subject: [PATCH] Makefile.am: fix compile failure
 -
--inherit xfce gtk-doc gobject-introspection vala
+-Fix build failure:
+-/build/tmp/work/x86-64-v3-poky-linux/parole/4.18.2/recipe-sysroot-native/usr/bin/x86_64-poky-linux/x86_64-poky-linux-ld: parole-conf.o: undefined reference to symbol 'xfce_rc_close'
+-/build/tmp/work/x86-64-v3-poky-linux/parole/4.18.2/recipe-sysroot-native/usr/bin/x86_64-poky-linux/x86_64-poky-linux-ld: /build/tmp/work/x86-64-v3-poky-linux/parole/4.18.2/recipe-sysroot/usr/lib/libxfce4util.so.7: error adding symbols: DSO missing from command line
 -
--do_configure:prepend() {
--    # Remove vapigen.m4 bundled with sources so that the one shipped by vala is used instead.
--    rm -f ${S}/m4/vapigen.m4
--}
+-Upstream-Status: Submitted [https://gitlab.xfce.org/apps/parole/-/issues/146]
 -
--SRC_URI[sha256sum] = "84bfc4daab9e466193540c3665eee42b2cf4d24e3f38fc3e8d1e0a2bebe3b8f1"
-diff --git a/meta-xfce/recipes-xfce/libxfce4util/libxfce4util_4.21.0.bb b/meta-xfce/recipes-xfce/libxfce4util/libxfce4util_4.21.0.bb
-new file mode 100644
-index 0000000000..c8c98d8022
---- /dev/null
-+++ b/meta-xfce/recipes-xfce/libxfce4util/libxfce4util_4.21.0.bb
-@@ -0,0 +1,14 @@
-+SUMMARY = "Basic utility library for Xfce4"
-+HOMEPAGE = "https://docs.xfce.org/xfce/libxfce4util/start"
-+SECTION = "x11/libs"
-+LICENSE = "LGPL-2.0-or-later"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=4cf66a4984120007c9881cc871cf49db"
-+DEPENDS = "xfce4-dev-tools-native glib-2.0"
-+
+-Signed-off-by: Changqing Li <changqing.li@windriver.com>
+----
+- src/Makefile.am | 1 +
+- 1 file changed, 1 insertion(+)
+-
+-diff --git a/src/Makefile.am b/src/Makefile.am
+-index 920b708..244c14c 100644
+---- a/src/Makefile.am
+-+++ b/src/Makefile.am
+-@@ -90,6 +90,7 @@ parole_LDADD =						   	\
+- 	$(GMODULE_LIBS)				\
+- 	$(DBUS_GLIB_LIBS)                       \
+- 	$(LIBXFCE4UI_LIBS)                     \
+-+	$(LIBXFCE4UTIL_LIBS)                \
+- 	$(XFCONF_LIBS)                     \
+- 	$(GST_VIDEO_LIBS)			\
+- 	$(TAGLIBC_LIBS)				\
+---
+-2.34.1
+-
+diff --git a/meta-xfce/recipes-multimedia/parole/parole_4.18.2.bb b/meta-xfce/recipes-multimedia/parole/parole_4.20.0.bb
+similarity index 51%
+rename from meta-xfce/recipes-multimedia/parole/parole_4.18.2.bb
+rename to meta-xfce/recipes-multimedia/parole/parole_4.20.0.bb
+index 1d2c858a2d..29b17c6db4 100644
+--- a/meta-xfce/recipes-multimedia/parole/parole_4.18.2.bb
++++ b/meta-xfce/recipes-multimedia/parole/parole_4.20.0.bb
+@@ -3,10 +3,15 @@ HOMEPAGE = "https://docs.xfce.org/apps/parole/start"
+ LICENSE = "GPL-2.0-only"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
+
 +XFCE_COMPRESS_TYPE = "xz"
 +XFCEBASEBUILDCLASS = "meson"
 +GTKDOC_MESON_OPTION = "gtk-doc"
 +
-+inherit xfce gtk-doc gobject-introspection vala
-+
-+SRC_URI[sha256sum] = "205677cb96b778e5079eeac80f3a636d2a909b08fcf2aa05bfe4513c69c27f29"
+ inherit xfce-app gtk-doc mime mime-xdg
+
+ DEPENDS += " \
+     dbus-glib \
++    dbus-glib-native \
+     xfce4-dev-tools-native \
+     libxfce4util \
+     libxfce4ui \
+@@ -15,17 +20,16 @@ DEPENDS += " \
+     taglib \
+ "
+
+-SRC_URI += "file://0001-Makefile.am-fix-compile-failure.patch"
+-
+-SRC_URI[sha256sum] = "6625288b760d38a15c295051ecf66c556fcad21dd1516d6d661c2a582421ee0e"
++SRC_URI[sha256sum] = "5cf753e670d6518701133eb860d8bceb3a08a496af6a2b7cc67b93320230c983"
+
+ RDEPENDS:${PN} += "gstreamer1.0-plugins-good"
+
+-EXTRA_OECONF = "--disable-gtk-doc DATADIRNAME=share"
++EXTRA_OEMESON = "-Dtaglib=enabled"
+
+-PACKAGECONFIG ??= "notify"
+-PACKAGECONFIG[clutter] = "--enable-clutter, --disable-clutter, clutter-gtk-1.0"
+-PACKAGECONFIG[notify] = "--enable-notify-plugin, --disable-notify-plugin, libnotify"
++PACKAGECONFIG ??= "notify ${@bb.utils.filter('DISTRO_FEATURES', 'wayland x11', d)}"
++PACKAGECONFIG[notify] = "-Dnotify-plugin=enabled,-Dnotify-plugin=disabled,libnotify"
++PACKAGECONFIG[wayland] = "-Dwayland=enabled,-Dwayland=disabled"
++PACKAGECONFIG[x11] = "-Dx11=enabled,-Dx11=disabled,virtual/libx11"
+
+ FILES:${PN} += " \
+     ${datadir}/metainfo \
