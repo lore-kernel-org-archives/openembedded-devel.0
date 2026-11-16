@@ -1,65 +1,65 @@
-Received: from mail-dy1-f173.google.com (mail-dy1-f173.google.com [74.125.82.173])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.4799.1794866445129174533
+Received: from mail-dl1-f44.google.com (mail-dl1-f44.google.com [74.125.82.44])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.4801.1794866446108098003
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 16 Nov 2026 14:00:45 -0800
+ Mon, 16 Nov 2026 14:00:46 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=jN7cJu8g;
- spf=pass (domain: gmail.com, ip: 74.125.82.173, mailfrom: raj.khem@gmail.com)
-Received: by mail-dy1-f173.google.com with SMTP id 5a478bee46e88-38133db970bso310129eec.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 16 Nov 2026 14:00:45 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=EixB9xnl;
+ spf=pass (domain: gmail.com, ip: 74.125.82.44, mailfrom: raj.khem@gmail.com)
+Received: by mail-dl1-f44.google.com with SMTP id a92af1059eb24-1ae58d17cd9so3149557c88.1
+        for <openembedded-devel@lists.openembedded.org>; Mon, 16 Nov 2026 14:00:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794866444; x=1795471244; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1794866445; x=1795471245; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=A4WigBY1mSvw4gX6H1U9nT2An8VzMzyiA5wl+l+X4HU=;
-        b=jN7cJu8gY0kKiySaUwJjGfE75fm3zqzkZ6hvSt8iU8+b27UqBW96rJmHF+MnqkrXw9
-         RY0wkd7Q9N27HJXXufW7HvGX9Iv5jFowalXpT9X7obtQuklYb6gpjBxdrD5my89OzH7z
-         SwoCV0aGvQerzsSt4cUGsVTToRWODxlsasImnS+nuHkbljyMDalxTKZyY+v1Gb7J5ol+
-         mE0SEfbETy1i23y8yLrbHy1Xky2gULjwWuNiHEbFGiHlX9O3iobJmoTllIP9gh7+slNO
-         cKk9p/0EY6DeGKDBJDu601MxMYUY+8n5XsGu3emgh51KaA5rYnEQLudPhN5gAhPBZHbe
-         BKIg==
+        bh=2KcAEJ/d//yNkNn25R3m5JPPTPab3qI1ELoNHffGJTw=;
+        b=EixB9xnlut/UMUAXX901/1UF07/HYAWrbdT64UMLDwTy1dRJUgoWNL11wpsfFrxXXT
+         mvqQvrf1CPc5CnlewdI8lKpvoC61dSe5kyawXFANRj9RXAglvdygibayGDgA6RGyOOuM
+         ZJx2VfrV/pA12Y4WxrJiGVrCKzXYkpoqrfDCQBqwM4g6Wq6rw/Ciaad/5RUw1ycn4vhr
+         vKWBCBkmQp8uYKK1BdLOlFWEWB+fBSv7m2w3zuAh36rxz7bsuCy8cQAmEO5CA6KYbuKP
+         2wr6dR7dMpNMbVt3djZiQKWXbL9v3SqwM5mif0K+6zMXzlqRc//w4TMkWZe/f3tTo15F
+         y69w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794866444; x=1795471244;
+        d=1e100.net; s=20260707; t=1794866445; x=1795471245;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=A4WigBY1mSvw4gX6H1U9nT2An8VzMzyiA5wl+l+X4HU=;
-        b=2mWQHk7f4y4uWAousG1MsewcKccRm65PZJDfZNzbfpvBf8qyCXNmU4FnnB6VC61hp9
-         BOWTXzABD/s6qB69DPy9Lh4ljJNoh+zIPu3br05zXBx/pZOJnXyj1FZC0xMNUc4aYF0J
-         0uDN3TPPgzhk4aJOT4p9i19ULfIVH6lWoVxdbnVyp64uee/XPSA0/5CCODMmkIPq+s8r
-         zJQY3kTnSYSLYhIFuNSgdxBIqEhVc/7M1r72ZL9DuvLLDL9wcejYtf211EnADJ5yL5Ut
-         fscZ+PEEcAT730TYbZ07JR45BGB2sDxwK1xQaLu94CKpLZ/c1M4At2qom86WhXTpUH7t
-         U1vQ==
-X-Gm-Message-State: APuU4Z8VU2FCjF7WtlKqADjRNMUWPQDEzzN3vLxAYgNR9Pf7PvnKGvTR
-	K6S3HfQjJXSK+1i2z0akouWMeHIQUD+/UvkGUdE1gW99g9/haqpU/VsOmJEXoRJo
-X-Gm-Gg: AZFdTZeZNkHbxhdgDa4YtRlBbEG8vZVo+ieaSumGciqAkvuAWAjZ5IvdhraNBNYIIsu
-	+7iKky8Ui499aomF9MlO1Bz52gZKxSFslpdLyDEnbdH5CzOnrPjh9f/9qcJvAKxJmPod7TT5kUW
-	mVisOEd45oLhlmFMZNnRCoh/qPV8WnK92xy2veyYJK7w8FRp1VcRZ2mzN7T8vKqmDjJZrUq40GK
-	Cq5KVOeDLJNo7E1zSDCISZWWercO2U8qE5/pSJD+NIwi43mifu0/EE4mKG9AaImU6/uYqvkJNfW
-	ZzGtlljKhHfWkQB7aG0DZRaO5BfsRCjjgQuB2eF2Sk/ZFelqwkPyaV74JGWy0Xwc7iizbNIvtac
-	orN9tqkwf7tUkeIgeMGH1LNX9bG8LPHwZDwn5P0ICzSq4we1gQtfj8IvWfpMItkMo9peXiSDacB
-	0OyJXN5nbTQxXYaQD1kW1aYTlVjTyyz51XXcfJ43y8CE4A36BGr0NZzicthJf7q7wr6BY9AQIzF
-	PrN3hkWyh3spG2lr+nrOZilw6VnZbRd8l+zV14UhjGiP5CXkTiWeM/B5B7SStH7AKeBq/r8WrUa
-	Yj/xMrr4izRwjs5jvwLAhGFUw00gmoR72as8lpiUSalCbu7xkGzaumBf6qtdK1TeqBKtvdWgZ+5
-	m3aNlcynk9OpLcVjYa0+OVWTuhykGUpOiYpCiSdNJEt6sLeiElXH2rW6OCX8o+ewrmbxqfujPR7
-	J6B/ME8+0UG/hJCW7LlBUyU/EzmRtbohvO65dJw49yTCVy17Mc+pA0HxX4iZcidWrUDntj7fkER
-	9XvdOZ9us29Nbh2K4e/XocdXF/Bj4brec2EadqijO5UD6WfI62G/JqIi1qQNeq9ipNVL6zU1vdi
-	ZiI2
-X-Received: by 2002:a05:693c:83cf:10b0:36a:79e7:2fd with SMTP id 5a478bee46e88-379684b838cmr12940594eec.40.1794866444106;
-        Mon, 16 Nov 2026 14:00:44 -0800 (PST)
+        bh=2KcAEJ/d//yNkNn25R3m5JPPTPab3qI1ELoNHffGJTw=;
+        b=Y5x4MNqr3DzZXkhX80uFZe5TgRfGhSSRNQpCmjLZJPuCAo9F8i7TjqrZo2u/Ft+IX2
+         S+1FYwiVU7kzCfiHkoE1zOLFRSfrVPiJoCdelJ3oO5WIybUmMYvnS5izLcj18KCrPZTn
+         0ucAmBGcuLep51nggBWU7Hz8ODJx0oJtzhoTLq4+rL1SaWu1J9nSqhYneOR1JnNegLDC
+         B301PVP/WR2hWW0YeswkiB+QcE1b0nV0Qz7GtDmS30zjuRlJ7uXYTclibtcmW1b2AUv9
+         hNC9jFB0B3S8/92KTj61JuK90EA2DRIaK0iEWIOiJuuocR9TBRMTcFKJUMh3Pvj6PSBx
+         xZjw==
+X-Gm-Message-State: APuU4Z/tdFyEqQgAiWMmEZyJgMth01j82Hxs97UrcUTwkdi4oB4/8r6w
+	loKvaxgxnkYH6Z5tNs6SRD1vRyNvg5K+B7u1MNvROWiFBKLclkRMDAAwk+aQGhUV
+X-Gm-Gg: AYBFou0a0we1ddKTZ9mfpexUNJmsqbHFOBStaLhr+4nZoADLE8RieGJEDCPUJ0y/Wjo
+	OWtxlPvzezMQqF1JIJOy+leeVoJIoE4Uxc1LEVC+rG2We9tCFjtteP5sAIjsYli/toEFwDgUuFk
+	r8yK1vkaB9gI0IBEXVCv64/VpE5ImKfYUCpe3xq1ZZ8v+uy9WOFjMehdzoAJAZO3nWWUrzXZC1N
+	Er389a9HBNa9zHgxNymOqsvAY5NOwZz3/nfXOiZr4hFCRLHROZzEnz90h4NtKSLPTkdSNoUAayA
+	WnQquFQQhwAF1ajMvlwje1x9GShHV7OeTzVBR7aLCb343+L2SLLymgDqMArvYTREzQGw8Swv6+2
+	B8RGdxRBQpMpnNKV9iEaCZaLkHd8WZgW7ameK4gsveAx2+D42ZlxA6q5x7+uwkHg5d7yCyjcK/r
+	ijkdFU202JlKNQfTmxsPET/PKTqozW0qn3eezMK0nsqraS9RViUm5whlUAAaNjGtumg9FjHp1/8
+	g+Bv0gxAa9Maj7D/fgcWrq+Hr27QNje7Y2CpTHN3R15PGUO3hViao/vBjygFkdCz8IKw0Q2xUUU
+	vrelhuWh3BtotxgyKdto7aCwd82ELLnQ0VvBJ3b6UT2lJ5kCs2ojJA+679PUsqXDY9q68Omq681
+	kt+6keX+qpx+YGJeCdM3EU5eFcCtHUo1JFbD8kBaEjigrOXylqVjlfGdeUPlt5ku5aUTTHDixnT
+	Ml2iL/b6rucC/ZZbS+p0h8+WFJJzsXEotbKKpXKynpONM/XJZ+0de+vQzG0Ddb86dYx7PhAh/Bn
+	h0BEMs32C0DfgMCNNzb+XNu1CemI1ShTLAJSUsj259bvS4gVZAR9JGJlYUTKXHoKEo/X3fEDCeP
+	U+V4jg==
+X-Received: by 2002:a05:7022:3b87:b0:190:da74:2c89 with SMTP id a92af1059eb24-1b5030b7a1dmr12630681c88.21.1794866445094;
+        Mon, 16 Nov 2026 14:00:45 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-38115cfdd6esm1221905eec.5.2026.11.16.14.00.43
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-38115cfdd6esm1221905eec.5.2026.11.16.14.00.44
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 16 Nov 2026 14:00:43 -0800 (PST)
+        Mon, 16 Nov 2026 14:00:44 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-oe][PATCH 2/5] kernel-selftest: Fix building the net selftests
-Date: Mon, 16 Nov 2026 14:00:36 -0800
-Message-ID: <20261116220039.1807391-2-khem.raj@oss.qualcomm.com>
+Subject: [meta-oe][PATCH 3/5] kernel-selftest: Add the modules and tools the tests need
+Date: Mon, 16 Nov 2026 14:00:37 -0800
+Message-ID: <20261116220039.1807391-3-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.1
 In-Reply-To: <20261116220039.1807391-1-khem.raj@oss.qualcomm.com>
 References: <20261116220039.1807391-1-khem.raj@oss.qualcomm.com>
@@ -67,91 +67,40 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Mon, 16 Nov 2026 22:00:51 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132566
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132567
 Content-Type: text/plain; charset="utf-8"
 
-The net selftests generate their netlink code with tools/net/ynl, which
-needs the netlink specs from Documentation/netlink, python3 with pyyaml
-and jsonschema, and the top-level MAINTAINERS file: ynl_gen_c.py finds
-the kernel root by walking up until it sees MAINTAINERS and loops
-forever when it is not there. libbpf needs elfutils and zlib,
-reuseport_bpf_numa numactl and tcp_mmap openssl.
+Many selftests modprobe what they need (gpio-mockup, netdevsim, vrf,
+the tc qdiscs, classifiers and actions, ...), but the image only had a
+couple of kernel modules, so recommend all of them.
 
-net/lib installs the whole ynl tree, so drop its build artifacts and
-bytecode, which trip the staticdev and buildpaths QA checks, and pass
-the prefix maps to clang so the BPF objects don't carry build paths
-either.
-
-The python tests load the netlink specs at runtime, so add pyyaml there
-as well.
+The net tests also need real iproute2, iputils ping and ping6, ethtool,
+iperf3, socat, jq, bc and taskset; busybox ip and ping lack most of the
+options they use, and busybox's ping6 has no -M, which pmtu.sh picks up
+over ping when it exists.
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- .../kernel-selftest/kernel-selftest.bb         | 18 ++++++++++++++++--
- 1 file changed, 16 insertions(+), 2 deletions(-)
+ meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb | 8 ++++++++
+ 1 file changed, 8 insertions(+)
 
 diff --git a/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb b/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb
-index 018ac74b85..4254eccfd6 100644
+index 4254eccfd6..b1266fe553 100644
 --- a/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb
 +++ b/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb
-@@ -5,6 +5,9 @@ LICENSE = "GPL-2.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=bbea815ee2795b2f4230826c0c6b8814"
- 
- DEPENDS = "rsync-native llvm-native libcap"
-+# net: libbpf (elfutils, zlib), YNL code generation (python3-pyyaml-native,
-+# python3-jsonschema-native), reuseport_bpf_numa (numactl) and tcp_mmap (openssl)
-+DEPENDS += "elfutils numactl openssl python3-jsonschema-native python3-pyyaml-native zlib"
- 
- S = "${UNPACKDIR}"
- 
-@@ -49,7 +52,7 @@ PACKAGECONFIG[mm] = ",,libcap liburing numactl, libgcc bash"
- do_patch[depends] += "virtual/kernel:do_shared_workdir"
- do_compile[depends] += "virtual/kernel:do_install"
- 
--inherit module-base kernel-arch ptest siteinfo
-+inherit module-base kernel-arch ptest python3native siteinfo
- 
- DEBUG_PREFIX_MAP:remove = "-fcanon-prefix-map"
- 
-@@ -123,7 +126,7 @@ EXTRA_OEMAKE = '\
-     CC="${CC} ${DEBUG_PREFIX_MAP}" \
-     AR="${AR}" \
-     LD="${LD}" \
--    CLANG="clang -fno-stack-protector -target ${TARGET_ARCH} ${TOOLCHAIN_OPTIONS} -isystem ${S} -D__WORDSIZE=\'64\' -Wno-error=unused-command-line-argument" \
-+    CLANG="clang -fno-stack-protector -target ${TARGET_ARCH} ${TOOLCHAIN_OPTIONS} ${DEBUG_PREFIX_MAP} -ffile-prefix-map=${STAGING_KERNEL_BUILDDIR}=/usr/src/kernel -isystem ${S} -D__WORDSIZE=\'64\' -Wno-error=unused-command-line-argument" \
-     DESTDIR="${D}" \
-     V=1 \
- '
-@@ -136,6 +139,8 @@ EXTRA_OEMAKE:append:toolchain-clang = "\
- CLEANBROKEN = "1"
- 
- KERNEL_SELFTEST_SRC ?= "Makefile \
-+                        Documentation/netlink \
-+                        MAINTAINERS \
-                         include \
-                         kernel \
-                         lib \
-@@ -187,6 +192,13 @@ do_install() {
-     if [ -e ${D}/usr/kernel-selftest/bpf/test_offload.py ]; then
-         sed -i -e '1s,#!.*python3,#! /usr/bin/env python3,' ${D}/usr/kernel-selftest/bpf/test_offload.py
-     fi
-+    # net/lib installs the whole tools/net/ynl tree, including its build
-+    # artifacts and the bytecode from running it at build time; only the
-+    # python library is used at runtime.
-+    if [ -d ${D}/usr/kernel-selftest/net/lib/ynl ]; then
-+        find ${D}/usr/kernel-selftest/net/lib/ynl \( -name '*.a' -o -name '*.o' -o -name '*.d' \) -delete
-+        find ${D}/usr/kernel-selftest/net/lib/ynl -name __pycache__ -type d -prune -exec rm -rf {} +
-+    fi
-     chown root:root  -R ${D}/usr/kernel-selftest
- }
- 
-@@ -227,6 +239,8 @@ FILES:${PN} += "/usr/kernel-selftest"
- # needs to enforce per-test timeouts; busybox has no timeout applet by default.
- # mount_setattr_test creates an ext4 image with mkfs.ext4.
+@@ -241,6 +241,14 @@ FILES:${PN} += "/usr/kernel-selftest"
  RDEPENDS:${PN} += "python3 perl perl-module-io-handle bash libcap libgcc coreutils e2fsprogs-mke2fs"
-+# The net python tests load netlink specs with the YNL library.
-+RDEPENDS:${PN} += "python3-pyyaml"
+ # The net python tests load netlink specs with the YNL library.
+ RDEPENDS:${PN} += "python3-pyyaml"
++# Tools the net selftests use; busybox ip and ping lack most of the options
++# they need.
++RDEPENDS:${PN}-ptest += "bc ethtool iperf3 iproute2 iproute2-bridge iproute2-nstat \
++                         iproute2-ss iproute2-tc iptables iputils-arping iputils-ping iputils-ping6 jq socat \
++                         util-linux-taskset"
++# Many selftests modprobe the modules they need (gpio-mockup, netdevsim, vrf,
++# the tc qdiscs, classifiers and actions, ...) and fail without them.
++RRECOMMENDS:${PN} += "kernel-modules"
  
  INSANE_SKIP:${PN} += "libdir"
  
