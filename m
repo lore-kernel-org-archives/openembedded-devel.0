@@ -1,65 +1,65 @@
-Received: from mail-dl1-f45.google.com (mail-dl1-f45.google.com [74.125.82.45])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.17654.1794787853800081299
+Received: from mail-dl1-f43.google.com (mail-dl1-f43.google.com [74.125.82.43])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.17655.1794787854788708038
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 15 Nov 2026 16:10:53 -0800
+ Sun, 15 Nov 2026 16:10:54 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=I/ozTW5T;
- spf=pass (domain: gmail.com, ip: 74.125.82.45, mailfrom: raj.khem@gmail.com)
-Received: by mail-dl1-f45.google.com with SMTP id a92af1059eb24-1438d9363fbso1336142c88.0
-        for <openembedded-devel@lists.openembedded.org>; Sun, 15 Nov 2026 16:10:53 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=DzNTnCo4;
+ spf=pass (domain: gmail.com, ip: 74.125.82.43, mailfrom: raj.khem@gmail.com)
+Received: by mail-dl1-f43.google.com with SMTP id a92af1059eb24-1b3b4bcbfc9so3042561c88.1
+        for <openembedded-devel@lists.openembedded.org>; Sun, 15 Nov 2026 16:10:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794787853; x=1795392653; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1794787854; x=1795392654; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=8D/Y65Sas7Vp9asO5kma+razKwYBLfKTGg6pv76qJRU=;
-        b=I/ozTW5T8qft8xO9+0FDQBYd2vOpxmCXxDqTNVPMJh2Pi4TrqF12OW7utjyRwrG0X8
-         aVAQJFPOhl7fjpYrmtUPwwINY1zNVTqf26M1leZgBBpFE32AesCAtgXBKRxUjpNHAAqI
-         qXHjv9kJnF7kqtaoSc2VEKBfmFL2sgiEREIEZpGRJ9y6z+g/xWy2pzdosaHTBQn49cGO
-         2sL+TG4njwhe552Mt7AEiDd7Ca2Sz5sAMg/+Z6/h0Vvcxk+OmpKqAwbiKcjDbVxCVDVg
-         y5vDBK2qliM7hQqIFMlvQczJcQ1t4IxvwAupops8BQr9Jao1LbpWYcHH6VfAjsGbVfUL
-         OGpw==
+        bh=m2hE62TiRV0uAAfTKqgZPJoLO0zIfXkq2cqLK0lxUxE=;
+        b=DzNTnCo4GbFb3huJQc9m759Q0fV72Lf72Sgugzg7oARdP5cyEeVODn8pmRK3Ar0viG
+         wdfFMA02mM9Ba9l6pStz0AV3UHhzlxxapnTIFHcLhayiVsbfmt7AK2LsggpyeH27E6dj
+         Sughps/jrPuhRbrgVmj4eZgLAJfj9h5S3W1wiTyo8HupJvUa+DUT6DE+vbhbL5MajDwR
+         FiU9eGJi41cGeyXj1WkFXElUm5aWv7+01CqCh2EIJ6fBZGoLRkI3GKOD/Xexz+0DODHb
+         GKlMs8l/3fa0GZ/4LTPcUTcqzUWuGK/blXXknUkVolB76fJgMA2yVTK6sezFLAEr4f8o
+         2jmQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794787853; x=1795392653;
+        d=1e100.net; s=20260707; t=1794787854; x=1795392654;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=8D/Y65Sas7Vp9asO5kma+razKwYBLfKTGg6pv76qJRU=;
-        b=HaYYfsZ9mfB1VgEsCS4K9hxP/79UkLoa9JjCLLcmW64keuxPen2zDV04oiV5WfKoOk
-         5ku7svqmDdItjwn3IccIzSnAnklu7Gt8WI7TJOWqDsaIbEMkDEfAHqGbC9InUrlyjslg
-         URGLG4shFpesNhEP02DWstnx+9GozvBsJVUmIn/c6I3e03Q5xB73GP4QaxlTKaRuQuW5
-         ZIi66EC0sM39LrjSEKaD8Yw81+Gi5BU0Y84PQQY9VlCwME9v/+DMTjiJlOYTwcNq8vZx
-         oJjI0w2E9gr4nP4GL6pfB+ArTyEO1EfuYURfKqy1EJMsdMt94JYT/nxf3lUaWDNL09p0
-         swUA==
-X-Gm-Message-State: APuU4Z/XTmBzFa6p9E5VDbilTLIy3S7gt7QXolp1tqAmHkKk+IkpEukq
-	4sFJCWN2gpFO4kWaIVlac3vvcfp8qUnkYy7Wy6+0pNdmm+U71d6Mq9Ka4EPq2OIZ
-X-Gm-Gg: AYBFou0qje1AjhFEizC6GfYax9550sZj40R+XTb1PFIHctU/A5zIDOM4jWH26Xzb3/R
-	4E+TrsD2+ckiyhTVtLItek1iGR1xg0sdi4EF6U/M+Z5RfDHnX8x0E+vEkMA4MvZpHvtLIwR277+
-	hiQfyw6ExUch0JaSUz1zG/JddEyVX4ITZH9MLVIWsa+rxHJt/Esilgo0WbjwCQC7fb4+EGXAda0
-	L5lfatWRA0tJhunmKMvTf7a6rS0hE48jjJ1w0kbRmimNlJ6racskkW14XrnMtWGKis+RDFKaZ8A
-	Y7ow4w5+N50KM8EXzUbUs1qVmXW83rR+P8Ak/SHc25cSXoNwHUbhbb2nwEqUzq8YGb2Sx9nuutk
-	flVwLMtASHXOmfqIwW20J4L2uUQHnn/xPYGuJYrnikNoiHro3LsAEDCNNxi8ZGD2GpnOXqv5zEY
-	UuhExYlS1B69eF50mXlCQPknYzJL7s2g5Df1MkNlqcdIKeyHnBKIa32hlvrj1ocO78ZGAhzZQ6a
-	MGscBAqxfUk4yQjtX1L9YlzqvHzoEC8coVKRcTPsjP8UN7an8lo70MoXG5W92tW45R8i4Y+waI4
-	NjTpnZFQ+K7/R+8wDunkRestgKiqR4fOKRp0hlHUV8hBWUNbk8FO8tFJPeRyYuNPF1HiCNvfDGi
-	ijxOI02ORNxsHybdl2nT6w9W9mgNA7fuN39zxVAwnghFHTm+aKq5EcdhazyyrHQNVL9bXHqg6QE
-	rTVO7fG0E+XP7084rJr8GGTFUdeMZxrbjXR0IeuQ3+zqQHlNey3hKgTNKHs9NXqB/dVr80a1D3A
-	vAZotbNPPqU8B6QAdZcM33LFA0W3X/P5oeRDsnhMEgt6xBdsT4vhZ+1kviYOqez0aW9kF7g7sdC
-	nc0wcQ==
-X-Received: by 2002:a05:701b:2616:b0:159:f192:5290 with SMTP id a92af1059eb24-1b4f5f37854mr9778108c88.13.1794787853076;
-        Sun, 15 Nov 2026 16:10:53 -0800 (PST)
+        bh=m2hE62TiRV0uAAfTKqgZPJoLO0zIfXkq2cqLK0lxUxE=;
+        b=mF4fA4GP0WxTTeezfF9nuFqHElgGoXpsYLq1h/bk+4XWRRWqdC63ZS4SO+M8UjAN4b
+         ubkEdmSUdLUSUaBV6rDI1Eqz0yhAL6LYDtZuvRFz9Lf1wKVnptH8Cv9kWTnqv3sXPv9z
+         aa5zT1ykABzv9vqG8hl/WQAuMsiBOuD/B5qghLmixQuamz/Q4V0jv9fI3QJ4ahFVAFaQ
+         K+wzPmTWyk04pYn9rLFatOoRZl11mZl5UPBEXRkuwuaxPsCgIq7/bb+1cEynmwr/Q1Es
+         MeuFpJn+7wHYvPIQTMtJkIhu9Aqm6vCC4badWx3y5bdsLWwc14uUjZK9w5PwI8bgrGLI
+         1e+Q==
+X-Gm-Message-State: APuU4Z8yQhRyH1BfmcVTQdvHp5HjPj30fwt//DdXMM1hcS+F84od40UP
+	D5qAkJ4n/LCWrlU/0whortozX3FSsgMBYH8XGgElwURW0vQbB99gTrx5oVOeTNaa
+X-Gm-Gg: AYBFou3bxE0MCQzwLNFUb0ZWuzZ585maZYb4vtBH9LP8/+TLwNcGZwzYUVgeY4nnXRG
+	VYYDdwl5BNIDWC6KN7XdckCjlAVi2kX045z8nFSRjTqZXevEwy1VpqnlRcle05R66qKYV35gLxU
+	e55+J8QAD2E92cnYaqIp7kB1nST5g3ReqgAu0a0fJEefKqNDUVLqMnNMC07aK7O2jdp0O+YYpJo
+	6xzVx/0vxrHnMfrahjObhouaR8ndzz0BkF5c29Tc7xSItJ5yR+HfPOKX/Z9lCJgnM2UBBZro7c3
+	T9lrX5qTX+x6VKjNCUP8Cf/Dfow+myRCenKYrfU/5CuZVwrursOrOFIl6jXj3xTR0TBo3azoFIa
+	stm9Z0LYK9gRAsVc6sqB2A6xZjqZ+UrEkohDheucMBvugPjiFSVJ3OuFL6hSrujLRe5+zCnOv9u
+	LzTb5Wtj1kBOiqC6/gfrtJh2wkd8TGOfxR3Kj+jumCkEn/5Zs2SqE65t2xrlJnpeIN244Klkufs
+	23z9zNvnNoMmTZvS8Cjelg/LU9xeIx5Darp4sbNUNrYnNYlwhC4+hw9R/sCKWjTB3+MOybKB6bX
+	6p/Gx40fbRsxawuWYs6/bVyc5sAkhcVvjiEZvsjATBXpq+FcIuY5ehABQn/vrJ9hP0sEkVFebbz
+	QxX6C1V8OionmRnSs2UDRaV9CFj9ACJHixip4CoUH20SwQkULB67PT+NcTrcjS8+v68KJFnN/I2
+	w9GedQztkK2YtuzpKo3UooxvkWaMzCMyT9xNTZ4iqrdD+VAbmS280hXzji0Z7UiB+x64nMtigtM
+	2Nik6eb09foPJrHaJGqFxVreg0WVglJHE9h6IhdiOO+70g6IOvPI46rBaGRHTfvmfoZa+UrDx5B
+	P/Ca
+X-Received: by 2002:a05:701b:4585:20b0:1a5:52f6:db9a with SMTP id a92af1059eb24-1b503131a8amr9018373c88.22.1794787854036;
+        Sun, 15 Nov 2026 16:10:54 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1b50316d9c2sm24163844c88.7.2026.11.15.16.10.52
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1b50316d9c2sm24163844c88.7.2026.11.15.16.10.53
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 15 Nov 2026 16:10:52 -0800 (PST)
+        Sun, 15 Nov 2026 16:10:53 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-oe][PATCH 11/16] ttf-sazanami: Set RPROVIDES on the font packages
-Date: Sun, 15 Nov 2026 16:10:33 -0800
-Message-ID: <20261116001038.440763-11-khem.raj@oss.qualcomm.com>
+Subject: [meta-oe][PATCH 12/16] dbd-mariadb: Fix DESCRIPTION and drop unused ptest RDEPENDS
+Date: Sun, 15 Nov 2026 16:10:34 -0800
+Message-ID: <20261116001038.440763-12-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.1
 In-Reply-To: <20261116001038.440763-1-khem.raj@oss.qualcomm.com>
 References: <20261116001038.440763-1-khem.raj@oss.qualcomm.com>
@@ -67,28 +67,34 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Mon, 16 Nov 2026 00:10:59 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132392
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132393
 Content-Type: text/plain; charset="utf-8"
 
-${PN} is not in PACKAGES, so RPROVIDES:${PN} had no effect.
+DESCRIPTION was misspelled, and the recipe has no ptest so
+RDEPENDS:${PN}-ptest had no effect.
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- meta-oe/recipes-graphics/ttf-fonts/ttf-sazanami_20040629.bb | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ meta-oe/recipes-devtools/perl/dbd-mariadb_1.24.bb | 7 +------
+ 1 file changed, 1 insertion(+), 6 deletions(-)
 
-diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf-sazanami_20040629.bb b/meta-oe/recipes-graphics/ttf-fonts/ttf-sazanami_20040629.bb
-index a1ffbea79f..fe0ade3d82 100644
---- a/meta-oe/recipes-graphics/ttf-fonts/ttf-sazanami_20040629.bb
-+++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-sazanami_20040629.bb
-@@ -7,7 +7,8 @@ HOMEPAGE = "http://sourceforge.jp/projects/efont/"
- LICENSE = "LicenseRef-PD"
- LIC_FILES_CHKSUM = "file://README;md5=97d739900be6e852830f55aa3c07d4a0"
+diff --git a/meta-oe/recipes-devtools/perl/dbd-mariadb_1.24.bb b/meta-oe/recipes-devtools/perl/dbd-mariadb_1.24.bb
+index 65f2ec232a..138c85bf53 100644
+--- a/meta-oe/recipes-devtools/perl/dbd-mariadb_1.24.bb
++++ b/meta-oe/recipes-devtools/perl/dbd-mariadb_1.24.bb
+@@ -1,4 +1,4 @@
+-DESPCRIPTION = "DBD::MariaDB is the Perl5 Database Interface driver for MariaDB and MySQL databases."
++DESCRIPTION = "DBD::MariaDB is the Perl5 Database Interface driver for MariaDB and MySQL databases."
+ HOMEPAGE = "https://metacpan.org/dist/DBD-MariaDB"
+ LICENSE = "GPL-1.0-only"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=d0a06964340e5c0cde88b7af611f755c"
+@@ -13,8 +13,3 @@ RDEPENDS:${PN} = "libdbi-perl"
+ S = "${UNPACKDIR}/DBD-MariaDB-${PV}"
 
--RPROVIDES:${PN} = "virtual-japanese-font"
-+RPROVIDES:ttf-sazanami-gothic = "virtual-japanese-font"
-+RPROVIDES:ttf-sazanami-mincho = "virtual-japanese-font"
-
- SRC_URI = "https://src.fedoraproject.org/repo/pkgs/sazanami-fonts/sazanami-20040629.tar.bz2/ceef10579a75c92483171f3bd7f77df2/sazanami-20040629.tar.bz2"
- S = "${UNPACKDIR}/sazanami-20040629"
+ inherit cpan
+-
+-RDEPENDS:${PN}-ptest += " \
+-	libtest-warnings-perl \
+-	perl-module-test-more \
+-"
