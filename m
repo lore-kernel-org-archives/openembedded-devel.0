@@ -1,150 +1,92 @@
-Received: from mail-wr1-f51.google.com (mail-wr1-f51.google.com [209.85.221.51])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.14886.1794911772939342124
+Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com [209.85.128.52])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.15157.1794913089796272532
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 17 Nov 2026 02:36:13 -0800
+ Tue, 17 Nov 2026 02:58:10 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=Aj21H7xh;
- spf=pass (domain: gmail.com, ip: 209.85.221.51, mailfrom: uvv.mail@gmail.com)
-Received: by mail-wr1-f51.google.com with SMTP id ffacd0b85a97d-492fcbfaa88so2420501f8f.3
-        for <openembedded-devel@lists.openembedded.org>; Tue, 17 Nov 2026 02:36:12 -0800 (PST)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=B0lF3x9h;
+ spf=pass (domain: konsulko.com, ip: 209.85.128.52, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-wm1-f52.google.com with SMTP id 5b1f17b1804b1-4bb64ef5a00so18415525e9.3
+        for <openembedded-devel@lists.openembedded.org>; Tue, 17 Nov 2026 02:58:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794911771; x=1795516571; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=DFdmgR59VEVHHhX53w0d/eEdnjn6PPgNdEJlhKLM9QI=;
-        b=Aj21H7xhXWMG0lt9n3i/tO0Rz7lBl6LXkIhH7YHQXZcgPdGqZB6YwTdOGXjWFAbZQc
-         jCg4vispKqSgCQ9Zcly+fQlyrvKz/KHdgfb9XJuIfoMdZqdoIgRO8M1IDj0yrLrrNx6/
-         apw5hnV1jB+LvZOj4ldtxlCFAs4N5EtpY5zzTPc6czTHAZ5UZgfjZjTH9yHYf9UYwO05
-         xwZcTdVqrgDi0cV/APo9S5XARpk+jIDtEOExUWvh6cio2LxBov/Nqs6Il3I1v9WT/cU2
-         YWInZ+E49TxDWjfoyn2CvUQ67fp0wlY44JSvK8q8r0of4V9ehaAyfGHl3hy1mFwjkWGh
-         Cb0g==
+        d=konsulko.com; s=google; t=1794913088; x=1795517888; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=AU7qz7y8DNbwWLH1WRyvBCwCkWzJerEhar0EKuDtZpU=;
+        b=B0lF3x9hOGpCYbmiW02a2WJ0z99O4UGJGYaqN2CChC1ZMwZsi7LTblgQ+USYLT0uim
+         21aHc1LvVmAyfdkp9p6F1KuNpcdAJnfHqGF7X3R9Tgaq+pBSs8OPLVprSMb980tKV8k/
+         En9BhfZso5CLDRD92z9307W28kR8WfoCFT2yI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794911771; x=1795516571;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=DFdmgR59VEVHHhX53w0d/eEdnjn6PPgNdEJlhKLM9QI=;
-        b=THCufeIbZPvtAkCfc1cCt2QiwCzyKTxLQp5AaNDHNqh3PDstesWs5QySp9t7zzvSdU
-         TKXnmp7C1MxoVz3eixZ5FmpyZD4OOwBiLwnL72RBM5oUBZSfiIVk2D8W+5BSqEJvDttn
-         pwO0xlLQC/QMTJzeKLk0ThR9vbfdyHPx3dAEwv8tnQD2X0ftdtwg2fF6CFo6zxu+9cGS
-         vrq5Wvscd7BT3QYGLSR5qy4fRtbNzdNMumFDgXXIwnYjaZj/5oVAm2u4cJZiDbTkxlRX
-         IgUlwPqj4mmQjZQASLCVTV2Siwpv/s9rqiZ53P1ysqcVtr3UnmXuBhg0k1cLP44t9dph
-         zu1w==
-X-Gm-Message-State: APuU4Z//nyzVJvY2tj9WYugxfigvvF9JbGUDN8kZe0eXR2HLXgtVcFgb
-	DSkO9HWojq0w88qQke7723c6/QpBZnQIlhCrUrOTvZmZq4RhVAsIfGwrknAMoA==
-X-Gm-Gg: AZFdTZeRbqbTuOUuDcLFrtxZapTTqCu0Q5Cs6gaetfOl+kRwXaf2S/fU3eQw6U2CivE
-	r/3R0eCanh6vjLGP9ws8kzj7GLT9IMnzkytR1+cvUvJfbkpBvRG5c7kvlZZRwljOxv5KYWCe0CD
-	UM4MQr+bE2yLja885Uo3uSuynaJWNPXWIOWp3DFqqp9+rnUBw2e1/72R0zLLjhGTp3qyzKdFmyz
-	DXSNqrKUOwf8lcZgAykPFwCK842moFnlri8U3rbLIJll9iHdhtm9t+UyNh6irjEcPoFrrnXtTCk
-	kxvyZr+RG5hAWGWEv9NgBDAA2Qkm5/a371HM/oUruKrgc9tNDxK+4SC7v2I+lyCA7f27ix5qOVk
-	lIysDlg1OSPEkuL7eqt2E7ynw95l5rc1PrbHmEYTNqpNlOPtK26FllWaerOIhqvNnshgDaDkPuZ
-	QVqCMSFdqNAopjyIJwn2Z0uQ8hEk51J10RqdG9oaZ8QEy9w7Fj1qUpUo/eU5EMKmv+DsLsnHiYv
-	/cMkZ41hdEIVt2oWga5vkxshU9CP7Jc05eCkOoiJb5ADVrzxp9aBi8RvHPJqSWIVF39W/RLkIvr
-	nDbIL9iQCdaadEGtrl4ldjCoYTIE/4k=
-X-Received: by 2002:a05:6000:2087:b0:4a4:7dd0:2177 with SMTP id ffacd0b85a97d-4a47dd110e5mr2064464f8f.49.1794911770989;
-        Tue, 17 Nov 2026 02:36:10 -0800 (PST)
-Return-Path: <uvv.mail@gmail.com>
-Received: from Ubuntu-2204-jammy-amd64-base.. ([2a01:4f8:272:3f67::2])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4a4de4cb1c3sm1604674f8f.8.2026.11.17.02.36.10
+        d=1e100.net; s=20260707; t=1794913088; x=1795517888;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=AU7qz7y8DNbwWLH1WRyvBCwCkWzJerEhar0EKuDtZpU=;
+        b=WMEUAiRy8GsS/qoU8O6tm/dGLrAkxVCmnieIgRfTjd2oMOZFtUJYWUAjT7UqkH2NAs
+         wWpWm5O8+1AiJDU3gmqfNvvH4+ubG1fb69dxUgK6IM2zbVTqTsm8unSYS4+fR5z9MHDC
+         Jd+Wj1P4LQG+J1hM1C4R0nrS/y0K8ZoqazNTEENkQHBganFUSp3OTc/zDpp4z/kPlInB
+         LN5S3r89DtwXUfqSUdJB5nDTzp/tI42k0DowPo9Mf87OtI34Itksaub8abrWmuAhMA5y
+         qTMK7oDNRC02QNzYeKmRbIyfQX2lgjbEcg5Ma/rOnP5h5SrufaShhO+O9OSTqbhrNyzd
+         Tlkw==
+X-Gm-Message-State: APuU4Z+n42vx/P4iEqTodZDqvP47RjFBRpAkXA1AayzGgWrqxYPyUrmz
+	2YJgMs+8UUUQckKbQR0n0iUhDyFpBaHLSq93blXD5x1DBX3RYh35V4E+GQB9ET1/ZefWIKVGw+A
+	64odn
+X-Gm-Gg: AYBFou1gNpxoOEl4XUgKSqKv2fv9klEtTeps9LQvHx/5aZFNX4NOtJGiIrNqfE4JBU8
+	S24EQdOVqfZ3Q+NOtTe7PqQXeSpe+5uhzQ3smz1Lgo3vwUfohyQqXK0vnTBAzrMIhaqTSqCkUGa
+	hK0clOSmuolh25gRvYTXrSlX0PphVd6ROdP9XlfKNK60qRMNqbWMIoofRvZ+a8cxfdRDhxgoOl4
+	yGl21YmCgYjVpOkCvkgYDnE0mS7U5yP3znO+/sy6iBxkx7u2x3dy1nWL8X3QnIPHn1B4h0flsm4
+	OQdUqASwQA4V7kJYCwAPQd1BafbdCO2kUYDUXO9vQF6SGiGN94lydqPGxEa80YM0fraGe99L1jU
+	qlrryKXEp34GEjD/0x0ybdO3JW9LKjYi8Dd2AKaulWdC4cHC1373XFi3RTwiuX6acIQf587Ro73
+	oKwMEmMDtJLFOAW9Jmk+AL5hhQFb+aWUzLVGGwCtGHbHD7I8hTnw7UXfyW7r1GCkGyo9gMFRXK9
+	dynjdu0Gw6A/yyZlsPkizjvQjM8VqKMoayyWTvtHMEnTvUhwzOxpIlIT+6xXQn7+bzfgGqfDxEz
+	gqqs3JGzLScpj9bZxIvMZ40X9s++GyLtz0wQnTORtmOYKvWy+929x4QIln+6g9zgQ+pXjnuRcM6
+	idnmd77qesXK360MQIBtRGf5CsUYMeizOSsy/5DKHO4dZEj+mp0MPBQ==
+X-Received: by 2002:a05:600c:1989:b0:4bb:665c:a078 with SMTP id 5b1f17b1804b1-4bb665ca43amr206292365e9.28.1794913087772;
+        Tue, 17 Nov 2026 02:58:07 -0800 (PST)
+Return-Path: <leon.anavi@konsulko.com>
+Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4bb7ad9426asm20454455e9.4.2026.11.17.02.58.06
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 17 Nov 2026 02:36:10 -0800 (PST)
-From: uvv.mail@gmail.com
+        Tue, 17 Nov 2026 02:58:07 -0800 (PST)
+From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Vyacheslav Yurkov <uvv.mail@gmail.com>
-Subject: [meta-oe][PATCH 2/2] overlayfs-tools: add ptest support
-Date: Tue, 17 Nov 2026 10:35:37 +0000
-Message-ID: <20261117103537.814124-2-uvv.mail@gmail.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20261117103537.814124-1-uvv.mail@gmail.com>
-References: <20261117103537.814124-1-uvv.mail@gmail.com>
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 1/4] python3-aiohue: Upgrade 4.9.1 -> 4.9.2
+Date: Tue, 17 Nov 2026 12:58:01 +0200
+Message-ID: <20261117105804.3937460-1-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.47.3
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Tue, 17 Nov 2026 10:36:17 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132578
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Tue, 17 Nov 2026 10:58:17 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132579
 Content-Type: text/plain; charset="utf-8"
 
-From: Vyacheslav Yurkov <uvv.mail@gmail.com>
+Upgrade to release 4.9.2:
 
-Run the upstream test cases on the target: the output of "overlay diff",
-"overlay diff -v" and "overlay diff -b" is compared with the expected
-results, and the result of "overlay merge" is mounted as an overlay.
+- Do not retry create_app_key over http after a bridge error
 
-The upstream meson test targets wrap these steps in sudo. ptest runs as
-root, so run-ptest performs them directly. The tests need root, trusted.*
-xattr support in TMPDIR and overlayfs support in the kernel; if any of
-these is missing, the tests are reported as SKIP.
-
-"overlay merge" generates a script that uses GNU coreutils options
-(chmod --reference, mv -T, cp --attributes-only), hence the coreutils
-dependency.
-
-The tests take about a second, so add the recipe to
-PTESTS_FAST_META_FILESYSTEMS.
-
-AI-Assisted: Claude
-Signed-off-by: Vyacheslav Yurkov <uvv.mail@gmail.com>
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../ptest-packagelists-meta-filesystems.inc       |  1 +
- .../overlayfs/overlayfs-tools/run-ptest           |  7 +++++++
- .../overlayfs/overlayfs-tools_2026.11.bb          | 15 ++++++++++++++-
- 3 files changed, 22 insertions(+), 1 deletion(-)
- create mode 100755 meta-filesystems/recipes-utils/overlayfs/overlayfs-tools/run-ptest
+ .../python/{python3-aiohue_4.9.1.bb => python3-aiohue_4.9.2.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-aiohue_4.9.1.bb => python3-aiohue_4.9.2.bb} (81%)
 
-diff --git a/meta-filesystems/conf/include/ptest-packagelists-meta-filesystems.inc b/meta-filesystems/conf/include/ptest-packagelists-meta-filesystems.inc
-index 26917a93c9..bf2701b660 100644
---- a/meta-filesystems/conf/include/ptest-packagelists-meta-filesystems.inc
-+++ b/meta-filesystems/conf/include/ptest-packagelists-meta-filesystems.inc
-@@ -9,6 +9,7 @@
- PTESTS_FAST_META_FILESYSTEMS = "\
-     e2tools \
-     exfatprogs \
-+    overlayfs-tools \
-     unionfs-fuse \
- "
+diff --git a/meta-python/recipes-devtools/python/python3-aiohue_4.9.1.bb b/meta-python/recipes-devtools/python/python3-aiohue_4.9.2.bb
+similarity index 81%
+rename from meta-python/recipes-devtools/python/python3-aiohue_4.9.1.bb
+rename to meta-python/recipes-devtools/python/python3-aiohue_4.9.2.bb
+index ac4892e120..f326ec8c55 100644
+--- a/meta-python/recipes-devtools/python/python3-aiohue_4.9.1.bb
++++ b/meta-python/recipes-devtools/python/python3-aiohue_4.9.2.bb
+@@ -4,7 +4,7 @@ SECTION = "devel/python"
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=dab31a1d28183826937f4b152143a33f"
  
-diff --git a/meta-filesystems/recipes-utils/overlayfs/overlayfs-tools/run-ptest b/meta-filesystems/recipes-utils/overlayfs/overlayfs-tools/run-ptest
-new file mode 100755
-index 0000000000..80e0c2b6b6
---- /dev/null
-+++ b/meta-filesystems/recipes-utils/overlayfs/overlayfs-tools/run-ptest
-@@ -0,0 +1,7 @@
-+#!/bin/sh
-+cd "$(dirname "$0")" || exit 1
-+./test_cases/run-tests.sh "$(command -v overlay)" ./test_cases
-+rc=$?
-+# 77 means "could not run"; the script already printed SKIP lines
-+[ $rc -eq 77 ] && exit 0
-+exit $rc
-diff --git a/meta-filesystems/recipes-utils/overlayfs/overlayfs-tools_2026.11.bb b/meta-filesystems/recipes-utils/overlayfs/overlayfs-tools_2026.11.bb
-index f0c378e043..4714479024 100644
---- a/meta-filesystems/recipes-utils/overlayfs/overlayfs-tools_2026.11.bb
-+++ b/meta-filesystems/recipes-utils/overlayfs/overlayfs-tools_2026.11.bb
-@@ -5,12 +5,25 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=f312a7c4d02230e8f2b537295d375c69"
+-SRC_URI[sha256sum] = "c56c22e046e3055e9e71b45db82692c1b8676ab561d4f8f82b8df0771fa744d5"
++SRC_URI[sha256sum] = "3f1e0e33b5f9b4b75b305d852bea0693234acb669cb9d1625842755a28203462"
  
- SRC_URI = "\
-     git://github.com/kmxz/overlayfs-tools.git;protocol=https;branch=master;tag=v${PV} \
-+    file://run-ptest \
- "
+ inherit pypi python_setuptools_build_meta
  
- SRCREV = "42582352e11b162895c06826f18a2246d8005ca9"
- 
- UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
- 
--inherit meson pkgconfig
-+inherit meson pkgconfig ptest
- 
- DEPENDS:append:libc-musl = " fts"
-+
-+do_install_ptest() {
-+	install -d ${D}${PTEST_PATH}/test_cases
-+    install -m 0755 ${S}/test_cases/run-tests.sh ${D}${PTEST_PATH}/test_cases/
-+    for f in lower.tar upper.tar diff.saved verbose.saved brief.saved; do
-+        install -m 0644 ${S}/test_cases/$f ${D}${PTEST_PATH}/test_cases/
-+    done
-+}
-+
-+# "overlay merge" generates a script that needs GNU coreutils options
-+RDEPENDS:${PN}-ptest += "attr coreutils diffutils tar"
-+RRECOMMENDS:${PN}-ptest += "kernel-module-overlay"
+-- 
+2.47.3
+
