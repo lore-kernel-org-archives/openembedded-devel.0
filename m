@@ -1,157 +1,132 @@
-Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com [209.85.128.54])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.727.1794955425409588996
+Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com [209.85.128.47])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.723.1794955421791991144
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 17 Nov 2026 14:43:45 -0800
+ Tue, 17 Nov 2026 14:43:42 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=CE0QGsL7;
- spf=pass (domain: konsulko.com, ip: 209.85.128.54, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-wm1-f54.google.com with SMTP id 5b1f17b1804b1-4ac95761c85so2683285e9.2
-        for <openembedded-devel@lists.openembedded.org>; Tue, 17 Nov 2026 14:43:45 -0800 (PST)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=kgFl70J8;
+ spf=pass (domain: konsulko.com, ip: 209.85.128.47, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-wm1-f47.google.com with SMTP id 5b1f17b1804b1-4ba013938d7so3515885e9.2
+        for <openembedded-devel@lists.openembedded.org>; Tue, 17 Nov 2026 14:43:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1794955424; x=1795560224; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=aET/3JmCcA0dKtPMGW5fOfbwowu/t7/b8l3IMuWzLjQ=;
-        b=CE0QGsL7aOOl7x8etgt0zC6nOuqmgYncVj93q50pvMiyq8o/gQoDY1qxYtSP9I31a6
-         exYelek9fMoMPIQX1Gs+HB3JujixUv2ir0461WNudBMW+p54MuJFzgPPrUhHQXdhMV8G
-         bakso+66sl+MVIwrtltMUt8nIJ/ZgV9q9jVAg=
+        d=konsulko.com; s=google; t=1794955420; x=1795560220; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=rDDU/xcj5xykuKvujZ64/J+H2x/I1OsLgM7SRIStZlI=;
+        b=kgFl70J8e/Pr0pRlJi9K7KKEX1injx46zoZnuVEnobM5RmAUCA/2acpv6ZFoGtQKDn
+         EOgoNNHR+dJ7R7iyuRnLpHZr0s9haxyqzNFljEtEOWnyWR+xcxZTZoUHz5/tXH9fb+sT
+         IB6MZGLOMrNY20LQzZ4uYE0NdkwNDLmAUu58U=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794955424; x=1795560224;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=aET/3JmCcA0dKtPMGW5fOfbwowu/t7/b8l3IMuWzLjQ=;
-        b=Se6QIizqelaeBiVDInLSSz6qjgI1aX3sDqVRcKsAomOkRTIfJLISVuQA5qY0LaCjIY
-         hDelM7t5vBLLp6gQfjaGUu7s8wbAKwvGt2LQk87HRmartnN0lg0miWHpNCG27kGjzgwN
-         dh6LWhkHiXedRuHHiKFJuw+hoFqBMGhRYBT5De9o/QfV2m6AHoLoBU87M1WiB3kNOJ42
-         PhfzC2ugnnLiegbTIkmHWvb6Fs0YwQSJYngtYdlwDWSXbXL0VQPMJCk3tXuxl1QoLrnj
-         Ik/ju2KxEu9jhXhNZIKr2sSMTRhU6Hg1kSBvqdIsHt1QVDm6BjG95PhGdvYLbxuunUcx
-         JNmQ==
-X-Gm-Message-State: APuU4Z/7k1MQX6AIYw/t6EsiwHvnSXskvM5N43h4NOJvm9TsdF09/Vi6
-	jutFJbQsu49IQ3KTQeG2tBHBe76aDi5Z9zq/EWEDJ5i/RrSg/PpW0+csDVfjF43Rnr3WKYFieG6
-	KpW5m
-X-Gm-Gg: AYBFou1JrggW0O8A9qtm8/jBAY1GlVHNwAEcFKMnPEcjz08LR7iciS6aXGsN+fJxkXT
-	NwkPJiF/qqdpQ0f//+54Tg+XRUcc0O72wtUAsG/Z2RxiVkKJyyG10mlVsSb8EHZryAicQEzG+/j
-	xR1iM5FaIMMU+twlwEVVB1CFQ0lhIU8OvhHQ49b31uqRbLlpqWMabE+aMiUIYvgvytBJoD25WzG
-	c5x1nABiEMUqxrkDB6G+IywDJ+58kAk3SkCa3UDmAcChuOz8+8PMCEogxzbK8lpx4uba3FTozX9
-	B6eOkEee2QRPU0Fwie0zj5i8pXDLskUa5YCkXoiTvPPPMi8UX3qio8ROI/uvS/+T02J0KrjGiW9
-	czlKf9Kg8eQ6dJg04GG59nXcNMQCSigzF9or4NFJLjxWn5Otd9wXb+v/ff0q/EMr4jiTF7WV2j6
-	szMFjtgYq0V1ZFCuVivZbPdMNmHpU40awFHcyFVxkGdyOGn/DK4QLu54hM1a1EgEXymmF2KyS2v
-	CSKdt6e8d2yZzGt9AQPLOww2Vbt/JZ+3zcOU9p0ZG9D+fztZJUaRZzBtQBEqxzpzgxlpTcprK87
-	5/0NulnC1LYThbgxPdHO2gGVWYocrpnt3OLHFgHZEZ8AozGRs4nhd6ry+3GAOMVI5Awn84OmG5g
-	TXAlSkOFkQ3AMiH771F8Vy3NROsf+u4L4Jq7UgSKaazISgAbyZIC32g==
-X-Received: by 2002:a05:600c:4715:b0:4bb:76d9:f81a with SMTP id 5b1f17b1804b1-4bb7da3d288mr11536075e9.34.1794955423551;
-        Tue, 17 Nov 2026 14:43:43 -0800 (PST)
+        d=1e100.net; s=20260707; t=1794955420; x=1795560220;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=rDDU/xcj5xykuKvujZ64/J+H2x/I1OsLgM7SRIStZlI=;
+        b=DQlUyoO3zw+z7LkeNEuCN/Q5e73IY2heMoc2Ktqjex/3/WTdmRS2+nbD7f6c4mYJo2
+         nVbi/RYhw/A2ujjeOYle8oGZHq+1u0FxpZf+ycBwiCMDMP7uIIqJVgpgny27yY4Bcj+J
+         uLCe1eiAkh5UbwBHzlZZi/X53dqxNR7WAOT+irjiuuus5si2UJ6HssI8POWstpkAzJ8G
+         N3Crb9DGc8hxqqrMqeaMR93D5jQCkvpO0dRmrs6/tNZexE0F2EAeihXg5Kzp9oO60zrs
+         9s0mpe8MZDGqlzHmXHr3ynE39yxBQ3EWccbtW09uMU0Ac2djylq3m0kq/Cu4dHqU77Os
+         7FrA==
+X-Gm-Message-State: APuU4Z+O46nhgHvqTnz2WM8RFBVZK89BA1g7HNzO9vss+nCQro8fuUaT
+	DhKp534h1n368q0gU7NioJqNcC159HGBpvgmFYRiktvkorzaGk16Fuzt5AvsebBY54hmLxmaX3N
+	C5rFM
+X-Gm-Gg: AYBFou2rTdHZroAe+Goy0iIDVV9/hxBodyRM5vbPqKtHJJy5Iycogid9wVaGNls9SfU
+	mQEQpqbgm2bNaT62OdPR7uLE593zu3izP0G+sZqo3+g4rdmfufVZE9JAlC3Epf5nletuN6WJaoL
+	0Ajc53x3DQnwaBaQbVDDKyycgchYarnm9V09k6eqBCHPYBEuoimhY0gABKWlTzT0T2L4ihH0CJC
+	LHX3OyZN0Kk/M2DuhAcov9GA4VVhn49b3d8n6K5esvqBkGhyZVqMkGZcCcKJ+djjuCLsPbbFrk7
+	6rcAEbRBIDvBtMGcMMHvxsrjFhMKtyzTxJPy1cPAgTpSPZypYJpatErbzAugF/TX1Jq0PXlLSYi
+	9kAHaqVtDDZbSqiXLGEpxoZWQCcUtRtUTwEpKht5mZDA4AR53fXcgKCjcjn4kztRPY5JYfZBpH1
+	VfPcZJ9hQPrlSn90Xow+QVfJbK4zBSXBB8kYioL+jn2Ks9Dj3FMDyoZzYFT93GGt6GdaPfp4A5P
+	6OcKRgSeYk6tP7e9rZuRY+mtbmPRggHkQ/MRBMem8X1ES0C/ZpgQEqY/4QcsPHTQA/5+pUfPRaG
+	eZfMnvgSzXC9TVzw0vsJmyVkn8jGrlJ6do5yVQRqx6WEOUh1xx0BfUUaVN5DrpceHARdiCY/5XU
+	RSTEgYp6V55ve6aIWnFXLFMMaB77cRjdZf2Qun3d4ztFVvXNqFOiBmA==
+X-Received: by 2002:a05:600c:46d0:b0:4bb:69b3:2b42 with SMTP id 5b1f17b1804b1-4bb7da23d03mr12789345e9.16.1794955420045;
+        Tue, 17 Nov 2026 14:43:40 -0800 (PST)
 Return-Path: <leon.anavi@konsulko.com>
 Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4bb7d2c3c93sm25012915e9.13.2026.11.17.14.43.42
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4bb7d2c3c93sm25012915e9.13.2026.11.17.14.43.39
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 17 Nov 2026 14:43:43 -0800 (PST)
+        Tue, 17 Nov 2026 14:43:39 -0800 (PST)
 From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-oe][PATCH 05/11] libmspack: Upgrade 0.11alpha -> 0.12alpha
-Date: Wed, 18 Nov 2026 00:43:31 +0200
-Message-ID: <20261117224337.4181772-5-leon.anavi@konsulko.com>
+Subject: [meta-oe][PATCH 01/11] cabextract: Upgrade 1.11 -> 1.12
+Date: Wed, 18 Nov 2026 00:43:27 +0200
+Message-ID: <20261117224337.4181772-1-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.47.3
-In-Reply-To: <20261117224337.4181772-1-leon.anavi@konsulko.com>
-References: <20261117224337.4181772-1-leon.anavi@konsulko.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Tue, 17 Nov 2026 22:43:48 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132595
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132591
 Content-Type: text/plain; charset="utf-8"
 
-- test/chminfo.c: add various guards to stop out-of-bounds reads
-  when reading CHM files with unusual structure sizes.
-- cabd_read_files(): Don't set merge_next/merge_prev if the file is
-  skipped, which happens if salvage mode is enabled and the file's
-  filename is blank or overlong. Otherwise, cabd_can_merge_folders()
-  will read from the skipped file's freed memory when comparing file
-  lists, which typically crashes.
-- cabd_read_files(): now rejects cabs for having file folder index
-  0xFFFF ("continued previous and next"), but more than one folder.
-- cabd_read_string(): seek to the byte after a string if it's
-  null-terminated but empty (when it's not allowed to be), so that
-  salvage mode can continue reading if that was the only problem.
+Upgrade to release 1.12:
+
+- cabextract -f now finds "hidden" files. There are two ways to look in
+  cabinets for files, which normally have the same results, but don't have
+  to. 7-Zip and Microsoft extract.exe find "hidden" files but not "normal"
+  files, while cabextract and Microsoft expand.exe find "normal" files but
+  not "hidden" files. cabextract -f now finds both "hidden" and "normal"
+  files, if they differ.
+- cabextract now prints more warning and error messages for normal cab files
+  listed on the command line. For example, it now prints "WARNING; atypical
+  files offset in header" if cabextract -f might find "hidden" files
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../libmspack/CVE-2026-110602.patch           | 41 -------------------
- ...ck_0.11alpha.bb => libmspack_0.12alpha.bb} |  6 +--
- 2 files changed, 2 insertions(+), 45 deletions(-)
- delete mode 100644 meta-oe/recipes-support/cabextract/libmspack/CVE-2026-110602.patch
- rename meta-oe/recipes-support/cabextract/{libmspack_0.11alpha.bb => libmspack_0.12alpha.bb} (78%)
+ .../cabextract/cabextract/fix-fnmatch.patch        | 14 +++++++++-----
+ .../{cabextract_1.11.bb => cabextract_1.12.bb}     |  2 +-
+ 2 files changed, 10 insertions(+), 6 deletions(-)
+ rename meta-oe/recipes-support/cabextract/{cabextract_1.11.bb => cabextract_1.12.bb} (88%)
 
-diff --git a/meta-oe/recipes-support/cabextract/libmspack/CVE-2026-110602.patch b/meta-oe/recipes-support/cabextract/libmspack/CVE-2026-110602.patch
-deleted file mode 100644
-index 15d690945f..0000000000
---- a/meta-oe/recipes-support/cabextract/libmspack/CVE-2026-110602.patch
-+++ /dev/null
-@@ -1,41 +0,0 @@
--From aca3603bed20772fd86ce5b901005668cee835ad Mon Sep 17 00:00:00 2001
--From: Stuart Caie <kyzer@cabextract.org.uk>
--Date: Mon, 15 Jun 2026 16:33:33 +0000
--Subject: [PATCH] kwajd_read_headers(): initialise pointers before returning
-- any error
--
--CVE: CVE-2026-110602
--Upstream-Status: Backport [https://github.com/kyz/libmspack/commit/4d868504114346aa767d435fbb89a8b76603493f]
--
--Dropped changes for test and ChangeLog file.
--
--Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
-----
-- mspack/kwajd.c | 7 +++++--
-- 1 file changed, 5 insertions(+), 2 deletions(-)
--
--diff --git a/mspack/kwajd.c b/mspack/kwajd.c
--index 30caa89..ede91dd 100644
----- a/mspack/kwajd.c
--+++ b/mspack/kwajd.c
--@@ -160,6 +160,11 @@ static int kwajd_read_headers(struct mspack_system *sys,
--     unsigned char buf[16];
--     int i;
-- 
--+
--+    /* initialise pointers */
--+    hdr->filename = NULL;
--+    hdr->extra    = NULL;
--+
--     /* read in the header */
--     if (sys->read(fh, &buf[0], kwajh_SIZEOF) != kwajh_SIZEOF) {
--         return MSPACK_ERR_READ;
--@@ -177,8 +182,6 @@ static int kwajd_read_headers(struct mspack_system *sys,
--     hdr->data_offset  = EndGetI16(&buf[kwajh_DataOffset]);
--     hdr->headers      = EndGetI16(&buf[kwajh_Flags]);
--     hdr->length       = 0;
---    hdr->filename     = NULL;
---    hdr->extra        = NULL;
--     hdr->extra_length = 0;
-- 
--     /* optional headers */
-diff --git a/meta-oe/recipes-support/cabextract/libmspack_0.11alpha.bb b/meta-oe/recipes-support/cabextract/libmspack_0.12alpha.bb
-similarity index 78%
-rename from meta-oe/recipes-support/cabextract/libmspack_0.11alpha.bb
-rename to meta-oe/recipes-support/cabextract/libmspack_0.12alpha.bb
-index c612e54e17..1d849bc052 100644
---- a/meta-oe/recipes-support/cabextract/libmspack_0.11alpha.bb
-+++ b/meta-oe/recipes-support/cabextract/libmspack_0.12alpha.bb
-@@ -8,10 +8,8 @@ LICENSE = "LGPL-2.1-only"
+diff --git a/meta-oe/recipes-support/cabextract/cabextract/fix-fnmatch.patch b/meta-oe/recipes-support/cabextract/cabextract/fix-fnmatch.patch
+index bd486283b6..27d1028ba5 100644
+--- a/meta-oe/recipes-support/cabextract/cabextract/fix-fnmatch.patch
++++ b/meta-oe/recipes-support/cabextract/cabextract/fix-fnmatch.patch
+@@ -1,5 +1,6 @@
+-From - Mon Jun 11 00:00:00 2024
++From e1f0981b45923c50382e7bbbd2f581a9597d68fb Mon Sep 17 00:00:00 2001
+ From: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
++Date: Tue, 17 Nov 2026 13:33:30 +0000
+ Subject: [PATCH] Don't play with fnmatch.c replacement
  
- LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=7fbc338309ac38fefcd64b04bb903e34"
+ Currently fnmatch.c, even if it is selected, conditionally disables compilation
+@@ -15,11 +16,14 @@ collect2: error: ld returned 1 exit status
  
--SRC_URI = "https://www.cabextract.org.uk/libmspack/libmspack-${PV}.tar.gz \
--           file://CVE-2026-110602.patch \
--"
--SRC_URI[sha256sum] = "70dd1fb2f0aecc36791b71a1e1840e62173079eadaa081192d1c323a0eeea21b"
-+SRC_URI = "https://www.cabextract.org.uk/libmspack/libmspack-${PV}.tar.gz"
-+SRC_URI[sha256sum] = "1834d1079a6e8db9546fa95d3a1fc2cf676124a8a60bbdd7f30b2db4eb4ad683"
+ Upstream-Status: Submitted [https://github.com/kyz/libmspack/pull/51]
+ Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
++---
++ fnmatch.c | 7 -------
++ 1 file changed, 7 deletions(-)
  
- inherit autotools
+-Index: cabextract-1.11/fnmatch.c
+-===================================================================
+---- cabextract-1.11.orig/fnmatch.c
+-+++ cabextract-1.11/fnmatch.c
++diff --git a/fnmatch.c b/fnmatch.c
++index 868bdae..d2b6f05 100644
++--- a/fnmatch.c
+++++ b/fnmatch.c
+ @@ -49,11 +49,6 @@ static const char rcsid[] =
+     it is simpler to just do this in the source for each such file.
+  */
+diff --git a/meta-oe/recipes-support/cabextract/cabextract_1.11.bb b/meta-oe/recipes-support/cabextract/cabextract_1.12.bb
+similarity index 88%
+rename from meta-oe/recipes-support/cabextract/cabextract_1.11.bb
+rename to meta-oe/recipes-support/cabextract/cabextract_1.12.bb
+index 96e29aef2b..41d475dbf1 100644
+--- a/meta-oe/recipes-support/cabextract/cabextract_1.11.bb
++++ b/meta-oe/recipes-support/cabextract/cabextract_1.12.bb
+@@ -11,7 +11,7 @@ SRC_URI = "\
+     file://fix-fnmatch.patch \
+ "
  
+-SRC_URI[sha256sum] = "b5546db1155e4c718ff3d4b278573604f30dd64c3c5bfd4657cd089b823a3ac6"
++SRC_URI[sha256sum] = "8f39ad5f9c076b9c62c67dea4f8649e75dcc16899a2d8122ca32ba68262cb713"
+ 
+ UPSTREAM_CHECK_URI = "https://github.com/kyz/libmspack/tags"
+ UPSTREAM_CHECK_REGEX = "releases/tag/v(?P<pver>\d+(\.\d+)+)"
 -- 
 2.47.3
 
