@@ -1,339 +1,237 @@
-Received: from mail-yx1-f42.google.com (mail-yx1-f42.google.com [74.125.224.42])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.2979.1794949121634910221
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.3485.1794950600499141086
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 17 Nov 2026 12:58:41 -0800
+ Tue, 17 Nov 2026 13:23:20 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=0EbBhjQ5;
- spf=pass (domain: gmail.com, ip: 74.125.224.42, mailfrom: raj.khem@gmail.com)
-Received: by mail-yx1-f42.google.com with SMTP id 956f58d0204a3-677d35fd1d2so152470d50.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 17 Nov 2026 12:58:41 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1794949120; cv=none;
-        d=google.com; s=arc-20260327;
-        b=he2ho+YFM+uyEc/baSuzObkl+HyjryEKbwriRMe8F0dvTYfrkLg0dLnXD7e75BzEeR
-         wD90Gj98shcYqtgdpwKyZvXj84KX0DgIU3oMZrFwsgk6vgZVLCRS8EODKvT5Oh9dZcZm
-         v52O50Cfa2miXmk84BX6QnJ/lvVeieuJfCUTxqJf57b50ovztsgX65OUbckjM+N2bInA
-         HST3ewkBBdN9tQsa/XFaZgJuU6vS25hOAi1TqlZhp9+Zj0DmK9QquAc5nSck/JFlHb0F
-         6p5PW3VTK2ycanKyZcBKtCswBAu5qtRU+EwgBZJEo+S5PAik65G8HoyAN4ol8l/ALqwn
-         FGaA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:dkim-signature;
-        bh=AAp+NISqt4zw1wZsr6IDRyGCbbtQUCN/mual0jDkg1w=;
-        fh=3HeG5lByMVOEpobyMX2S2UbVHKrPGnAoodhsw06jBF0=;
-        b=SJimwOyCyXA9UsxFOcPA3TbWTX+Ya47qNKXq/QKyzpQhdP3w9wUwQlW7f+ltcr9GQo
-         NWlMRwSpsT3HfkXxBguIZeKt/0OUTP2Ot76ZPNH1b0GveLIPcTWUESFw1gqmVdq+e8dA
-         bquWDAJcoFWWOeNGhT6wmCE596717sZZcwei4QGu/ZcQ/hjW4jeRraMtO9dZJETfqmom
-         Jj9/FHOqjaZfYt55wvJCDnyInmNSd8IKowfNf76yPc763QAORLuVU/6BgBGXRWXP9NL+
-         ZhA+Sp/+I9HpVMy/i2BXfyOpIyD4odHLQ4X5cl3WQvdnIgMkSJsMaVN1BywQ25Rl1g0c
-         +z2w==;
-        darn=lists.openembedded.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794949120; x=1795553920; darn=lists.openembedded.org;
-        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
-         :references:mime-version:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=AAp+NISqt4zw1wZsr6IDRyGCbbtQUCN/mual0jDkg1w=;
-        b=0EbBhjQ5VBS67TVZv5Q/bn9jKxm38e4MyYO3OsrxtPzvbCH87EzUkfgAEaMalB9Efq
-         flCN/gphWhdwwD2c4hfOIjK6zVYeldy8MEeICFzC3mSmWAmVIXkyTTQRdXOIG2baD919
-         uSiPhlV0hRCktZPidwRxww/STVfe/3sZ5ydeKixo10UrIK4DzedokjEuVhwUxZEQpQhg
-         AyEGenyQPDrRMZTsqdzYq16DxEiN5/RHAdz4H5XTeYaiVeZR0FFkPe0cBef8AFURVqIm
-         Jkb5EUBVqiofStAs0+Mkfx6vlC9j5aVYMJ9Br/bwJ6Y0cV5ma+fFUGAy8rSpvhJo8JsP
-         jpcQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794949120; x=1795553920;
-        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
-         :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=AAp+NISqt4zw1wZsr6IDRyGCbbtQUCN/mual0jDkg1w=;
-        b=L95QCGMou8+Nl7Hv23JLsg9724Hvp93TfA5kvQ8OvrW5qGAHTURcuGO//d05otQQKc
-         KbmDatiQWZpGUJoltwacWfRUQ6DoudeiBOjQUHqraEoPHE7tdD8I5VXbQrAPEktp33Ls
-         tfmRSCJ277nbmFAUfHJAkm5JkbL5hcRhRynxM3m642YrmKKwGYfq6IOSCpi/oXn1gdkf
-         4PzrJJVH1Es2TFXVdeQyOrPoVn27zmpxpMVZso3qYcfoANC2lU9s4nYIQlJGfR+Gely+
-         InemMI4okPCc6y2kHocDAZQdTvZbjRTWP9C/roGmxhONRyV7o3JpZevTaKbp6h/bZ49l
-         iEbQ==
-X-Gm-Message-State: APuU4Z8j8fPWGBorCP3Uq4uT24ua1uPaMXDg0UbSDxoPBwil8S35yyJC
-	vX2BkMT/fXC+KvXhXeG7QfZiak2U7+mw+j2CEJwSaZ2XqO33S/ZyKBCcX4FIEgdqlCprkjpQyRy
-	Hkeqd42/7DVP/UeQJXEY9Op3htLMT9Fk=
-X-Gm-Gg: AZFdTZetSqN0CUUtgih/7erS4VJwefdlaA6ftqeONOA0rrECbYSkAwR00iCVLKZPLR5
-	b+QEKWpUs+UU/VsJqLiRZ3+QHJIuRsSPQMBvsNOVmpd51lLkS03ayQPp1Jeah9fx02/XSS27HNh
-	/EmLdvvXRXF+ffb62TzNF9A2XJJAqu8VSeAvrtOIyt7Fylx9Rg3qCl3Gkp32hR0hiYI41RzvBh5
-	of6zthNoMDvbQwZbGYBEGhnlri2nVxi5RYkqleBmMm8O+MB7fxjEXN4RtfP0ho14vdpoWCkqWXV
-	e/ls2FHSqrR9CtGLkMu3Sk/+AkogBLyom59+MzuLot65hFmiAg6HrM01zHJTYDyYxPkLF2oA1fv
-	ppR/O3tuEDbJ5QB5eREW1ogLfCezc5kkQP+AGrBJtJGSC8NoNZnCLGD5KBSiniuc3KaRi+ZbjYT
-	CF9wp9NFLjA9dU57PPH3ozKTJt27F/On3u09iFqivkLuC0vr5AW9l5f7V/cNrObK7sYoGXCNIsH
-	WsJphLirwEvu6lrBKmK334Yfvs9xuAryMaTIJCY0wLXsdRHUlc7c/xDezTUAOK4mTtW9y2midSe
-	cS+C99K4CK7iPs109YStIrTFG8V6SsqE8ladACf6g0i8AiPMKorKpCy33N3mhaHnVA==
-X-Received: by 2002:a05:690e:1486:b0:67d:b309:a242 with SMTP id
- 956f58d0204a3-67dd450ff13mr273591d50.16.1794949120503; Tue, 17 Nov 2026
- 12:58:40 -0800 (PST)
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=CywMv88W;
+ spf=none, err=permanent DNS error (domain: oak-lpgbuild08.wrs.com, ip: 205.220.178.238, mailfrom: prvs=5781c8dfd1=st10@oak-lpgbuild08.wrs.com)
+Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AHJ4hcJ2652808
+	for <openembedded-devel@lists.openembedded.org>; Tue, 17 Nov 2026 21:23:19 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+	 h=cc:content-transfer-encoding:content-type:date:from
+	:in-reply-to:message-id:mime-version:references:subject:to; s=
+	PPS06212021; bh=1vqv1FC1XUQd1GrBYhv42QKgHktxpB22EBnJFsT44gM=; b=
+	CywMv88WfQQcgEF4V0wUXZjC5OoDqeXnJ7+/PKb4T+N/1h7Zzfdjei+vVdRyRJJ+
+	kxJZhMVlMsLsREEmRynEn56Mw6yUDnB2nCgHhPYxWXoYmKybF1zZVUZvkzEGhW4J
+	uhb0xDK09Nyobvo680b/K+BpAP6eopEsO5hIs5+3lHeF5YUJlEVtAd+DpseM6sQH
+	MpVVarLelhVD8AjDvJUnLstmZfAVIELMdeouvVlNvZ+A0qWJ+V/PsQ+Tw7bLpNIc
+	Ab7523fBR5D6UK0oQpqItJkQp5QQdHCYziv+IX0UFJPBdbbyoESN2rpOcB9hjIgy
+	r7b+Hx9HnLBZS2X3gbJfhg==
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [128.224.246.36])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 4hxgwae055-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Tue, 17 Nov 2026 21:23:19 +0000 (GMT)
+Received: from ala-p2exch02.corp.ad.wrs.com (10.11.226.102) by
+ ala-exchng01.corp.ad.wrs.com (10.11.224.121) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.1.2507.61; Tue, 17 Nov 2026 13:23:17 -0800
+Received: from ALA-EXCHNG02.corp.ad.wrs.com (10.11.224.122) by
+ ala-p2exch02.corp.ad.wrs.com (10.11.226.102) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.2562.46; Tue, 17 Nov 2026 13:23:16 -0800
+Received: from oak-lpgbuild08.wrs.com (10.11.232.110) by
+ ALA-EXCHNG02.corp.ad.wrs.com (10.11.224.122) with Microsoft SMTP Server id
+ 15.1.2507.61 via Frontend Transport; Tue, 17 Nov 2026 13:23:16 -0800
+Received: by oak-lpgbuild08.wrs.com (Postfix, from userid 1762445530)
+	id CEF4F41DBEDC; Tue, 17 Nov 2026 21:23:16 +0000 (UTC)
+From: SaiSireesha T <saisireesha.t@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: <Sumanth.Gavini@windriver.com>,
+        SaiSireesha T
+	<saisireesha.t@windriver.com>
+Subject: [PATCH] soup-auth-ntlm: Reject excessively long passwords
+Date: Tue, 17 Nov 2026 21:23:14 +0000
+Message-ID: <20261117212314.3466658-1-saisireesha.t@windriver.com>
+X-Mailer: git-send-email 2.54.0
+In-Reply-To: <20261106195125.102739-1-saisireesha.t@windriver.com>
+References: <20261106195125.102739-1-saisireesha.t@windriver.com>
 MIME-Version: 1.0
-References: <20261116145516.11115-2-yunseong.kim@est.tech>
-In-Reply-To: <20261116145516.11115-2-yunseong.kim@est.tech>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 17 Nov 2026 12:58:13 -0800
-X-Gm-Features: AclHuK-7Sb3Z2XmC-Ewm1W4GlTWG-vCCKZ2TFDOT30luqTrl7BCm8eyHJih82Dk
-Message-ID: <CAMKF1sqV_euA58RmpGZvWgwAHqs5W=iyM3k0Mrk6v7sP3Yj1Bg@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH] vock: add recipe
-To: yunseong.kim@est.tech
-Cc: openembedded-devel@lists.openembedded.org, Yunseong Kim <ysk@kzalloc.com>
-Content-Type: multipart/alternative; boundary="000000000000b7bb1f06607f282b"
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-GUID: PslxqNvkSKohLnh7zyyvP8GxDF-Gm5XS
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTE3MDA4NSBTYWx0ZWRfXyVMiyruRdWwL
+ MTx3BJqt829q/AN0/bgHl0jUtnzfAPck0hDaPiAE5VVDZryBwwj8dDIj/QOV6/5c0FJd/1aA8tf
+ RSr+LELT7DszjfDO8XC/AHnaaIpCDtovZZF08lXT57K20VxkKzmxm0T+nbhU/WNHpLIBeSmDjtd
+ 6ekd50w5Bi8ZFifr4eeKT1zEd+qDOOP+5m86QWZqXMuBtrMen5j5shUY/OkEp7Byiabf4sONmvK
+ NszrNy1j9Y3IkwtgLMfJB/92pk8wYKqbq1dmt3U45QQ2OGqHIlaLaGabsxIn0HA7BOAaTdqAS65
+ nzhQnR2sWiSyN+qY6Kn+RIo/YrB+6q41kxvjvW4MbFiY8clkmIZdVLFtulyGD8mvG2NciQnIhkJ
+ A4Bz7BLuLNxSaejI439pyXG+q/ss0XW9KpEDor2TdgKh6SzZz9ZNHv3z7EMLTBTpx7UknWbx2wE
+ yE9bUsRkjdA5HttAqTA==
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTE3MDA4NSBTYWx0ZWRfXyF60Kvq3xGHr
+ +wm8Ga9wYfTgd+C0BCpfk7u8aItt4RiQ1BApp6IyX/Z8k7Z6JCuw4FH4LOSb65hJg77LKUg4MQd
+ gQvcTtRbQMJtIf288fCMyXMp0xSyTpBD4pBu1s9zk+JancDGNzNc
+X-Authority-Analysis: v=2.4 cv=OJWyTiaB c=1 sm=1 tr=0 ts=6afcc5c7 cx=c_pps
+ a=AbJuCvi4Y3V6hpbCNWx0WA==:117 a=AbJuCvi4Y3V6hpbCNWx0WA==:17
+ a=zJRp6_cAMcgA:10 a=VkNPw1HP01LnGYTKEx00:22 a=bi6dqmuHe4P4UrxVR6um:22
+ a=fTW__CHxibyLmBMfj2wP:22 a=NEAV23lmAAAA:8 a=t7CeM3EgAAAA:8
+ a=Ig0ZtvGesqF_3ZK0nFsA:9 a=FdTzh2GWekK77mhwV6Dw:22
+X-Proofpoint-ORIG-GUID: PslxqNvkSKohLnh7zyyvP8GxDF-Gm5XS
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-11-17_04,2026-11-16_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ adultscore=0 spamscore=0 lowpriorityscore=0 phishscore=0 impostorscore=0
+ malwarescore=0 priorityscore=1501 bulkscore=0 clxscore=1015 suspectscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611170085
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Tue, 17 Nov 2026 20:58:51 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132586
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Tue, 17 Nov 2026 21:23:31 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132587
+Content-Type: text/plain; charset="utf-8"
 
---000000000000b7bb1f06607f282b
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+CVE: CVE-2026-0719
 
-Fails to build on TCLIBC =3D "musl"
+Upstream-Status: Backport [https://github.com/GNOME/libsoup/commit/1972635264f1d9ab1823c8b6becf921b4125b513]
 
-On Mon, Nov 16, 2026 at 7:12=E2=80=AFAM Yunseong Kim via openembedded-devel
-<yunseong.kim=3Dest.tech@lists.openembedded.org> wrote:
+Signed-off-by: SaiSireesha T <saisireesha.t@windriver.com>
+---
+ libsoup/soup-auth-ntlm.c | 29 +++++++++++++++++++-------
+ tests/ntlm-test.c        | 44 ++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 66 insertions(+), 7 deletions(-)
 
-> vock reports the kernel code a userspace command executes, using KCOV
-> or hardware tracing (Intel PT, AMD LBR/IBS and Arm Coresight ETMv4),
-> symbolized against a vmlinux and annotated with kernel source.
-> Forked children and threads are followed through an LD_PRELOAD library
-> in KCOV mode and through inherited per-CPU perf events in hardware mode.
-> It is useful to see which kernel paths a workload reaches when testing or
-> debugging an embedded system.
->
-> COMPATIBLE_HOST is limited to x86_64 and aarch64, the only architectures
-> with syscall decoding and trace backends.
->
-> Tested with poky on qemux86-64 and qemuarm64 (build, packaging,
-> update_crates) and by running KCOV coverage, fork following and
-> syscall tracing in core-image-minimal on qemux86-64 with a KCOV kernel.
->
-> Signed-off-by: Yunseong Kim <yunseong.kim@est.tech>
-> ---
->  meta-oe/recipes-kernel/vock/vock-crates.inc |  8 +++++
->  meta-oe/recipes-kernel/vock/vock.bb         | 33 +++++++++++++++++++++
->  2 files changed, 41 insertions(+)
->  create mode 100644 meta-oe/recipes-kernel/vock/vock-crates.inc
->  create mode 100644 meta-oe/recipes-kernel/vock/vock.bb
->
-> diff --git a/meta-oe/recipes-kernel/vock/vock-crates.inc
-> b/meta-oe/recipes-kernel/vock/vock-crates.inc
-> new file mode 100644
-> index 0000000000..9ddbda00cd
-> --- /dev/null
-> +++ b/meta-oe/recipes-kernel/vock/vock-crates.inc
-> @@ -0,0 +1,8 @@
-> +# Autogenerated with 'bitbake -c update_crates vock'
-> +
-> +# from Cargo.lock
-> +SRC_URI +=3D " \
-> +    crate://crates.io/libc/0.2.189 \
-> +"
-> +
-> +SRC_URI[libc-0.2.189.sha256sum] =3D
-> "3eaf3ede3fee6db1a4c2ee091bf8a8b4dccdc6d17f656fb07896ee72867612f2"
-> diff --git a/meta-oe/recipes-kernel/vock/vock.bb
-> b/meta-oe/recipes-kernel/vock/vock.bb
-> new file mode 100644
-> index 0000000000..530ca6dd16
-> --- /dev/null
-> +++ b/meta-oe/recipes-kernel/vock/vock.bb
-> @@ -0,0 +1,33 @@
-> +SUMMARY =3D "Kernel code coverage of a user-space command (KCOV, Intel P=
-T,
-> AMD LBR and Arm Coresight ETMv4)"
-> +DESCRIPTION =3D "vock runs a command and reports which kernel code it
-> executed, \
-> +using KCOV or hardware tracing (Intel PT, AMD LBR/IBS and Arm Coresight
-> ETMv4), \
-> +optionally with an strace-style syscall trace and syzkaller-compatible
-> output. \
-> +Coverage is symbolized against a vmlinux (DWARF or BTF) and annotated
-> with kernel source."
-> +HOMEPAGE =3D "https://github.com/yskzalloc/vock"
-> +BUGTRACKER =3D "https://github.com/yskzalloc/vock/issues"
-> +SECTION =3D "devel"
-> +
-> +LICENSE =3D "Apache-2.0"
-> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Ddaf2426a488a4a2b68a88bd7cf641=
-0e4"
-> +
-> +SRC_URI =3D "git://github.com/yskzalloc/vock.git;protocol=3Dhttps;branch=
-=3Dmain
-> "
-> +SRCREV =3D "db50863d4d70038738a157379d24a9d9e5e4ce2a"
-> +PV =3D "0.1.0+git"
-> +
-> +inherit cargo cargo-update-recipe-crates
-> +
-> +require ${BPN}-crates.inc
-> +
-> +# Syscall decoding, ptrace register access and the hardware-trace backen=
-ds
-> +# are implemented for x86_64 and aarch64 only.
-> +COMPATIBLE_HOST =3D "(x86_64|aarch64).*-linux"
-> +
-> +do_install:append() {
-> +    # LD_PRELOAD shim used by --mode kcov to follow forks and threads.
-> vock
-> +    # looks it up next to its binary as ../lib/vock/kcov.so, i.e. under
-> +    # ${nonarch_libdir} regardless of multilib.
-> +    install -Dm 0755
-> ${B}/target/${CARGO_TARGET_SUBDIR}/libkcov_preload.so \
-> +        ${D}${nonarch_libdir}/vock/kcov.so
-> +}
-> +
-> +FILES:${PN} +=3D "${nonarch_libdir}/vock"
-> --
-> 2.55.0
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#132454):
-> https://lists.openembedded.org/g/openembedded-devel/message/132454
-> Mute This Topic: https://lists.openembedded.org/mt/122295770/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
-> raj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
->
+diff --git a/libsoup/soup-auth-ntlm.c b/libsoup/soup-auth-ntlm.c
+index 2d078461..08eac15b 100644
+--- a/libsoup/soup-auth-ntlm.c
++++ b/libsoup/soup-auth-ntlm.c
+@@ -349,6 +349,16 @@ soup_auth_ntlm_update_connection (SoupConnectionAuth *auth, SoupMessage *msg,
+ 		return FALSE;
+ 	}
+ 
++	static const guchar zero_hash[21] = { 0 };
++	if (priv->password_state == SOUP_NTLM_PASSWORD_PROVIDED &&
++	    !memcmp (priv->nt_hash, zero_hash, sizeof (zero_hash))) {
++		/* This can happen if an excessively long password was
++		 * provided, in which case we don't try to hash */
++		conn->state = SOUP_NTLM_FAILED;
++		priv->password_state = SOUP_NTLM_PASSWORD_REJECTED;
++		return TRUE;
++	}
++
+ 	if (!soup_ntlm_parse_challenge (auth_header + 5, &conn->nonce,
+ 					priv->domain ? NULL : &priv->domain,
+ 					&conn->ntlmv2_session, &conn->negotiate_target,
+@@ -439,8 +449,10 @@ soup_auth_ntlm_authenticate (SoupAuth *auth, const char *username,
+ 		priv->username = g_strdup (username);
+ 	}
+ 
+-	soup_ntlm_nt_hash (password, priv->nt_hash);
+-	soup_ntlm_lanmanager_hash (password, priv->lm_hash);
++	if (strlen (password) < 256) {
++		soup_ntlm_nt_hash (password, priv->nt_hash);
++		soup_ntlm_lanmanager_hash (password, priv->lm_hash);
++	}
+ 
+ 	priv->password_state = SOUP_NTLM_PASSWORD_PROVIDED;
+ }
+@@ -594,7 +606,7 @@ soup_auth_ntlm_class_init (SoupAuthNTLMClass *auth_ntlm_class)
+ }
+ 
+ static void md4sum                (const unsigned char *in, 
+-				   int                  nbytes, 
++				   size_t               nbytes, 
+ 				   unsigned char        digest[16]);
+ 
+ typedef guint32 DES_KS[16][2]; /* Single-key DES key schedule */
+@@ -640,7 +652,7 @@ soup_ntlm_nt_hash (const char *password, guchar hash[21])
+ {
+ 	unsigned char *buf, *p;
+ 
+-	p = buf = g_malloc (strlen (password) * 2);
++	p = buf = g_malloc_n (strlen (password), 2);
+ 
+ 	while (*password) {
+ 		*p++ = *password++;
+@@ -1079,15 +1091,16 @@ calc_response (const guchar *key, const guchar *plaintext, guchar *results)
+ #define ROT(val, n) ( ((val) << (n)) | ((val) >> (32 - (n))) )
+ 
+ static void
+-md4sum (const unsigned char *in, int nbytes, unsigned char digest[16])
++md4sum (const unsigned char *in, size_t nbytes, unsigned char digest[16])
+ {
+ 	unsigned char *M;
+ 	guint32 A, B, C, D, AA, BB, CC, DD, X[16];
+-	int pbytes, nbits = nbytes * 8, i, j;
++	size_t pbytes, nbits = nbytes * 8;
++	int i, j;
+ 
+ 	/* There is *always* padding of at least one bit. */
+ 	pbytes = ((119 - (nbytes % 64)) % 64) + 1;
+-	M = alloca (nbytes + pbytes + 8);
++	M = g_malloc_n (nbytes + pbytes + 8, 1);
+ 	memcpy (M, in, nbytes);
+ 	memset (M + nbytes, 0, pbytes + 8);
+ 	M[nbytes] = 0x80;
+@@ -1187,6 +1200,8 @@ md4sum (const unsigned char *in, int nbytes, unsigned char digest[16])
+ 	digest[13] = (D >>  8) & 0xFF;
+ 	digest[14] = (D >> 16) & 0xFF;
+ 	digest[15] = (D >> 24) & 0xFF;
++
++	g_free (M);
+ }
+ 
+ 
+diff --git a/tests/ntlm-test.c b/tests/ntlm-test.c
+index dcacd74e..a8b968a0 100644
+--- a/tests/ntlm-test.c
++++ b/tests/ntlm-test.c
+@@ -685,6 +685,47 @@ do_retrying_test (TestServer *ts,
+ 	soup_test_session_abort_unref (session);
+ }
+ 
++static void
++long_password_test_authenticate (SoupSession *session, SoupMessage *msg,
++				  SoupAuth *auth, gboolean retrying,
++				  gpointer user_data)
++{
++	if (!retrying) {
++		char *password = g_malloc (65536);
++		memset (password, 'A', 65535);
++		password[65535] = '\0';
++		soup_auth_authenticate (auth, "alice", password);
++		g_free (password);
++	}
++}
++
++static void
++do_long_password_test (TestServer *ts, gconstpointer data)
++{
++	SoupSession *session;
++	SoupMessage *msg;
++	SoupURI *uri;
++
++	g_setenv ("SOUP_NTLM_AUTH_DEBUG", "", TRUE);
++
++	session = soup_test_session_new (SOUP_TYPE_SESSION,
++					 SOUP_SESSION_ADD_FEATURE_BY_TYPE, SOUP_TYPE_AUTH_NTLM,
++					 NULL);
++	g_signal_connect (session, "authenticate",
++			  G_CALLBACK (long_password_test_authenticate), NULL);
++
++	uri = soup_uri_new_with_base (ts->uri, "/alice");
++	msg = soup_message_new_from_uri ("GET", uri);
++	soup_uri_free (uri);
++
++	soup_session_send_message (session, msg);
++
++	soup_test_assert_message_status (msg, SOUP_STATUS_UNAUTHORIZED);
++
++	g_object_unref (msg);
++	soup_test_session_abort_unref (session);
++}
++
+ int
+ main (int argc, char **argv)
+ {
+@@ -708,6 +749,9 @@ main (int argc, char **argv)
+ 	g_test_add ("/ntlm/retry", TestServer, NULL,
+ 		    setup_server, do_retrying_test, teardown_server);
+ 
++	g_test_add ("/ntlm/long-password", TestServer, NULL,
++		    setup_server, do_long_password_test, teardown_server);
++
+ 	ret = g_test_run ();
+ 
+ 	test_cleanup ();
+-- 
+2.54.0
 
---000000000000b7bb1f06607f282b
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr">Fails to build on TCLIBC =3D &quot;musl&quot;</div><br><di=
-v class=3D"gmail_quote gmail_quote_container"><div dir=3D"ltr" class=3D"gma=
-il_attr">On Mon, Nov 16, 2026 at 7:12=E2=80=AFAM Yunseong Kim via openembed=
-ded-devel &lt;yunseong.kim=3D<a href=3D"mailto:est.tech@lists.openembedded.=
-org">est.tech@lists.openembedded.org</a>&gt; wrote:<br></div><blockquote cl=
-ass=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid=
- rgb(204,204,204);padding-left:1ex">vock reports the kernel code a userspac=
-e command executes, using KCOV<br>
-or hardware tracing (Intel PT, AMD LBR/IBS and Arm Coresight ETMv4),<br>
-symbolized against a vmlinux and annotated with kernel source.<br>
-Forked children and threads are followed through an LD_PRELOAD library<br>
-in KCOV mode and through inherited per-CPU perf events in hardware mode.<br=
->
-It is useful to see which kernel paths a workload reaches when testing or<b=
-r>
-debugging an embedded system.<br>
-<br>
-COMPATIBLE_HOST is limited to x86_64 and aarch64, the only architectures<br=
->
-with syscall decoding and trace backends.<br>
-<br>
-Tested with poky on qemux86-64 and qemuarm64 (build, packaging,<br>
-update_crates) and by running KCOV coverage, fork following and<br>
-syscall tracing in core-image-minimal on qemux86-64 with a KCOV kernel.<br>
-<br>
-Signed-off-by: Yunseong Kim &lt;yunseong.kim@est.tech&gt;<br>
----<br>
-=C2=A0meta-oe/recipes-kernel/vock/vock-crates.inc |=C2=A0 8 +++++<br>
-=C2=A0meta-oe/recipes-kernel/vock/<a href=3D"http://vock.bb" rel=3D"norefer=
-rer" target=3D"_blank">vock.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0| 33 ++=
-+++++++++++++++++++<br>
-=C2=A02 files changed, 41 insertions(+)<br>
-=C2=A0create mode 100644 meta-oe/recipes-kernel/vock/vock-crates.inc<br>
-=C2=A0create mode 100644 meta-oe/recipes-kernel/vock/<a href=3D"http://vock=
-.bb" rel=3D"noreferrer" target=3D"_blank">vock.bb</a><br>
-<br>
-diff --git a/meta-oe/recipes-kernel/vock/vock-crates.inc b/meta-oe/recipes-=
-kernel/vock/vock-crates.inc<br>
-new file mode 100644<br>
-index 0000000000..9ddbda00cd<br>
---- /dev/null<br>
-+++ b/meta-oe/recipes-kernel/vock/vock-crates.inc<br>
-@@ -0,0 +1,8 @@<br>
-+# Autogenerated with &#39;bitbake -c update_crates vock&#39;<br>
-+<br>
-+# from Cargo.lock<br>
-+SRC_URI +=3D &quot; \<br>
-+=C2=A0 =C2=A0 crate://<a href=3D"http://crates.io/libc/0.2.189" rel=3D"nor=
-eferrer" target=3D"_blank">crates.io/libc/0.2.189</a> \<br>
-+&quot;<br>
-+<br>
-+SRC_URI[libc-0.2.189.sha256sum] =3D &quot;3eaf3ede3fee6db1a4c2ee091bf8a8b4=
-dccdc6d17f656fb07896ee72867612f2&quot;<br>
-diff --git a/meta-oe/recipes-kernel/vock/<a href=3D"http://vock.bb" rel=3D"=
-noreferrer" target=3D"_blank">vock.bb</a> b/meta-oe/recipes-kernel/vock/<a =
-href=3D"http://vock.bb" rel=3D"noreferrer" target=3D"_blank">vock.bb</a><br=
->
-new file mode 100644<br>
-index 0000000000..530ca6dd16<br>
---- /dev/null<br>
-+++ b/meta-oe/recipes-kernel/vock/<a href=3D"http://vock.bb" rel=3D"norefer=
-rer" target=3D"_blank">vock.bb</a><br>
-@@ -0,0 +1,33 @@<br>
-+SUMMARY =3D &quot;Kernel code coverage of a user-space command (KCOV, Inte=
-l PT, AMD LBR and Arm Coresight ETMv4)&quot;<br>
-+DESCRIPTION =3D &quot;vock runs a command and reports which kernel code it=
- executed, \<br>
-+using KCOV or hardware tracing (Intel PT, AMD LBR/IBS and Arm Coresight ET=
-Mv4), \<br>
-+optionally with an strace-style syscall trace and syzkaller-compatible out=
-put. \<br>
-+Coverage is symbolized against a vmlinux (DWARF or BTF) and annotated with=
- kernel source.&quot;<br>
-+HOMEPAGE =3D &quot;<a href=3D"https://github.com/yskzalloc/vock" rel=3D"no=
-referrer" target=3D"_blank">https://github.com/yskzalloc/vock</a>&quot;<br>
-+BUGTRACKER =3D &quot;<a href=3D"https://github.com/yskzalloc/vock/issues" =
-rel=3D"noreferrer" target=3D"_blank">https://github.com/yskzalloc/vock/issu=
-es</a>&quot;<br>
-+SECTION =3D &quot;devel&quot;<br>
-+<br>
-+LICENSE =3D &quot;Apache-2.0&quot;<br>
-+LIC_FILES_CHKSUM =3D &quot;file://LICENSE;md5=3Ddaf2426a488a4a2b68a88bd7cf=
-6410e4&quot;<br>
-+<br>
-+SRC_URI =3D &quot;git://<a href=3D"http://github.com/yskzalloc/vock.git;pr=
-otocol=3Dhttps;branch=3Dmain" rel=3D"noreferrer" target=3D"_blank">github.c=
-om/yskzalloc/vock.git;protocol=3Dhttps;branch=3Dmain</a>&quot;<br>
-+SRCREV =3D &quot;db50863d4d70038738a157379d24a9d9e5e4ce2a&quot;<br>
-+PV =3D &quot;0.1.0+git&quot;<br>
-+<br>
-+inherit cargo cargo-update-recipe-crates<br>
-+<br>
-+require ${BPN}-crates.inc<br>
-+<br>
-+# Syscall decoding, ptrace register access and the hardware-trace backends=
-<br>
-+# are implemented for x86_64 and aarch64 only.<br>
-+COMPATIBLE_HOST =3D &quot;(x86_64|aarch64).*-linux&quot;<br>
-+<br>
-+do_install:append() {<br>
-+=C2=A0 =C2=A0 # LD_PRELOAD shim used by --mode kcov to follow forks and th=
-reads. vock<br>
-+=C2=A0 =C2=A0 # looks it up next to its binary as ../lib/vock/kcov.so, i.e=
-. under<br>
-+=C2=A0 =C2=A0 # ${nonarch_libdir} regardless of multilib.<br>
-+=C2=A0 =C2=A0 install -Dm 0755 ${B}/target/${CARGO_TARGET_SUBDIR}/libkcov_=
-preload.so \<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 ${D}${nonarch_libdir}/vock/kcov.so<br>
-+}<br>
-+<br>
-+FILES:${PN} +=3D &quot;${nonarch_libdir}/vock&quot;<br>
--- <br>
-2.55.0<br>
-<br>
-<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-Links: You receive all messages sent to this group.<br>
-View/Reply Online (#132454): <a href=3D"https://lists.openembedded.org/g/op=
-enembedded-devel/message/132454" rel=3D"noreferrer" target=3D"_blank">https=
-://lists.openembedded.org/g/openembedded-devel/message/132454</a><br>
-Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/122295770/199=
-7914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
-t/122295770/1997914</a><br>
-Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
-d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
-><br>
-Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
-/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
-/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmail.com" targ=
-et=3D"_blank">raj.khem@gmail.com</a>]<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-<br>
-</blockquote></div>
-
---000000000000b7bb1f06607f282b--
