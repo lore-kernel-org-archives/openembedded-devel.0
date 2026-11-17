@@ -1,213 +1,339 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.16025.1794916150352550206
+Received: from mail-yx1-f42.google.com (mail-yx1-f42.google.com [74.125.224.42])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.2979.1794949121634910221
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 17 Nov 2026 03:49:10 -0800
+ Tue, 17 Nov 2026 12:58:41 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@qualcomm.com header.s=qcppdkim1 header.b=gMSKON7E;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: qualcomm.com, ip: 205.220.180.131, mailfrom: vaibjind@qualcomm.com)
-Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AHAK2lC3457899
-	for <openembedded-devel@lists.openembedded.org>; Tue, 17 Nov 2026 11:49:09 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:date:from:in-reply-to:message-id
-	:mime-version:references:subject:to; s=qcppdkim1; bh=krDICuIVy9O
-	wx2vNPysQqmXCNY0Q8PBuL/+qRfODk1s=; b=gMSKON7Ez2+1Ym/d6YHpY7yVjh0
-	8OB+eL39069vWlqCbW1QaXRYcnIbuj/k4/UOpCHo/ewRLNA7VZVBxO7RHyt6LVbP
-	zY5nHzih0eHbOt+pf3opGBFpBcDomUh42CnahFP5qimuy8z7Mw920TpPtgsRApcJ
-	snd6HVfNJ2JBNqREgHw61jofDe/0X7rZIjNfHcjx49ejtzbH2Xpr1vuAcgfkORvP
-	s0ND79A/NuERR2RHBDRjgMF0+d6hQrws5g0279yFoQi5cCGqhuOT0Ncv5wG7Lzi+
-	0ypREJ56y6+M0vip4KqUN227TSnUolk6ykgYkPjiiS6oXKbJvweJDsPxUUQ==
-Received: from apblrppmta02.qualcomm.com (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com [103.229.18.19])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j0geh9hy9-1
-	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Tue, 17 Nov 2026 11:49:08 +0000 (GMT)
-Received: from pps.filterd (apblrppmta02.qualcomm.com [127.0.0.1])
-	by APBLRPPMTA02.qualcomm.com (8.18.1.11/8.18.1.11) with ESMTP id 6AHBn6RX2678958;
-	Tue, 17 Nov 2026 11:49:06 GMT
-Received: from hu-devc-hyd-u22-a.qualcomm.com (hu-vaibjind-hyd.qualcomm.com [10.147.244.121])
-	by APBLRPPMTA02.qualcomm.com (PPS) with ESMTPS id 6AHBn6CB2678952
-	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
-	Tue, 17 Nov 2026 11:49:06 +0000 (GMT)
-Received: by hu-devc-hyd-u22-a.qualcomm.com (Postfix, from userid 4734334)
-	id 3F70765B; Tue, 17 Nov 2026 17:19:05 +0530 (+0530)
-From: Vaibhav Jindal <vaibjind@qti.qualcomm.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: khem.raj@oss.qualcomm.com, Vaibhav Jindal <vaibjind@qti.qualcomm.com>
-Subject: [wrynose][PATCH 2/2] tiobench: Allow large file support with musl
-Date: Tue, 17 Nov 2026 17:19:02 +0530
-Message-Id: <20261117114902.577356-3-vaibjind@qti.qualcomm.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20261117114902.577356-1-vaibjind@qti.qualcomm.com>
-References: <20261117114902.577356-1-vaibjind@qti.qualcomm.com>
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=0EbBhjQ5;
+ spf=pass (domain: gmail.com, ip: 74.125.224.42, mailfrom: raj.khem@gmail.com)
+Received: by mail-yx1-f42.google.com with SMTP id 956f58d0204a3-677d35fd1d2so152470d50.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 17 Nov 2026 12:58:41 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1794949120; cv=none;
+        d=google.com; s=arc-20260327;
+        b=he2ho+YFM+uyEc/baSuzObkl+HyjryEKbwriRMe8F0dvTYfrkLg0dLnXD7e75BzEeR
+         wD90Gj98shcYqtgdpwKyZvXj84KX0DgIU3oMZrFwsgk6vgZVLCRS8EODKvT5Oh9dZcZm
+         v52O50Cfa2miXmk84BX6QnJ/lvVeieuJfCUTxqJf57b50ovztsgX65OUbckjM+N2bInA
+         HST3ewkBBdN9tQsa/XFaZgJuU6vS25hOAi1TqlZhp9+Zj0DmK9QquAc5nSck/JFlHb0F
+         6p5PW3VTK2ycanKyZcBKtCswBAu5qtRU+EwgBZJEo+S5PAik65G8HoyAN4ol8l/ALqwn
+         FGaA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:dkim-signature;
+        bh=AAp+NISqt4zw1wZsr6IDRyGCbbtQUCN/mual0jDkg1w=;
+        fh=3HeG5lByMVOEpobyMX2S2UbVHKrPGnAoodhsw06jBF0=;
+        b=SJimwOyCyXA9UsxFOcPA3TbWTX+Ya47qNKXq/QKyzpQhdP3w9wUwQlW7f+ltcr9GQo
+         NWlMRwSpsT3HfkXxBguIZeKt/0OUTP2Ot76ZPNH1b0GveLIPcTWUESFw1gqmVdq+e8dA
+         bquWDAJcoFWWOeNGhT6wmCE596717sZZcwei4QGu/ZcQ/hjW4jeRraMtO9dZJETfqmom
+         Jj9/FHOqjaZfYt55wvJCDnyInmNSd8IKowfNf76yPc763QAORLuVU/6BgBGXRWXP9NL+
+         ZhA+Sp/+I9HpVMy/i2BXfyOpIyD4odHLQ4X5cl3WQvdnIgMkSJsMaVN1BywQ25Rl1g0c
+         +z2w==;
+        darn=lists.openembedded.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20260707; t=1794949120; x=1795553920; darn=lists.openembedded.org;
+        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+         :references:mime-version:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=AAp+NISqt4zw1wZsr6IDRyGCbbtQUCN/mual0jDkg1w=;
+        b=0EbBhjQ5VBS67TVZv5Q/bn9jKxm38e4MyYO3OsrxtPzvbCH87EzUkfgAEaMalB9Efq
+         flCN/gphWhdwwD2c4hfOIjK6zVYeldy8MEeICFzC3mSmWAmVIXkyTTQRdXOIG2baD919
+         uSiPhlV0hRCktZPidwRxww/STVfe/3sZ5ydeKixo10UrIK4DzedokjEuVhwUxZEQpQhg
+         AyEGenyQPDrRMZTsqdzYq16DxEiN5/RHAdz4H5XTeYaiVeZR0FFkPe0cBef8AFURVqIm
+         Jkb5EUBVqiofStAs0+Mkfx6vlC9j5aVYMJ9Br/bwJ6Y0cV5ma+fFUGAy8rSpvhJo8JsP
+         jpcQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1794949120; x=1795553920;
+        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+         :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=AAp+NISqt4zw1wZsr6IDRyGCbbtQUCN/mual0jDkg1w=;
+        b=L95QCGMou8+Nl7Hv23JLsg9724Hvp93TfA5kvQ8OvrW5qGAHTURcuGO//d05otQQKc
+         KbmDatiQWZpGUJoltwacWfRUQ6DoudeiBOjQUHqraEoPHE7tdD8I5VXbQrAPEktp33Ls
+         tfmRSCJ277nbmFAUfHJAkm5JkbL5hcRhRynxM3m642YrmKKwGYfq6IOSCpi/oXn1gdkf
+         4PzrJJVH1Es2TFXVdeQyOrPoVn27zmpxpMVZso3qYcfoANC2lU9s4nYIQlJGfR+Gely+
+         InemMI4okPCc6y2kHocDAZQdTvZbjRTWP9C/roGmxhONRyV7o3JpZevTaKbp6h/bZ49l
+         iEbQ==
+X-Gm-Message-State: APuU4Z8j8fPWGBorCP3Uq4uT24ua1uPaMXDg0UbSDxoPBwil8S35yyJC
+	vX2BkMT/fXC+KvXhXeG7QfZiak2U7+mw+j2CEJwSaZ2XqO33S/ZyKBCcX4FIEgdqlCprkjpQyRy
+	Hkeqd42/7DVP/UeQJXEY9Op3htLMT9Fk=
+X-Gm-Gg: AZFdTZetSqN0CUUtgih/7erS4VJwefdlaA6ftqeONOA0rrECbYSkAwR00iCVLKZPLR5
+	b+QEKWpUs+UU/VsJqLiRZ3+QHJIuRsSPQMBvsNOVmpd51lLkS03ayQPp1Jeah9fx02/XSS27HNh
+	/EmLdvvXRXF+ffb62TzNF9A2XJJAqu8VSeAvrtOIyt7Fylx9Rg3qCl3Gkp32hR0hiYI41RzvBh5
+	of6zthNoMDvbQwZbGYBEGhnlri2nVxi5RYkqleBmMm8O+MB7fxjEXN4RtfP0ho14vdpoWCkqWXV
+	e/ls2FHSqrR9CtGLkMu3Sk/+AkogBLyom59+MzuLot65hFmiAg6HrM01zHJTYDyYxPkLF2oA1fv
+	ppR/O3tuEDbJ5QB5eREW1ogLfCezc5kkQP+AGrBJtJGSC8NoNZnCLGD5KBSiniuc3KaRi+ZbjYT
+	CF9wp9NFLjA9dU57PPH3ozKTJt27F/On3u09iFqivkLuC0vr5AW9l5f7V/cNrObK7sYoGXCNIsH
+	WsJphLirwEvu6lrBKmK334Yfvs9xuAryMaTIJCY0wLXsdRHUlc7c/xDezTUAOK4mTtW9y2midSe
+	cS+C99K4CK7iPs109YStIrTFG8V6SsqE8ladACf6g0i8AiPMKorKpCy33N3mhaHnVA==
+X-Received: by 2002:a05:690e:1486:b0:67d:b309:a242 with SMTP id
+ 956f58d0204a3-67dd450ff13mr273591d50.16.1794949120503; Tue, 17 Nov 2026
+ 12:58:40 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-Reinject: loops=2 maxloops=12
-X-QCInternal: smtphost
-X-QCInternal: smtphost
-X-Proofpoint-ORIG-GUID: H51cCuMat_foBUoYb45t9EqxrSFmhegc
-X-Authority-Analysis: v=2.4 cv=dLkzC+Zb c=1 sm=1 tr=0 ts=6afc3f35 cx=c_pps
- a=Ou0eQOY4+eZoSc0qltEV5Q==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
- a=zJRp6_cAMcgA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
- a=ZpdpYltYx_vBUK5n70dp:22 a=NEAV23lmAAAA:8 a=EUspDBNiAAAA:8
- a=-TmCsF24s4zJGDMKLFMA:9
-X-Proofpoint-GUID: H51cCuMat_foBUoYb45t9EqxrSFmhegc
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTE3MDA0NiBTYWx0ZWRfX1yxL9wqQMNRu
- 3ha4rWJKTao50b1ZjntbtCuR8p5yufzy95rCS1RsTyEDJEVqo6AHkW3gGe+s8Wqb0gBVy0LVRo7
- lW4LWf19WjAc2bKOam1bccfVFeUzGPY=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTE3MDA0NiBTYWx0ZWRfX2bh2Gzqg5Jih
- QcqqIzAJRqXi/gFuSE1u9lBP+8cZ4BwGIiN7LsRik/azWohdA95MO8s9Kh3W/wVIUMXeAn6TwoM
- dloaEFBw5ntmWjXXLGK4l05+BB3kc5K2o4/NIsldiROHkPmQ9w28wH0EdwSlGlSoWQuoBnhGLMy
- q7+iB5EOXm6ddSqbM9KfcqeQdcrylA2R9LNFg7uy3CkR5zPbQ3WOQVOin9v8UZ+klf3LgqPqI+1
- Cqu5HpZv7FvSmh/TR3yP0OHq0BuI4Wh8DRzWxA8Ozmnt5ruAURAw+dJliItH7Ic9ZCl/jPPA7Xc
- 1zoTuCklKmiN9RKeQ/IbqmaeUdwHejK343aAvhB6JCrY9fi6B1xsyL2tydnZ2OCPuAy7y+eSpQ7
- n6i8ld7CHyii7UZkAcyyHHcz5ClwARxV2jn5jLDRezHzsiRcDgQ7OpaUDODzWJVpadaPFZAYg6/
- 1L0ofhlE7mrW8dw8hXQ==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-11-17_01,2026-11-16_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 bulkscore=0 adultscore=0 lowpriorityscore=0 spamscore=0
- priorityscore=1501 suspectscore=0 impostorscore=0 malwarescore=0
- clxscore=1015 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2611040001
- definitions=main-2611170046
+References: <20261116145516.11115-2-yunseong.kim@est.tech>
+In-Reply-To: <20261116145516.11115-2-yunseong.kim@est.tech>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 17 Nov 2026 12:58:13 -0800
+X-Gm-Features: AclHuK-7Sb3Z2XmC-Ewm1W4GlTWG-vCCKZ2TFDOT30luqTrl7BCm8eyHJih82Dk
+Message-ID: <CAMKF1sqV_euA58RmpGZvWgwAHqs5W=iyM3k0Mrk6v7sP3Yj1Bg@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH] vock: add recipe
+To: yunseong.kim@est.tech
+Cc: openembedded-devel@lists.openembedded.org, Yunseong Kim <ysk@kzalloc.com>
+Content-Type: multipart/alternative; boundary="000000000000b7bb1f06607f282b"
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Tue, 17 Nov 2026 11:49:18 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132585
-Content-Type: text/plain; charset="utf-8"
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Tue, 17 Nov 2026 20:58:51 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132586
 
-From: Khem Raj <khem.raj@oss.qualcomm.com>
+--000000000000b7bb1f06607f282b
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-USE_LARGEFILES requires _LFS64_LARGEFILE, which musl does not define
-because its off_t is always 64-bit, so the build fails on musl:
+Fails to build on TCLIBC =3D "musl"
 
-  ./constants.h:36:2: error: no large file support available, remove -DLARGEFILES from makefile
+On Mon, Nov 16, 2026 at 7:12=E2=80=AFAM Yunseong Kim via openembedded-devel
+<yunseong.kim=3Dest.tech@lists.openembedded.org> wrote:
 
-Add a patch that only requires a 64-bit off_t in that case. It also
-replaces the %L length modifier on integer conversions with the standard
-%ll, which musl's printf requires.
+> vock reports the kernel code a userspace command executes, using KCOV
+> or hardware tracing (Intel PT, AMD LBR/IBS and Arm Coresight ETMv4),
+> symbolized against a vmlinux and annotated with kernel source.
+> Forked children and threads are followed through an LD_PRELOAD library
+> in KCOV mode and through inherited per-CPU perf events in hardware mode.
+> It is useful to see which kernel paths a workload reaches when testing or
+> debugging an embedded system.
+>
+> COMPATIBLE_HOST is limited to x86_64 and aarch64, the only architectures
+> with syscall decoding and trace backends.
+>
+> Tested with poky on qemux86-64 and qemuarm64 (build, packaging,
+> update_crates) and by running KCOV coverage, fork following and
+> syscall tracing in core-image-minimal on qemux86-64 with a KCOV kernel.
+>
+> Signed-off-by: Yunseong Kim <yunseong.kim@est.tech>
+> ---
+>  meta-oe/recipes-kernel/vock/vock-crates.inc |  8 +++++
+>  meta-oe/recipes-kernel/vock/vock.bb         | 33 +++++++++++++++++++++
+>  2 files changed, 41 insertions(+)
+>  create mode 100644 meta-oe/recipes-kernel/vock/vock-crates.inc
+>  create mode 100644 meta-oe/recipes-kernel/vock/vock.bb
+>
+> diff --git a/meta-oe/recipes-kernel/vock/vock-crates.inc
+> b/meta-oe/recipes-kernel/vock/vock-crates.inc
+> new file mode 100644
+> index 0000000000..9ddbda00cd
+> --- /dev/null
+> +++ b/meta-oe/recipes-kernel/vock/vock-crates.inc
+> @@ -0,0 +1,8 @@
+> +# Autogenerated with 'bitbake -c update_crates vock'
+> +
+> +# from Cargo.lock
+> +SRC_URI +=3D " \
+> +    crate://crates.io/libc/0.2.189 \
+> +"
+> +
+> +SRC_URI[libc-0.2.189.sha256sum] =3D
+> "3eaf3ede3fee6db1a4c2ee091bf8a8b4dccdc6d17f656fb07896ee72867612f2"
+> diff --git a/meta-oe/recipes-kernel/vock/vock.bb
+> b/meta-oe/recipes-kernel/vock/vock.bb
+> new file mode 100644
+> index 0000000000..530ca6dd16
+> --- /dev/null
+> +++ b/meta-oe/recipes-kernel/vock/vock.bb
+> @@ -0,0 +1,33 @@
+> +SUMMARY =3D "Kernel code coverage of a user-space command (KCOV, Intel P=
+T,
+> AMD LBR and Arm Coresight ETMv4)"
+> +DESCRIPTION =3D "vock runs a command and reports which kernel code it
+> executed, \
+> +using KCOV or hardware tracing (Intel PT, AMD LBR/IBS and Arm Coresight
+> ETMv4), \
+> +optionally with an strace-style syscall trace and syzkaller-compatible
+> output. \
+> +Coverage is symbolized against a vmlinux (DWARF or BTF) and annotated
+> with kernel source."
+> +HOMEPAGE =3D "https://github.com/yskzalloc/vock"
+> +BUGTRACKER =3D "https://github.com/yskzalloc/vock/issues"
+> +SECTION =3D "devel"
+> +
+> +LICENSE =3D "Apache-2.0"
+> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Ddaf2426a488a4a2b68a88bd7cf641=
+0e4"
+> +
+> +SRC_URI =3D "git://github.com/yskzalloc/vock.git;protocol=3Dhttps;branch=
+=3Dmain
+> "
+> +SRCREV =3D "db50863d4d70038738a157379d24a9d9e5e4ce2a"
+> +PV =3D "0.1.0+git"
+> +
+> +inherit cargo cargo-update-recipe-crates
+> +
+> +require ${BPN}-crates.inc
+> +
+> +# Syscall decoding, ptrace register access and the hardware-trace backen=
+ds
+> +# are implemented for x86_64 and aarch64 only.
+> +COMPATIBLE_HOST =3D "(x86_64|aarch64).*-linux"
+> +
+> +do_install:append() {
+> +    # LD_PRELOAD shim used by --mode kcov to follow forks and threads.
+> vock
+> +    # looks it up next to its binary as ../lib/vock/kcov.so, i.e. under
+> +    # ${nonarch_libdir} regardless of multilib.
+> +    install -Dm 0755
+> ${B}/target/${CARGO_TARGET_SUBDIR}/libkcov_preload.so \
+> +        ${D}${nonarch_libdir}/vock/kcov.so
+> +}
+> +
+> +FILES:${PN} +=3D "${nonarch_libdir}/vock"
+> --
+> 2.55.0
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#132454):
+> https://lists.openembedded.org/g/openembedded-devel/message/132454
+> Mute This Topic: https://lists.openembedded.org/mt/122295770/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
+> raj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
+>
 
-AI-Generated: Uses Claude Code
-Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
-(cherry picked from commit 4ef0b50bcd671b81396689dd8b554b6bf2908fb8)
-Signed-off-by: Vaibhav Jindal <vaibjind@qti.qualcomm.com>
----
- ...1-Allow-large-file-support-with-musl.patch | 90 +++++++++++++++++++
- .../tiobench/tiobench_0.4.2+git.bb            |  4 +-
- 2 files changed, 93 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-benchmark/tiobench/tiobench/0001-Allow-large-file-support-with-musl.patch
+--000000000000b7bb1f06607f282b
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/meta-oe/recipes-benchmark/tiobench/tiobench/0001-Allow-large-file-support-with-musl.patch b/meta-oe/recipes-benchmark/tiobench/tiobench/0001-Allow-large-file-support-with-musl.patch
-new file mode 100644
-index 0000000000..632553c066
---- /dev/null
-+++ b/meta-oe/recipes-benchmark/tiobench/tiobench/0001-Allow-large-file-support-with-musl.patch
-@@ -0,0 +1,90 @@
-+From: Khem Raj <khem.raj@oss.qualcomm.com>
-+Date: Sun, 18 Oct 2026 19:00:00 -0700
-+Subject: [PATCH] Allow large file support with musl
-+
-+USE_LARGEFILES requires the libc to define _LFS64_LARGEFILE and errors
-+out otherwise. musl does not define it: its off_t is always 64-bit and
-+lseek64(), mmap64() and friends are aliases of the plain interfaces.
-+So the build fails on musl:
-+
-+  ./constants.h:36:2: error: no large file support available, remove -DLARGEFILES from makefile
-+
-+When _LFS64_LARGEFILE is missing, only require a 64-bit off_t.
-+
-+Also replace the %L length modifier on integer conversions with the
-+standard %ll. %L is only defined for long double, and musl's printf
-+rejects it with integer conversions.
-+
-+Upstream-Status: Pending
-+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
-+---
-+ constants.h       | 9 +++++++--
-+ test_largefiles.c | 6 +++---
-+ tiotest.c         | 2 +-
-+ 3 files changed, 11 insertions(+), 6 deletions(-)
-+
-+--- a/constants.h
-++++ b/constants.h
-+@@ -33,7 +33,12 @@
-+ 
-+ #ifdef USE_LARGEFILES
-+ #ifndef _LFS64_LARGEFILE
-+-#error no large file support available, remove -DLARGEFILES from makefile
-++/*
-++ * musl does not define _LFS64_LARGEFILE: its off_t is always 64-bit and
-++ * the *64 interfaces are plain aliases, so only require a 64-bit off_t.
-++ */
-++_Static_assert(sizeof(off_t) >= 8,
-++	"no large file support available, remove -DLARGEFILES from makefile");
-+ #endif
-+ #endif
-+ 
-+@@ -83,7 +88,7 @@
-+ #define TIO_ftruncate  ftruncate64
-+ #define TIO_pread      pread64
-+ #define TIO_pwrite     pwrite64
-+-#define OFFSET_FORMAT  "0x%Lx"
-++#define OFFSET_FORMAT  "0x%llx"
-+ #else
-+ typedef off_t          TIO_off_t;
-+ #define TIO_lseek      lseek
-+--- a/tiotest.c
-++++ b/tiotest.c
-+@@ -1411,7 +1411,7 @@
-+ 
-+ 			if(crc != d->bufferCrc)
-+ 			{
-+-				fprintf(stderr, "Thread(%lu) consistency check failed at offset %Lu\n", d->myNumber, (long long unsigned int)offset);
-++				fprintf(stderr, "Thread(%lu) consistency check failed at offset %llu\n", d->myNumber, (long long unsigned int)offset);
-+ 				return -1;
-+ 			}
-+ 		}
-+--- a/test_largefiles.c
-++++ b/test_largefiles.c
-+@@ -57,7 +57,7 @@
-+         exit(1);
-+     }
-+ 
-+-    printf( xstr(TIO_ftruncate) "()'ing large test file to size %Lx\n", LARGEFILE_SIZE);
-++    printf( xstr(TIO_ftruncate) "()'ing large test file to size %llx\n", LARGEFILE_SIZE);
-+     rc = TIO_ftruncate(fd, LARGEFILE_SIZE); /* pre-allocate space */
-+     if(rc != 0) 
-+     {
-+@@ -67,7 +67,7 @@
-+ 
-+     for(offset = (TIO_off_t)0; offset + CHUNK_SIZE <= LARGEFILE_SIZE; offset += CHUNK_SIZE) {
-+ 
-+-        printf(xstr(TIO_lseek) "()ing to offset %Lx\n", offset);
-++        printf(xstr(TIO_lseek) "()ing to offset %llx\n", offset);
-+         offset_ret = TIO_lseek(fd, offset, SEEK_SET);
-+         if (offset_ret != offset) {
-+             perror("Error " xstr(TIO_lseek) "()ing");
-+@@ -105,7 +105,7 @@
-+         }
-+         data = 0;
-+ 
-+-        printf(xstr(TIO_mmap) "()ing chunk of size %Lx at offset %Lx\n", CHUNK_SIZE, offset);
-++        printf(xstr(TIO_mmap) "()ing chunk of size %llx at offset %llx\n", CHUNK_SIZE, offset);
-+         file_loc = TIO_mmap((caddr_t )0, CHUNK_SIZE,
-+                  PROT_READ | PROT_WRITE, MAP_SHARED, fd, (TIO_off_t)offset);
-+         if (file_loc == MAP_FAILED) {
-diff --git a/meta-oe/recipes-benchmark/tiobench/tiobench_0.4.2+git.bb b/meta-oe/recipes-benchmark/tiobench/tiobench_0.4.2+git.bb
-index b42982686c..c773a8cc53 100644
---- a/meta-oe/recipes-benchmark/tiobench/tiobench_0.4.2+git.bb
-+++ b/meta-oe/recipes-benchmark/tiobench/tiobench_0.4.2+git.bb
-@@ -3,7 +3,9 @@ HOMEPAGE = "https://github.com/mkuoppal/tiobench"
- LICENSE = "GPL-2.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=c93c0550bd3173f4504b2cbd8991e50b"
- 
--SRC_URI = "git://github.com/mkuoppal/tiobench.git;protocol=https;branch=master"
-+SRC_URI = "git://github.com/mkuoppal/tiobench.git;protocol=https;branch=master \
-+           file://0001-Allow-large-file-support-with-musl.patch \
-+           "
- 
- SRCREV = "11c965c8c0f37927423fb4ea590df6c093cf2f1e"
- 
--- 
-2.34.1
+<div dir=3D"ltr">Fails to build on TCLIBC =3D &quot;musl&quot;</div><br><di=
+v class=3D"gmail_quote gmail_quote_container"><div dir=3D"ltr" class=3D"gma=
+il_attr">On Mon, Nov 16, 2026 at 7:12=E2=80=AFAM Yunseong Kim via openembed=
+ded-devel &lt;yunseong.kim=3D<a href=3D"mailto:est.tech@lists.openembedded.=
+org">est.tech@lists.openembedded.org</a>&gt; wrote:<br></div><blockquote cl=
+ass=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid=
+ rgb(204,204,204);padding-left:1ex">vock reports the kernel code a userspac=
+e command executes, using KCOV<br>
+or hardware tracing (Intel PT, AMD LBR/IBS and Arm Coresight ETMv4),<br>
+symbolized against a vmlinux and annotated with kernel source.<br>
+Forked children and threads are followed through an LD_PRELOAD library<br>
+in KCOV mode and through inherited per-CPU perf events in hardware mode.<br=
+>
+It is useful to see which kernel paths a workload reaches when testing or<b=
+r>
+debugging an embedded system.<br>
+<br>
+COMPATIBLE_HOST is limited to x86_64 and aarch64, the only architectures<br=
+>
+with syscall decoding and trace backends.<br>
+<br>
+Tested with poky on qemux86-64 and qemuarm64 (build, packaging,<br>
+update_crates) and by running KCOV coverage, fork following and<br>
+syscall tracing in core-image-minimal on qemux86-64 with a KCOV kernel.<br>
+<br>
+Signed-off-by: Yunseong Kim &lt;yunseong.kim@est.tech&gt;<br>
+---<br>
+=C2=A0meta-oe/recipes-kernel/vock/vock-crates.inc |=C2=A0 8 +++++<br>
+=C2=A0meta-oe/recipes-kernel/vock/<a href=3D"http://vock.bb" rel=3D"norefer=
+rer" target=3D"_blank">vock.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0| 33 ++=
++++++++++++++++++++<br>
+=C2=A02 files changed, 41 insertions(+)<br>
+=C2=A0create mode 100644 meta-oe/recipes-kernel/vock/vock-crates.inc<br>
+=C2=A0create mode 100644 meta-oe/recipes-kernel/vock/<a href=3D"http://vock=
+.bb" rel=3D"noreferrer" target=3D"_blank">vock.bb</a><br>
+<br>
+diff --git a/meta-oe/recipes-kernel/vock/vock-crates.inc b/meta-oe/recipes-=
+kernel/vock/vock-crates.inc<br>
+new file mode 100644<br>
+index 0000000000..9ddbda00cd<br>
+--- /dev/null<br>
++++ b/meta-oe/recipes-kernel/vock/vock-crates.inc<br>
+@@ -0,0 +1,8 @@<br>
++# Autogenerated with &#39;bitbake -c update_crates vock&#39;<br>
++<br>
++# from Cargo.lock<br>
++SRC_URI +=3D &quot; \<br>
++=C2=A0 =C2=A0 crate://<a href=3D"http://crates.io/libc/0.2.189" rel=3D"nor=
+eferrer" target=3D"_blank">crates.io/libc/0.2.189</a> \<br>
++&quot;<br>
++<br>
++SRC_URI[libc-0.2.189.sha256sum] =3D &quot;3eaf3ede3fee6db1a4c2ee091bf8a8b4=
+dccdc6d17f656fb07896ee72867612f2&quot;<br>
+diff --git a/meta-oe/recipes-kernel/vock/<a href=3D"http://vock.bb" rel=3D"=
+noreferrer" target=3D"_blank">vock.bb</a> b/meta-oe/recipes-kernel/vock/<a =
+href=3D"http://vock.bb" rel=3D"noreferrer" target=3D"_blank">vock.bb</a><br=
+>
+new file mode 100644<br>
+index 0000000000..530ca6dd16<br>
+--- /dev/null<br>
++++ b/meta-oe/recipes-kernel/vock/<a href=3D"http://vock.bb" rel=3D"norefer=
+rer" target=3D"_blank">vock.bb</a><br>
+@@ -0,0 +1,33 @@<br>
++SUMMARY =3D &quot;Kernel code coverage of a user-space command (KCOV, Inte=
+l PT, AMD LBR and Arm Coresight ETMv4)&quot;<br>
++DESCRIPTION =3D &quot;vock runs a command and reports which kernel code it=
+ executed, \<br>
++using KCOV or hardware tracing (Intel PT, AMD LBR/IBS and Arm Coresight ET=
+Mv4), \<br>
++optionally with an strace-style syscall trace and syzkaller-compatible out=
+put. \<br>
++Coverage is symbolized against a vmlinux (DWARF or BTF) and annotated with=
+ kernel source.&quot;<br>
++HOMEPAGE =3D &quot;<a href=3D"https://github.com/yskzalloc/vock" rel=3D"no=
+referrer" target=3D"_blank">https://github.com/yskzalloc/vock</a>&quot;<br>
++BUGTRACKER =3D &quot;<a href=3D"https://github.com/yskzalloc/vock/issues" =
+rel=3D"noreferrer" target=3D"_blank">https://github.com/yskzalloc/vock/issu=
+es</a>&quot;<br>
++SECTION =3D &quot;devel&quot;<br>
++<br>
++LICENSE =3D &quot;Apache-2.0&quot;<br>
++LIC_FILES_CHKSUM =3D &quot;file://LICENSE;md5=3Ddaf2426a488a4a2b68a88bd7cf=
+6410e4&quot;<br>
++<br>
++SRC_URI =3D &quot;git://<a href=3D"http://github.com/yskzalloc/vock.git;pr=
+otocol=3Dhttps;branch=3Dmain" rel=3D"noreferrer" target=3D"_blank">github.c=
+om/yskzalloc/vock.git;protocol=3Dhttps;branch=3Dmain</a>&quot;<br>
++SRCREV =3D &quot;db50863d4d70038738a157379d24a9d9e5e4ce2a&quot;<br>
++PV =3D &quot;0.1.0+git&quot;<br>
++<br>
++inherit cargo cargo-update-recipe-crates<br>
++<br>
++require ${BPN}-crates.inc<br>
++<br>
++# Syscall decoding, ptrace register access and the hardware-trace backends=
+<br>
++# are implemented for x86_64 and aarch64 only.<br>
++COMPATIBLE_HOST =3D &quot;(x86_64|aarch64).*-linux&quot;<br>
++<br>
++do_install:append() {<br>
++=C2=A0 =C2=A0 # LD_PRELOAD shim used by --mode kcov to follow forks and th=
+reads. vock<br>
++=C2=A0 =C2=A0 # looks it up next to its binary as ../lib/vock/kcov.so, i.e=
+. under<br>
++=C2=A0 =C2=A0 # ${nonarch_libdir} regardless of multilib.<br>
++=C2=A0 =C2=A0 install -Dm 0755 ${B}/target/${CARGO_TARGET_SUBDIR}/libkcov_=
+preload.so \<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 ${D}${nonarch_libdir}/vock/kcov.so<br>
++}<br>
++<br>
++FILES:${PN} +=3D &quot;${nonarch_libdir}/vock&quot;<br>
+-- <br>
+2.55.0<br>
+<br>
+<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+Links: You receive all messages sent to this group.<br>
+View/Reply Online (#132454): <a href=3D"https://lists.openembedded.org/g/op=
+enembedded-devel/message/132454" rel=3D"noreferrer" target=3D"_blank">https=
+://lists.openembedded.org/g/openembedded-devel/message/132454</a><br>
+Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/122295770/199=
+7914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
+t/122295770/1997914</a><br>
+Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
+d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
+><br>
+Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
+/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
+/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmail.com" targ=
+et=3D"_blank">raj.khem@gmail.com</a>]<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+<br>
+</blockquote></div>
 
+--000000000000b7bb1f06607f282b--
