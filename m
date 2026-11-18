@@ -1,65 +1,65 @@
-Received: from mail-dl1-f44.google.com (mail-dl1-f44.google.com [74.125.82.44])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.5761.1794975209403187567
+Received: from mail-dy1-f173.google.com (mail-dy1-f173.google.com [74.125.82.173])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.5762.1794975210281056672
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 17 Nov 2026 20:13:29 -0800
+ Tue, 17 Nov 2026 20:13:30 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=jBLuyk3j;
- spf=pass (domain: gmail.com, ip: 74.125.82.44, mailfrom: raj.khem@gmail.com)
-Received: by mail-dl1-f44.google.com with SMTP id a92af1059eb24-1b3ada81853so631900c88.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 17 Nov 2026 20:13:29 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=rjFLqpSY;
+ spf=pass (domain: gmail.com, ip: 74.125.82.173, mailfrom: raj.khem@gmail.com)
+Received: by mail-dy1-f173.google.com with SMTP id 5a478bee46e88-33bf40b0c8bso1562163eec.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 17 Nov 2026 20:13:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794975209; x=1795580009; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1794975210; x=1795580010; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=kNn6b3v55L4LhmEzfLRnyybkH+u9QvSK7BbKJ784wro=;
-        b=jBLuyk3jtsdc035UqAwRRGmdFkwMRiPsAisGw57HMHyO8BRcuWWXnHjkfcBrK87yJE
-         IwQqVvzIyL/OeAcelNyZytNNHwVmVT+1ZA5kEE5ck8yH7W1MyOJn0NIQkdqR/qZHIGKj
-         FW1Kk3KXQ7Ee7heIqyuv4Qudnl7/0I6gPLPnYC+W6hPgBiKZ37f6gBO7CAllA6gb5gzB
-         0xUlxILMBI1IgZVdp+nAlkylu2QOyUkV3c7+0hbEZ6SlOi7kvLgxi8YDxBxMRr62HuFH
-         e61B49ltthAgqs1gl8Abu7q4yPG0XOKlDVN9TPSiKXzTR8sttTXVPFYy4jqd7R8t0rUF
-         1zxA==
+        bh=/2RRfh4r5hl9Jq/q3g5vl4b7/N25RLNW/qT/PZ/raeA=;
+        b=rjFLqpSYMjWDnlv7oE4oZxZS5TjiblXz/RbHY4hEiryyBzfdrC8T0cvIuPYf7YzTru
+         bdQkJhsg8vNg+WK77QFEzX9u+x7MHISb+wyoQo/mhDnd77lMgamMeWEkJNxFOXL+nFiI
+         2fuaxRabmlPRIDV7s3fWKQVmdMEg1tPlCNNA12g7jom5ef7TLGJ85taG1+noS6WWqW9M
+         FUrhWAvD7LnCYE3PYJbMmz5ZOGY77bEVgPX7IJtuH1VKfs8UffpTEE7dmZq8ZnD5gPdr
+         5oebOokZVqyiJtEqKXbumfioIlYVSbzcE7IIQ+8je36MD6oxplmA2WYIMmzvpTJBLEWF
+         8bow==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794975209; x=1795580009;
+        d=1e100.net; s=20260707; t=1794975210; x=1795580010;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=kNn6b3v55L4LhmEzfLRnyybkH+u9QvSK7BbKJ784wro=;
-        b=SS5XbUz8DP9Gmu8SSyKuOLn4X+raXOaLTWdLthkASum/u0ZfHWheRVQ4acXFrU2mFo
-         rhRY5s/PCPnD+iRM704V2LH5wtXVPKV5ZdFsNkD2vpI9l/jBAq0EyQSkC89e2kLv9NIe
-         Ksq7keRQOIwSaO7Z7vftbOR4DSggJz/lQY2CMskRTJ5F6hKioet+wysVtqI+6zS9r9jf
-         ELEZ2jwjKM08/FO4v8L06qx8zpydVtHihTnwWY7eXVKmFLzKiOqKlNt2z71W3W8dEovg
-         JTOK1BDVC3hvTWZVfwILsWTRdIEPYPddDYxRzTO6g4+iL+DMkISifl+JZCxtkX7/tzCW
-         SUJg==
-X-Gm-Message-State: APuU4Z8jIPPU6O7yO8fO4t2bMK/jXtYMVLJl3iZ+QVt+CkK4u+JIcI+S
-	G20Ks+VlO+sc9rPRUm7/bx2m+5/ZaKFC3dJ9Upd6ZdfzTzukmjsXvjNodnEVApIb
-X-Gm-Gg: AYBFou0gE3/viu1ulBCT/7B3Y1R9IUrTTQ/y4VaNV2Vm7evJdEOT80PCslWkLgmIBCS
-	7SJb2Woal6Q0Ed1FzznsAUz2OXbbJ7pUG42AhnEDsatR7hBTZLwrabAV+2yoGGc8kHalX3TPZFF
-	muau3GbapqT/UMSHJukVi+g6yzLmYpE6GGbbbp3Rh/mEI9hEsXlXRsIqXLFH8Wcqsg2SoMWTD2W
-	9BwKGNjmVtSQLeYWjkFmiXCUy85Ru8HcHCROVnRbUjxu1T72CvrCG9tCFptQEBVqZFADLIvkDZD
-	phYJXPWdl0dKmHbpmzucDAf1Mt259wKLjoHAkrOtMvNjhnNW6P+sayUBhbtzrROxQP3CGHEOp5w
-	Fybz2yvy8rhM4uyOGOUPBem79hnIowMK9qzhHBf4NOEYX9wl1oNwqtmwUvEiyE6LDoV+JJQ3CJf
-	nV/H5odKq2MkHPf3fDlmTwnyoQXMhJsUwfi4HQT+0kERd/x+c2RQWrhS0MowAnMWrZwAGCCMESN
-	z0sRvMJJcOhzqwvn7uOcGBy5ZfY06JojM9AdnByCNuEBCF7BTypway1b3/H0/tUDOZ2WKAtxkXc
-	+geN7CJgfWMkbvXP/UlCIqBUrhKQv37FUhdXoRW9oJ7wyLiXRQq5RXpaJCElrO02C5e8bk4yDRH
-	ixZJ5pUb6hNvTVqdVf4GR9Q9J65hYZEByftZkmZFgyMs2+Go+E79OgJR4HHq7Ti5EGTqNAd1MJt
-	Gv0XLY0ZKqdnh/5hsvoIdB988nUPzJyGmdhMNgyAARX3KmpgsvXtuHvPoP9/6MLYqXjQRG0nbUg
-	0tACPOP/OuTwxUPva0+uvkCaQv/9oiFJzNPeZO916vFO6ECL2mc1fzhmIb7MVNUTqbbLlxz6djc
-	bCj9
-X-Received: by 2002:a05:7022:281:20b0:191:444:425 with SMTP id a92af1059eb24-1b543c12d1emr1356510c88.2.1794975208604;
-        Tue, 17 Nov 2026 20:13:28 -0800 (PST)
+        bh=/2RRfh4r5hl9Jq/q3g5vl4b7/N25RLNW/qT/PZ/raeA=;
+        b=ZWE4rUdKRSRNFEfb0h5TfvH6M8A7vHlZ/tMBhkC60ArugYT0Eb5RrffNt/vhwdTOyf
+         Yae0QQzPlNKY+A0nFVcJKRyYK2XG8t5gwaAjJYI0qUWr6OgNy4b3q6SPCgOxXRrAz7tW
+         MES8zafISFk4VIYGrsdWu17O9PHH8EehkbMZ891RJrU4hVXsifXbkyVJ2h+PP3UeR0rw
+         gZCOiZqwv2uNQr28XfifhLvQBr10wdNsQJCJpH2bdcqvBrRpqvsQ4XqO0nvTONeLX1UU
+         Eq9zOgb4z2BvJCoch032XNIrJ6K8UjmSmAWDPSzL2ZMp7KaRX/JXmtHqD5BtoIeVM046
+         FoMA==
+X-Gm-Message-State: APuU4Z8C46F5wY/Fo8Dh3xS1v2kXWWk4QU+H0OpwTkP6julKzAIZYq71
+	mbJVe6+XjRjP/cr6c59mOeVtRRAOK0BGo4dgeCHgsnsR2CLVX36xOYtxJAyAZk6t
+X-Gm-Gg: AYBFou0jdibwSD5EPyNGk16sbKpUnpCe2HIECy+NFSJ6eNaNj7Mksc4q7eUtg2+RkAq
+	oNQdtg4GMkQYOIt9DYK03jdt9+z3Xhrr3ewAqUCb9hyWjBizRtykUB0v2RqMdRb5Krua5Q6m1M2
+	syRAoBdtHYlYKN9/dvS3jDoMKKxN63cc3VC4UpP9iuc5w17gwskB9a4oOCWuHSvCAWD3K2W5NE3
+	3DQEVIyHE7DDA/qESg6vmMkRCleifY/ePBPwYJD12ZRLfjOYRhU8x0RrF8XSllI+16FTWVIOsIw
+	8xsFGS1IBxtkdXAByw261tz182UZtaDp0c4aqNS9LDGKx9ZAL/M/OApJEZNQXZcfXWx2QQ9lkTv
+	a5FoDZMTBMgddW9iVI4FcS4w74RkAaH1cqpLLdqn4sF/0NbacpZKrGQBfDVvITS3ao5LWdmJsLY
+	N14wiU9rYUStqmtT25VNgEGW0JweTHfI6L1jsc71sjPMbtuLgtrL3AXaMCufNIV3WjN53FU86Uh
+	bxcmcwvNZAtFxDQM6RMcdDKMUheczPpWvD5gKbj6fHlsKSdH/uusM7W9EhoD3I3M23Al9quRln9
+	38kdzmfthUCRRhmP/LPU8Cq+3EQ001NcmxbBMZZXQ6isW8jwYVUfGu04T40V8FV2tGPNN+PWoBZ
+	CSV+5SsszSlMFAVGu+574+xWc28Af2yKdfFB7B91PdwkbCJDitRw2QxfAB+ftGwNiSQiu6fX2ff
+	6hMCvYJNV1QJo8Zn3zWRP1svxABgjxKCKAQLeRIgbMny+ragfSPmzOcxRm3ro7gA6rHg3k13L2B
+	QplOJZg0t3S8AHtUTSLSQ+0e6fVgRAokWSQ/wIo99BioRLxhS83SCPah9xpHWhtZk4xWvV0HJ1e
+	ICvn
+X-Received: by 2002:a05:701a:c961:b0:1b5:2bcb:8691 with SMTP id a92af1059eb24-1b543c447e7mr1491915c88.42.1794975209618;
+        Tue, 17 Nov 2026 20:13:29 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1b5447f4eafsm2655742c88.14.2026.11.17.20.13.27
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1b5447f4eafsm2655742c88.14.2026.11.17.20.13.28
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 17 Nov 2026 20:13:28 -0800 (PST)
+        Tue, 17 Nov 2026 20:13:29 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-networking][PATCH 08/12] libesmtp: Fix LICENSE to LGPL-2.1-or-later
-Date: Tue, 17 Nov 2026 20:13:13 -0800
-Message-ID: <20261118041317.2287415-8-khem.raj@oss.qualcomm.com>
+Subject: [meta-python][PATCH 09/12] python3-pylint: Fix LICENSE to GPL-2.0-or-later
+Date: Tue, 17 Nov 2026 20:13:14 -0800
+Message-ID: <20261118041317.2287415-9-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.1
 In-Reply-To: <20261118041317.2287415-1-khem.raj@oss.qualcomm.com>
 References: <20261118041317.2287415-1-khem.raj@oss.qualcomm.com>
@@ -67,28 +67,26 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Wed, 18 Nov 2026 04:13:36 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132631
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132632
 Content-Type: text/plain; charset="utf-8"
 
-The library sources say LGPL version 2.1 or any later version and LICENSE
-is the LGPL-2.1 text. Only the uninstalled mail-file example is GPL.
+pyproject.toml declares GPL-2.0-or-later.
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- meta-networking/recipes-support/libesmtp/libesmtp_1.1.0.bb | 2 +-
+ meta-python/recipes-devtools/python/python3-pylint_4.1.4.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-networking/recipes-support/libesmtp/libesmtp_1.1.0.bb b/meta-networking/recipes-support/libesmtp/libesmtp_1.1.0.bb
-index d1364a8948..a364249799 100644
---- a/meta-networking/recipes-support/libesmtp/libesmtp_1.1.0.bb
-+++ b/meta-networking/recipes-support/libesmtp/libesmtp_1.1.0.bb
-@@ -3,7 +3,7 @@ DESCRIPTION = "LibESMTP is a library to manage posting \
- (or submission of) electronic mail using SMTP to a \
- preconfigured Mail Transport Agent (MTA) such as Exim or PostFix."
- HOMEPAGE = "https://libesmtp.github.io/"
--LICENSE = "LGPL-2.0-or-later"
-+LICENSE = "LGPL-2.1-or-later"
- SECTION = "libs"
+diff --git a/meta-python/recipes-devtools/python/python3-pylint_4.1.4.bb b/meta-python/recipes-devtools/python/python3-pylint_4.1.4.bb
+index 3836d82951..b5e2ff6109 100644
+--- a/meta-python/recipes-devtools/python/python3-pylint_4.1.4.bb
++++ b/meta-python/recipes-devtools/python/python3-pylint_4.1.4.bb
+@@ -1,6 +1,6 @@
+ SUMMARY = "Pylint is a Python source code analyzer"
+ HOMEPAGE = "https://www.pylint.org/"
+-LICENSE = "GPL-2.0-only"
++LICENSE = "GPL-2.0-or-later"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=c107cf754550e65755c42985a5d4e9c9"
 
- DEPENDS = "openssl"
+ SRCREV = "edc8e376ba4affd43bc07571bdf3a90efc281ba7"
