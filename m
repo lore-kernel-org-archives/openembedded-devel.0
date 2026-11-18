@@ -1,97 +1,94 @@
-Received: from mail-wm1-f46.google.com (mail-wm1-f46.google.com [209.85.128.46])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.729.1794955428872827722
+Received: from mail-dl1-f43.google.com (mail-dl1-f43.google.com [74.125.82.43])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.2519.1794961607937255440
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 17 Nov 2026 14:43:49 -0800
+ Tue, 17 Nov 2026 16:26:47 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=kSkGgH8J;
- spf=pass (domain: konsulko.com, ip: 209.85.128.46, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-wm1-f46.google.com with SMTP id 5b1f17b1804b1-4bb6886d30aso3150665e9.3
-        for <openembedded-devel@lists.openembedded.org>; Tue, 17 Nov 2026 14:43:48 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=TtnXkhYB;
+ spf=pass (domain: gmail.com, ip: 74.125.82.43, mailfrom: raj.khem@gmail.com)
+Received: by mail-dl1-f43.google.com with SMTP id a92af1059eb24-15ea896ddc8so779417c88.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 17 Nov 2026 16:26:47 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1794955427; x=1795560227; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1794961607; x=1795566407; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=Fx8W+4QLxKfrHZ0K5ZoDGsptvYq2o1POky4p7uRXwf4=;
-        b=kSkGgH8JMpSh+CSm+nM5e+hDiWaKvAJXqwLMUAWexR7t4WBfs2EjLplopGTTa4unMT
-         FFL26abKmcTk7jp6Gbw9IVENLDuMbtv/a1rdJzjCMuxejnSRUvXJpsZWnvf+qXBdssfk
-         u5OKG8ouspC7p/Etwxb9jAit5w24ex5PGzup8=
+        bh=elkQlmVmyGYaQKEIT6wqJhq8hD1+pEgUyEgKLRVQPUk=;
+        b=TtnXkhYBq52vQa79rGGnAMkFUK+lbNfKhukDY73M75GBEkgGWANJTOXsezEwokf8rP
+         DRqZ4+hIwOF6LflRslDMoWhxyh92jrqwfGm4j6HWpS8y6oRhPJZ/51F60aIcCMBXsFrj
+         F2u+jxwMoJ880AqKifUADU/jNCgKpXpIpmcVYjMcxerCEkdnj8hdW7VQlruAqXV6P63X
+         NitijnbpeebqSlyg6g3PokVS6ty9dKi/aCo6FMCF4rv4/ctErAjgqC6xZ0ko08iTEkeD
+         1DT6qyqBCaR7gP5lGl3I/s+/pdPNSN11/D+yjDskII4Ccqlzjqn79BKgM09vHsv9jRAj
+         Quvg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794955427; x=1795560227;
+        d=1e100.net; s=20260707; t=1794961607; x=1795566407;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=Fx8W+4QLxKfrHZ0K5ZoDGsptvYq2o1POky4p7uRXwf4=;
-        b=YMr+3cub+JL4Ghocm+9mvxyu44DJeMYsUEpUdUz+18f5hEpGieacM0suGFVBVK1aop
-         PpMsjjpR0khCFcSIM1yMx7AdyaZg4iv85qIpj+q5CbjXH2duezDw896cFDjfQ/InEXf1
-         qSnF5TGHTE8211zecgXHLY7vT8wHLmpWwXQrzrQTNDPlBoQSk91+9yHhzp3ZvFBqvnZz
-         EfrccqZPEjpCutHRFpdBr9myD79WHHrLHUDgEk9Exuy5ZiC81d86iTwz+1wi3LXewxKo
-         18uAmHd9IrGNeXLWmE88z3cv2TcR3oo9ey/XWtWZdRxQxcd08ohBR7SQYC0X5diuCOaN
-         UIdw==
-X-Gm-Message-State: APuU4Z8ZLYq8tPGBBer9z1GVFBmTNRIYqEYKxGbwxIJs2k4u4o2B8jto
-	5qOsZLXpQPkQsuQtqjKSRqwV2EWQALtuucIr7vX1uxar8+rGP3e/fNy0WJstFT+2otdNh8xhxvM
-	OLccy
-X-Gm-Gg: AYBFou3wRvBlDJyFMlBkm7CC0ypoyJw97tvjKx8oZlKy1xonebPF9XXIrvIw1/ZYmI1
-	1fBH84Uw21v8UH0pAZaQNmPF/PreIpL4iDb5AMZzmeHJZ441cra+SsixCHrF37rpu67hDcS5YxT
-	lI339b/yZTs35yBib3EyMG3JcxvHfFp5jBvO6g5eqM0N9h1DKu/7nqSszShiovvRhjrjA0cCSKP
-	X8h/AUp2gEfEAiwe6dedndD4eSnaRqh4s2uJ06IV0nrqI87Vt6IQES6m5x0nvSvJsLwIovd27Up
-	z/N3dWXwrcOLGLMBsTfTNz7nfK7Ea5FUrVqXP/m7Xf8J+EJGhlFbprV79Q91fC6w3p5T8ydcYJZ
-	6YXmHl6v0UtX9oSiceW2NTlmOQyr+Jg5Dnftd3PULfleeXyUODwiuSBPNO98WjEF6GS2juMilv2
-	0AA92+H7hIGWZ9lmCLbo8nLEIgJQVMr7Gwfe+z6pDa84oq1pvRaRydmH1cdAjZydELwMx7trpYi
-	OVBx+XAq7rayWrQCG+64wwRY8KaD6fmzQnKKHa26Kt8zqF0fLX3Gm5HmET7azG/USFjdHIor2ij
-	ts1dI9CY7IR7zhyL9ST2TDsc2xi5azNFEkICBYZ8JFEbRE42vaSk5yf4JXXnVZ4BT1ZdAG4f4qI
-	jtDcvxyVIthtA0lYVdDtWeSxiHh4OkDGVpWBoGLvSUZ752A+8bsuANSx12/k3AMvzSS+tjhELEo
-	8=
-X-Received: by 2002:a05:600c:3111:b0:4a6:4d6b:a840 with SMTP id 5b1f17b1804b1-4bb7da2bb49mr11237295e9.31.1794955426987;
-        Tue, 17 Nov 2026 14:43:46 -0800 (PST)
-Return-Path: <leon.anavi@konsulko.com>
-Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4bb7d2c3c93sm25012915e9.13.2026.11.17.14.43.46
+        bh=elkQlmVmyGYaQKEIT6wqJhq8hD1+pEgUyEgKLRVQPUk=;
+        b=RTJT7H0yd55oVHXSFtiHOztTyEmY5LnLrIZuewuKEhsd2F8/UojMCY3oL5T/IJfk1Y
+         snbY5CieRAGwtixup0KaXS0nQJU8VWRHuMry0sJQNlFEolgMCyBUaZ6e9y8Ry8/ag3da
+         akhRpHX+F+32r3zy2u3sJSC9KQonL3L0U1VlrrwtLAyXnUlkSoLRc2rvom1t47ToZbI5
+         wRXTabJwIkw+R7fC4XGci9B9+kRwnR0fnotij4t1oPnU2mfgzJ3rU9sW4eaiGy01lcWn
+         sERtneuJsoL7ukhMK6d7cFjA6/fR4NQ3OSYpvkvHacPfEYY99okfQ4RejO4mhgCSxO2/
+         iUoA==
+X-Gm-Message-State: APuU4Z9yHa+95BXjRETNULA37kE1g39kC4sC+/xH6KylRu/CIotgFHX/
+	z/9/xG+g+K9Krq0R1Obh9MJ4X0j7kgipDlms6yIFBUi+1XuNmF70SAsrmbOxjzXs
+X-Gm-Gg: AZFdTZdrCdM18e1Rhad9vuutwNeMkBBu7U8XCRye2LD+FvlIWUueY0RMifxHRlDqFAT
+	SH7vu4+4zBfA/GOl/jVP5HJvJainZLaGEMs/DS19BIW+PgGp09Cu7ev2741zs6dP53OJARTn11n
+	PDxE46S/hCUsUg+0ExQA5KfwOLg8ARDgEyFLz2mBCZwgehCLN6w+M0gxVRXsuJr4Z3bWLwLy7nS
+	Y6OtMM2GNQvTYI7Y9NnsWg7fRF6axkLWnnj4f9lut5xJSqCXrPtzJj7kV2D+Y7VF/QrEhptOZap
+	niKC7vnKjulK32HZfvT22gzSYcrIpwdBNBZqYHx0l2qfhWxcEuz051PNRRx+lb5LOERT/JGBJik
+	8MFbVma37UPQmur/w6o9K63dNkxoVGtzJQULldkma5nI8ovaOjNEKK8VccC2ctt9D1KyD0BwLBS
+	fDFoE7gHX1a1OcXAanrFnBzVuRxhC8IScidR1z9YP48pxCuDZqSONGfhHylAQWVFspA7NGGOuuI
+	Kcb6TegVEyj11NRLYimUmQBB3y+58idRkDky4s9W3PzatOboz4VuBlA5j4G2p6RZvPpJUbyYcfF
+	CWFkc35w4P7HcBHI3v4Y3lRhlDY0y0usfp/1wM3PA+6oGs5W8sDvjvLE9p/GAD3yr0rvkDThZEh
+	IVO+IhL8kxIfrFbBrWTQeaFOYQbO3XO3mtkePR/1xb8/4ATMaxQyV2rzygzIRDQuDjSVl90RzL5
+	7cw8MOnIKxZBaJx+ok703n71w8+OxUSLo1uZbbyLHoXI7/KnogStVJSIKT6w4HJTs/yuZCxN0SH
+	POgHvY6Q4e2k7BmXaDvN9kI4dn5ie6EPs0ztVJz6wbhKFrv6x13rIhWT6J51H7T+BY/Ipw8QUBk
+	qe3U
+X-Received: by 2002:a05:7300:d217:b0:35e:f1a5:9ba6 with SMTP id 5a478bee46e88-3827db0fa8bmr1049629eec.5.1794961607104;
+        Tue, 17 Nov 2026 16:26:47 -0800 (PST)
+Return-Path: <raj.khem@gmail.com>
+Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-382a7fbceffsm1697015eec.28.2026.11.17.16.26.46
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 17 Nov 2026 14:43:46 -0800 (PST)
-From: Leon Anavi <leon.anavi@konsulko.com>
+        Tue, 17 Nov 2026 16:26:46 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
+X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-oe][PATCH 09/11] usb-modeswitch-data: Upgrade 20251207 -> 20261111
-Date: Wed, 18 Nov 2026 00:43:35 +0200
-Message-ID: <20261117224337.4181772-9-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.47.3
-In-Reply-To: <20261117224337.4181772-1-leon.anavi@konsulko.com>
-References: <20261117224337.4181772-1-leon.anavi@konsulko.com>
+Cc: Khem Raj <khem.raj@oss.qualcomm.com>
+Subject: [meta-oe][PATCH 02/14] ostree: Fix LICENSE to LGPL-2.0-or-later
+Date: Tue, 17 Nov 2026 16:26:30 -0800
+Message-ID: <20261118002643.29829-2-khem.raj@oss.qualcomm.com>
+X-Mailer: git-send-email 2.56.1
+In-Reply-To: <20261118002643.29829-1-khem.raj@oss.qualcomm.com>
+References: <20261118002643.29829-1-khem.raj@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Tue, 17 Nov 2026 22:43:59 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132599
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Wed, 18 Nov 2026 00:26:49 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132603
 Content-Type: text/plain; charset="utf-8"
 
-Upgrade to 20261111 that adds new devices:
+Upstream sources are tagged SPDX LGPL-2.0+ / LGPL-2.0-or-later and
+COPYING is the LGPL-2.0 text; LGPL-2.1-only was incorrect.
 
-- [0bda:1a2b] Realtek Wifi Dongle
-- [046d:c26d] Logitech G923 Wheel (Xbox ed.)
-
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+AI-Generated: Uses Claude Code
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- ...eswitch-data_20251207.bb => usb-modeswitch-data_20261111.bb} | 2 +-
+ meta-oe/recipes-extended/ostree/ostree_2026.6.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-support/usb-modeswitch/{usb-modeswitch-data_20251207.bb => usb-modeswitch-data_20261111.bb} (84%)
 
-diff --git a/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch-data_20251207.bb b/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch-data_20261111.bb
-similarity index 84%
-rename from meta-oe/recipes-support/usb-modeswitch/usb-modeswitch-data_20251207.bb
-rename to meta-oe/recipes-support/usb-modeswitch/usb-modeswitch-data_20261111.bb
-index 3bced56f44..5da108b67d 100644
---- a/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch-data_20251207.bb
-+++ b/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch-data_20261111.bb
-@@ -7,7 +7,7 @@ inherit allarch
- DEPENDS += "tcl-native"
+diff --git a/meta-oe/recipes-extended/ostree/ostree_2026.6.bb b/meta-oe/recipes-extended/ostree/ostree_2026.6.bb
+index 70f3c8ee13..ca6ebdd739 100644
+--- a/meta-oe/recipes-extended/ostree/ostree_2026.6.bb
++++ b/meta-oe/recipes-extended/ostree/ostree_2026.6.bb
+@@ -4,7 +4,7 @@ tools that combines a \"git-like\" model for committing and downloading \
+ bootable filesystem trees, along with a layer for deploying them and managing \
+ the bootloader configuration."
+ HOMEPAGE = "https://ostree.readthedocs.io"
+-LICENSE = "LGPL-2.1-only"
++LICENSE = "LGPL-2.0-or-later"
  
- SRC_URI = "http://www.draisberghof.de/usb_modeswitch/${BP}.tar.bz2"
--SRC_URI[sha256sum] = "0bb12d64aee5e467c31af61a53fb828ff7aa59c54a82ca85eeede4c5690bfa66"
-+SRC_URI[sha256sum] = "221507574da7d11debdba94e40cf164b59fb8b19be1a3ecbec76e348b7a4fa73"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=5f30f0716dfdd0d91eb439ebec522ec2"
  
- do_install() {
-     oe_runmake install DESTDIR=${D} RULESDIR=${D}/${nonarch_base_libdir}/udev/rules.d
--- 
-2.47.3
-
