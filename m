@@ -1,175 +1,95 @@
-Received: from alln-iport-2.cisco.com (alln-iport-2.cisco.com [173.37.142.89])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.10846.1795002600425853158
+Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com [209.85.128.54])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.10964.1795003162921951537
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 18 Nov 2026 03:50:00 -0800
+ Wed, 18 Nov 2026 03:59:23 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=CMFI4Mar;
- spf=pass (domain: cisco.com, ip: 173.37.142.89, mailfrom: yurade@cisco.com)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=dmBMUvGb;
+ spf=pass (domain: konsulko.com, ip: 209.85.128.54, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-wm1-f54.google.com with SMTP id 5b1f17b1804b1-4a35d5d4a20so9277145e9.2
+        for <openembedded-devel@lists.openembedded.org>; Wed, 18 Nov 2026 03:59:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=cisco.com; i=@cisco.com; l=4126; q=dns/txt;
-  s=iport01; t=1795002600; x=1796212200;
-  h=from:to:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=CWfz1aZEPWh6w9XR5pG7PfaV88D6jIpl6rqR+39dr1s=;
-  b=CMFI4MarYM4MXTOuUFSLSiTvnO5gwRG2Ntc/fjB8JlqXM/kietf2jRJs
-   MivG6P44B+Nv/KHfXOV4F8Q53FGgT451V66Ij1Z7zPT+pfdPrzI2c6uOy
-   Odsv+e6M6Sdrp2cIo2pXwp+p3wQIZo/BOzmAGkyS4bpn9LFPfSruteSX+
-   OQyHNV+R2YLdIqb8PvJlIxtLKynQHy82lDYvZvnPvhFHXITzLngE8qxiQ
-   vzsAQUyjVizq6SmgWHl2UJEiwPXDewMb6nQivwfq6cg3Cj1XG1cmz7fQA
-   ELkAlsQCNnquqOp9fTGy8JbCd/UeEsIcYKMbv3+ZNxWaZnbEJ/fU3SJqW
-   w==;
-X-CSE-ConnectionGUID: 2BSDJM+FQDKGYdB9qwWHbA==
-X-CSE-MsgGUID: HJNnmrvoTFeudxeg6NtYIA==
-X-IPAS-Result: =?us-ascii?q?A0BDAgAZkP1q/40QJK1aHgEBCxIMggULgld1YENJlCqCI?=
- =?us-ascii?q?Z4rgX4PAQEBD0QNBAEBkycCJjQJDgECBAMCAwEBAQEBAQEBAQEBAQoBAQUBA?=
- =?us-ascii?q?QECAQcFgQ4Thk8NkBIBOAEYARs+AwECJDYjIYMCAYJ0AxG6dIIsgQGDKQHbH?=
- =?us-ascii?q?4FoAQsUAYE4hUKIJF2FFicbgUlEhBBvgmECiCYEgiJ6EoFUHox5AoFPh3VIg?=
- =?us-ascii?q?R4DWSwBVRMNCgsHBYFoAzUSKhUyPDIdgSM7F4EHGwYFgRyBHoESgQNdgSsoX?=
- =?us-ascii?q?iGBCIF2AoJRggACAUlBDgdFUwklQxJHJCIIEgkBExosCoEaNTwJJj8VDGcLG?=
- =?us-ascii?q?gVhCAINDHQ5EDAeJC8FGiY+GwqBDCcfHggYDUgRLDcVGQQ+bgeTM4MYexMBK?=
- =?us-ascii?q?xeBCWUahTueJ4IhoRGEK4wklToaM4VbpReZCIs3glOWUYRqgWg8gVkzGggbF?=
- =?us-ascii?q?YMiCUoZD44vFRyBXIFoy2cmMgIJMgIHAgcOAwuTZgEB?=
-IronPort-Data: A9a23:RnQEUaxPGgP5nr2jtzF6t+dgxyrEfRIJ4+MujC+fZmUNrF6WrkUAm
- mIeWW6AbPiNYGvyft1/PIuxoRsAuJLUxoRrSABor1hgHilAwSbn6Xt1DatR0we6dJCroJdPt
- p1GAjX4BJlqCCKa/lH9aOWJQUBUjcmgXqD7BPPPJhd/TAplTDZJoR94kobVuKYw6TSCK13L4
- 4yaT/H3Ygf/hWctazJMscpvlTs21BjMkGJA1rABTagjUG/2zxE9EJ8ZLKetGHr0KqE8NvK6X
- evK0Iai9Wrf+Ro3Yvv9+losWhRXKlJ6FVHmZkt+A8BOsDAbzsAB+vpT2M4nVKtio27hc+adZ
- zl6ncfYpQ8BZsUgkQmGOvVSO3kW0aZuoNcrLZUj2CCe5xWuTpfi/xlhJBscBqE636VZOE1t2
- s0UAmEUcS+jjcvjldpXSsE07igiBMDvOIVavjRryivUSK56B5vCWK7No9Rf2V/chOgXQq2YP
- JRfMGQpNUiZC/FMEg9/5JYWjfqyj3XyWzZZs1mS46Ew5gA/ySQhgeiwYYKOJY3iqcN9vmS+o
- Gfc4WPFLBwHOMySxmSj7kONr7qa9c/8cMdIfFGizdZtmFCVy2kZBREaWFf+rfSnh0qWX9NEN
- 1dS/TIjq6U3/kGnQtTxGRqirxa5UgU0Ut5UFag+rQqK0KeRu1rfDWkfRTkHY9sj3CMreQEXO
- payt4uBLVRSXHe9ExpxKp/8QeuOBBUo
-IronPort-HdrOrdr: A9a23:P4sSrqOEfvTBv8BcTvGjsMiBIKoaSvp037BN7TESdfU7SKKlfq
- yV8cjztiWE6wr5JktApTnoAsDpKhnhHPVOjrX5U43PYOCfgguVBbAny5f+yDv9HCC73Otc2a
- B8N5VaMrTLfD1HZQKQ2njeLz7mq+P3lJyVuQ==
-X-Talos-CUID: =?us-ascii?q?9a23=3AmrHJU2idzvyruHTIClQyqyTE/DJuKFfm4FX1YGG?=
- =?us-ascii?q?BJUVGebG/GEaPx4Nuup87?=
-X-Talos-MUID: =?us-ascii?q?9a23=3AX/w1HA9P6/+bN1FGswxDINSQf+dKxaKrEl4Krbs?=
- =?us-ascii?q?LpsWUOCMuHSusrR3iFw=3D=3D?=
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-AV: E=Sophos;i="6.27,219,1787011200"; 
-   d="scan'208";a="898590379"
-Received: from alln-l-core-04.cisco.com ([173.36.16.141])
-  by alln-iport-2.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 18 Nov 2026 11:49:57 +0000
-Received: from sjc-ads-7871.cisco.com (sjc-ads-7871.cisco.com [10.30.222.158])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by alln-l-core-04.cisco.com (Postfix) with ESMTPS id A21C8180001B3
-	for <openembedded-devel@lists.openembedded.org>; Wed, 18 Nov 2026 11:49:57 +0000 (GMT)
-Received: by sjc-ads-7871.cisco.com (Postfix, from userid 1889728)
-	id 42117CC1611; Wed, 18 Nov 2026 03:49:57 -0800 (PST)
-From: Yogita Urade <yurade@cisco.com>
+        d=konsulko.com; s=google; t=1795003161; x=1795607961; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=qUMv/ec9Nu3RQNCIdqoRAXpW8vJigja3+N/B1zpv6so=;
+        b=dmBMUvGbijrQHV9qxMcV61USiS5VkbBYcB6WmdcgVPa0+Y/YPmrosQfC6rcySZaA0I
+         jcLp6Z8fd09VSBfU3TQkjfhk7MzpB8B7WZK5SB9A57w2P9Xah4T0MBdlbjCCrPfRL7Y7
+         B9ZORx5T1E1COLb8qtep1S3PYS/1hvu8Q6d+8=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1795003161; x=1795607961;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=qUMv/ec9Nu3RQNCIdqoRAXpW8vJigja3+N/B1zpv6so=;
+        b=0x6xWPgzlAkZtwAlamqbCWcQPOaYUow/SqRRPQW2YAcEnPY3nvrv+4EckO7er+s0aH
+         uSBBqyFbOx8NIz1QQPtfRQgpcYRlkL40vbCNmsmV9L3xSfequZzUSkej6/8PMmnZ2q+9
+         1WguRhFMzzYEPd5Oki2fxMF3We+2h0FUvAz0TvJ548vx3OZzASW8R8Cie4XlhTqiJSLp
+         yU3R9c9ltz9491KJrwi9o18sJM34ZzTOwYmYH+X9gBeOw33iTg7MqbIIy6jsAJSmfwes
+         55ZLObP/J+bOySBMhSDV4X3kaNnmVxpuggakj9sFaFtJ3A2CJ7MSYoMciYYdVuz2RvDi
+         Gn/g==
+X-Gm-Message-State: APuU4Z/UtZq0AaOV48n35Ud9M+bSmMurIv5IE1r4T485hRdrxvxoqaHq
+	gxCHY6G1kPaAEo37ffulfDq3FJIh9US/w0va1/izlD+rwVljeLZcEoQ1qujBo8pEe7wFCA22rjF
+	tS3HU
+X-Gm-Gg: AYBFou02NNVcZOEURB/ufP/s+rbxz/e6wRwWA9G0po8oyOg0jNSTtu4S5Ksyw4Fo2Ke
+	DsKDQ1k8bs3UHz9RICHgrshXLMufopJfR/I+0rT1nXfCbbTk1sm1Seutt/ruNjrDjNS5LWn4ib8
+	PVRZob6boSxDhU41yrAmvD3AXrxsuoulk59xKrW7iy/tWBd9kDMCfS1A512F2Mwo71UtJArf+lV
+	Um8FLTOPA1rRR0TrXqzBEHMy1SEDUNHH9AA6MiCDVNRPnP3hdQ4oRH4fusy53sSKCbBqdWaMR8R
+	WnU1OS3m1e58ERAl/v04AYq4PgcthZxDoIlzypWiOJj+ClX4D5KocYDCjqhqDeH5w4m2jNep7iZ
+	rgVZpzo8CR6lyNclYtb4qlnPLLHpCoDeIVsoa9OcAFOcUFgccb4CsBwmdfYnNGmBhfN7qSqvNnH
+	7DZe36Tv9sUMo1Jgvekjt74OroN42fCxPf2pSVvGifgaS1F0D/KMzHYWVd84o3KMBs30nckOVvN
+	964pyCG9RIftktBC2JiUkUMSBNPXfSzlfRQQcPmEmVEyXPqarUuoKEKy3BTUOn8DUXGiIWW8moC
+	YGTv2CYOkcms5opqdIpZOFOcPFly0y/2cWLehotHoLkxy8X1aB7WfBzidLJhq8P0ObzbwF4Val6
+	ZUurQcmQxRa2jww4zHS6NzbQLXEIGQUUwnVsvYmz6sBOqSnqQjqAa3w==
+X-Received: by 2002:a05:600c:4fc6:b0:4a1:dade:f049 with SMTP id 5b1f17b1804b1-4bb7da23baemr45757445e9.15.1795003161056;
+        Wed, 18 Nov 2026 03:59:21 -0800 (PST)
+Return-Path: <leon.anavi@konsulko.com>
+Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4bb7d2b979bsm61328365e9.11.2026.11.18.03.59.20
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 18 Nov 2026 03:59:20 -0800 (PST)
+From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [oe][meta-networking][wrynose][PATCH] frr: Fix build with bison rejecting paths in output directives
-Date: Wed, 18 Nov 2026 03:49:56 -0800
-Message-Id: <20261118114956.431781-1-yurade@cisco.com>
-X-Mailer: git-send-email 2.35.6
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-multimedia][PATCH 1/3] mimic: Look up flite and rateconv licenses in meta-oe
+Date: Wed, 18 Nov 2026 13:59:11 +0200
+Message-ID: <20261118115918.905269-1-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.47.3
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Outbound-Client-TLS: ANONYMOUS;sjc-ads-7871.cisco.com [10.30.222.158];TLSv1.3;TLS_AES_256_GCM_SHA384;256
-X-Outbound-SMTP-Client: 10.30.222.158, sjc-ads-7871.cisco.com
-X-Outbound-Node: alln-l-core-04.cisco.com
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Wed, 18 Nov 2026 11:50:00 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132647
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Wed, 18 Nov 2026 11:59:41 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132648
 Content-Type: text/plain; charset="utf-8"
 
-From: Khem Raj <khem.raj@oss.qualcomm.com>
+With the new layer format, LICENSE_PATH is set per layer in
+conf/layervars.conf, so recipes in meta-multimedia no longer see
+the licenses shipped by meta-oe. Add the meta-oe licenses directory
+to LICENSE_PATH to fix:
 
-bison now carries the fix for CVE-2026-56390, which rejects '/' in
-%header/%defines and %output file names, so generating the command
-parser fails:
-
-  lib/command_parse.y:20.10-30: error: invalid %header file name ignored
-  lib/command_parse.y:21.10-30: error: invalid %output file name ignored
-
-Backport the upstream fix which drops these directives and passes the
-output file name with -o instead.
+ERROR: mimic_1.3.0.1.bb: QA Issue: mimic: LICENSE contains a
+reference to license(s) LicenseRef-flite, LicenseRef-rateconv for
+which no generic license was found [license-format]
 
 AI-Generated: Uses Claude Code
-Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
-(cherry picked from commit cf06742a7c064d293c715e143fdabf91bf072893)
-Signed-off-by: Yogita Urade <yurade@cisco.com>
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...ths-in-bison-output-defines-directiv.patch | 54 +++++++++++++++++++
- .../recipes-protocols/frr/frr_10.6.1.bb       |  1 +
- 2 files changed, 55 insertions(+)
- create mode 100644 meta-networking/recipes-protocols/frr/frr/0001-lib-Don-t-use-paths-in-bison-output-defines-directiv.patch
+ meta-multimedia/recipes-multimedia/mimic/mimic_1.3.0.1.bb | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/meta-networking/recipes-protocols/frr/frr/0001-lib-Don-t-use-paths-in-bison-output-defines-directiv.patch b/meta-networking/recipes-protocols/frr/frr/0001-lib-Don-t-use-paths-in-bison-output-defines-directiv.patch
-new file mode 100644
-index 0000000000..ac732d9ebc
---- /dev/null
-+++ b/meta-networking/recipes-protocols/frr/frr/0001-lib-Don-t-use-paths-in-bison-output-defines-directiv.patch
-@@ -0,0 +1,54 @@
-+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
-+From: Donatas Abraitis <donatas@opensourcerouting.org>
-+Date: Tue, 13 Oct 2026 15:33:02 +0300
-+Subject: [PATCH] lib: Don't use paths in bison %output/%defines directives
-+
-+The fix for CVE-2026-56390 rejects any '/' in %output and %header (%defines)
-+file names. The directive is then ignored, and bison reports an error
-+and exits non-zero, which breaks the build:
-+
-+    invalid %output file name ignored
-+    invalid %header file name ignored
-+
-+We only used these directives to place the generated files in lib/,
-+because the .y.c rule ran bison without -o. Drop them and pass
-+`-o $@` instead. With -d, bison derives lib/command_parse.h from the
-+-o name, so the generated files stay the same.
-+
-+Signed-off-by: Donatas Abraitis <donatas@opensourcerouting.org>
-+
-+Upstream-Status: Backport [https://github.com/FRRouting/frr/commit/b7ad39d799d98c982713b29c1d0ba6d49691308b]
-+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
-+---
-+ lib/command_parse.y | 4 ----
-+ lib/subdir.am       | 2 +-
-+ 2 files changed, 1 insertion(+), 5 deletions(-)
-+
-+diff --git a/lib/command_parse.y b/lib/command_parse.y
-+index bc04bc93bb4c..4d9377e5df87 100644
-+--- a/lib/command_parse.y
-++++ b/lib/command_parse.y
-+@@ -16,10 +16,6 @@
-+ %define api.pure full
-+ /* define api.prefix {cmd_yy} */
-+ 
-+-/* names for generated header and parser files */
-+-%defines "lib/command_parse.h"
-+-%output  "lib/command_parse.c"
-+-
-+ /* note: code blocks are output in order, to both .c and .h:
-+  *  1. %code requires
-+  *  2. %union + bison forward decls
-+diff --git a/lib/subdir.am b/lib/subdir.am
-+index 20947c306d60..dafebacf8e7a 100644
-+--- a/lib/subdir.am
-++++ b/lib/subdir.am
-+@@ -537,7 +537,7 @@ CLEANFILES += vtysh/vtysh_cmd.c $(vtysh_cmd_split)
-+ .l.c:
-+ 	$(AM_V_LEX)$(am__skiplex) $(LEXCOMPILE) $<
-+ .y.c:
-+-	$(AM_V_YACC)$(am__skipyacc) $(YACCCOMPILE) $<
-++	$(AM_V_YACC)$(am__skipyacc) $(YACCCOMPILE) -o $@ $<
-+ 
-+ #
-+ # generated sources & extra foo
-diff --git a/meta-networking/recipes-protocols/frr/frr_10.6.1.bb b/meta-networking/recipes-protocols/frr/frr_10.6.1.bb
-index 8f53cf68d5..bd977be214 100644
---- a/meta-networking/recipes-protocols/frr/frr_10.6.1.bb
-+++ b/meta-networking/recipes-protocols/frr/frr_10.6.1.bb
-@@ -13,6 +13,7 @@ LIC_FILES_CHKSUM = "file://doc/licenses/GPL-2.0;md5=b234ee4d69f5fce4486a80fdaf4a
- SRC_URI = "git://github.com/FRRouting/frr.git;protocol=https;branch=stable/10.6;tag=frr-${PV} \
-            file://frr.pam \
-            file://0001-lib-fix-mgmt_msg-recv-to-deal-with-mis-alignment.patch \
-+           file://0001-lib-Don-t-use-paths-in-bison-output-defines-directiv.patch \
-            "
- SRCREV = "71da51baee6fb2a02b24262defc46591c86e8a81"
+diff --git a/meta-multimedia/recipes-multimedia/mimic/mimic_1.3.0.1.bb b/meta-multimedia/recipes-multimedia/mimic/mimic_1.3.0.1.bb
+index 38c615f493..c2ba6cc58f 100644
+--- a/meta-multimedia/recipes-multimedia/mimic/mimic_1.3.0.1.bb
++++ b/meta-multimedia/recipes-multimedia/mimic/mimic_1.3.0.1.bb
+@@ -18,6 +18,9 @@ LICENSE = " \
+ "
+ LIC_FILES_CHKSUM = "file://COPYING;md5=a2c2c7371b58b9cdeae0dc68846fe9f1"
  
++# The flite and rateconv licenses are provided by meta-oe
++LICENSE_PATH += "${LAYERDIR_meta-oe}/licenses"
++
+ DEPENDS = "curl-native libpcre2"
+ 
+ SRCREV = "adf655da0399530ac1b586590257847eb61be232"
 -- 
-2.35.6
+2.47.3
 
