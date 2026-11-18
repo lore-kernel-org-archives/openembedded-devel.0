@@ -1,65 +1,65 @@
-Received: from mail-dy1-f179.google.com (mail-dy1-f179.google.com [74.125.82.179])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.2522.1794961610744005176
+Received: from mail-dy1-f176.google.com (mail-dy1-f176.google.com [74.125.82.176])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.2575.1794961617464823283
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 17 Nov 2026 16:26:50 -0800
+ Tue, 17 Nov 2026 16:26:57 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=bdWHgJ0t;
- spf=pass (domain: gmail.com, ip: 74.125.82.179, mailfrom: raj.khem@gmail.com)
-Received: by mail-dy1-f179.google.com with SMTP id 5a478bee46e88-33bf40b0c8bso1234351eec.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 17 Nov 2026 16:26:50 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=sTMSbNAp;
+ spf=pass (domain: gmail.com, ip: 74.125.82.176, mailfrom: raj.khem@gmail.com)
+Received: by mail-dy1-f176.google.com with SMTP id 5a478bee46e88-382f4710a17so6359eec.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 17 Nov 2026 16:26:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794961610; x=1795566410; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1794961617; x=1795566417; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=tu8EMG2GfHTG+YE7UTGd2RhueVUwr/Cg4Bk64yBur6k=;
-        b=bdWHgJ0tCtKuxKhB1DY+UBUOdfRp/8KoOIjy34vuigZnqyf/AUw4egWb1DEadu5u+l
-         pOEAmpFMvpd0Osv74pu0UKMKzruo/RcOdpKJ4r+adxgExibMywyCS7hk0CpN9M0eq34s
-         XnxOfso6EPPkz/iphYxbv7x4jXiAUsFP3riFwyK7hbOL+4N9/usHaQc/SlwAnyuqomwb
-         wo974JPLmkFgucjLVvchVj+ihT4k6ChKeqKx/GN2T/4+LY4Fruq+FGkts+cIKT3NOqST
-         o0a8tAFL5Hxo0VycYW+3GWzUcdnBQVZzw+KQIei1KXz7EZXnxEKUg4UjASYa4/eehq1o
-         EHCw==
+        bh=CiQFy9fNp3rOTJbLVpTyuZscbjbJhaVvFPXh4HATLpE=;
+        b=sTMSbNAp8Br9qwx/mZgLNkDjvPxct0p0MN9NKhEdEEUppOU5Gsmhrm/ZSqMPhi+2R1
+         88sBeCFACQs2IwokeGRD54ZhdeOd+YGc0k6NJOuSNpMV5taWnkyst9oftkKmaxl9OagV
+         LPGTlT4ua/RXNEb+/ZhxIilIpdg6sNH9A3YO1oJYzoLRi+6gnolu00xyW+v8FYrV+lhU
+         ECOm2yTiweR4uJqHgXxJ6B92XO6XmPphdp8tBrjVBEWJvAhgBdEz2Ri7ru2TxgDzICbc
+         Gmq1W9/Q/AR73dgnWlrpP+hRaaz5OfpH+ap2uPRjck/J6UqRPp+r41fdgXxaMBybDRJz
+         FGRQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794961610; x=1795566410;
+        d=1e100.net; s=20260707; t=1794961617; x=1795566417;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=tu8EMG2GfHTG+YE7UTGd2RhueVUwr/Cg4Bk64yBur6k=;
-        b=BNFhBFld6hsrwV2qcbhyHYH0j7MTowdMg/6uy1iEA2cKjSaKSMKRXTMJJk0LcZTq8W
-         ISZakXrObWx9ca5jSWf+/Kl88MjU0quPBLCBQU8CWsWNaqeWPJntFUvcSUeXifDCeE8d
-         LyDMfEiNFFpjvUaktM1WHAvEKOXzoIMpB99UeUo/rmm6ufKQ1qTIAmCVpSZzIt8mTHcd
-         Jhh/lx4KZ11X0V+XdDRbjlDqK4/mMXz2w3PC0m+ucjEbw8tvnqah683NoYzCTsAReD9P
-         5k8JqsLdgaZGDqJ3ds6+Tm2LO0v6aOGHrKn/FVFPeSmKuIJesL0RZSgZYbl3rWeO3Ji3
-         t8bg==
-X-Gm-Message-State: APuU4Z+l7DCp5fNr5YmCknhH0X/q1GjmnqUuaerYW7IYo31j18BWqhv5
-	pG2QF7Pp6nP2oKVWGmITq6htFWV67jK0gzkZG2VJNbJ5tNuaZOWwYiydNOuFNknp
-X-Gm-Gg: AZFdTZeE23xTYLYt16E/BHTV4MSMdALCac1qcXu7vQsqgpgLAArbLPSIhEUTUk0jSiT
-	pa1nhSnVyq/h+l5x8z2juZUr35F/uBo24e5wH7owVNmvY8oYvAYW48I1Arg7e/ARWwM2as1kpXM
-	OQH0SnYAHvglzbNUz8fNOj5/UIDjNdajhYzeDdanazgmBKMt5yTacBhb+TAi0tCzvPg4Pj0M+Bk
-	wtG4jWfVZayraJpf5gLYkEKJwLCJEno9VQgnZ6LT9dYgMYLGj1VpMOy1YbyDSvIaeUg9QyDeE9O
-	6jYdBHm3kzmILPvxjj8VrVWLzcPeytUefb08zVGcMqgf6rpy4BYyImR7TglKxi7I4n9s6M9qUyx
-	Z/JVzB26z4pkpDs8bGFlXbtx+v+kODWH+pZcFtwGXE5DlLKc5kPdK6aqaDpoH13DbtkTHoMMmai
-	GAep+uFQctItDSeE8osFCKr0gmrqL2DHRhfdrq9NwAZmG80/Il5M3dqdE1dyFJ+ZmwIbE9iTfqW
-	op23O6L++tm+W6y+A6J5e+T711Ao3jZ3NYRP82WjpnbarWPSmRVu1qeGD41A0pHo7ySuCqtJdMl
-	FOQswbcnKGZYODvsaHk/GgoOXd0HmtU4mMeP1987ho0R72f+TlWFnpjs28YUvRETBXm3Eludg4H
-	ERkdHE3Ofj5tc2Ar0ba7t2xuPrMoK0tTX8h7/oCwqacGTaoCvB6L4mEVR8biNF3B3X4FVGj8CzR
-	jShLi8oBQAwvOUsHudjExo5+bNFWVAdYfbndpSJobGC8C+U4iD9SEzeUsKecXbBeYoZnfSmLcaq
-	TSeTAyrYlsJr+pVsuOm1oMjCRQ92qaba181lx5n9AlaxDoUtyIk/1AKEoNoVVsvpWTFbjPejMoW
-	HriM
-X-Received: by 2002:a05:7300:cd90:b0:381:1eb7:938e with SMTP id 5a478bee46e88-3827da107a8mr1472713eec.4.1794961610041;
-        Tue, 17 Nov 2026 16:26:50 -0800 (PST)
+        bh=CiQFy9fNp3rOTJbLVpTyuZscbjbJhaVvFPXh4HATLpE=;
+        b=WNxtLCArclJBsxA7klJszvxsux0kLmI4FyAPdYSHDSR9kimBiGrWGPQ/YbvTyWdf3D
+         FCIWR67cekSCDff6Sp7nWStbmOHZZdJxlYMt3XiBGVqrk+ymjPr86079WCN+oL+0qD3O
+         Fmg2Buw9fecEuwYN3eYFMRBRxeL05nC8ZNGNj68xSeVZcOwpQfy9lf9gkbyi/S83/CDO
+         24bs/ALifmg02pds9S4nKRh0XyFXgszayqOnqTwnSusd8gFOzdJLwSouqzCySRPvBz0l
+         cgfB7R+hjumw19I6vf1QEFQ/E2jDMny7p1b9XPBfJ1GwKHVUrYwtRGoYfcV/+KyQSbtV
+         8YRQ==
+X-Gm-Message-State: APuU4Z/UrJfXznPL+dT1KPOoBz7z19BDdZF1mcVhrUi4ZfEQjA/tfmrj
+	MkD6gVp5K1+U0tIctzlJQk8MBfX8zMxhgR1ipv66x3TmtbBAV6R3uAnyM7h1rO0l
+X-Gm-Gg: AZFdTZcBXbHZ7+A6lcTBAJB1qSoz2ZkEzr480mg8vrpjPIJDn0bFJNtw1ZR4gpICrOi
+	79yoZQRGky+A25wITKEtUIBEzneDR+u0POgGHc525gDtMrn8Q6yBh21C+t15nyRofdqtchd5wdE
+	C8YDRRdDhvKSmcO9siDSBUR3p71TLxiH/EUZF2/HrM58N/sL7STsy5QTUvde5cRFrA4NbUk6Eto
+	ha9xXK9hosBh9BHwsQ8aD80WOM49S1S50T3IYB+aQ7/Segu4oNprTG83Pr95xzsRyApMw/xLIRr
+	eKoiCVFAHePS0Zs1WOq0wvFbcuth3H89rwMUrvZC2kNR1PtQbyYMHgm1JpQHUVrI67txVUTMD2u
+	rJEg5s2EcXezAf3urxuYnbCLE16nfJwOQYNcsSpe1ragHzqrQ4gABsAIOFvxdSCM5yazvSZY4Z7
+	yx5paCmzNeNoQMltAxUhP4/bz67YCasIz7BfiIpvAmzH7PjvSw9uDS02ARorstjD+Yk8XdVGZ9A
+	xMf4SGBb4yboeuN+pBZacirMzQOsShdNywVatn+AK8kxoFktPv7SR++QP+97poUEpdz+JWldBRM
+	PNoyORB7teLKOiwe7gLeoKqQBw3ztGQQ4YsOBJepZPe/yt+P2jc/JrT+cWcqQgDNhSkjWM8RJY1
+	E9zbDHg5UhEGRGM07EOjtz58wits/3h4vJRuOqf5UV7cTVI0Mm9d0N486S2CiBRtBnkWJbiRyud
+	f6KtT7+43XkoT2+4uhjeLJL7DesO197JzxlTcn/WeYLfrT6/rn8M15NPB4OpRQLHFCzk9x6xOwJ
+	8b4gp9NQbD1vGSRgWFMbA14s/lelan/5YiR6X1lh+jlMfhEe2FeZJrYKCjrCsxjcmTyQzFg+ynV
+	orLF
+X-Received: by 2002:a05:7300:cd90:b0:36c:a154:db1d with SMTP id 5a478bee46e88-3827d8222b6mr1523887eec.4.1794961616594;
+        Tue, 17 Nov 2026 16:26:56 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-382a7fbceffsm1697015eec.28.2026.11.17.16.26.48
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-382a7fbceffsm1697015eec.28.2026.11.17.16.26.55
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 17 Nov 2026 16:26:49 -0800 (PST)
+        Tue, 17 Nov 2026 16:26:56 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-oe][PATCH 04/14] gtkperf: Fix LICENSE to GPL-2.0-only
-Date: Tue, 17 Nov 2026 16:26:32 -0800
-Message-ID: <20261118002643.29829-4-khem.raj@oss.qualcomm.com>
+Subject: [meta-oe][PATCH 10/14] libpcsc-perl: Fix LICENSE to GPL-2.0-or-later
+Date: Tue, 17 Nov 2026 16:26:38 -0800
+Message-ID: <20261118002643.29829-10-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.1
 In-Reply-To: <20261118002643.29829-1-khem.raj@oss.qualcomm.com>
 References: <20261118002643.29829-1-khem.raj@oss.qualcomm.com>
@@ -67,27 +67,29 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Wed, 18 Nov 2026 00:27:00 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132605
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132611
 Content-Type: text/plain; charset="utf-8"
 
-COPYING is the GPL-2.0 text and the sources carry no other licensing
-notice; only the bundled gettext intl/ code is LGPL.
+pcsc-perl is not under the Perl terms; README and PCSC.pm say GPL
+version 2 or (at your option) any later version, and LICENCE is the
+GPL-2.0 text.
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- meta-oe/recipes-graphics/gtkperf/gtkperf_0.40.bb | 2 +-
+ meta-oe/recipes-devtools/perl/libpcsc-perl_1.4.15.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-graphics/gtkperf/gtkperf_0.40.bb b/meta-oe/recipes-graphics/gtkperf/gtkperf_0.40.bb
-index ef9b194f9a..815c7985fa 100644
---- a/meta-oe/recipes-graphics/gtkperf/gtkperf_0.40.bb
-+++ b/meta-oe/recipes-graphics/gtkperf/gtkperf_0.40.bb
-@@ -1,6 +1,6 @@
- SUMMARY = "GTK Performance tool"
+diff --git a/meta-oe/recipes-devtools/perl/libpcsc-perl_1.4.15.bb b/meta-oe/recipes-devtools/perl/libpcsc-perl_1.4.15.bb
+index d6b1773640..363d49afd2 100644
+--- a/meta-oe/recipes-devtools/perl/libpcsc-perl_1.4.15.bb
++++ b/meta-oe/recipes-devtools/perl/libpcsc-perl_1.4.15.bb
+@@ -4,7 +4,7 @@ together with some small examples. \
+ The provided modules are Chipcard::PCSC and Chipcard::PCSC::Card."
+ HOMEPAGE = "https://metacpan.org/dist/pcsc-perl"
  SECTION = "libs"
--LICENSE = "LGPL-2.1-only"
-+LICENSE = "GPL-2.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
+-LICENSE = "Artistic-1.0 OR GPL-1.0-or-later"
++LICENSE = "GPL-2.0-or-later"
+ LIC_FILES_CHKSUM = "file://LICENCE;md5=b234ee4d69f5fce4486a80fdaf4a4263"
  
- SRC_URI = "http://prdownloads.sourceforge.net/${BPN}/${BPN}_${PV}.tar.gz \
+ SRC_URI = "https://cpan.metacpan.org/authors/id/W/WH/WHOM/pcsc-perl-${PV}.tar.bz2"
