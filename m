@@ -1,108 +1,93 @@
-Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com [209.85.128.53])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.14296.1795013547800281127
+Received: from mail-wm1-f46.google.com (mail-wm1-f46.google.com [209.85.128.46])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.15253.1795015858230478219
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 18 Nov 2026 06:52:28 -0800
+ Wed, 18 Nov 2026 07:30:58 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@snap.com header.s=google header.b=OHFb6m0y;
- spf=pass (domain: snapchat.com, ip: 209.85.128.53, mailfrom: ecordonnier@snapchat.com)
-Received: by mail-wm1-f53.google.com with SMTP id 5b1f17b1804b1-4b467581b98so12862135e9.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 18 Nov 2026 06:52:27 -0800 (PST)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=r/RC7ko8;
+ spf=pass (domain: konsulko.com, ip: 209.85.128.46, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-wm1-f46.google.com with SMTP id 5b1f17b1804b1-4bb64c99d2fso12737025e9.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 18 Nov 2026 07:30:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=snap.com; s=google; t=1795013546; x=1795618346; darn=lists.openembedded.org;
+        d=konsulko.com; s=google; t=1795015856; x=1795620656; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=4Sen5+Ak9GwHHOZKxdp3j5afrHdsDbSAoQ3VrVIRCAU=;
-        b=OHFb6m0yXg9NYM0iIeVex//aSbW+40j7od9v9JD/vA8wn6ZSN97JreIK+ELGOKsgYD
-         Ei7yo9x3zIvJIz5PBeSwZGh02HSbTd0AKZRAB+6dfYl8IQPOxyLGAL6wmKjSQ5I+zlDt
-         3iT/Ius8kofPiCCSVHff8k6Z93IwB8bYDNNac=
+        bh=Jkxv4/Iwd/8hRn7wpijHJgkD2GzvZjILbix+YNEOT/A=;
+        b=r/RC7ko8e9B73auYEOpXgJWWN0pCpweNLslLtC5VcPd/2ng/NuTb5CwG1UZ+P7UGiF
+         gn/63yCJ1TK7ooMWmyvHa5oltrZsPzVGVYPnWsn+dNM7BnCKi0Rrh1bvkFvlDiwzd/7a
+         Yx3D2oL5JlNt1or/VyDp7jkEdN8gh05zMhRHg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795013546; x=1795618346;
+        d=1e100.net; s=20260707; t=1795015856; x=1795620656;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=4Sen5+Ak9GwHHOZKxdp3j5afrHdsDbSAoQ3VrVIRCAU=;
-        b=spmdPZS2aOyFAclU/wCgLlf2zNqPdIdlef0CuVb62+JsQdPCTssQggVwJsDErjkh7M
-         w7YJn56j8ngAxJOGjIfa8ji4OyZbYbtLWjJH6KIEh2lkKNhvzJfxxiY42j0us4FYbAt/
-         iJr/Jla9GUi0r9Gnx9tZyK3c5OVp7RPSuP4JSXl2pHdrdrgXRvzdTrCHmMCS3XEano0u
-         ciqzr379q4bLaWEZhwvivkDtVo5nLia6ipJOl0e9GAA0FUwq5ioBncGHC4TPRgb9mI4w
-         vDXds8+jM+VGo2dKDOwXc05GoDG3U/yxwFrwW+6qq5x8RcmZYjY//tGvvUXjkD6cINRV
-         gOfg==
-X-Gm-Message-State: APuU4Z+PliK7pfcgz6Au768bm545o1Bh3oAhKzsHsXe2EWNS3jjpOKPC
-	6fHk6wYIT9fcLZIIXNkV0cE6gpgKWIH+/DLQFyx/Qx6bN9GRe3zu+UuLyqMwBvpEI1NHQLp4W8N
-	dBayxQUw=
-X-Gm-Gg: AYBFou3VfGxVqeyuTk5ZZ48uKtI6GJerB0mfEy2rm9cAgl1+k65b2tiCCstFj7RoDr6
-	NpC+NcRe3DrhyWhkxRzkiMVeU8eEvdZfdVdioCZlC5yqD39N2PKRy9SRJwnLPfeDU9c7ygOcwNL
-	xI1GrQmkVS6mkyUvAL/1F56vGEQ3Hh70GZNr5gYRWrLnEuJplFQVyX62p/duS1XNVHANZHPLaDY
-	BKR9oxWXCiK1xT0Fl/FaQBnsWLldvsHgqGsiMaO3DenhGXMtViY9iYVkthlG8lBbKK1vaGwRu+n
-	vIupCOOGh5nqJSbe7zfG6wiWcf0ZjQj2ALPeNtq5aT9dLR2Kz7qO49jljrOm41rYQfjPnAS1agR
-	iR7DUd/Yt950AGfbTDEUGMc71uAlzMjaTfSKVMmNZlu1BNjhRqxBA4ax/1zkETQ3Z7kDFWzLAeQ
-	EuXh3CM9hX9BU7ejq3g3G5zonCDlPDbvePrm04uoSbyjTj4rw/eqv7WZCCTUUy63zPtgZofxDEg
-	9c+XRvmI8F8znuzjSwdqPnAIPFthYe34gVNfagvJTFV+ldGGb+zDkflOnynTWZCj6fZ+8hZ66Dk
-	kXHU9kVKbacyCf4fh2w8R+ZAin/ExI6ScYMXdc+fVcA91cZcbgMs1J3ZlkMET2ABBhkYoIQnyPK
-	ujIPSexAcccL05n7CxO67etha7zbciJ/5Ig==
-X-Received: by 2002:a05:600c:83cf:b0:4a0:1c0e:b057 with SMTP id 5b1f17b1804b1-4bb7d6cd41amr52346865e9.4.1795013545763;
-        Wed, 18 Nov 2026 06:52:25 -0800 (PST)
-Return-Path: <ecordonnier@snapchat.com>
-Received: from lj8k2dq3.sc-core.net ([213.249.125.50])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4bb783862d6sm130346255e9.2.2026.11.18.06.52.25
+        bh=Jkxv4/Iwd/8hRn7wpijHJgkD2GzvZjILbix+YNEOT/A=;
+        b=VwprUc4GoNoIhduVWLjqN2XftpCafyhfBPILurTeTW3uvltWl/lAGjWOSxkYA3E2hL
+         Ef58tvb0S3SsyyZAzzLlDZiDfcuSx8DY2L2mWkgEYeJyUxKi/4wU73I3CouR3sRrUf+X
+         bA6BnQzLJj4cxVcDcabdIbDmNM/zZxzJUxvAawcjvNy1XIVIkwE4pfW3bEHuafI42WMZ
+         LexH2Baexey02X9mwYKd3gF7kH5kq0+jExhMSlHXI9rtB9ZRzyCGDY8cjE6UIALjc4PP
+         GT8SnOUY6OzzQD8AEkJhhQLGdm0zcRKr/6o7UKD143adRU8WQX7kyjUJvelJPfUBvoQX
+         cjTA==
+X-Gm-Message-State: APuU4Z9EpAH1Do9aEZW9zLGkoV5BunriAvGBsf+3x5R0EY6EurYxAy+b
+	Yixr+h9IhIAfOtdQ5AkADnkrDDMWG5gTVWX/2wZYJINzZ4gj8mzpvfAzeAxftM6ILkA9VDk4boX
+	PCUbg
+X-Gm-Gg: AYBFou31XE9fZ6kcPeDNG7ignJjVGss33Jee2EDT1lPHPRJmLO032aIWU27eglqwey4
+	h0hCyp1kvrpgq1tGxRJ9r8BIHTAudz7KDVDt857l4w2r6yq43bhhnLPon+7p3h9NgcOntVUrY3E
+	c+oiAyrqIKXb1oQewa7APcoBucgKsdc/pkYUdzbOWgItZlVlG5Bl/6i73L3QEC05Wq5hPDS6XWo
+	pagkez6op3u63R0AKPLX5bk2gNxrTRLB83roiNhh1eerRRq9gojlLIgZuf57LvLKz/SksUBVecC
+	yYOdo/NiUxvgCwgkENZAsWC85DyiH5Gx8afsMGnxm/GTgUjOFwUM24V2AN+2sOMFTjUNtqttkb+
+	vaOVfEn7lmLk0umly5hG6RvvTK29p3xbH6b60Jm0Uy/5R1ZUtgBfvs4Kg+150tVg2I5LphaAhEF
+	ShuiKpInOZtL99f0q3qGd/T2LsXWMxgppH1g6ZsJKBIhX/1/+0VTdsy8hJJh9uE58MnvNk9PZfc
+	aQtgglDPm8ZIyEtQ18Rn0+hxjpU70IUJk90YZCl4lRMXNpu5NffhrgGxeWy3VSgd09YA0Fd+4TV
+	OtrKTPoNA9Iu1AljfP58hmjWMUrFqkzOrSuhayarmhA4hhGd5m8Z0F196IAW+qYZLp8VPV71Xhf
+	4B7NreU3tZJVOHrcm2WeKOG61T1VcAz5CH5gk6yhom46aBEeC9QBxWXA=
+X-Received: by 2002:a05:600c:1d97:b0:4b0:c1ae:829 with SMTP id 5b1f17b1804b1-4bb7da581a9mr61140965e9.30.1795015855935;
+        Wed, 18 Nov 2026 07:30:55 -0800 (PST)
+Return-Path: <leon.anavi@konsulko.com>
+Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4bb7843bd79sm150214265e9.14.2026.11.18.07.30.55
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 18 Nov 2026 06:52:25 -0800 (PST)
-From: ecordonnier@snap.com
+        Wed, 18 Nov 2026 07:30:55 -0800 (PST)
+From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Etienne Cordonnier <ecordonnier@snap.com>
-Subject: [meta-oe][PATCH] android-tools: drop android-gadget-setup call from android-tools-adbd.service
-Date: Wed, 18 Nov 2026 15:52:03 +0100
-Message-ID: <20261118145203.2577227-1-ecordonnier@snap.com>
-X-Mailer: git-send-email 2.43.0
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 1/6] python3-annotated-doc: Upgrade 0.0.6 -> 0.0.7
+Date: Wed, 18 Nov 2026 17:30:48 +0200
+Message-ID: <20261118153053.922769-1-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.47.3
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Wed, 18 Nov 2026 14:52:35 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132655
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Wed, 18 Nov 2026 15:31:06 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132656
 Content-Type: text/plain; charset="utf-8"
 
-From: Etienne Cordonnier <ecordonnier@snap.com>
+Upgrade to release 0.0.7:
 
-The unit calls "/usr/bin/android-gadget-setup adb" from ExecStartPre,
-prefixed with "-" so that a failure is ignored. The android-gadget-setup in
-this layer does not read its arguments, so "adb" has no effect. That adb parameter
-is historical: it is used in meta-smartphone which is where the meta-oe
-android-tools recipe was imported from.
+- Drop support for Python 3.10
+- Limit the full test matrix to Python 3.15
 
-The call made sense while there were two android-tools-conf
-implementations. The sysfs-based one installed only android-gadget-setup,
-so the unit was what ran it. The configfs-based one ships its own drop-in,
-10-adbd-configfs.conf, which runs android-gadget-setup, android-gadget-start
-and android-gadget-cleanup. Commit 55cc6751e426 ("android-tools-conf:
-replace sysfs implementation with configfs") removed the sysfs
-implementation. Since then android-gadget-setup runs twice on every start,
-and the second run first tears down the gadget created by the first one.
-The unit also refers to a file that is not installed when android-tools-conf
-is not.
-
-Remove the call from the unit and leave the gadget setup to the drop-in.
-Layers that replace android-gadget-setup and remove the drop-in, such as
-meta-android in meta-smartphone, whose script takes the USB function list as
-argument, need to run it from their own drop-in ( see https://github.com/shr-distribution/meta-smartphone/pull/204 ).
-
-AI-Generated: Uses Claude Code
-Signed-off-by: Etienne Cordonnier <ecordonnier@snap.com>
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../android-tools/android-tools/android-tools-adbd.service       | 1 -
- 1 file changed, 1 deletion(-)
+ ...n3-annotated-doc_0.0.6.bb => python3-annotated-doc_0.0.7.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-annotated-doc_0.0.6.bb => python3-annotated-doc_0.0.7.bb} (78%)
 
-diff --git a/meta-oe/recipes-devtools/android-tools/android-tools/android-tools-adbd.service b/meta-oe/recipes-devtools/android-tools/android-tools/android-tools-adbd.service
-index 7c16b5cea2..f8c8bc7f33 100644
---- a/meta-oe/recipes-devtools/android-tools/android-tools/android-tools-adbd.service
-+++ b/meta-oe/recipes-devtools/android-tools/android-tools/android-tools-adbd.service
-@@ -6,7 +6,6 @@ Before=android-system.service
- [Service]
- Type=notify
- Restart=on-failure
--ExecStartPre=-/usr/bin/android-gadget-setup adb
- ExecStart=/usr/bin/adbd
+diff --git a/meta-python/recipes-devtools/python/python3-annotated-doc_0.0.6.bb b/meta-python/recipes-devtools/python/python3-annotated-doc_0.0.7.bb
+similarity index 78%
+rename from meta-python/recipes-devtools/python/python3-annotated-doc_0.0.6.bb
+rename to meta-python/recipes-devtools/python/python3-annotated-doc_0.0.7.bb
+index 5042ff15c3..807051a1f6 100644
+--- a/meta-python/recipes-devtools/python/python3-annotated-doc_0.0.6.bb
++++ b/meta-python/recipes-devtools/python/python3-annotated-doc_0.0.7.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/fastapi/annotated-doc"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=e36e91f278975b8bb76a769f32582892"
  
- [Install]
+-SRC_URI[sha256sum] = "7969bb69912085b2285849c0dcac0b4b374fd180c13cf10a87f284ffcf347bbf"
++SRC_URI[sha256sum] = "0a30ef8f5322a4173720ae6712dc9a5e58f5a19868f3f167b4b5778db066c2b5"
+ 
+ inherit pypi python_pdm
+ 
 -- 
-2.43.0
+2.47.3
 
