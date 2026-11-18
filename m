@@ -1,66 +1,65 @@
-Received: from mail-dl1-f50.google.com (mail-dl1-f50.google.com [74.125.82.50])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.5705.1794974927463216912
+Received: from mail-dy1-f182.google.com (mail-dy1-f182.google.com [74.125.82.182])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.5697.1794974925976771286
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 17 Nov 2026 20:08:47 -0800
+ Tue, 17 Nov 2026 20:08:46 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=eC6Sj7XT;
- spf=pass (domain: gmail.com, ip: 74.125.82.50, mailfrom: raj.khem@gmail.com)
-Received: by mail-dl1-f50.google.com with SMTP id a92af1059eb24-1b3beeaf6f9so776390c88.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 17 Nov 2026 20:08:47 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=cRSl4utC;
+ spf=pass (domain: gmail.com, ip: 74.125.82.182, mailfrom: raj.khem@gmail.com)
+Received: by mail-dy1-f182.google.com with SMTP id 5a478bee46e88-3282db206d3so1560501eec.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 17 Nov 2026 20:08:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794974927; x=1795579727; darn=lists.openembedded.org;
-        h=content-transfer-encoding:content-type:mime-version:references
-         :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=psjqNkoQtFseczdqkeQCnpSeIChuBaqOD1K3ysnw8s0=;
-        b=eC6Sj7XT5rSZsOCqEifHoVKrpNr7xh7BA9WdvZVb5wqyLgHac4XrFM7JqHxxUjkemf
-         +RZ9oGaVQ2T6+u8N/JddLNc/buacVyuPoQmRBQgOPNmykRFpGAEuku/dfgJEN22fUBya
-         AjWz3gnKSUQ6t+WNhnnDmfUjeFjEEdmR45PowEyJ6Xxo7eYJ3aP3iJYCNOscb/PYdK/j
-         aTX/D/NLd/IFAhehvh1HGv4kzqFdg4sHEHu+uZ+a/NOEg12dr4mN1koVapqAcgRK64v0
-         JY8URsbL+iBE9rlYUNqBzjSOF1a9b0mEuR1CeRlinmnY/y7w1NDBccHxHDYqcofjNJGf
-         cF+A==
+        d=gmail.com; s=20260707; t=1794974925; x=1795579725; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=rfYe48n9Eih8kxqIC3o5XQ61NS6fHDbilu/RksTcarA=;
+        b=cRSl4utCFKRCzEibrM2pfzugG/yjcudc0F6vPIn0c5mss4aj1ZUlojuLfZl9CIDxu4
+         +Y66m8HwcjxxJ1yTG/lOuSIPQ4EdhuITEOOd4PoSDaTWM1AW1aG+B5Jwj07MlOrygLre
+         HyaiAlGyZtl7o26p8J+nHeYRh88jB6xu9xWLqofsUDnxweSiepeyZ/x3g9LhVmmmKOes
+         ZWYCuxSvPPG9lV4fw+mLmJbfD3WCl7Mi3AUs2WjHU9l+gYnD2uQphc7uGSgjNFHQiKJV
+         cP2zrxfzMjvMLMo3u6nx1F7N6lXm1q0EYG4ggGGQQ/b1vm85awtRTMaJme41H05b6bh5
+         TzXA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794974927; x=1795579727;
-        h=content-transfer-encoding:content-type:mime-version:references
-         :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=psjqNkoQtFseczdqkeQCnpSeIChuBaqOD1K3ysnw8s0=;
-        b=hoS/cjOTf1RNGBXrtRw+o0VpZxsYJqBB3hHk7L9VOpX78cHBV4cJPVPHGaHmORZ9wO
-         zHOvLB3KYm/8zhUvjAwBiBGs/2IwuA/s9AjW+CS437lOhUMz57hqNx6hhA8bD/l7Y+cY
-         FKxcBsjxYJHsHcESrsiPqv0S9lCU/oMTC5dnLT/tcYD1xZm+S9yhDG0Az0jrug2TKU0l
-         Rafh4JAVKoA9fvJLrl7Dg4pLx5G/ZjpdwDIbpvArcQEok8QjrI/AWeOecuCv6bxWFcY9
-         3dH3+9Ln9fHc+1/ZfwJGpS/fk6m97+4E4+iu1Pz0bNVnuCQenYvdloocWAoJMza1ZdMB
-         vTeA==
-X-Gm-Message-State: APuU4Z/YT+PSbNhGSylR9oDmRlX3cxJFuX3CJWRcCX3FaoDRxf7xUWWS
-	6HIZKo1RieaNbdhwkQoWoHkfrB0qNatnC+HDyEIYJplIvS665v9BXQoZitkL/Pci
-X-Gm-Gg: AYBFou2VKEnF5W3vkLQbpFFAVGgL0ntszpCwqp+DkFp6VRE14R/ycU9dxCmCF6BwoGr
-	PqeudY09pRvLml0NA2iyhkgDfvpymw1JyNeFeUvKlMs3mhO1FDK0KL3MIdJV0WrFlarVd2qvIue
-	EQZKmhBnTFrj7aTslfyxL4bqhwXy4TElZfxYrWfUiZrGkKNNTgdYRK2eG/eR+g8LDwFXxqIjD5C
-	TlVXA2xoOwCrHBLLGnpT2OfpP58bhyYlqaKNrZVwsRsIjz9WNp7cWMH8boOl47FtrE70W8t28FA
-	ARq4jS8coSxumC1lYh9r4NJZdCzfDrQlNOj7trpIJ3c3DQ8q/ejv85l5oAP1XnnTELhUbd3JDXM
-	11xg5kzXAxy6QsOBzAjwN2zvRRmEnfZRfvzoSc97OKAPDEPLHOqV4iwRtR68qEptEpNU5N7HYJ3
-	W1+MRytttczGNKJIlQ3b5l+EYsZqpkAWMMA+IExl/BzmVCaPkQe5PQdsOTltPLQNjmMsUNO28Pr
-	x1c35QBIiFZv0L6xXdoMMYRqP5ZSQZx3yVeVIL/rsYjS3Kp8b0cCB5WAt95ehGIV6sHmoMaHjOU
-	59aG4bc0kfz7+NGyBQ9CNTnyfQFi4JGXdhZirUiw3VBmFYSJjmFvuOrZ9hd1o21DrRG6awWMdYW
-	aNxOTBYgMdtFkrRwCDmLffsDM14Pl1dT7phiJl7urlqr0aKrA1vWMJxtrW/Sr/M71Cj56OKOd4X
-	9uAmeHW3VEGCkt48aFf5tYoMr5dOQFQ/I74PwbtHhC4kwmM1pFFcU1Ot8dbrF3S6a01ilkuHih8
-	fp4OxxxGkBogg0q26MiJOSykUWG/FIUTyubNbv38W4Z3zW47iYn+gsdO+GSbXhY8IRFicCp53Jp
-	HTm0
-X-Received: by 2002:a05:701b:42c5:20b0:144:fd7c:84fe with SMTP id a92af1059eb24-1b543d48dcamr1533502c88.35.1794974926639;
-        Tue, 17 Nov 2026 20:08:46 -0800 (PST)
+        d=1e100.net; s=20260707; t=1794974925; x=1795579725;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=rfYe48n9Eih8kxqIC3o5XQ61NS6fHDbilu/RksTcarA=;
+        b=jHxb5xSkFzlney5JMYtqtTDUn1wVZTLoEaAf1ovFm5zE8UM04Bh4buXDSHYNSRFdCJ
+         mRx9h8sZqQz6wEUGQZu0ktr6ptHTXcIvsKjGzqT1r2FBm9sdEKIsuhUWoyw7d/7IXVsf
+         Jv1Ie/qv82qK86KibGMe01COTzvl1975Zg3o1eeHGUJswgPd90yWzV10w+wnlUCj+yrS
+         JazGJ8hN2N5QexUhWRy8OL3hLJJLHX/9gbyKAHFdmKzqWBDvpYcW1KEeouYjpow3LoMr
+         vkLED+Jzix/KdoweP3BH3vzNDkncssraMqZ8fXMYSElSuxUxYiHQWU3YJHkwQ1nQe+PF
+         MCPg==
+X-Gm-Message-State: APuU4Z8WrqU8ySJ9oyg5MdU9TPUvsLAEh1DKEHeJaUwsLOIZJNZDD1OS
+	EgDFOKfo/HoTw7ffiZkcNDdt3DUcqM7KppVEvFON7+/itmjpU6Z+2964lb/aeeHm
+X-Gm-Gg: AZFdTZcV+Br/EBMsXYrWRd5szKnGF1WNcRLiqBm/pMfKsYiNAZnS6T5GcJ5ACQ9shjN
+	GhfPKBDtJOaxp0tIQLR1WI3o2nG4aQbAxoTTMRbpqV3PRt4EexIPzxn4v/kVSWi1E45YiFj0Ygb
+	1RJK0/gt/KPim8now7MIZT6x+ou9UX5sm3MsnohyiIdxDhGFEQCBFjPKDIYUG+Nh2N0q6omOq6a
+	hzisHjtGo9t1/RLYHjimMFCaNM2GGQ/OUHb/sD5zn+yD3M6XNE4X7yQ3naSwWIEDEPLVliC5vvX
+	Z+ZVJsjnD21k3ooHPrCsKBgpiarxoasEEHB3ZzU/csrctYBDh6o4xfYCWweBVXEfdw2pp+B3pVv
+	MauUMEHXdum31U32zSWhM37MP84TuV5XAJtOSWfQ0Knfe566YH6Vv12jCzKwVquwirIaPtN2LOl
+	CywaMbLEqaQ7nuWqRlYZcoe1NHrHWuAqSu8gAuRA+U4IR9Qm4+LzKmRsW9NQF9OPd3uTTMHyiR2
+	VTXewV6QiYlyZwVQiBtPXPLLBOdu+FfXMQqvfnuRYLiDOdafSr0rH1aipsZ7sGqztgxbOXY5waI
+	+R6Rp4+MHYpDOOOPM74p2dNXA9NUxRhhA5hmkYjzAEIAkxr15hOXAIysPWczDLfxC/fFqqMM6CP
+	hl0Pgr2cGtFnxCIeCTnbm53cxbnADV1nGWwDSXHJ4Aq+qjNIzCP5MN1Fdg+sYiNeujdr/3RBGmG
+	U/r4Bxj5Pst75aAylxpOfzdGtX8Zx0f7qYNuyt6NFp6usa+3jPYrLV4LviOiLAczoU9tt90/f/n
+	gJ9WVJ+haus8kIYYcZvJkeY55lIrHJlAnjXW//hbUylTHy3xSe2cpXk32uuErv6g4E7sau4Sgjj
+	+/KM
+X-Received: by 2002:a05:7301:b02:b0:375:f846:5b50 with SMTP id 5a478bee46e88-38280a3d628mr1322619eec.26.1794974925248;
+        Tue, 17 Nov 2026 20:08:45 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-382a73e0aa6sm2695251eec.19.2026.11.17.20.08.45
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-382a73e0aa6sm2695251eec.19.2026.11.17.20.08.43
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 17 Nov 2026 20:08:45 -0800 (PST)
+        Tue, 17 Nov 2026 20:08:44 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-oe][PATCH 7/8] libsdl: Add upstream follow-up to CVE-2019-7637 fix
-Date: Tue, 17 Nov 2026 20:08:29 -0800
-Message-ID: <20261118040831.2284885-7-khem.raj@oss.qualcomm.com>
+Subject: [meta-networking][PATCH 6/8] ssmtp: Drop gcc-15 incompatible-pointer-types patch
+Date: Tue, 17 Nov 2026 20:08:28 -0800
+Message-ID: <20261118040831.2284885-6-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.1
 In-Reply-To: <20261118040831.2284885-1-khem.raj@oss.qualcomm.com>
 References: <20261118040831.2284885-1-khem.raj@oss.qualcomm.com>
@@ -68,61 +67,81 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Wed, 18 Nov 2026 04:08:55 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132622
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132621
 Content-Type: text/plain; charset="utf-8"
 
-Upstream commit 267d102f6e9c fixes copy+paste mistakes in the
-CVE-2019-7637 fix, which checked current->pitch instead of video->pitch
-in the gapi, windib and windx5 backends and broke setting the video mode
-there. Fold it into the patch so it matches upstream.
+ssmtp 2.66 already casts the handler passed to signal(), so it builds
+without this patch.
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- .../libsdl/libsdl-1.2.15/CVE-2019-7637.patch          | 11 +++++++----
- 1 file changed, 7 insertions(+), 4 deletions(-)
+ ...ible-pointer-types-error-with-gcc-15.patch | 46 -------------------
+ .../recipes-support/ssmtp/ssmtp_2.66.bb       |  1 -
+ 2 files changed, 47 deletions(-)
+ delete mode 100644 meta-networking/recipes-support/ssmtp/ssmtp/0001-Fix-incompatible-pointer-types-error-with-gcc-15.patch
 
-diff --git a/meta-oe/recipes-graphics/libsdl/libsdl-1.2.15/CVE-2019-7637.patch b/meta-oe/recipes-graphics/libsdl/libsdl-1.2.15/CVE-2019-7637.patch
-index aa1d47d82c..c8bf174f09 100644
---- a/meta-oe/recipes-graphics/libsdl/libsdl-1.2.15/CVE-2019-7637.patch
-+++ b/meta-oe/recipes-graphics/libsdl/libsdl-1.2.15/CVE-2019-7637.patch
-@@ -29,8 +29,11 @@ https://bugzilla.libsdl.org/show_bug.cgi?id=4497
+diff --git a/meta-networking/recipes-support/ssmtp/ssmtp/0001-Fix-incompatible-pointer-types-error-with-gcc-15.patch b/meta-networking/recipes-support/ssmtp/ssmtp/0001-Fix-incompatible-pointer-types-error-with-gcc-15.patch
+deleted file mode 100644
+index cde2ec4681..0000000000
+--- a/meta-networking/recipes-support/ssmtp/ssmtp/0001-Fix-incompatible-pointer-types-error-with-gcc-15.patch
++++ /dev/null
+@@ -1,46 +0,0 @@
+-From 7d3db0f63b9fa4a0deca486eccbe60c3cfa00750 Mon Sep 17 00:00:00 2001
+-From: "mark.yang" <mark.yang@lge.com>
+-Date: Wed, 16 Apr 2025 18:28:24 +0900
+-Subject: [PATCH] Fix incompatible-pointer-types error with gcc 15
+-
+-../ssmtp-2.64/ssmtp.c:1454:31: error: passing argument 2 of 'signal' from incompatible pointer type [-Wincompatible-pointer-types]
+- 1454 |         (void)signal(SIGALRM, (void(*)())handler);      /* Catch SIGALRM */
+-      |                               ^~~~~~~~~~~~~~~~~~
+-      |                               |
+-      |                               void (*)(void)
+-In file included from TOPDIR/tmp/work/core2-64-oe-linux/ssmtp/2.64/recipe-sysroot/usr/include/sys/param.h:28,
+-                 from ../ssmtp-2.64/ssmtp.c:18:
+-TOPDIR/tmp/work/core2-64-oe-linux/ssmtp/2.64/recipe-sysroot/usr/include/signal.h:88:57: note: expected '__sighandler_t' {aka 'void (*)(int)'} but argument is of type 'void (*)(void)'
+-   88 | extern __sighandler_t signal (int __sig, __sighandler_t __handler)
+-      |                                          ~~~~~~~~~~~~~~~^~~~~~~~~
+-../ssmtp-2.64/ssmtp.c:1393:6: note: 'handler' declared here
+- 1393 | void handler(void)
+-      |      ^~~~~~~
+-
+-Note: as of ssmtp 2.66, the call site already reads
+-"(void)signal(SIGALRM, (sighandler_t)handler);", so once handler()'s
+-signature below is changed to take an int argument it matches
+-sighandler_t (void (*)(int)) exactly and the incompatible-pointer-types
+-warning/error is gone. Only the handler() signature hunk from the
+-original patch is still needed; the call-site hunk has been dropped
+-since it no longer applies and is unnecessary.
+-
+-Upstream-Status: Pending
+-Signed-off-by: mark.yang <mark.yang@lge.com>
+----
+- ssmtp.c | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/ssmtp.c b/ssmtp.c
+-index 4dedaf8..a938d14 100644
+---- a/ssmtp.c
+-+++ b/ssmtp.c
+-@@ -1390,7 +1390,7 @@ handler() -- A "normal" non-portable version of an alarm handler
+- 			like a socket. So we longjump instead, which is erronious on
+- 			a small number of machines and ill-defined in the language
+- */
+--void handler(void)
+-+void handler(__attribute__((unused)) int sig)
+- {
+- 	extern jmp_buf TimeoutJmpBuf;
+-
+diff --git a/meta-networking/recipes-support/ssmtp/ssmtp_2.66.bb b/meta-networking/recipes-support/ssmtp/ssmtp_2.66.bb
+index 67c335b7a0..714b8ce635 100644
+--- a/meta-networking/recipes-support/ssmtp/ssmtp_2.66.bb
++++ b/meta-networking/recipes-support/ssmtp/ssmtp_2.66.bb
+@@ -7,7 +7,6 @@ SRC_URI = "${DEBIAN_MIRROR}/main/s/${BPN}/${BPN}_${PV}.orig.tar.gz \
+            file://build-ouside_srcdir.patch \
+            file://use-DESTDIR.patch \
+            file://0001-include-libgen.h-for-basename.patch \
+-           file://0001-Fix-incompatible-pointer-types-error-with-gcc-15.patch \
+            "
 
- Signed-off-by: Petr Písař <ppisar@redhat.com>
-
-+Also includes the follow-up fix from upstream commit 267d102f6e9c
-+("fix copy+paste mistakes in commit 9b0e5c555c0f (CVE-2019-7637 fix)").
-+
- CVE: CVE-2019-7637
--Upstream-Status: Backport [https://github.com/libsdl-org/SDL-1.2/commit/40d97bfe0e3dae1d6e5a91a46af1f15e8f967bc8]
-+Upstream-Status: Backport [https://github.com/libsdl-org/SDL-1.2/commit/40d97bfe0e3dae1d6e5a91a46af1f15e8f967bc8 https://github.com/libsdl-org/SDL-1.2/commit/267d102f6e9ce32878a6251d5136b176fdd2d49e]
- Signed-off-by: Anuj Mittal <anuj.mittal@intel.com>
-
- diff -r 4646533663ae -r 9b0e5c555c0f src/video/SDL_pixels.c
-@@ -104,7 +107,7 @@ diff -r 4646533663ae -r 9b0e5c555c0f src/video/gapi/SDL_gapivideo.c
-  	video->w = gapi->w = width;
-  	video->h = gapi->h = height;
-  	video->pitch = SDL_CalculatePitch(video);
--+	if (!current->pitch) {
-++	if (!video->pitch) {
- +		return(NULL);
- +	}
-
-@@ -157,7 +160,7 @@ diff -r 4646533663ae -r 9b0e5c555c0f src/video/windib/SDL_dibvideo.c
-  	video->w = width;
-  	video->h = height;
-  	video->pitch = SDL_CalculatePitch(video);
--+	if (!current->pitch) {
-++	if (!video->pitch) {
- +		return(NULL);
- +	}
-
-@@ -170,7 +173,7 @@ diff -r 4646533663ae -r 9b0e5c555c0f src/video/windx5/SDL_dx5video.c
-  		video->w = width;
-  		video->h = height;
-  		video->pitch = SDL_CalculatePitch(video);
--+		if (!current->pitch) {
-++		if (!video->pitch) {
- +			return(NULL);
- +		}
-
+ SRC_URI[md5sum] = "f9894703fcc559f63cffacfea08f9b75"
