@@ -1,135 +1,128 @@
-Received: from mail-dy1-f177.google.com (mail-dy1-f177.google.com [74.125.82.177])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.5696.1794974924352024170
+Received: from mail-dl1-f50.google.com (mail-dl1-f50.google.com [74.125.82.50])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.5705.1794974927463216912
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 17 Nov 2026 20:08:44 -0800
+ Tue, 17 Nov 2026 20:08:47 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=iAnUiQ+0;
- spf=pass (domain: gmail.com, ip: 74.125.82.177, mailfrom: raj.khem@gmail.com)
-Received: by mail-dy1-f177.google.com with SMTP id 5a478bee46e88-33bf40b0c8bso1555653eec.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 17 Nov 2026 20:08:44 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=eC6Sj7XT;
+ spf=pass (domain: gmail.com, ip: 74.125.82.50, mailfrom: raj.khem@gmail.com)
+Received: by mail-dl1-f50.google.com with SMTP id a92af1059eb24-1b3beeaf6f9so776390c88.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 17 Nov 2026 20:08:47 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794974924; x=1795579724; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=MCZfS9NGfzTXRjBsZEbqbVhvCd8NTLVHZOGcjHO0p+w=;
-        b=iAnUiQ+0dm8wtjPybzYzJ9TgGy3nRs2DaxILZg4BWKAB7nOpOccXVpF/ManTrcp4oF
-         6ijDjhQ8BY0fC9p0LcS8x11TeHlxzRwRZPvL6iY4Fz7as+Yrx8meWRZ6JPEo7LvQK1nh
-         E3yeNspgo4hsA4jeTbRHAKIfWUzGrHXYFFef4q2HDtl/8K2UP4QJT4eScmU6Ppp7Ua/o
-         AR/399/3Kg/hkEQI26wXRxh0eFhlFkrJUO5V1wVwXRSfRNKG88mN9qelHrGxdUBIrxXq
-         BPRNg4SxXw4HxtN37owM276VYOz90DATyl0NtgM7slqbvcIm4Cqfwk2Oxh3xXA9Ka0d6
-         Vcwg==
+        d=gmail.com; s=20260707; t=1794974927; x=1795579727; darn=lists.openembedded.org;
+        h=content-transfer-encoding:content-type:mime-version:references
+         :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=psjqNkoQtFseczdqkeQCnpSeIChuBaqOD1K3ysnw8s0=;
+        b=eC6Sj7XT5rSZsOCqEifHoVKrpNr7xh7BA9WdvZVb5wqyLgHac4XrFM7JqHxxUjkemf
+         +RZ9oGaVQ2T6+u8N/JddLNc/buacVyuPoQmRBQgOPNmykRFpGAEuku/dfgJEN22fUBya
+         AjWz3gnKSUQ6t+WNhnnDmfUjeFjEEdmR45PowEyJ6Xxo7eYJ3aP3iJYCNOscb/PYdK/j
+         aTX/D/NLd/IFAhehvh1HGv4kzqFdg4sHEHu+uZ+a/NOEg12dr4mN1koVapqAcgRK64v0
+         JY8URsbL+iBE9rlYUNqBzjSOF1a9b0mEuR1CeRlinmnY/y7w1NDBccHxHDYqcofjNJGf
+         cF+A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794974924; x=1795579724;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=MCZfS9NGfzTXRjBsZEbqbVhvCd8NTLVHZOGcjHO0p+w=;
-        b=AM7hPMIgabIdnpIRUnfZc3foNiOuQc2dTLt0TgM76EFt3yoNAAxTIzTL5MwhPvRBYm
-         4t01bnsinsXAkfwHnESKGd3tmmBt+hm3q8Pm5ysYS12emT7fWz0Tc6l9axgxn636lma+
-         dFhc3eOGsBPvFOlYZ5G9KnYcY9R7Gp/DZFak2DmcQHE7WUvASnbzM/9lhJCjvY2C+Bic
-         N2LdcMHhSg58IlGtwWpNjW2FfG5FXqNw13SW7VS+HBajr1vOF1pnYJeq29H+W9GmLBjU
-         Bxk1p1Y2+H7bPA+QxgiySB5BaB1NQEPPj///jVxGH6xx26UBxifjIQIFEty7Mld4tzDH
-         xw7w==
-X-Gm-Message-State: APuU4Z+TTElX6gKotzdGhyhJkkxH/L3KQpWUCpsp7mgOFjh9BuTTlDK3
-	CLXTeAMPONR++XgIdBVKtC2Iq/typjELZeEi76KS5bMceFqXecdtdfb09pUrJBvZ
-X-Gm-Gg: AZFdTZdelzTlfTUzN0IF+X56hREV8jTwWmtqr/v7fI9pcBWBBtKTHnVRTQHrAIL2Gkj
-	qiCi7lhCOSMWDLaM8pnltUaOcydQ8m2DEAuSdnD03sSnGWZ5uU6t42OWLR0kISLvLW2RVOcy4Xz
-	bWvIcvt3m9+k8wxt+4wmgkAJHDGjL8ujtg7Lk+/zs1vTe7TSKU2iVVo/D1uYsREu3OmygQx50bW
-	m3AYbNP4QJWUTtvt+kv3EAhv3KmAh1qks6vOQ0QrBzjjm2oqGVUlYAoZaXiFy9cc4TXB/uiBQja
-	4PLqafyI2Ib1Y7k80YVmFAwmi7Tyz1/yCUSff/qsoyGIqYMmKPAF3B9LNddsugN8r6fKPMQE6zb
-	OCfbRRYR7LTGbD6OeG/qp690+xTT9NvL3vSQfVVaM++6G/jNFyQfqzKkVFCBQfMCP9M3e/7uPyE
-	jaf10mKyAL0eC/KGqKCWuG4Nmj821aR5++ZhQncgUMe6rDyZ6cxS0RR7OFd/gzwUtcW40rSNhr1
-	prt1vPey+GRN66Diu0h+SdAM0i2LEZ9uX0jaqdHURSqVABPfu3BavM0uK7/wPGPlARAoztfZmvN
-	wtVSdjahRImylU8e6BfRRFLUFiQCbMRBq/LUAPs/ZA2skgWjfcq46S2Jy15jfcUTKqocDU+6J/N
-	UK+TxCkfZsj8xDbQEj5XT9ekJIR1CbfWrpJ0VcNrvA6t1F7vR5zsYWS+wEDfZoWVXoqMrEuRkei
-	NxfZSw/s0XV8hizFAZbFTYNuhX9RDNP4y9oZLvqRgc9r7QajI70EXcH8z8IHPFkwq01KuOIALQJ
-	/HzXAAtNrXxx0geqjK17xnM3p4YRZZq4PsqYfXkUYiYLud1yy1u0WPRnEQSlUPxoHq60j4dUJiE
-	UebO
-X-Received: by 2002:a05:7300:1488:b0:381:cf4:2a17 with SMTP id 5a478bee46e88-3827aae12c6mr1861286eec.0.1794974923659;
-        Tue, 17 Nov 2026 20:08:43 -0800 (PST)
+        d=1e100.net; s=20260707; t=1794974927; x=1795579727;
+        h=content-transfer-encoding:content-type:mime-version:references
+         :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=psjqNkoQtFseczdqkeQCnpSeIChuBaqOD1K3ysnw8s0=;
+        b=hoS/cjOTf1RNGBXrtRw+o0VpZxsYJqBB3hHk7L9VOpX78cHBV4cJPVPHGaHmORZ9wO
+         zHOvLB3KYm/8zhUvjAwBiBGs/2IwuA/s9AjW+CS437lOhUMz57hqNx6hhA8bD/l7Y+cY
+         FKxcBsjxYJHsHcESrsiPqv0S9lCU/oMTC5dnLT/tcYD1xZm+S9yhDG0Az0jrug2TKU0l
+         Rafh4JAVKoA9fvJLrl7Dg4pLx5G/ZjpdwDIbpvArcQEok8QjrI/AWeOecuCv6bxWFcY9
+         3dH3+9Ln9fHc+1/ZfwJGpS/fk6m97+4E4+iu1Pz0bNVnuCQenYvdloocWAoJMza1ZdMB
+         vTeA==
+X-Gm-Message-State: APuU4Z/YT+PSbNhGSylR9oDmRlX3cxJFuX3CJWRcCX3FaoDRxf7xUWWS
+	6HIZKo1RieaNbdhwkQoWoHkfrB0qNatnC+HDyEIYJplIvS665v9BXQoZitkL/Pci
+X-Gm-Gg: AYBFou2VKEnF5W3vkLQbpFFAVGgL0ntszpCwqp+DkFp6VRE14R/ycU9dxCmCF6BwoGr
+	PqeudY09pRvLml0NA2iyhkgDfvpymw1JyNeFeUvKlMs3mhO1FDK0KL3MIdJV0WrFlarVd2qvIue
+	EQZKmhBnTFrj7aTslfyxL4bqhwXy4TElZfxYrWfUiZrGkKNNTgdYRK2eG/eR+g8LDwFXxqIjD5C
+	TlVXA2xoOwCrHBLLGnpT2OfpP58bhyYlqaKNrZVwsRsIjz9WNp7cWMH8boOl47FtrE70W8t28FA
+	ARq4jS8coSxumC1lYh9r4NJZdCzfDrQlNOj7trpIJ3c3DQ8q/ejv85l5oAP1XnnTELhUbd3JDXM
+	11xg5kzXAxy6QsOBzAjwN2zvRRmEnfZRfvzoSc97OKAPDEPLHOqV4iwRtR68qEptEpNU5N7HYJ3
+	W1+MRytttczGNKJIlQ3b5l+EYsZqpkAWMMA+IExl/BzmVCaPkQe5PQdsOTltPLQNjmMsUNO28Pr
+	x1c35QBIiFZv0L6xXdoMMYRqP5ZSQZx3yVeVIL/rsYjS3Kp8b0cCB5WAt95ehGIV6sHmoMaHjOU
+	59aG4bc0kfz7+NGyBQ9CNTnyfQFi4JGXdhZirUiw3VBmFYSJjmFvuOrZ9hd1o21DrRG6awWMdYW
+	aNxOTBYgMdtFkrRwCDmLffsDM14Pl1dT7phiJl7urlqr0aKrA1vWMJxtrW/Sr/M71Cj56OKOd4X
+	9uAmeHW3VEGCkt48aFf5tYoMr5dOQFQ/I74PwbtHhC4kwmM1pFFcU1Ot8dbrF3S6a01ilkuHih8
+	fp4OxxxGkBogg0q26MiJOSykUWG/FIUTyubNbv38W4Z3zW47iYn+gsdO+GSbXhY8IRFicCp53Jp
+	HTm0
+X-Received: by 2002:a05:701b:42c5:20b0:144:fd7c:84fe with SMTP id a92af1059eb24-1b543d48dcamr1533502c88.35.1794974926639;
+        Tue, 17 Nov 2026 20:08:46 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-382a73e0aa6sm2695251eec.19.2026.11.17.20.08.42
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-382a73e0aa6sm2695251eec.19.2026.11.17.20.08.45
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 17 Nov 2026 20:08:42 -0800 (PST)
+        Tue, 17 Nov 2026 20:08:45 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-oe][PATCH 5/8] smartmontools: Drop obsolete reproducibility patch
-Date: Tue, 17 Nov 2026 20:08:27 -0800
-Message-ID: <20261118040831.2284885-5-khem.raj@oss.qualcomm.com>
+Subject: [meta-oe][PATCH 7/8] libsdl: Add upstream follow-up to CVE-2019-7637 fix
+Date: Tue, 17 Nov 2026 20:08:29 -0800
+Message-ID: <20261118040831.2284885-7-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.1
 In-Reply-To: <20261118040831.2284885-1-khem.raj@oss.qualcomm.com>
 References: <20261118040831.2284885-1-khem.raj@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Wed, 18 Nov 2026 04:08:45 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132620
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Wed, 18 Nov 2026 04:08:55 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132622
 Content-Type: text/plain; charset="utf-8"
 
-The SOURCE_DATE_EPOCH change has been part of smartmontools since 7.3;
-against 7.5 the patch only added a ChangeLog entry.
+Upstream commit 267d102f6e9c fixes copy+paste mistakes in the
+CVE-2019-7637 fix, which checked current->pitch instead of video->pitch
+in the gapi, windib and windx5 backends and broke setting the video mode
+there. Fold it into the patch so it matches upstream.
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- ...Define-SOURCE_DATE_EPOCH-in-CPPFLAGS.patch | 34 -------------------
- .../smartmontools/smartmontools_7.5.bb        |  1 -
- 2 files changed, 35 deletions(-)
- delete mode 100644 meta-oe/recipes-extended/smartmontools/files/0001-configure.ac-Define-SOURCE_DATE_EPOCH-in-CPPFLAGS.patch
+ .../libsdl/libsdl-1.2.15/CVE-2019-7637.patch          | 11 +++++++----
+ 1 file changed, 7 insertions(+), 4 deletions(-)
 
-diff --git a/meta-oe/recipes-extended/smartmontools/files/0001-configure.ac-Define-SOURCE_DATE_EPOCH-in-CPPFLAGS.patch b/meta-oe/recipes-extended/smartmontools/files/0001-configure.ac-Define-SOURCE_DATE_EPOCH-in-CPPFLAGS.patch
-deleted file mode 100644
-index 917cbb0306..0000000000
---- a/meta-oe/recipes-extended/smartmontools/files/0001-configure.ac-Define-SOURCE_DATE_EPOCH-in-CPPFLAGS.patch
-+++ /dev/null
-@@ -1,34 +0,0 @@
--From 898fd4115be5cdd848db99fe85e1d0d7f1b3fa02 Mon Sep 17 00:00:00 2001
--From: Oleksiy Obitotskyy <oobitots@cisco.com>
--Date: Mon, 22 Feb 2021 17:21:33 +0200
--Subject: [PATCH] smartmontools: Improve reproducibility
--
--Backport changes added to master smartmontools.
--https://github.com/smartmontools/smartmontools/commit/24838916b4c0e91f5c897d44fcdeedb22848f684
--
--Upstream-Status: Backport [https://github.com/smartmontools/smartmontools/commit/24838916b4c0e91f5c897d44fcdeedb22848f684]
--Signed-off-by: Oleksiy Obitotskyy <oobitots@cisco.com>
--
-----
-- ChangeLog | 8 ++++++++
-- 1 file changed, 8 insertions(+)
--
--diff --git a/ChangeLog b/ChangeLog
--index 5f0930a..4c5a91e 100644
----- a/ChangeLog
--+++ b/ChangeLog
--@@ -705,6 +705,14 @@ $Id: ChangeLog 5338 2022-02-28 16:34:26Z chrfranke $
--
-- 	Happy New Year!  Update copyright year in version info.
--
--+2021-02-07  Christian Franke  <franke@computer.org>
--+
--+	Improve reproducibility if SOURCE_DATE_EPOCH if set (GH pull/89).
--+	configure.ac: Define SOURCE_DATE_EPOCH in CPPFLAGS.
--+	utility.cpp: Print SOURCE_DATE_EPOCH value if specified.
--+	Don't include configure arguments then.
--+	cppcheck.sh: Silence related 'ConfigurationNotChecked' message.
--+
-- 2020-12-30  Christian Franke  <franke@computer.org>
--
-- 	smartmontools 7.2
-diff --git a/meta-oe/recipes-extended/smartmontools/smartmontools_7.5.bb b/meta-oe/recipes-extended/smartmontools/smartmontools_7.5.bb
-index 96e48ee924..6f007527c2 100644
---- a/meta-oe/recipes-extended/smartmontools/smartmontools_7.5.bb
-+++ b/meta-oe/recipes-extended/smartmontools/smartmontools_7.5.bb
-@@ -16,7 +16,6 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/smartmontools/smartmontools-${PV}.tar.gz \
-            file://initd.smartd \
-            file://smartmontools.default \
-            file://smartd.service \
--           file://0001-configure.ac-Define-SOURCE_DATE_EPOCH-in-CPPFLAGS.patch \
-            "
+diff --git a/meta-oe/recipes-graphics/libsdl/libsdl-1.2.15/CVE-2019-7637.patch b/meta-oe/recipes-graphics/libsdl/libsdl-1.2.15/CVE-2019-7637.patch
+index aa1d47d82c..c8bf174f09 100644
+--- a/meta-oe/recipes-graphics/libsdl/libsdl-1.2.15/CVE-2019-7637.patch
++++ b/meta-oe/recipes-graphics/libsdl/libsdl-1.2.15/CVE-2019-7637.patch
+@@ -29,8 +29,11 @@ https://bugzilla.libsdl.org/show_bug.cgi?id=4497
 
- UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/smartmontools/files/"
+ Signed-off-by: Petr Písař <ppisar@redhat.com>
+
++Also includes the follow-up fix from upstream commit 267d102f6e9c
++("fix copy+paste mistakes in commit 9b0e5c555c0f (CVE-2019-7637 fix)").
++
+ CVE: CVE-2019-7637
+-Upstream-Status: Backport [https://github.com/libsdl-org/SDL-1.2/commit/40d97bfe0e3dae1d6e5a91a46af1f15e8f967bc8]
++Upstream-Status: Backport [https://github.com/libsdl-org/SDL-1.2/commit/40d97bfe0e3dae1d6e5a91a46af1f15e8f967bc8 https://github.com/libsdl-org/SDL-1.2/commit/267d102f6e9ce32878a6251d5136b176fdd2d49e]
+ Signed-off-by: Anuj Mittal <anuj.mittal@intel.com>
+
+ diff -r 4646533663ae -r 9b0e5c555c0f src/video/SDL_pixels.c
+@@ -104,7 +107,7 @@ diff -r 4646533663ae -r 9b0e5c555c0f src/video/gapi/SDL_gapivideo.c
+  	video->w = gapi->w = width;
+  	video->h = gapi->h = height;
+  	video->pitch = SDL_CalculatePitch(video);
+-+	if (!current->pitch) {
+++	if (!video->pitch) {
+ +		return(NULL);
+ +	}
+
+@@ -157,7 +160,7 @@ diff -r 4646533663ae -r 9b0e5c555c0f src/video/windib/SDL_dibvideo.c
+  	video->w = width;
+  	video->h = height;
+  	video->pitch = SDL_CalculatePitch(video);
+-+	if (!current->pitch) {
+++	if (!video->pitch) {
+ +		return(NULL);
+ +	}
+
+@@ -170,7 +173,7 @@ diff -r 4646533663ae -r 9b0e5c555c0f src/video/windx5/SDL_dx5video.c
+  		video->w = width;
+  		video->h = height;
+  		video->pitch = SDL_CalculatePitch(video);
+-+		if (!current->pitch) {
+++		if (!video->pitch) {
+ +			return(NULL);
+ +		}
+
