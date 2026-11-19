@@ -1,61 +1,63 @@
 Received: from mail-pf1-f179.google.com (mail-pf1-f179.google.com [209.85.210.179])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.1892.1795113378931922436
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.1894.1795113381867923395
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 19 Nov 2026 10:36:18 -0800
+ Thu, 19 Nov 2026 10:36:21 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=e8Fk7cg/;
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=vrOxAl3I;
  spf=pass (domain: gmail.com, ip: 209.85.210.179, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pf1-f179.google.com with SMTP id d2e1a72fcca58-8b600fae14dso46472b3a.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 19 Nov 2026 10:36:18 -0800 (PST)
+Received: by mail-pf1-f179.google.com with SMTP id d2e1a72fcca58-8b5c3288e6cso55986b3a.3
+        for <openembedded-devel@lists.openembedded.org>; Thu, 19 Nov 2026 10:36:21 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795113378; x=1795718178; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1795113381; x=1795718181; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=AHukX1t+rmRqXYccUdWQMzTC6St+lBukbiMWGKvbp64=;
-        b=e8Fk7cg/puIURBie84fNcmzDGjWt761cBgHWtlJvqXpC008NDu47n/jiPNcC3d8nG5
-         J1JDktYsEr3bLxACkgsY0kEDlV/7uuy8ToIeRLdTNrvrsVDZJ5GtEIats+FeifFbjN1l
-         A7hEIzHf33C9D9BCzwsyVZAyhcFlc4LwuCohPkDw2fvgEo2aPBMlfha7REoQON5leHxr
-         fw6Jq0Nf9kgpb4zLrYwQFibsX4zsL6nkiYeGpk1USTJD+ovhuPpKjI0r2YTFwwfEks+f
-         BrAQ7aRYqesZpgZw9CIB3wZLrmmQ/hi/BjoF+3Xh9oYG8/sXZneFMEcC6Lu1gbTfW2fe
-         8aXg==
+        bh=XMWNcYSuvUjVv1i2YqzO4vOhLgAs51nSCdiJykx35Bo=;
+        b=vrOxAl3IGxLFZTNK3HLaD6JEN8kxsyvBbSZ91/0DFvv/tord5Wc8IXWv5z3bFiuCAC
+         eBmxkPxp9s8cISvZvKl2t2Es2vhRyQ19htaEBoOD5mbLmtPUIGJzvecG5uwdiuZyNuXo
+         burMTuM85rNnNR7kg1u7gi5Qxr1CAgnnm96IDnTX17YPofibHsAUxciWxttiG9HBWoT0
+         W5BR4gMuTgTbguKZgIms9g6a2V6cD0jpn2j88I6l/vaW2eEyk6Vd+DybtSJq4Zc8PgyB
+         yKD0sg9YGOP8SJue4kEdPs+wQQM/It5FxPBWgTjbRT/LcyIYCDwb0axDzMWolerKCFSM
+         BWvA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795113378; x=1795718178;
+        d=1e100.net; s=20260707; t=1795113381; x=1795718181;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=AHukX1t+rmRqXYccUdWQMzTC6St+lBukbiMWGKvbp64=;
-        b=ZEXoMDMDDLXcSleTb9uJKG8faJacpY8SA8fub8tY6NFnidT2ChsPjVt/1aoXzi7RIR
-         NEKbcZQKRIlY0HUjoKKrjCoPJWCtcvJLCmYsQ8PFpAmuPyxAWJZXEblDmqjSkedWKT1f
-         V9Xe+TBDQP2AcGrCEbLYnJAjAQKCJvwXLaxZSqzWxecUK3awENrNIMYaomIXv6rmA/5+
-         +jYfpBmK440EFELvZPij8lgb3nFUjEXIDMYwyRRKzaKm3xXdGLxY3X1hOGQ+ykVFUp7D
-         BasX9izPSYC9YaLvG3K6mW7mjp+xWh62Pb7Srexg22NRycyc5/W4ETz/N3CS6annExJC
-         KjeA==
-X-Gm-Message-State: APuU4Z/S2xCP/5QvclKvVOtqAQAaMPAVh/LyxULpSjtBiBrAsc/S1gWn
-	SxA1z0dnyiCfoZRhnOkZ2gaOuoPyz8Z8GF6+3lzWJl+WlJUF1GtbEvLHk+eMlw==
-X-Gm-Gg: AYBFou0ipU3RjSL/zULHXSQO+PIOIc2ze2w20FcQIexHHCOwkTzHBZRVl6Tkg0aain3
-	XQ/qeO3s1kWyqloS+ZHY/9TzaJs7YAcX9rw6Ig9zPfBqzb169T6gjBJcZmsuzx2EuxEwZDbHkY1
-	Zk6qsd6+yZ4lXjceAPet7xWYOhQsvwrG9due6uhGSQROCmW5hvUIxO/kEOohYmjs5vCdkidcjp1
-	iNMYzBYK93gp3gRSx6DrK1+cN6lpExsqf0dHG4pCi+MSXJ+YL5PZDmE2xufHQgOdufUx13K1eQ/
-	zc9f7AYhpS1JLFDpidEhlKb/DpsNvOyK/FAf6EaI8qRkPSfhlkeFRF7DV1GUlnBU0b/V2U9wftG
-	rzPTGakN3UJWy276Jc3HFyzeZlpIuA1Orn7xEAqwB1anPpXIcN4N4owmuJ/FpPN1en+IKk6ndsc
-	1Mvepl5KJw3fmJmL2+4KysyRY+jkG2OQYItxuW4qsmATadkE9EuIKIgyVlnP+81U1VvAk0/yR7X
-	qeHuX6z19oXYDdIkmBGZElJDdMPsFt85CwnsM8b0RdPrbDxQTCd7y/739vbw6A+lhrXuX+RFzKQ
-	axaLFzFJpul5ryhmaRPhhQ+lvWA9HqtoMYo28T/0+EEbyOJC2SG0n/YYfAF4Sg==
-X-Received: by 2002:a05:6a00:1808:b0:89c:1f2b:a73f with SMTP id d2e1a72fcca58-8c87bcbced8mr493873b3a.17.1795113378211;
-        Thu, 19 Nov 2026 10:36:18 -0800 (PST)
+        bh=XMWNcYSuvUjVv1i2YqzO4vOhLgAs51nSCdiJykx35Bo=;
+        b=PPOP4xkhWxDqRxjHQ6u9JVPhOTK4ZoU2R39CxtwBm81SYVHB1zXh1o4y76hshg4NVT
+         dhRq30i+7JaTQWiWzqTva0nQiorOjlKaSOtJufQoIVJaZqhj8ZEp12+N8EjfrjR10SCQ
+         tzQ6czgd+NSv8son5XxIMhExY2I/4Y8VPAFICKDh49+s5CB48Sa5LOeYO57GC2f966a9
+         3D7viVKvnpG82ffQaHWW7l/O+BCg3Z10Xgy+xLfu5uFhv1dUngAdCJ+XXTGbBSp6akmP
+         T+3IG0e8AGoQrm8YLvUGq5LYm9i7yB4QvJn/yiQyV5YzQEbcKtc6OP3b2+D+ieFhltCp
+         F0gA==
+X-Gm-Message-State: APuU4Z+d/z/+1Gd0OgOf2eRMXPjXC0zZKMc0lel12JkCOaABAkI/KULU
+	YxV7W3mdAEEC0z4+AGFhkQaYQjyFnA3ciQdIJt8DpoM2ADr+hgXB6dkmXYK+lw==
+X-Gm-Gg: AYBFou3t3OzNosI+FFGVhF6Jbac6cvICt35WrlqxsxnrgdtJN9zTMA+3A5/dfWeKkA9
+	YrSvR9VNTSj08qoXi7BdvaQEh8GFMq91W0q9Um/WqzjgNHPU2ofBC8Wsib3pddBC62TNEUj43M1
+	JKdN8V5dGpPfus5yOuSa49/PV+zQnWjCL1PUovulLOK6OpGSPiQrlGf6PAFOI1ByFV3RqWcmmp5
+	7dJu5Wuxz3kseoHk0/ZI99fvHSRqWcicnn2RgQHIvcwO20+OYSCrb0oP70UYF/4q+yP0HhiSrRJ
+	0kPuctHvy52AFsKC1SNaxGfYSb8d3N0ZE37MSO4ros3wDcWDjDB72fwqWO8fGy17oshI1RXm6LJ
+	YUru0WzEeOSQqqtzI8sKahNOS1pPjZJw9+M9gfl3Ly2Vv9hoTLSevAzz8WYeLeVJe6S3TvcYd/e
+	ChfC8RcfqTmSF7hrACKpdQNv6Qu7mOxPsdq5dLqXYgygBy6mYaJZ8QKSUQMGuU8dM9eICMGPQIf
+	HL2SShsoCr7ROLsOF7a2dCq2jZ3hK2rq5tOrjrJcAbXrGvWJB/4AoSh27z+OwDNi6vD9weuaOay
+	6JnREnDjJyb6UrOtWnFMEd+IBKg4f9Srm9mosJ5OVJbSEpxioogsCgHt4n0S5LALzFmegUtUGYQ
+	L1jePCWY=
+X-Received: by 2002:a05:6300:4086:b0:3e2:8b69:eef0 with SMTP id adf61e73a8af0-4014d25474fmr484722637.19.1795113381206;
+        Thu, 19 Nov 2026 10:36:21 -0800 (PST)
 Return-Path: <ankur.tyagi85@gmail.com>
 Received: from NVAPF55DW0D-IPD.. ([147.161.217.9])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-8c872e4d7basm294518b3a.21.2026.11.19.10.36.16
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-8c872e4d7basm294518b3a.21.2026.11.19.10.36.18
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 19 Nov 2026 10:36:17 -0800 (PST)
+        Thu, 19 Nov 2026 10:36:20 -0800 (PST)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>,
-	Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [blacksail][PATCH 09/64] libraw: upgrade 0.22.2 -> 0.22.3
-Date: Fri, 20 Nov 2026 07:32:37 +1300
-Message-ID: <f258232193b79dcd3d02ab56f2e7bc819cec8bdc.1795112941.git.ankur.tyagi85@gmail.com>
+Cc: Leon Anavi <leon.anavi@konsulko.com>,
+	Khem Raj <khem.raj@oss.qualcomm.com>,
+	Ankur Tyagi <ankur.tyagi85@gmail.com>
+Subject: [blacksail][PATCH 10/64] python3-httplib2: Upgrade 0.32.0 -> 0.32.1
+Date: Fri, 20 Nov 2026 07:32:38 +1300
+Message-ID: <1e1e2f5331f25bf685bd1253a6501a94ae485aca.1795112941.git.ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1795112941.git.ankur.tyagi85@gmail.com>
 References: <cover.1795112941.git.ankur.tyagi85@gmail.com>
@@ -63,36 +65,38 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Thu, 19 Nov 2026 18:36:25 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132699
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132700
 Content-Type: text/plain; charset="utf-8"
 
-From: Ankur Tyagi <ankur.tyagi85@gmail.com>
+From: Leon Anavi <leon.anavi@konsulko.com>
 
-Changelog:
-https://github.com/LibRaw/LibRaw/releases/tag/0.22.3
+Upgrade to release 0.32.1:
 
-Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
+- cacerts: remove distrusted Comodo AAA Certificate Services root
+  CA due to eMudhra incident https://emudhra.we-have-a-problem.com/
+
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
-(cherry picked from commit 2f7a0c3dfdf3e8faa6fbfd07b60328dfa65a9b10)
+(cherry picked from commit cbeb9338439eb0f017e82d74d2e28add8edc9bd3)
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../libraw/{libraw_0.22.2.bb => libraw_0.22.3.bb}               | 2 +-
+ .../{python3-httplib2_0.32.0.bb => python3-httplib2_0.32.1.bb}  | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-support/libraw/{libraw_0.22.2.bb => libraw_0.22.3.bb} (92%)
+ rename meta-python/recipes-devtools/python/{python3-httplib2_0.32.0.bb => python3-httplib2_0.32.1.bb} (85%)
 
-diff --git a/meta-oe/recipes-support/libraw/libraw_0.22.2.bb b/meta-oe/recipes-support/libraw/libraw_0.22.3.bb
-similarity index 92%
-rename from meta-oe/recipes-support/libraw/libraw_0.22.2.bb
-rename to meta-oe/recipes-support/libraw/libraw_0.22.3.bb
-index 2db0c14a61..c0601f71a8 100644
---- a/meta-oe/recipes-support/libraw/libraw_0.22.2.bb
-+++ b/meta-oe/recipes-support/libraw/libraw_0.22.3.bb
-@@ -3,7 +3,7 @@ LICENSE = "CDDL-1.0 OR LGPL-2.1-only"
- LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=1d66195044cfbe4327c055d1c9c1a229"
+diff --git a/meta-python/recipes-devtools/python/python3-httplib2_0.32.0.bb b/meta-python/recipes-devtools/python/python3-httplib2_0.32.1.bb
+similarity index 85%
+rename from meta-python/recipes-devtools/python/python3-httplib2_0.32.0.bb
+rename to meta-python/recipes-devtools/python/python3-httplib2_0.32.1.bb
+index 341cb3dd04..54af71c097 100644
+--- a/meta-python/recipes-devtools/python/python3-httplib2_0.32.0.bb
++++ b/meta-python/recipes-devtools/python/python3-httplib2_0.32.1.bb
+@@ -4,7 +4,7 @@ SECTION = "devel/python"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=56e5e931172b6164b62dc7c4aba6c8cf"
  
- SRC_URI = "git://github.com/LibRaw/LibRaw.git;branch=0.22-stable;protocol=https;tag=${PV}"
--SRCREV = "b93f6e45c194f5df9b02a43b1af9a54b4f41f33f"
-+SRCREV = "cf02d66eb5c19d4e46df7aee0582e47a4918509a"
+-SRC_URI[sha256sum] = "48a0ef30a42db65d8f3399045e1d09ab0ba66e3b9efc360d07f80ea55d286025"
++SRC_URI[sha256sum] = "37900eb8a74576bd99fc39ae1dc8409f95f965d45b56cbcb2194bb55f58a90e1"
  
- inherit autotools pkgconfig
+ inherit pypi python_setuptools_build_meta
  
