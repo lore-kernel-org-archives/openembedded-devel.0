@@ -1,157 +1,270 @@
-Received: from mail-pf1-f173.google.com (mail-pf1-f173.google.com [209.85.210.173])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.1872.1795113416038851507
+Received: from mail-pf1-f172.google.com (mail-pf1-f172.google.com [209.85.210.172])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.1908.1795113418541381751
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 19 Nov 2026 10:36:56 -0800
+ Thu, 19 Nov 2026 10:36:58 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=NKktMCoW;
- spf=pass (domain: gmail.com, ip: 209.85.210.173, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pf1-f173.google.com with SMTP id d2e1a72fcca58-8a05b210703so84200b3a.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 19 Nov 2026 10:36:55 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=S46Jpggh;
+ spf=pass (domain: gmail.com, ip: 209.85.210.172, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pf1-f172.google.com with SMTP id d2e1a72fcca58-8b32bc605d9so65763b3a.2
+        for <openembedded-devel@lists.openembedded.org>; Thu, 19 Nov 2026 10:36:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795113415; x=1795718215; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1795113418; x=1795718218; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=ZKo2PqI0oKWBjpF4hAGroR7qnkIp+g5s7sUH7KzS4ZE=;
-        b=NKktMCoWqKJCHAkWISjlxNUkEuMhdxbuj5c93BdyrVFEi5vDEMxUdlX8OHFcUw4mle
-         QpksjIQB5DazOYO7D1gzTuUDeLgO9sTHVDV2RTPUz9tvnX859uaUf+91PATpSGy6KYF0
-         TeFM8CrFV+XFkb9cnVwa1PhfFAtEUjp27Pq5Wc4TeBlMgjGS/FPShDr1hodWBsQ0z3xS
-         9VreHTwW6yo/zAItqvWEVP8hPowJSESg09Tv9kaYnpbrpuRWaCx50W5wSDFkOemBsGRo
-         ntgfhP3nk76+/hnUuu/fLm0UFcW/1mPJERyYjCsx4/A2XgSI+xtyhZqr0aWUJmI2KS/Q
-         H1ZQ==
+        bh=ZxsGHdfckDqPHxHI7QhLMOqD85vHe/kgQGcZ71QdHZk=;
+        b=S46Jpgghgkp0VVz3gfUeJIFBBC7tOr7gYnifSRw1wT0U330Tk765v5UIy0xFK9vZgC
+         I1cY+RWJE6JYYOLj2a1F/X8MR6kHuhc1jF/uKr0t5ezMjeqP5fiDLA1I1NxPW6lkdrU6
+         7dNgel3dHL+/dS9co0FcJ1I/Rwczag8KnP/UX4xoQ8hiVfWx5ISodmUFRV9K/3QlDlLY
+         NCQUytDluWLfJwEplVdIF5QLqm0iabCksYHYBEDwIv8JXazlajFTknUjGwpSjVqCrsxH
+         vNSndb3JBDPVuxJ+DY9Rn9nwM1fIDvsCukUnINaXvFgzODmDuFenYPpwWsnEes5E6ArR
+         7Wew==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795113415; x=1795718215;
+        d=1e100.net; s=20260707; t=1795113418; x=1795718218;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=ZKo2PqI0oKWBjpF4hAGroR7qnkIp+g5s7sUH7KzS4ZE=;
-        b=steWfBL6cpVcPF082wuDL3E3/C1OCO8VjAXtCy87REiKp0YTEqSNGY2c28XM6NVmH8
-         iWVvoCdGlwVCSdOpTSAEc4idxfzx1WBDSIn0r45mIlD8u8bFRfIwqauCQTyU7zPTtXRT
-         yDXGtaw1UvjAjWB/P10yH3g/yTunYUWMUisPkOFpYxSHki3l6RRacN/AUQvN2P3uwOcq
-         Wlv1YrCRG2aqOQWtPssz7oK8FMeDNvLFgynSV2uUGRdrHx0IIvepbDQLeODwxSfB7jv8
-         dr3ScQVU7h50ul/p8AcIyWwnEH8mBcXOKWlU895ZsQML6Eb59jZk4MuoMVn7v8OlQZxV
-         Nfsg==
-X-Gm-Message-State: APuU4Z+FejJKIvY1KlCWd9SCr21oc2ybhbW/B1sRGavBhHi672LIcXAE
-	CfgOvAfvDFotWXdXoKXyBwq17aLUiE4WJxWhFnjRWQyiIhREAM3yl86/qBa2QA==
-X-Gm-Gg: AYBFou2+F8Q4o7l2SIP2p82+BBnB8o2ZE/AJDJ9+IM6T5LS/9Ft6KE3bTonlvpnhXXk
-	54aI/eL2AI/52xl3Zu4kIAtiuB9lT+vIB5j+OROvVSzrTYWH/VjbKGi0CoUn5OIt1Ofpm041l2A
-	/4mBfA4cvPb3AUyB8Y1BP42qmJlkYMC7PkGUXBafGyxPTRknZtUe/M5QeafyMx39+3S4JT2+Ywh
-	BEYzXh1WefpqvaoFq2dlgD3xVVAYSY1OS+iz/OHR5xpWIdGDiU/gc90ZedVQzXHG10sgzkiiv2R
-	PskEANkjMVEUcQ/Qq18hHmNyuji1mpIe5Jc6dGF4jOPMBx6WJhdJS475Iz6iNOVpo5wMjObvGQ5
-	1lnLRDDpjqlbCF8ncwBGgaXfW3C7sZ/tw+6tURA/GEPVZn3Ld1pWcfGhvgl3nrx3F3Qx1YeRluH
-	fWN8gXf0ayTsZVCBXO2vP6NL3idu04YFz2yGnIpdfFOFkgKA50QmZzXzOqldkVi0BFVuqztfS2h
-	hbimNhWxilTtF9m7L5lf3KUVnGy1zVqASYML80GOngy9pCIzzUErAUuigdB9BbzAT+wWSdk/IwX
-	CxZXZIUgbt0kLfqJuV2Ll6qkmlrrLzPgo/HKtRIDkBb0wDxREaMNtzjcTrI8bg==
-X-Received: by 2002:a05:6a00:1388:b0:89f:7ac5:9d54 with SMTP id d2e1a72fcca58-8c87b9cf650mr507463b3a.17.1795113415322;
-        Thu, 19 Nov 2026 10:36:55 -0800 (PST)
+        bh=ZxsGHdfckDqPHxHI7QhLMOqD85vHe/kgQGcZ71QdHZk=;
+        b=JtKYaYCLiFb1o3sh9KgH2b+4bPUkCbrZX6+ntxby1yS2T2JktfE2HOjoOuPhH0umS3
+         9pqTxnc7V9nQ3bZl9Te50efQgk9i9+VhCuQkC/70GTTFsbcjQ3nx3Kd8unXmgA+Ib8O0
+         sF/HOvFTqqCXAyG3q4SQJhr5v4Md59Fsb8mJjImGOE8gHRQ+YSKnBosKf1xo/0gM4/S2
+         xV5r+PivnG5pACrVM2QekFM5z+swQol8r8meb6o8mXrVTNJls8GS9UEE1fJTsfyT7kZG
+         A6Zsg8AKCe3dRV/gE/vZWXtXlq0ISEL9Bf9f2A0UexQvbLFBreC3cc9oJFxq4u7MeOiz
+         atOA==
+X-Gm-Message-State: APuU4Z+ZYymxoT/iypBukDXSQ7Ox3Ez/4/Yab/V2eK++90kYQCHtRgYJ
+	waKWW1cOsAXDDjxOJI24Kyqalj7GTHFzuNY+qMJX3g7VdUWxnI4/d0At2ktbYw==
+X-Gm-Gg: AYBFou12OT44LW6+6A9iGTKsznqUsUdotdgl0xn7S739RhTwLs3LPXfp38EUfStn71W
+	dcECtgUm63iA7wWKy2zIL1QMliYle2z7b5c9FeuT5Aj4rvIcUyDNqD8bmcVU6WpJTUDIwTKogfi
+	v7BDD+7Wnd/S+g8++lfoiIjia/Zo2w3QmKOT7EikOdrKwn2GX13Zyx4pgbJ1tXZSvaDOgnbmtWX
+	gAoog8ppr3ZZ2TyuwHa+WpCw0S4X976P7j11nk5hhcfIxwkWaSAj9Ks5U5HfK8Q8v7SrN2rp7YL
+	2EogCsGmWThA1AtqLGjVf1wNtlHM4X5ZLc9J6MxWDPwGJE6bqvjLgjew7k86v4Mmos9GiKeimwb
+	03FYKBgRkqcGglOCukkOyEmEk9H7j9Q0gTDtvnb39cMEJkB3CkCXz+FRXoORQkWcpLeyboExwS9
+	fth36h3Ev6eBfDxovZzR3CCJRF1d0+Z3AnS/7zMpuXR9LU/BENJ33lAxO84EZuvn6RTKCpndEt5
+	Mm8GDg9L3WEfUqgECsjiIMsHLIUntNXjky0Gp+BLCpDm7GVoYY6KetzEStnjpaXxpRG8g2+oAjl
+	RexZHuZmryalFFCAuu2UT+PLTzH2nq5Y8HyO7NhCwsuJlQbGWLuT7IIRI0hmeAYt
+X-Received: by 2002:a05:6a00:368d:b0:8b0:5457:9477 with SMTP id d2e1a72fcca58-8c876739fb1mr497399b3a.0.1795113417788;
+        Thu, 19 Nov 2026 10:36:57 -0800 (PST)
 Return-Path: <ankur.tyagi85@gmail.com>
 Received: from NVAPF55DW0D-IPD.. ([147.161.217.9])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-8c872e4d7basm294518b3a.21.2026.11.19.10.36.53
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-8c872e4d7basm294518b3a.21.2026.11.19.10.36.55
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 19 Nov 2026 10:36:55 -0800 (PST)
+        Thu, 19 Nov 2026 10:36:57 -0800 (PST)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [blacksail][PATCH 23/64] hdf5: patch CVE-2026-120689
-Date: Fri, 20 Nov 2026 07:32:51 +1300
-Message-ID: <049b93d6ee8aeba8dae887339aa0d9741496b0d0.1795112941.git.ankur.tyagi85@gmail.com>
+Subject: [blacksail][PATCH 24/64] hdf5: patch CVE-2026-120754 and CVE-2026-120755
+Date: Fri, 20 Nov 2026 07:32:52 +1300
+Message-ID: <b28bcfc482d74b625188cef097238245b8f7a973.1795112941.git.ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1795112941.git.ankur.tyagi85@gmail.com>
 References: <cover.1795112941.git.ankur.tyagi85@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Thu, 19 Nov 2026 18:37:05 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132713
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Thu, 19 Nov 2026 18:37:06 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132714
 Content-Type: text/plain; charset="utf-8"
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
 Details:
-https://nvd.nist.gov/vuln/detail/cve-2026-120689
+https://nvd.nist.gov/vuln/detail/cve-2026-120754
+https://nvd.nist.gov/vuln/detail/cve-2026-120755
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../hdf5/files/CVE-2026-120689.patch          | 60 +++++++++++++++++++
- meta-oe/recipes-support/hdf5/hdf5_2.0.0.bb    |  1 +
- 2 files changed, 61 insertions(+)
- create mode 100644 meta-oe/recipes-support/hdf5/files/CVE-2026-120689.patch
+ .../CVE-2026-120754-CVE-2026-120755.patch     | 172 ++++++++++++++++++
+ meta-oe/recipes-support/hdf5/hdf5_2.0.0.bb    |   1 +
+ 2 files changed, 173 insertions(+)
+ create mode 100644 meta-oe/recipes-support/hdf5/files/CVE-2026-120754-CVE-2026-120755.patch
 
-diff --git a/meta-oe/recipes-support/hdf5/files/CVE-2026-120689.patch b/meta-oe/recipes-support/hdf5/files/CVE-2026-120689.patch
+diff --git a/meta-oe/recipes-support/hdf5/files/CVE-2026-120754-CVE-2026-120755.patch b/meta-oe/recipes-support/hdf5/files/CVE-2026-120754-CVE-2026-120755.patch
 new file mode 100644
-index 0000000000..dd9e9374ac
+index 0000000000..3f0a8d69d5
 --- /dev/null
-+++ b/meta-oe/recipes-support/hdf5/files/CVE-2026-120689.patch
-@@ -0,0 +1,60 @@
-+From 0472315404dc03d0e89eec4513eb80930f9b176e Mon Sep 17 00:00:00 2001
-+From: PGZXB <420254146@qq.com>
-+Date: Fri, 9 Oct 2026 02:52:55 +0800
-+Subject: [PATCH] Fix StackOverflow when calling `H5Gget_info` (#6685)
++++ b/meta-oe/recipes-support/hdf5/files/CVE-2026-120754-CVE-2026-120755.patch
+@@ -0,0 +1,172 @@
++From 78672660618de8cca7c804f465886af02a89e79b Mon Sep 17 00:00:00 2001
++From: Matt L <124107509+mattjala@users.noreply.github.com>
++Date: Wed, 21 Oct 2026 13:52:39 -0500
++Subject: [PATCH] Bound filter header reads to the stored chunk length (#6585)
 +
-+Verify B-tree node level when an expected level value is provided
++* bound scaleoffset and fletcher32 reads to the chunk buffer
 +
-+(cherry picked from commit 5933130b610c7bd6e66fe93c2798b97e3f3188c8)
++* Bound filter header reads to the stored chunk length
 +
-+CVE: CVE-2026-120689
-+Upstream-Status: Backport [https://github.com/HDFGroup/hdf5/commit/5933130b610c7bd6e66fe93c2798b97e3f3188c8]
++This PR is an expansion of #6579.
++
++The scaleoffset bounds checks measured against *buf_size, the size of the
++chunk buffer, rather than nbytes, the number of bytes the pipeline read from
++the file. H5D__chunk_lock() sizes a filtered chunk buffer to MAX(stored size,
++unfiltered size) so filters have room to expand into, and fills only the
++stored bytes, so the buffer is routinely longer than the data in it. A
++truncated chunk therefore passed the header check and decompressed out of the
++uninitialized remainder of the allocation, returning unrelated heap contents
++as dataset data. Because the reads stay inside the allocation, the address
++sanitizer does not see them.
++
++This PR switches every read-side check in H5Z__filter_scaleoffset()
++to bound against nbytes and pass the stored length to
++H5Z__scaleoffset_decompress().
++
++Similar short-chunk checks are added to szip and fletcher32.
++
++The direct chunk test has been extended to cover a chunk whose unfiltered size is
++larger than the bytes stored for it, and to cover szip.
++
++* Correct potential invalid pointer usage
++
++* update CHANGELOG
++
++* Update CHANGELOG comment
++
++* Guard scaleoffset output size against multiplication overflow
++
++---------
++
++Co-authored-by: Nayyar <nayyar@bugqore.com>
++Co-authored-by: Larry Knox <lrknox@hdfgroup.org>
++
++CVE: CVE-2026-120754 CVE-2026-120755
++Upstream-Status: Backport [https://github.com/HDFGroup/hdf5/commit/cdb13c4de9c7edbbae180f384e2e610a3b3cf185]
++
++Dropped changes to the test and CHANGELOG file.
 +
 +Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 +---
-+ release_docs/CHANGELOG.md |  6 ++++++
-+ src/H5B.c                 | 14 ++++++++++++++
-+ 2 files changed, 20 insertions(+)
++ src/H5Zfletcher32.c  | 13 +++++++------
++ src/H5Zscaleoffset.c | 15 +++++++++++----
++ src/H5Zszip.c        | 18 ++++++++++++++----
++ 3 files changed, 32 insertions(+), 14 deletions(-)
 +
-+diff --git a/release_docs/CHANGELOG.md b/release_docs/CHANGELOG.md
-+index c181f174bbb..b5c99cd4b16 100644
-+--- a/release_docs/CHANGELOG.md
-++++ b/release_docs/CHANGELOG.md
-+@@ -778,6 +778,12 @@ Added Fortran wrapper `h5fdsubfiling_get_file_mapping_f()` for the subfiling fil
++diff --git a/src/H5Zfletcher32.c b/src/H5Zfletcher32.c
++index b89724ad0a3..5ef3b04cbcf 100644
++--- a/src/H5Zfletcher32.c
+++++ b/src/H5Zfletcher32.c
++@@ -62,13 +62,14 @@ H5Z__filter_fletcher32(unsigned flags, size_t H5_ATTR_UNUSED cd_nelmts,
++     assert(sizeof(uint32_t) >= 4);
 + 
-+    A malformed HDF5 file could have an attribute with a recorded name length of zero.This would lead to an overflow and an invalid memory access. An integrity check has been added to detect this case and safely stop file decoding.
++     if (flags & H5Z_FLAG_REVERSE) { /* Read */
++-        /* A Fletcher32-filtered buffer must contain at least the trailing
++-         * checksum.  Reject anything smaller to avoid a size_t underflow
++-         * when computing the data length.
+++        /* The checksum is stored at the end of the chunk, so anything shorter
+++         * than the checksum itself makes the length arithmetic below wrap.  A
+++         * chunk of exactly FLETCHER_LEN bytes holds no data and would return a
+++         * filtered size of zero, which the pipeline reports as a filter failure,
+++         * so reject it here where the reason can be stated.
++          */
++-        if (nbytes < FLETCHER_LEN)
++-            HGOTO_ERROR(H5E_STORAGE, H5E_OVERFLOW, 0,
++-                        "fletcher32 filter input buffer too small to contain checksum");
+++        if (nbytes <= FLETCHER_LEN)
+++            HGOTO_ERROR(H5E_ARGS, H5E_BADVALUE, 0, "buffer too short");
 + 
-++### Fixed a stack overflow when iterating a corrupted B-tree
-++
-++   `H5B__iterate_helper()` now verifies that a B-tree node it has just protected has the level the traversal expects, when the expected level is known. The equivalent check in `H5B__cache_deserialize()` only runs when a node is first loaded into the metadata cache, so a corrupted B-tree whose child pointer revisits a node that is already cached (for example, a node that points to itself) could bypass that check and recurse without bound until the stack was exhausted. Such a file is now rejected with an error instead of crashing. This was observed through `H5Gget_info()`.
-++
-++   Fixes GitHub issue #6403
-++
-+ ## Java Library
++         /* Do checksum if it's enabled for read; otherwise skip it
++          * to save performance. */
++diff --git a/src/H5Zscaleoffset.c b/src/H5Zscaleoffset.c
++index d39b4f40403..d506e5203a0 100644
++--- a/src/H5Zscaleoffset.c
+++++ b/src/H5Zscaleoffset.c
++@@ -1205,10 +1205,18 @@ H5Z__filter_scaleoffset(unsigned flags, size_t cd_nelmts, const unsigned cd_valu
++         unsigned long long minval_mask  = 0;
++         unsigned           minval_size  = 0;
 + 
-+ ### Renamed the Callbacks.java file to H5Callbacks.java
-+diff --git a/src/H5B.c b/src/H5B.c
-+index c9571708b73..4c6b1a55480 100644
-+--- a/src/H5B.c
-++++ b/src/H5B.c
-+@@ -1140,6 +1140,20 @@ H5B__iterate_helper(H5F_t *f, const H5B_class_t *type, haddr_t addr, int exp_lev
-+     if (NULL == (bt = (H5B_t *)H5AC_protect(f, H5AC_BT, addr, &cache_udata, H5AC__READ_ONLY_FLAG)))
-+         HGOTO_ERROR(H5E_BTREE, H5E_CANTPROTECT, H5_ITER_ERROR, "unable to load B-tree node");
++-        minbits = 0;
++-        if (H5_IS_BUFFER_OVERFLOW((unsigned char *)*buf, 5, (unsigned char *)*buf + *buf_size - 1))
+++        /* Bound every read below by nbytes rather than *buf_size.  The caller may
+++         * provide a buffer larger than the data it holds, so restrict the read
+++         * to the valid nbytes.
+++         */
+++        /* The minbits and minval-size fields are the first five bytes of the
+++         * stream, so validate that length before deriving an end-of-buffer
+++         * pointer from nbytes
+++         */
+++        if (nbytes < 5)
++             HGOTO_ERROR(H5E_ARGS, H5E_BADVALUE, 0, "buffer too short");
 + 
-++    /* Check for a corrupted B-tree node.  If the caller has told us what
-++     * level to expect, verify that the node we just protected actually has
-++     * that level.  This check must be performed here rather than relying
-++     * solely on the equivalent check in H5B__cache_deserialize, because
-++     * that deserialize callback only runs when a node is first loaded into
-++     * the metadata cache.  A corrupted B-tree whose child pointer revisits
-++     * a node that is already cached (e.g. a node that points to itself)
-++     * bypasses the deserialize callback entirely, so without this check the
-++     * recursion below would never terminate and would overflow the stack.
-++     */
-++    if (exp_level != H5B_UNKNOWN_NODELEVEL && bt->level != (unsigned)exp_level)
-++        HGOTO_ERROR(H5E_BTREE, H5E_BADVALUE, H5_ITER_ERROR,
-++                    "B-tree node level is not as expected, possibly corrupted");
+++        minbits = 0;
++         for (i = 0; i < 4; i++) {
++             minbits_mask = ((unsigned char *)*buf)[i];
++             minbits_mask <<= i * 8;
++@@ -1224,8 +1232,7 @@ H5Z__filter_scaleoffset(unsigned flags, size_t cd_nelmts, const unsigned cd_valu
++         minval_size = sizeof(unsigned long long) <= ((unsigned char *)*buf)[4] ? sizeof(unsigned long long)
++                                                                                : ((unsigned char *)*buf)[4];
++         minval      = 0;
++-        if (H5_IS_BUFFER_OVERFLOW((unsigned char *)*buf, 5 + minval_size,
++-                                  (unsigned char *)*buf + *buf_size - 1))
+++        if (H5_IS_BUFFER_OVERFLOW((unsigned char *)*buf, 5 + minval_size, (unsigned char *)*buf + nbytes - 1))
++             HGOTO_ERROR(H5E_ARGS, H5E_BADVALUE, 0, "buffer too short");
++         for (i = 0; i < minval_size; i++) {
++             minval_mask = ((unsigned char *)*buf)[5 + i];
++diff --git a/src/H5Zszip.c b/src/H5Zszip.c
++index 9b37035374f..dd6c3619873 100644
++--- a/src/H5Zszip.c
+++++ b/src/H5Zszip.c
++@@ -28,6 +28,9 @@
++ #include "szlib.h"
++ #endif
++ 
+++/* Size of the uncompressed-length header stored in front of the szip stream */
+++#define SZIP_HEADER_LEN 4
 ++
-+     /* Iterate over node's children */
-+     for (u = 0; u < bt->nchildren && ret_value == H5_ITER_CONT; u++) {
-+         if (bt->level > 0)
++ /* Local function prototypes */
++ static htri_t H5Z__can_apply_szip(hid_t dcpl_id, hid_t type_id, hid_t space_id);
++ static herr_t H5Z__set_local_szip(hid_t dcpl_id, hid_t type_id, hid_t space_id);
++@@ -284,6 +287,13 @@ H5Z__filter_szip(unsigned flags, size_t cd_nelmts, const unsigned cd_values[], s
++         uint32_t stored_nalloc; /* Number of bytes the compressed block will expand into */
++         size_t   nalloc;        /* Number of bytes the compressed block will expand into */
++ 
+++        /* The uncompressed length is stored in front of the compressed stream, so
+++         * a chunk shorter than that header makes the length arithmetic below wrap.
+++         * A chunk of exactly SZIP_HEADER_LEN bytes holds no compressed data.
+++         */
+++        if (nbytes <= SZIP_HEADER_LEN)
+++            HGOTO_ERROR(H5E_ARGS, H5E_BADVALUE, 0, "buffer too short");
+++
++         /* Get the size of the uncompressed buffer */
++         newbuf = (unsigned char *)(*buf);
++         UINT32DECODE(newbuf, stored_nalloc);
++@@ -295,7 +305,7 @@ H5Z__filter_szip(unsigned flags, size_t cd_nelmts, const unsigned cd_values[], s
++ 
++         /* Decompress the buffer */
++         size_out = nalloc;
++-        if (SZ_BufftoBuffDecompress(outbuf, &size_out, newbuf, nbytes - 4, &sz_param) != SZ_OK)
+++        if (SZ_BufftoBuffDecompress(outbuf, &size_out, newbuf, nbytes - SZIP_HEADER_LEN, &sz_param) != SZ_OK)
++             HGOTO_ERROR(H5E_RESOURCE, H5E_NOSPACE, 0, "szip_filter: decompression failed");
++         assert(size_out == nalloc);
++ 
++@@ -313,7 +323,7 @@ H5Z__filter_szip(unsigned flags, size_t cd_nelmts, const unsigned cd_values[], s
++         unsigned char *dst = NULL; /* Temporary pointer to new output buffer */
++ 
++         /* Allocate space for the compressed buffer & header (assume data won't get bigger) */
++-        if (NULL == (dst = outbuf = (unsigned char *)H5MM_malloc(nbytes + 4)))
+++        if (NULL == (dst = outbuf = (unsigned char *)H5MM_malloc(nbytes + SZIP_HEADER_LEN)))
++             HGOTO_ERROR(H5E_RESOURCE, H5E_NOSPACE, 0, "unable to allocate szip destination buffer");
++ 
++         /* Encode the uncompressed length */
++@@ -332,8 +342,8 @@ H5Z__filter_szip(unsigned flags, size_t cd_nelmts, const unsigned cd_values[], s
++         /* Set return values */
++         *buf      = outbuf;
++         outbuf    = NULL;
++-        *buf_size = nbytes + 4;
++-        ret_value = size_out + 4;
+++        *buf_size = nbytes + SZIP_HEADER_LEN;
+++        ret_value = size_out + SZIP_HEADER_LEN;
++     }
++ 
++ done:
 diff --git a/meta-oe/recipes-support/hdf5/hdf5_2.0.0.bb b/meta-oe/recipes-support/hdf5/hdf5_2.0.0.bb
-index 9d300b210a..57a62ff9d0 100644
+index 57a62ff9d0..2d5d134e01 100644
 --- a/meta-oe/recipes-support/hdf5/hdf5_2.0.0.bb
 +++ b/meta-oe/recipes-support/hdf5/hdf5_2.0.0.bb
-@@ -24,6 +24,7 @@ SRC_URI = "https://support.hdfgroup.org/releases/hdf5/v2_0/v2_0_0/downloads/${BP
-            file://CVE-2026-19025.patch \
+@@ -25,6 +25,7 @@ SRC_URI = "https://support.hdfgroup.org/releases/hdf5/v2_0/v2_0_0/downloads/${BP
             file://CVE-2026-19026-CVE-2026-19027-CVE-2026-19028.patch \
             file://CVE-2026-19023-CVE-2026-19024.patch \
-+           file://CVE-2026-120689.patch \
+            file://CVE-2026-120689.patch \
++           file://CVE-2026-120754-CVE-2026-120755.patch \
             "
  SRC_URI[sha256sum] = "f4c2edc5668fb846627182708dbe1e16c60c467e63177a75b0b9f12c19d7efed"
  
