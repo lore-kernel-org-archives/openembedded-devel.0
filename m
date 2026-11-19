@@ -1,112 +1,91 @@
-Received: from mail-ej1-f41.google.com (mail-ej1-f41.google.com [209.85.218.41])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.11186.1795082052158658607
+Received: from mailout04.t-online.de (mailout04.t-online.de [194.25.134.18])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.11754.1795083950913399901
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 19 Nov 2026 01:54:12 -0800
+ Thu, 19 Nov 2026 02:25:51 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@linaro.org header.s=google header.b=cwZBUvss;
- spf=pass (domain: linaro.org, ip: 209.85.218.41, mailfrom: andre.draszik@linaro.org)
-Received: by mail-ej1-f41.google.com with SMTP id a640c23a62f3a-c4395d31228so316421666b.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 19 Nov 2026 01:54:11 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1795082050; x=1795686850; darn=lists.openembedded.org;
-        h=content-transfer-encoding:content-type:mime-version:message-id:date
-         :subject:to:from:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=Zp+w3D0ENV0hV9zvGTGcg+NtazsRM/z7KRl9wC5cdXQ=;
-        b=cwZBUvssdHNzZkDuwxHYF8ikCSYbRdD/JRlHUs+ZY/xY62z4pWYZsAQhmmlb+3NHPR
-         0xRwomCaUzG4ohSn/MP0/aiYVCWENPLcRI1CEMgUYqJBpSnHbO6O6bwYtwYSDH62Fl9F
-         mxi5PNn6kgs5s8G4yrHD5OOdpogj3KEQ0xV6Kb0kqo5vk0fbofrDalaDSTMWC+v9CM8Z
-         z8aK6SXGbUdCQc/N/2QygnEWJ4iCLso5Ca0XbvOlf9VCTF+4YWllqSS8yAw1mGofs2aR
-         DeRpz8JQ74EBHyM7YHE2mR0lqDFvKzijvTgP73ASBtr3TseKPC2O9+BO/MbJCDqsTYl4
-         otbA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795082050; x=1795686850;
-        h=content-transfer-encoding:content-type:mime-version:message-id:date
-         :subject:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=Zp+w3D0ENV0hV9zvGTGcg+NtazsRM/z7KRl9wC5cdXQ=;
-        b=cfLsbA5+p22mWKCnPg/mYv86D3zRHF/0/OOFFmZUPrQzCTJvFYJpZ4hNK5Sjpbr/rh
-         K9dG4cvuMq1jvAa4FgYth1lH41uv0dd7FDNlJ0X6fMQqmlmp4ZVS0o5PwFBfCYmDb9ip
-         oXS255n0I7cwHVgZrvwq5Kd+HJjsEVPeYZeYPDdzYXexsnUhchIRzb47TYJlrvyki5H/
-         Gzml9x/F5BhGx95LwSg0uItpAnw63K+A+jMMyJJA5P2EDyFfJB8qWbudpct6ijCtKhbH
-         Du4cp4mZFzM+ztFd1pbjxPVvqdMM6ppfvROzWfq8NDeIHeerfGVkiN0+Eqt7UBpy3n1V
-         mxUw==
-X-Gm-Message-State: APuU4Z8IgGsXSydADO3xNCvhfqIPDygKW7/dwYdafdmxPiCTRMT2j8RK
-	X/j4aHYGmUefVIepDkewLM5ckpBZZRtZn9seUlErGcdPmMlDjIgumOkH9oPx4qvHUqXMZAkQNQ3
-	UcG1sVEoBgQ==
-X-Gm-Gg: AYBFou2edcRNmRZqO5SYLs9mFPPpWU+jR5JDhHTwVZBf+DQJQNXwCsX+BXxhyVEzfm9
-	XNQ6PPzXEG7iLjY9SDbgGVwCkiGGDxjFXJd78OpvoMMwGW8GUekSBsMSirWY2eyvHD2lCb4r9ug
-	9JpY5VrfQ84jtU61Gg89LDA+j/rSZ+Du7NuFS6wePFBLDwaIaGy9D3JK5VTYcVc3gqGl3Q6mWFz
-	EluWUSLpc0zfVGAhvHB8GSw1Qxudm5ZyK17q6quf4YXuYd4InxLqfYWlpzDmmMVYywlGCza20oo
-	5JOkGFQ297dnD7J3kaNAwh5Fln72nvp2gsAtn+ORA5tKlXfAs1hSuuXZUAb9w8Ky0fOr9y3BHY1
-	wWs6e5Go0s43qyX4KKUGl3dTi+pTZjGevOZRMAtc8aUPAGRHSJFvq841MzABrplqdq5AtWOtcvw
-	1egnGQqo5KXrfY64F2FcuM90IVw9FPT6Cqvg5T2sKsoC44WL6btZIu7GjPqEZIoeh5od5Nr/H0P
-	UwW7GBd7c1opdzpSpNEu5+OSOO8EUiV0Nl0ItVsl7B0HC/Srx8z1hueRvvV2b67JOvmpCGsdRYo
-	wWMgG1f3enlU+nKdUJPDRi6cszUFXXtZixuObq5UjRxjqKCrmN+9/gukS5iomR+noSl894WcUs5
-	McsGo/Jh63Tt/C7hK2TMSr6U=
-X-Received: by 2002:a17:907:ea5:b0:c50:5e10:71aa with SMTP id a640c23a62f3a-c510e290031mr543044266b.14.1795082050024;
-        Thu, 19 Nov 2026 01:54:10 -0800 (PST)
-Return-Path: <andre.draszik@linaro.org>
-Received: from puffmais2.c.googlers.com.com (226.124.90.34.bc.googleusercontent.com. [34.90.124.226])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c5123419838sm92276966b.34.2026.11.19.01.54.09
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 19 Nov 2026 01:54:09 -0800 (PST)
-From: =?UTF-8?q?Andr=C3=A9=20Draszik?= <andre.draszik@linaro.org>
+ dkim=fail reason="dkim: body hash did not verify" header.i=f_l_k@t-online.de header.s=20260216 header.b=k1azfZ8S;
+ spf=pass (domain: t-online.de, ip: 194.25.134.18, mailfrom: f_l_k@t-online.de)
+Received: from fwd78.aul.t-online.de (fwd78.aul.t-online.de [10.223.144.104])
+	by mailout04.t-online.de (Postfix) with SMTP id 7EB4D42A
+	for <openembedded-devel@lists.openembedded.org>; Thu, 19 Nov 2026 11:25:48 +0100 (CET)
+Received: from localhost.localdomain ([79.219.238.229]) by fwd78.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1xTzKt-41P5Cy0; Thu, 19 Nov 2026 11:25:48 +0100
+From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
-Subject: [oe][meta-oe][PATCH] android-tools-conf: start adbd once a UDC exists
-Date: Thu, 19 Nov 2026 09:54:07 +0000
-Message-ID: <20261119095407.1118604-1-andre.draszik@linaro.org>
-X-Mailer: git-send-email 2.56.1.708.g77570a6a1d-goog
+Subject: [meta-oe][PATCH 1/2] libtreesitter: add recipe for 0.27.2
+Date: Thu, 19 Nov 2026 11:25:41 +0100
+Message-ID: <20261119102542.104648-1-f_l_k@t-online.de>
+X-Mailer: git-send-email 2.56.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-TOI-EXPURGATEID: 150726::1795083948-95FF892B-EB0F97FC/0/0 CLEAN NORMAL
+X-TOI-MSGID: 98148d32-2cb3-49b2-a6ba-f94b825088ca
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=t-online.de;
+	s=20260216; t=1795083948; i=f_l_k@t-online.de;
+	bh=Xi2A46CE/NX9YYFxw5TjUvUlXfBwZC8vefUVQkiC4Ds=;
+	h=From:To:Subject:Date;
+	b=k1azfZ8SV9x71rD+T/XQe1lAUAjX7WLL4D9RaVFNlm6HT9Nxafl82k4hmY9kZShEL
+	 1TM397Ki/n6Htu4IzJ5s27+e/AuuhwnfRHuC1latcSEBOhoDchfV+CFLbPy1HfNQcv
+	 Di5c6v23tF8oxqVj4NMuEkv4mKsSR7kcdIbfQ3GYcS3Ig4UxPly+QvBKj60rBTgkYS
+	 SUsXlIakLvXcfxTUELJ0FSDcYmFz+bWPU4HyT3ROL4+pU7/Mxnw9/985M/lrKgUN8g
+	 xVbIYwhqi33HWlxrsp/H79c0xIWnTnF81vRWwIGslHR6oDS05tcGvW1tX8IXx59VsY
+	 SQvAaniV4Yp+w==
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Thu, 19 Nov 2026 09:54:21 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132671
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Thu, 19 Nov 2026 10:25:55 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132672
 Content-Type: text/plain; charset="utf-8"
 
-android-tools-adbd.service is wanted by basic.target. That dates back to
-the original recipe, which configured the gadget through the Android
-specific /sys/class/android_usb interface. With configfs,
-android-gadget-start binds the gadget once, to the first UDC listed in
-/sys/class/udc. It used to wait a fixed 3s (later 10s) before doing so,
-but since adbd signals readiness through sd_notify, the drop-in sets
-ANDROID_GADGET_UDC_DELAY=0, and the gadget is bound right after adbd has
-started. Nothing orders that after the UDC has been registered: the UDC
-driver or its PHY driver can be a module, which udev loads while it
-processes the coldplug events that systemd-udev-trigger only queues. If
-the UDC appears later, the gadget stays unbound and adb doesn't work.
+Tree-sitter is an incremental parsing library used by editors for
+syntax highlighting and code navigation: neovim requires it, and GNU
+Emacs uses it for its tree-sitter major modes since version 29.
+Language grammars are built as separate shared libraries against it.
 
-Make adbd wanted by usb-gadget.target instead, which systemd's udev
-rules start when a UDC is registered. adbd still starts after
-basic.target, through the default dependencies of services. The same
-override, applied from a BSP layer, made adb come up reliably on devices
-with the USB drivers built as modules.
+The recipe builds only the C runtime library, without the wasm
+feature; the tree-sitter CLI, which is written in Rust, is not needed.
 
-AI-Generated: Uses Claude Code
-Fixes: b94dcd325625 ("android-tools: upgrade 29.0.6.r14 -> 35.0.2")
-Signed-off-by: André Draszik <andre.draszik@linaro.org>
+Tested on intel-corei7-64 by building emacs with the new tree-sitter
+PACKAGECONFIG and neovim 0.12.5 against it; both parse C code with
+tree-sitter-c 0.24.1.
+
+AI-Generated: Uses Claude Code (Claude Opus 5.5)
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
- .../android-tools-conf/10-adbd-configfs.conf             | 9 +++++++++
- 1 file changed, 9 insertions(+)
+ .../tree-sitter/libtreesitter_0.27.2.bb       | 19 +++++++++++++++++++
+ 1 file changed, 19 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/tree-sitter/libtreesitter_0.=
+27.2.bb
 
-diff --git a/meta-oe/recipes-devtools/android-tools/android-tools-conf/10-adbd-configfs.conf b/meta-oe/recipes-devtools/android-tools/android-tools-conf/10-adbd-configfs.conf
-index 7971f319c3..b91b16ee11 100644
---- a/meta-oe/recipes-devtools/android-tools/android-tools-conf/10-adbd-configfs.conf
-+++ b/meta-oe/recipes-devtools/android-tools/android-tools-conf/10-adbd-configfs.conf
-@@ -5,3 +5,12 @@ Environment=ANDROID_GADGET_UDC_DELAY=0
- ExecStartPre=/usr/bin/android-gadget-setup
- ExecStartPost=/usr/bin/android-gadget-start
- ExecStopPost=/usr/bin/android-gadget-cleanup
+diff --git a/meta-oe/recipes-devtools/tree-sitter/libtreesitter_0.27.2.bb=
+ b/meta-oe/recipes-devtools/tree-sitter/libtreesitter_0.27.2.bb
+new file mode 100644
+index 0000000000..e1e9ab1dce
+--- /dev/null
++++ b/meta-oe/recipes-devtools/tree-sitter/libtreesitter_0.27.2.bb
+@@ -0,0 +1,19 @@
++SUMMARY =3D "Tree-sitter parsing library"
++DESCRIPTION =3D "Tree-sitter is an incremental parsing system for progra=
+mming tools. \
++This is the C runtime library libtree-sitter, which editors such as neov=
+im and \
++emacs use to load language grammars."
++HOMEPAGE =3D "https://tree-sitter.github.io/tree-sitter/"
++LICENSE =3D "MIT"
++LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Db83e3e9ab94483903b3bc21d9a1d4=
+1ed"
 +
-+[Install]
-+# android-gadget-start binds the gadget only once, to the first UDC that
-+# exists at that point. The UDC driver (or its PHY driver) can be a module
-+# that udev loads only after basic.target has been reached, so start adbd
-+# when a UDC appears: systemd's udev rules start usb-gadget.target when a
-+# UDC is registered.
-+WantedBy=
-+WantedBy=usb-gadget.target
--- 
-2.56.1.708.g77570a6a1d-goog
++SRC_URI =3D "git://github.com/tree-sitter/tree-sitter.git;protocol=3Dhtt=
+ps;branch=3Drelease-0.27;tag=3Dv${PV}"
++SRCREV =3D "3fb7be49145acfb07e33b61ed5689e2b6771b2e9"
++
++inherit cmake pkgconfig
++
++EXTRA_OECMAKE =3D " \
++    -DBUILD_SHARED_LIBS=3DON \
++    -DTREE_SITTER_FEATURE_WASM=3DOFF \
++"
++
++BBCLASSEXTEND =3D "native"
+--=20
+2.56.0
 
