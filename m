@@ -1,60 +1,62 @@
-Received: from mail-pf1-f180.google.com (mail-pf1-f180.google.com [209.85.210.180])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.1957.1795113491633560854
+Received: from mail-pf1-f175.google.com (mail-pf1-f175.google.com [209.85.210.175])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.1908.1795113495166776296
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 19 Nov 2026 10:38:11 -0800
+ Thu, 19 Nov 2026 10:38:15 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=sSveAVLh;
- spf=pass (domain: gmail.com, ip: 209.85.210.180, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pf1-f180.google.com with SMTP id d2e1a72fcca58-8a60f90a924so59383b3a.3
-        for <openembedded-devel@lists.openembedded.org>; Thu, 19 Nov 2026 10:38:11 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=OvkcAfYx;
+ spf=pass (domain: gmail.com, ip: 209.85.210.175, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pf1-f175.google.com with SMTP id d2e1a72fcca58-8c4cc85a315so108788b3a.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 19 Nov 2026 10:38:15 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795113491; x=1795718291; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1795113494; x=1795718294; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=Vd5SD3p0efXkTUYyLJO4uC1u5tQVNvKva8m39m31jKo=;
-        b=sSveAVLh5wW3X2EgJfGz55vMJrp0wn7YHthOf8NAkUYGOlzWBWib19ZREjfiK7kQH4
-         8tXQZOHxFPu+GFyHFHigKJa2FIoO/HfFRNeFh+da5GyxBigHhZ04c7OMNSTzKYBzURuH
-         KeCliPTvtXv/JTobYpRXZVamGtO/7tHOH/x76e0mmARlV/WXXYESPvn7BHiIhis9XfBB
-         tr7NumNrJknLSk8OJEGwFPT50AHV+7SE2jvahIeRu3xC67elDYI0vOHpFBPxB3H8PE3o
-         CeIMvAeSeDYnY4uJ9LYkqkIJPaFF9/dE11O14LXU8RsH+AdGh26c0B2eJ+PiI6HwZ+yX
-         JslA==
+        bh=2g0IjJLLnWPQDYoyIr4qJqM6t31zYYKQTRXLoEtMRhk=;
+        b=OvkcAfYx6jio/vBwjr8hTn7SwLpcqJamX2oPWoyj5kXpa23GjGEEBmDdxgG8uMP+nw
+         PNdHp+EGwEwFd6/8rCMaGkXL8izP3ZoJVwzN03X0slSVOx/dgy/DQeqfbJp1zAdRwDDL
+         yX3EF9F/pyHYvIegQrzodRuREaaTor9s4kwI0AYFFRC4i/dhL6pnyJNScaFHvu57ZC3F
+         Wf5ZZM4fooia3Oxdsf9inYG2DckhEqWEIAhAstsPME3ZPjxiQ2ikX8IQo9qQeLT7glZv
+         69sWOGEp+SjGf3ZSC5K1X6V0ptHsAbKbjxRDlE3UQE4qZ9TzddttPCM03KlalmQOKeHb
+         +3Zw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795113491; x=1795718291;
+        d=1e100.net; s=20260707; t=1795113494; x=1795718294;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=Vd5SD3p0efXkTUYyLJO4uC1u5tQVNvKva8m39m31jKo=;
-        b=Lhv6b6wMFosz+HsmDaUuTM8TayivxQdA3CPWlTNa5HGz9Y01bbrUMUbpukIjaEHeMI
-         f5I1jJA7JI4WZ7zaufhsndzzkX1VfC5lRtidA8ows0OgLQ7OoKnRkyf9tfmvh8yK8f77
-         VGavcWrjMMlh4Hmt4sK0Yv18895z28krQZ91pyHHXtV1TTeYAZXZ1bbf63n8BG+8lDvt
-         8qVv0O35qEckkv/k+2ZYpY6lOm5tF7J4VJzlvDPUl31erS3yeubRAkvj2MtOFUfFpCUo
-         pcM7+8+DCIfGJh0teZ/X24Ka26XAIDdtTGSXFUzSQOq0Kx2go4H/nvSwJgWUMEuqUtwL
-         kZlQ==
-X-Gm-Message-State: APuU4Z+DyADdNbcDOcZWQK2+OHgw8ijSVmq1jn4TTkmFGgKAj0tiNzhE
-	lXbiFT+NcBccS7S259TeEHTtR6KTb4vGw6mQcRGfE8HkAS989CvBZS43MlN71Q==
-X-Gm-Gg: AYBFou1QkoKoDnXa9aOJQZI2DHbBAnOcNhwNvvdGtXfeZ+SQ4noIZhbgG6pqKX9vhzx
-	oVb1+ecjSIyFXtz/bauT/DeC9f3MRuQ89+gxw2Lv0LxqAlTxA9/tYsi+/lWzNr6ns/vKqG2R528
-	2+Y2IR8TPQke9maBrBYr84VvPmti2YMB58hgMKHFstH6jqujJr+pjXZqeTKZ8x2LlC4/ogdjNye
-	E60XFhlkRRvcmAfjjpB+q8paGU5PSwnBmDHqyIsEiplQcl8d3vB2jNFrjFeIy0NojXNZTp0qqzG
-	Z7mPCV244VUYk4scJE8AVJoaT+PDJIeyuF3vcoUikqZ6N+WS92cfzGt0KVBXJAYNGqCZuDbJcMO
-	NTohc2YPLbpB3X+1DM3DxltV0XB+dYP3luJZY4XF01NlwVk2EIa/zXqnqdvRmgzlk43gZTsAuXf
-	sn+1gL/gi5JzEOfJBhjRCKOZ0chFlfLwXrmpKZiDmdgOQgG2MjQR2qoSQoAOGtu88LCB3Osu3Qx
-	lR12yAqUHi5igPYr8lQy0FaitBEOiP4fcozousJW7fKN4rQAYDEe/v0Q64HNbiPNnu5m2Vw8Usc
-	O0kmYQcAQAr3ACdIF95cz8TB2FW7IzXAaB1auJOCllhvoKvsY2MIsXhouJUjaA==
-X-Received: by 2002:a05:6a20:9148:b0:3d4:52bd:b89d with SMTP id adf61e73a8af0-4014ae820dcmr514861637.23.1795113490894;
-        Thu, 19 Nov 2026 10:38:10 -0800 (PST)
+        bh=2g0IjJLLnWPQDYoyIr4qJqM6t31zYYKQTRXLoEtMRhk=;
+        b=JHhTbA9i2OPWKgmolmk1OnNLngsyhRTxWf7csR5y8daXIcCt7Ra+T2H5BwA9Y6cLmR
+         FQV7Zbg/ez468/CVuSYl6QPi6RXCEqESRGBuuq1qGbj3tVglFq7fkXF0eMCqa6cl6xjU
+         oNAYD1RrF1riQ6x/tc0bs6OXnZ67KpyrB7W+TM6gp3gpYF1PmOTZMSE8sDu9Bz3uufFe
+         shfO+Nb5pA1/mZ4lJz/5stGO20k0kRcnxu8vsu9kHvYuuwijyieWZCUP9tGGjhWTPAnq
+         g3CYt3D6CMgNSyJd6CcUmuNYb7sGwCrBhNmqG1OGxT8OLUhFpvTft308DbDxJqg4j5jR
+         jPFg==
+X-Gm-Message-State: APuU4Z+Rjg3Sgk45Zr7F1UfYl7QDauzdA4H5XbDHCNElT6Nql5mEANxi
+	gLGLd6UR6R16AVqorUSc41Iewj77tRMRTzv3OuyldmaVF/OM1MzmvsCVcPvNkw==
+X-Gm-Gg: AYBFou0zLwrANPG0j069NlNT/YxAc8S/TPdPhzYnlQCjZ+zEGpfIVDZcryY4W8ZdFkV
+	iKGUwJ70vcHGCGViD9BtWD6pSju2HRfXcJCzpczmJxTPZ/c3gsSIdott1pniFlfgY/c3W2wsvbA
+	jB59PsLBzMeRVwjZmkNeikcbfxZ7OLO4algrBEWoq78UXirSLhq1rFtnN2Qas3Wvyc1U44PmB3I
+	wx/jaeyzFEa4V8j96Wbyvl/hn8Qt+JfPiLKu6M9pMKdFssMBGT9dj5ZFs5+ucjgpdFEvKrGqySa
+	oPVcX5AVoD1WjIPH7uI+rRsZRqLi6W2AQy1hMUj3wnmzeykUAEXGY6GzKCnECoxEvBWl8Iy+27l
+	Yp0NN3GkbucAAlbdArv9ckNpcWYB0SMBI4AuPg7EnNhWsS0bCLUYrkLxygK6PlPwAfcHINfRI5N
+	uL7Ija/Ks+vqfWrvi//rvL0KjNuAITuvju0lMN16icx0Q2hG5eaN26xIQH/R6nkHdc0x4dNadY2
+	m3x7lI4pHDYm8EZEwga5y719ZxbXGDJFPSH7znbPzEzM4ONWKRXuRvVurQzb70066hCElbGSbQH
+	u40hqeJBP0/AkQAemZ6eq4kyZuQfghbmiRFaVPhUAtZ0+JVNrtDnKyF+IV7DAA==
+X-Received: by 2002:aa7:8893:0:b0:89f:9da8:1b66 with SMTP id d2e1a72fcca58-8c87c389aedmr472233b3a.33.1795113494503;
+        Thu, 19 Nov 2026 10:38:14 -0800 (PST)
 Return-Path: <ankur.tyagi85@gmail.com>
 Received: from NVAPF55DW0D-IPD.. ([147.161.217.9])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-8c872e4d7basm294518b3a.21.2026.11.19.10.38.08
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-8c872e4d7basm294518b3a.21.2026.11.19.10.38.11
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 19 Nov 2026 10:38:10 -0800 (PST)
+        Thu, 19 Nov 2026 10:38:13 -0800 (PST)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [blacksail][PATCH 54/64] mpv: patch CVE-2026-123095
-Date: Fri, 20 Nov 2026 07:33:22 +1300
-Message-ID: <0eb3681e733ab8a11def8c52978698e77d259057.1795112941.git.ankur.tyagi85@gmail.com>
+Cc: Awais Belal <awais.belal@gmail.com>,
+	Armin Kuster <akuster808@gmail.com>,
+	Ankur Tyagi <ankur.tyagi85@gmail.com>
+Subject: [blacksail][PATCH 55/64] mongodb: fix build with python 3.12
+Date: Fri, 20 Nov 2026 07:33:23 +1300
+Message-ID: <b5382389cc9a22f49d766351567cd252cd4067a8.1795112941.git.ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1795112941.git.ankur.tyagi85@gmail.com>
 References: <cover.1795112941.git.ankur.tyagi85@gmail.com>
@@ -62,73 +64,104 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Thu, 19 Nov 2026 18:38:18 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132744
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132745
 Content-Type: text/plain; charset="utf-8"
 
-From: Ankur Tyagi <ankur.tyagi85@gmail.com>
+From: Awais Belal <awais.belal@gmail.com>
 
-Details:
-https://nvd.nist.gov/vuln/detail/cve-2026-123095
+The moduleconfig.py build script uses the 'imp' module which
+is deprecated in favor of 'importlib' in python 3.12. This fixes
+the build issue by replacing the affected portion of the code
+and the package now builds fine on hosts with python 3.12.
 
+Signed-off-by: Awais Belal <awais.belal@gmail.com>
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
+(cherry picked from commit edd1a1e284fdcb80cd48d411f235d47f23bc27ae)
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../mplayer/mpv/CVE-2026-123095.patch         | 37 +++++++++++++++++++
- .../recipes-multimedia/mplayer/mpv_0.41.0.bb  |  1 +
- 2 files changed, 38 insertions(+)
- create mode 100644 meta-oe/recipes-multimedia/mplayer/mpv/CVE-2026-123095.patch
+ ...econfig.py-python-3.12-compatibility.patch | 57 +++++++++++++++++++
+ .../recipes-dbs/mongodb/mongodb_git.bb        |  3 +-
+ 2 files changed, 58 insertions(+), 2 deletions(-)
+ create mode 100644 meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb/0001-moduleconfig.py-python-3.12-compatibility.patch
 
-diff --git a/meta-oe/recipes-multimedia/mplayer/mpv/CVE-2026-123095.patch b/meta-oe/recipes-multimedia/mplayer/mpv/CVE-2026-123095.patch
+diff --git a/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb/0001-moduleconfig.py-python-3.12-compatibility.patch b/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb/0001-moduleconfig.py-python-3.12-compatibility.patch
 new file mode 100644
-index 0000000000..1efa0fdee6
+index 0000000000..51926b9d2e
 --- /dev/null
-+++ b/meta-oe/recipes-multimedia/mplayer/mpv/CVE-2026-123095.patch
-@@ -0,0 +1,37 @@
-+From 2c6599aa7d16efd29ae49865757eb449d9306742 Mon Sep 17 00:00:00 2001
-+From: =?UTF-8?q?Kacper=20Michaj=C5=82ow?= <kasper93@gmail.com>
-+Date: Wed, 4 Nov 2026 20:28:57 +0100
-+Subject: [PATCH] ytdl_hook: reject playlist entry URLs with control characters
++++ b/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb/0001-moduleconfig.py-python-3.12-compatibility.patch
+@@ -0,0 +1,57 @@
++From 37580777bc5294d606584f3731d9f5f5425bb587 Mon Sep 17 00:00:00 2001
++From: Awais B <awais.b@rufilla.com>
++Date: Tue, 4 Mar 2025 11:27:10 +0000
++Subject: [PATCH] moduleconfig.py: python 3.12 compatibility
 +
-+The entries are joined into a memory:// M3U playlist, one URL per line.
-+A URL with a line break became several entries, and only the first line
-+went through url_is_safe(). The other lines were loaded with the origin
-+of the opened URL, so any protocol was allowed. Skip any URLs with
-+control characters.
++The imp module was deprecated in python 3.4 and is dropped
++with python 3.12. We now need to use importlib for the
++purpose of manipulating/loading modules.
 +
-+Fixes: e6e6b0dcc7
-+Fixes: GHSA-p99g-m25w-x8xv
-+(cherry picked from commit c3096515dcd26c14004f985538b5aa41db613856)
-+
-+CVE: CVE-2026-123095
-+Upstream-Status: Backport [https://github.com/mpv-player/mpv/commit/c3096515dcd26c14004f985538b5aa41db613856]
-+
-+Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
++Upstream-Status: Pending
++Signed-off-by: Awais B <awais.b@rufilla.com>
 +---
-+ player/lua/ytdl_hook.lua | 3 +++
-+ 1 file changed, 3 insertions(+)
++ buildscripts/moduleconfig.py | 21 ++++++++++++++-------
++ 1 file changed, 14 insertions(+), 7 deletions(-)
 +
-+diff --git a/player/lua/ytdl_hook.lua b/player/lua/ytdl_hook.lua
-+index 65ef859595..2b0edb193a 100644
-+--- a/player/lua/ytdl_hook.lua
-++++ b/player/lua/ytdl_hook.lua
-+@@ -1111,6 +1111,9 @@ local function run_ytdl_hook(url)
-+                 -- links without protocol as returned by --flat-playlist
-+                 if not site then
-+                     msg.error("Playlist entry does not have unique URL, can't add it.")
-++                elseif site:find("%c") then
-++                    -- a line break would add entries to the playlist
-++                    msg.error("Playlist entry URL contains control characters, can't add it.")
-+                 elseif not site:find("://") then
-+                     -- youtube extractor provides only IDs,
-+                     -- others come prefixed with the extractor name and ":"
-diff --git a/meta-oe/recipes-multimedia/mplayer/mpv_0.41.0.bb b/meta-oe/recipes-multimedia/mplayer/mpv_0.41.0.bb
-index f37ae4ac50..0c99e354e7 100644
---- a/meta-oe/recipes-multimedia/mplayer/mpv_0.41.0.bb
-+++ b/meta-oe/recipes-multimedia/mplayer/mpv_0.41.0.bb
-@@ -27,6 +27,7 @@ SRC_URI = " \
-     git://github.com/mpv-player/mpv;name=mpv;branch=release/${@oe.utils.trim_version('${PV}', 2)};protocol=https;tag=v${PV} \
-     file://0001-opengl-context-require-swap_buffers-param-for-FenceS.patch \
-     file://0002-hwdec_drmprime_overlay-make-the-framebuffer-the-whole-frame.patch \
-+    file://CVE-2026-123095.patch \
- "
++diff --git a/buildscripts/moduleconfig.py b/buildscripts/moduleconfig.py
++index b4d0bba0490..69dd91ab30d 100644
++--- a/buildscripts/moduleconfig.py
+++++ b/buildscripts/moduleconfig.py
++@@ -27,7 +27,8 @@ MongoDB SConscript files do.
++ __all__ = ('discover_modules', 'discover_module_directories', 'configure_modules',
++            'register_module_test')  # pylint: disable=undefined-all-variable
++ 
++-import imp
+++import importlib
+++import sys
++ import inspect
++ import os
++ 
++@@ -71,12 +72,18 @@ def discover_modules(module_root, allowed_modules):
++             print("adding module: %s" % (name))
++             fp = open(build_py, "r")
++             try:
++-                module = imp.load_module("module_" + name, fp, build_py,
++-                                         (".py", "r", imp.PY_SOURCE))
++-                if getattr(module, "name", None) is None:
++-                    module.name = name
++-                found_modules.append(module)
++-                found_module_names.append(name)
+++                module_name = "module_" + name
+++                module_spec = importlib.util.spec_from_file_location(module_name, build_py)
+++
+++                if module_spec is not None:
+++                    module = importlib.util.module_from_spec(module_spec)
+++                    sys.modules[module_name] = module
+++                    module_spec.loader.exec_module(module)
+++
+++                    if not hasattr(module, "name"):
+++                        module.name = name
+++                    found_modules.append(module)
+++                    found_module_names.append(name)
++             finally:
++                 fp.close()
++         except (FileNotFoundError, IOError):
++-- 
++2.34.1
++
+diff --git a/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb_git.bb b/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb_git.bb
+index 36bea146b4..8f28bc76c6 100644
+--- a/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb_git.bb
++++ b/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb_git.bb
+@@ -36,6 +36,7 @@ SRC_URI = "git://github.com/mongodb/mongo.git;branch=v4.4;protocol=https \
+            file://0001-apply-msvc-workaround-for-clang-16.patch \
+            file://0001-Fix-type-mismatch-on-32bit-arches.patch \
+            file://0001-Fix-build-on-32bit.patch \
++           file://0001-moduleconfig.py-python-3.12-compatibility.patch \
+            "
+ SRC_URI:append:libc-musl = "\
+            file://0001-Mark-one-of-strerror_r-implementation-glibc-specific.patch \
+@@ -140,5 +141,3 @@ SYSTEMD_SERVICE:${PN} = "mongod.service"
+ FILES:${PN} += "${nonarch_libdir}/tmpfiles.d"
  
- inherit meson pkgconfig mime-xdg
+ RDEPENDS:${PN} += "tzdata-core"
+-
+-SKIP_RECIPE[mongodb] ?= "Needs porting to python 3.12"
