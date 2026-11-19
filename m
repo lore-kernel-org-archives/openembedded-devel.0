@@ -1,240 +1,140 @@
-Received: from mail-pf1-f173.google.com (mail-pf1-f173.google.com [209.85.210.173])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.1915.1795113425449664849
+Received: from mail-pg1-f181.google.com (mail-pg1-f181.google.com [209.85.215.181])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.1917.1795113427737020031
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 19 Nov 2026 10:37:05 -0800
+ Thu, 19 Nov 2026 10:37:07 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=fiVS9QXN;
- spf=pass (domain: gmail.com, ip: 209.85.210.173, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pf1-f173.google.com with SMTP id d2e1a72fcca58-8a9f9473029so88556b3a.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 19 Nov 2026 10:37:05 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=RCoCAdh2;
+ spf=pass (domain: gmail.com, ip: 209.85.215.181, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pg1-f181.google.com with SMTP id 41be03b00d2f7-cdd9d0c9bbdso51884a12.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 19 Nov 2026 10:37:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795113425; x=1795718225; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1795113427; x=1795718227; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=2QiL+MkQyXfDlSf+K9zP7OAfqo4qnyxPlwgDV8DbqVc=;
-        b=fiVS9QXNxpkXEXuwUYYZ/4VBauN3nvI4ltTTKDDdwdOFPUpq5N/hkVR4kDX9Gx4DqZ
-         9FK8k4ktNIa3mgP/513eS2ExJyNaYZb2m9s5Nk7faMNLtMHxnajCNvAtt/BeASPxbHhM
-         VPEwShqsgjwmPwjNjxw3Re06G5twYi2tBmoF7atuHg7DW75H1sgCk4yS3cYGt4UWGLP3
-         0yVQg4c+hei9+Dtnr8sAmVUcgOASK4SozrvQ0xPGu37Vy0quVETrIxPhp4uiLXqsSM2o
-         PxJfrnCXTGsObTEXzd7pzRvOetzx1rEhSG3eNlDAv0AV5cs0jspBFxPk8aQqJP0BNIZx
-         pYtA==
+        bh=AzK/GcssTXrpUDQaCDfhx0bFanW0XUz8u95RSnWXkYE=;
+        b=RCoCAdh2+j8TPY5ETXFZuZJgjQnpPSZnyTxyRF7dbq7qE15zR7Jzbz3jURqfDhb7SJ
+         vtbLv3peZ7FSWQ+8OMFWSLDvqE/6bxNxNcU2Ofs9F8WnpdHkliKEBDDBoG6FLifzYWRw
+         27R1gttj1vqwwCNCVO5RAi5LAznVtbXXfaiarbmi6iNELpzMVZRfS7pPLxLa7oOokpF9
+         OBWCNhHHJGxhwc98ESdDo2uIdV7raWpAuiOYctcuCZBfvSHmC/Fo55qyuR1NnEC3Xskm
+         OAqR7Oz0Eq3B1yX8iPIMEx0GKpfrUgg2hYR5qhwQxWXDrHxp407jvxBNEAIugzAxedLn
+         6DiA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795113425; x=1795718225;
+        d=1e100.net; s=20260707; t=1795113427; x=1795718227;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=2QiL+MkQyXfDlSf+K9zP7OAfqo4qnyxPlwgDV8DbqVc=;
-        b=HwbT218BVoVbuv5lvA+Atmvpj/i8/maHQAcozAfFhw6ADLhbV1aYDZ+0lJv2xCFggj
-         uiUqSMF1pgmgo6O4t7Y1VQ/QSLN9d9Uq6GMNQtZhSUcoKB4tX1/vSKf7RnkqibIAvx09
-         tjzxbhDCwGM0TNBolxPBNUcru4bV55DdqMIyvTzo29OHJU9V82YpeRWm82umqS9FlPIe
-         e/ysj30lQ71SH+pkL8gs1AhyAQLG2Lb9blp65dVbFBX/FQWNC1JcV0zfLdncxX+Pb2fG
-         +n89k2orxfjcD6mNvEtJQlmuvYf2pW2b1Xx+WAfNNWOqTlsjBO8wasrecExVY8A/4g7p
-         VCGg==
-X-Gm-Message-State: APuU4Z+KeMJ8W4vpmdZlxq7GmlX4+q/SltBovMABCW0x00g2bg4chKXt
-	RsOTEfIlp6XqjA+MLHO4zNNjlT8qowN8+QUdPoN3lhTFGRa4IEl7349ngvsOJA==
-X-Gm-Gg: AYBFou2nQ5ed5Yi0m4yHnwb7ntYvW4upl+Ma2xPIX9c/S4uwe+EvYkpv29nqR3tr4V+
-	7qlHx2Za7uOFl8g1PkqpOL4+dinfr3SDIvU2GnfJ7sVEITCYyk+7LH4mWBduCMOGk8mjquco6g+
-	xBaGSIKAB46WF7+0PWzENrSKYjTX5T0c3QuGoo/6YJG6ZwdNEl3zDMmppyEVNgV03zs/9VHERo+
-	NXvN8IUzSL6fH8zlFVuAjISBNwIgORw8B8+RIdSns72K55nmvpt12UAabZsHCY/J10VfxOxwWah
-	wjqNYhVKnI9AbY2AT9fBzcu0SyHHoRb0gHbifIEYW6elI8ciozP8/Txr7A5gJjpvzU/zoYCO46N
-	G2b5zCFWjBovlHPaceiF4VumJLO12URfGAhOCUGG12bx1Ed7rfjou2DsLHnbZK9pcfD50QBDUqU
-	vqLVRqrUFMSPJ4+8R98iprAsBBti1LZ54FoI62wGu5dGYlDv0DEdix8IJdfzQ4ylK4hXog2po+V
-	nZ5SLsoH0q29MeQfV/WMfqdW0smcUFxmboLs3CHJYy2IDERsk6eQ1DIW4nWtJG7p4byEiKJ/LjP
-	phO+yayIl4p1cFuFQ4j7gOUNHmcqHh9yPAaaEDAWcgddpygx5xpfI4LVL8rA7g==
-X-Received: by 2002:a05:6a00:340a:b0:89e:848a:fc97 with SMTP id d2e1a72fcca58-8c87c95be2bmr475819b3a.35.1795113424712;
-        Thu, 19 Nov 2026 10:37:04 -0800 (PST)
+        bh=AzK/GcssTXrpUDQaCDfhx0bFanW0XUz8u95RSnWXkYE=;
+        b=UXvro0Dg6m4/9dI2dq6OEFRLgYiexVdd46bNz4Nnv3gMKP9ht7L4shp5kjlPQaGKjl
+         L9FC3rngumVhql2tprrDVT27p70BM1//4lK5qdgE342wXgnGmXlXAMOywTNKQ6Uya8bc
+         ODb7BD8cyY6lH/UDKMPU8XoeT68ekG9gOVzYbcARJ972KGszQu36yOH3sUh+FOrGKAw9
+         Lts/fsRvf1BcNtzLlQzZ0YTYldvuPz+TzusB2WVgg3eBrsnzr0UJtCyAY6bMi799uY/N
+         rTCD01UAN1KHauG/oTEAJPOhVPKqtXdtHjRX+3R4TGzjHr2lMAYIQOjVOgtjn2yt2yAc
+         WipA==
+X-Gm-Message-State: APuU4Z+kK2d9UZfFfVKzML1p17v5nRybzW24W5NOJhBW3GvyaHXaBT8M
+	LNvksjpEsABiql4BKCaUIkPvZS86N+2D7kD4GxYCYfVqH98eDGonKwEohBpGIA==
+X-Gm-Gg: AYBFou3XLJUq8Pb5zinFDICKffTcHGaS5fgKDsOT7yVW8c7eSTQj94StA2EDUbQVCVp
+	q/6fdCNsJ7E5lMcstFWugn+b2D7bDaVEP6K2kCdyc8kapRIPg7Ur3zVv78STl8a9zp3lfnWse9p
+	/qTg1fB/Wm0QWiRRHK5UEyKf85dCd3B7P8JSP+zI0CQ7Ck4NFrGQbX05qYSrbjEeyM8msk8H9Za
+	o49kfFy/jkEnf9VC5mRsshm84PRfQ4SD1YlPpmgFUB1HTm+Jbm6IoBqn1k+Bjd8sfO3frvr0sHp
+	GhexMfmVJaaDdD8CCQ8Ao68uRp85xA0XNzFPH5GDCQoRtWUwlUM2TGFx9iiSIs1RG5eu/3rHXD8
+	7DZjL6TyqEv9CuAEtQpWvbdAkNL0SXuX28mauiRiLBu6m1zNjZx/H29SsQZcgPYh0bxRzzb5An1
+	SjLHtPy2TiAtYj5bTRuz5E22zlI5aOKxVDFAjFO1xBqz/uGyykyVWtwIFOh8t8si40u19iKd/Fk
+	rjdBqZLr9js+h2pm95CS9qMgBTO1/q9I2D94hnuWz6wgphJOLWzaJEqvPlaLd/1fPAARr4y2Ux0
+	r+4tO4TXuUoo7yOpSldQn751gx+T3Ul6i1ZRcg5ZEbEVfJmRvWzxFSc+Sa6B7A==
+X-Received: by 2002:a05:6a20:c887:b0:3e2:86b6:9be8 with SMTP id adf61e73a8af0-4014d36082amr463924637.35.1795113427026;
+        Thu, 19 Nov 2026 10:37:07 -0800 (PST)
 Return-Path: <ankur.tyagi85@gmail.com>
 Received: from NVAPF55DW0D-IPD.. ([147.161.217.9])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-8c872e4d7basm294518b3a.21.2026.11.19.10.37.02
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-8c872e4d7basm294518b3a.21.2026.11.19.10.37.05
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 19 Nov 2026 10:37:04 -0800 (PST)
+        Thu, 19 Nov 2026 10:37:06 -0800 (PST)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [blacksail][PATCH 27/64] hdf5: patch CVE-2026-120758
-Date: Fri, 20 Nov 2026 07:32:55 +1300
-Message-ID: <ae59cd88e6262be94a4c2f0fbfa069666ca75d63.1795112941.git.ankur.tyagi85@gmail.com>
+Subject: [blacksail][PATCH 28/64] libgphoto2: patch CVE-2026-120451
+Date: Fri, 20 Nov 2026 07:32:56 +1300
+Message-ID: <8acab97a6259c675d4135245482acaf8be62efa2.1795112941.git.ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1795112941.git.ankur.tyagi85@gmail.com>
 References: <cover.1795112941.git.ankur.tyagi85@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Thu, 19 Nov 2026 18:37:06 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132717
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Thu, 19 Nov 2026 18:37:16 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132718
 Content-Type: text/plain; charset="utf-8"
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
 Details:
-https://nvd.nist.gov/vuln/detail/cve-2026-120758
+https://nvd.nist.gov/vuln/detail/cve-2026-120451
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../hdf5/files/CVE-2026-120758.patch          | 143 ++++++++++++++++++
- meta-oe/recipes-support/hdf5/hdf5_2.0.0.bb    |   1 +
- 2 files changed, 144 insertions(+)
- create mode 100644 meta-oe/recipes-support/hdf5/files/CVE-2026-120758.patch
+ .../gphoto2/libgphoto2/CVE-2026-120451.patch  | 43 +++++++++++++++++++
+ .../gphoto2/libgphoto2_2.5.34.bb              |  1 +
+ 2 files changed, 44 insertions(+)
+ create mode 100644 meta-oe/recipes-graphics/gphoto2/libgphoto2/CVE-2026-120451.patch
 
-diff --git a/meta-oe/recipes-support/hdf5/files/CVE-2026-120758.patch b/meta-oe/recipes-support/hdf5/files/CVE-2026-120758.patch
+diff --git a/meta-oe/recipes-graphics/gphoto2/libgphoto2/CVE-2026-120451.patch b/meta-oe/recipes-graphics/gphoto2/libgphoto2/CVE-2026-120451.patch
 new file mode 100644
-index 0000000000..a8fb5f72ff
+index 0000000000..7addb4d566
 --- /dev/null
-+++ b/meta-oe/recipes-support/hdf5/files/CVE-2026-120758.patch
-@@ -0,0 +1,143 @@
-+From 277a6bbfdb8e852b7bbd08ae002907fc559e0194 Mon Sep 17 00:00:00 2001
-+From: tbeu <tbeu@users.noreply.github.com>
-+Date: Sat, 3 Oct 2026 07:43:53 +0200
-+Subject: [PATCH] Fix NULL pointer dereferences in H5HL_protect and
-+ H5HL_unprotect (#6377)
++++ b/meta-oe/recipes-graphics/gphoto2/libgphoto2/CVE-2026-120451.patch
+@@ -0,0 +1,43 @@
++From 5924549b4750f0b17369f82e98959b779880400a Mon Sep 17 00:00:00 2001
++From: TheProtagonist07 <63047129+TheProtagonist07@users.noreply.github.com>
++Date: Wed, 28 Oct 2026 18:51:05 +0530
++Subject: [PATCH] jl2005c: reject an allocation table that does not fit the
++ buffers
 +
-+* Fix NULL pointer dereferences in H5HL_protect and H5HL_unprotect
++jl2005c_init() computes alloc_table_size from the entry count reported by
++the camera and then reads that many bytes into the 0x4020 byte info[] stack
++buffer and copies them into priv->table[0x4000]. For nb_entries >= 1022 both
++operations write past the end of their destination.
 +
-+When reading corrupted HDF5 files, H5HL_protect can encounter a heap
-+where prfx->heap is NULL or heap->dblk_image is NULL. Similarly,
-+H5HL_unprotect can encounter a heap where heap->prfx or heap->dblk has
-+been set to NULL by H5HL__prfx_dest during cache eviction of corrupted
-+entries. In both cases, the code proceeded to dereference NULL pointers,
-+causing a segfault (found by OSS-Fuzz via matio).
++Return GP_ERROR_CORRUPTED_DATA if the table would not fit.
 +
-+Replace the assert in H5HL_unprotect with proper NULL checks and
-+HGOTO_ERROR, and add equivalent guards in H5HL_protect, so corrupted
-+files are rejected gracefully instead of crashing.
++Addresses findings 1 and 2 of #1326.
 +
-+* Address review: drop speculative H5HL_protect NULL checks, add regression test + changelog
++(cherry picked from commit 6a3393dd996502457ab965432cf0b2035278825e)
 +
-+- Remove the NULL checks in H5HL_protect for prfx->heap and heap->dblk_image.
-+  prfx->heap is set in H5HL__prfx_new and only cleared in H5HL__prfx_dest (which
-+  frees the prefix in the same call), so the check is unreachable and could leak
-+  prfx via the done block. heap->dblk_image is NULL by design whenever the data
-+  block is not contiguous with the prefix, so that check was a false positive.
-+- Keep the H5HL_unprotect NULL checks for heap->prfx and heap->dblk, which are the
-+  actual fix for the reported crash (OSS-Fuzz 504827191).
-+- Add a regression test (corrupt_heap_unprotect) in test/lheap.c using the
-+  minimized fuzzer file heap_corrupt_prfx.h5, asserting the corrupted file fails
-+  gracefully instead of crashing in H5HL_unprotect.
-+- Document the fix in release_docs/CHANGELOG.md.
-+
-+* Improve lheap regression test for H5HL_unprotect NULL deref
-+
-+Replace the file-based traversal (which does not deterministically reach
-+the cache-eviction path that nulls heap->prfx) with a white-box check that
-+protects a local heap, simulates the corrupted/evicted condition by nulling
-+the heap's prfx/dblk pointers, and verifies H5HL_unprotect() returns an
-+error instead of dereferencing NULL. Keep a best-effort open/traverse of the
-+OSS-Fuzz minimized file (issue 504827191) as a smoke test.
-+
-+Verified: without the fix the test aborts (H5AC_unpin_entry(NULL)); with the
-+fix it passes.
-+
-+* Improve lheap regression test to consider review comments
-+
-+* Fix formatting
-+
-+* test: improve lheap regression test for reviewer comments
-+
-+- Use H5L_info2_t in visitor (matches H5L_iterate2_t signature)
-+- Use H5O_info2_t with H5Oget_info_by_name3
-+- Replicate matio's exact traversal: H5Literate2 + H5Gopen2/H5Dopen2 +
-+  H5Lvisit2 recursion, H5Aiterate2 attribute reads, skip #refs#/#subsystem#
-+- Keep white-box deterministic NULL-pointer guard (fuzzer file does not
-+  deterministically crash via public API alone; original crash required
-+  matio fuzzer's specific cache-pressure environment)
-+- Add CORRUPT_HEAP_TESTFILE define back for white-box test
-+
-+* Fix formatting
-+
-+* Reject a local heap unprotect when its pinned cache entry is gone
-+
-+H5HL_unprotect() now reports an error instead of dereferencing NULL when the
-+cache entry that H5HL_protect() pinned is no longer linked to the heap, and it
-+checks for that before decrementing the protect count so a rejected call leaves
-+the heap unchanged. The regression test as written couldn't fail, since its cleanup
-+label was after passed and every failure path still returned 0 (success).
-+It also only ever built single-cache-object heaps, and didn't reach the branch the crash
-+came from. It now grows a heap into a separate data block to cover both
-+branches and uses the standard error reporting.
-+
-+---------
-+
-+Co-authored-by: Matthew Larson <mlarson@hdfgroup.org>
-+Co-authored-by: Matt L <124107509+mattjala@users.noreply.github.com>
-+Co-authored-by: Larry Knox <lrknox@hdfgroup.org>
-+
-+CVE: CVE-2026-120758
-+Upstream-Status: Backport [https://github.com/HDFGroup/hdf5/commit/91fc37c3325264e67699408e3a190fe4f329bf85]
-+
-+Dropped changes to the test and CHANGELOG file.
-+
++CVE: CVE-2026-120451
++Upstream-Status: Backport [https://github.com/gphoto/libgphoto2/commit/6a3393dd996502457ab965432cf0b2035278825e]
 +Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 +---
-+ src/H5HL.c | 34 +++++++++++++++++++++-------------
-+ 1 file changed, 21 insertions(+), 13 deletions(-)
++ camlibs/jl2005c/jl2005c.c | 8 ++++++++
++ 1 file changed, 8 insertions(+)
 +
-+diff --git a/src/H5HL.c b/src/H5HL.c
-+index b55b3690617..838426406a9 100644
-+--- a/src/H5HL.c
-++++ b/src/H5HL.c
-+@@ -416,28 +416,36 @@ H5HL_unprotect(H5HL_t *heap)
-+     /* Check arguments */
-+     assert(heap);
-+ 
-+-    /* Decrement # of times heap is protected */
-+-    heap->prots--;
-+-
-+     /* Check for last unprotection of heap */
-+-    if (heap->prots == 0) {
-+-        /* Check for separate heap data block */
-++    if (heap->prots == 1) {
-++        void *pin_obj; /* Pointer to local heap object to unpin */
-++
-++        /* Get the object that H5HL_protect() pinned.  It is unlinked from the
-++         * heap when the cache destroys it, which a damaged file can provoke,
-++         * so check for it before the protect count is decremented.
-++         */
-+         if (heap->single_cache_obj) {
-+-            /* Mark local heap prefix as evictable again */
-+-            if (FAIL == H5AC_unpin_entry(heap->prfx))
-+-                HGOTO_ERROR(H5E_HEAP, H5E_CANTUNPIN, FAIL, "unable to unpin local heap data block");
-++            if (NULL == heap->prfx)
-++                HGOTO_ERROR(H5E_HEAP, H5E_CANTUNPIN, FAIL, "local heap prefix is not in the cache");
-++
-++            pin_obj = heap->prfx;
-+         }
-+         else {
-+-            /* Sanity check */
-+-            assert(heap->dblk);
-++            if (NULL == heap->dblk)
-++                HGOTO_ERROR(H5E_HEAP, H5E_CANTUNPIN, FAIL, "local heap data block is not in the cache");
-+ 
-+-            /* Mark local heap data block as evictable again */
-+             /* (data block still pins prefix) */
-+-            if (FAIL == H5AC_unpin_entry(heap->dblk))
-+-                HGOTO_ERROR(H5E_HEAP, H5E_CANTUNPIN, FAIL, "unable to unpin local heap data block");
-++            pin_obj = heap->dblk;
-+         }
-++
-++        /* Mark local heap object as evictable again */
-++        if (FAIL == H5AC_unpin_entry(pin_obj))
-++            HGOTO_ERROR(H5E_HEAP, H5E_CANTUNPIN, FAIL, "unable to unpin local heap object");
-+     }
-+ 
-++    /* Decrement # of times heap is protected */
-++    heap->prots--;
-++
-+ done:
-+     FUNC_LEAVE_NOAPI(ret_value)
-+ } /* end H5HL_unprotect() */
-diff --git a/meta-oe/recipes-support/hdf5/hdf5_2.0.0.bb b/meta-oe/recipes-support/hdf5/hdf5_2.0.0.bb
-index 3cfce91bff..7117c72f96 100644
---- a/meta-oe/recipes-support/hdf5/hdf5_2.0.0.bb
-+++ b/meta-oe/recipes-support/hdf5/hdf5_2.0.0.bb
-@@ -28,6 +28,7 @@ SRC_URI = "https://support.hdfgroup.org/releases/hdf5/v2_0/v2_0_0/downloads/${BP
-            file://CVE-2026-120754-CVE-2026-120755.patch \
-            file://CVE-2026-120756.patch \
-            file://CVE-2026-120757.patch \
-+           file://CVE-2026-120758.patch \
++diff --git a/camlibs/jl2005c/jl2005c.c b/camlibs/jl2005c/jl2005c.c
++index c447a2300..12c106acb 100644
++--- a/camlibs/jl2005c/jl2005c.c
+++++ b/camlibs/jl2005c/jl2005c.c
++@@ -144,6 +144,14 @@ restart:
++ 	alloc_table_size = priv->nb_entries * 0x10 + 0x30;
++ 	if (alloc_table_size%0x200)
++ 		alloc_table_size += 0x200 - (alloc_table_size%0x200);
+++	/* nb_entries comes from the camera. The table has to fit into the
+++	 * local info buffer as well as into priv->table. */
+++	if ((size_t)alloc_table_size > sizeof(info) ||
+++	    (size_t)alloc_table_size - 0x30 > sizeof(priv->table)) {
+++		GP_DEBUG("alloc_table_size 0x%x is too large for %d entries\n",
+++			 alloc_table_size, priv->nb_entries);
+++		return GP_ERROR_CORRUPTED_DATA;
+++	}
++ 	/* However, we have already just now downloaded 0x200 bytes, so
++ 	 * when downloading the rest of the table we correct for that and
++ 	 * just download whatever remains of the information block.
+diff --git a/meta-oe/recipes-graphics/gphoto2/libgphoto2_2.5.34.bb b/meta-oe/recipes-graphics/gphoto2/libgphoto2_2.5.34.bb
+index fca158fe11..488364b542 100644
+--- a/meta-oe/recipes-graphics/gphoto2/libgphoto2_2.5.34.bb
++++ b/meta-oe/recipes-graphics/gphoto2/libgphoto2_2.5.34.bb
+@@ -12,6 +12,7 @@ DEPENDS = "libtool jpeg virtual/libusb0 libexif zlib libxml2"
+ SRC_URI = "${SOURCEFORGE_MIRROR}/gphoto/${BP}.tar.xz;name=libgphoto2 \
+            file://40-libgphoto2.rules \
+            file://0001-configure-Filter-out-buildpaths-from-CC.patch \
++           file://CVE-2026-120451.patch \
             "
- SRC_URI[sha256sum] = "f4c2edc5668fb846627182708dbe1e16c60c467e63177a75b0b9f12c19d7efed"
+ SRC_URI[libgphoto2.sha256sum] = "51993f5d9bfb6b4e5925cbbe5883085791bff6f81bcacb8ffe1b783ce76d586a"
  
