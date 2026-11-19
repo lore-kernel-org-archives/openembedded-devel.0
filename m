@@ -1,179 +1,146 @@
-Received: from mail-pf1-f178.google.com (mail-pf1-f178.google.com [209.85.210.178])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.1904.1795113480863662115
+Received: from mail-pf1-f170.google.com (mail-pf1-f170.google.com [209.85.210.170])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.1907.1795113486193319101
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 19 Nov 2026 10:38:00 -0800
+ Thu, 19 Nov 2026 10:38:06 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=d812yLhK;
- spf=pass (domain: gmail.com, ip: 209.85.210.178, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pf1-f178.google.com with SMTP id d2e1a72fcca58-8a4c72951b8so89691b3a.3
-        for <openembedded-devel@lists.openembedded.org>; Thu, 19 Nov 2026 10:38:00 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=RU7QehHK;
+ spf=pass (domain: gmail.com, ip: 209.85.210.170, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pf1-f170.google.com with SMTP id d2e1a72fcca58-8b6a88e4341so67481b3a.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 19 Nov 2026 10:38:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795113480; x=1795718280; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1795113485; x=1795718285; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=bnhZOEUmH7DZgb+dCxIVsEa2abQGsaAOGIYQhRfpgCQ=;
-        b=d812yLhKcZLWBwYRooB9/v7XV1TgtUHRBcY98Advkh8X/7RuP6AXOPB4dcpnpXn5fX
-         USgPPUsx51LdqT6wJCJc7TmECwDTb2LU+GuX6fdY23mdi4ub4vRdNd6aQVq190HWuzWc
-         Eee+LVFJSZy04dg/Di8VxPsFKfPPm89mmWjhVXEtSTFcmcFtUjzZ5BMVwW+2B2iyGnXm
-         rRZ4CXSX/fydIdyc89+eVgVo3iaizoECL0WRESFeYvU9ioW+yKjRK5YFCiaVn4a8z1V3
-         V/vRXKDY4/ZWNa7T/pxKWO3qtMJGeL+cGdWJjIHOp73AinlQucDApcYT0mNEmCJn+SVr
-         S1Pg==
+        bh=Sz/oXJGQuT7STL02UEDYZ3i8MsiPJdSnDSgvN9ru3TI=;
+        b=RU7QehHKwT4J8qUnr5d2/QFj//GyyeG7Qp7SyI7qsBhWfeOBAMyaBDmT+UKyUmnV+X
+         /3uG7igz12R3FAgocFyWn4ZKBtYDMMHFxeF7zMILsOpfU9tKdYNP9pyZPkRBupjyn75N
+         4ScSKxs4Uk2DNKzus1VYGbCftEKk/Cgb2FcjTZv8Vd4gIzDK3Brhi76vnubCRNWGnUL2
+         xdr0UGLD44xE7tm0nllLxKvx1I+EHDN6toJhGFhjucxIQ9IUwfRyLOf+ydah7xzO5y3V
+         97HLEKaiJoGPccH8qmLEtAlCFgv/3zGXELlKVEprCoNpmtzDe3WKncmoDuOcmgau0Y7B
+         4lBQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795113480; x=1795718280;
+        d=1e100.net; s=20260707; t=1795113485; x=1795718285;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=bnhZOEUmH7DZgb+dCxIVsEa2abQGsaAOGIYQhRfpgCQ=;
-        b=dx4GaQWqqJ5m1cxmw3/RB1t77v/2vWEDH/d2eS9tgB3orGjVnswu1tRe+6IsRn5z98
-         ZW+GeCEgPNbWoAvQJ3iQ3LWDEyVU9QmYjw3BXjBVrkBi8yI8O+uf3WFXc0F6mJlTqvLG
-         3pirfBjSpiAFGYwqOw8vq43r/ERiNB+0Hy17oVMbP64a8YLR6MRP18RVHJPl0e7Jf1Cq
-         JQTqx+JgxZkImQVnhsf+55edcDPfMEi/ox2bXqlbwybINod7rCvnb66JBs7imrga56BC
-         2ODSgejY53/9qQ3WxWRbVD3YTOkw7sU+oVQAcx1ePBRNMayskXTSEDtoh55GsSHbrt5Y
-         143Q==
-X-Gm-Message-State: APuU4Z+3NAb0+UOO3RpdDAUe4E3Vg0KgENPrMpRfpcKIsmVRxw8QdTGq
-	2TpkeGSMwyCiiF93wznV8XJEKOZr/Y/cHK3S/FB/30YxZmZfHYKPtj/PfvEzYw==
-X-Gm-Gg: AYBFou2HFbUYn+SU+4NBR47/ycd1wn6wNqFTiivL1yA6/1IaiErmyRWRprjpwEIGrvM
-	uDJwS5WzZRWjukP/lArYhMzLxIe8QaL6TFtHK/gieT9WdImDbLbM9wfsdsQbzUSjFYCmQUfvDk7
-	EOuBqhlPLzewz7EDwW90lQzXvC3wE8emfB9t0bEOu1IA2RIQMr5M02d29gqJMCiAqwIKqidmunQ
-	6ba+lRrzIThRuaHUPkDe61PDb95fCca+uoUSP3RY8/U/Zg3ecJ8rKk0s2b8DnwjjSmqXyW6d4uY
-	bDluo1NzhaPLroLp0NwndY6ygFxwQnypd+e68jSlT1PYfWVnmj6/ir6c1ncZws7/PPHUeRx7GjP
-	uduo5jGBQJcRr3d3FFAvieOCNylCXIIXnAZYuPD5/em27p/NsEMUZTN433ImEybTwDPZ0grz++J
-	wo+ioHNMjcmLAf/0yHpOjmDNR+DhUxxtfmr0dFcnUzwF1pThMUtUAhsOVjbFiV9zS0rjZOQoCwK
-	ZXsBJFz5Z/Z9NCRJDLOPbMQq9DN4LCfbgsU0Wz/8QpwqSZL8/oZoYLSYJIlqbbfqXMBcsrmEBV+
-	gTi2CVqiBFguYYEnXtw7USCmzc6sKQL2btZPlAr9NU8UxS5RFsk/0F+VhL2Axw==
-X-Received: by 2002:a05:6a00:2d06:b0:89e:fe2d:abe2 with SMTP id d2e1a72fcca58-8c87c862ab8mr415289b3a.44.1795113480185;
-        Thu, 19 Nov 2026 10:38:00 -0800 (PST)
+        bh=Sz/oXJGQuT7STL02UEDYZ3i8MsiPJdSnDSgvN9ru3TI=;
+        b=n1M3YZPC30EFh4Ksiwg/M1KPxEJKcRi2XYmEFadYTTPh9i2vkIunfF/8j19baAQSY2
+         SgsBPeYCTejSr3ixmK2Ar68TRe1wvcjZaFfNIRo/NNM1WWzm6xUv3JV11cBt8T4u+vbj
+         muzA7YYUb4Tup2vh6Ad6tiaqkp1rvjkvWJEwY3vKXqfmHRzL5QKobhtb+LRpwGFZxDFK
+         SyLGVV4ZXd45bfy5nCp8shEIbOsfuoC7wjfOVH83YKnWdFM3KTq7PTClFKTuk5Q2AK5c
+         lYWHRFGHwVloEdoww54V2pmW1o8dEPcCVGvmTnt6VZO3Z2GZv2CjUvbQizbM2TkIn52c
+         5Uhw==
+X-Gm-Message-State: APuU4Z/TXFkSB7O8s6BS4k8YkNsfm6RUlxDMhC0aLdgk9K2VksxhCQUb
+	B11P7yH4CMGCdJdpuQDOmRel+NKhu1MnElP9BxJVFHCzgLy7vGerKYKdqwU66Q==
+X-Gm-Gg: AYBFou1ed+oztDRCzhK/Tn0/8d/W6WzsXJ89F5yLHc06mZqaE0lm/vFF+n0AEPlTc/i
+	c/W/jkyN0Tfkn2VExp1ajAfuWg5OuhIXuRR9B7zX9QfCONU4d1ftxdmWC43FB1FLj4U31CSKMOq
+	Tsr8qQe7YqP3RxJnlAzN6/VfcmsM8NHhSW9addsSFWXHNaLqtvoHQQo4VQaQYguUkKmAli4ivRb
+	oqlWgLNycRYTB8dMMX1UwVjoz6U3gTaHNC/bNDX4oZMbi4Rc1jHJZB+zKLLE47NLnWQE/7mOPSx
+	zBlmwoL4DE+5urPtbtJ0BKjuYDjttPYzJT3DDY/+nYOvryY/UEG7Yt1lP4SfZaHPtHRjdmvKOCx
+	TrhEr2alLizJkPF3q14C/FEJFjdteFbBcawAcSGdWFkiiIEu3ec4UTWF/UDQnHkjX5B3DHb2P3z
+	c6RSLVH00kpCpd2PeNs1wqgKMGY26CnPgmACgsXXFx/vCIwhFKWCLZTSNUFdZ3hPbITvy7cUuxa
+	fTR3BF200AfmQEX9+p51XSpQWwBsffEdb+D4cacxhUUzfF96odiR/NC6XhTyBcNUFfO+j0sKc84
+	RiYl7TmGotFPNgYEp+WV8ODCzM6Thqjh33CR7ln16wn0wKRuQXooMBKJmEeltqV1wR/W9AyrVgB
+	cGXC2Esarvg==
+X-Received: by 2002:a05:6a21:6e4a:b0:3f9:da7f:317a with SMTP id adf61e73a8af0-4014ee4f4cbmr446115637.70.1795113485499;
+        Thu, 19 Nov 2026 10:38:05 -0800 (PST)
 Return-Path: <ankur.tyagi85@gmail.com>
 Received: from NVAPF55DW0D-IPD.. ([147.161.217.9])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-8c872e4d7basm294518b3a.21.2026.11.19.10.37.58
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-8c872e4d7basm294518b3a.21.2026.11.19.10.38.02
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 19 Nov 2026 10:37:59 -0800 (PST)
+        Thu, 19 Nov 2026 10:38:05 -0800 (PST)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [blacksail][PATCH 50/64] python3-aiohttp: patch CVE-2026-111750
-Date: Fri, 20 Nov 2026 07:33:18 +1300
-Message-ID: <b26454909fe83d8451fc8351b838d1f8f5b0b225.1795112941.git.ankur.tyagi85@gmail.com>
+Cc: Markus Volk <f_l_k@t-online.de>,
+	Khem Raj <khem.raj@oss.qualcomm.com>,
+	Ankur Tyagi <ankur.tyagi85@gmail.com>
+Subject: [blacksail][PATCH 52/64] mpv: fix a file descriptor leak in the render API
+Date: Fri, 20 Nov 2026 07:33:20 +1300
+Message-ID: <cab7d3850d61af23c0db5522b1051e1cf38f05ce.1795112941.git.ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1795112941.git.ankur.tyagi85@gmail.com>
 References: <cover.1795112941.git.ankur.tyagi85@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Thu, 19 Nov 2026 18:38:07 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132740
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Thu, 19 Nov 2026 18:38:08 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132742
 Content-Type: text/plain; charset="utf-8"
 
-From: Ankur Tyagi <ankur.tyagi85@gmail.com>
+From: Markus Volk <f_l_k@t-online.de>
 
-Details:
-https://nvd.nist.gov/vuln/detail/cve-2026-111750
+With the OpenGL render API (vo_libmpv) every frame left a fence behind
+that nothing cleaned up. On v3d each one holds a sync file, so after about
+a minute of video the process ran into the open file limit and the
+picture stopped ("MESA: error: Export failed"). Backport the upstream
+fix.
 
+AI-Generated: Uses Claude Code (Claude Fable 5.1)
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+(cherry picked from commit 2826f6233d450a7cb788a9e04f77f2cd55d951f0)
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../python3-aiohttp/CVE-2026-111750.patch     | 82 +++++++++++++++++++
- .../python/python3-aiohttp_3.14.3.bb          |  1 +
- 2 files changed, 83 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-111750.patch
+ ...equire-swap_buffers-param-for-FenceS.patch | 35 +++++++++++++++++++
+ .../recipes-multimedia/mplayer/mpv_0.41.0.bb  |  5 ++-
+ 2 files changed, 39 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-multimedia/mplayer/mpv/0001-opengl-context-require-swap_buffers-param-for-FenceS.patch
 
-diff --git a/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-111750.patch b/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-111750.patch
+diff --git a/meta-oe/recipes-multimedia/mplayer/mpv/0001-opengl-context-require-swap_buffers-param-for-FenceS.patch b/meta-oe/recipes-multimedia/mplayer/mpv/0001-opengl-context-require-swap_buffers-param-for-FenceS.patch
 new file mode 100644
-index 0000000000..ff9088ad3c
+index 0000000000..70ba81b34c
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-111750.patch
-@@ -0,0 +1,82 @@
-+From 18e23a890422e952b0fdbf09e02794adda56c120 Mon Sep 17 00:00:00 2001
-+From: Sam Bull <git@sambull.org>
-+Date: Wed, 9 Sep 2026 01:25:13 +0100
-+Subject: [PATCH] Fix head request parsing (#13671) (#13673)
++++ b/meta-oe/recipes-multimedia/mplayer/mpv/0001-opengl-context-require-swap_buffers-param-for-FenceS.patch
+@@ -0,0 +1,35 @@
++From f74adc4243bd9e1a8ee96d187c939e6232510650 Mon Sep 17 00:00:00 2001
++From: Dudemanguy <random342@airmail.cc>
++Date: Thu, 22 Jan 2026 11:12:22 -0600
++Subject: [PATCH] opengl/context: require swap_buffers param for FenceSync
 +
-+(cherry picked from commit 5789546e37fe35af27d0a2f840870b22bc15bfc4)
-+(cherry picked from commit 9b27347e61454d9f8ca2055f4c67a37dee336e83)
++Commits 8854c742711705be1fcfcc6a5875960a3e2593dc and
++5ae0e0ff9a6974453c1aba41ddc8442d12ac9264 eliminated the external
++swapchain API that the render backend (vo_libmpv) was previously using.
++However, it was missed that this was being used to skip the
++gl->FenceSync calls and that logic change was not properly accounted
++for. This meant that vo_libmpv would leak fences since
++ra_gl_ctx_swap_buffers is never called to clean them up.
 +
-+CVE: CVE-2026-111750
-+Upstream-Status: Backport [https://github.com/aio-libs/aiohttp/commit/9b27347e61454d9f8ca2055f4c67a37dee336e83]
-+
-+Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
++Fix this by making sure the ra_ctx_params have swap_buffers defined
++before calling gl->FenceSync. All platforms are required to implement
++this anyway with the exception of vo_libmpv since it's a funny special
++case. Fixes #17217.
++Upstream-Status: Backport [https://github.com/mpv-player/mpv/commit/f74adc4243bd9e1a8ee96d187c939e6232510650]
 +---
-+ CHANGES/13671.bugfix.rst  |  1 +
-+ aiohttp/http_parser.py    |  6 +++++-
-+ tests/test_http_parser.py | 27 ++++++++++++++++++++++++++-
-+ 3 files changed, 32 insertions(+), 2 deletions(-)
-+ create mode 100644 CHANGES/13671.bugfix.rst
++ video/out/opengl/context.c | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
 +
-+diff --git a/CHANGES/13671.bugfix.rst b/CHANGES/13671.bugfix.rst
-+new file mode 100644
-+index 000000000..e6fbc7000
-+--- /dev/null
-++++ b/CHANGES/13671.bugfix.rst
-+@@ -0,0 +1 @@
-++Fixed pure-Python request parser not reading a body in a ``HEAD`` request -- by :user:`Dreamsorcerer`.
-+diff --git a/aiohttp/http_parser.py b/aiohttp/http_parser.py
-+index 678aee020..947060c9a 100644
-+--- a/aiohttp/http_parser.py
-++++ b/aiohttp/http_parser.py
-+@@ -433,8 +433,12 @@ class HttpParser(abc.ABC, Generic[_MsgT]):
++diff --git a/video/out/opengl/context.c b/video/out/opengl/context.c
++index 86e8d5daac8b4..86e5c797d670a 100644
++--- a/video/out/opengl/context.c
+++++ b/video/out/opengl/context.c
++@@ -232,7 +232,7 @@ bool ra_gl_ctx_submit_frame(struct ra_swapchain *sw, const struct vo_frame *fram
++     if (p->opts->use_glfinish)
++         gl->Finish();
 + 
-+                         assert self.protocol is not None
-+                         # calculate payload
-++                        # https://www.rfc-editor.org/info/rfc9112/#name-message-body-length
-++                        # https://www.rfc-editor.org/info/rfc9110/#section-9.3.1-6
-++                        # EMPTY_BODY_METHODS should only apply to responses.
-++                        # self.method is None on request parser.
-+                         empty_body = code in EMPTY_BODY_STATUS_CODES or bool(
-+-                            method and method in EMPTY_BODY_METHODS
-++                            self.method and self.method in EMPTY_BODY_METHODS
-+                         )
-+                         if not empty_body and (
-+                             (length is not None and length > 0) or msg.chunked
-+diff --git a/tests/test_http_parser.py b/tests/test_http_parser.py
-+index fcc1b6018..e9d40532b 100644
-+--- a/tests/test_http_parser.py
-++++ b/tests/test_http_parser.py
-+@@ -2181,7 +2181,32 @@ def test_http_request_chunked_payload_and_next_message(parser) -> None:
-+     assert not payload2.is_eof()
-+ 
-+ 
-+-def test_http_request_chunked_payload_chunks(parser) -> None:
-++def test_http_request_parser_head_with_content_length_payload(
-++    parser: HttpRequestParser,
-++) -> None:
-++    smuggled = b"GET /smuggled HTTP/1.1\r\nHost: a\r\n\r\n"
-++    text = (
-++        b"HEAD /test HTTP/1.1\r\nHost: a\r\nContent-Length: %d\r\n\r\n" % len(smuggled)
-++        + smuggled
-++        + b"POST /next HTTP/1.1\r\nHost: a\r\nContent-Length: 0\r\n\r\n"
-++    )
-++    messages, upgraded, tail = parser.feed_data(text)
-++
-++    assert len(messages) == 2
-++    msg, payload = messages[0]
-++    assert msg.method == "HEAD"
-++    assert b"".join(payload._buffer) == smuggled
-++    assert payload.is_eof()
-++
-++    msg2, payload2 = messages[1]
-++    assert msg2.method == "POST"
-++    assert msg2.path == "/next"
-++    assert payload2.is_eof()
-++    assert not upgraded
-++    assert not tail
-++
-++
-++def test_http_request_chunked_payload_chunks(parser: HttpRequestParser) -> None:
-+     text = b"GET /test HTTP/1.1\r\nHost: a\r\ntransfer-encoding: chunked\r\n\r\n"
-+     msg, payload = parser.feed_data(text)[0][0]
-+ 
-diff --git a/meta-python/recipes-devtools/python/python3-aiohttp_3.14.3.bb b/meta-python/recipes-devtools/python/python3-aiohttp_3.14.3.bb
-index 78845ffb56..81ed8a849b 100644
---- a/meta-python/recipes-devtools/python/python3-aiohttp_3.14.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-aiohttp_3.14.3.bb
-@@ -11,6 +11,7 @@ SRC_URI += "file://CVE-2026-111063.patch \
-             file://CVE-2026-111066.patch \
-             file://CVE-2026-111748.patch \
-             file://CVE-2026-111749.patch \
-+            file://CVE-2026-111750.patch \
- "
++-    if (gl->FenceSync) {
+++    if (gl->FenceSync && p->params.swap_buffers) {
++         GLsync fence = gl->FenceSync(GL_SYNC_GPU_COMMANDS_COMPLETE, 0);
++         if (fence)
++             MP_TARRAY_APPEND(p, p->vsync_fences, p->num_vsync_fences, fence);
+diff --git a/meta-oe/recipes-multimedia/mplayer/mpv_0.41.0.bb b/meta-oe/recipes-multimedia/mplayer/mpv_0.41.0.bb
+index c8a0222ebf..7178182c29 100644
+--- a/meta-oe/recipes-multimedia/mplayer/mpv_0.41.0.bb
++++ b/meta-oe/recipes-multimedia/mplayer/mpv_0.41.0.bb
+@@ -23,7 +23,10 @@ LIC_FILES_CHKSUM = "file://LICENSE.GPL;md5=570a9b3749dd0463a1778803b12a6dce"
+ LICENSE_FLAGS = "commercial"
  
- CVE_PRODUCT = "aiohttp:aiohttp"
+ SRCREV = "41f6a645068483470267271e1d09966ca3b9f413"
+-SRC_URI = "git://github.com/mpv-player/mpv;name=mpv;branch=release/${@oe.utils.trim_version('${PV}', 2)};protocol=https;tag=v${PV}"
++SRC_URI = " \
++    git://github.com/mpv-player/mpv;name=mpv;branch=release/${@oe.utils.trim_version('${PV}', 2)};protocol=https;tag=v${PV} \
++    file://0001-opengl-context-require-swap_buffers-param-for-FenceS.patch \
++"
+ 
+ inherit meson pkgconfig mime-xdg
+ 
