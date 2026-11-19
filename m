@@ -1,99 +1,98 @@
-Received: from mail-pf1-f171.google.com (mail-pf1-f171.google.com [209.85.210.171])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.1856.1795113376434404887
+Received: from mail-pf1-f179.google.com (mail-pf1-f179.google.com [209.85.210.179])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.1892.1795113378931922436
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 19 Nov 2026 10:36:16 -0800
+ Thu, 19 Nov 2026 10:36:18 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=ye50fZQr;
- spf=pass (domain: gmail.com, ip: 209.85.210.171, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pf1-f171.google.com with SMTP id d2e1a72fcca58-89d6bd67045so5846b3a.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 19 Nov 2026 10:36:16 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=e8Fk7cg/;
+ spf=pass (domain: gmail.com, ip: 209.85.210.179, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pf1-f179.google.com with SMTP id d2e1a72fcca58-8b600fae14dso46472b3a.2
+        for <openembedded-devel@lists.openembedded.org>; Thu, 19 Nov 2026 10:36:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795113376; x=1795718176; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1795113378; x=1795718178; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=JPUseMm31BfMitmuBadgiiPShDZ16zDBHeXoyBaMRf0=;
-        b=ye50fZQrFppMDHYbu45WTwPErjIlSLogjLZ+fQXYf8yfjWiKbqB6OsYmHSzxj3xU2c
-         w5A2XQSFepwe38qtweTIlR3rXoyeAOQZ6Y5oG9q2BsAYbgxAWGgkSnuiqMuYt0FRP35j
-         mHea2HigwnTG9+rCYDkkBUM5LiUZdjvtdiSBSrwM+dLeJ7FqgAJEG73iX7lr11pDKAag
-         XD5RfbaxWP2cy0imBOVM72NnuH70eEayqJPiCB/0rQsJQrtr+GGHnKsM5zdm23S6YPxS
-         lrXNIK8S5340cxwY40t5trAWYlLmISGxzXA5FQWPQ6RzUG8UamyrPMZB/CZPpdmlEjpS
-         cPww==
+        bh=AHukX1t+rmRqXYccUdWQMzTC6St+lBukbiMWGKvbp64=;
+        b=e8Fk7cg/puIURBie84fNcmzDGjWt761cBgHWtlJvqXpC008NDu47n/jiPNcC3d8nG5
+         J1JDktYsEr3bLxACkgsY0kEDlV/7uuy8ToIeRLdTNrvrsVDZJ5GtEIats+FeifFbjN1l
+         A7hEIzHf33C9D9BCzwsyVZAyhcFlc4LwuCohPkDw2fvgEo2aPBMlfha7REoQON5leHxr
+         fw6Jq0Nf9kgpb4zLrYwQFibsX4zsL6nkiYeGpk1USTJD+ovhuPpKjI0r2YTFwwfEks+f
+         BrAQ7aRYqesZpgZw9CIB3wZLrmmQ/hi/BjoF+3Xh9oYG8/sXZneFMEcC6Lu1gbTfW2fe
+         8aXg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795113376; x=1795718176;
+        d=1e100.net; s=20260707; t=1795113378; x=1795718178;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=JPUseMm31BfMitmuBadgiiPShDZ16zDBHeXoyBaMRf0=;
-        b=rGaDPZ1+VNDcpRTMnv8C02gmKynal8TfWp8ZWFx574F4IYIeGHP4tQw6W/kRkbi2Mp
-         MkEgxh2oy6ZUBAf1uHaMjHiL/10zz7/Fk4r+MS037HiOZcTk9Ezc/spgHBaKJQDEEm0X
-         b0ye4lOkBQWXXDd/LJzvDhden3hwK6sM/tzt8Q7wO4eTRHMG9on4TmtXWHIFEz8+PB9a
-         DY3848tGSfKpFfS8iLk7SEHjZO2DiCy1xnmYr6N8anCfWeFw+7cPj67WoqnbVxa2Zulo
-         mlSY8Y/nl2fh+lqu5tAu6pFRSDjd+/+pnUl0+8tiT/zzrLwhVKt0G+GqJRev/YhRwJ8L
-         X44A==
-X-Gm-Message-State: APuU4Z/x0vo/H5ycMJrGkkRLZLr06ObzGV85zM7DJvTGdpmXQuFXHa3T
-	c8n0NkF9gXNCS8fJ8/ZnuGIUfE8aqB0CIQ1XjQxxX6vI4A/NFGmgR/CTa14JVQ==
-X-Gm-Gg: AYBFou1XsS8XFFS6UEct8MOiv8hI8JJZB/klyNOPhYOQVFxV9YtD4HnZxP97VHOaaCj
-	x0A1nO0Bk2aLncSeUEI8truUP3b0fU1miWI7UGuOcz7uMYtYgNpuxpYJDJLIn+V8JxYUpaDzRcY
-	SvbgItLY5tVg21dXE5GwnxSlZ/kFAGJ0EyAAoeRTwDVVYwmUnGhgLAmDrq7EnYoWrtMRESjHSr6
-	4IK3Rs02ipdHDvXjRUvK1xCe6t5UhM5XU0++tjO6C9k998SvJ0DgyVcQ65AqyJ8K4x3kEt1/nYa
-	4gLCtYf5qIVKyHAEaNmrTz6VyYQ3FbVOM+9REea6kmvXa4QTajBQQpeqqXow6Pinp/01fzq5qt2
-	3zTGOfp81FFg5DpXAbA5ECN7qv9k5BiEOJMffLMOaK1ZjWn1KUeem/Svepa2kt0md1CzDasqDfi
-	rX/ZOE8Fr0rFuD6InrhJNVkdbp3lFOqwyxNr6mXOATGUrot6iCj3ye9L8Jmftcavy8uylmu6alY
-	ggffQidM0dzXNwnOoPPbXnX6XtLOjN5Zl5u6L3BqbmtGkHylR+Am7/nzNRAneHrtrBAtK/52gX9
-	x8h7/kro424QeWq8w9+eG8zeIXZZ9QaQStVEn+DWMMeScc/kjMahbAJs7TfdcfAPXHLjKeSgmhz
-	W1tpny00=
-X-Received: by 2002:a05:6a00:4b10:b0:8c6:37f1:16cb with SMTP id d2e1a72fcca58-8c7dea67dd8mr1301337b3a.47.1795113375663;
-        Thu, 19 Nov 2026 10:36:15 -0800 (PST)
+        bh=AHukX1t+rmRqXYccUdWQMzTC6St+lBukbiMWGKvbp64=;
+        b=ZEXoMDMDDLXcSleTb9uJKG8faJacpY8SA8fub8tY6NFnidT2ChsPjVt/1aoXzi7RIR
+         NEKbcZQKRIlY0HUjoKKrjCoPJWCtcvJLCmYsQ8PFpAmuPyxAWJZXEblDmqjSkedWKT1f
+         V9Xe+TBDQP2AcGrCEbLYnJAjAQKCJvwXLaxZSqzWxecUK3awENrNIMYaomIXv6rmA/5+
+         +jYfpBmK440EFELvZPij8lgb3nFUjEXIDMYwyRRKzaKm3xXdGLxY3X1hOGQ+ykVFUp7D
+         BasX9izPSYC9YaLvG3K6mW7mjp+xWh62Pb7Srexg22NRycyc5/W4ETz/N3CS6annExJC
+         KjeA==
+X-Gm-Message-State: APuU4Z/S2xCP/5QvclKvVOtqAQAaMPAVh/LyxULpSjtBiBrAsc/S1gWn
+	SxA1z0dnyiCfoZRhnOkZ2gaOuoPyz8Z8GF6+3lzWJl+WlJUF1GtbEvLHk+eMlw==
+X-Gm-Gg: AYBFou0ipU3RjSL/zULHXSQO+PIOIc2ze2w20FcQIexHHCOwkTzHBZRVl6Tkg0aain3
+	XQ/qeO3s1kWyqloS+ZHY/9TzaJs7YAcX9rw6Ig9zPfBqzb169T6gjBJcZmsuzx2EuxEwZDbHkY1
+	Zk6qsd6+yZ4lXjceAPet7xWYOhQsvwrG9due6uhGSQROCmW5hvUIxO/kEOohYmjs5vCdkidcjp1
+	iNMYzBYK93gp3gRSx6DrK1+cN6lpExsqf0dHG4pCi+MSXJ+YL5PZDmE2xufHQgOdufUx13K1eQ/
+	zc9f7AYhpS1JLFDpidEhlKb/DpsNvOyK/FAf6EaI8qRkPSfhlkeFRF7DV1GUlnBU0b/V2U9wftG
+	rzPTGakN3UJWy276Jc3HFyzeZlpIuA1Orn7xEAqwB1anPpXIcN4N4owmuJ/FpPN1en+IKk6ndsc
+	1Mvepl5KJw3fmJmL2+4KysyRY+jkG2OQYItxuW4qsmATadkE9EuIKIgyVlnP+81U1VvAk0/yR7X
+	qeHuX6z19oXYDdIkmBGZElJDdMPsFt85CwnsM8b0RdPrbDxQTCd7y/739vbw6A+lhrXuX+RFzKQ
+	axaLFzFJpul5ryhmaRPhhQ+lvWA9HqtoMYo28T/0+EEbyOJC2SG0n/YYfAF4Sg==
+X-Received: by 2002:a05:6a00:1808:b0:89c:1f2b:a73f with SMTP id d2e1a72fcca58-8c87bcbced8mr493873b3a.17.1795113378211;
+        Thu, 19 Nov 2026 10:36:18 -0800 (PST)
 Return-Path: <ankur.tyagi85@gmail.com>
 Received: from NVAPF55DW0D-IPD.. ([147.161.217.9])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-8c872e4d7basm294518b3a.21.2026.11.19.10.36.13
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-8c872e4d7basm294518b3a.21.2026.11.19.10.36.16
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 19 Nov 2026 10:36:15 -0800 (PST)
+        Thu, 19 Nov 2026 10:36:17 -0800 (PST)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>,
 	Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [blacksail][PATCH 08/64] haveged: upgrade 1.9.26 -> 1.9.27
-Date: Fri, 20 Nov 2026 07:32:36 +1300
-Message-ID: <20e8adf8d91cbcd7e29f1308a75d03104025d06c.1795112941.git.ankur.tyagi85@gmail.com>
+Subject: [blacksail][PATCH 09/64] libraw: upgrade 0.22.2 -> 0.22.3
+Date: Fri, 20 Nov 2026 07:32:37 +1300
+Message-ID: <f258232193b79dcd3d02ab56f2e7bc819cec8bdc.1795112941.git.ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1795112941.git.ankur.tyagi85@gmail.com>
 References: <cover.1795112941.git.ankur.tyagi85@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Thu, 19 Nov 2026 18:36:24 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132698
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Thu, 19 Nov 2026 18:36:25 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132699
 Content-Type: text/plain; charset="utf-8"
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
 Changelog:
-https://github.com/jirka-h/haveged/releases/tag/v1.9.27
+https://github.com/LibRaw/LibRaw/releases/tag/0.22.3
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
-(cherry picked from commit 694eb9006e1e1bd6847a03851389167cf5a80996)
+(cherry picked from commit 2f7a0c3dfdf3e8faa6fbfd07b60328dfa65a9b10)
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../haveged/{haveged_1.9.26.bb => haveged_1.9.27.bb}            | 2 +-
+ .../libraw/{libraw_0.22.2.bb => libraw_0.22.3.bb}               | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-extended/haveged/{haveged_1.9.26.bb => haveged_1.9.27.bb} (94%)
+ rename meta-oe/recipes-support/libraw/{libraw_0.22.2.bb => libraw_0.22.3.bb} (92%)
 
-diff --git a/meta-oe/recipes-extended/haveged/haveged_1.9.26.bb b/meta-oe/recipes-extended/haveged/haveged_1.9.27.bb
-similarity index 94%
-rename from meta-oe/recipes-extended/haveged/haveged_1.9.26.bb
-rename to meta-oe/recipes-extended/haveged/haveged_1.9.27.bb
-index 727f856379..13782ddd5d 100644
---- a/meta-oe/recipes-extended/haveged/haveged_1.9.26.bb
-+++ b/meta-oe/recipes-extended/haveged/haveged_1.9.27.bb
-@@ -6,7 +6,7 @@ HOMEPAGE = "https://www.issihosts.com/haveged/index.html"
- LICENSE = "GPL-3.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
+diff --git a/meta-oe/recipes-support/libraw/libraw_0.22.2.bb b/meta-oe/recipes-support/libraw/libraw_0.22.3.bb
+similarity index 92%
+rename from meta-oe/recipes-support/libraw/libraw_0.22.2.bb
+rename to meta-oe/recipes-support/libraw/libraw_0.22.3.bb
+index 2db0c14a61..c0601f71a8 100644
+--- a/meta-oe/recipes-support/libraw/libraw_0.22.2.bb
++++ b/meta-oe/recipes-support/libraw/libraw_0.22.3.bb
+@@ -3,7 +3,7 @@ LICENSE = "CDDL-1.0 OR LGPL-2.1-only"
+ LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=1d66195044cfbe4327c055d1c9c1a229"
  
--SRCREV = "c0edcf284f654321b7c5665fe38106f9321ceeb3"
-+SRCREV = "54d8dd95f90c2af87d1b778f0469fae4cc225aa6"
- SRC_URI = "git://github.com/jirka-h/haveged.git;branch=master;protocol=https;tag=v${PV} \
- "
+ SRC_URI = "git://github.com/LibRaw/LibRaw.git;branch=0.22-stable;protocol=https;tag=${PV}"
+-SRCREV = "b93f6e45c194f5df9b02a43b1af9a54b4f41f33f"
++SRCREV = "cf02d66eb5c19d4e46df7aee0582e47a4918509a"
+ 
+ inherit autotools pkgconfig
  
