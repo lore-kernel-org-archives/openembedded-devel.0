@@ -1,60 +1,60 @@
-Received: from mail-pf1-f179.google.com (mail-pf1-f179.google.com [209.85.210.179])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.1946.1795113469405207225
+Received: from mail-pg1-f170.google.com (mail-pg1-f170.google.com [209.85.215.170])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.1898.1795113471875619374
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 19 Nov 2026 10:37:49 -0800
+ Thu, 19 Nov 2026 10:37:51 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=Z4hUpYG2;
- spf=pass (domain: gmail.com, ip: 209.85.210.179, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pf1-f179.google.com with SMTP id d2e1a72fcca58-8a0880a46e7so919982b3a.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 19 Nov 2026 10:37:49 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=kugwcANC;
+ spf=pass (domain: gmail.com, ip: 209.85.215.170, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pg1-f170.google.com with SMTP id 41be03b00d2f7-cd69954c755so47529a12.3
+        for <openembedded-devel@lists.openembedded.org>; Thu, 19 Nov 2026 10:37:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795113469; x=1795718269; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1795113471; x=1795718271; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=LSJSGAJPx03D7Tpd3VpFQct2bfESpAi2T5mLwdAAEZE=;
-        b=Z4hUpYG2J8ZdSRDLcZLzOEc2RDRDm6ZG+r30u1RV4I743q1weHl9C7s+WR1u/p4k8B
-         mfbEJnOYTBeSDe8LckZnAh+vqSpLyJTKf2uIhSQb7jbepdczhzdXLfdpd5GKcpENGEnW
-         91nPnsqHKX+z5qsXSah8XyQk6Ph4OTqLSSsyLcDth2zTDPa4G38LaeQx/ZryLMndkF2U
-         PqzIDxDihQKBrdq+CPNKdTpWbIDfrXOYsUdUT4mxV4QiN75rjonFXR5rdy1DcMgJWAT5
-         HgFgIH40/pUkDY0AEptEGg2/rEfysoCnEtQ4SffvK+ussW9SG0wThz9Y7puOSmjkNeiB
-         xtgw==
+        bh=SAF7qDbL8eA6kMUKZU8F1PSUIQVQEg3hxxtPho6fm+0=;
+        b=kugwcANCU+1Oc1HWK7UUlwzZ/8ijaBwks54zp4swgWjpBfXVf41vx0FVNqD1mEHGrO
+         /PRPr3pqzayftuYv/KLjGfeDdfeo+CJkeWAXkZb5A9lmldT8A8zKMm6H6Elo6ONfaIWC
+         rpC66sSVs/p+QPp762/kXU7LgecXmf/tRndln/GnX2HR+hTO1FMSygPO2QPjwGmAtJQh
+         r+WH6TgAsMX7FYp3rqXj7NlJRKJpDFmDPKZMVnhZ02uV8mqjmAioSWtsDcxycpAwJknh
+         Y8lX0St/1sOwuORZu3SeOV3lwQ+uPWSYjCK/P3GcZW5YtRj5PRkmq2ek1qbiwKahRCAI
+         1Ilg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795113469; x=1795718269;
+        d=1e100.net; s=20260707; t=1795113471; x=1795718271;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=LSJSGAJPx03D7Tpd3VpFQct2bfESpAi2T5mLwdAAEZE=;
-        b=JgzrrBhG0wIJZqibfNhuOkPGmwiwX4yRdQNjhzhmRnFakt3BeY8jRiev1WHrHJF4UN
-         hEZHRJghknN73ca1Frbtw1xG5Vp+B5QHXor8xpapFNea55lXfmaL3Nqfmi5asthqB9VH
-         LWRInz8R7bLeBaG6bs1CiuWHEflrP1vR6JiXbvKyNJ+osrY9DEhc0q/T4Dc9HOFd81jX
-         OaktSrkATRnT7ExK3oVCT+192VxfrjeMJAiABuYxEIp8abTa9vBHVvu7Q5+iIG0dfTNS
-         3XIhQc7P3BG0xlGMmCtJisdDTsb91cqUW1+fJF1QQLD0nJhLk9LIm/xhpfD6+gtkizO8
-         5YnA==
-X-Gm-Message-State: APuU4Z+fSOGLILPvKu3DBIo2sRIds2i4QsuBXUPFw4xA1Qe9Z8nz4GBM
-	tk2umOF0osCJ2s21KXgJytmn+K/is+vU48vag9T6+2EtRFUvpj+NyWNYSbS8ZA==
-X-Gm-Gg: AYBFou3RBW4JFpuR6e26W1Kh86CgaI2R3RgTBOZ0Hdb+08QCvgT+ZDnwRKYi4ctEc1f
-	AveGXZOxVJU9G1mEm/BmQ9NhP0ggiA4RKw9icAwnYWOfCuqClioXUdR778WfdblmvCA9h6xc9Mi
-	Gn5352AaeCBJjIxfMaicRZ+gMGpAhtUN2j0ndFUY0+IPlgldC3l0UCzc0QZZ9uNpoBFGdHXdplH
-	4nTsA4ywGTMIZ2iFOrV/o1ynwH0lV12BwqpSOypt+Ter0tY/JsCX52U5j4Mq4Jn//pDIvTXSNYb
-	8PJvdjBc3tr78P+iR4PGE/iF5rlHfzUEvRJJeQiXRtcaufv+5JzOYx+p9+aInVm76+xEgb97Fds
-	uMKPHBFmrVzYjHKgAGD3ScYlWyNATCfHE/ytE78WlrV9Sr4T0hmAq5D322tHaI/aZOeux3q+qh3
-	1p7k53OpcnS2FjvBy9t2JKzRPTT2t8dgBJ45vKoi482LqEakkfmbYu30hPTuUCyjP2BOOdiKc19
-	Seim0vRym4CW2woew6H3WZGk/+Ak0N+Or7H0TTktsjGfgAdFvjz5pkZ/A18ZIr9r5jcku+PPdLA
-	gGR/Q3U4IaG6Z3zF4XQ68oXvl3a4+a4cl3uoMqSDUdpgCrH01E37YlVLqY1Uig==
-X-Received: by 2002:a05:6a00:3d44:b0:8a0:5eff:ad5b with SMTP id d2e1a72fcca58-8c7ddfafeecmr1358317b3a.33.1795113468690;
-        Thu, 19 Nov 2026 10:37:48 -0800 (PST)
+        bh=SAF7qDbL8eA6kMUKZU8F1PSUIQVQEg3hxxtPho6fm+0=;
+        b=pD77NehFvDC8WV3ptFdah/lggHw/c5KvRCOkcfcCznlZLuOlustf3G4SW3prhNxYRs
+         FeJpBT/iCfE4o9vd7+WM3kFtGucfBGkmgoDIk9HUewtwe7k5TpHVROid0YzAplaGnNMQ
+         9RBO32EkcOEyezQmaOyLSK3ml7mgtGG3bpETm/21hU9jAMJv+zNmKQUtEZ5yIG2X4XMq
+         HAiqUVtoonBCyvawtwgv3Lcbs8vVU/RrY3G3WzTP9ysuahAio1gn/hsxnzdI1Ec9Tcbm
+         dD9q4wm9nvpaaVU88bvTF8RLJbDzQn4/VnVBI8MinO9EODX7uBQLSWMytE2nMrE6BBQR
+         QgoA==
+X-Gm-Message-State: APuU4Z9aQatMHoeh1eVEvC1qgtki7NzMq08J/zOBNuj4IjlgB/v8za++
+	BBOs3XUgLg/6GHvpvHA8tx0iGWk3QfhB1a4GhDfnC7FiMrmDv/rlNH3XPNtaig==
+X-Gm-Gg: AYBFou29gfz9kt084a2no+3DB+inOgHLwKn/InNqE1TAMbiVtKUGzgq4VQzbzJVpl0n
+	JoXBEI72vPhYUY+VMcKdnrUVjm9eABUBjcb4Jv4yLAb3lqiVodv4T2pWpovLDz69iSg6CnwNHVT
+	+LJkn0/EvLW32Gwp0cJIWmwUMk5ARoyAh9AXTHMo9ItMsrOiNN9MF01XlO3Urz1gZ90ouhFAFYF
+	Dpl5oTxjt+vh2dZflqI8FuOiDVdJPrLeq8LRsZjq+rw+NdT8Di62I9WRk5EcQnny9sGDc67OJsR
+	5AW65F1OAB4tXENc1czWW68XO5JQGG4TGFSDXuZyhyLLR4NyOtR1aiFgv1/T3zWZWEl+w3t/W0p
+	XLAPwGy0m/D6geZD7vblpNxyiQX/YDqg/l3bJJC/f90tR+IIziag66JFHnMUrAb/sIjjhocVDxA
+	Zb7suUTON+Nwl9OodWzW/lSZIP/i6vaLeuNlOad9ByA8fNscaza/A5wRSGnKa878oDBTIPyXKEH
+	0FHltsOdc+cjqUiKev4mGAePSdyvU1fiepkRYEdZ2myqP656AUXmNw8b3Vmavu7wBSn+k5srR/l
+	I4PY10wLfaxODxxYxPKGcIaUPval+NkWdzAjk4roC5HK3cnc9Tc99zQmSOb+/w==
+X-Received: by 2002:a05:6a20:a128:b0:3eb:af80:78c4 with SMTP id adf61e73a8af0-401493a6873mr592753637.3.1795113471148;
+        Thu, 19 Nov 2026 10:37:51 -0800 (PST)
 Return-Path: <ankur.tyagi85@gmail.com>
 Received: from NVAPF55DW0D-IPD.. ([147.161.217.9])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-8c872e4d7basm294518b3a.21.2026.11.19.10.37.46
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-8c872e4d7basm294518b3a.21.2026.11.19.10.37.49
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 19 Nov 2026 10:37:48 -0800 (PST)
+        Thu, 19 Nov 2026 10:37:50 -0800 (PST)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [blacksail][PATCH 45/64] python3-aiohttp: patch CVE-2026-111063
-Date: Fri, 20 Nov 2026 07:33:13 +1300
-Message-ID: <817f4398c2204be3d9f9ce75c424f02eb58597f6.1795112941.git.ankur.tyagi85@gmail.com>
+Subject: [blacksail][PATCH 46/64] python3-aiohttp: patch CVE-2026-111065
+Date: Fri, 20 Nov 2026 07:33:14 +1300
+Message-ID: <b06e0a035ce5a39561b3dd0526cce70f24eaf4af.1795112941.git.ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1795112941.git.ankur.tyagi85@gmail.com>
 References: <cover.1795112941.git.ankur.tyagi85@gmail.com>
@@ -62,173 +62,211 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Thu, 19 Nov 2026 18:37:57 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132735
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132736
 Content-Type: text/plain; charset="utf-8"
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
 Details:
-https://nvd.nist.gov/vuln/detail/cve-2026-111063
+https://nvd.nist.gov/vuln/detail/cve-2026-111065
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../python3-aiohttp/CVE-2026-111063.patch     | 136 ++++++++++++++++++
- .../python/python3-aiohttp_3.14.3.bb          |   2 +
- 2 files changed, 138 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-111063.patch
+ .../python3-aiohttp/CVE-2026-111065.patch     | 172 ++++++++++++++++++
+ .../python/python3-aiohttp_3.14.3.bb          |   4 +-
+ 2 files changed, 175 insertions(+), 1 deletion(-)
+ create mode 100644 meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-111065.patch
 
-diff --git a/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-111063.patch b/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-111063.patch
+diff --git a/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-111065.patch b/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-111065.patch
 new file mode 100644
-index 0000000000..f9654a5a9b
+index 0000000000..affe7e62a9
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-111063.patch
-@@ -0,0 +1,136 @@
-+From 2dcbe838baee9938cdf4f0b7a8c682b92913bb76 Mon Sep 17 00:00:00 2001
++++ b/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-111065.patch
+@@ -0,0 +1,172 @@
++From 16a92b236b34f86d3873e29292b78159dd3ff19f Mon Sep 17 00:00:00 2001
 +From: "patchback[bot]" <45432694+patchback[bot]@users.noreply.github.com>
-+Date: Sun, 27 Sep 2026 21:27:34 +0100
-+Subject: [PATCH] [PR #13830/e11d2836 backport][3.14] Fix secure shared cookie
-+ (#13832)
++Date: Wed, 9 Sep 2026 14:43:30 +0100
++Subject: [PATCH] [PR #13677/9e08ba02 backport][3.14] Fix cookie overflow
++ (#13679)
 +
-+**This is a backport of PR #13830 as merged into master
-+(e11d2836203a21bec59095498e578d37801027e7).**
++**This is a backport of PR #13677 as merged into master
++(9e08ba02abe573ce9e4cc541d4e3c3646adb43a7).**
++
++---------
 +
 +Co-authored-by: Sam Bull <git@sambull.org>
-+(cherry picked from commit 999c356d61e966faffa97b06ab0d0455226d36c5)
++(cherry picked from commit 9dd8eaf4e31f1237ef2c1574a8c82a739fca5805)
 +
-+CVE: CVE-2026-111063
-+Upstream-Status: Backport [https://github.com/aio-libs/aiohttp/commit/999c356d61e966faffa97b06ab0d0455226d36c5]
++CVE: CVE-2026-111065
++Upstream-Status: Backport [https://github.com/aio-libs/aiohttp/commit/9dd8eaf4e31f1237ef2c1574a8c82a739fca5805]
 +
 +Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 +---
-+ CHANGES/13830.bugfix.rst        |  1 +
-+ aiohttp/cookiejar.py            |  3 +++
-+ docs/client_reference.rst       |  3 ++-
-+ docs/spelling_wordlist.txt      |  1 +
-+ tests/test_client_functional.py |  9 +++++++--
-+ tests/test_cookiejar.py         | 28 ++++++++++++++++++++++++++++
-+ 6 files changed, 42 insertions(+), 3 deletions(-)
-+ create mode 100644 CHANGES/13830.bugfix.rst
++ CHANGES/13677.bugfix.rst        |  1 +
++ aiohttp/client.py               |  5 ++++
++ aiohttp/cookiejar.py            | 10 ++++++-
++ tests/test_client_functional.py | 46 ++++++++++++++++++++++++++++++++-
++ tests/test_cookiejar.py         | 22 ++++++++++++++++
++ 5 files changed, 82 insertions(+), 2 deletions(-)
++ create mode 100644 CHANGES/13677.bugfix.rst
 +
-+diff --git a/CHANGES/13830.bugfix.rst b/CHANGES/13830.bugfix.rst
++diff --git a/CHANGES/13677.bugfix.rst b/CHANGES/13677.bugfix.rst
 +new file mode 100644
-+index 000000000..2a3976924
++index 000000000..bea67cba7
 +--- /dev/null
-++++ b/CHANGES/13830.bugfix.rst
+++++ b/CHANGES/13677.bugfix.rst
 +@@ -0,0 +1 @@
-++Fixed ``CookieJar.filter_cookies()`` sending shared cookies (cookies without a ``Domain`` attribute) marked ``Secure`` over unencrypted connections -- by :user:`Dreamsorcerer`.
+++Fixed a possible ``OverflowError`` on cookies and a connection not being closed properly -- by :user:`Dreamsorcerer`.
++diff --git a/aiohttp/client.py b/aiohttp/client.py
++index 12f236d6c..df9fbd8c9 100644
++--- a/aiohttp/client.py
+++++ b/aiohttp/client.py
++@@ -697,6 +697,7 @@ class ClientSession:
++ 
++         timer = tm.timer()
++         req: ClientRequest | None = None
+++        resp: ClientResponse | None = None
++         try:
++             with timer:
++                 # https://www.rfc-editor.org/rfc/rfc9112.html#name-retrying-requests
++@@ -1020,6 +1021,10 @@ class ClientSession:
++                 handle.cancel()
++                 handle = None
++ 
+++            if resp is not None:
+++                # A failure occurred after the response was received.
+++                resp.close()
+++
++             if req is not None and req._body is not None:
++                 await req._body.close()
++ 
 +diff --git a/aiohttp/cookiejar.py b/aiohttp/cookiejar.py
-+index 2b9722470..0d2f3e05c 100644
++index 0d2f3e05c..b949cc118 100644
 +--- a/aiohttp/cookiejar.py
 ++++ b/aiohttp/cookiejar.py
-+@@ -478,6 +478,9 @@ class CookieJar(AbstractCookieJar):
-+         # Send shared cookie
-+         key = ("", "")
-+         for c in self._cookies[key].values():
-++            if is_not_secure and c["secure"]:
-++                continue
-++
-+             # Check cache first
-+             if c.key in self._morsel_cache[key]:
-+                 filtered[c.key] = self._morsel_cache[key][c.key]
-+diff --git a/docs/client_reference.rst b/docs/client_reference.rst
-+index 734201128..a237fb64b 100644
-+--- a/docs/client_reference.rst
-++++ b/docs/client_reference.rst
-+@@ -2544,7 +2544,8 @@ Utilities
-+       :param ~yarl.URL response_url: URL of response, ``None`` for *shared
-+          cookies*.  Regular cookies are coupled with server's URL and
-+          are sent only to this server, shared ones are sent in every
-+-         client request.
-++         client request (except that shared cookies marked ``Secure``
-++         are only sent over encrypted connections).
-+ 
-+    .. method:: filter_cookies(request_url)
-+ 
-+diff --git a/docs/spelling_wordlist.txt b/docs/spelling_wordlist.txt
-+index 24561f52d..88638bf12 100644
-+--- a/docs/spelling_wordlist.txt
-++++ b/docs/spelling_wordlist.txt
-+@@ -369,6 +369,7 @@ un
-+ unawaited
-+ unclosed
-+ undercounting
-++unencrypted
-+ unescaped
-+ unhandled
-+ unicode
++@@ -425,7 +425,15 @@ class CookieJar(AbstractCookieJar):
++             if max_age := cookie["max-age"]:
++                 try:
++                     delta_seconds = int(max_age)
++-                    max_age_expiration = min(time.time() + delta_seconds, self.MAX_TIME)
+++                    # https://datatracker.ietf.org/doc/html/rfc6265#section-5.2.2
+++                    if delta_seconds <= 0:
+++                        max_age_expiration = 0.0
+++                    else:
+++                        # Cap first to protect against OverflowError on next line.
+++                        delta_seconds = min(delta_seconds, self.MAX_TIME)
+++                        max_age_expiration = min(
+++                            time.time() + delta_seconds, self.MAX_TIME
+++                        )
++                     self._expire_cookie(max_age_expiration, domain, path, name)
++                 except ValueError:
++                     cookie["max-age"] = ""
 +diff --git a/tests/test_client_functional.py b/tests/test_client_functional.py
-+index 9470876d0..639ca4606 100644
++index 639ca4606..f07104b81 100644
 +--- a/tests/test_client_functional.py
 ++++ b/tests/test_client_functional.py
-+@@ -2909,12 +2909,17 @@ async def test_morsel_with_attributes(aiohttp_client) -> None:
-+     c = http.cookies.Morsel()
-+     c.set("test3", "456", "456")
-+     c["httponly"] = True
-+-    c["secure"] = True
-+     c["max-age"] = 1000
++@@ -15,7 +15,7 @@ import tarfile
++ import time
++ import zipfile
++ import zlib
++-from collections.abc import AsyncIterator, Awaitable, Callable
+++from collections.abc import AsyncIterator, Awaitable, Callable, Sequence
++ from contextlib import suppress
++ from typing import Any, NoReturn
++ from unittest import mock
++@@ -3050,6 +3050,50 @@ async def test_set_cookies_max_age_overflow(aiohttp_client) -> None:
++                 assert int(cookie["max-age"]) == int(overflow)
 + 
-++    # A Secure shared cookie must be withheld entirely: the test server
-++    # is plain http, so it must not reach the handler at all.
-++    c2: http.cookies.Morsel[str] = http.cookies.Morsel()
-++    c2.set("test4", "789", "789")
-++    c2["secure"] = True
++ 
+++async def test_connection_released_when_cookie_processing_fails(
+++    aiohttp_client: AiohttpClient,
+++) -> None:
+++    class EvilJar(aiohttp.CookieJar):
+++        def update_cookies_from_headers(
+++            self, headers: Sequence[str], response_url: URL
+++        ) -> None:
+++            raise RuntimeError("boom")
 ++
-+     app = web.Application()
-+     app.router.add_get("/", handler)
-+-    client = await aiohttp_client(app, cookies={"test2": c})
-++    client = await aiohttp_client(app, cookies={"test2": c, "test4": c2})
-+ 
-+     async with client.get("/") as resp:
-+         assert 200 == resp.status
+++    hold = asyncio.Event()
+++
+++    async def hostile(request: web.Request) -> web.StreamResponse:
+++        ret = web.StreamResponse()
+++        ret.content_length = 2
+++        ret.set_cookie("sid", "x")
+++        await ret.prepare(request)
+++        await ret.write(b"x")
+++        await hold.wait()
+++        assert False
+++
+++    async def clean(request: web.Request) -> web.Response:
+++        return web.Response()
+++
+++    app = web.Application()
+++    app.router.add_get("/hostile", hostile)
+++    app.router.add_get("/clean", clean)
+++    connector = aiohttp.TCPConnector(limit=1)
+++    client = await aiohttp_client(app, connector=connector, cookie_jar=EvilJar())
+++
+++    try:
+++        for _ in range(2):
+++            with pytest.raises(RuntimeError, match="boom") as excinfo:
+++                await client.get("/hostile")
+++            assert not connector._acquired
+++            del excinfo
+++
+++        # The single connector slot is free again: an unaffected request
+++        # succeeds instead of waiting forever for a connection.
+++        async with client.get("/clean") as resp:
+++            assert resp.status == 200
+++    finally:
+++        hold.set()
+++
+++
++ async def test_request_conn_error() -> None:
++     client = aiohttp.ClientSession()
++     with pytest.raises(aiohttp.ClientConnectionError):
 +diff --git a/tests/test_cookiejar.py b/tests/test_cookiejar.py
-+index 9276ff252..9f279801b 100644
++index 9f279801b..be6da2a5f 100644
 +--- a/tests/test_cookiejar.py
 ++++ b/tests/test_cookiejar.py
-+@@ -1206,6 +1206,34 @@ async def test_treat_as_secure_origin() -> None:
-+     assert len(filtered_cookies) == 1
++@@ -2069,3 +2069,25 @@ async def test_cookie_jar_unsafe_property() -> None:
 + 
-+ 
-++async def test_treat_as_secure_origin_sends_secure_shared_cookie() -> None:
-++    endpoint = URL("http://127.0.0.1/")
-++
-++    jar = CookieJar(unsafe=True, treat_as_secure_origin=[endpoint])
-++    jar.update_cookies(SimpleCookie("shared-secure-cookie=first; Secure;"))
-++
-++    filtered_cookies = jar.filter_cookies(request_url=endpoint)
-++    assert "shared-secure-cookie" in filtered_cookies
++     jar_unsafe = CookieJar(unsafe=True)
++     assert jar_unsafe.unsafe is True
 ++
 ++
-++async def test_filter_cookies_with_secure_shared_cookie() -> None:
-++    """Secure shared cookies (no Domain attribute) must not be sent over cleartext."""
+++async def test_update_cookies_max_age_beyond_float_range_is_clamped() -> None:
+++    """A hostile Max-Age larger than float max must clamp, not raise OverflowError."""
+++    url = URL("https://example.com/")
 ++    jar = CookieJar()
-++    jar.update_cookies(
-++        SimpleCookie("shared-secure-cookie=first; Secure; shared-cookie=second;")
-++    )
 ++
-++    filtered = jar.filter_cookies(URL("http://example.com/"))
-++    assert set(filtered.keys()) == {"shared-cookie"}
+++    jar.update_cookies_from_headers([f"sid=x; Max-Age={'9' * 309}"], url)
 ++
-++    filtered = jar.filter_cookies(URL("https://example.com/"))
-++    assert set(filtered.keys()) == {"shared-cookie", "shared-secure-cookie"}
-++
-++    # The morsel cached by the https request must not bypass the Secure check.
-++    filtered = jar.filter_cookies(URL("http://example.com/"))
-++    assert set(filtered.keys()) == {"shared-cookie"}
+++    assert "sid" in jar.filter_cookies(url)
+++    assert jar._expirations[("example.com", "", "sid")] == CookieJar.MAX_TIME
 ++
 ++
-+ async def test_filter_cookies_does_not_leak_memory() -> None:
-+     """Test that filter_cookies doesn't create empty cookie entries.
-+ 
+++async def test_update_cookies_negative_max_age_beyond_float_range_expires() -> None:
+++    """A negative Max-Age below float min must expire the cookie, not raise."""
+++    url = URL("https://example.com/")
+++    jar = CookieJar()
+++
+++    jar.update_cookies_from_headers([f"sid=x; Max-Age=-{'9' * 309}"], url)
+++
+++    assert "sid" not in jar.filter_cookies(url)
+++    assert len(jar) == 0
 diff --git a/meta-python/recipes-devtools/python/python3-aiohttp_3.14.3.bb b/meta-python/recipes-devtools/python/python3-aiohttp_3.14.3.bb
-index b862076869..3f97b89ef2 100644
+index 3f97b89ef2..f3bb555408 100644
 --- a/meta-python/recipes-devtools/python/python3-aiohttp_3.14.3.bb
 +++ b/meta-python/recipes-devtools/python/python3-aiohttp_3.14.3.bb
-@@ -6,6 +6,8 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=b5e9e27554f71f0f132919037cb967b2"
+@@ -6,7 +6,9 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=b5e9e27554f71f0f132919037cb967b2"
  
  SRC_URI[sha256sum] = "9491196535a88924a60afd5b5f434b5b203b6cc616250878dbdb223a8f7844bc"
  
-+SRC_URI += "file://CVE-2026-111063.patch"
-+
+-SRC_URI += "file://CVE-2026-111063.patch"
++SRC_URI += "file://CVE-2026-111063.patch \
++            file://CVE-2026-111065.patch \
++"
+ 
  CVE_PRODUCT = "aiohttp:aiohttp"
  CVE_STATUS_GROUPS = "CVE_AIOHTTP_FIX_3_13_4"
- CVE_AIOHTTP_FIX_3_13_4[status] = "fixed-version: fixed in 3.13.4"
