@@ -1,60 +1,60 @@
-Received: from mail-pf1-f182.google.com (mail-pf1-f182.google.com [209.85.210.182])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.1913.1795113423231586524
+Received: from mail-pf1-f173.google.com (mail-pf1-f173.google.com [209.85.210.173])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.1915.1795113425449664849
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 19 Nov 2026 10:37:03 -0800
+ Thu, 19 Nov 2026 10:37:05 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=qvCdJlRZ;
- spf=pass (domain: gmail.com, ip: 209.85.210.182, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pf1-f182.google.com with SMTP id d2e1a72fcca58-8a07078200fso84827b3a.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 19 Nov 2026 10:37:03 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=fiVS9QXN;
+ spf=pass (domain: gmail.com, ip: 209.85.210.173, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pf1-f173.google.com with SMTP id d2e1a72fcca58-8a9f9473029so88556b3a.2
+        for <openembedded-devel@lists.openembedded.org>; Thu, 19 Nov 2026 10:37:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795113422; x=1795718222; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1795113425; x=1795718225; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=ENccA9Y/+lG02UVA4kJA3ys6/ru2f9mjV0lgJ9jCHvQ=;
-        b=qvCdJlRZ/OYc+GU+2XrOe3iQMYk6ZtwrqPQ+PlyTNPLjkGLnGISleX0WTEGPQVesOL
-         NRlkUl+a6vI3GaGt0uGCOfD1mpijnjBczCVPFL0VBxPYWvesdNQA/MCXtSHmKgbaraoP
-         FUQAAnf1nOZujjObluBoN6cnd0AtT1u+GyhKNvJZPpNW+HvErMYV/2cgNz9vS0YhvxXE
-         MDiPkVSqtMNTMgodfvCxpTG4JGzd4rR9e8MaFUz+5B9abytbiwzgsaO3BKADKipRTIFq
-         LLv5YtAP1r8pdaJf9RysCWP9sMl14c3SKclcG23Q0lQHd1QIuS1lUZCXJrZg4cSLsTBW
-         mILA==
+        bh=2QiL+MkQyXfDlSf+K9zP7OAfqo4qnyxPlwgDV8DbqVc=;
+        b=fiVS9QXNxpkXEXuwUYYZ/4VBauN3nvI4ltTTKDDdwdOFPUpq5N/hkVR4kDX9Gx4DqZ
+         9FK8k4ktNIa3mgP/513eS2ExJyNaYZb2m9s5Nk7faMNLtMHxnajCNvAtt/BeASPxbHhM
+         VPEwShqsgjwmPwjNjxw3Re06G5twYi2tBmoF7atuHg7DW75H1sgCk4yS3cYGt4UWGLP3
+         0yVQg4c+hei9+Dtnr8sAmVUcgOASK4SozrvQ0xPGu37Vy0quVETrIxPhp4uiLXqsSM2o
+         PxJfrnCXTGsObTEXzd7pzRvOetzx1rEhSG3eNlDAv0AV5cs0jspBFxPk8aQqJP0BNIZx
+         pYtA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795113422; x=1795718222;
+        d=1e100.net; s=20260707; t=1795113425; x=1795718225;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=ENccA9Y/+lG02UVA4kJA3ys6/ru2f9mjV0lgJ9jCHvQ=;
-        b=yEp7UT9a8P2IDAmeA7owhfoUCuhGHkK0ps/kVakEJAbanKv1kNTVcCALpoV/je3lPf
-         N0ZMbtKAPtNB8BWSK3uS14/rb6kv6wgKvcPX5UEEM+8IWIYvRlg0uBe6JmMLcMPm+b9O
-         +x1qJnl0nq68+HkclSA9Q7WtjaTWMNn/1FwWSBh8bB/b3QR/xX3rQj4aeiwt9pXYpiuV
-         2xrCgmCKr+SW4SzrAhfm+kiGXBl4ifoJw2KsfJHrK9LtddotPkM6qz0BSk7xf4X0K2jw
-         f8nEnjvybvjmwEEALNUjRzycDtRvWyhPdO/ooAFYDtosdTZl6pMtU3wAkevAGmomz60j
-         jbMg==
-X-Gm-Message-State: APuU4Z9giLSNRDvLbluQxVDMoz4R4LxCY6tGyPXdtXHgcFAo0EGqgXhq
-	RAu+cV0yvIvzfIY2eqSl2fhTyr3p+WfSya32q6xI5xHeZuGomhGFD6w/6y3Tug==
-X-Gm-Gg: AYBFou3KyKm8YNNqN93KEy6hiBtXla11+GGepjBGitcdmmzrfKZIH8BRTuITaMFBInS
-	aVDrKNKAz8uW0sMdK2mY2j2xIrE3nnKUcejNZ/K3lpRQT82xHyGGy+7P76ZSMi3wpcIwERxiKdy
-	YARRhxn+u47rf3GhqjMVziHSqxWo1Y2zAC98XAvwu3f++Q9D7x0vlwce1zKodYSilo1yCkXdsIw
-	bkiWgujBqgJYfRGhb+1z26zXlCorSn+Zmnt/JeKF9XMnarPriqABLQ/leZM5OO1f8QpbPpP8v7V
-	r5WXjI70Aejr53LOUPNE/rnWKtLYSL6nAhjUnp0ATzW0wTDCYRMSl7Dxdgs3E3DUjWM87yoaQJS
-	A2em61Ie1UAG+Wi0V1ifLgpjzqOtvM/1Jz+v+9A7E4fqgIbK/TMyE232up5AZ+lF4hBDDIlobsq
-	kJAlDM6ukJBGHHygYUeELMftqCNnao9Z3dSVidrQNKghJI5Xo6pRq26iK37YX225MQwR3HZRLCN
-	ApCEWYiajKXuY1pCr1IBLlGZcOcCnkzQA3F0mqUoNGzate3pQU9VZbT5OvvghvsY6QPMd674Xq3
-	YOAzSS4jC5DchFGj/C3Ma8BC3gveJa9ADhO6CjbbroEHlMgcgstrK1y1aowm4A==
-X-Received: by 2002:a05:6a00:1ad3:b0:893:1336:4816 with SMTP id d2e1a72fcca58-8c87d809a46mr467149b3a.57.1795113422552;
-        Thu, 19 Nov 2026 10:37:02 -0800 (PST)
+        bh=2QiL+MkQyXfDlSf+K9zP7OAfqo4qnyxPlwgDV8DbqVc=;
+        b=HwbT218BVoVbuv5lvA+Atmvpj/i8/maHQAcozAfFhw6ADLhbV1aYDZ+0lJv2xCFggj
+         uiUqSMF1pgmgo6O4t7Y1VQ/QSLN9d9Uq6GMNQtZhSUcoKB4tX1/vSKf7RnkqibIAvx09
+         tjzxbhDCwGM0TNBolxPBNUcru4bV55DdqMIyvTzo29OHJU9V82YpeRWm82umqS9FlPIe
+         e/ysj30lQ71SH+pkL8gs1AhyAQLG2Lb9blp65dVbFBX/FQWNC1JcV0zfLdncxX+Pb2fG
+         +n89k2orxfjcD6mNvEtJQlmuvYf2pW2b1Xx+WAfNNWOqTlsjBO8wasrecExVY8A/4g7p
+         VCGg==
+X-Gm-Message-State: APuU4Z+KeMJ8W4vpmdZlxq7GmlX4+q/SltBovMABCW0x00g2bg4chKXt
+	RsOTEfIlp6XqjA+MLHO4zNNjlT8qowN8+QUdPoN3lhTFGRa4IEl7349ngvsOJA==
+X-Gm-Gg: AYBFou2nQ5ed5Yi0m4yHnwb7ntYvW4upl+Ma2xPIX9c/S4uwe+EvYkpv29nqR3tr4V+
+	7qlHx2Za7uOFl8g1PkqpOL4+dinfr3SDIvU2GnfJ7sVEITCYyk+7LH4mWBduCMOGk8mjquco6g+
+	xBaGSIKAB46WF7+0PWzENrSKYjTX5T0c3QuGoo/6YJG6ZwdNEl3zDMmppyEVNgV03zs/9VHERo+
+	NXvN8IUzSL6fH8zlFVuAjISBNwIgORw8B8+RIdSns72K55nmvpt12UAabZsHCY/J10VfxOxwWah
+	wjqNYhVKnI9AbY2AT9fBzcu0SyHHoRb0gHbifIEYW6elI8ciozP8/Txr7A5gJjpvzU/zoYCO46N
+	G2b5zCFWjBovlHPaceiF4VumJLO12URfGAhOCUGG12bx1Ed7rfjou2DsLHnbZK9pcfD50QBDUqU
+	vqLVRqrUFMSPJ4+8R98iprAsBBti1LZ54FoI62wGu5dGYlDv0DEdix8IJdfzQ4ylK4hXog2po+V
+	nZ5SLsoH0q29MeQfV/WMfqdW0smcUFxmboLs3CHJYy2IDERsk6eQ1DIW4nWtJG7p4byEiKJ/LjP
+	phO+yayIl4p1cFuFQ4j7gOUNHmcqHh9yPAaaEDAWcgddpygx5xpfI4LVL8rA7g==
+X-Received: by 2002:a05:6a00:340a:b0:89e:848a:fc97 with SMTP id d2e1a72fcca58-8c87c95be2bmr475819b3a.35.1795113424712;
+        Thu, 19 Nov 2026 10:37:04 -0800 (PST)
 Return-Path: <ankur.tyagi85@gmail.com>
 Received: from NVAPF55DW0D-IPD.. ([147.161.217.9])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-8c872e4d7basm294518b3a.21.2026.11.19.10.37.00
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-8c872e4d7basm294518b3a.21.2026.11.19.10.37.02
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 19 Nov 2026 10:37:02 -0800 (PST)
+        Thu, 19 Nov 2026 10:37:04 -0800 (PST)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [blacksail][PATCH 26/64] hdf5: patch CVE-2026-120757
-Date: Fri, 20 Nov 2026 07:32:54 +1300
-Message-ID: <28dbc625a3b20166159912c5cbf45860d20a6185.1795112941.git.ankur.tyagi85@gmail.com>
+Subject: [blacksail][PATCH 27/64] hdf5: patch CVE-2026-120758
+Date: Fri, 20 Nov 2026 07:32:55 +1300
+Message-ID: <ae59cd88e6262be94a4c2f0fbfa069666ca75d63.1795112941.git.ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1795112941.git.ankur.tyagi85@gmail.com>
 References: <cover.1795112941.git.ankur.tyagi85@gmail.com>
@@ -62,99 +62,179 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Thu, 19 Nov 2026 18:37:06 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132716
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132717
 Content-Type: text/plain; charset="utf-8"
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
 Details:
-https://nvd.nist.gov/vuln/detail/cve-2026-120757
+https://nvd.nist.gov/vuln/detail/cve-2026-120758
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../hdf5/files/CVE-2026-120757.patch          | 63 +++++++++++++++++++
- meta-oe/recipes-support/hdf5/hdf5_2.0.0.bb    |  1 +
- 2 files changed, 64 insertions(+)
- create mode 100644 meta-oe/recipes-support/hdf5/files/CVE-2026-120757.patch
+ .../hdf5/files/CVE-2026-120758.patch          | 143 ++++++++++++++++++
+ meta-oe/recipes-support/hdf5/hdf5_2.0.0.bb    |   1 +
+ 2 files changed, 144 insertions(+)
+ create mode 100644 meta-oe/recipes-support/hdf5/files/CVE-2026-120758.patch
 
-diff --git a/meta-oe/recipes-support/hdf5/files/CVE-2026-120757.patch b/meta-oe/recipes-support/hdf5/files/CVE-2026-120757.patch
+diff --git a/meta-oe/recipes-support/hdf5/files/CVE-2026-120758.patch b/meta-oe/recipes-support/hdf5/files/CVE-2026-120758.patch
 new file mode 100644
-index 0000000000..886d6d946b
+index 0000000000..a8fb5f72ff
 --- /dev/null
-+++ b/meta-oe/recipes-support/hdf5/files/CVE-2026-120757.patch
-@@ -0,0 +1,63 @@
-+From fa4c737d41c1c86638525a290b5576c8966090d0 Mon Sep 17 00:00:00 2001
-+From: Nayyar <nayyar@bugqore.com>
-+Date: Thu, 8 Oct 2026 18:57:14 +0530
-+Subject: [PATCH] reject malformed external link data in H5L__extern_traverse
-+ (#6708)
++++ b/meta-oe/recipes-support/hdf5/files/CVE-2026-120758.patch
+@@ -0,0 +1,143 @@
++From 277a6bbfdb8e852b7bbd08ae002907fc559e0194 Mon Sep 17 00:00:00 2001
++From: tbeu <tbeu@users.noreply.github.com>
++Date: Sat, 3 Oct 2026 07:43:53 +0200
++Subject: [PATCH] Fix NULL pointer dereferences in H5HL_protect and
++ H5HL_unprotect (#6377)
 +
-+* validate external link data before parsing in traversal
++* Fix NULL pointer dereferences in H5HL_protect and H5HL_unprotect
 +
-+(cherry picked from commit 8117f4c75fdfb5e759ad73ce62d7ef4584130acd)
++When reading corrupted HDF5 files, H5HL_protect can encounter a heap
++where prfx->heap is NULL or heap->dblk_image is NULL. Similarly,
++H5HL_unprotect can encounter a heap where heap->prfx or heap->dblk has
++been set to NULL by H5HL__prfx_dest during cache eviction of corrupted
++entries. In both cases, the code proceeded to dereference NULL pointers,
++causing a segfault (found by OSS-Fuzz via matio).
 +
-+CVE: CVE-2026-120757
-+Upstream-Status: Backport [https://github.com/HDFGroup/hdf5/commit/8117f4c75fdfb5e759ad73ce62d7ef4584130acd]
++Replace the assert in H5HL_unprotect with proper NULL checks and
++HGOTO_ERROR, and add equivalent guards in H5HL_protect, so corrupted
++files are rejected gracefully instead of crashing.
++
++* Address review: drop speculative H5HL_protect NULL checks, add regression test + changelog
++
++- Remove the NULL checks in H5HL_protect for prfx->heap and heap->dblk_image.
++  prfx->heap is set in H5HL__prfx_new and only cleared in H5HL__prfx_dest (which
++  frees the prefix in the same call), so the check is unreachable and could leak
++  prfx via the done block. heap->dblk_image is NULL by design whenever the data
++  block is not contiguous with the prefix, so that check was a false positive.
++- Keep the H5HL_unprotect NULL checks for heap->prfx and heap->dblk, which are the
++  actual fix for the reported crash (OSS-Fuzz 504827191).
++- Add a regression test (corrupt_heap_unprotect) in test/lheap.c using the
++  minimized fuzzer file heap_corrupt_prfx.h5, asserting the corrupted file fails
++  gracefully instead of crashing in H5HL_unprotect.
++- Document the fix in release_docs/CHANGELOG.md.
++
++* Improve lheap regression test for H5HL_unprotect NULL deref
++
++Replace the file-based traversal (which does not deterministically reach
++the cache-eviction path that nulls heap->prfx) with a white-box check that
++protects a local heap, simulates the corrupted/evicted condition by nulling
++the heap's prfx/dblk pointers, and verifies H5HL_unprotect() returns an
++error instead of dereferencing NULL. Keep a best-effort open/traverse of the
++OSS-Fuzz minimized file (issue 504827191) as a smoke test.
++
++Verified: without the fix the test aborts (H5AC_unpin_entry(NULL)); with the
++fix it passes.
++
++* Improve lheap regression test to consider review comments
++
++* Fix formatting
++
++* test: improve lheap regression test for reviewer comments
++
++- Use H5L_info2_t in visitor (matches H5L_iterate2_t signature)
++- Use H5O_info2_t with H5Oget_info_by_name3
++- Replicate matio's exact traversal: H5Literate2 + H5Gopen2/H5Dopen2 +
++  H5Lvisit2 recursion, H5Aiterate2 attribute reads, skip #refs#/#subsystem#
++- Keep white-box deterministic NULL-pointer guard (fuzzer file does not
++  deterministically crash via public API alone; original crash required
++  matio fuzzer's specific cache-pressure environment)
++- Add CORRUPT_HEAP_TESTFILE define back for white-box test
++
++* Fix formatting
++
++* Reject a local heap unprotect when its pinned cache entry is gone
++
++H5HL_unprotect() now reports an error instead of dereferencing NULL when the
++cache entry that H5HL_protect() pinned is no longer linked to the heap, and it
++checks for that before decrementing the protect count so a rejected call leaves
++the heap unchanged. The regression test as written couldn't fail, since its cleanup
++label was after passed and every failure path still returned 0 (success).
++It also only ever built single-cache-object heaps, and didn't reach the branch the crash
++came from. It now grows a heap into a separate data block to cover both
++branches and uses the standard error reporting.
++
++---------
++
++Co-authored-by: Matthew Larson <mlarson@hdfgroup.org>
++Co-authored-by: Matt L <124107509+mattjala@users.noreply.github.com>
++Co-authored-by: Larry Knox <lrknox@hdfgroup.org>
++
++CVE: CVE-2026-120758
++Upstream-Status: Backport [https://github.com/HDFGroup/hdf5/commit/91fc37c3325264e67699408e3a190fe4f329bf85]
 +
 +Dropped changes to the test and CHANGELOG file.
 +
 +Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 +---
-+ src/H5Lexternal.c | 18 ++++++++++++++++--
-+ 1 file changed, 16 insertions(+), 2 deletions(-)
++ src/H5HL.c | 34 +++++++++++++++++++++-------------
++ 1 file changed, 21 insertions(+), 13 deletions(-)
 +
-+diff --git a/src/H5Lexternal.c b/src/H5Lexternal.c
-+index 793825d1c3d..5f874d53177 100644
-+--- a/src/H5Lexternal.c
-++++ b/src/H5Lexternal.c
-+@@ -93,7 +93,7 @@ static const H5L_class_t H5L_EXTERN_LINK_CLASS[1] = {{
-+  */
-+ static hid_t
-+ H5L__extern_traverse(const char H5_ATTR_UNUSED *link_name, hid_t cur_group, const void *_udata,
-+-                     size_t H5_ATTR_UNUSED udata_size, hid_t lapl_id, hid_t H5_ATTR_UNUSED dxpl_id)
-++                     size_t udata_size, hid_t lapl_id, hid_t H5_ATTR_UNUSED dxpl_id)
-+ {
-+     H5P_genplist_t    *plist;                              /* Property list pointer */
-+     H5G_loc_t          root_loc;                           /* Location of root group in external file */
-+@@ -121,6 +121,18 @@ H5L__extern_traverse(const char H5_ATTR_UNUSED *link_name, hid_t cur_group, cons
-+     /* Sanity checks */
-+     assert(p);
++diff --git a/src/H5HL.c b/src/H5HL.c
++index b55b3690617..838426406a9 100644
++--- a/src/H5HL.c
+++++ b/src/H5HL.c
++@@ -416,28 +416,36 @@ H5HL_unprotect(H5HL_t *heap)
++     /* Check arguments */
++     assert(heap);
 + 
-++    /* The udata holds a version/flags byte followed by two NULL-terminated
-++     * strings (file name and object path).  The strings are located below with
-++     * strlen(), so validate the buffer against udata_size first: it must have
-++     * room for both strings and end on a NULL terminator.  A malformed link
-++     * from a corrupted file would otherwise read past the udata buffer.  This
-++     * matches the checks in H5Lunpack_elink_val().
-++     */
-++    if (udata_size <= 2)
-++        HGOTO_ERROR(H5E_LINK, H5E_CANTDECODE, H5I_INVALID_HID, "external link data too small");
-++    if (p[udata_size - 1] != '\0')
-++        HGOTO_ERROR(H5E_LINK, H5E_CANTDECODE, H5I_INVALID_HID, "external link data is not NULL-terminated");
++-    /* Decrement # of times heap is protected */
++-    heap->prots--;
++-
++     /* Check for last unprotection of heap */
++-    if (heap->prots == 0) {
++-        /* Check for separate heap data block */
+++    if (heap->prots == 1) {
+++        void *pin_obj; /* Pointer to local heap object to unpin */
 ++
-+     /* Check external link version & flags */
-+     if (((*p >> 4) & 0x0F) > H5L_EXT_VERSION)
-+         HGOTO_ERROR(H5E_LINK, H5E_CANTDECODE, H5I_INVALID_HID, "bad version number for external link");
-+@@ -131,7 +143,9 @@ H5L__extern_traverse(const char H5_ATTR_UNUSED *link_name, hid_t cur_group, cons
-+     /* Gather some information from the external link's user data */
-+     file_name = (const char *)p;
-+     fname_len = strlen(file_name);
-+-    obj_name  = (const char *)p + fname_len + 1;
-++    if ((fname_len + 1) >= (udata_size - 1))
-++        HGOTO_ERROR(H5E_LINK, H5E_CANTDECODE, H5I_INVALID_HID, "external link data has no object path");
-++    obj_name = (const char *)p + fname_len + 1;
+++        /* Get the object that H5HL_protect() pinned.  It is unlinked from the
+++         * heap when the cache destroys it, which a damaged file can provoke,
+++         * so check for it before the protect count is decremented.
+++         */
++         if (heap->single_cache_obj) {
++-            /* Mark local heap prefix as evictable again */
++-            if (FAIL == H5AC_unpin_entry(heap->prfx))
++-                HGOTO_ERROR(H5E_HEAP, H5E_CANTUNPIN, FAIL, "unable to unpin local heap data block");
+++            if (NULL == heap->prfx)
+++                HGOTO_ERROR(H5E_HEAP, H5E_CANTUNPIN, FAIL, "local heap prefix is not in the cache");
+++
+++            pin_obj = heap->prfx;
++         }
++         else {
++-            /* Sanity check */
++-            assert(heap->dblk);
+++            if (NULL == heap->dblk)
+++                HGOTO_ERROR(H5E_HEAP, H5E_CANTUNPIN, FAIL, "local heap data block is not in the cache");
 + 
-+     /* Get the plist structure */
-+     if (NULL == (plist = H5P_object_verify(lapl_id, H5P_LINK_ACCESS, true)))
++-            /* Mark local heap data block as evictable again */
++             /* (data block still pins prefix) */
++-            if (FAIL == H5AC_unpin_entry(heap->dblk))
++-                HGOTO_ERROR(H5E_HEAP, H5E_CANTUNPIN, FAIL, "unable to unpin local heap data block");
+++            pin_obj = heap->dblk;
++         }
+++
+++        /* Mark local heap object as evictable again */
+++        if (FAIL == H5AC_unpin_entry(pin_obj))
+++            HGOTO_ERROR(H5E_HEAP, H5E_CANTUNPIN, FAIL, "unable to unpin local heap object");
++     }
++ 
+++    /* Decrement # of times heap is protected */
+++    heap->prots--;
+++
++ done:
++     FUNC_LEAVE_NOAPI(ret_value)
++ } /* end H5HL_unprotect() */
 diff --git a/meta-oe/recipes-support/hdf5/hdf5_2.0.0.bb b/meta-oe/recipes-support/hdf5/hdf5_2.0.0.bb
-index 390884e618..3cfce91bff 100644
+index 3cfce91bff..7117c72f96 100644
 --- a/meta-oe/recipes-support/hdf5/hdf5_2.0.0.bb
 +++ b/meta-oe/recipes-support/hdf5/hdf5_2.0.0.bb
-@@ -27,6 +27,7 @@ SRC_URI = "https://support.hdfgroup.org/releases/hdf5/v2_0/v2_0_0/downloads/${BP
-            file://CVE-2026-120689.patch \
+@@ -28,6 +28,7 @@ SRC_URI = "https://support.hdfgroup.org/releases/hdf5/v2_0/v2_0_0/downloads/${BP
             file://CVE-2026-120754-CVE-2026-120755.patch \
             file://CVE-2026-120756.patch \
-+           file://CVE-2026-120757.patch \
+            file://CVE-2026-120757.patch \
++           file://CVE-2026-120758.patch \
             "
  SRC_URI[sha256sum] = "f4c2edc5668fb846627182708dbe1e16c60c467e63177a75b0b9f12c19d7efed"
  
