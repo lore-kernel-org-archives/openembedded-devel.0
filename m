@@ -1,54 +1,54 @@
-Received: from mail-pf1-f170.google.com (mail-pf1-f170.google.com [209.85.210.170])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.1911.1795113502573609437
+Received: from mail-pf1-f169.google.com (mail-pf1-f169.google.com [209.85.210.169])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.1967.1795113506030263126
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 19 Nov 2026 10:38:22 -0800
+ Thu, 19 Nov 2026 10:38:26 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=eWxar2sB;
- spf=pass (domain: gmail.com, ip: 209.85.210.170, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pf1-f170.google.com with SMTP id d2e1a72fcca58-8c4cc85a315so108850b3a.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 19 Nov 2026 10:38:22 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=XSkhOjrX;
+ spf=pass (domain: gmail.com, ip: 209.85.210.169, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pf1-f169.google.com with SMTP id d2e1a72fcca58-8b67f25e6e1so95508b3a.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 19 Nov 2026 10:38:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795113502; x=1795718302; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1795113505; x=1795718305; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=dBAo2CjiumD4/Har+01Qsf/ylrxyQmFtyQrTXqGdvdk=;
-        b=eWxar2sB0ensh+vbRgyND/EJfef2Rl4a7iuhAKDrFcEGkohznx/YOfoFIjc8IcRhQq
-         L6SyDp3jSYZX61ub6BvfeSCOUYy5I61yWevGiXJD9KAwyqQWatJ5ErqbWoxqJa2SvDsI
-         LcN76+1j7SJp6kf1Y/FNxJJ+pTBpOGD2/aokg1F4KvJhQ26TJEEBO++Y3CfdEQFfJUoG
-         GPl4tchd/lfkRUeTBxqDVgK4YomRaFsSxUeuqaHbtd8aXxJwyYoe9zRJ3QLqz5Hd+7Gs
-         aZdrwc4Gz50bO8Fr2A05SRDAmhaZ3IEHP16EDEkAPivWmWeEA1k474ID3sgL4AEwzxqY
-         IOBg==
+        bh=G02u5csT10sC28I5ejsE9FpQRxHvf5Sp+xyFp0NCV4A=;
+        b=XSkhOjrX8DhyDFv+UGrtX0D+we6GFZ/rRhBDetJ9C/HGYHNn79A61+ow+QNHe2Dm2i
+         x1CTDJISlEc1NbFtdwXiBPyfz3ESz2Cd7l5FL8f79hsmeBEH+3JBiZrGshakMAGEHyYP
+         BIgsSXZckqUuac7THYMvOla0LR29u6mpG8WP4aLrTv5ZWX4wttfExCyTbBf2ik8+iFmr
+         K1jeYzEYPI+5GFgWUOZTZiLywzp1LFi49DJ90kr1nGckKXO6aG6CWFMEVXKgnJy6WCFH
+         +yxrcripIdgjgf52FTshtbCgDDrYaEZBoCw3/eK1NPK52Z+YjjAfLi7bWiyJf6Yi66Si
+         WZoA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795113502; x=1795718302;
+        d=1e100.net; s=20260707; t=1795113505; x=1795718305;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=dBAo2CjiumD4/Har+01Qsf/ylrxyQmFtyQrTXqGdvdk=;
-        b=RbROY/O8eQD4C+q+vFicis+quzbQYu8+Tk17TreErzVQOHVxrrOSMNPHshKAJKWxpw
-         4QePDfIraz58AUZtdir38t2/Y5RDcwSrXHvCTBqMBRli3o0wI9CRv3gch6SYuXaO7i0x
-         A1eSgtrJ1nEAYQWKW2EY8axq8vTFMcFMCEkcZfLWPZLrRGePTSPJX/haxea115EjynFU
-         jLCVUDWzs8q4+zm1fDjX6wfztsUC6zDQ744F3+IOHw0i954O8mNqcDeCaJnIarL6a+NQ
-         xLNzcYXBmqUT//fjW5EFHIgPkuuX5fryhTCCVRboMDoi0DHcV2JQRBmEZZslFw5Vj8Lg
-         8tlQ==
-X-Gm-Message-State: APuU4Z+S+B8CRPd/vFxe3gS82c9xbNgH5g+NNxFmuldgM0eUf9KLVxC7
-	CYZJzHySC6vjWhUBJdFVuNhLQZ1nYc0LaOVDkPHVjOt7nM59EUEbnUvCkQN3sA==
-X-Gm-Gg: AYBFou3hc8QqIKvv1lk/sy8xz43K8gJ+H2sPaFlhrTwHxQSMxRYssvCM0nz8IdC8dDw
-	039Y+FkMDAZzF8nY3Drk+PCc7c2tVilcxw9m4c/jqn/51/3GHiiIAK45oVGfjwO0V1qaV9rc/jG
-	xMZdUKYvhB7OD4pLQ2366AiLMwnUzMSpiLhA0gm4RidtffqzZm3GK92sgrJPLXgg9pa2JZQvOga
-	B2x6biV0tBOArPEWFcvcSza/QG4fTeA/isSjMo6lq9g+X6ytKi7lnnyD7ErHFpEh7OVJW2L3rWt
-	qsfDrcMgiM2tygkTiOa5XH/WkB9NMEplco3dGUV9tvijMHPmZ/F7416IxEmueXuvfcD8WAq/3dY
-	egevPThfuWTe8LlmRTqAVTywJLCBtbGuEESOT50sTEhcpa6YD6uClONglOvY6pnsMSbnlaAv0ew
-	YvdekcPenB7yEPTHL3tNeOIbLmHWx8HvoExAnrU9LxSkZRxJ95OrADujes51GTJnkiIJEXOlnbH
-	0IOvnjppTh7kpjzJCcSTJS2uOVWhIMIRrHLCglrxWTAYQhit+7qSb2Wualn9nDEi+lAIqrZhKwA
-	CZsQFT2R8uJbaKuh2Rot5qKrvMhxG26nkPp/i2W/yGxU2YyEQzitY+AnimNk3w==
-X-Received: by 2002:a05:6372:a70f:b0:3fb:4a1e:2f7c with SMTP id adf61e73a8af0-4014e351c1fmr414613637.57.1795113501923;
-        Thu, 19 Nov 2026 10:38:21 -0800 (PST)
+        bh=G02u5csT10sC28I5ejsE9FpQRxHvf5Sp+xyFp0NCV4A=;
+        b=lRHa16TOZ8P5BVxanolHYvTJATZ6IcnKa7/VHkuY5FVHnwQGbRU+xhvWCqL8/TD9ZB
+         XGShQ/1oJNgydqVxxzMyTyfssdokJ3UykUY6sUedRRDEMQF1a6YoShSKGxS/ZFghwCwZ
+         /mKc/AehMamu3eYLkJkGNhf+8wkbwmr9E+v24YvVTUbBe29lqjmAftR4YDooJKQhofwC
+         jbT0ItMdu2QhgIeJxd5b+UHZ0xynD5BPTcHFAdSre4nB4p/Da3xM6Ll9x3M9YeAPueTk
+         iMwImR6zM2ql4mI6Xe6/hCYk3aEJ6bgZEgvFjsDlCL69JrCD4xFScFyowYC5Kl1LGf6m
+         OHuw==
+X-Gm-Message-State: APuU4Z+HxhHKdhEIYOsvyFXXouxtspXwplcqNRh0jmY8yTSZZL1rvylc
+	ZX6Plxx5wQjJltEmrs+wiSSaQ7g+JcOxSnjEDIAwFV8qlzZxZ+XfWeDoB4srWA==
+X-Gm-Gg: AYBFou02trDwC5aYET9ewoQfmDIiLUQizsiH3e8s3YgqumPaMjnNOljwCHKYA7G46vh
+	dGDMLHB4BAyYLKgpZrHt++Y06Z1ydxnFVkDryb3leHhco5tgc3e+/yENwsdPJLxEkodyIvU4Eps
+	Gnfdp8Pds9U1mHYzR/h1NYMFlRz+ekonypxcCfH2uCDEGF30w5R6ImUJXTQe9YJO8tOEflIz/XW
+	PI4sv8RVRT1f8aZZQf9a+nQYP34rQwH19jXCajyXrW9sAPrq+EMzK8vFe3g0vWJt6WchuegnsV4
+	2WaOl4RYmb72FkOXuErTPPOuHf7iSKM/0zIh595Ksm5CppD+esNLj3MioBnXuvdk2H1aWrycUc3
+	PM3sd/MZKExQdEp0CF4RTbq9IOSbhLj8zTA41M2PxCzrU510PzuaJk9chr+zzfRSaSCuD09IuEr
+	wUtynFLfig6h5r5o74owpDWOdIz7i1HCuqCDbujTmaOGe8DF7zeC43X00y+cHnexSlM1cJCyIF2
+	Q6FdRX1zoK4Hj9zJ9zFtMLxq0FFkCsf5VuG24wY3nFwyj95KUVB+DZnjkJYIUmtc9pJ7KMe81Oi
+	6lNAznGeKlnjL1HDo9GnKRS4Qwy3ffWhJmDRwDLO9RO71v8c01yKTsCmeRg2u2oD
+X-Received: by 2002:a05:6a00:3c84:b0:89e:ba55:119a with SMTP id d2e1a72fcca58-8c87d123bd5mr470719b3a.47.1795113505435;
+        Thu, 19 Nov 2026 10:38:25 -0800 (PST)
 Return-Path: <ankur.tyagi85@gmail.com>
 Received: from NVAPF55DW0D-IPD.. ([147.161.217.9])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-8c872e4d7basm294518b3a.21.2026.11.19.10.38.18
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-8c872e4d7basm294518b3a.21.2026.11.19.10.38.22
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 19 Nov 2026 10:38:21 -0800 (PST)
+        Thu, 19 Nov 2026 10:38:25 -0800 (PST)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Gyorgy Sarvari <skandigraun@gmail.com>,
@@ -56,9 +56,9 @@ Cc: Gyorgy Sarvari <skandigraun@gmail.com>,
 	Mike Looijmans <mike.looijmans@topic.nl>,
 	Khem Raj <khem.raj@oss.qualcomm.com>,
 	Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [blacksail][PATCH 57/64] mongodb: upgrade 4.4.29 -> 4.4.30
-Date: Fri, 20 Nov 2026 07:33:25 +1300
-Message-ID: <8227b9d8fb8e9e7837b3a7d48bf6bc7abc6a244e.1795112941.git.ankur.tyagi85@gmail.com>
+Subject: [blacksail][PATCH 58/64] mongodb: ignore CVE-2025-14911
+Date: Fri, 20 Nov 2026 07:33:26 +1300
+Message-ID: <7d9eb9deeb2422cd6346aa98f85f2659596af3d6.1795112941.git.ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1795112941.git.ankur.tyagi85@gmail.com>
 References: <cover.1795112941.git.ankur.tyagi85@gmail.com>
@@ -66,38 +66,39 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Thu, 19 Nov 2026 18:38:28 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132747
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132748
 Content-Type: text/plain; charset="utf-8"
 
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 
-This is a security release to fix CVE-2025-14847:
-https://nvd.nist.gov/vuln/detail/CVE-2025-14847
+Details: https://nvd.nist.gov/vuln/detail/CVE-2025-14911
+
+The CVE is currently tracked without valid CPE. The vulnerability
+affects mongo-c-driver component, not mongodb. They are also stored
+in different repositories.
+
+Due to this, ignore this CVE.
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 Signed-off-by: Anuj Mittal <anuj.mittal@oss.qualcomm.com>
+
 Signed-off-by: Mike Looijmans <mike.looijmans@topic.nl>
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
-(cherry picked from commit 08c49b447b5a615aaaeb89802f503ec6d1722b74)
+(cherry picked from commit 272e975c34e5bd8863e72477c461755839932d88)
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../meta-python/recipes-dbs/mongodb/mongodb_git.bb          | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ .../meta-python/recipes-dbs/mongodb/mongodb_git.bb               | 1 +
+ 1 file changed, 1 insertion(+)
 
 diff --git a/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb_git.bb b/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb_git.bb
-index ae9123c7c4..ccae6e9dcd 100644
+index ccae6e9dcd..e7a4d1e34b 100644
 --- a/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb_git.bb
 +++ b/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb_git.bb
-@@ -11,9 +11,9 @@ DEPENDS = "openssl libpcap zlib boost curl python3 \
+@@ -51,6 +51,7 @@ SRC_URI:append:toolchain-clang = "\
  
- inherit scons dos2unix siteinfo python3native systemd useradd
+ CVE_STATUS[CVE-2014-8180] = "not-applicable-config: Not affecting our configuration so it can be safely ignored."
+ CVE_STATUS[CVE-2017-2665] = "not-applicable-config: Not affecting our configuration so it can be safely ignored."
++CVE_STATUS[CVE-2025-14911] = "cpe-incorrect: The vulnerability is about mongo-c-driver application, not mongodb"
  
--PV = "4.4.29"
--#v4.4.29
--SRCREV = "89d6ffe6fc67b36fd47aff6425087003966588e3"
-+PV = "4.4.30"
-+#v4.4.30
-+SRCREV = "1ae4c9990dbc5711f3500748f0c3f8b5d375d8c0"
- SRC_URI = "git://github.com/mongodb/mongo.git;branch=v4.4;protocol=https \
-            file://0001-Tell-scons-to-use-build-settings-from-environment-va.patch \
-            file://0001-Use-long-long-instead-of-int64_t.patch \
+ COMPATIBLE_HOST ?= '(x86_64|i.86|powerpc64|arm|aarch64).*-linux'
+ 
