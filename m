@@ -1,64 +1,64 @@
-Received: from mail-pg1-f177.google.com (mail-pg1-f177.google.com [209.85.215.177])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.1963.1795113498946979295
+Received: from mail-pf1-f170.google.com (mail-pf1-f170.google.com [209.85.210.170])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.1911.1795113502573609437
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 19 Nov 2026 10:38:19 -0800
+ Thu, 19 Nov 2026 10:38:22 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=h04L5g9x;
- spf=pass (domain: gmail.com, ip: 209.85.215.177, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pg1-f177.google.com with SMTP id 41be03b00d2f7-cd60c5da24cso64486a12.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 19 Nov 2026 10:38:18 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=eWxar2sB;
+ spf=pass (domain: gmail.com, ip: 209.85.210.170, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pf1-f170.google.com with SMTP id d2e1a72fcca58-8c4cc85a315so108850b3a.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 19 Nov 2026 10:38:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795113498; x=1795718298; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1795113502; x=1795718302; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=a6dtomXhJw3L747O4LdctiC4Rv6OGDo+uvglyG7Zh5w=;
-        b=h04L5g9xMQEDDcrba8wD+tA7iQRpXt778FHmsqFTFBC0A4zpSLfXJAGJcKGcww7rkV
-         gf3oDw4Wc4u8mDlvO2UWs5JUaNyqLj0RGM6Wd0ebx1AQrbgJm7gFb3xi7MZPxJPWQ0QE
-         98lTSQSr97R7IxeKCT4M/4gIqA2Jg+QCwUf36z4QD8xpHHnwviUGaSnRT4rff6UcE3No
-         jM/NDmJkkFdq9n0PSXhS7BqiLTMfAZ0q7AfWHSUxHU2N4XaLwmpDjyjY2R9ggPbJfjZ1
-         ySs4aw0C+qX/qNZUIwzypLIe4L1TeuVNZRYCpayc/ZdeGfnoigOTxuCDLlG8TBv6VHss
-         6i7A==
+        bh=dBAo2CjiumD4/Har+01Qsf/ylrxyQmFtyQrTXqGdvdk=;
+        b=eWxar2sB0ensh+vbRgyND/EJfef2Rl4a7iuhAKDrFcEGkohznx/YOfoFIjc8IcRhQq
+         L6SyDp3jSYZX61ub6BvfeSCOUYy5I61yWevGiXJD9KAwyqQWatJ5ErqbWoxqJa2SvDsI
+         LcN76+1j7SJp6kf1Y/FNxJJ+pTBpOGD2/aokg1F4KvJhQ26TJEEBO++Y3CfdEQFfJUoG
+         GPl4tchd/lfkRUeTBxqDVgK4YomRaFsSxUeuqaHbtd8aXxJwyYoe9zRJ3QLqz5Hd+7Gs
+         aZdrwc4Gz50bO8Fr2A05SRDAmhaZ3IEHP16EDEkAPivWmWeEA1k474ID3sgL4AEwzxqY
+         IOBg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795113498; x=1795718298;
+        d=1e100.net; s=20260707; t=1795113502; x=1795718302;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=a6dtomXhJw3L747O4LdctiC4Rv6OGDo+uvglyG7Zh5w=;
-        b=uDlpx2RFxEwPWCF6TXIcfnpMmo9X3VU4Q01Wm1eLVW8KSz7uQf4mGCxhxOyt7ZqMCT
-         dCRrRB/RfvS9AcT1ChKmdxb8I8rNa+p+qkmVK2az9Uji5qaZ9KRrtymm/rkcoja7n6It
-         67G5uEOWocA35n6IcfoGbAkgHiZFBvBwLFys0NLVnW/W2825pIbilHFfNR133OkKLOrf
-         vfkkcivg0ZbpDdHFTvNk46qhWNFOL8V9DHTBMsMQHGd5kBEsgkGI+3KaHNHX+rqFaKUy
-         829N+YjwjbvqWuMTWru2jPeoV0JNhWR7U//JjtM+qZvtqD6RurdgpzSqEo9scJmQkTTr
-         DxGA==
-X-Gm-Message-State: APuU4Z/wFLTTh3FuHTFBBrD4ZutiDwn4HG0gPWExzW3e3TDQqdWfg3tV
-	Mt4soFG5f+Em8+AONSGeUo4l0CcsxM/EeUywS5ve3iXg6hd83UZklcbPbqgF8w==
-X-Gm-Gg: AYBFou3EOc8TzNoO/zrqryyyWcyZhuuXEok3kBgmc/u/vpdZ/tp23nNl6M83tTzkT/X
-	tI0Y3VxFij6odqx5IGs6iGI48B3q78bEn6kyMS4kifOmcdDPmH9ACbdG1XLsq2qBnKhJJjKY3Zd
-	j+H2i60ujymFlVWpoCWGGx3gCTvGc8UeNMVJXe5IsGsO1xN1Dgh/yeT6JrxFM2m3NO/xNgyW0ss
-	l5q+7g/h9wWFztQFZ4N6YgoqsetKDF2/k75odUG+3MWpRaJ3KkUAjz06pzAy5qR77/7QwRtZ1zG
-	jTH43q+tUCaw8NXqV16l90JXOFT9BXBKiqcanNEuDZA/V8w54/RFhn+jrmg8ZxqT1+5cEDH6nps
-	UgIDRv5TvEvFs8ggiCEQ+zExKgufDse5ez3kQuMicW0PPmPfPRnSEzrNHYDA6tAYateHdUA9E+F
-	1V+u9EUzaXeorHslhNtE+Uvax+6dYxLpb0YohwmiNZa8QmOU1VCSrTzXz++7beSBGeyZay2+GKb
-	Ou67o7Ep32eiLYAQ71HsU0ma4CnDyn+8qcNftqSXmEoIVRrDBQwaO0I3T+q48dbuIxlAsfzPTdP
-	cx6jHPFKTceY/nIafhUIFUNJ/ZN6kcqvc0FRydnF0gG6UwLa9XUjsM9yh64gAQ==
-X-Received: by 2002:a05:6a20:6a0c:b0:3f9:503d:ee7d with SMTP id adf61e73a8af0-4014b65ccf2mr543548637.17.1795113498272;
-        Thu, 19 Nov 2026 10:38:18 -0800 (PST)
+        bh=dBAo2CjiumD4/Har+01Qsf/ylrxyQmFtyQrTXqGdvdk=;
+        b=RbROY/O8eQD4C+q+vFicis+quzbQYu8+Tk17TreErzVQOHVxrrOSMNPHshKAJKWxpw
+         4QePDfIraz58AUZtdir38t2/Y5RDcwSrXHvCTBqMBRli3o0wI9CRv3gch6SYuXaO7i0x
+         A1eSgtrJ1nEAYQWKW2EY8axq8vTFMcFMCEkcZfLWPZLrRGePTSPJX/haxea115EjynFU
+         jLCVUDWzs8q4+zm1fDjX6wfztsUC6zDQ744F3+IOHw0i954O8mNqcDeCaJnIarL6a+NQ
+         xLNzcYXBmqUT//fjW5EFHIgPkuuX5fryhTCCVRboMDoi0DHcV2JQRBmEZZslFw5Vj8Lg
+         8tlQ==
+X-Gm-Message-State: APuU4Z+S+B8CRPd/vFxe3gS82c9xbNgH5g+NNxFmuldgM0eUf9KLVxC7
+	CYZJzHySC6vjWhUBJdFVuNhLQZ1nYc0LaOVDkPHVjOt7nM59EUEbnUvCkQN3sA==
+X-Gm-Gg: AYBFou3hc8QqIKvv1lk/sy8xz43K8gJ+H2sPaFlhrTwHxQSMxRYssvCM0nz8IdC8dDw
+	039Y+FkMDAZzF8nY3Drk+PCc7c2tVilcxw9m4c/jqn/51/3GHiiIAK45oVGfjwO0V1qaV9rc/jG
+	xMZdUKYvhB7OD4pLQ2366AiLMwnUzMSpiLhA0gm4RidtffqzZm3GK92sgrJPLXgg9pa2JZQvOga
+	B2x6biV0tBOArPEWFcvcSza/QG4fTeA/isSjMo6lq9g+X6ytKi7lnnyD7ErHFpEh7OVJW2L3rWt
+	qsfDrcMgiM2tygkTiOa5XH/WkB9NMEplco3dGUV9tvijMHPmZ/F7416IxEmueXuvfcD8WAq/3dY
+	egevPThfuWTe8LlmRTqAVTywJLCBtbGuEESOT50sTEhcpa6YD6uClONglOvY6pnsMSbnlaAv0ew
+	YvdekcPenB7yEPTHL3tNeOIbLmHWx8HvoExAnrU9LxSkZRxJ95OrADujes51GTJnkiIJEXOlnbH
+	0IOvnjppTh7kpjzJCcSTJS2uOVWhIMIRrHLCglrxWTAYQhit+7qSb2Wualn9nDEi+lAIqrZhKwA
+	CZsQFT2R8uJbaKuh2Rot5qKrvMhxG26nkPp/i2W/yGxU2YyEQzitY+AnimNk3w==
+X-Received: by 2002:a05:6372:a70f:b0:3fb:4a1e:2f7c with SMTP id adf61e73a8af0-4014e351c1fmr414613637.57.1795113501923;
+        Thu, 19 Nov 2026 10:38:21 -0800 (PST)
 Return-Path: <ankur.tyagi85@gmail.com>
 Received: from NVAPF55DW0D-IPD.. ([147.161.217.9])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-8c872e4d7basm294518b3a.21.2026.11.19.10.38.14
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-8c872e4d7basm294518b3a.21.2026.11.19.10.38.18
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 19 Nov 2026 10:38:17 -0800 (PST)
+        Thu, 19 Nov 2026 10:38:21 -0800 (PST)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Cc: Awais Belal <awais.belal@gmail.com>,
-	Armin Kuster <akuster808@gmail.com>,
+Cc: Gyorgy Sarvari <skandigraun@gmail.com>,
+	Anuj Mittal <anuj.mittal@oss.qualcomm.com>,
 	Mike Looijmans <mike.looijmans@topic.nl>,
 	Khem Raj <khem.raj@oss.qualcomm.com>,
 	Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [blacksail][PATCH 56/64] mongodb: update to 4.4.29
-Date: Fri, 20 Nov 2026 07:33:24 +1300
-Message-ID: <dfc3118d3fd0b234b7743572ea3ffc2a3e8424a9.1795112941.git.ankur.tyagi85@gmail.com>
+Subject: [blacksail][PATCH 57/64] mongodb: upgrade 4.4.29 -> 4.4.30
+Date: Fri, 20 Nov 2026 07:33:25 +1300
+Message-ID: <8227b9d8fb8e9e7837b3a7d48bf6bc7abc6a244e.1795112941.git.ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1795112941.git.ankur.tyagi85@gmail.com>
 References: <cover.1795112941.git.ankur.tyagi85@gmail.com>
@@ -66,81 +66,38 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Thu, 19 Nov 2026 18:38:28 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132746
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132747
 Content-Type: text/plain; charset="utf-8"
 
-From: Awais Belal <awais.belal@gmail.com>
+From: Gyorgy Sarvari <skandigraun@gmail.com>
 
-Move on to 4.4.29 and drop a patch that is not applicable anymore.
+This is a security release to fix CVE-2025-14847:
+https://nvd.nist.gov/vuln/detail/CVE-2025-14847
 
-Signed-off-by: Awais Belal <awais.belal@gmail.com>
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+Signed-off-by: Anuj Mittal <anuj.mittal@oss.qualcomm.com>
 Signed-off-by: Mike Looijmans <mike.looijmans@topic.nl>
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
-(cherry picked from commit 245b2dceb256932c62e762839adb57c0dec32edf)
+(cherry picked from commit 08c49b447b5a615aaaeb89802f503ec6d1722b74)
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- ...001-free_mon-Include-missing-cstdint.patch | 28 -------------------
- .../recipes-dbs/mongodb/mongodb_git.bb        |  7 ++---
- 2 files changed, 3 insertions(+), 32 deletions(-)
- delete mode 100644 meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb/0001-free_mon-Include-missing-cstdint.patch
+ .../meta-python/recipes-dbs/mongodb/mongodb_git.bb          | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb/0001-free_mon-Include-missing-cstdint.patch b/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb/0001-free_mon-Include-missing-cstdint.patch
-deleted file mode 100644
-index 8cee14889f..0000000000
---- a/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb/0001-free_mon-Include-missing-cstdint.patch
-+++ /dev/null
-@@ -1,28 +0,0 @@
--From 5d8218b8a1b5bc71e2a0cf543a000e194daba599 Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Sun, 29 Jan 2023 17:15:30 -0800
--Subject: [PATCH] free_mon: Include missing <cstdint>
--
--gcc 13 moved some includes around and as a result <cstdint> is no
--longer transitively included [1]. Explicitly include it
--for uintXX_t.
--
--[1] https://gcc.gnu.org/gcc-13/porting_to.html#header-dep-changes
--
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
--
--Upstream-Status: Pending
-----
-- src/mongo/db/free_mon/free_mon_options.h | 1 +
-- 1 file changed, 1 insertion(+)
--
----- a/src/mongo/db/free_mon/free_mon_options.h
--+++ b/src/mongo/db/free_mon/free_mon_options.h
--@@ -29,6 +29,7 @@
-- 
-- #pragma once
-- 
--+#include <cstdint>
-- #include <string>
-- #include <vector>
-- 
 diff --git a/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb_git.bb b/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb_git.bb
-index 8f28bc76c6..ae9123c7c4 100644
+index ae9123c7c4..ccae6e9dcd 100644
 --- a/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb_git.bb
 +++ b/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb_git.bb
 @@ -11,9 +11,9 @@ DEPENDS = "openssl libpcap zlib boost curl python3 \
  
  inherit scons dos2unix siteinfo python3native systemd useradd
  
--PV = "4.4.24"
--#v4.4.24
--SRCREV = "0b86b9b7b42ad9970c5f818c527dd86c0634243a"
-+PV = "4.4.29"
-+#v4.4.29
-+SRCREV = "89d6ffe6fc67b36fd47aff6425087003966588e3"
+-PV = "4.4.29"
+-#v4.4.29
+-SRCREV = "89d6ffe6fc67b36fd47aff6425087003966588e3"
++PV = "4.4.30"
++#v4.4.30
++SRCREV = "1ae4c9990dbc5711f3500748f0c3f8b5d375d8c0"
  SRC_URI = "git://github.com/mongodb/mongo.git;branch=v4.4;protocol=https \
             file://0001-Tell-scons-to-use-build-settings-from-environment-va.patch \
             file://0001-Use-long-long-instead-of-int64_t.patch \
-@@ -32,7 +32,6 @@ SRC_URI = "git://github.com/mongodb/mongo.git;branch=v4.4;protocol=https \
-            file://0001-add-explict-static_cast-size_t-to-maxMemoryUsageByte.patch \
-            file://0001-server-Adjust-the-cache-alignment-assumptions.patch \
-            file://0001-The-std-lib-unary-binary_function-base-classes-are-d.patch \
--           file://0001-free_mon-Include-missing-cstdint.patch \
-            file://0001-apply-msvc-workaround-for-clang-16.patch \
-            file://0001-Fix-type-mismatch-on-32bit-arches.patch \
-            file://0001-Fix-build-on-32bit.patch \
