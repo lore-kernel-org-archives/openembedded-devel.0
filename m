@@ -1,235 +1,120 @@
-Received: from aer-iport-5.cisco.com (aer-iport-5.cisco.com [173.38.203.67])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.4445.1795175881503278797
+Received: from mail-wr1-f45.google.com (mail-wr1-f45.google.com [209.85.221.45])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.8739.1795189706464853648
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 20 Nov 2026 03:58:02 -0800
+ Fri, 20 Nov 2026 07:48:26 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=JGcFI7mK;
- spf=pass (domain: cisco.com, ip: 173.38.203.67, mailfrom: asparmar@cisco.com)
+ dkim=pass header.i=@snap.com header.s=google header.b=CeTpPMxW;
+ spf=pass (domain: snapchat.com, ip: 209.85.221.45, mailfrom: ecordonnier@snapchat.com)
+Received: by mail-wr1-f45.google.com with SMTP id ffacd0b85a97d-498f5fa5103so639689f8f.2
+        for <openembedded-devel@lists.openembedded.org>; Fri, 20 Nov 2026 07:48:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=cisco.com; i=@cisco.com; l=6156; q=dns/txt;
-  s=iport01; t=1795175881; x=1796385481;
-  h=from:to:cc:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=5mUZK+Ll2vvqvqsIlWP/r+heSR27vWAj1KlgQAcXt1w=;
-  b=JGcFI7mKUGqKdu1qiVr1Zvk23cyqBcVMfuMZuto8Knp3Zs6IXG26l6zN
-   6Lfuo940X/tHH9DiWKAo3hvhd344Z6FlCcRRwv0gV12X46BwNgCQ77iWu
-   Ykv4TCxtrfQr5TTcJWRkD4dhtFkroil0WGjkYn5UwrXPrE2UK8PaOspuY
-   bDZpuV/txLhG+PljhFAP8QSb1HUu92TZX8UoLAo/pZiRvLRwp++UMKf7A
-   MoHLN9FP1z7QzmqOENt1U8eTJrp7E3kZKEpa20g7V42nqEi6qVRSfzB+v
-   9hHYcpn1gw4mdkHh9vkBNDHJueFdHrA/TFiYJAMmeQZsL4tedRrnXD+u9
-   g==;
-X-CSE-ConnectionGUID: ALwusNfzR8OudCa7RnmbGQ==
-X-CSE-MsgGUID: urT9T1hUTA6/17ZtxtIbUA==
-X-IPAS-Result: =?us-ascii?q?A0BFAgBYNABr/85K/pBaglmCV3VhQkmiNJJDgX4PAQEBD?=
- =?us-ascii?q?0QNBAEBhQUCjiECJjQJDgECBAMCAwEBAQEBAQEBAQEBAQoBAQUBAQECAQcFg?=
- =?us-ascii?q?Q4Thk8NkBIBAgE1ARgBLSwDAQJPCyMhgwIBgjoDNwIBEbkXgiyBAYMpAT8CQ?=
- =?us-ascii?q?1DYTA2CWgELFAEFgTOFQoMAhSRdGAGEfScbG4FyhH+BBYEaGCoBAYFIhl4Eg?=
- =?us-ascii?q?iKBDIFUjRcCgU+IJkiBHgNZLAFVEw0KCwcFgWgDNRIqFW4yHYEjOxeBBxsGB?=
- =?us-ascii?q?YEcgR6BEoEDXYErKF0BIYEIgXYCglGCAAIBSUEOB0VTCSVDEkckIggSCQETG?=
- =?us-ascii?q?iwKgRo1PAkmPxUMZwsaBWEIAg0MdDkQMB4kLwUaJj4bCoEMJx8eGw4CHxAGD?=
- =?us-ascii?q?RgNSBEsNxUZBD5uB5NsgxmBDgErgjKTMQGSPaAgcQoog3mMJI8+hXwaM4Vbp?=
- =?us-ascii?q?RcLmH2OCoQKhCKOJYRqgWg8gUcLB3AVgyIJShkPji4LC4NggX+DZch3IzUCC?=
- =?us-ascii?q?TIBAQcCBw4DC4FokX4BAQ?=
-IronPort-Data: A9a23:zq8hwKkFKoayZ9M1jyz+Rujo5gzWJ0RdPkR7XQ2eYbSJt1+Wr1Gzt
- xJJW26FbPrcNzf9fNAgaY2zpxsB68KAytQ2T1c//yxmHltH+JHPbTi7wugcHM8zwunrFh8PA
- xA2M4GYRCwMZiaC4Errav6x9yQUOZigHtLUEPTDNj16WThqQSIgjQMLs+Mii+aEu/Dha++2k
- Y20+ZK31GONgWYubDtNsfra8XuDgdyr0N8mlg1mDRx0lAe2e0k9VPo3Oay3Jn3kdYhYdsbSb
- /rD1ryw4lTC9B4rDN6/+p6jGqHdauePVeQmoiM+t5mK2nCulARrukoIHKZ0hXNsttm8t4sZJ
- OOhGnCHYVxB0qXkwIzxWvTDes10FfUuFLTveRBTvSEPpqHLWyOE/hlgMK05FaQ85ftsJ29cz
- 6w/NTwmZ0+5gee874vuH4GAhux7RCXqFIoSoDRkiDreF/tjGc2FSKTR7tge1zA17ixMNa+CO
- 4xDNGYpM0iGOUURUrsUIMpWcOOAj2LneiddoUi9rqss6G+Vxwt0uFToGIeEJIXUFJgM9qqej
- n/cwzXFWxEnCPXBjmPawG68ms7FoAquDer+E5X9rJaGmma7wXQeDhATX1a3rfS1z0KzRd9bA
- 0gV4TY1668q+UqmS9PwUxG1rDiDpBF0ZjZLO+Q38kSJj6HT+QvcXjVCRT9aY9tgv8gzLdA36
- mK0cxrSLWQHmNWopbi1r994cRva1fApEFI/
-IronPort-HdrOrdr: A9a23:F6SUxqoBq5MmYbj9dsXfQUgaV5oHeYIsimQD101hICG9vPb2qy
- nIpoV/6faaslcssR0b9OxoW5PwI080i6QU3WB5B97LN2PbUQCTQr2Kg7GP/9TIIVybygck79
- YCT4FOTPvtEFN9kcH2pCO8E9om3Z271ZrAv5a485+oJjsaEp2JKGxCe2CmLnE=
-X-Talos-CUID: 9a23:1AKBaG8n499bBQk5JEuVv2cwBd0+VHPP9if3PkOTADlTTrifZmbFrQ==
-X-Talos-MUID: 9a23:BzRgXgUVItxAzhrq/CL2uGBebcdV343wTxlSo4kWp+iOCAUlbg==
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-AV: E=Sophos;i="6.27,222,1787011200"; 
-   d="scan'208";a="59616951"
-Received: from aer-l-core-05.cisco.com ([144.254.74.206])
-  by aer-iport-5.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 20 Nov 2026 11:57:59 +0000
-Received: from sjc-ads-20495.cisco.com (sjc-ads-20495.cisco.com [171.70.188.248])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
-	 client-signature RSA-PSS (4096 bits) client-digest SHA256)
-	(Client CN "ciscoit-managed-infra-smtp-auth.cisco.com", Issuer "Internal Private TLS SubCA" (verified OK))
-	by aer-l-core-05.cisco.com (Postfix) with ESMTPS id DF4C0180003BA;
-	Fri, 20 Nov 2026 11:57:58 +0000 (GMT)
-Received: by sjc-ads-20495.cisco.com (Postfix, from userid 1877012)
-	id 95F46CC1634; Fri, 20 Nov 2026 03:57:57 -0800 (PST)
-From: "Ashishkumar Parmar X (asparmar - E INFOCHIPS PRIVATE LIMITED at Cisco)" <asparmar@cisco.com>
+        d=snap.com; s=google; t=1795189704; x=1795794504; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=GPPId0IBiXeEJEFWMtd23CnXechn1Qrhxz1HCkJ+Z88=;
+        b=CeTpPMxWB8GUaD1EmrAUswRO54j3ipAmbvCLpWWxzfEh47xdVXDn6AeqUWcqsOmH/Q
+         kxLUg714eI9jHlZAIJGyOAHWzD3xyJyhy/CPJIPygHY3j0oyHajVav4DVlL3YtyraBgk
+         pf4uzrY+cgxk4gOXly9mgjzj/OmNZP8HY1oaY=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1795189704; x=1795794504;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=GPPId0IBiXeEJEFWMtd23CnXechn1Qrhxz1HCkJ+Z88=;
+        b=bXBIQ90de2jO8gh2E006x7Cpu5v/s+pLVHPrUwMru8fmOkxqN/MSewako5u7lfULr2
+         g0MEOIjElWYIM24WREYQ+akBEOySQXCcMvqCxLERkpxE+rOj7ljtRugRI/Vw14a3djmM
+         osYtf7PphTWmgqmRZ/FuzaEtcrEIzhJ95H4AJPNAS2dfbmIjSJCxYrSZOexscWG0z6GB
+         s5urLBVIukrn53OyrDF0TYBJ5+3/s/hJL0gT+0JmS/PpKq5+I/5O53277thunHV/A1QN
+         t+XWLBh5Yr4AUjF6awF2QI9uDnXqHJ6HYrkBjJornCyV2X7mS0ZZ9cGQtnKfJZss495q
+         m5ew==
+X-Gm-Message-State: APuU4Z+QLjGi1tRdebYL6DWYHUak3OBfXI/29XoxQ/x9LpnX6TUvUfzP
+	0amNkUUXkvf+0YYFoO02H2m2giJZhb1T1c1p3oXkXF6xVGIo/rU1LjV+l6l3kYdTB7hoIMMPTIv
+	Ug1PSfuI=
+X-Gm-Gg: AZFdTZc0F2CRcXK+04pYOcPO5d5seVuChw+FgfFeUYab7ZJuE37FRd/eI9C5PtFrP4d
+	DftflOwjwmQPx4QmCylHcfYMjRG3G+R/TVZ4zupaR28QUdky3VXWEB4MKWda908tZ+AkI9U1LAC
+	1o70S778efU/0Ge/k/FlHcKY8I0mAI2DtS50IMjHh+Dx/uIl6a5IH6Gy3lOh1AShQKiCetTmA9E
+	DEnvbVsneGX2XsZxM1XWSE2Rf5GBMoi56nlHmI8ssUALe77C4G0vV5aZrvuMSH0R01cyBKfgCro
+	77rA13Xq+fGCoTF/ik0LKBNS02gangWPWouCZr/n+Cf71vJvTtumxqS7EcrJAZGork9nFzif+PE
+	+dW5z+mV7fWoGVTRUHkG63Yf76OJaDbc2QoCpWlv7dChXZDtMaRqYrQL2SE/fjTPeZMPQcdlRgj
+	qwt9qt2d62KVtyevOR775PK8sLOIyFAdZ2Ux9ZWGXEmMrr/cJ8LEsUCunw2DhQS2vJhcPOIi4lZ
+	qTDhZ6S2Nu78DHUaO258UvGFJ9cgWUbcM0X1zTOsp29U0r711ymwTnYWoymq79PPvfseB9Bqdxa
+	QrEQ/dIooUA5ciOedySuBFo6kJ0/naEzBX3LM2kZmoZ6JQ9cS4qWPQgVDyvWs2f3gOM+VlMD7iF
+	SuIlGp9Cikxt+K3IvwMGwZxhsYi7kNiXDpM0GgJOcxeu3T0BsJn33y1bXnykBn0aCT9lukq3Xov
+	tQHzFe68vKOUxoVMiAzwEW
+X-Received: by 2002:a05:6000:22ca:b0:487:1662:cf4c with SMTP id ffacd0b85a97d-4abacfea532mr7968253f8f.7.1795189704396;
+        Fri, 20 Nov 2026 07:48:24 -0800 (PST)
+Return-Path: <ecordonnier@snapchat.com>
+Received: from localhost.localdomain (80-108-196-96.cable.dynamic.surfer.at. [80.108.196.96])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4ab6a680355sm5285862f8f.27.2026.11.20.07.48.23
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 20 Nov 2026 07:48:23 -0800 (PST)
+From: ecordonnier@snap.com
 To: openembedded-devel@lists.openembedded.org
-Cc: xe-linux-external@cisco.com,
-	Ashishkumar Parmar <asparmar@cisco.com>
-Subject: [meta-python][wrynose][PATCH] python3-socketio: Fix CVE-2026-48804
-Date: Fri, 20 Nov 2026 03:57:51 -0800
-Message-Id: <20261120115751.2246881-1-asparmar@cisco.com>
-X-Mailer: git-send-email 2.35.6
+Cc: Etienne Cordonnier <ecordonnier@snap.com>
+Subject: [meta-oe][PATCH] android-tools: make usbgadget optional
+Date: Fri, 20 Nov 2026 16:48:18 +0100
+Message-ID: <20261120154818.4037066-1-ecordonnier@snap.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-X-Auto-Response-Suppress: DR, OOF, AutoReply
-X-Outbound-Client-TLS: VERIFIED;sjc-ads-20495.cisco.com [171.70.188.248];TLSv1.3;TLS_AES_256_GCM_SHA384;256;ciscoit-managed-infra-smtp-auth.cisco.com
-X-Outbound-SMTP-Client: 171.70.188.248, sjc-ads-20495.cisco.com
-X-Outbound-Node: aer-l-core-05.cisco.com
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Fri, 20 Nov 2026 12:00:07 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132775
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Fri, 20 Nov 2026 15:48:33 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132776
 Content-Type: text/plain; charset="utf-8"
 
-From: Ashishkumar Parmar <asparmar@cisco.com>
+From: Etienne Cordonnier <ecordonnier@snap.com>
 
-This patch applies the upstream fix referenced in [2], using the commit
-shown in [1].
+adbd can also be used over TCP, so USB gadget support is optional.
+android-tools-conf only contains the configfs USB gadget setup (scripts and
+a systemd drop-in), but android-tools depends on it unconditionally. On a
+machine without a USB device controller, android-gadget-setup fails and adbd
+does not start, even if it is only meant to be reached over TCP.
 
-[1] https://github.com/miguelgrinberg/python-socketio/commit/4bec3ef87bcfd6ab5b94cd3ac09d873283a6960e
-[2] https://nvd.nist.gov/vuln/detail/CVE-2026-48804
+Add a "usbgadget" PACKAGECONFIG, and make the dependency on
+android-tools-conf, and the recommendation for the gadget kernel modules,
+conditional on it. The dependency moves from android-tools to
+android-tools-adbd, the package the drop-in belongs to.
 
-Signed-off-by: Ashishkumar Parmar <asparmar@cisco.com>
+Enable usbgadget by default for every machine, as before. Machines without
+a USB device controller can remove it from PACKAGECONFIG.
+
+AI-Generated: Uses Claude Code
+Signed-off-by: Etienne Cordonnier <ecordonnier@snap.com>
 ---
- .../python3-socketio/CVE-2026-48804.patch     | 117 ++++++++++++++++++
- .../python/python3-socketio_5.16.3.bb         |   2 +
- 2 files changed, 119 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-socketio/CVE-2026-48804.patch
+ .../android-tools/android-tools_35.0.2.bb             | 11 +++++++----
+ 1 file changed, 7 insertions(+), 4 deletions(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-socketio/CVE-2026-48804.patch b/meta-python/recipes-devtools/python/python3-socketio/CVE-2026-48804.patch
-new file mode 100644
-index 0000000000..8ac7a49c7d
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-socketio/CVE-2026-48804.patch
-@@ -0,0 +1,117 @@
-+From f568afc1b85c0bd5001910cb4957a52d7116ab2f Mon Sep 17 00:00:00 2001
-+From: Miguel Grinberg <miguel.grinberg@gmail.com>
-+Date: Fri, 7 Aug 2026 00:02:23 +0100
-+Subject: [PATCH] Delete incomplete binary packet when client disconnects
-+
-+CVE: CVE-2026-48804
-+Upstream-Status: Backport [https://github.com/miguelgrinberg/python-socketio/commit/4bec3ef87bcfd6ab5b94cd3ac09d873283a6960e]
-+
-+Signed-off-by: Ashishkumar Parmar <asparmar@cisco.com>
-+---
-+ src/socketio/async_server.py |  2 ++
-+ src/socketio/server.py       |  2 ++
-+ tests/async/test_server.py   | 19 ++++++++++++++++++-
-+ tests/common/test_server.py  | 17 ++++++++++++++++-
-+ 4 files changed, 38 insertions(+), 2 deletions(-)
-+
-+diff --git a/src/socketio/async_server.py b/src/socketio/async_server.py
-+index 7e9c872..bcffb35 100644
-+--- a/src/socketio/async_server.py
-++++ b/src/socketio/async_server.py
-+@@ -590,6 +590,8 @@ class AsyncServer(base_server.BaseServer):
-+         if not self.manager.is_connected(sid, namespace):  # pragma: no cover
-+             return
-+         self.manager.pre_disconnect(sid, namespace=namespace)
-++        if eio_sid in self._binary_packet:
-++            del self._binary_packet[eio_sid]
-+         await self._trigger_event('disconnect', namespace, sid,
-+                                   reason or self.reason.CLIENT_DISCONNECT)
-+         await self.manager.disconnect(sid, namespace, ignore_queue=True)
-+diff --git a/src/socketio/server.py b/src/socketio/server.py
-+index 143d27e..6af30f3 100644
-+--- a/src/socketio/server.py
-++++ b/src/socketio/server.py
-+@@ -571,6 +571,8 @@ class Server(base_server.BaseServer):
-+         if not self.manager.is_connected(sid, namespace):  # pragma: no cover
-+             return
-+         self.manager.pre_disconnect(sid, namespace=namespace)
-++        if eio_sid in self._binary_packet:
-++            del self._binary_packet[eio_sid]
-+         self._trigger_event('disconnect', namespace, sid,
-+                             reason or self.reason.CLIENT_DISCONNECT)
-+         self.manager.disconnect(sid, namespace, ignore_queue=True)
-+diff --git a/tests/async/test_server.py b/tests/async/test_server.py
-+index c3c0903..97c804a 100644
-+--- a/tests/async/test_server.py
-++++ b/tests/async/test_server.py
-+@@ -937,7 +937,7 @@ class TestAsyncServer:
-+         await s.disconnect('1', namespace='/foo')
-+         assert calls == s.eio.send.await_count
-+ 
-+-    async def test_disconnect_with_partial_binary_packet(self, eio):
-++    async def test_server_disconnect_with_partial_binary_packet(self, eio):
-+         eio.return_value.send = mock.AsyncMock()
-+         eio.return_value.disconnect = mock.AsyncMock()
-+         s = async_server.AsyncServer()
-+@@ -955,6 +955,23 @@ class TestAsyncServer:
-+         s.eio.send.assert_any_await('123', '1')
-+         assert '123' not in s._binary_packet
-+ 
-++    async def test_client_disconnect_with_partial_binary_packet(self, eio):
-++        eio.return_value.send = mock.AsyncMock()
-++        eio.return_value.disconnect = mock.AsyncMock()
-++        s = async_server.AsyncServer()
-++        await s._handle_eio_connect('123', 'environ')
-++        await s._handle_eio_message('123', '0')
-++        await s._handle_eio_message(
-++            '123',
-++            '52-["my message","a",'
-++            '{"_placeholder":true,"num":1},'
-++            '{"_placeholder":true,"num":0}]',
-++        )
-++        await s._handle_eio_message('123', b'foo')
-++        assert s._binary_packet['123'] is not None
-++        await s._handle_disconnect('123', '/')
-++        assert '123' not in s._binary_packet
-++
-+     async def test_namespace_handler(self, eio):
-+         eio.return_value.send = mock.AsyncMock()
-+         result = {}
-+diff --git a/tests/common/test_server.py b/tests/common/test_server.py
-+index d8d80dc..251d661 100644
-+--- a/tests/common/test_server.py
-++++ b/tests/common/test_server.py
-+@@ -862,7 +862,7 @@ class TestServer:
-+         s.disconnect('123', namespace='/foo')
-+         assert calls == s.eio.send.call_count
-+ 
-+-    def test_disconnect_with_partial_binary_packet(self, eio):
-++    def test_disconnect_server_with_partial_binary_packet(self, eio):
-+         s = server.Server()
-+         s._handle_eio_connect('123', 'environ')
-+         s._handle_eio_message('123', '0')
-+@@ -878,6 +878,21 @@ class TestServer:
-+         s.eio.send.assert_any_call('123', '1')
-+         assert '123' not in s._binary_packet
-+ 
-++    def test_disconnect_client_with_partial_binary_packet(self, eio):
-++        s = server.Server()
-++        s._handle_eio_connect('123', 'environ')
-++        s._handle_eio_message('123', '0')
-++        s._handle_eio_message(
-++            '123',
-++            '52-["my message","a",'
-++            '{"_placeholder":true,"num":1},'
-++            '{"_placeholder":true,"num":0}]',
-++        )
-++        s._handle_eio_message('123', b'foo')
-++        assert s._binary_packet['123'] is not None
-++        s._handle_disconnect('123', '/')
-++        assert '123' not in s._binary_packet
-++
-+     def test_namespace_handler(self, eio):
-+         result = {}
-+ 
-+-- 
-+2.35.6
-+
-diff --git a/meta-python/recipes-devtools/python/python3-socketio_5.16.3.bb b/meta-python/recipes-devtools/python/python3-socketio_5.16.3.bb
-index be352876a8..be58a2172c 100644
---- a/meta-python/recipes-devtools/python/python3-socketio_5.16.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-socketio_5.16.3.bb
-@@ -9,6 +9,8 @@ inherit pypi python_setuptools_build_meta
+diff --git a/meta-oe/recipes-devtools/android-tools/android-tools_35.0.2.bb b/meta-oe/recipes-devtools/android-tools/android-tools_35.0.2.bb
+index 045642a683..38b522084d 100644
+--- a/meta-oe/recipes-devtools/android-tools/android-tools_35.0.2.bb
++++ b/meta-oe/recipes-devtools/android-tools/android-tools_35.0.2.bb
+@@ -239,9 +239,9 @@ do_install:append:class-native() {
+ }
  
- PYPI_PACKAGE = "python_socketio"
+ PACKAGES =+ "${PN}-adbd"
+-RDEPENDS:${PN}:class-target = "android-tools-conf-configfs 7zip android-libboringssl"
+-RDEPENDS:${PN}-adbd += "${PN}"
+-RRECOMMENDS:${PN}-adbd += "kernel-module-libcomposite kernel-module-usb-f-fs"
++RDEPENDS:${PN}:class-target = "7zip android-libboringssl"
++RDEPENDS:${PN}-adbd += "${PN} ${@bb.utils.contains('PACKAGECONFIG', 'usbgadget', 'android-tools-conf', '', d)}"
++RRECOMMENDS:${PN}-adbd += "${@bb.utils.contains('PACKAGECONFIG', 'usbgadget', 'kernel-module-libcomposite kernel-module-usb-f-fs', '', d)}"
+ PRIVATE_LIBS:${PN} = "liblog.so.0 libbase.so.0 libcutils.so.0"
  
-+SRC_URI += "file://CVE-2026-48804.patch"
-+
- SRC_URI[sha256sum] = "89b136f677ae65607a84cecda9b4d6c5377b40a97582c504c25df89af16d520e"
+ inherit useradd
+@@ -260,9 +260,12 @@ FILES:${PN}-adbd = " \
  
- PACKAGECONFIG ?= "asyncio_client client"
+ BBCLASSEXTEND = "native"
+ 
+-PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
++PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)} usbgadget"
+ # Apply Android's fs_config ownership/mode tables to files pushed by adbd to
+ # /system, /vendor and /oem. Off by default: the tables describe Android
+ # partition images and are meaningless on a generic Linux rootfs.
+ PACKAGECONFIG[fs-config] = ""
+ PACKAGECONFIG[systemd] = ",,systemd"
++# adbd over a USB gadget. Machines without a USB device controller (UDC) do not need them,
++# and can use adbd over TCP.
++PACKAGECONFIG[usbgadget] = ""
 -- 
-2.35.6
+2.43.0
 
