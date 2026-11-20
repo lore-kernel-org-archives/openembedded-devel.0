@@ -1,118 +1,125 @@
-Received: from mail-wr1-f46.google.com (mail-wr1-f46.google.com [209.85.221.46])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.637.1795195666380973609
+Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com [209.85.128.52])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.638.1795195666557534134
  for <openembedded-devel@lists.openembedded.org>;
  Fri, 20 Nov 2026 09:27:46 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=m3EFB0zT;
- spf=pass (domain: konsulko.com, ip: 209.85.221.46, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-wr1-f46.google.com with SMTP id ffacd0b85a97d-4a5024b3c28so1492935f8f.0
+ dkim=pass header.i=@konsulko.com header.s=google header.b=ZmJAAvd7;
+ spf=pass (domain: konsulko.com, ip: 209.85.128.52, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-wm1-f52.google.com with SMTP id 5b1f17b1804b1-4b79502c27aso10703755e9.1
         for <openembedded-devel@lists.openembedded.org>; Fri, 20 Nov 2026 09:27:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1795195664; x=1795800464; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=ZQ3Y2mAQ2CZWkUp5pQwW6f72Q2K/OSGgghZWQowMQYM=;
-        b=m3EFB0zTAqlfNFc5Z8hMEWDgCZPEsYdHECdzcCEsUyrQ79dRuttMTp3rsvz070pGSs
-         9JVa2t/RATtybZv8PaaAP0HO44ASqyZFlxJGTc02GcP5kU6iRaM7ho1O3JX1yuRSO6rV
-         Q5LTJ/FW2gjgCQp2WHT7TcB8DKQ3PbysHENY0=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795195664; x=1795800464;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=konsulko.com; s=google; t=1795195665; x=1795800465; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=ZQ3Y2mAQ2CZWkUp5pQwW6f72Q2K/OSGgghZWQowMQYM=;
-        b=sgQncFKphm+iT9qXfxzlZ6kNG8nIB2+kGUre4R6ZwpS0zD8DXMEaC5IWNqviDKs7tl
-         c4c8Ahxz/2Sb5j9344Qe2VDjmEV39wTx7TTPYnm5vvXJ85IOAvPZFhaAHmeXplynULVu
-         COlwsMwb9AXeWdR/g2YyOXE7WOWr6HS8AZw0tZYlIGlLPNKkYUtsKyoer0MJEG9A24Ed
-         8oNp4metO/NbB+eYqcKPlhIuXqy+Gj4ON86emrAL7AHCv7TX43VSxTxu7+VvpQd6rlbB
-         sb1G9Q+xaqCAOIct/sUqVpPnmJMu/KpvSIre8wWcQOsQTAldIf79xbHOKvLOUUuB8wU5
-         dROg==
-X-Gm-Message-State: APuU4Z/QNhTITBxJpDefeteScZqGQRSgkbOMAsrMgL5gxOWZl6YlIkxh
-	xqeMO/02l01kctl69uQI2D03aSM/RYd2pQ/5dorUaT9jIxBEaCAnPU4GvsQ5MBtChcCoGS5xeOQ
-	5B1jw
-X-Gm-Gg: AYBFou11K3bOaayABCQngYV9QdGAl7t4YtXfgZvwb80vpPhrktqn5idIUkfHepHjIYh
-	mLGJyMXCMHMT4l53UrKeQ5egp1Lvj9MJ5AoyB0RKDBpkC3++wA9ReeVuSeKmRnrFUVgDCN0fJVP
-	o+L8yINcryT61O86cdekdWU4z8vwdyo0X539VazT1MysUs7TjUSulwQvqahY/m5I20ZpXjnvOON
-	+RELdwaJ2EljcsI16bQScskIFsZn/Ccv0rgNrdF27sMGq+0u1TprM8rNvZWWJuKc4d1S+l6yQEm
-	l8PbPsUTvJoovz/p8R+7p5oOxVCaRDlF8DJFTAth+gLlAfiRQyLgkxaUWZ3SlInOLx1G3OIIZIp
-	WJOF6DaWmKdhzy4dkBRoSSCj45qoU45iLD9KScGQ9g0pV1t568aEuHKgu1fKFWQTpHDKtvzBrvQ
-	pKmMcXqcq2XMsNCHn53MPBpxnGIzfPRXbgAFiopHXsd4dAHCCEic8JUMGYDchFGbXjF1L99Fm7Q
-	YMvpO9hn49mgxglkvVrisJf8sHn2KdsKaFzldfUL8ztUgqAx77LcD8QpkiABMmwzs5vQvyJ3Xm2
-	zTvnvfp6okZf+qH3IfLYvkBpqJvujGfgScw9acAfvGUKzAb2BQ1LqepK4zlEcyXivM50PyJZyxj
-	96FpVLiRYw2dIaukbvXVpaI0qhn+bja3KEjhprtI=
-X-Received: by 2002:a05:600c:64c6:b0:49e:6581:7baf with SMTP id 5b1f17b1804b1-4bb887c3412mr83301305e9.2.1795195664032;
+        bh=o2l+ztwIlR+iP57UEQrt3Z7BGypUKzS4HN7T8zTjLDc=;
+        b=ZmJAAvd7L/TOXwEQnRSKSvPa+hFcTmuNv1gH8qHnWhX3lC9iL1vRP3zI+Uypk0MPZR
+         pEyktXQfK4U4gHRnzZf71vQ8EyVsQgW6HV3zVJ63wJluWDCtmCpf8+iLRyX6U/L8YrU/
+         O05abI5JRJ6MTIKfI905J04JcBEiwxqzuLZvg=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1795195665; x=1795800465;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=o2l+ztwIlR+iP57UEQrt3Z7BGypUKzS4HN7T8zTjLDc=;
+        b=YDRK087c4UPJtfZTtxlduSEzvJtg6iudVh6ldfJWa0ujSIaA/bdNX9ScJkqQV5OAeV
+         OHKue0AlhCzuovE2tpOXPehjZeHgyHLNkIf1LlyV9Oz+0gtH0F/yO4pSQ0NfDzxLljXv
+         N86NyRotidjygOVuo2yPELqLdF93yu7VtD7Aszm/9UKgpWo0rVELP/MBaYZHmuNTz05A
+         pWogipvwWy7Z+9x2i8ylX7HDJI5y6AbW/6/qgkgcjKD3W1Tn+HCn3lYjnZhSqVnydwpM
+         K5aPrEEjv3eKu8UEo+Zh7iUbWtzBpeWtSwLRT6mDFBR5kGcFHpiQtUpNOkar+MRDhCv2
+         yDEg==
+X-Gm-Message-State: APuU4Z9k/b25eyM2+BzzhGCssJjQ3wMMUbao3ptNmavvI27iWMRxwafM
+	uido3yRVdlofwh7kkdoRsCjZHNgro8Eq1F/UWhdQD1MXAsUhHUeov1AGw9kM0O07roBWVXscmLb
+	8A7mR
+X-Gm-Gg: AYBFou0sK2MowdSZQdFcp6GBEsvmRQch6as9MUw3CzZ4+d0tsJAeXN3YPRyJMxVe6OY
+	inkhNAhAdr39wDldAMT49sAxlM1y9pKks4/LMNRyEotWxC2biyYNRyjqFAkVBcbIWpcZU/FXMpn
+	J+FavBMJcWWmjMEL+zGr2IGsFIv+IbNlurOOQFHJfFICUcGsmk/AOsDdEaBv0dRIBYGP8vtCsBW
+	CgWf4pakNJ/jmsQ/5TFLd4Gp4sKfm8/YJQGULFvZKHgv43bUgAjyDPOpwEdQPzKS2468io82yQ9
+	6RRQ+QaTV2Ed43vkAU3Nj6EMD1pekT+Q5fLrqHOILXZ1M1enCfLB7bhJ23UCFnrmP5HnLrxXhFh
+	3MrR7aO7qF21cup0tYSbhiIcdQCfH996JABBIQPF867fNMHUuxAb0vUQZJ8xdzR3tfimbs8U/4X
+	pYEa1AaE4QW7/x4fX4A/0CDvG6Wcz9wNDXKz7NMygXvqv0EgfarLgjyvQmDMgWyM/oFYB6GIPWC
+	CFtMl9unvF6w3B9EQNhqTmZ6HtZFDayiihS7cfLRCSPY7pCofzJev95UEj/6n+k/lfdJhsx02dc
+	e2dqIfjRY9RRKGhQeq1N3sWygN4DVi4bP6hyEHKz3M6gFwK+a3kS2blZqS5BsY+uU2N95wxu3a/
+	FHbElL/6xHnllJlLDQutGqOipGpyJ2zKRm2ghJmkXRYCKqfE4rF7ZBw==
+X-Received: by 2002:a05:600c:1389:b0:4bb:6519:477e with SMTP id 5b1f17b1804b1-4bb88813b35mr88909975e9.17.1795195664827;
         Fri, 20 Nov 2026 09:27:44 -0800 (PST)
 Return-Path: <leon.anavi@konsulko.com>
 Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4bb90655f5asm1946485e9.1.2026.11.20.09.27.43
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4bb90655f5asm1946485e9.1.2026.11.20.09.27.44
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 20 Nov 2026 09:27:43 -0800 (PST)
+        Fri, 20 Nov 2026 09:27:44 -0800 (PST)
 From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 1/3] python3-configargparse: Upgrade 1.10.1 -> 1.10.2
-Date: Fri, 20 Nov 2026 19:27:38 +0200
-Message-ID: <20261120172740.3283871-1-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 2/3] python3-importlib-metadata: Upgrade 10.1.0 -> 10.2.0
+Date: Fri, 20 Nov 2026 19:27:39 +0200
+Message-ID: <20261120172740.3283871-2-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.47.3
+In-Reply-To: <20261120172740.3283871-1-leon.anavi@konsulko.com>
+References: <20261120172740.3283871-1-leon.anavi@konsulko.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Fri, 20 Nov 2026 17:27:53 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132778
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132779
 Content-Type: text/plain; charset="utf-8"
 
-Upgrade to release 1.10.2:
+Upgrade to release 10.2.0:
 
-Fixes a regression in 1.10.0 and 1.10.1, and a bug in how
-TomlConfigParser reads section names.
+Features:
 
-- None as a command line arg works again.
-  parser.parse_args(['--foo', None]) raised TypeError: object of
-  type 'NoneType' has no len() in 1.10.0 and 1.10.1. It gives
-  foo=None again, as 1.9.0 and plain argparse do. The same goes for
-  0 and False.
-- A quoted part of a TOML section name can now hold a dot when it
-  is in single quotes or comes after a space (#370).
-  TomlConfigParser(["tool.'a.b'"]) and TomlConfigParser(['tool .
-  "a.b"']) now read the table [tool."a.b"]. Before, both names were
-  split at the dot inside the quotes, so that table's settings were
-  silently not read (tool."a.b" already worked). Writing a config
-  file with such a section name now writes [tool."a.b"] too.
+- Restored csv, inspect, json, zipfile, _adapters, and
+  importlib.metadata to module scope, where a reader can see what
+  the module depends on, instead of hiding them in the functions
+  that use them for performance. They are declared in
+  __lazy_modules__ and so stay deferred, and deferred alike on
+  every supported Python: 3.15 honors the declaration natively
+  (PEP 810) and earlier Pythons reach the same behavior through
+  the lazy-importer backport, which is now a dependency there.
 
-With that fix, the quoted parts of a section name follow TOML's rules
-more closely:
+Bugfixes:
 
-- Backslash escapes are read in a double-quoted part and left as
-  they are in a single-quoted part.
-- Spaces inside double quotes are kept. tool." a " used to be read
-  as tool.a.
-- A quote character in the middle of an unquoted part, which isn't
-  valid TOML, now starts a quoted part, so tool.it's.x is no longer
-  split at the second dot. Write it as tool."it's".x, which works
-  in earlier versions too.
+- MetadataPathFinder is now installed on sys.meta_path only after
+  the module is fully initialized. Previously it was installed
+  partway through, so anything walking sys.meta_path during that
+  window, such as another thread calling entry_points(), would raise
+  NameError: name 'PathDistribution'
+- is not defined. An import interrupted in that window left the
+  half-built finder installed for the life of the process, failing
+  every subsequent lookup.
+- Return License-File, Import-Name, and Import-Namespace as lists
+  in JSON-compatible metadata, including when only one value is
+  present, and retain all repeated values as required by PEP 566.
+
+Improved Documentation:
+
+- Added a caveats page describing how this package and
+  importlib.metadata interoperate: the two class hierarchies, the
+  protocols both satisfy, and what that asks of consumers and of
+  custom providers.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...onfigargparse_1.10.1.bb => python3-configargparse_1.10.2.bb} | 2 +-
+ ...-metadata_10.1.0.bb => python3-importlib-metadata_10.2.0.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-configargparse_1.10.1.bb => python3-configargparse_1.10.2.bb} (86%)
+ rename meta-python/recipes-devtools/python/{python3-importlib-metadata_10.1.0.bb => python3-importlib-metadata_10.2.0.bb} (82%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-configargparse_1.10.1.bb b/meta-python/recipes-devtools/python/python3-configargparse_1.10.2.bb
-similarity index 86%
-rename from meta-python/recipes-devtools/python/python3-configargparse_1.10.1.bb
-rename to meta-python/recipes-devtools/python/python3-configargparse_1.10.2.bb
-index 8631ebc7ab..eac7a19dfd 100644
---- a/meta-python/recipes-devtools/python/python3-configargparse_1.10.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-configargparse_1.10.2.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/bw2/ConfigArgParse"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=da746463714cc35999ed9a42339f2943"
- 
--SRC_URI[sha256sum] = "8ee7c4429e6402b881c9a85569eb9484db2f63260718b45c67c59625284371c8"
-+SRC_URI[sha256sum] = "2deb0b3d6d46ff6e3218fcd350127507c5e3c11e21c8072a9fb24531dfc9bd4a"
- 
+diff --git a/meta-python/recipes-devtools/python/python3-importlib-metadata_10.1.0.bb b/meta-python/recipes-devtools/python/python3-importlib-metadata_10.2.0.bb
+similarity index 82%
+rename from meta-python/recipes-devtools/python/python3-importlib-metadata_10.1.0.bb
+rename to meta-python/recipes-devtools/python/python3-importlib-metadata_10.2.0.bb
+index 10ceed1515..cfa517128e 100644
+--- a/meta-python/recipes-devtools/python/python3-importlib-metadata_10.1.0.bb
++++ b/meta-python/recipes-devtools/python/python3-importlib-metadata_10.2.0.bb
+@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=affe5a7d8b988c3db245c01075b29e17"
  
  inherit pypi python_setuptools_build_meta
+ 
+-SRC_URI[sha256sum] = "82b04047fa09792c1a8cfeddfe08bec79e4b13c29c8469b0d3949860f61017e8"
++SRC_URI[sha256sum] = "9413a2029fd9ca5669d27f1386071bbfe3c7ebca0545692ec975088241fe1d79"
+ 
+ DEPENDS += "python3-setuptools-scm-native python3-coherent-licensed-native"
+ RDEPENDS:${PN} += "python3-misc python3-zipp"
 -- 
 2.47.3
 
