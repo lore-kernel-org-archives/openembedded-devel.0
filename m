@@ -1,109 +1,140 @@
-Received: from mail-dy1-f175.google.com (mail-dy1-f175.google.com [74.125.82.175])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.4887.1795147167035858976
+Received: from mail-dy1-f173.google.com (mail-dy1-f173.google.com [74.125.82.173])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.4930.1795147168107466593
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 19 Nov 2026 19:59:27 -0800
+ Thu, 19 Nov 2026 19:59:28 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=ohcZXpFV;
- spf=pass (domain: gmail.com, ip: 74.125.82.175, mailfrom: raj.khem@gmail.com)
-Received: by mail-dy1-f175.google.com with SMTP id 5a478bee46e88-380b40312e2so1233955eec.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 19 Nov 2026 19:59:27 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=FeKfRVBw;
+ spf=pass (domain: gmail.com, ip: 74.125.82.173, mailfrom: raj.khem@gmail.com)
+Received: by mail-dy1-f173.google.com with SMTP id 5a478bee46e88-372bdb942dbso576859eec.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 19 Nov 2026 19:59:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795147166; x=1795751966; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=fVFJ8m2u9YDyXt2icXhSbY5MVk13nUQuBAdGZY8m9ks=;
-        b=ohcZXpFVz3kg4S6Q8DRIjla4Sbymy3zAzoe3eyXC/L95QwTRITe7dY8W+c4WoAhkHo
-         rMUvi+6jpMc3GOUrTX+yGzbzs3o6pURVXivGrvdnK1fJFlWEHYG2FXkF8wCU/KwYNKEg
-         HatFOdVI8OTE+lz9aiTM6TcysaEpzILHjSCoxNwXyZSk03oSReGLpurFTOuKIYSgJLzx
-         bznQ8fshyjnPF3LTo70ELKA0W5W7/FGXb/PREijehsAObi7dq0QJlWrRbPeRFb+3mq5t
-         kV6cOLVf23b1hzxu2okQJgnD5/nd6gkFts7M+zJ0XVMICX9AJ3Rz2YnAmdDUQYmn2U3y
-         nR2Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795147166; x=1795751966;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=gmail.com; s=20260707; t=1795147167; x=1795751967; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=fVFJ8m2u9YDyXt2icXhSbY5MVk13nUQuBAdGZY8m9ks=;
-        b=O9hzs9UvW7m8OEOEkUEjTyIWOBXTRl61QCrrWEha1aNaZWlQCvXiZQlaw0rG2MQ5xC
-         Mvm2lgHX8rhHN5L3nyBBxYgqUmtIbX2IQTZjM7+kiohr3PdlcBcBCVzMgzJCUWdeWzCT
-         DHTjLZN4U9ryNX/vwNkiuwIYwcD+7D/7BUrxBU5aOe+0gsDJtn3kEuwGPP+UWRA1yWwI
-         DP21nGIGfAIT8x9E+WjAuBZLnpkrt1gK39rn87dEBY+rjmJMMxqdsNbMJkTqsOakyfGJ
-         bVaQw0qeGHGnSsdqnH5ZVZ3szQciRJeKSgbvnCW++Jzcbr5cvEwO48QggJT8baiootPB
-         NgTw==
-X-Gm-Message-State: APuU4Z+O+ZvMoC6UMk8jpOEh93McuO675zARLItg/3wbhMd4cn1QwHJA
-	MkSteL/US8KpFtUgdj+Wh6NVK2keYtRcH330+j0R76oPGsHNCcKVwZQKIjGgmlOr
-X-Gm-Gg: AZFdTZcaRA9Wb1pN1eQQ8dmDrT6UqtRba8V1Se6DYitxBECkN+FF7s+36jXgA2kNSyl
-	ZZ/jlKbOhNCXhKv5350noTf+ohGLSznivllc+H2jkt83pSOrQsttrhVEsXNJaZVgQzyMzLOC9hj
-	g7iYCZCcJuRS4D17VPij6mJ9EFfYnifTnibSnhz6WO0IzvRc6lkYynxXSBYenmQ1/vSGBH5GChB
-	f4n3H+M0bXIImlDPVzQj9dwJIala4SFSjBXEbjFdA5flSOESSHBTegHk4ar3RM0fBcx7sKRDc9B
-	0RayojwpjQ8mIKkmsSMY/hIrw4aMezYfM8usIWJojSK/GDP5590AiNRWu4e58ORSqC+UEjt7Ue6
-	ITLi740nMjrPiLO8cMSmFAzquEBmI9yDPjHWFxS514RpRD2CmYiw6pQVdgFvq0WUQRhsrG9oSZT
-	H3I1qj+4sSWkp31Pj4Ks4fcgEPqyOe3+9It7EEuNZfQXzZ86v/EUmuI2EiAuaM5QG+nt/7mueuW
-	akddsxSDGSZgaTblF1SfNcxsWqW6JMJUfCkj0mKnVbQ9ao2V0bojkzpww8UqGzDZClg4ErL6CRc
-	JtWsWoiWbvKsK7kuhqs2CMd3So1di/SeUtfvttQ2H7VIcUFHcv72n/1sBlzEGrNGdGobNy++k/I
-	gBJ96g6Qan7QWdx7JlZOQsrGR6hyF7lznM/u1D9FkkUkWUptyQeYDXaHdlNfD7X5WlYvJfl73iQ
-	eXO29CDUbmFWgB3FLHMlZL4r+NDQNhaSX+oCJEcW753+hRYVAd6seauChxEXZUK1aksOmvkeOQM
-	yP6yl6EQS7vae5Y+U97hPjZ12ZAH/ErqqcE93qnN3Mq5emebei33A15jHtjDZ8sp1zIqggrOnPW
-	N7UL
-X-Received: by 2002:a05:7300:c3aa:b0:385:c28b:a4d5 with SMTP id 5a478bee46e88-385c28baffbmr732852eec.17.1795147166249;
-        Thu, 19 Nov 2026 19:59:26 -0800 (PST)
+        bh=j7pP57GONC4xTi9kIjfFaGuE/8tUTeCZ41V3QsIjgRE=;
+        b=FeKfRVBwRhJT1hWeMNkNDMeksgvZLWtv0yivTjPxKfl8fFDOJvkO+hxlBQpLUoOk1+
+         1mjIzXM9v52oAXPLU7Du6RAuMj9dTUjaK2XtEiJU6R9a9eXgRBcESCfar6/e06j89x9Z
+         Ru2DYQ/Uu/uH7YnwQ41itT3oq4rTImPnXdTwBnQQqgkIiDSvsnjjGvwyXuXdCGs8rTBx
+         hlW+8mjAaqgL/EzZEMpxr5p6Bwzm2ptbjKWbSBPSrzx6AUyBnAo7K+cJjm/tN+CqepJP
+         esB1VLds4JjS373cuW+krEhAMdaib29RbBA5ZEJii+g1mFEp9uSwUI69MYF36lK7feT8
+         EAUA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1795147167; x=1795751967;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=j7pP57GONC4xTi9kIjfFaGuE/8tUTeCZ41V3QsIjgRE=;
+        b=rDX+s+RxFHsSZINcix76MaSYk4OWmTjq12XjJLMGt++6EL8pipee5kaXZDYSZFrRLo
+         rJIaJwhBahcGCwbvh4DhH5YRBqtM3mSrL44b2ovrN0wLVSOOIfRMTXWYVKazjOiESsDW
+         1eQX/fYWCN11R/zwSmf4mPBMEQjP7KyJmRKfQShvRnszkBe3PhvQt8vsUn+e3tpminwe
+         0b478rsOLhIvfo1dPumFU59rs73VSQAkK3pvjXUYrKVLqWVqMe0ycYjtzV4gTNEjyI4B
+         WpCYQ2qFLB8K2QuEaVoawz/an4AfgeKplcrOjHU0eZ0aaAwXT0hxiYUqoEIDtf58JiWW
+         fXgw==
+X-Gm-Message-State: APuU4Z/oLyMloldk/580Pof06zSDDxdkDIKBdvDWYlzdLrHcwD8cWLT+
+	3VFEQ86KMrjv/2Y3m8BVUIak/RL/w5mQDKOSXaa16d6nMnX/LA0vdYUBNy483O+S
+X-Gm-Gg: AZFdTZcmp3s52agrMnlK/sMRKPAU+NYB4R7IIFqmVwx0Vpd/1mO5bQ2bbKMu1egriuN
+	qp0onLtiGeZ8XnRnDMPWWjurdDFNj3wX7Wi4ZqCQAm6QEZjQnI1HVQBq83cb5wfHIQNoV4nyD9X
+	3azFkSi/N+KO3EqhXP+Sv6smPM0CGHx1sK5rCrxApWazTPuB7qdEZc/XtUUre7iUyl3PcfHKrPR
+	HTNSHtIAZCbKx81eXNL2b/o+hseX+ebixFGfEHbubf9NXM+lQzS6hIKDEnA1d/p/HgeuxLKLvYf
+	tn1P9An0s8BBX0ln7JRgqN69H1889zMIQTNy+T8En0OO9ywpfiNuduLlLCJ4Cjln160tr2x07TD
+	khKCeJAyTzzpAbZQdH9Xph0OUdUofq2iA+bH82YVbzBPQkI4CNKNd9aAK76NPZqUUIOeBkYGMQW
+	BTHzt58UJTuRV3ceY8AQvEpH83WGx07UtNRHCVafmKxlmplk1xNloTXTIr1StegmwehW+K6eM50
+	5wV6hE9/OZQ0e0GPXisbiiHVhO5A/zr5y5/sHMOYu4uGWinUbx3OSN2+XMzkQgQDl/bbjU9YPxk
+	28hH0IBfCS/9Wn17hXHaZNKQHOn02OwABbuyOhVeoD5UsXwhnTMJdTDQCrUtvZG0osACDPVKZ31
+	s17GIJYG4zzzydTJCQoqn2XH1gG3g67rgrXrX4Yv+CrtHsbGNj53ywAS/tn8t9ALt28fOTrGpaK
+	PHBzosoOlEcDKkXzrJPGrvRFzq6C1e+u0OL5UvBdJCmVC1ZsHIPs/aDl9qEoGHfj/bL6oLOlOZ/
+	PLscgUfBYMRQ45btXVqyAvjv7vyXdW2696kjeV61NSAg+6LSpCGQSuFiLV3173eExtADpDxow08
+	W/4s
+X-Received: by 2002:a05:7300:c7c4:b0:376:13e5:e8fe with SMTP id 5a478bee46e88-3856c4b839cmr1375311eec.3.1795147167290;
+        Thu, 19 Nov 2026 19:59:27 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-385677c371esm3190201eec.23.2026.11.19.19.59.25
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-385677c371esm3190201eec.23.2026.11.19.19.59.26
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 19 Nov 2026 19:59:25 -0800 (PST)
+        Thu, 19 Nov 2026 19:59:26 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-multimedia][PATCH 1/4] gupnp-igd: Bound each ptest with a timeout
-Date: Thu, 19 Nov 2026 19:59:19 -0800
-Message-ID: <20261120035922.3013969-1-khem.raj@oss.qualcomm.com>
+Subject: [meta-python][PATCH 2/4] python3-geojson: Allow building with Python 3.15
+Date: Thu, 19 Nov 2026 19:59:20 -0800
+Message-ID: <20261120035922.3013969-2-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.1
+In-Reply-To: <20261120035922.3013969-1-khem.raj@oss.qualcomm.com>
+References: <20261120035922.3013969-1-khem.raj@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Fri, 20 Nov 2026 03:59:35 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132760
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132761
 Content-Type: text/plain; charset="utf-8"
 
-gupnp-simple-igd blocks in g_main_loop_run() until the UPnP exchange
-over loopback completes, with no timeout of its own. It hung once on
-qemux86-64 for 9+ hours; 15 back-to-back reruns passed in ~10s each.
-Its GLib debug output keeps flowing while it waits, so ptest-runner's
-inactivity timeout never fires. Wrap each test in timeout(1) and pull
-in coreutils, since busybox in ptest images lacks the applet.
+setup.py exits unless the interpreter is 3.10 - 3.14, so do_compile
+fails now that oe-core ships Python 3.15. Upstream main still has the
+same bound; raise it to 3.15.
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- meta-multimedia/recipes-connectivity/gupnp/gupnp-igd/run-ptest | 2 +-
- meta-multimedia/recipes-connectivity/gupnp/gupnp-igd_1.6.0.bb  | 2 ++
- 2 files changed, 3 insertions(+), 1 deletion(-)
+ .../0001-setup.py-Allow-Python-3.15.patch     | 38 +++++++++++++++++++
+ .../python/python3-geojson_3.3.0.bb           |  1 +
+ 2 files changed, 39 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-geojson/0001-setup.py-Allow-Python-3.15.patch
 
-diff --git a/meta-multimedia/recipes-connectivity/gupnp/gupnp-igd/run-ptest b/meta-multimedia/recipes-connectivity/gupnp/gupnp-igd/run-ptest
-index 05aa2a9b3a..ff024e9a66 100644
---- a/meta-multimedia/recipes-connectivity/gupnp/gupnp-igd/run-ptest
-+++ b/meta-multimedia/recipes-connectivity/gupnp/gupnp-igd/run-ptest
-@@ -3,7 +3,7 @@ RET=0
-
- cd test
- for t in $(find . -type f -executable); do
--    if ./$t; then
-+    if timeout 300 ./$t; then
-         echo PASS: $t
-     else
-         echo FAIL: $t
-diff --git a/meta-multimedia/recipes-connectivity/gupnp/gupnp-igd_1.6.0.bb b/meta-multimedia/recipes-connectivity/gupnp/gupnp-igd_1.6.0.bb
-index de14e50d41..b17719dbca 100644
---- a/meta-multimedia/recipes-connectivity/gupnp/gupnp-igd_1.6.0.bb
-+++ b/meta-multimedia/recipes-connectivity/gupnp/gupnp-igd_1.6.0.bb
-@@ -12,6 +12,8 @@ SRC_URI[archive.sha256sum] = "4099978339ab22126d4968f2a332b6d094fc44c78797860781
-
- GTKDOC_MESON_OPTION = "gtk_doc"
-
-+RDEPENDS:${PN}-ptest += "coreutils"
+diff --git a/meta-python/recipes-devtools/python/python3-geojson/0001-setup.py-Allow-Python-3.15.patch b/meta-python/recipes-devtools/python/python3-geojson/0001-setup.py-Allow-Python-3.15.patch
+new file mode 100644
+index 0000000000..e61ef33abf
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-geojson/0001-setup.py-Allow-Python-3.15.patch
+@@ -0,0 +1,38 @@
++From b0ebb91bc05e240a1acee4133662e3cc2127a9e3 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Thu, 19 Nov 2026 10:21:40 -0800
++Subject: [PATCH] setup.py: Allow Python 3.15
 +
- do_install_ptest(){
-     cd ${B}/tests/gtest
-     for t in $(find . -type f -executable); do
++setup.py refuses to run on anything newer than 3.14, so the package
++cannot be built with Python 3.15. Raise the upper bound and add the
++classifier.
++
++Upstream-Status: Submitted [https://github.com/jazzband/geojson/pull/264]
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ setup.py | 5 +++--
++ 1 file changed, 3 insertions(+), 2 deletions(-)
++
++diff --git a/setup.py b/setup.py
++index 05ce9cd..427c434 100644
++--- a/setup.py
+++++ b/setup.py
++@@ -17,8 +17,8 @@ else:
++
++
++ major_version, minor_version = sys.version_info[:2]
++-if not (major_version == 3 and 10 <= minor_version <= 14):
++-    sys.stderr.write("Sorry, only Python 3.10 - 3.14 are "
+++if not (major_version == 3 and 10 <= minor_version <= 15):
+++    sys.stderr.write("Sorry, only Python 3.10 - 3.15 are "
++                      "supported at this time.\n")
++     exit(1)
++
++@@ -52,6 +52,7 @@ setup(
++         "Programming Language :: Python :: 3.12",
++         "Programming Language :: Python :: 3.13",
++         "Programming Language :: Python :: 3.14",
+++        "Programming Language :: Python :: 3.15",
++         "Topic :: Scientific/Engineering :: GIS",
++     ]
++ )
+diff --git a/meta-python/recipes-devtools/python/python3-geojson_3.3.0.bb b/meta-python/recipes-devtools/python/python3-geojson_3.3.0.bb
+index 8b3d5cfd81..7d866cac37 100644
+--- a/meta-python/recipes-devtools/python/python3-geojson_3.3.0.bb
++++ b/meta-python/recipes-devtools/python/python3-geojson_3.3.0.bb
+@@ -3,6 +3,7 @@ HOMEPAGE = "https://pypi.org/project/geojson/"
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=127b4a863485faf7c57d12dc2c1f60b3"
+
++SRC_URI += "file://0001-setup.py-Allow-Python-3.15.patch"
+ SRC_URI[sha256sum] = "92e83b9cb378a450b42f1207bb9b2a031f9fc89185f335153c44369b8b8b71fd"
+
+ inherit pypi setuptools3 ptest-python-pytest
