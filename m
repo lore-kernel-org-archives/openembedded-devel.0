@@ -1,88 +1,241 @@
-Received: from mail-pf1-f178.google.com (mail-pf1-f178.google.com [209.85.210.178])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.1925.1795113522042364033
+Received: from mail-yx1-f45.google.com (mail-yx1-f45.google.com [74.125.224.45])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.4185.1795143426325121162
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 19 Nov 2026 10:38:42 -0800
+ Thu, 19 Nov 2026 18:57:06 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=U99dR0oW;
- spf=pass (domain: gmail.com, ip: 209.85.210.178, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pf1-f178.google.com with SMTP id d2e1a72fcca58-8c5ebbc5150so86659b3a.3
-        for <openembedded-devel@lists.openembedded.org>; Thu, 19 Nov 2026 10:38:41 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=RbYyxfZs;
+ spf=pass (domain: gmail.com, ip: 74.125.224.45, mailfrom: schonm@gmail.com)
+Received: by mail-yx1-f45.google.com with SMTP id 956f58d0204a3-67dabd38cdfso732719d50.2
+        for <openembedded-devel@lists.openembedded.org>; Thu, 19 Nov 2026 18:57:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795113521; x=1795718321; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=nDBSwJBFWmOwVGT8x20+Gu3+IQamlbGQilOuTcWP1hY=;
-        b=U99dR0oWN12Vg5TWbVKzxkfXRBpIZ8ozh7UfBNq6ui81xWhrgDlM8qz8KtEyEoLv4P
-         7KgZ52qUyXAx3fzDqSe87mziuEWjW1YTjj3PUr5Dmtawwib6DxH2yN5WNvR0RBRWJemV
-         DrD6yRkuIVvzy/Y0mPlEuEmXr1f114F0dvEh9cYOl0VEUp++SMJw4lwz4y9KpOLfdlwH
-         nau0yFaFIp2bAWhEfmx08A/lXDuvFbRtAIHzU4byoQtKdpOeGWBDZ4wJarIuDx/UQkyT
-         KlB5zKyviTGkg77HtQ7sSwhWrtgoSmWECaDPzYSnQ4nQSPqWbIuU3XYZJ7LcWseot4WP
-         wtPQ==
+        d=gmail.com; s=20260707; t=1795143425; x=1795748225; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=QXScchKaX22w1eee0C1SIDKkDzwltxDtU+H7xKHaYxE=;
+        b=RbYyxfZsL4GwyP9RUShEreaI3zHfxIW1TtffzVx678c3Lr/K3I/VBKOXIUg9fsOeIL
+         JfV768Q/Xba8NWiQCDdB1UlOJcRsMdft5olZddTt1yJ0TSN6A9+Z3kh4QhVS0T6uygA8
+         WaC2sTVsOLgBXlBfnpxrMb5Evv/u0c1fHfPJ3l0nUX623zNaFCr0zZRXz4hrAOkgtH7G
+         BEgFDIVd9eWuCnOES04LANdnhMoHRRt6rVUKn6Db9SmUUIqLEYu9vbQ1xW/Kt1KOegB9
+         Xs1LOtBPxRqnvBjA7V1Csfxot/4iuG7D8fnTEr/TzpYyARP7J2f0S8RnAwK7Xu63KrTl
+         EMnw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795113521; x=1795718321;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=nDBSwJBFWmOwVGT8x20+Gu3+IQamlbGQilOuTcWP1hY=;
-        b=DVJBdUf5fyBmupeg1t70/Cm5VBuQ4pPLbsGbI9VNT5CmzmU7vja0DFOulCfrsCVIyo
-         cOPKNoRi5+cRZAAK/nBkw3EGT0tLBVrO/yI1dA4Ne4UDPcbuD08r3bjEXJQykCnjc6jw
-         7ClKKaZapZX1ThNNTBP9nEh8ivWKgPlzLKwPAMkw0ap/RXJyKMpMX9d7j7J6+k/ARXaT
-         r00UEqqE+cNJ72YZn7QOo4JvwnQNHWaIheH/rYtawdblN1cV/qmP9f6DYCqHqmG2cUYK
-         JKryD920HJj3yGToGhWmVNvQCoX0aEaOYvclIAnUSuAsUtKck7Yk2kaAYFPrNWDQoLX2
-         b89A==
-X-Gm-Message-State: APuU4Z/42h9kes6Sd7UA1tb/PwxdcxJGNduI2lPaMx6yCqYtycwwy+sk
-	GuTkozoIbJ394rMshttN4+4dzSabA1+ewdhqYmQMo5+ExFR8J9SpQ5eJtWY0jw==
-X-Gm-Gg: AYBFou2CHIfR5rZguvKhWqs9k6KpiGEw0gcQRkOJLWoEzkNqTA7tJD8AHtUiOSV9paz
-	V5VGUNle4qbhoKSbzXhidwEeRik5OzJMJffAzSlWf0M0yoFixD3o0a8n+l77GaBSlUsI2borIc9
-	M2FGndIqDAzYLkyZ/0nBYlU9azAQNxgqScHAV/Q6WNSOh01rhtl1mh9ylGBNEYHy+FtVGwNP512
-	nb4hRRMGs7nPLdyFHuWKx3+ze5nGrntYDJapJc137X2dhmbPET10OsNb4aBHZWWkOXwx0gRaEWs
-	neMgPDEmaBSuqv5k3liAG5mrUmVcLdHtZIg+3KCbTy6bGXxuSBo8uwZ13X9qgMvgyRgWJ1LLkV4
-	3aL56c0GuxxYrU+J7FPHmU0+9rYM93xYmky7YSPX6+iAlQ5z57Fod1UMpIfBPfzv9Qy2+blBmo8
-	a4ATbYuQ7MrJazDEHv5MK3dOyxoHWNUPObrl7RV7tV6M4lkl6NG/zED4XBoqjw6e9gU0GoVvlGD
-	lLZooNCKbLQEROI/Vc+3BOvqCwS/NGHcXSvSMZgtQU3DacKo+t1hDbQMZz0O9jkBZjIwx+5QDxW
-	njEzOkEgVBCxNkIPlY60kn6ZD08d70OH3Oqlq4FqXkLV5kRjsj3ZbJDzpUsQJw7tcz7nYjmFiEJ
-	o7EVx1Pk=
-X-Received: by 2002:a05:6a00:4fcc:b0:89a:8a44:5db5 with SMTP id d2e1a72fcca58-8c87cb4bbc5mr488774b3a.44.1795113521450;
-        Thu, 19 Nov 2026 10:38:41 -0800 (PST)
-Return-Path: <ankur.tyagi85@gmail.com>
-Received: from NVAPF55DW0D-IPD.. ([147.161.217.9])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-8c872e4d7basm294518b3a.21.2026.11.19.10.38.39
+        d=1e100.net; s=20260707; t=1795143425; x=1795748225;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=QXScchKaX22w1eee0C1SIDKkDzwltxDtU+H7xKHaYxE=;
+        b=uNh/htKAgOvJiyQIK2vjf8g1dgYWJH9grRC8ZNoQWHna7YO8ZILZJ6VHDbiZTvBtGe
+         g8Jy8IscoUQ7MkSPWbiJS1ZCXivFjXg7nAFZ6hE+Qnu3cSgd4nCR98Ui8/x0KVaw2ome
+         BTETpTvunA4k3G3z3vCCpqUCkV4hhA7ZqhF0da7duk7I8oML7XwYMgal/beIQtg5AS4u
+         n99HIYV8q2dFRr2s/sFDvE3c+E9W84+I/MC62zIkHlwz0Eb6Q7pJRtZsAUmZIkT6EcFt
+         RULUtOFpwscdlm/WObITPRvdtloOJKEoElvDJzOLZUT+/e/PiHcGKn9I5+uFEbdddsPU
+         RtLA==
+X-Gm-Message-State: APuU4Z8yUCQSZJjl36O+giBpF7AUNOtROHPxyF7jQ7/gJ4Yt5Z1qLEvF
+	c/q847ZnEa+TQXgkBcSrUByT+Y8njMANNjTdtFyU/ewgLD9tjgsQmr30DW/EXkzc
+X-Gm-Gg: AZFdTZciapvuQYueDHFTX0nlGaht8idOLebLmwPp/4TBQjGkm7m8Blps2jFtuTQ8miI
+	p+HrXKFmhXul1OIOyQMGSLsjAjS+RSiC7pLcFc8kvTUUZpatpnfRfj3UeWkKsYrP0Ee7CXgZ7cH
+	2+RE6xRXJBhQvTnCZ4tCxVbpxjeMr89PpFxK/ovZ30ZrvN99Xl6m1tdquC6kwA3d2ebVzRpLZGB
+	bzUbl42bqQxBvhUk/ywjTxmqFjw1rpx8MZiv1URE45BUsvROReKjP6xQopQNmb5Qxbt2ZbdEzJ/
+	lTxCnIMLrS+SfqjWqMvrd3zyz6y6/9eyI2Bs6JIG3BZST5tDSClwL8WS6QvmnWjtJbTcUAAjV8k
+	thgBJyjCJr5+qYp35LOfGrCnaEXi1GLZin3RHe5D85UDNWRX72oYoTkXOOt0JXyixFB592Kq093
+	BQF41f7yhAB9/R4RC8cjIOnF7XAICbTs2Q3x/j67AERAZMUwTHKsw/KskvMjh+KtsWCDyuAWmZP
+	VJvPgWY4VIUi0M4trDFKwOzQEmZtDQVofhCe2E1BGvlivGF3DdmZkOnA8B/dOFqUdL591DKz1Xg
+	Wi3Qhv9cOrY4ZSDf9Cg3QJiPdT7y1j6ciy5ptrFKOGAZVfMWVXYZsBcf0FMgoeN6x513q9dsTl5
+	FFmn0nUtZUT2+BBh2pNG+96rlPpLj6B9hzf2TBG9jyYKlwLyYj88I
+X-Received: by 2002:a05:690e:1247:b0:67d:ebad:8ca2 with SMTP id 956f58d0204a3-67df4410cabmr718360d50.53.1795143425022;
+        Thu, 19 Nov 2026 18:57:05 -0800 (PST)
+Return-Path: <schonm@gmail.com>
+Received: from localhost.localdomain ([71.3.193.106])
+        by smtp.gmail.com with ESMTPSA id 956f58d0204a3-67df30e4407sm1078275d50.0.2026.11.19.18.57.03
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 19 Nov 2026 10:38:41 -0800 (PST)
-From: ankur.tyagi85@gmail.com
+        Thu, 19 Nov 2026 18:57:03 -0800 (PST)
+From: Jason Schonberg <schonm@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [blacksail][PATCH 64/64] libplacebo: update SRC_URI branch
-Date: Fri, 20 Nov 2026 07:33:32 +1300
-Message-ID: <a0413b03fe80a66a454e5364768d36cd1fdbeb7e.1795112941.git.ankur.tyagi85@gmail.com>
+Cc: Jason Schonberg <schonm@gmail.com>
+Subject: [meta-oe][PATCH] php: upgrade 8.5.12 -> 8.5.13
+Date: Thu, 19 Nov 2026 21:56:43 -0500
+Message-ID: <20261120025643.1718331-1-schonm@gmail.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <cover.1795112941.git.ankur.tyagi85@gmail.com>
-References: <cover.1795112941.git.ankur.tyagi85@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Thu, 19 Nov 2026 18:38:48 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132754
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Fri, 20 Nov 2026 02:57:15 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132755
 Content-Type: text/plain; charset="utf-8"
 
-From: Ankur Tyagi <ankur.tyagi85@gmail.com>
+This is a security release.
 
-Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
+Patches updated with devtool.
+
+CVE-2026-15353  CVE-2026-48841  CVE-2026-115560 CVE-2026-126714 CVE-2026-127960 CVE-2026-128064 CVE-2026-129182
+CVE-2026-129289 CVE-2026-129291 CVE-2026-129292 CVE-2026-129438 CVE-2026-129474 CVE-2026-129481 CVE-2026-129496
+CVE-2026-129501 CVE-2026-129506
+
+Changelog: https://www.php.net/ChangeLog-8.php#8.5.13
+
+Signed-off-by: Jason Schonberg <schonm@gmail.com>
 ---
- meta-oe/recipes-multimedia/mplayer/libplacebo_7.360.1.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ ...onfigure.ac-don-t-include-build-libtool.m4.patch |  9 +++------
+ ...-ext-phar-Makefile.frag-Fix-phar-packaging.patch |  9 +++------
+ .../php/php/0003-iconv-fix-detection.patch          |  6 +++---
+ .../php/0004-pear-fix-Makefile.frag-for-Yocto.patch | 13 +++++--------
+ ...-not-generate-phar.php-during-cross-compil.patch |  5 +----
+ .../php/{php_8.5.12.bb => php_8.5.13.bb}            |  2 +-
+ 6 files changed, 16 insertions(+), 28 deletions(-)
+ rename meta-oe/recipes-devtools/php/{php_8.5.12.bb => php_8.5.13.bb} (99%)
 
-diff --git a/meta-oe/recipes-multimedia/mplayer/libplacebo_7.360.1.bb b/meta-oe/recipes-multimedia/mplayer/libplacebo_7.360.1.bb
-index 94767730a8..6c6c640da7 100644
---- a/meta-oe/recipes-multimedia/mplayer/libplacebo_7.360.1.bb
-+++ b/meta-oe/recipes-multimedia/mplayer/libplacebo_7.360.1.bb
-@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=435ed639f84d4585d93824e7da3d85da"
+diff --git a/meta-oe/recipes-devtools/php/php/0001-configure.ac-don-t-include-build-libtool.m4.patch b/meta-oe/recipes-devtools/php/php/0001-configure.ac-don-t-include-build-libtool.m4.patch
+index fae8697fd4..ae57c012ff 100644
+--- a/meta-oe/recipes-devtools/php/php/0001-configure.ac-don-t-include-build-libtool.m4.patch
++++ b/meta-oe/recipes-devtools/php/php/0001-configure.ac-don-t-include-build-libtool.m4.patch
+@@ -1,7 +1,7 @@
+-From 6da78888b934dc10720a6e0e520536077cc2aac2 Mon Sep 17 00:00:00 2001
++From 18ab3bb29863f639c6f69d8464f5e31223425f63 Mon Sep 17 00:00:00 2001
+ From: Claude Bing <cbing@cybernetics.com>
+ Date: Tue, 9 Nov 2021 13:03:46 -0500
+-Subject: [PATCH 1/5] configure.ac: don't include build/libtool.m4
++Subject: [PATCH] configure.ac: don't include build/libtool.m4
  
- DEPENDS += "fastfloat glad-native python3-mako-native python3-jinja2-native vulkan-headers"
+ we delete build/libtool.m4 before do_configure,
+ we will use libtool.m4 under ACLOCALDIR
+@@ -17,7 +17,7 @@ Signed-off-by: Claude Bing <cbing@cybernetics.com>
+  1 file changed, 1 deletion(-)
  
--SRC_URI = "git://code.videolan.org/videolan/libplacebo.git;protocol=https;branch=release;tag=v${PV}"
-+SRC_URI = "git://code.videolan.org/videolan/libplacebo.git;protocol=https;branch=v7.360;tag=v${PV}"
- SRCREV = "cee9b076f2c63104ccfd497fa79c39a867293ec4"
+ diff --git a/configure.ac b/configure.ac
+-index 9d79720a2..9353e2f6e 100644
++index b0ea82bf..31933cca 100644
+ --- a/configure.ac
+ +++ b/configure.ac
+ @@ -6,7 +6,6 @@ dnl ----------------------------------------------------------------------------
+@@ -28,6 +28,3 @@ index 9d79720a2..9353e2f6e 100644
+  m4_include([build/php_cxx_compile_stdcxx.m4])
+  m4_include([build/php.m4])
+  m4_include([build/pkg.m4])
+--- 
+-2.25.1
+-
+diff --git a/meta-oe/recipes-devtools/php/php/0002-ext-phar-Makefile.frag-Fix-phar-packaging.patch b/meta-oe/recipes-devtools/php/php/0002-ext-phar-Makefile.frag-Fix-phar-packaging.patch
+index b2c4f8840f..fe1393cc6f 100644
+--- a/meta-oe/recipes-devtools/php/php/0002-ext-phar-Makefile.frag-Fix-phar-packaging.patch
++++ b/meta-oe/recipes-devtools/php/php/0002-ext-phar-Makefile.frag-Fix-phar-packaging.patch
+@@ -1,7 +1,7 @@
+-From f7724d7ccd157058630e6a887798ab6d3e34c6b7 Mon Sep 17 00:00:00 2001
++From 36809a52857fd60f2a4707d4db2514072ceffe61 Mon Sep 17 00:00:00 2001
+ From: Claude Bing <cbing@cybernetics.com>
+ Date: Tue, 9 Nov 2021 13:07:25 -0500
+-Subject: [PATCH 2/5] ext/phar/Makefile.frag: Fix phar packaging
++Subject: [PATCH] ext/phar/Makefile.frag: Fix phar packaging
  
- inherit meson pkgconfig
+ Inherited from OE-Classic, with some additions to fix host paths leaking
+ into the target package.
+@@ -19,7 +19,7 @@ Signed-off-by: Claude Bing <cbing@cybernetics.com>
+  1 file changed, 3 insertions(+), 14 deletions(-)
+ 
+ diff --git a/ext/phar/Makefile.frag b/ext/phar/Makefile.frag
+-index cedde76df..09d577d73 100644
++index cedde76d..09d577d7 100644
+ --- a/ext/phar/Makefile.frag
+ +++ b/ext/phar/Makefile.frag
+ @@ -10,20 +10,9 @@ pharcmd: $(builddir)/phar.php $(builddir)/phar.phar
+@@ -46,6 +46,3 @@ index cedde76df..09d577d73 100644
+  
+  $(builddir)/phar/phar.inc: $(srcdir)/phar/phar.inc
+  	-@test -d $(builddir)/phar || mkdir $(builddir)/phar
+--- 
+-2.25.1
+-
+diff --git a/meta-oe/recipes-devtools/php/php/0003-iconv-fix-detection.patch b/meta-oe/recipes-devtools/php/php/0003-iconv-fix-detection.patch
+index 745bc2140d..91e4563292 100644
+--- a/meta-oe/recipes-devtools/php/php/0003-iconv-fix-detection.patch
++++ b/meta-oe/recipes-devtools/php/php/0003-iconv-fix-detection.patch
+@@ -1,4 +1,4 @@
+-From d9fc6b314cefe010a0deb6e591719cfb0ff226a5 Mon Sep 17 00:00:00 2001
++From 4f65f373989fab85328be28423e97c70bce3ec08 Mon Sep 17 00:00:00 2001
+ From: Claude Bing <cbing@cybernetics.com>
+ Date: Tue, 9 Nov 2021 13:10:33 -0500
+ Subject: [PATCH] iconv: fix detection
+@@ -20,10 +20,10 @@ Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
+  1 file changed, 2 insertions(+), 1 deletion(-)
+ 
+ diff --git a/build/php.m4 b/build/php.m4
+-index d8a5cbf0..aee21924 100644
++index 0a2169f6..a93ce1f5 100644
+ --- a/build/php.m4
+ +++ b/build/php.m4
+-@@ -1829,7 +1829,8 @@ AC_DEFUN([PHP_SETUP_ICONV], [
++@@ -1786,7 +1786,8 @@ AC_DEFUN([PHP_SETUP_ICONV], [
+      [Define to 1 if you have the 'libiconv' function.])
+  
+    dnl Check libc first if no path is provided in --with-iconv.
+diff --git a/meta-oe/recipes-devtools/php/php/0004-pear-fix-Makefile.frag-for-Yocto.patch b/meta-oe/recipes-devtools/php/php/0004-pear-fix-Makefile.frag-for-Yocto.patch
+index 23641be2c6..635f19b744 100644
+--- a/meta-oe/recipes-devtools/php/php/0004-pear-fix-Makefile.frag-for-Yocto.patch
++++ b/meta-oe/recipes-devtools/php/php/0004-pear-fix-Makefile.frag-for-Yocto.patch
+@@ -1,7 +1,7 @@
+-From 35d7d40ac49c96b7a9a19b2f6593abb9f18ade2b Mon Sep 17 00:00:00 2001
++From c4bb3b277abe7867e0eb9f5170195a865a3876b2 Mon Sep 17 00:00:00 2001
+ From: Claude Bing <cbing@cybernetics.com>
+ Date: Tue, 9 Nov 2021 13:04:29 -0500
+-Subject: [PATCH 4/5] pear: fix Makefile.frag for Yocto
++Subject: [PATCH] pear: fix Makefile.frag for Yocto
+ 
+ Upstream-Status: Pending
+ 
+@@ -14,11 +14,11 @@ Signed-off-by: Claude Bing <cbing@cybernetics.com>
+  1 file changed, 1 insertion(+), 1 deletion(-)
+ 
+ diff --git a/pear/Makefile.frag b/pear/Makefile.frag
+-index 9408757a3..69072f39e 100644
++index fc56dfcb..e39472b4 100644
+ --- a/pear/Makefile.frag
+ +++ b/pear/Makefile.frag
+-@@ -10,7 +10,7 @@ PEAR_SUFFIX = -ds a$(program_suffix)
+- PEAR_INSTALLER_URL = https://pear.php.net/install-pear-nozlib.phar
++@@ -7,7 +7,7 @@ PEAR_PREFIX = -dp a${program_prefix}
++ PEAR_SUFFIX = -ds a$(program_suffix)
+  
+  install-pear-installer: $(SAPI_CLI_PATH)
+ -	@$(top_builddir)/sapi/cli/php $(PEAR_INSTALL_FLAGS) pear/install-pear-nozlib.phar -d "$(peardir)" -b "$(bindir)" ${PEAR_PREFIX} ${PEAR_SUFFIX}
+@@ -26,6 +26,3 @@ index 9408757a3..69072f39e 100644
+  
+  install-pear:
+  	@echo "Installing PEAR environment:      $(INSTALL_ROOT)$(peardir)/"
+--- 
+-2.25.1
+-
+diff --git a/meta-oe/recipes-devtools/php/php/0005-explicitly-not-generate-phar.php-during-cross-compil.patch b/meta-oe/recipes-devtools/php/php/0005-explicitly-not-generate-phar.php-during-cross-compil.patch
+index 469d26e06b..de2b5dcdce 100644
+--- a/meta-oe/recipes-devtools/php/php/0005-explicitly-not-generate-phar.php-during-cross-compil.patch
++++ b/meta-oe/recipes-devtools/php/php/0005-explicitly-not-generate-phar.php-during-cross-compil.patch
+@@ -1,4 +1,4 @@
+-From 41c8c5821fc74efea8b086927a17aa3bc7aef6bb Mon Sep 17 00:00:00 2001
++From c99cba1ddfaea0839240220129727c8411ee46f0 Mon Sep 17 00:00:00 2001
+ From: Hongxu Jia <hongxu.jia@windriver.com>
+ Date: Tue, 18 Nov 2025 16:25:28 +0800
+ Subject: [PATCH] explicitly not generate phar.php during cross-compile
+@@ -30,6 +30,3 @@ index 09d577d7..2f85847c 100644
+  
+  $(builddir)/phar.php: $(srcdir)/build_precommand.php $(srcdir)/phar/*.inc $(srcdir)/phar/*.php $(SAPI_CLI_PATH)
+  	-@(echo "Generating phar.php"; \
+--- 
+-2.34.1
+-
+diff --git a/meta-oe/recipes-devtools/php/php_8.5.12.bb b/meta-oe/recipes-devtools/php/php_8.5.13.bb
+similarity index 99%
+rename from meta-oe/recipes-devtools/php/php_8.5.12.bb
+rename to meta-oe/recipes-devtools/php/php_8.5.13.bb
+index f9759cf7a5..0fbcfd6ea2 100644
+--- a/meta-oe/recipes-devtools/php/php_8.5.12.bb
++++ b/meta-oe/recipes-devtools/php/php_8.5.13.bb
+@@ -32,7 +32,7 @@ UPSTREAM_CHECK_REGEX = "releases/tag/php-(?P<pver>\d+(\.\d+)+)"
+ 
+ S = "${UNPACKDIR}/php-${PV}"
+ 
+-SRC_URI[sha256sum] = "ffb60edc437ced63b5137e4984db379a8111c50049c711510d8b958277efc1a8"
++SRC_URI[sha256sum] = "47d50c36016784a4a71f019cd7bfa29c31e4be0de22d3fa06095b280a6299e2f"
+ 
+ CVE_PRODUCT = "php:php php_group:php"
+ 
+-- 
+2.43.0
+
