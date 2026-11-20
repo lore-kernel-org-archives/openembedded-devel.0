@@ -1,73 +1,72 @@
-Received: from aer-iport-1.cisco.com (aer-iport-1.cisco.com [173.38.203.51])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.4791.1795146382343166330
+Received: from aer-iport-6.cisco.com (aer-iport-6.cisco.com [173.38.203.68])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.4792.1795146382716273373
  for <openembedded-devel@lists.openembedded.org>;
  Thu, 19 Nov 2026 19:46:23 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=GoUX0nx8;
- spf=pass (domain: cisco.com, ip: 173.38.203.51, mailfrom: hthakar@cisco.com)
+ dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=YVfqjcMX;
+ spf=pass (domain: cisco.com, ip: 173.38.203.68, mailfrom: hthakar@cisco.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=cisco.com; i=@cisco.com; l=13990; q=dns/txt;
+  d=cisco.com; i=@cisco.com; l=41868; q=dns/txt;
   s=iport01; t=1795146382; x=1796355982;
   h=from:to:subject:date:message-id:in-reply-to:references:
    mime-version:content-transfer-encoding;
-  bh=UJj+P0Lq6xregR0wE8AqUZDUaw622ghwKDkUgdEDmCg=;
-  b=GoUX0nx8cYIBVBFt1IStX9C3yHNAub1+EyhIQne5tqAT/3U9cZ5mA1iI
-   bIo+YuzEdEGQSvx6o5iv5Zm+EfFmb6FKpr2ONl7rJ1kFP3Nl4Be4mZj50
-   S9M0jPtJ6tBK/vuoG0pszxigvJ6LDd3rENhek2eZ2Pkv2COh45bWPzrPH
-   WlHMjGz5OSPDsqQcHURZhMLirVhLwL559jXXLe4aIhnXIkvv6fiXpEW4X
-   GfrAE6gXrPSK+a4v6m9MktUNdOI+ly0NbmGf5cCAnGIEabdaX//81O0Zd
-   Ise0tMUf1pOO8PWLYwmPm4szyaIKMnX9CuFepHx9rC+TSGu2tugDcjtDc
-   g==;
-X-CSE-ConnectionGUID: vhiGr+GjT+ixQGRMp1sJkQ==
-X-CSE-MsgGUID: RTgS+9TYR7+Ao5a1d1XZQQ==
-X-IPAS-Result: =?us-ascii?q?A0AuAABXwf9q/9RK/pBaHQEBAQEJARIBBQUBgXwIAQsBg?=
- =?us-ascii?q?lZ1YENJA4xvhziBNWwDgROKU4VqjFmBfg8BAQEPRA0EAQGEP0YCjiECJjQJD?=
- =?us-ascii?q?gECBAMCAwEBAQEBAQEBAQEBAQoBAQUBAQECAQcFgQ4ThhUIMg2QEgECAQMyA?=
- =?us-ascii?q?RgBPRwDAQIvIAsjCBmDAgGCOgM3AxG5O4IsgQGDKQE/AkNQ2EwNgloBCxQBg?=
- =?us-ascii?q?TgBhUGDAIUkXRgBhH0nGxuBcoEVgnR2gQWBGhgqAQGBSIZeBIIigQyBVIELh?=
- =?us-ascii?q?TGGWwKBT4gmSIEeA1ksAVUTDQoLBwWBaAM1EioVbjIdgSM7F4EHGwYFgRyBH?=
- =?us-ascii?q?oESgQNdgSsoXiGBCIF2AoJRggACAUlBDgdFUwklQxJHJCIIEgkBExosCoEaN?=
- =?us-ascii?q?TwJJj8VDGcLGgVhCAINDHQ5EDAeJC8FGiY+GwqBDCcfHhsOAh8QBg0YDUgRL?=
- =?us-ascii?q?DcVGQQ+bgeTbIImUxkGAXQHEwEHAyABFxJWHAUUDxcPFAYpEQ0EGJJgJZI2o?=
- =?us-ascii?q?CBxCiiDeYwkjz6FfBozhASBV5JDklQLmH2CWYhOgmOECoQijQsqIANNhGqBa?=
- =?us-ascii?q?DyBRwsHcBWDIgkKQBkPjFiBVwoLg2CBf4MUUch3JjICCQMvAQEHAgcOAwuBa?=
- =?us-ascii?q?JAAAiYCBYFPAQE?=
-IronPort-Data: A9a23:YHaQlq/sQa5WBmDicsnPDrUD1H+TJUtcMsCJ2f8bNWPcYEJGY0x3n
- 2VMCm7QP6mJNmWgLdojYI21oEwF7cLdytBlQFQ6rSlEQiMRo6IpJzg2wmQcns+2BpeeJK6yx
- 5xGMrEsFOhtEDmB4E/rYuK8xZVF/fngbqLmD+LZMTxGSwZhSSMw4TpugOdRbrRA2bBVOCvT/
- 4mtyyHjEAX9gWAtazhMs/3rRC5H5ZwehhtJ5jTSWtgT1LPuvyF9JI4SI6i3M0z5TuF8dsamR
- /zOxa2O5WjQ+REgELuNyt4XpWVTH9Y+lSDX4pZnc/DKbipq/0Te4Y5nXBYoUnq7vh3S9zxHJ
- HqhgrTrIeshFvWkdO3wyHC0GQkmVUFN0OevzXRSLaV/wmWeG0YAzcmCA2koPYw34KVYA10N9
- OwhBwoodkmYpeGPlefTpulE3qzPLeHiMZlavjRryivUSK9/B5vCWK7No9Rf2V/chOgXQaqYP
- ZdFL2UzKk6ZOXWjOX9PYH46tOe0hnD8eidwo1OOrq1x6G/WpOB0+Oa3aYePIIPXLSlTtnykq
- VmFrljIOE5ZHdvCwGOJq0Kev9aayEsXX6pXTtVU7MVCh0WewGEWAhAaWVa35PW0lEO6c9ZeM
- FAPvC02oK4/8UamQtXwU1u/unHsg/IHc9NdCag+rQqK0KeRul/fDWkfRTkHY9sj3CMreQEXO
- payt4uBLVRSXHe9EBpxKp/8QeuOBBUo
-IronPort-HdrOrdr: A9a23:tqJJgqhTLalyZRvc/x0zOOxq4HBQXvYji2hC6mlwRA09TyX+rb
- HLoB1173HJYVoqNU3I3OrwW5VoIkmskKKdn7NxAV7KZmCP0wGVxcNZnOnfKlbbdBEWmNQw6U
- 4ZSchDIey1K0RmhsDn5wT9OdMhzN6btJ2Mv47lvhBQpcUAUdAY0++/YTzrdHFLeA==
-X-Talos-CUID: =?us-ascii?q?9a23=3ABCvHSmoguORqi7z3wSy54s7mUd4lc1LHj1jSHwy?=
- =?us-ascii?q?5GV9GcpiNEESy+5oxxg=3D=3D?=
-X-Talos-MUID: =?us-ascii?q?9a23=3Afu+g7Q1u1C4NNdaIikL2xopB4zUj2ZihMwNcraQ?=
- =?us-ascii?q?85IqtMnF5YjvEvAaOe9py?=
+  bh=aT+Mo/+/qbfxXQICuvQQ//GIUl/nTmW9IeoL1e4ek6s=;
+  b=YVfqjcMXplJbvColhBmQSbC2hmYwD2xlyFcwbR7QoHsnjM4xjlr9T26Y
+   KmvWv2B6UhfRDWpATWiwRl53FdHZovv6ww0y69Ms0ayd5Z5a77tnH21L/
+   ZDI3SIqgTJa+DTcZXpCrtNCj7H/v/dlRPOicO4wii2c2BYNZ1/HSK5BQc
+   BN6EieUOhci60HZOt9idriPqLSd1eLhwisx+6B0vxdPo+NreroA0RHgs6
+   4HcPF2+fZWNzWTBuRZGpjUTnJpWcmqu57xvr9Mot7PDl3aJoER/LqUNVF
+   +y1euWLOs7FFihtxQPSoVqizvng5+JbYG269tBZdTAYAuz7itZNoXNw+H
+   A==;
+X-CSE-ConnectionGUID: DL9y2wSrTkiHcHtQe7+XEQ==
+X-CSE-MsgGUID: 8mxU2vqYRFWh5eECcfPjqQ==
+X-IPAS-Result: =?us-ascii?q?A0C3AgBXwf9q/8xK/pBRCR4BAQsSDIIFC4JXdWBDSQOUJ?=
+ =?us-ascii?q?4IhA4tmhWqMWYF+DwEBAQ9EDQQBAYQ/RgKOIQImNAkOAQIEAwIDAQEBAQEBA?=
+ =?us-ascii?q?QEBAQEBCgEBBQEBAQIBBwWBDhOGTw2QEgECAQMaARcBGAE9HAMBAhkWIAsjC?=
+ =?us-ascii?q?BmDAgGCOgM3AxG5O4IsgQGDKQE/AkNQ2EwNgloBCxQBgTiFQoMAhSRdGAGEf?=
+ =?us-ascii?q?ScbG4FygRWDaoEFgRpCAQECAYExFGiFdgSCIoEMgQdNgQuLchoCgU+BW4ZLS?=
+ =?us-ascii?q?IEeA1ksAVUTDQoLBwWBaAM1EioVbjIdgSM7F4EHGwYFgRyBHoESgQNdgSsoX?=
+ =?us-ascii?q?iGBCIF2AoJRggACAUlBDgdFUwklQxJHJCIIEgkBExosCoEaNTwJJj8VDGcLG?=
+ =?us-ascii?q?gVhCAINDHQ5EDAeJC8FGiY+GwqBDCcfHhsOAh8QBg0YDUgRLDcVGQQ+bgeTb?=
+ =?us-ascii?q?IImJgcOAjYvMhMHEwEpAQECFQoId2MBASccAQUDjiCETAkUCQiSNoE1nmtxC?=
+ =?us-ascii?q?iiDeYwkjz6FfBozhASBV6UXC5h9glmIToJjhAqRKwI9DQNNhGqBaDyBRwsHc?=
+ =?us-ascii?q?BWDIglKGQ+OOYNrgX+DFFHIdyYyAgEIAy8BAQcCBw4DC4FokAIkCYFPAQE?=
+IronPort-Data: A9a23:AfOyTqvAgVfqoVpDDNf2CQ3dzufnVAJfMUV32f8akzHdYApBsoF/q
+ tZmKTyFOvuNamLwf9EjO4239klQu5PVn4JnGwBprykwE3sWgMeUXt7xwmUckM+xwmwvaGo9s
+ q3yv/GZdJhcokf0/0nrb/656ykmiMlkf5KkYMbcICd9WAR4fykojBNnioYRj5Vh6TSDK1vlV
+ eja/YuFZzdJ5xYuajhKsvvZ8Esw1BjPkGpwUmIWNKgjUGD2zxH5PLpHTYmtIn3xRJVjH+LSb
+ 47r0LGj82rFyAwmA9Wjn6yTWhVirmn6ZFXmZtJ+AsBOszAazsAA+v9T2Mk0NS+7vw60c+VZk
+ 72hg3AfpTABZcUgkMxFO/VR/roX0aduoNcrKlDn2SCfItGvn3bEm51T4E8K0YIw1sImEDtRz
+ uYkKzEtZTCfvu/pg4KWc7w57igjBJGD0II3s3x6iDWcBvE8TNWbGOPB5MRT23E7gcUm8fT2P
+ pZFL2AyMFKfP1sVYgt/5JEWxI9EglH/bz1Rq1uPjaE2+GPUigd21dABNfKIK4fXFJUJwi50o
+ EqW+nTEWA8DBeax9jrY/1+HjeH3nzrCDdd6+LqQs6QCbEeo7msLBRsbUFG2rfW0hguyVsxSL
+ 2QQ+zEytu417EGtQ9z3UhG0rXLCuQQTM+e8CMUz5RvIzu/f5ByUQzBfCDVAc9ch8sQxQFTGy
+ 2O0oj8gPhQ32JX9dJ5X3u78Qe+aUcTNEVI/WA==
+IronPort-HdrOrdr: A9a23:1AK78aoVVitRnwuVgM72TdQaV5oHeYIsimQD101hICG9Ffbo8/
+ xG88506faZslsssTQb6LO90cq7MBbhHOBOgLX5VI3KNGKNhILrFvAB0WKI+VLd8kPFmtK1rZ
+ 0BT4FOTPvtEFN9kcH2pCO8E9om3Z271ZrAv5a485+oJjsaEp2JKGxCe2CmLnE=
+X-Talos-CUID: =?us-ascii?q?9a23=3AvGq1NWvtu8xV6Xq6srffEpyB6IsJVizMlmjrOXO?=
+ =?us-ascii?q?7CEZiaKGsRADTyI5dxp8=3D?=
+X-Talos-MUID: =?us-ascii?q?9a23=3AoBS/gw0Upa6fgE1UOva5qDzgjjUjs6G+NRoTiKQ?=
+ =?us-ascii?q?8lfaEaCFdEDyTtDaue9py?=
 X-IronPort-Anti-Spam-Filtered: true
 X-IronPort-AV: E=Sophos;i="6.27,222,1787011200"; 
-   d="scan'208";a="62152275"
-Received: from aer-l-core-11.cisco.com ([144.254.74.212])
-  by aer-iport-1.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 20 Nov 2026 03:46:20 +0000
+   d="scan'208";a="59359844"
+Received: from aer-l-core-03.cisco.com ([144.254.74.204])
+  by aer-iport-6.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 20 Nov 2026 03:46:20 +0000
 Received: from sjc-ads-5245.cisco.com (sjc-ads-5245.cisco.com [10.28.23.9])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by aer-l-core-11.cisco.com (Postfix) with ESMTPS id 8EEBB1800042C
+	by aer-l-core-03.cisco.com (Postfix) with ESMTPS id 9E027180006C5
 	for <openembedded-devel@lists.openembedded.org>; Fri, 20 Nov 2026 03:46:19 +0000 (GMT)
 Received: by sjc-ads-5245.cisco.com (Postfix, from userid 1887505)
-	id 3DB81CBF201; Thu, 19 Nov 2026 19:46:18 -0800 (PST)
+	id 4537BCBF202; Thu, 19 Nov 2026 19:46:18 -0800 (PST)
 From: "Hetvi Thakar -X (hthakar - E INFOCHIPS PRIVATE LIMITED at Cisco)" <hthakar@cisco.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-python][wrynose][PATCH 2/4] python3-oauthlib: fix CVE-2026-49264
-Date: Thu, 19 Nov 2026 19:46:16 -0800
-Message-Id: <20261120034618.604880-2-hthakar@cisco.com>
+Subject: [meta-python][wrynose][PATCH 3/4] python3-oauthlib: fix CVE-2026-118669
+Date: Thu, 19 Nov 2026 19:46:17 -0800
+Message-Id: <20261120034618.604880-3-hthakar@cisco.com>
 X-Mailer: git-send-email 2.35.6
 In-Reply-To: <20261120034618.604880-1-hthakar@cisco.com>
 References: <20261120034618.604880-1-hthakar@cisco.com>
@@ -75,312 +74,903 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Outbound-Client-TLS: ANONYMOUS;sjc-ads-5245.cisco.com [10.28.23.9];TLSv1.3;TLS_AES_256_GCM_SHA384;256
 X-Outbound-SMTP-Client: 10.28.23.9, sjc-ads-5245.cisco.com
-X-Outbound-Node: aer-l-core-11.cisco.com
+X-Outbound-Node: aer-l-core-03.cisco.com
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Fri, 20 Nov 2026 03:46:25 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132757
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132758
 Content-Type: text/plain; charset="utf-8"
 
 From: Hetvi Thakar <hthakar@cisco.com>
 
-When enable_jsonp=True, the token revocation endpoint reflects an
-unvalidated callback into its responses. Applications loading these
-responses as trusted JSONP can execute attacker-controlled JavaScript.
+The client_credentials and password grants can authenticate one client
+while authorizing grants and scopes using a supplied client_id for
+another client, when validators rely on that client_id argument.
 
 Backport upstream fix [1], referenced by NVD [2] and Debian [3], to
-remove JSONP support from token revocation in OAuthLib 3.3.1.
+bind authorization to the authenticated client identity and reject a
+conflicting client_id in OAuthLib 3.3.1.
 
-Include upstream follow-up [4] to reject callback passed through
-keyword arguments, including callback=None, and retain its regression
-tests. Omit the CHANGELOG.rst update because its newer release-note
-context is absent from the 3.3.1 source.
+Include authentication-helper prerequisite [4] for the older grant
+implementation. Public-client validators must attach request.client.
+Retain the upstream validator contract and regressions, and add cases
+for missing, matching and inconsistent client identifiers. Omit
+docs/oauth2/server.rst because the 3.3.1 source archive excludes docs.
 
-[1] https://github.com/oauthlib/oauthlib/commit/c888359f3c42bec235b2c5caab2069c9ed62457c
-[2] https://nvd.nist.gov/vuln/detail/CVE-2026-49264
-[3] https://security-tracker.debian.org/tracker/CVE-2026-49264
-[4] https://github.com/oauthlib/oauthlib/commit/8f7db807dfeabc69386b4b67b14bb10c9efe56c8
+[1] https://github.com/oauthlib/oauthlib/commit/c951a1d09f99f14e3240973fa83c4f4287d4753d
+[2] https://nvd.nist.gov/vuln/detail/CVE-2026-118669
+[3] https://security-tracker.debian.org/tracker/CVE-2026-118669
+[4] https://github.com/oauthlib/oauthlib/commit/90d8aa851b6ce0fd095ed27e0f88051ab02279a9
 
 Signed-off-by: Hetvi Thakar <hthakar@cisco.com>
 ---
- .../python3-oauthlib/CVE-2026-49264_p1.patch  | 200 ++++++++++++++++++
- .../python3-oauthlib/CVE-2026-49264_p2.patch  |  50 +++++
+ .../CVE-2026-118669-dependent.patch           | 237 +++++++
+ .../python3-oauthlib/CVE-2026-118669.patch    | 602 ++++++++++++++++++
  .../python/python3-oauthlib_3.3.1.bb          |   2 +
- 3 files changed, 252 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-oauthlib/CVE-2026-49264_p1.patch
- create mode 100644 meta-python/recipes-devtools/python/python3-oauthlib/CVE-2026-49264_p2.patch
+ 3 files changed, 841 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-oauthlib/CVE-2026-118669-dependent.patch
+ create mode 100644 meta-python/recipes-devtools/python/python3-oauthlib/CVE-2026-118669.patch
 
-diff --git a/meta-python/recipes-devtools/python/python3-oauthlib/CVE-2026-49264_p1.patch b/meta-python/recipes-devtools/python/python3-oauthlib/CVE-2026-49264_p1.patch
+diff --git a/meta-python/recipes-devtools/python/python3-oauthlib/CVE-2026-118669-dependent.patch b/meta-python/recipes-devtools/python/python3-oauthlib/CVE-2026-118669-dependent.patch
 new file mode 100644
-index 0000000000..e336f9b6a7
+index 0000000000..f3933854e5
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-oauthlib/CVE-2026-49264_p1.patch
-@@ -0,0 +1,200 @@
-+From c888359f3c42bec235b2c5caab2069c9ed62457c Mon Sep 17 00:00:00 2001
++++ b/meta-python/recipes-devtools/python/python3-oauthlib/CVE-2026-118669-dependent.patch
+@@ -0,0 +1,237 @@
++From 90d8aa851b6ce0fd095ed27e0f88051ab02279a9 Mon Sep 17 00:00:00 2001
++From: Kyle Hekhuis <kyle@posit.co>
++Date: Mon, 14 Jul 2025 16:04:42 -0400
++Subject: [PATCH] Add helper method for validating client authentication and
++ use it in AuthorizationCodeGrant, DeviceCodeGrant, RefreshTokenGrant, and
++ ResourceOwnerPasswordCredentialsGrant.
++
++Add some missing imports to the oauth2 __init__.py
++
++CVE: CVE-2026-118669
++Upstream-Status: Backport [https://github.com/oauthlib/oauthlib/commit/90d8aa851b6ce0fd095ed27e0f88051ab02279a9]
++
++Signed-off-by: Hetvi Thakar <hthakar@cisco.com>
++---
++ oauthlib/oauth2/__init__.py                        |  5 ++--
++ .../rfc6749/grant_types/authorization_code.py      | 16 +----------
++ oauthlib/oauth2/rfc6749/grant_types/base.py        | 21 +++++++++++++++
++ .../oauth2/rfc6749/grant_types/refresh_token.py    | 16 ++++-------
++ .../resource_owner_password_credentials.py         |  9 +------
++ oauthlib/oauth2/rfc8628/grant_types/device_code.py | 20 +++++---------
++ .../oauth2/rfc8628/grant_types/test_device_code.py | 31 +++++++++++++++++++++-
++ 7 files changed, 67 insertions(+), 51 deletions(-)
++
++diff --git a/oauthlib/oauth2/__init__.py b/oauthlib/oauth2/__init__.py
++index 3bb5102..0e0bafd 100644
++--- a/oauthlib/oauth2/__init__.py
+++++ b/oauthlib/oauth2/__init__.py
++@@ -66,5 +66,6 @@ from .rfc6749.request_validator import RequestValidator
++ from .rfc6749.tokens import BearerToken, OAuth2Token
++ from .rfc6749.utils import is_secure_transport
++ from .rfc8628.clients import DeviceClient
++-from oauthlib.oauth2.rfc8628.endpoints import DeviceAuthorizationEndpoint, DeviceApplicationServer
++-from oauthlib.oauth2.rfc8628.grant_types import DeviceCodeGrant
+++from .rfc8628.endpoints import DeviceAuthorizationEndpoint, DeviceApplicationServer
+++from .rfc8628.errors import AuthorizationPendingError, SlowDownError, ExpiredTokenError, AccessDenied
+++from .rfc8628.grant_types import DeviceCodeGrant
++diff --git a/oauthlib/oauth2/rfc6749/grant_types/authorization_code.py b/oauthlib/oauth2/rfc6749/grant_types/authorization_code.py
++index 09dc619..f2d6d27 100644
++--- a/oauthlib/oauth2/rfc6749/grant_types/authorization_code.py
+++++ b/oauthlib/oauth2/rfc6749/grant_types/authorization_code.py
++@@ -452,21 +452,7 @@ class AuthorizationCodeGrant(GrantTypeBase):
++                 raise errors.InvalidRequestError(description='Duplicate %s parameter.' % param,
++                                                  request=request)
++ 
++-        if self.request_validator.client_authentication_required(request):
++-            # If the client type is confidential or the client was issued client
++-            # credentials (or assigned other authentication requirements), the
++-            # client MUST authenticate with the authorization server as described
++-            # in Section 3.2.1.
++-            # https://tools.ietf.org/html/rfc6749#section-3.2.1
++-            if not self.request_validator.authenticate_client(request):
++-                log.debug('Client authentication failed, %r.', request)
++-                raise errors.InvalidClientError(request=request)
++-        elif not self.request_validator.authenticate_client_id(request.client_id, request):
++-            # REQUIRED, if the client is not authenticating with the
++-            # authorization server as described in Section 3.2.1.
++-            # https://tools.ietf.org/html/rfc6749#section-3.2.1
++-            log.debug('Client authentication failed, %r.', request)
++-            raise errors.InvalidClientError(request=request)
+++        self.validate_client_authentication(request)
++ 
++         if not hasattr(request.client, 'client_id'):
++             raise NotImplementedError('Authenticate client must set the '
++diff --git a/oauthlib/oauth2/rfc6749/grant_types/base.py b/oauthlib/oauth2/rfc6749/grant_types/base.py
++index d96a2db..0b69e54 100644
++--- a/oauthlib/oauth2/rfc6749/grant_types/base.py
+++++ b/oauthlib/oauth2/rfc6749/grant_types/base.py
++@@ -175,6 +175,27 @@ class GrantTypeBase:
++                                                       request.scopes, request.client, request):
++             raise errors.InvalidScopeError(request=request)
++ 
+++    def validate_client_authentication(self, request):
+++        """Raise on failed client authentication."""
+++        # Handles confidential clients
+++        if self.request_validator.client_authentication_required(request):
+++            # If the client type is confidential or the client was issued client
+++            # credentials (or assigned other authentication requirements), the
+++            # client MUST authenticate with the authorization server as described
+++            # in Section 3.2.1.
+++            # https://tools.ietf.org/html/rfc6749#section-3.2.1
+++            if not self.request_validator.authenticate_client(request):
+++                log.debug('Client authentication failed, %r.', request)
+++                raise errors.InvalidClientError(request=request)
+++
+++        # Handles public clients
+++        elif not self.request_validator.authenticate_client_id(request.client_id, request):
+++            # REQUIRED, if the client is not authenticating with the
+++            # authorization server as described in Section 3.2.1.
+++            # https://tools.ietf.org/html/rfc6749#section-3.2.1
+++            log.debug('Client authentication failed, %r.', request)
+++            raise errors.InvalidClientError(request=request)
+++
++     def prepare_authorization_response(self, request, token, headers, body, status):
++         """Place token according to response mode.
++ 
++diff --git a/oauthlib/oauth2/rfc6749/grant_types/refresh_token.py b/oauthlib/oauth2/rfc6749/grant_types/refresh_token.py
++index 43bf55a..f626f0c 100644
++--- a/oauthlib/oauth2/rfc6749/grant_types/refresh_token.py
+++++ b/oauthlib/oauth2/rfc6749/grant_types/refresh_token.py
++@@ -96,17 +96,11 @@ class RefreshTokenGrant(GrantTypeBase):
++         # authentication requirements), the client MUST authenticate with the
++         # authorization server as described in Section 3.2.1.
++         # https://tools.ietf.org/html/rfc6749#section-3.2.1
++-        if self.request_validator.client_authentication_required(request):
++-            log.debug('Authenticating client, %r.', request)
++-            if not self.request_validator.authenticate_client(request):
++-                log.debug('Invalid client (%r), denying access.', request)
++-                raise errors.InvalidClientError(request=request)
++-            # Ensure that request.client_id is set.
++-            if request.client_id is None and request.client is not None:
++-                request.client_id = request.client.client_id
++-        elif not self.request_validator.authenticate_client_id(request.client_id, request):
++-            log.debug('Client authentication failed, %r.', request)
++-            raise errors.InvalidClientError(request=request)
+++        self.validate_client_authentication(request)
+++
+++        # Ensure that request.client_id is set.
+++        if request.client_id is None and request.client is not None:
+++            request.client_id = request.client.client_id
++ 
++         # Ensure client is authorized use of this grant type
++         self.validate_grant_type(request)
++diff --git a/oauthlib/oauth2/rfc6749/grant_types/resource_owner_password_credentials.py b/oauthlib/oauth2/rfc6749/grant_types/resource_owner_password_credentials.py
++index 55d9287..6fc67c6 100644
++--- a/oauthlib/oauth2/rfc6749/grant_types/resource_owner_password_credentials.py
+++++ b/oauthlib/oauth2/rfc6749/grant_types/resource_owner_password_credentials.py
++@@ -85,14 +85,7 @@ class ResourceOwnerPasswordCredentialsGrant(GrantTypeBase):
++         """
++         headers = self._get_default_headers()
++         try:
++-            if self.request_validator.client_authentication_required(request):
++-                log.debug('Authenticating client, %r.', request)
++-                if not self.request_validator.authenticate_client(request):
++-                    log.debug('Client authentication failed, %r.', request)
++-                    raise errors.InvalidClientError(request=request)
++-            elif not self.request_validator.authenticate_client_id(request.client_id, request):
++-                log.debug('Client authentication failed, %r.', request)
++-                raise errors.InvalidClientError(request=request)
+++            self.validate_client_authentication(request)
++             log.debug('Validating access token request, %r.', request)
++             self.validate_token_request(request)
++         except errors.OAuth2Error as e:
++diff --git a/oauthlib/oauth2/rfc8628/grant_types/device_code.py b/oauthlib/oauth2/rfc8628/grant_types/device_code.py
++index 082daf0..9d23d45 100644
++--- a/oauthlib/oauth2/rfc8628/grant_types/device_code.py
+++++ b/oauthlib/oauth2/rfc8628/grant_types/device_code.py
++@@ -55,14 +55,12 @@ class DeviceCodeGrant(GrantTypeBase):
++                     description=f"Duplicate {param} parameter.", request=request
++                 )
++ 
++-        if not self.request_validator.authenticate_client(request):
++-            raise rfc6749_errors.InvalidClientError(request=request)
++-        elif not hasattr(request.client, "client_id"):
++-            raise NotImplementedError(
++-                "Authenticate client must set the "
++-                "request.client.client_id attribute "
++-                "in authenticate_client."
++-            )
+++        self.validate_client_authentication(request)
+++
+++        if not hasattr(request.client, 'client_id'):
+++            raise NotImplementedError('Authenticate client must set the '
+++                                      'request.client.client_id attribute '
+++                                      'in authenticate_client.')
++ 
++         # Ensure client is authorized use of this grant type
++         self.validate_grant_type(request)
++@@ -93,13 +91,7 @@ class DeviceCodeGrant(GrantTypeBase):
++         """
++         headers = self._get_default_headers()
++         try:
++-            if self.request_validator.client_authentication_required(
++-                request
++-            ) and not self.request_validator.authenticate_client(request):
++-                raise rfc6749_errors.InvalidClientError(request=request)
++-
++             self.validate_token_request(request)
++-
++         except rfc6749_errors.OAuth2Error as e:
++             headers.update(e.headers)
++             return headers, e.json, e.status_code
++diff --git a/tests/oauth2/rfc8628/grant_types/test_device_code.py b/tests/oauth2/rfc8628/grant_types/test_device_code.py
++index da0592f..10b5dd6 100644
++--- a/tests/oauth2/rfc8628/grant_types/test_device_code.py
+++++ b/tests/oauth2/rfc8628/grant_types/test_device_code.py
++@@ -99,7 +99,7 @@ def test_create_token_response():
++     validator.save_token.assert_called_once()
++ 
++ 
++-def test_invalid_client_error():
+++def test_invalid_client_authentication_error_confidential_client():
++     validator = mock.MagicMock()
++     request: common.Request = create_request()
++     request.client = mock.Mock()
++@@ -107,6 +107,8 @@ def test_invalid_client_error():
++     auth = DeviceCodeGrant(validator)
++     bearer = BearerToken(validator)
++ 
+++    # Simulate a confidential client that requires authentication
+++    validator.client_authentication_required.return_value = True
++     validator.authenticate_client.return_value = False
++ 
++     headers, body, status_code = auth.create_token_response(request, bearer)
++@@ -124,6 +126,33 @@ def test_invalid_client_error():
++     validator.save_token.assert_not_called()
++ 
++ 
+++def test_invalid_client_authentication_error_public_client():
+++    validator = mock.MagicMock()
+++    request: common.Request = create_request()
+++    request.client = mock.Mock()
+++
+++    auth = DeviceCodeGrant(validator)
+++    bearer = BearerToken(validator)
+++
+++    # Simulate a public client that does not require authentication
+++    validator.client_authentication_required.return_value = False
+++    validator.authenticate_client_id.return_value = False
+++
+++    headers, body, status_code = auth.create_token_response(request, bearer)
+++    body = json.loads(body)
+++
+++    assert headers == {
+++        "Content-Type": "application/json",
+++        "Cache-Control": "no-store",
+++        "Pragma": "no-cache",
+++        "WWW-Authenticate": 'Bearer error="invalid_client"',
+++    }
+++    assert body == {"error": "invalid_client"}
+++    assert status_code == 401
+++
+++    validator.save_token.assert_not_called()
+++
+++
++ def test_invalid_grant_type_error():
++     validator = mock.MagicMock()
++     request: common.Request = create_request()
+diff --git a/meta-python/recipes-devtools/python/python3-oauthlib/CVE-2026-118669.patch b/meta-python/recipes-devtools/python/python3-oauthlib/CVE-2026-118669.patch
+new file mode 100644
+index 0000000000..dd89de8a4a
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-oauthlib/CVE-2026-118669.patch
+@@ -0,0 +1,602 @@
++From c951a1d09f99f14e3240973fa83c4f4287d4753d Mon Sep 17 00:00:00 2001
 +From: Jonathan Huot <jonathan.huot@gmail.com>
-+Date: Fri, 22 May 2026 19:51:42 +0000
-+Subject: [PATCH] Remove JSONP support from token revocation
++Date: Sat, 11 Jul 2026 16:25:12 +0200
++Subject: [PATCH] Organized validate_client functions for all grant to avoid
++ mistake in grnat implementation
 +
-+JSONP was useful in the past for cross-origin requests but has been
-+superseded by CORS browser protections. This change removes the outdated
-+JSONP functionality.
-+
-+Breaking changes:
-+- Remove enable_jsonp parameter from RevocationEndpoint
-+- Remove callback parameter from prepare_token_revocation_request
-+- Remove JSONP documentation and examples
-+- Remove JSONP tests
-+
-+The token revocation endpoint now returns empty response bodies on
-+success instead of JSONP-wrapped responses.
-+
-+CVE: CVE-2026-49264
-+Upstream-Status: Backport [https://github.com/oauthlib/oauthlib/commit/c888359f3c42bec235b2c5caab2069c9ed62457c]
++CVE: CVE-2026-118669
++Upstream-Status: Backport [https://github.com/oauthlib/oauthlib/commit/c951a1d09f99f14e3240973fa83c4f4287d4753d]
 +
 +Backport Changes:
-+- Omit the CHANGELOG.rst hunk because its later WIP section is absent
-+  from 3.3.1. Retain all upstream code, documentation and test changes.
++- Omit docs/oauth2/server.rst because the 3.3.1 PyPI source archive
++  excludes the documentation tree. Retain the corresponding validator
++  contract changes in request_validator.py.
++- Add defensive tests for mismatched and missing client identifiers in
++  both affected grants, and absent/matching/mismatching identifiers in
++  the confidential and public authentication helpers.
 +
 +Signed-off-by: Hetvi Thakar <hthakar@cisco.com>
 +---
-+ oauthlib/oauth2/rfc6749/clients/base.py            | 24 ++--------------------
-+ oauthlib/oauth2/rfc6749/endpoints/revocation.py    | 11 ++--------
-+ oauthlib/oauth2/rfc6749/parameters.py              |  8 ++------
-+ tests/oauth2/rfc6749/clients/test_base.py          |  7 -------
-+ .../rfc6749/endpoints/test_revocation_endpoint.py  | 13 ------------
-+ 5 files changed, 6 insertions(+), 57 deletions(-)
++ .../rfc6749/grant_types/authorization_code.py      |  7 ---
++ oauthlib/oauth2/rfc6749/grant_types/base.py        | 60 ++++++++++++++++------
++ .../rfc6749/grant_types/client_credentials.py      | 11 +---
++ .../oauth2/rfc6749/grant_types/refresh_token.py    | 10 +---
++ .../resource_owner_password_credentials.py         | 10 +---
++ oauthlib/oauth2/rfc6749/request_validator.py       | 14 ++---
++ oauthlib/oauth2/rfc8628/grant_types/device_code.py |  6 ---
++ .../rfc6749/endpoints/test_error_responses.py      |  2 +-
++ .../rfc6749/endpoints/test_scope_handling.py       |  4 +-
++ .../rfc6749/grant_types/test_authorization_code.py | 32 +++++++++++-
++ .../grant_types/test_client_authentication.py      | 44 ++++++++++++++++
++ .../rfc6749/grant_types/test_client_credentials.py | 26 ++++++++++
++ .../rfc6749/grant_types/test_refresh_token.py      | 11 ++++
++ .../grant_types/test_resource_owner_password.py    | 25 +++++++++
++ tests/oauth2/rfc6749/test_server.py                |  4 +-
++ .../oauth2/rfc8628/grant_types/test_device_code.py |  2 +
++ .../connect/core/endpoints/test_claims_handling.py |  4 +-
++ .../connect/core/endpoints/test_refresh_token.py   |  7 +++
++ .../core/grant_types/test_authorization_code.py    |  2 +-
++ 19 files changed, 212 insertions(+), 69 deletions(-)
 +
-+diff --git a/oauthlib/oauth2/rfc6749/clients/base.py b/oauthlib/oauth2/rfc6749/clients/base.py
-+index 17f833d236cb0f1ca7a4dd85f661b2e6be6b087e..cdbbc191f75393d8e17fbcd852987bb45dd9c0df 100644
-+--- a/oauthlib/oauth2/rfc6749/clients/base.py
-++++ b/oauthlib/oauth2/rfc6749/clients/base.py
-+@@ -320,7 +320,7 @@ class Client:
-+         return token_url, FORM_ENC_HEADERS, body
++diff --git a/oauthlib/oauth2/rfc6749/grant_types/authorization_code.py b/oauthlib/oauth2/rfc6749/grant_types/authorization_code.py
++index f2d6d27..1677939 100644
++--- a/oauthlib/oauth2/rfc6749/grant_types/authorization_code.py
+++++ b/oauthlib/oauth2/rfc6749/grant_types/authorization_code.py
++@@ -454,13 +454,6 @@ class AuthorizationCodeGrant(GrantTypeBase):
 + 
-+     def prepare_token_revocation_request(self, revocation_url, token,
-+-                                         token_type_hint="access_token", body='', callback=None, **kwargs):
-++                                         token_type_hint="access_token", body='', **kwargs):
-+         """Prepare a token revocation request.
++         self.validate_client_authentication(request)
 + 
-+         :param revocation_url: Provider token revocation endpoint URL.
-+@@ -329,14 +329,9 @@ class Client:
-+             ``"refresh_token"``. This is optional and if you wish to not pass it you
-+             must provide ``token_type_hint=None``.
-+         :param body:
-+-        :param callback: A jsonp callback such as ``package.callback`` to be invoked
-+-            upon receiving the response. Not that it should not include a () suffix.
-+         :param kwargs: Additional parameters to included in the request.
-+         :returns: The prepared request tuple with (url, headers, body).
-+ 
-+-        Note that JSONP request may use GET requests as the parameters will
-+-        be added to the request URL query as opposed to the request body.
++-        if not hasattr(request.client, 'client_id'):
++-            raise NotImplementedError('Authenticate client must set the '
++-                                      'request.client.client_id attribute '
++-                                      'in authenticate_client.')
 +-
-+         An example of a revocation request
-+ 
-+         .. code-block:: http
-+@@ -348,21 +343,6 @@ class Client:
-+ 
-+             token=45ghiukldjahdnhzdauz&token_type_hint=refresh_token
-+ 
-+-        An example of a jsonp revocation request
++-        request.client_id = request.client_id or request.client.client_id
 +-
-+-        .. code-block:: http
-+-
-+-            GET /revoke?token=agabcdefddddafdd&callback=package.myCallback HTTP/1.1
-+-            Host: server.example.com
-+-            Content-Type: application/x-www-form-urlencoded
-+-            Authorization: Basic czZCaGRSa3F0MzpnWDFmQmF0M2JW
-+-
-+-        and an error response
-+-
-+-        .. code-block:: javascript
-+-
-+-            package.myCallback({"error":"unsupported_token_type"});
-+-
-+         Note that these requests usually require client credentials, client_id in
-+         the case for public clients and provider specific authentication
-+         credentials for confidential clients.
-+@@ -371,7 +351,7 @@ class Client:
-+             raise InsecureTransportError()
++         # Ensure client is authorized use of this grant type
++         self.validate_grant_type(request)
 + 
-+         return prepare_token_revocation_request(revocation_url, token,
-+-                                                token_type_hint=token_type_hint, body=body, callback=callback,
-++                                                token_type_hint=token_type_hint, body=body,
-+                                                 **kwargs)
++diff --git a/oauthlib/oauth2/rfc6749/grant_types/base.py b/oauthlib/oauth2/rfc6749/grant_types/base.py
++index 0b69e54..a5e5f42 100644
++--- a/oauthlib/oauth2/rfc6749/grant_types/base.py
+++++ b/oauthlib/oauth2/rfc6749/grant_types/base.py
++@@ -175,26 +175,56 @@ class GrantTypeBase:
++                                                       request.scopes, request.client, request):
++             raise errors.InvalidScopeError(request=request)
 + 
-+     def parse_request_body_response(self, body, scope=None, **kwargs):
-+diff --git a/oauthlib/oauth2/rfc6749/endpoints/revocation.py b/oauthlib/oauth2/rfc6749/endpoints/revocation.py
-+index 596d0860fae67017a86b1042fcf9edb674fdf38d..06b450a43fa7c9b74c293b0cbade270629c0a9f1 100644
-+--- a/oauthlib/oauth2/rfc6749/endpoints/revocation.py
-++++ b/oauthlib/oauth2/rfc6749/endpoints/revocation.py
-+@@ -27,13 +27,11 @@ class RevocationEndpoint(BaseEndpoint):
-+     valid_token_types = ('access_token', 'refresh_token')
-+     valid_request_methods = ('POST',)
-+ 
-+-    def __init__(self, request_validator, supported_token_types=None,
-+-            enable_jsonp=False):
-++    def __init__(self, request_validator, supported_token_types=None):
-+         BaseEndpoint.__init__(self)
-+         self.request_validator = request_validator
-+         self.supported_token_types = (
-+             supported_token_types or self.valid_token_types)
-+-        self.enable_jsonp = enable_jsonp
-+ 
-+     @catch_errors_and_unavailability
-+     def create_revocation_response(self, uri, http_method='POST', body=None,
-+@@ -69,18 +67,13 @@ class RevocationEndpoint(BaseEndpoint):
-+         except OAuth2Error as e:
-+             log.debug('Client error during validation of %r. %r.', request, e)
-+             response_body = e.json
-+-            if self.enable_jsonp and request.callback:
-+-                response_body = '{}({});'.format(request.callback, response_body)
-+             resp_headers.update(e.headers)
-+             return resp_headers, response_body, e.status_code
-+ 
-+         self.request_validator.revoke_token(request.token,
-+                                             request.token_type_hint, request)
-+ 
-+-        response_body = ''
-+-        if self.enable_jsonp and request.callback:
-+-            response_body = request.callback + '();'
-+-        return {}, response_body, 200
-++        return {}, '', 200
-+ 
-+     def validate_revocation_request(self, request):
-+         """Ensure the request is valid.
-+diff --git a/oauthlib/oauth2/rfc6749/parameters.py b/oauthlib/oauth2/rfc6749/parameters.py
-+index 8268ef927cc2d174f44a00e60cf07156fb223db7..b912e447b817c7ed125900f4e5c455ff416cb6d2 100644
-+--- a/oauthlib/oauth2/rfc6749/parameters.py
-++++ b/oauthlib/oauth2/rfc6749/parameters.py
-+@@ -172,7 +172,7 @@ def prepare_token_request(grant_type, body='', include_client_id=True, code_veri
-+ 
-+ 
-+ def prepare_token_revocation_request(url, token, token_type_hint="access_token",
-+-        callback=None, body='', **kwargs):
-++        body='', **kwargs):
-+     """Prepare a token revocation request.
-+ 
-+     The client constructs the request by including the following parameters
-+@@ -222,11 +222,7 @@ def prepare_token_revocation_request(url, token, token_type_hint="access_token",
-+ 
-+     headers = {'Content-Type': 'application/x-www-form-urlencoded'}
-+ 
-+-    if callback:
-+-        params.append(('callback', callback))
-+-        return add_params_to_uri(url, params), headers, body
-+-    else:
-+-        return url, headers, add_params_to_qs(body, params)
-++    return url, headers, add_params_to_qs(body, params)
-+ 
-+ 
-+ def parse_authorization_code_response(uri, state=None):
-+diff --git a/tests/oauth2/rfc6749/clients/test_base.py b/tests/oauth2/rfc6749/clients/test_base.py
-+index b0970f2d46a5f053ad7100ebda3f09bc27bc5281..d01a1dbdcc4232eacb8dafbf6f81c871f641aa35 100644
-+--- a/tests/oauth2/rfc6749/clients/test_base.py
-++++ b/tests/oauth2/rfc6749/clients/test_base.py
-+@@ -237,13 +237,6 @@ class ClientTest(TestCase):
-+         self.assertEqual(h, {'Content-Type': 'application/x-www-form-urlencoded'})
-+         self.assertEqual(b, 'token=%s&token_type_hint=refresh_token' % token)
-+ 
-+-        # JSONP
-+-        u, h, b = client.prepare_token_revocation_request(
-+-            url, token, callback='hello.world')
-+-        self.assertURLEqual(u, url + '?callback=hello.world&token=%s&token_type_hint=access_token' % token)
-+-        self.assertEqual(h, {'Content-Type': 'application/x-www-form-urlencoded'})
-+-        self.assertEqual(b, '')
-+-
-+     def test_prepare_authorization_request(self):
-+         redirect_url = 'https://example.com/callback/'
-+         scopes = 'read'
-+diff --git a/tests/oauth2/rfc6749/endpoints/test_revocation_endpoint.py b/tests/oauth2/rfc6749/endpoints/test_revocation_endpoint.py
-+index 338dbd91faa795a0c25d7254818fbf72879c2920..d347b1767c285bddd1e99910e173df2343239add 100644
-+--- a/tests/oauth2/rfc6749/endpoints/test_revocation_endpoint.py
-++++ b/tests/oauth2/rfc6749/endpoints/test_revocation_endpoint.py
-+@@ -88,19 +88,6 @@ class RevocationEndpointTest(TestCase):
-+         self.assertEqual(loads(b)['error'], 'invalid_client')
-+         self.assertEqual(s, 401)
-+ 
-+-    def test_revoke_with_callback(self):
-+-        endpoint = RevocationEndpoint(self.validator, enable_jsonp=True)
-+-        callback = 'package.hello_world'
-+-        for token_type in ('access_token', 'refresh_token', 'invalid'):
-+-            body = urlencode([('token', 'foo'),
-+-                              ('token_type_hint', token_type),
-+-                              ('callback', callback)])
-+-            h, b, s = endpoint.create_revocation_response(self.uri,
-+-                    headers=self.headers, body=body)
-+-            self.assertEqual(h, {})
-+-            self.assertEqual(b, callback + '();')
-+-            self.assertEqual(s, 200)
-+-
-+     def test_revoke_unsupported_token(self):
-+         endpoint = RevocationEndpoint(self.validator,
-+                                       supported_token_types=['access_token'])
-diff --git a/meta-python/recipes-devtools/python/python3-oauthlib/CVE-2026-49264_p2.patch b/meta-python/recipes-devtools/python/python3-oauthlib/CVE-2026-49264_p2.patch
-new file mode 100644
-index 0000000000..24694cc8d1
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-oauthlib/CVE-2026-49264_p2.patch
-@@ -0,0 +1,50 @@
-+From 8f7db807dfeabc69386b4b67b14bb10c9efe56c8 Mon Sep 17 00:00:00 2001
-+From: Jonathan Huot <jonathan.huot@gmail.com>
-+Date: Sat, 11 Jul 2026 12:21:48 +0200
-+Subject: [PATCH] Reject callback in revocation params
-+
-+Prevent callback from being accepted via kwargs in prepare_token_revocation_request, and add a regression test to ensure callback now raises TypeError.
-+
-+CVE: CVE-2026-49264
-+Upstream-Status: Backport [https://github.com/oauthlib/oauthlib/commit/8f7db807dfeabc69386b4b67b14bb10c9efe56c8]
-+
-+Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>
-+Signed-off-by: Hetvi Thakar <hthakar@cisco.com>
-+---
-+ oauthlib/oauth2/rfc6749/parameters.py   | 3 +++
-+ tests/oauth2/rfc6749/test_parameters.py | 8 ++++++++
-+ 2 files changed, 11 insertions(+)
-+
-+diff --git a/oauthlib/oauth2/rfc6749/parameters.py b/oauthlib/oauth2/rfc6749/parameters.py
-+index 1b026037..ae483b9e 100644
-+--- a/oauthlib/oauth2/rfc6749/parameters.py
-++++ b/oauthlib/oauth2/rfc6749/parameters.py
-+@@ -216,6 +216,9 @@ def prepare_token_revocation_request(url, token, token_type_hint="access_token",
-+     if token_type_hint:
-+         params.append(('token_type_hint', token_type_hint))
-+ 
-++    if 'callback' in kwargs:
-++        raise TypeError("prepare_token_revocation_request() got an unexpected keyword argument 'callback'")
+++    def validate_client_confidential(self, request):
+++        # If the client type is confidential or the client was issued client
+++        # credentials (or assigned other authentication requirements), the
+++        # client MUST authenticate with the authorization server as described
+++        # in Section 3.2.1.
+++        # https://tools.ietf.org/html/rfc6749#section-3.2.1
+++        log.debug('Authenticating confidential client, %r.', request)
+++        if not self.request_validator.authenticate_client(request):
+++            log.debug('Client authentication failed, %r.', request)
+++            raise errors.InvalidClientError(request=request)
 ++
-+     for k in kwargs:
-+         if kwargs[k]:
-+             params.append((str(k), kwargs[k]))
-+diff --git a/tests/oauth2/rfc6749/test_parameters.py b/tests/oauth2/rfc6749/test_parameters.py
-+index bd8a8b61..0c14de99 100644
-+--- a/tests/oauth2/rfc6749/test_parameters.py
-++++ b/tests/oauth2/rfc6749/test_parameters.py
-+@@ -208,6 +208,14 @@ def test_prepare_token_request(self):
-+         self.assertFormBodyEqual(prepare_token_request(**self.cred_grant), self.cred_body)
-+         self.assertFormBodyEqual(prepare_token_request(**self.grant_body_pkce), self.auth_grant_body_pkce)
-+ 
-++    def test_prepare_token_revocation_request_rejects_callback(self):
-++        with self.assertRaisesRegex(
-++                TypeError,
-++                "prepare_token_revocation_request\\(\\) got an unexpected keyword argument 'callback'"):
-++            prepare_token_revocation_request(
-++                "https://server.example.com/revoke", "token", callback="jsonp"
-++            )
+++        if request.client is None or \
+++            not hasattr(request.client, 'client_id'):
+++            raise NotImplementedError('Authenticate client must set the '
+++                                      'request.client.client_id attribute '
+++                                      'in authenticate_client.')
 ++
-+     def test_grant_response(self):
-+         """Verify correct parameter parsing and validation for auth code responses."""
-+         params = parse_authorization_code_response(self.grant_response)
+++        if not request.client_id:
+++            request.client_id = request.client.client_id
+++        elif request.client_id != request.client.client_id:
+++            raise errors.ServerError('Discrepency found between client identifier')
+++
+++    def validate_client_public(self, request):
+++        # REQUIRED, if the client is not authenticating with the
+++        # authorization server as described in Section 3.2.1.
+++        # https://tools.ietf.org/html/rfc6749#section-3.2.1
+++        log.debug('Authenticating public client, %r.', request)
+++        if not self.request_validator.authenticate_client_id(request.client_id, request):
+++            log.debug('Client authentication failed, %r.', request)
+++            raise errors.InvalidClientError(request=request)
+++
+++        if request.client is None or \
+++            not hasattr(request.client, 'client_id'):
+++            raise NotImplementedError('Authenticate client must set the '
+++                                      'request.client.client_id attribute '
+++                                      'in authenticate_client.')
+++
+++        if not request.client_id:
+++            request.client_id = request.client.client_id
+++        elif request.client_id != request.client.client_id:
+++            raise errors.ServerError('Discrepency found between client identifier')
+++
++     def validate_client_authentication(self, request):
++         """Raise on failed client authentication."""
++         # Handles confidential clients
++         if self.request_validator.client_authentication_required(request):
++-            # If the client type is confidential or the client was issued client
++-            # credentials (or assigned other authentication requirements), the
++-            # client MUST authenticate with the authorization server as described
++-            # in Section 3.2.1.
++-            # https://tools.ietf.org/html/rfc6749#section-3.2.1
++-            if not self.request_validator.authenticate_client(request):
++-                log.debug('Client authentication failed, %r.', request)
++-                raise errors.InvalidClientError(request=request)
++-
+++            self.validate_client_confidential(request)
++         # Handles public clients
++-        elif not self.request_validator.authenticate_client_id(request.client_id, request):
++-            # REQUIRED, if the client is not authenticating with the
++-            # authorization server as described in Section 3.2.1.
++-            # https://tools.ietf.org/html/rfc6749#section-3.2.1
++-            log.debug('Client authentication failed, %r.', request)
++-            raise errors.InvalidClientError(request=request)
+++        else:
+++            self.validate_client_public(request)
++ 
++     def prepare_authorization_response(self, request, token, headers, body, status):
++         """Place token according to response mode.
++diff --git a/oauthlib/oauth2/rfc6749/grant_types/client_credentials.py b/oauthlib/oauth2/rfc6749/grant_types/client_credentials.py
++index 35c5440..d5a653a 100644
++--- a/oauthlib/oauth2/rfc6749/grant_types/client_credentials.py
+++++ b/oauthlib/oauth2/rfc6749/grant_types/client_credentials.py
++@@ -103,18 +103,11 @@ class ClientCredentialsGrant(GrantTypeBase):
++                 raise errors.InvalidRequestError(description='Duplicate %s parameter.' % param,
++                                                  request=request)
++ 
++-        log.debug('Authenticating client, %r.', request)
++-        if not self.request_validator.authenticate_client(request):
++-            log.debug('Client authentication failed, %r.', request)
++-            raise errors.InvalidClientError(request=request)
++-        elif not hasattr(request.client, 'client_id'):
++-            raise NotImplementedError('Authenticate client must set the '
++-                                      'request.client.client_id attribute '
++-                                      'in authenticate_client.')
+++        self.validate_client_confidential(request)
+++
++         # Ensure client is authorized use of this grant type
++         self.validate_grant_type(request)
++ 
++-        request.client_id = request.client_id or request.client.client_id
++         log.debug('Authorizing access to client %r.', request.client_id)
++         self.validate_scopes(request)
++ 
++diff --git a/oauthlib/oauth2/rfc6749/grant_types/refresh_token.py b/oauthlib/oauth2/rfc6749/grant_types/refresh_token.py
++index f626f0c..60ec06b 100644
++--- a/oauthlib/oauth2/rfc6749/grant_types/refresh_token.py
+++++ b/oauthlib/oauth2/rfc6749/grant_types/refresh_token.py
++@@ -91,17 +91,9 @@ class RefreshTokenGrant(GrantTypeBase):
++ 
++         # Because refresh tokens are typically long-lasting credentials used to
++         # request additional access tokens, the refresh token is bound to the
++-        # client to which it was issued.  If the client type is confidential or
++-        # the client was issued client credentials (or assigned other
++-        # authentication requirements), the client MUST authenticate with the
++-        # authorization server as described in Section 3.2.1.
++-        # https://tools.ietf.org/html/rfc6749#section-3.2.1
+++        # client to which it was issued
++         self.validate_client_authentication(request)
++ 
++-        # Ensure that request.client_id is set.
++-        if request.client_id is None and request.client is not None:
++-            request.client_id = request.client.client_id
++-
++         # Ensure client is authorized use of this grant type
++         self.validate_grant_type(request)
++ 
++diff --git a/oauthlib/oauth2/rfc6749/grant_types/resource_owner_password_credentials.py b/oauthlib/oauth2/rfc6749/grant_types/resource_owner_password_credentials.py
++index 6fc67c6..c721328 100644
++--- a/oauthlib/oauth2/rfc6749/grant_types/resource_owner_password_credentials.py
+++++ b/oauthlib/oauth2/rfc6749/grant_types/resource_owner_password_credentials.py
++@@ -85,7 +85,6 @@ class ResourceOwnerPasswordCredentialsGrant(GrantTypeBase):
++         """
++         headers = self._get_default_headers()
++         try:
++-            self.validate_client_authentication(request)
++             log.debug('Validating access token request, %r.', request)
++             self.validate_token_request(request)
++         except errors.OAuth2Error as e:
++@@ -168,23 +167,18 @@ class ResourceOwnerPasswordCredentialsGrant(GrantTypeBase):
++         if not request.grant_type == 'password':
++             raise errors.UnsupportedGrantTypeError(request=request)
++ 
+++        self.validate_client_authentication(request)
+++
++         log.debug('Validating username %s.', request.username)
++         if not self.request_validator.validate_user(request.username,
++                                                     request.password, request.client, request):
++             raise errors.InvalidGrantError(
++                 'Invalid credentials given.', request=request)
++-        elif not hasattr(request.client, 'client_id'):
++-            raise NotImplementedError(
++-                'Validate user must set the '
++-                'request.client.client_id attribute '
++-                'in authenticate_client.')
++         log.debug('Authorizing access to user %r.', request.user)
++ 
++         # Ensure client is authorized use of this grant type
++         self.validate_grant_type(request)
++ 
++-        if request.client:
++-            request.client_id = request.client_id or request.client.client_id
++         self.validate_scopes(request)
++ 
++         for validator in self.custom_validators.post_token:
++diff --git a/oauthlib/oauth2/rfc6749/request_validator.py b/oauthlib/oauth2/rfc6749/request_validator.py
++index 6d6ebaa..ce0dc98 100644
++--- a/oauthlib/oauth2/rfc6749/request_validator.py
+++++ b/oauthlib/oauth2/rfc6749/request_validator.py
++@@ -80,9 +80,10 @@ class RequestValidator:
++         A non-confidential client is one that is not required to authenticate
++         through other means, such as using HTTP Basic.
++ 
++-        Note, while not strictly necessary it can often be very convenient
++-        to set request.client to the client object associated with the
++-        given client_id.
+++        After the client identification succeeds, this method needs to set the
+++        client on the request, i.e. request.client = client. A client object's
+++        class must contain the 'client_id' attribute and the 'client_id' must have
+++        a value.
++ 
++         :param client_id: Unicode client identifier.
++         :param request: OAuthlib request.
++@@ -419,9 +420,10 @@ class RequestValidator:
++     def validate_client_id(self, client_id, request, *args, **kwargs):
++         """Ensure client_id belong to a valid and active client.
++ 
++-        Note, while not strictly necessary it can often be very convenient
++-        to set request.client to the client object associated with the
++-        given client_id.
+++        After the client identification succeeds, this method needs to set the
+++        client on the request, i.e. request.client = client. A client object's
+++        class must contain the 'client_id' attribute and the 'client_id' must have
+++        a value.
++ 
++         :param client_id: Unicode client identifier.
++         :param request: OAuthlib request.
++diff --git a/oauthlib/oauth2/rfc8628/grant_types/device_code.py b/oauthlib/oauth2/rfc8628/grant_types/device_code.py
++index 9d23d45..41ee09e 100644
++--- a/oauthlib/oauth2/rfc8628/grant_types/device_code.py
+++++ b/oauthlib/oauth2/rfc8628/grant_types/device_code.py
++@@ -57,15 +57,9 @@ class DeviceCodeGrant(GrantTypeBase):
++ 
++         self.validate_client_authentication(request)
++ 
++-        if not hasattr(request.client, 'client_id'):
++-            raise NotImplementedError('Authenticate client must set the '
++-                                      'request.client.client_id attribute '
++-                                      'in authenticate_client.')
++-
++         # Ensure client is authorized use of this grant type
++         self.validate_grant_type(request)
++ 
++-        request.client_id = request.client_id or request.client.client_id
++         self.validate_scopes(request)
++ 
++         for validator in self.custom_validators.post_token:
++diff --git a/tests/oauth2/rfc6749/endpoints/test_error_responses.py b/tests/oauth2/rfc6749/endpoints/test_error_responses.py
++index f61595e..5b9a929 100644
++--- a/tests/oauth2/rfc6749/endpoints/test_error_responses.py
+++++ b/tests/oauth2/rfc6749/endpoints/test_error_responses.py
++@@ -400,7 +400,7 @@ class ErrorResponseTest(TestCase):
++         self.assertEqual('invalid_client', json.loads(body)['error'])
++ 
++         # Client credentials grant
++-        _, body, _ = self.legacy.create_token_response('https://i.b/token',
+++        _, body, _ = self.backend.create_token_response('https://i.b/token',
++                 body='grant_type=client_credentials')
++         self.assertEqual('invalid_client', json.loads(body)['error'])
++ 
++diff --git a/tests/oauth2/rfc6749/endpoints/test_scope_handling.py b/tests/oauth2/rfc6749/endpoints/test_scope_handling.py
++index 4c87d9c..6de7641 100644
++--- a/tests/oauth2/rfc6749/endpoints/test_scope_handling.py
+++++ b/tests/oauth2/rfc6749/endpoints/test_scope_handling.py
++@@ -30,12 +30,12 @@ class TestScopeHandling(TestCase):
++         request.user = 'foo'
++         request.client_id = 'bar'
++         request.client = mock.MagicMock()
++-        request.client.client_id = 'mocked'
+++        request.client.client_id = request.client_id
++         return True
++ 
++     def set_client(self, request):
++         request.client = mock.MagicMock()
++-        request.client.client_id = 'mocked'
+++        request.client.client_id = request.client_id
++         return True
++ 
++     def setUp(self):
++diff --git a/tests/oauth2/rfc6749/grant_types/test_authorization_code.py b/tests/oauth2/rfc6749/grant_types/test_authorization_code.py
++index 77e1a81..1448646 100644
++--- a/tests/oauth2/rfc6749/grant_types/test_authorization_code.py
+++++ b/tests/oauth2/rfc6749/grant_types/test_authorization_code.py
++@@ -34,7 +34,7 @@ class AuthorizationCodeGrantTest(TestCase):
++ 
++     def set_client(self, request):
++         request.client = mock.MagicMock()
++-        request.client.client_id = 'mocked'
+++        request.client.client_id = request.client_id
++         return True
++ 
++     def setup_validators(self):
++@@ -198,6 +198,36 @@ class AuthorizationCodeGrantTest(TestCase):
++         self.assertRaises(errors.InvalidClientError,
++                           self.auth.validate_token_request, self.request)
++ 
+++    def test_client_id_discrepancy(self):
+++        """ServerError raised when authenticate_client sets a different client_id."""
+++        def set_mismatched_client(request):
+++            request.client = mock.MagicMock()
+++            request.client.client_id = 'different_from_abcdef'
+++            return True
+++        self.mock_validator.authenticate_client.side_effect = set_mismatched_client
+++        self.assertRaises(errors.ServerError,
+++                          self.auth.validate_token_request, self.request)
+++
+++    def test_public_client_id_missing(self):
+++        """NotImplementedError raised when authenticate_client_id does not set request.client."""
+++        self.mock_validator.client_authentication_required.return_value = False
+++        self.mock_validator.authenticate_client_id.return_value = True
+++        self.request.client = mock.MagicMock()
+++        del self.request.client.client_id
+++        self.assertRaises(NotImplementedError,
+++                          self.auth.validate_token_request, self.request)
+++
+++    def test_public_client_id_discrepancy(self):
+++        """ServerError raised when authenticate_client_id sets a different client_id."""
+++        def set_mismatched_client(client_id, request):
+++            request.client = mock.MagicMock()
+++            request.client.client_id = 'different_from_abcdef'
+++            return True
+++        self.mock_validator.client_authentication_required.return_value = False
+++        self.mock_validator.authenticate_client_id.side_effect = set_mismatched_client
+++        self.assertRaises(errors.ServerError,
+++                          self.auth.validate_token_request, self.request)
+++
++     def test_invalid_redirect_uri(self):
++         self.mock_validator.confirm_redirect_uri.return_value = False
++         self.assertRaises(errors.MismatchingRedirectURIError,
++diff --git a/tests/oauth2/rfc6749/grant_types/test_client_authentication.py b/tests/oauth2/rfc6749/grant_types/test_client_authentication.py
++new file mode 100644
++index 0000000..3481cba
++--- /dev/null
+++++ b/tests/oauth2/rfc6749/grant_types/test_client_authentication.py
++@@ -0,0 +1,44 @@
+++from types import SimpleNamespace
+++from unittest import mock
+++
+++from oauthlib.common import Request
+++from oauthlib.oauth2.rfc6749 import errors
+++from oauthlib.oauth2.rfc6749.grant_types.base import GrantTypeBase
+++
+++from tests.unittest import TestCase
+++
+++
+++class ClientAuthenticationIdentityTest(TestCase):
+++
+++    def authenticate(self, method, client_id):
+++        request = Request('https://example.test/token')
+++        request.client_id = client_id
+++        validator = mock.Mock()
+++
+++        def attach_client(*args):
+++            request.client = SimpleNamespace(client_id='test-client')
+++            return True
+++
+++        validator.authenticate_client.side_effect = attach_client
+++        validator.authenticate_client_id.side_effect = attach_client
+++        grant = GrantTypeBase(validator)
+++        getattr(grant, method)(request)
+++        return request, validator
+++
+++    def test_missing_identifier_is_set_from_authenticated_client(self):
+++        for method in ('validate_client_confidential', 'validate_client_public'):
+++            with self.subTest(method=method):
+++                request, _ = self.authenticate(method, None)
+++                self.assertEqual(request.client_id, request.client.client_id)
+++
+++    def test_matching_identifier_is_preserved(self):
+++        for method in ('validate_client_confidential', 'validate_client_public'):
+++            with self.subTest(method=method):
+++                request, _ = self.authenticate(method, 'test-client')
+++                self.assertEqual(request.client_id, 'test-client')
+++
+++    def test_mismatched_identifier_is_rejected(self):
+++        for method in ('validate_client_confidential', 'validate_client_public'):
+++            with self.subTest(method=method):
+++                with self.assertRaises(errors.ServerError):
+++                    self.authenticate(method, 'different-client')
++diff --git a/tests/oauth2/rfc6749/grant_types/test_client_credentials.py b/tests/oauth2/rfc6749/grant_types/test_client_credentials.py
++index e9559c7..10afd4f 100644
++--- a/tests/oauth2/rfc6749/grant_types/test_client_credentials.py
+++++ b/tests/oauth2/rfc6749/grant_types/test_client_credentials.py
++@@ -3,6 +3,7 @@ import json
++ from unittest import mock
++ 
++ from oauthlib.common import Request
+++from oauthlib.oauth2.rfc6749 import errors
++ from oauthlib.oauth2.rfc6749.grant_types import ClientCredentialsGrant
++ from oauthlib.oauth2.rfc6749.tokens import BearerToken
++ 
++@@ -74,3 +75,28 @@ class ClientCredentialsGrantTest(TestCase):
++     def test_validate_token_response(self):
++         # wrong grant type, scope
++         pass
+++
+++    def test_client_identifier_mismatch_rejected_before_authorization(self):
+++        self.request.client = mock.Mock(client_id='authenticated-client')
+++        self.request.client_id = 'different-client'
+++        self.mock_validator.authenticate_client.return_value = True
+++
+++        with self.assertRaises(errors.ServerError):
+++            self.auth.validate_token_request(self.request)
+++
+++        self.mock_validator.validate_grant_type.assert_not_called()
+++        self.mock_validator.validate_scopes.assert_not_called()
+++
+++    def test_missing_client_identifier_set_before_authorization(self):
+++        self.request.client = mock.Mock(client_id='authenticated-client')
+++        self.request.client_id = None
+++        self.mock_validator.authenticate_client.return_value = True
+++
+++        self.auth.validate_token_request(self.request)
+++
+++        self.mock_validator.validate_grant_type.assert_called_once_with(
+++            'authenticated-client', 'client_credentials',
+++            self.request.client, self.request)
+++        self.mock_validator.validate_scopes.assert_called_once_with(
+++            'authenticated-client', self.request.scopes,
+++            self.request.client, self.request)
++diff --git a/tests/oauth2/rfc6749/grant_types/test_refresh_token.py b/tests/oauth2/rfc6749/grant_types/test_refresh_token.py
++index f963444..efa156a 100644
++--- a/tests/oauth2/rfc6749/grant_types/test_refresh_token.py
+++++ b/tests/oauth2/rfc6749/grant_types/test_refresh_token.py
++@@ -15,6 +15,7 @@ class RefreshTokenGrantTest(TestCase):
++     def setUp(self):
++         mock_client = mock.MagicMock()
++         mock_client.user.return_value = 'mocked user'
+++        mock_client.client_id = 'abcdef'
++         self.request = Request('http://a.b/path')
++         self.request.grant_type = 'refresh_token'
++         self.request.refresh_token = 'lsdkfhj230'
++@@ -146,6 +147,16 @@ class RefreshTokenGrantTest(TestCase):
++         self.auth.validate_token_request(self.request)
++         self.request.client_id = 'foobar'
++ 
+++    def test_client_id_discrepancy(self):
+++        """ServerError raised when authenticate_client sets a different client_id."""
+++        def set_mismatched_client(request):
+++            request.client = mock.MagicMock()
+++            request.client.client_id = 'different_from_abcdef'
+++            return True
+++        self.mock_validator.authenticate_client.side_effect = set_mismatched_client
+++        self.assertRaises(errors.ServerError,
+++                          self.auth.validate_token_request, self.request)
+++
++     def test_invalid_grant_type(self):
++         self.request.grant_type = 'wrong_type'
++         self.assertRaises(errors.UnsupportedGrantTypeError,
++diff --git a/tests/oauth2/rfc6749/grant_types/test_resource_owner_password.py b/tests/oauth2/rfc6749/grant_types/test_resource_owner_password.py
++index 294e27b..49fbb26 100644
++--- a/tests/oauth2/rfc6749/grant_types/test_resource_owner_password.py
+++++ b/tests/oauth2/rfc6749/grant_types/test_resource_owner_password.py
++@@ -32,6 +32,31 @@ class ResourceOwnerPasswordCredentialsGrantTest(TestCase):
++         request.client.client_id = 'mocked'
++         return True
++ 
+++    def test_client_identifier_mismatch_rejected_before_authorization(self):
+++        self.request.client = mock.Mock(client_id='authenticated-client')
+++        self.request.client_id = 'different-client'
+++        self.mock_validator.authenticate_client.return_value = True
+++
+++        with self.assertRaises(errors.ServerError):
+++            self.auth.validate_token_request(self.request)
+++
+++        self.mock_validator.validate_grant_type.assert_not_called()
+++        self.mock_validator.validate_scopes.assert_not_called()
+++
+++    def test_missing_client_identifier_set_before_authorization(self):
+++        self.request.client = mock.Mock(client_id='authenticated-client')
+++        self.request.client_id = None
+++        self.mock_validator.authenticate_client.return_value = True
+++
+++        self.auth.validate_token_request(self.request)
+++
+++        self.mock_validator.validate_grant_type.assert_called_once_with(
+++            'authenticated-client', 'password',
+++            self.request.client, self.request)
+++        self.mock_validator.validate_scopes.assert_called_once_with(
+++            'authenticated-client', self.request.scopes,
+++            self.request.client, self.request)
+++
++     def test_create_token_response(self):
++         bearer = BearerToken(self.mock_validator)
++         headers, body, status_code = self.auth.create_token_response(
++diff --git a/tests/oauth2/rfc6749/test_server.py b/tests/oauth2/rfc6749/test_server.py
++index 94af37e..1bfd3e7 100644
++--- a/tests/oauth2/rfc6749/test_server.py
+++++ b/tests/oauth2/rfc6749/test_server.py
++@@ -112,7 +112,7 @@ class TokenEndpointTest(TestCase):
++         def set_user(request):
++             request.user = mock.MagicMock()
++             request.client = mock.MagicMock()
++-            request.client.client_id = 'mocked_client_id'
+++            request.client.client_id = request.client_id
++             return True
++ 
++         self.mock_validator = mock.MagicMock()
++@@ -219,7 +219,7 @@ class SignedTokenEndpointTest(TestCase):
++         def set_user(request):
++             request.user = mock.MagicMock()
++             request.client = mock.MagicMock()
++-            request.client.client_id = 'mocked_client_id'
+++            request.client.client_id = request.client_id
++             return True
++ 
++         self.mock_validator = mock.MagicMock()
++diff --git a/tests/oauth2/rfc8628/grant_types/test_device_code.py b/tests/oauth2/rfc8628/grant_types/test_device_code.py
++index 10b5dd6..3e3c002 100644
++--- a/tests/oauth2/rfc8628/grant_types/test_device_code.py
+++++ b/tests/oauth2/rfc8628/grant_types/test_device_code.py
++@@ -53,6 +53,7 @@ def test_custom_pre_and_post_token_validators():
++ 
++     request: common.Request = create_request()
++     request.client = client
+++    client.client_id = request.client_id
++ 
++     auth = DeviceCodeGrant(validator)
++ 
++@@ -70,6 +71,7 @@ def test_create_token_response():
++     validator = mock.MagicMock()
++     request: common.Request = create_request()
++     request.client = mock.Mock()
+++    request.client.client_id = request.client_id
++ 
++     auth = DeviceCodeGrant(validator)
++ 
++diff --git a/tests/openid/connect/core/endpoints/test_claims_handling.py b/tests/openid/connect/core/endpoints/test_claims_handling.py
++index bc70269..d47affd 100644
++--- a/tests/openid/connect/core/endpoints/test_claims_handling.py
+++++ b/tests/openid/connect/core/endpoints/test_claims_handling.py
++@@ -29,12 +29,12 @@ class TestClaimsHandling(TestCase):
++         request.user = 'foo'
++         request.client_id = 'bar'
++         request.client = mock.MagicMock()
++-        request.client.client_id = 'mocked'
+++        request.client.client_id = request.client_id
++         return True
++ 
++     def set_client(self, request):
++         request.client = mock.MagicMock()
++-        request.client.client_id = 'mocked'
+++        request.client.client_id = request.client_id
++         return True
++ 
++     def save_claims_with_code(self, client_id, code, request, *args, **kwargs):
++diff --git a/tests/openid/connect/core/endpoints/test_refresh_token.py b/tests/openid/connect/core/endpoints/test_refresh_token.py
++index 9161f5a..b083097 100644
++--- a/tests/openid/connect/core/endpoints/test_refresh_token.py
+++++ b/tests/openid/connect/core/endpoints/test_refresh_token.py
++@@ -19,6 +19,13 @@ class TestRefreshToken(TestCase):
++         self.validator = mock.MagicMock(spec=RequestValidator)
++         self.validator.get_id_token.return_value='id_token'
++ 
+++        def set_client(request):
+++            request.client = mock.MagicMock()
+++            request.client.client_id = request.client_id
+++            return True
+++
+++        self.validator.authenticate_client.side_effect = set_client
+++
++         self.server = Server(self.validator)
++ 
++     def test_refresh_token_with_openid(self):
++diff --git a/tests/openid/connect/core/grant_types/test_authorization_code.py b/tests/openid/connect/core/grant_types/test_authorization_code.py
++index f19b5fa..b453d9d 100644
++--- a/tests/openid/connect/core/grant_types/test_authorization_code.py
+++++ b/tests/openid/connect/core/grant_types/test_authorization_code.py
++@@ -54,7 +54,7 @@ class OpenIDAuthCodeTest(TestCase):
++ 
++     def set_client(self, request):
++         request.client = mock.MagicMock()
++-        request.client.client_id = 'mocked'
+++        request.client.client_id = request.client_id
++         return True
++ 
++     @mock.patch('oauthlib.common.generate_token')
 diff --git a/meta-python/recipes-devtools/python/python3-oauthlib_3.3.1.bb b/meta-python/recipes-devtools/python/python3-oauthlib_3.3.1.bb
-index 0974020a17..ffb07fef30 100644
+index ffb07fef30..d41eeff279 100644
 --- a/meta-python/recipes-devtools/python/python3-oauthlib_3.3.1.bb
 +++ b/meta-python/recipes-devtools/python/python3-oauthlib_3.3.1.bb
-@@ -7,6 +7,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=2699a9fb0d71d5eafd75d8d7c302f7df"
- SRC_URI += " \
-     file://CVE-2026-49265_p1.patch \
+@@ -9,6 +9,8 @@ SRC_URI += " \
      file://CVE-2026-49265_p2.patch \
-+    file://CVE-2026-49264_p1.patch \
-+    file://CVE-2026-49264_p2.patch \
+     file://CVE-2026-49264_p1.patch \
+     file://CVE-2026-49264_p2.patch \
++    file://CVE-2026-118669-dependent.patch \
++    file://CVE-2026-118669.patch \
  "
  
  SRC_URI[sha256sum] = "0f0f8aa759826a193cf66c12ea1af1637f87b9b4622d46e866952bb022e538c9"
