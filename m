@@ -1,39 +1,39 @@
-Received: from mailout07.t-online.de (mailout07.t-online.de [194.25.134.83])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.18639.1795276077340907622
+Received: from mailout05.t-online.de (mailout05.t-online.de [194.25.134.82])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.19257.1795278301288762449
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 21 Nov 2026 07:47:57 -0800
+ Sat, 21 Nov 2026 08:25:01 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=f_l_k@t-online.de header.s=20260216 header.b=Ngqs2dgn;
- spf=pass (domain: t-online.de, ip: 194.25.134.83, mailfrom: f_l_k@t-online.de)
-Received: from fwd72.aul.t-online.de (fwd72.aul.t-online.de [10.223.144.98])
-	by mailout07.t-online.de (Postfix) with SMTP id E1D61E158
-	for <openembedded-devel@lists.openembedded.org>; Sat, 21 Nov 2026 16:47:54 +0100 (CET)
-Received: from localhost.localdomain ([84.154.170.58]) by fwd72.t-online.de
+ dkim=fail reason="dkim: body hash did not verify" header.i=f_l_k@t-online.de header.s=20260216 header.b=bmXk+mtS;
+ spf=pass (domain: t-online.de, ip: 194.25.134.82, mailfrom: f_l_k@t-online.de)
+Received: from fwd75.aul.t-online.de (fwd75.aul.t-online.de [10.223.144.101])
+	by mailout05.t-online.de (Postfix) with SMTP id 0120264A
+	for <openembedded-devel@lists.openembedded.org>; Sat, 21 Nov 2026 17:24:41 +0100 (CET)
+Received: from localhost.localdomain ([84.154.170.58]) by fwd75.t-online.de
 	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1xUnJh-0lqVc00; Sat, 21 Nov 2026 16:47:53 +0100
+	esmtp id 1xUntH-366rQG0; Sat, 21 Nov 2026 17:24:39 +0100
 From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH] libcupsfilters: fix the page count of PDF input
-Date: Sat, 21 Nov 2026 16:47:46 +0100
-Message-ID: <20261121154746.1155467-1-f_l_k@t-online.de>
+Subject: [meta-oe][PATCHv2] libcupsfilters: fix the page count of PDF input
+Date: Sat, 21 Nov 2026 17:24:32 +0100
+Message-ID: <20261121162432.2430934-1-f_l_k@t-online.de>
 X-Mailer: git-send-email 2.56.1
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1795276073-B37FD922-4CE10CE6/0/0 CLEAN NORMAL
-X-TOI-MSGID: 8253c4c7-a3bb-4ccf-9ea5-fa23766c422c
+X-TOI-EXPURGATEID: 150726::1795278279-FFFDC363-1B692956/0/0 CLEAN NORMAL
+X-TOI-MSGID: c6646cab-ecc0-4120-baf9-21a0ee349a8e
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=t-online.de;
-	s=20260216; t=1795276074; i=f_l_k@t-online.de;
-	bh=wXzz+UJNDUSQ6xFPNQGG/qK1jE2fEHKFWjRsmkAK5Cw=;
+	s=20260216; t=1795278280; i=f_l_k@t-online.de;
+	bh=bs8/gmbdN/llkB7kn3r5Dwoay3Ot4Ry2q6dLC3DmbVw=;
 	h=From:To:Subject:Date;
-	b=Ngqs2dgnBUQ7QtWiMd1A5IPjO79V0JCcmknRZm/b+YOKik9NOKKqAQoMhF6A0kX7g
-	 6tURUzJXpBAQSGYUVSr3KcChw4oXjJh7SR8S2xTQxhaI1zuU8pyK99vdKTEFYGR9bk
-	 +Tet3xwKfkl2X/haC2bf8iFpMwJTTDNLsDi+aSe4Nu0HFI5c2o80a0Z41dd2TJWqP9
-	 dtjNwRG8S9/1CTXMSKD7v65vKMEK8OlTgsBcksriusXm7LD3GI1O0Z3TMc7/jPOqVX
-	 TGQJOINpivtzP71kwIpYo5HsnH2F4BCpiD182sV6nAsuFjWw+XWjBVHd/gY5ttWzIK
-	 vbvwQ5gkKhmsw==
+	b=bmXk+mtS1tk6hrSnNNN6QRMVmiPKcATI0+h/ZTg3UrK3G54teo0yAhxMTn2zyHnRm
+	 fs6JG5dLKgyCH56swCqCuSNBpnwYckpoJ5BBkppcm587szwJzgx6A627Z1u/cq/P3t
+	 pYvIhov78cIDZP8P0QcFY9cAKzJyOgeDgfJ8UAwK+DLOEyGMwjPaC3drTrs4SE2ovv
+	 OdZIzk67aOXntIYJ5kglO85DF4I1QHK0/9OBzgMjdGeDyynp4CP+B7CunJXuYaqSUJ
+	 1DLWwAfdj4bF8cfznIi1Og485t4KwKg7ywGTuVofA16FAEa7WhxBuDrCiGbvJbZKND
+	 G2N8lwTSAtSUg==
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Sat, 21 Nov 2026 15:47:58 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132783
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Sat, 21 Nov 2026 16:25:08 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132784
 Content-Type: text/plain; charset="utf-8"
 
 cfPDFPagesFP() copies the input into a temporary file and opens it with
@@ -46,9 +46,9 @@ Tested by printing a PDF through CUPS to an IPP Everywhere printer.
 AI-Generated: Uses Claude Code (Claude Opus 5.5)
 Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
- ...ror-pdfio-output-Missing-Root-object.patch | 27 +++++++++++++++++++
+ ...ror-pdfio-output-Missing-Root-object.patch | 28 +++++++++++++++++++
  .../cups/libcupsfilters_2.2.1.bb              |  1 +
- 2 files changed, 28 insertions(+)
+ 2 files changed, 29 insertions(+)
  create mode 100644 meta-oe/recipes-printing/cups/libcupsfilters/0002-Fix=
 -printing-error-pdfio-output-Missing-Root-object.patch
 
@@ -57,11 +57,11 @@ ng-error-pdfio-output-Missing-Root-object.patch b/meta-oe/recipes-printin=
 g/cups/libcupsfilters/0002-Fix-printing-error-pdfio-output-Missing-Root-o=
 bject.patch
 new file mode 100644
-index 0000000000..173521517d
+index 0000000000..ee473b1367
 --- /dev/null
 +++ b/meta-oe/recipes-printing/cups/libcupsfilters/0002-Fix-printing-erro=
 r-pdfio-output-Missing-Root-object.patch
-@@ -0,0 +1,27 @@
+@@ -0,0 +1,28 @@
 +From e14bad406189a66bdeb40131112944bfb58ee0cc Mon Sep 17 00:00:00 2001
 +From: szlt5 <117269245+szlt5@users.noreply.github.com>
 +Date: Tue, 18 Aug 2026 16:04:19 +0800
@@ -71,6 +71,7 @@ r-pdfio-output-Missing-Root-object.patch
 +
 +Upstream-Status: Backport [https://github.com/OpenPrinting/libcupsfilter=
 s/commit/e14bad406189a66bdeb40131112944bfb58ee0cc]
++Signed-off-by: Markus Volk <f_l_k@t-online.de>
 +---
 + cupsfilters/pdf.c | 5 +++++
 + 1 file changed, 5 insertions(+)
