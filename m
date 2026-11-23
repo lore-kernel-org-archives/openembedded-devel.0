@@ -1,65 +1,65 @@
-Received: from mail-dy1-f169.google.com (mail-dy1-f169.google.com [74.125.82.169])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.48042.1795411872879098634
+Received: from mail-dy1-f173.google.com (mail-dy1-f173.google.com [74.125.82.173])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.48046.1795411879936558211
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 22 Nov 2026 21:31:12 -0800
+ Sun, 22 Nov 2026 21:31:19 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=htzbVrMH;
- spf=pass (domain: gmail.com, ip: 74.125.82.169, mailfrom: raj.khem@gmail.com)
-Received: by mail-dy1-f169.google.com with SMTP id 5a478bee46e88-38190551625so6115747eec.1
-        for <openembedded-devel@lists.openembedded.org>; Sun, 22 Nov 2026 21:31:12 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=jDO3DujW;
+ spf=pass (domain: gmail.com, ip: 74.125.82.173, mailfrom: raj.khem@gmail.com)
+Received: by mail-dy1-f173.google.com with SMTP id 5a478bee46e88-3866a784546so3600173eec.0
+        for <openembedded-devel@lists.openembedded.org>; Sun, 22 Nov 2026 21:31:19 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795411872; x=1796016672; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1795411879; x=1796016679; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=f/0BI+Q1ZfVHz7rPk+jqMsZXIR5jeo4nhdjO0XYcsoo=;
-        b=htzbVrMHzfsyALEvHrNmnTtFd5yXYl56yaJJa8mHBrFJXZCjNBdJLal81cZ5MCYvEl
-         wC+sUR+yMu7YHmVeBcINophmhYKREbkp3NO5WCj9ms/xfqWdMyFu/uRxN9IG11o4y+Km
-         H3bvORdNArYj3EKyZ1kTnRG7AHW74PJWpMz3QResra6IWVuJq3Nbkxyh8bBnaV1wIGDF
-         oc+hnz60P684rd8AJe0tC1jFaXaodnWbHAait0YeLz1t0wwRKw9O3K/RWVshGlyCr/f0
-         rPJ6vPq+l3RqNytbL4ushuwX6MhSP8GrTtgOz9xyUphEi/oEgCf6KS1WWZGRIMAPPNFE
-         VdaA==
+        bh=LQCQrhCaBbP+tY9GFpEvu5QAEEhteCi5SUK19OBBEW8=;
+        b=jDO3DujWQT5mia2nBYfA+GMPfje7sfNb/UJJPYU+hAEBPtALfajRYa/pj4p96m63jd
+         roAXbMQa47Y0X0tvglazn9PCX6FgyED6TUVWBzQvYSQ2ezZ3RD1ESwuW57tbC60NKEfr
+         Z+65l3SXCDJHgwT7rsH9bVE3CcRX+dvwOFDxDo3cIXJyzYyUHQPje9sMh0F1xQRghIeO
+         ca3wPM1+gJGl7+jTwImUqd0HdVKKp8wJ29dMw1TfjNqMPKqFsWc8qj4Gur2utj0Tgyyo
+         DWZdKJE/wwaPoBWKe6uPsnRUZg5L4BRN2SguU2Jjxw10SiTtEn0sBRUk0UDNi6HmJNow
+         aEpA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795411872; x=1796016672;
+        d=1e100.net; s=20260707; t=1795411879; x=1796016679;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=f/0BI+Q1ZfVHz7rPk+jqMsZXIR5jeo4nhdjO0XYcsoo=;
-        b=pJeGfDdGDrWuTP8D1bIGIt7BMwFFYLJlBqfU6/KRscGtfUqomGkmFEuA3E3m1mT4g3
-         Ugi8P6B4ULDBGmXvWIJ13jGP3T5jqydcktHKt7r10plPPpwNfHFG08KpLm/jOJMiPmxp
-         L9mcDIa68HBmwrsnqB6d/dKIgA5kQCnUj583kTU1CuaJAkV661Jo5DYoFo19RPscqTwk
-         iSQG9xsZNtfpNzANyD35/g5sxZV2r993ur+2d2dLD2FzFzJn6JP6V4KWnBK48Q8cq7gP
-         WYuCG7dBctnWFKCtGbuIAWAhz1VOt52KWQ0xdCsflKNvoRhNFZr9O9hOS8uSN0le357v
-         vwnA==
-X-Gm-Message-State: APuU4Z8g7Q8fiA5ML/ItMiNlMYjzRiUece/elI+PnP9LTIEWod8WdRZS
-	712hQNC6aNYwMkofzSjdmBUuIZ89U6QeiY7rRsYBdbYYMPmjCTdP8ZMMLYD26p8RSi0=
-X-Gm-Gg: AZFdTZcRZBymo0AFn9kHgQb0Ls+Y1EGXqPxu/T9I0Hs6aPr/K6jZWLlLr/dtH4Kfnqp
-	rAfJ6kRDt6eMkBnUQUsjqS2z4lpj+gTmncG66O+ztXcRSQ3GZZKG6gPezmq62bS9o16zPrn3ZR4
-	41FhpsqO2kMy8QgZsmdOmuDztQ+vX5C3yBofKUUnpQttLI1Nrdf7wgciBAOFYSmPKGUFPGOD4wR
-	mRi/ijBpE0KqqPkotkyK29pzxvtRKqYiRMM9FMd1FejQoP+MLfSD0mOh977ygWj11vGavFQJY+q
-	7rTRVHbG5u8NxY20ejqzqm/aj2DJEYlJZa4TQGY7FU0P65EpLDYLAHlcTDkQIRZeMFIYTPe40j7
-	MZu42d6MVby3cM/TLLQ/6L3Mt9lSMUiiNIwiKc0RtkIgP1zaTOSs1PpdfjMhF9tTWg21pHHIgdB
-	oH6T5tq84lB4SRbydn0h4WeYbdqyrFoZ4zB1HLbQ1jtj7njPZP/t3h303IfsmkTSw4wYSSdfoQ2
-	cAnCQwb91lKxTP4QZJpf71Wh5HC3jM2GQkB1fF8Cxu3mIh+bEUlypYwJVMc5Axuu3uZi3Hw8Y8f
-	KzInvMmamr2sG31Ty9tDdKCyCPS1HCuBCL8b+OWjlU6x4NsBNY8gxwo6yDWUpVHvXMzfoDyDnQo
-	/3VLWKuJRcaJQAU2sjvnIRMqCVEjJV5j1TVo/sXCmDBZd5hjPTCAjxHzKer/Hg+baCygLnXjyw+
-	2KegWN9Xaoyvj283N3z8/oWZIt9aO7qIaRYjDctzHCVYq1k0k3zyROgQu/l8VsqhsWdl/D64giK
-	/DimBpmfZvWkbZbo5MoF85iJp8jf4YAlnJprSKMVU9XcASm3rSvBMrvDJSUE4GlogdweIElQHsh
-	YUfW
-X-Received: by 2002:a05:7301:7187:b0:386:bd8:7ab3 with SMTP id 5a478bee46e88-3860bd88965mr10405251eec.29.1795411872038;
-        Sun, 22 Nov 2026 21:31:12 -0800 (PST)
+        bh=LQCQrhCaBbP+tY9GFpEvu5QAEEhteCi5SUK19OBBEW8=;
+        b=dQGDIBuAml5JjRqeg2jefeWw0Bly4Ccj+uDCXdUJAtF5pKunec9vXqu1fDkLY32nJp
+         jThINZ4q2GlutUjauJUgg7JOrCJVtiFsimMKno3iTVLoIR2bVY21i/E8WoG6fNaFMxl7
+         pFYZ1+EOMEWMmMj5B2JvYJ01uUI6BVlekeZY6qzxB8/237rEGKlrGICx5oLeY3naRSIh
+         /yKVon/4rzzEZDTxAqIYEyONGfpouu9GojFefA7TLGYSwNgmxUJpHoKqDV/iETyUky82
+         qgG6LCLFQf4jHd1YEoJNiS+tSo+/BvOM6t7CsALym15b9o3oIqzKxGRULi9D17lyYnwz
+         g4bQ==
+X-Gm-Message-State: APuU4Z9u71CcVqb5cEYgFD3MuQZDQ9NBHpnxRbkSicPOLCIUB/EYcUUv
+	nNMF2842/fgRz8zEvYzhNSgvpNRgbgiDpemr9L0qZyK0hqA0q19DGAak5Jbm0gV2nFU=
+X-Gm-Gg: AZFdTZff77sqFlE7l6DvpanuahTkIfI7WXDLOVAJEloV/mOBS7CsazSG18Ndvr70A99
+	FJ9IM755KoQTq2RegL+ZNApH+F9JqmntN1f8FN5EOhmzyNJkbRGfhwHrrt68hTq67kyRX/YfFGL
+	4azWibwwlonO9TY/PPbXsrf8O2ze2s3c2PKaeKSVJAa/DJ33OBhrI1fAF8ASDFxcriY+DT/7+d1
+	blmKVbXnpj5arMcjmWtWqtddEznpkB0LbIs334KPNi14phrAuEA9R85QYsIF5kXWy7twTdPFxC3
+	D+hCwmRWKwR6lLMhPg5sRo0opi9gCufOVgThHU5tTw3IHPK8enWNY3rPgfKZ1C37DXUsJg6BkfS
+	jwwN1EO9zkFNaLjdP37RQELO6CV3Gxea7KsMfctLCxGlUDTnH46811WbF3x3gdtDJ92UoKD17Pc
+	bwxp0rYCcbS9ozt7WTCZl4mOG90CARkgGNid7fiwICEir2Ui0jMNUCrx4bBvvbUqJ4EJE7EUXjR
+	cSAj/hEbELATr7NvzE+m/yo51nLOkbSalzGo9mvf4nQlAYSdMTUEAbISOz94DrocxjNfhv/SlNZ
+	QmD5pCh6F5CnPsw/L28jjQ9hBA4UDIzUEk078BXb8YRqOnTEppxfVnxBP0WxTJ/7Yeq8huvHSIX
+	SuWJ6mvDQpy696UZv/nEnJy8hBG4MTS7L+WRQ1oyb2PRlr3QtVk1t7LOrXYgL7yh95wCWcZowxw
+	K2dPwhgzPYREGzDEg4wQ2IE8NCR72CJq6dQ7r5EC1rZo1TyP4FH1TXjnE/ug+Jw2ysngo3nW+Fv
+	TVXZIs75hpKM0FNoKcSo7RejBH5891qYvBAgPdnOU4opfQccpt6wCviTABtkPcwAb7TXNSQireL
+	uD55
+X-Received: by 2002:a05:7300:1486:b0:383:6eb6:5730 with SMTP id 5a478bee46e88-38570e24c0fmr13009369eec.32.1795411879224;
+        Sun, 22 Nov 2026 21:31:19 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-38567cafec4sm36573136eec.26.2026.11.22.21.31.10
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-38567cafec4sm36573136eec.26.2026.11.22.21.31.18
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 22 Nov 2026 21:31:11 -0800 (PST)
+        Sun, 22 Nov 2026 21:31:18 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-oe][PATCH 34/42] syslog-ng: upgrade 4.12.0 -> 4.13.0
-Date: Sun, 22 Nov 2026 21:29:18 -0800
-Message-ID: <20261123052953.3658549-62-khem.raj@oss.qualcomm.com>
+Subject: [meta-oe][PATCH 40/42] libirecovery: upgrade 1.3.1 -> 1.4.0
+Date: Sun, 22 Nov 2026 21:29:24 -0800
+Message-ID: <20261123052953.3658549-68-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.1
 In-Reply-To: <20261123052953.3658549-1-khem.raj@oss.qualcomm.com>
 References: <20261123052953.3658549-1-khem.raj@oss.qualcomm.com>
@@ -67,39 +67,37 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Mon, 23 Nov 2026 05:31:21 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132849
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132855
 Content-Type: text/plain; charset="utf-8"
 
-- New $(format-json) --order option, CloudWatch Logs HLC destination,
-  and certificate-based Azure/OAuth2 authentication in cloud-auth
-- Security fixes: unbounded dynamic name-value registration
-  (GHSA-ch7v-cjmh-j4g2), crash with encoding() and large log-msg-size
-  (GHSA-v8gx-qpvj-wqr7), TLS hostname check accepting embedded NUL
-  (GHSA-gx8q-j4c3-prc2)
-- New options: http response-body-action(), disk-buffer
-  remove-if-empty(), reconnect backoff, password-protected PKCS#12
-- java module disabled; many crash, leak and parser fixes
+- Device database moved to data/devices.txt with support for
+  user-provided device files; new irecv_devices_add() and
+  irecv_command_is_breq() APIs, async request functions
+- Support for new Apple devices (iPhone 17e/18 Pro, iPad Air M4,
+  MacBook M5 models and others)
+- Bug fixes: robust iSerialNumber reading, halted endpoint handling,
+  device list locking, leaks and double frees
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- .../syslog-ng/{syslog-ng_4.12.0.bb => syslog-ng_4.13.0.bb}      | 2 +-
+ .../{libirecovery_1.3.1.bb => libirecovery_1.4.0.bb}            | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-support/syslog-ng/{syslog-ng_4.12.0.bb => syslog-ng_4.13.0.bb} (98%)
+ rename meta-oe/recipes-connectivity/libirecovery/{libirecovery_1.3.1.bb => libirecovery_1.4.0.bb} (89%)
 
-diff --git a/meta-oe/recipes-support/syslog-ng/syslog-ng_4.12.0.bb b/meta-oe/recipes-support/syslog-ng/syslog-ng_4.13.0.bb
-similarity index 98%
-rename from meta-oe/recipes-support/syslog-ng/syslog-ng_4.12.0.bb
-rename to meta-oe/recipes-support/syslog-ng/syslog-ng_4.13.0.bb
-index 32ec456f50..73ce344ca9 100644
---- a/meta-oe/recipes-support/syslog-ng/syslog-ng_4.12.0.bb
-+++ b/meta-oe/recipes-support/syslog-ng/syslog-ng_4.13.0.bb
-@@ -27,7 +27,7 @@ SRC_URI = "https://github.com/balabit/syslog-ng/releases/download/${BP}/${BP}.ta
-            "
- SRC_URI:append:powerpc64le = " file://0001-plugin.c-workaround-powerpc64le-segfaults-error.patch"
+diff --git a/meta-oe/recipes-connectivity/libirecovery/libirecovery_1.3.1.bb b/meta-oe/recipes-connectivity/libirecovery/libirecovery_1.4.0.bb
+similarity index 89%
+rename from meta-oe/recipes-connectivity/libirecovery/libirecovery_1.3.1.bb
+rename to meta-oe/recipes-connectivity/libirecovery/libirecovery_1.4.0.bb
+index e7a2ece779..74859bb673 100644
+--- a/meta-oe/recipes-connectivity/libirecovery/libirecovery_1.3.1.bb
++++ b/meta-oe/recipes-connectivity/libirecovery/libirecovery_1.4.0.bb
+@@ -8,7 +8,7 @@ HOMEPAGE = "http://www.libimobiledevice.org/"
  
--SRC_URI[sha256sum] = "03a03d19ac203dca53c7ec79a7005c8a850665a95ff4cd0f1e7bb4c497c64d46"
-+SRC_URI[sha256sum] = "e82daa3139d1cd790f2d8f2699c70b56a521d8e5218f7e52633dfad1b1f63297"
+ DEPENDS = "libimobiledevice-glue libusb1 readline"
  
- UPSTREAM_CHECK_URI = "https://github.com/balabit/syslog-ng/releases"
- UPSTREAM_CHECK_REGEX = "releases/tag/syslog-ng-(?P<pver>\d+(\.\d+)+)"
+-SRCREV = "b59ef4814525f487287da1609864f432cd79e3ed"
++SRCREV = "25147fbc926d668f425b36fe3157dbb25f548f45"
+ SRC_URI = "git://github.com/libimobiledevice/libirecovery;protocol=https;branch=master;tag=${PV}"
+ 
+ inherit autotools pkgconfig
