@@ -1,89 +1,122 @@
-Received: from mail-wr1-f50.google.com (mail-wr1-f50.google.com [209.85.221.50])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.50423.1795423193250003937
+Received: from metis.whiteo.stw.pengutronix.de (metis.whiteo.stw.pengutronix.de [185.203.201.7])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.51414.1795428941511640790
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 23 Nov 2026 00:39:53 -0800
+ Mon, 23 Nov 2026 02:15:42 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=sTxZFagR;
- spf=pass (domain: gmail.com, ip: 209.85.221.50, mailfrom: alex.kiernan@gmail.com)
-Received: by mail-wr1-f50.google.com with SMTP id ffacd0b85a97d-4aa5833c263so2829147f8f.2
-        for <openembedded-devel@lists.openembedded.org>; Mon, 23 Nov 2026 00:39:53 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795423191; x=1796027991; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=BqFZiHRB5ntjN1fd4e6Fy3lLGBBSG9CujU27iBF7v1M=;
-        b=sTxZFagRDZes91yXDxr0UVdF8V4TkSY2HH/+g6WZsJKoYTL/sbKoVh295g+9SPQV4u
-         d4tUhqVLgg6VTcpVoLc7t+2Khqxe1f95FON3D/YQVuaGmk6u2Lq6h1utkuFqfqSxxvgr
-         WTiRUytyTB77kPALa6C3ml8xbpRaJdb52wockWPNXMIcRl6/Rl7OetQoWzC1sgcj/UOO
-         BHBI571WWvN0V869i7NeDi1lgK0K4z/BO0WW7nZBMK90/MI0UOQoEuwtTNuz3C3HYhAt
-         QT2m7eoDBUDnr8wNt3n9UfNUBeSoiXdF72qUj82lXNl+pRs5uXhQHsy4qYLTfLdOOAdI
-         GxnA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795423191; x=1796027991;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=BqFZiHRB5ntjN1fd4e6Fy3lLGBBSG9CujU27iBF7v1M=;
-        b=YM+yL0q4NjD1Gl6STc5l27Vw3L96ncW2U688L76mb/g0zdsrDCWrtVsm2akjy4R/W3
-         iugd4sM9QqigIuk7cO1fIMFJxVR90xONQV1ih/l0mk/KgyEzdkDi3rUYkXHSEOWBO5PF
-         ySNsjnzRoa6207j4BXCIHiAPlrp37n0F54D/IDMFbssCjnkro/T5bDfNJzOvwPnPoK0a
-         Xisn36OAQspVnZHdDKHywD5aSC5n+TBvmY5fDp3j1jpejYbqi2zcDiXXdzub80epx/g1
-         eJh+qckHpdVz9wHnqGMwM9BOU0GQeU3pp4OpT7ic3AODchORkOt3HVDyrtD26ZaxmVX5
-         EFHQ==
-X-Gm-Message-State: APuU4Z8I7whEmHYPkcyMyH1F3jgV0wV+yrhOVKJr3Q4RwQmu0AOZSjal
-	xdeFeVdemvJndMugbwFfYoeLdF//gDSbXHwP62S7tkdM0nLaxJr3Rz1Xa5q76Q==
-X-Gm-Gg: AZFdTZeh9n4Fl3RRICokTBI9a0GMFbVG8IIa2YGhOke91BxGcWNC7xbGvENsKahTfZE
-	da62o0HX/93NDr6y38SIiX/uBMnWliQKP10YQu3e1BiUmkL85gQE4hgPhe7pUOwytN5uDTkjSw7
-	AnDhsnGfsX+5EnpXdtD64OTL+Nh5Jmy4/FsVuc0n5sTc02hGYrCZnk8+Fg79gL1QqAppVoHcLq3
-	qFf0o9MtWVgjyq5c4KIhj3Mqz7u/zcQInbLXFfccK8wGZqzBVst4Qtt0krNtn0mIgZAf7H79cAv
-	v6tcvROjMa3L8Y5NQ6loRIZ2DDM9a795tcUBtN1Glr3mRZIMnNkP4Crd0a0RzrwTAzLf60EqDNl
-	jUOoG7ZQj8lBRbuoWVCobuvxQwSFXvlapVzZlEKMLKc4BSTdXpQqBCBbxMd5JsFJSIJvkwqyrLX
-	QNwp0f+CrWbm6YeuMVH0H5m3ySoP8yf6f1CQb8AkjFJMBTvuMZmuJPCixdbrQ0jPlnObiuaQpwj
-	1T5aeusHCLOWziLIx3fOuIzpo4aDumytDdiPFJfwxHCXG3e7tFCjDRV8BxqrOXrN/9WW36CIM4G
-	KypAWzMy8XvGe25fMTATMQq5T3++yRyXM/XdchizzufIvxEF3MwvkwqYH+9TbyhoahDpu08l+t/
-	AL/+0xs4r+bBGQg==
-X-Received: by 2002:a05:6000:299c:10b0:4a7:9630:7b5a with SMTP id ffacd0b85a97d-4abb47b2043mr14731543f8f.47.1795423191327;
-        Mon, 23 Nov 2026 00:39:51 -0800 (PST)
-Return-Path: <alex.kiernan@gmail.com>
-Received: from localhost.localdomain (cust18-dsl93-89-130.idnet.net. [93.89.130.18])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4b34e9c3ffesm4419223f8f.19.2026.11.23.00.39.50
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 23 Nov 2026 00:39:50 -0800 (PST)
-From: Alex Kiernan <alex.kiernan@gmail.com>
+ dkim=none (message not signed); spf=pass (domain: pengutronix.de, ip: 185.203.201.7, mailfrom: f.pflug@pengutronix.de)
+Received: from dude06.red.stw.pengutronix.de ([2a0a:edc0:0:1101:1d::5c])
+	by metis.whiteo.stw.pengutronix.de with esmtp (Exim 4.92)
+	(envelope-from <f.pflug@pengutronix.de>)
+	id 1xVR5H-0002SX-G4; Mon, 23 Nov 2026 11:15:39 +0100
+From: Fabian Pflug <f.pflug@pengutronix.de>
 To: openembedded-devel@lists.openembedded.org
-Cc: Alex Kiernan <alex.kiernan@gmail.com>
-Subject: [meta-python][PATCH] python3-paho-mqtt: correct license
-Date: Mon, 23 Nov 2026 08:39:04 +0000
-Message-ID: <20261123083903.2627354-2-alex.kiernan@gmail.com>
-X-Mailer: git-send-email 2.43.0
+Cc: yocto@pengutronix.de
+Subject: [meta-initramfs][PATCH] rsinit: add recipe for /init written in rust
+Date: Mon, 23 Nov 2026 11:14:38 +0100
+Message-ID: <20261123101533.3325486-1-f.pflug@pengutronix.de>
+X-Mailer: git-send-email 2.47.3
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-SA-Exim-Connect-IP: 2a0a:edc0:0:1101:1d::5c
+X-SA-Exim-Mail-From: f.pflug@pengutronix.de
+X-SA-Exim-Scanned: No (on metis.whiteo.stw.pengutronix.de); SAEximRunCond expanded to false
+X-PTX-Original-Recipient: openembedded-devel@lists.openembedded.org
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Mon, 23 Nov 2026 08:39:58 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132885
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Mon, 23 Nov 2026 10:15:43 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132886
 Content-Type: text/plain; charset="utf-8"
 
-The license has been EPL-2.0 or EDL-1.0 since 2.0 (LICENSE.txt and
-epl-v20); the recipe still said EPL-1.0.
+rsinit speeds up the boot by not having to parse all the bash scripts
+currently used in the initramfs and replacing it with a single binary
+written in rust.
 
-AI-Generated: Claude Opus 5.5 (Claude Code)
-License-Update: EPL-1.0 corrected to EPL-2.0, as shipped since 2.0
-Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
+Signed-off-by: Fabian Pflug <f.pflug@pengutronix.de>
 ---
- .../recipes-devtools/python/python3-paho-mqtt_2.2.0.bb       | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
+ .../recipes-core/rsinit/rsinit-crates.inc     | 36 +++++++++++++++++++
+ .../recipes-core/rsinit/rsinit_v0.1.0.bb      | 31 ++++++++++++++++
+ 2 files changed, 67 insertions(+)
+ create mode 100644 meta-initramfs/recipes-core/rsinit/rsinit-crates.inc
+ create mode 100644 meta-initramfs/recipes-core/rsinit/rsinit_v0.1.0.bb
 
-diff --git a/meta-python/recipes-devtools/python/python3-paho-mqtt_2.2.0.bb b/meta-python/recipes-devtools/python/python3-paho-mqtt_2.2.0.bb
-index fbfbf064d6bd..946f1867210d 100644
---- a/meta-python/recipes-devtools/python/python3-paho-mqtt_2.2.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-paho-mqtt_2.2.0.bb
-@@ -1,6 +1,7 @@
--SUMMARY = "MQTT version 3.1/3.1.1 client library"
--LICENSE = "EPL-1.0 OR LicenseRef-EDL-1.0"
-+SUMMARY = "MQTT version 5.0/3.1.1 client library"
-+LICENSE = "EPL-2.0 OR LicenseRef-EDL-1.0"
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=8e5f264c6988aec56808a3a11e77b913 \
-+                    file://epl-v20;md5=2dd765ca47a05140be15ebafddbeadfe \
-                     file://edl-v10;md5=c09f121939f063aeb5235972be8c722c \
- "
- 
+diff --git a/meta-initramfs/recipes-core/rsinit/rsinit-crates.inc b/meta-initramfs/recipes-core/rsinit/rsinit-crates.inc
+new file mode 100644
+index 0000000000..9970c4a913
+--- /dev/null
++++ b/meta-initramfs/recipes-core/rsinit/rsinit-crates.inc
+@@ -0,0 +1,36 @@
++# Autogenerated with 'bitbake -c update_crates rsinit'
++
++# from Cargo.lock
++SRC_URI += " \
++    crate://crates.io/bitflags/2.13.0 \
++    crate://crates.io/cfg-if/1.0.4 \
++    crate://crates.io/cfg_aliases/0.2.1 \
++    crate://crates.io/getrandom/0.2.17 \
++    crate://crates.io/git-version/0.3.9 \
++    crate://crates.io/git-version-macro/0.3.9 \
++    crate://crates.io/json/0.12.4 \
++    crate://crates.io/libc/0.2.186 \
++    crate://crates.io/log/0.4.32 \
++    crate://crates.io/nix/0.31.3 \
++    crate://crates.io/proc-macro2/1.0.106 \
++    crate://crates.io/quote/1.0.45 \
++    crate://crates.io/syn/2.0.118 \
++    crate://crates.io/unicode-ident/1.0.24 \
++    crate://crates.io/wasi/0.11.1+wasi-snapshot-preview1 \
++"
++
++SRC_URI[bitflags-2.13.0.sha256sum] = "b4388bee8683e3d04af747c73422af53102d2bd24d9eadb6cbc100baef4b43f8"
++SRC_URI[cfg-if-1.0.4.sha256sum] = "9330f8b2ff13f34540b44e946ef35111825727b38d33286ef986142615121801"
++SRC_URI[cfg_aliases-0.2.1.sha256sum] = "613afe47fcd5fac7ccf1db93babcb082c5994d996f20b8b159f2ad1658eb5724"
++SRC_URI[getrandom-0.2.17.sha256sum] = "ff2abc00be7fca6ebc474524697ae276ad847ad0a6b3faa4bcb027e9a4614ad0"
++SRC_URI[git-version-0.3.9.sha256sum] = "1ad568aa3db0fcbc81f2f116137f263d7304f512a1209b35b85150d3ef88ad19"
++SRC_URI[git-version-macro-0.3.9.sha256sum] = "53010ccb100b96a67bc32c0175f0ed1426b31b655d562898e57325f81c023ac0"
++SRC_URI[json-0.12.4.sha256sum] = "078e285eafdfb6c4b434e0d31e8cfcb5115b651496faca5749b88fafd4f23bfd"
++SRC_URI[libc-0.2.186.sha256sum] = "68ab91017fe16c622486840e4c83c9a37afeff978bd239b5293d61ece587de66"
++SRC_URI[log-0.4.32.sha256sum] = "953f07c43838f8e6f9758cab68bf5bed85465e7587ebe0b823f1bcd81978ad3a"
++SRC_URI[nix-0.31.3.sha256sum] = "cf20d2fde8ff38632c426f1165ed7436270b44f199fc55284c38276f9db47c3d"
++SRC_URI[proc-macro2-1.0.106.sha256sum] = "8fd00f0bb2e90d81d1044c2b32617f68fcb9fa3bb7640c23e9c748e53fb30934"
++SRC_URI[quote-1.0.45.sha256sum] = "41f2619966050689382d2b44f664f4bc593e129785a36d6ee376ddf37259b924"
++SRC_URI[syn-2.0.118.sha256sum] = "1b9ae57f904213ebb649ce6895b8a66c66f0203b9319718f69a5612a065b1422"
++SRC_URI[unicode-ident-1.0.24.sha256sum] = "e6e4313cd5fcd3dad5cafa179702e2b244f760991f45397d14d4ebf38247da75"
++SRC_URI[wasi-0.11.1+wasi-snapshot-preview1.sha256sum] = "ccf3ec651a847eb01de73ccad15eb7d99f80485de043efb2f370cd654f4ea44b"
+diff --git a/meta-initramfs/recipes-core/rsinit/rsinit_v0.1.0.bb b/meta-initramfs/recipes-core/rsinit/rsinit_v0.1.0.bb
+new file mode 100644
+index 0000000000..e2c5e71d54
+--- /dev/null
++++ b/meta-initramfs/recipes-core/rsinit/rsinit_v0.1.0.bb
+@@ -0,0 +1,31 @@
++SUMMARY = "minimalistic init written in rust"
++DESCRIPTION = "rsinit is a minimalistic single binary init for the initramfs for embedded systems"
++HOMEPAGE = "https://github.com/pengutronix/rsinit"
++
++LICENSE = "GPL-2.0-only AND CC0-1.0"
++LIC_FILES_CHKSUM = "file://LICENSES/GPL-2.0-only.txt;md5=570a9b3749dd0463a1778803b12a6dce \
++                    file://LICENSES/CC0-1.0.txt;md5=65d3616852dbf7b1a6d4b53b00626032"
++
++SRC_URI = "git://github.com/pengutronix/rsinit.git;protocol=https;branch=main"
++SRCREV = "${PV}"
++
++inherit cargo cargo-update-recipe-crates
++
++require ${BPN}-crates.inc
++
++INSANE_SKIP:${PN} += "already-stripped"
++
++PACKAGECONFIG ??= " \
++    ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)} \
++    reboot \
++"
++
++PACKAGECONFIG[defaults] = ",--no-default-features"
++PACKAGECONFIG[dmverity] = "--features dmverity"
++PACKAGECONFIG[reboot] = "--features reboot-on-failure"
++PACKAGECONFIG[systemd] = "--features systemd"
++PACKAGECONFIG[usb9pfs] = "--features usb9pfs"
++
++# cargo installs everything into ${bindir}, which is normally /usr/bin.
++# Not the best choice for the init system, which should reside under /init
++bindir = ""
+-- 
+2.47.3
+
