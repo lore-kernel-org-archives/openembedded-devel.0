@@ -1,101 +1,113 @@
-Received: from mail-dy1-f180.google.com (mail-dy1-f180.google.com [74.125.82.180])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.48031.1795411849382914645
+Received: from mail-dy1-f177.google.com (mail-dy1-f177.google.com [74.125.82.177])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.48531.1795411858598517129
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 22 Nov 2026 21:30:49 -0800
+ Sun, 22 Nov 2026 21:30:58 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=rXkvv/HE;
- spf=pass (domain: gmail.com, ip: 74.125.82.180, mailfrom: raj.khem@gmail.com)
-Received: by mail-dy1-f180.google.com with SMTP id 5a478bee46e88-38699cf08dfso2509773eec.1
-        for <openembedded-devel@lists.openembedded.org>; Sun, 22 Nov 2026 21:30:49 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=EaOhC0Sm;
+ spf=pass (domain: gmail.com, ip: 74.125.82.177, mailfrom: raj.khem@gmail.com)
+Received: by mail-dy1-f177.google.com with SMTP id 5a478bee46e88-38564b4b017so3109888eec.0
+        for <openembedded-devel@lists.openembedded.org>; Sun, 22 Nov 2026 21:30:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795411849; x=1796016649; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1795411858; x=1796016658; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=7Zkco59dXtvd6mo2iwk2zBcCRbubBfORBRsXiIByl+Q=;
-        b=rXkvv/HEQufl/CgE12ebuhWwDmPmQtlTnXegnQAneZk+IQrgHiCmUgcHpk5O/KcTpB
-         NkyCzah8pBF45YZprwj+ln7ptjHwQaNCSK9ldx+yk/R8HAFBHVh/EJ+r/zzdR4dlCfmC
-         VdYi2vk8m0+E29TiDrkyfI8JzVGqyZbi7DkKFjB9tmhEhUlHNZYcFkONRE4h05CeR2Cv
-         TDnobMIddO/q0Zxb2G07vlhLl53cC7yVwUXyAxLLct4ciCxxP3Ks3/VMw1FjP75A8OYY
-         HmYcH+BtJ608hgsGKNMFA0Mu5L7Tg0+d3pJ6pEYea//5peIA9AtQpLPVlyQEi2MP4q7d
-         R6VA==
+        bh=tg7UCOPVQqmF44xbw2xGBYBVS85GsdT/jUjQ/4yKBTY=;
+        b=EaOhC0SmNdZkMPRASXzvq61L854PkMthSwtgPlQNuCeeO1Q4UpRBmKUxTFQmtxBgdP
+         8J4ePzATVe+CdqE7z5tUOxef8nhZhdxnYqB+y/F8AldP222pZTuby64iDDdzfMLaKOlg
+         Wd+Re9SsZ6qzMVLbyIdbCGB/j1ncQlulBnr6bkyHzK9vbiGJCOdIb5SkfNF4WpLWLD76
+         TKVA7ZqIykM6J2yKvqqFkExkMwM9hZHOihfMCUI+8C3lw78JYq8dMfuDSWWDEdZDkyAK
+         a5bIkHRTHeGZHzKN2dKWSaSKGHzua3RkEj5tK0tm2uamdLQStjd+cvSXCi/1b8hFPaEf
+         y/7Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795411849; x=1796016649;
+        d=1e100.net; s=20260707; t=1795411858; x=1796016658;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=7Zkco59dXtvd6mo2iwk2zBcCRbubBfORBRsXiIByl+Q=;
-        b=xP1ZJDtOf0dllaF3ij84hZpe9EreTP59LmuDPs47FMV6G+s7j2em706zO4Pvt7idgV
-         wE7t5kwEeiTov9zOeWluezyVxTEnlvfSZwrlLDviM92JRRZgDBEErqUCQS0W68O3PSfP
-         JFIIBZl0lbP4hVPaM8jeRoe6+wSCx92eEWnDLtawWoHyXX61f/Cu/p2gUM6BRLDmjJRe
-         1L75dcGt85vOvsZZP8JXbaYbVSW8GCdMK/l5/E+a1jxIs86Fi7YJEQkYhOpJri7jo/2q
-         SVtcG0Q9p3i+yKy5lFMH0PmDX7YMe5qs6rbZP1/Mim3F9BpVx0BmX/yo9TCZGihxNnsk
-         RKoQ==
-X-Gm-Message-State: APuU4Z9sKL04kL3V1FLGlyEf81MW8m8jwOZipO/0/qwgzQzdgXMOl4FS
-	ZZmrmmnYfcT9LUAtBR6Mn4DeVW+d16omlPKIRAVMJA1GwC0DcY7+9GTpyR4OazX3770=
-X-Gm-Gg: AZFdTZeVTDgWzm4YvqpnewkbZFg/X6tCh9Szgyidg4JIEvkqhp/SEUqH5SDb3Nmv/lW
-	wOHrx9qdBIENQGAhyL7lGEVZXNS3b7iLL730dCAE/VwPdPTqlBa1kk1LO+xuTRxpIo+Da1O/fwu
-	PSWyJIkcBH0Exnm1yRJDXu/x/HIHs+DmnMv0nm1XF/9FVeINJHZbcTHN4l/Mrnqs8pNkp1awfy3
-	Jcg99q23TcVqbd9jFnh3XGeUzmaEMyRYcvURfUJS5tbTjehgoG8CYKTwoAluGyLB8VCxBePchZ9
-	P6j2CPNqJoFsBMI0KidjYr9QvxFSLcuJosNkcxDG3Bdg7s7bqH4Wsh+lIrSxc+TZdLuWEnuuSl9
-	yQdM4xNTUJhzEMjk2hhSxYzFBe7xzlJFS88FQNwBOq+X2RohISpd7Pfhfb0azEVNAeWXeF5CiO4
-	FJTOaAB1fpehjGgIVfCoc7C72jv/q6qkW1DEmswL2c7ymYbtHVC16DgxRkHuW4i495NmqVzDJev
-	JpmlogwjvQRyMD6fgZC9yDtTS18DPd/xxPFuonhfGCnr620ktviixrfSMoi+iAimte9QRTG7HIx
-	3QEJVhmI0xGCIIf4ZBKbK4IPjTvyko1I+RAJmc0ISln6q/kjA5rz/aw/FtocAqh/3sX2Jpx1Pur
-	p0m899H8BecofHoSMaB6Dp1/BRq4NtxWlxyYE7rSLFpe3oWK0d0LJSbaXpXmgNKLgg5ZqxJlPVT
-	rfAaz0acdt2CcL9efUMfAEYwyOuysjFA7IUl1IqvcHy1bF5WLIP1WS6D0xDhXiiT3CJstyqBRMK
-	UDDMOEShouWhewIPN8InnpJU5OrQcKwWRLZ6HXBCwHyQj5Dgs23eZhdXiCl/D4tsGuWTHaKp7Wj
-	Yx66
-X-Received: by 2002:a05:7300:1909:b0:383:f646:9feb with SMTP id 5a478bee46e88-3856c4b8304mr16870492eec.2.1795411848734;
-        Sun, 22 Nov 2026 21:30:48 -0800 (PST)
+        bh=tg7UCOPVQqmF44xbw2xGBYBVS85GsdT/jUjQ/4yKBTY=;
+        b=wCF9YBPOHkRphUFRDrJMcUjrHG7VXq4NfAEM6ApL0oLgkIjjxjW29nkw5TeMJq3ni8
+         OC+UPkbn2hv7akgf5B71lu3x6MtqPUux/PMNQYc6evAabjZCj39bJUD1sFLwqjAknpIG
+         /DgmmPiU/AiMKsS0N19hw4ZWR6czRHG7Cyl7bGBiA9Wt4N6lHuVVRlEz+pf9YAH/70XO
+         nj6jRYDZghl3w+E0IR1qsPg31I3CRxoSs37HoFyirP9aNV9Hf+JekUb7txerJ5YOb1Yd
+         2hoYfX7eIB2hiDrBrsPJBy+njv33YtUkcE45Guc7L8oRGF/elcPJr6y0HF645THnujZC
+         NWpQ==
+X-Gm-Message-State: APuU4Z93LRcW8v5bVVxKPYEVQbCBjCcfkqqcae7ksjTNFwiSKpEBLaCE
+	p9D2hZtZRI0HpgNb2NT9HuSLpv5GzYO4OyXtmWPrZZr07epnDGtiOCMLL12NZb2Clas=
+X-Gm-Gg: AZFdTZfE4gpxNePVVKjDTiAyfnThSJblqIIAQY83jZWt2gBY9VwpxDZN0lj491x6rKo
+	0lhHPwJ+o4pR5eEn80Sv1PlTkv3TOrOPjPc2HUPzwYQPG3q2VHwOrf9bjx5ghZGyyGcSybhELjn
+	s4UrYjOVT7EEJwJDPIBf4rWwYw1DqixExH0a7PD01DFGKVOarrzPCZ0U9AWV+tuRDCWzfW7nxSF
+	JDiXCl/kJQEdGtfeK5OTGPB6Aja/XUOy16ADgokd+vDNT7RHcMTXDA1uSmZBvD47bop0VK+UkNz
+	iVEvpkVC8OEmTGYw+urvThddltanX+xT567WmRTFoY1wK8jVNMfyhEfVatVE9Cam/0o5xc+XPE1
+	n2n0JHUwM3lkKWBixyrqjsRdQDXTD23B8LQZ1SbczQlF/HR0hV40+LSEFw/9mf0lc5Som7nvOPT
+	KT44iJrjRLVc/2wDWg1jgBfogqyGoywqY+pLpQUaZCiD10tL26k73WRTRqZhd+2XBXuq5AFotMZ
+	aGPuUqkJmULuwVzw/TfIRCKQ6R88111uJ2cQY6dnU0VvXj0Yhj3Xs1XJ4CD40navPJPRur3OxOx
+	rAJFOdQ4CB9q9w8nYJoFjCHN76N20SNex7t1dIL8wnyY1BDTkhvTclqfr7zPShaWs/ScsAjDUK9
+	RP9UCcbe4jpWgWUzI5JnKwnpsA2nwRAKjPQGGVyuZb5gjg3e84tD5t4/fxfQvRRMFEwgYst6kyV
+	Bt+f758F7FXt6AxFMkCbePw5SXAsK/rN+QV6m2RAQiR7AnOmzwWOngddt20V5dvnL+lU6l8zrH5
+	ficaqAeobdJ67HIn3IH+uhtyY96S2DF7Bw9LbwzUPv3PdZJxJF7L34E+WzAuF75FrRvLIVyf3+H
+	ceKS
+X-Received: by 2002:a05:693c:408b:b0:377:82e:2d79 with SMTP id 5a478bee46e88-384b39896edmr13101964eec.9.1795411857863;
+        Sun, 22 Nov 2026 21:30:57 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-38567cafec4sm36573136eec.26.2026.11.22.21.30.47
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-38567cafec4sm36573136eec.26.2026.11.22.21.30.56
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 22 Nov 2026 21:30:48 -0800 (PST)
+        Sun, 22 Nov 2026 21:30:57 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-oe][PATCH 15/42] imagemagick: upgrade 7.1.2-35 -> 7.1.2-36
-Date: Sun, 22 Nov 2026 21:28:59 -0800
-Message-ID: <20261123052953.3658549-43-khem.raj@oss.qualcomm.com>
+Subject: [meta-oe][PATCH 23/42] monit: upgrade 6.0.0 -> 6.1.0
+Date: Sun, 22 Nov 2026 21:29:07 -0800
+Message-ID: <20261123052953.3658549-51-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.1
 In-Reply-To: <20261123052953.3658549-1-khem.raj@oss.qualcomm.com>
 References: <20261123052953.3658549-1-khem.raj@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Mon, 23 Nov 2026 05:30:50 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132830
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Mon, 23 Nov 2026 05:31:00 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132838
 Content-Type: text/plain; charset="utf-8"
 
-Security and bug fix release: fixes for 31 GitHub security advisories
-(e.g. GHSA-4jg2-g974-7w79 in the DPX encoder, GHSA-f3r8-89f9-mx43 in
-the DOT decoder, GHSA-cvrx-j29f-c5q9 in the splay tree), stricter
-write-failure checks across many coders, and fixes in resize, SVG path
-arc parsing, JPEG size hints and grayscale conversions.
+- Incompatible: outgoing SSL connections now verify the remote
+  certificate; the control file must be UTF-8; poll time is capped at
+  3600s
+- Per-test event types, so alerts flag only the failed test (space
+  usage alert text changed)
+- New link errors test; link up/down tests react only to state changes
+- PID 1 container mode: shutdown timeout and ordered service stop
+- Many fixes in the parser, HTTP server, protocol tests (MySQL, RADIUS,
+  DNS, RDATE), timeouts, fd leaks and platform statistics
+
+6.1.0 installs a bash completion file; inherit bash-completion to
+package it.
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- .../{imagemagick_7.1.2-35.bb => imagemagick_7.1.2-36.bb}        | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-support/imagemagick/{imagemagick_7.1.2-35.bb => imagemagick_7.1.2-36.bb} (99%)
+ .../recipes-support/monit/{monit_6.0.0.bb => monit_6.1.0.bb}  | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-support/monit/{monit_6.0.0.bb => monit_6.1.0.bb} (92%)
 
-diff --git a/meta-oe/recipes-support/imagemagick/imagemagick_7.1.2-35.bb b/meta-oe/recipes-support/imagemagick/imagemagick_7.1.2-36.bb
-similarity index 99%
-rename from meta-oe/recipes-support/imagemagick/imagemagick_7.1.2-35.bb
-rename to meta-oe/recipes-support/imagemagick/imagemagick_7.1.2-36.bb
-index 877aa4dbba..2dabbff118 100644
---- a/meta-oe/recipes-support/imagemagick/imagemagick_7.1.2-35.bb
-+++ b/meta-oe/recipes-support/imagemagick/imagemagick_7.1.2-36.bb
-@@ -17,7 +17,7 @@ SRC_URI = "git://github.com/ImageMagick/ImageMagick.git;branch=main;protocol=htt
-            file://imagemagick-ptest.sh \
+diff --git a/meta-oe/recipes-support/monit/monit_6.0.0.bb b/meta-oe/recipes-support/monit/monit_6.1.0.bb
+similarity index 92%
+rename from meta-oe/recipes-support/monit/monit_6.0.0.bb
+rename to meta-oe/recipes-support/monit/monit_6.1.0.bb
+index 5dcf1c83d6..36a277fc68 100644
+--- a/meta-oe/recipes-support/monit/monit_6.0.0.bb
++++ b/meta-oe/recipes-support/monit/monit_6.1.0.bb
+@@ -16,11 +16,11 @@ SRC_URI = " \
+ 	file://monitrc \
  "
  
--SRCREV = "5d1bcc55f2c83bc2ff802118b7369756610f3ad4"
-+SRCREV = "dcec873ede2912a1b045a50fd54cd138ee5f3fa4"
+-SRC_URI[sha256sum] = "ddacd2a8120aeb2351e4486ee04a17782b5004aee99f2041d829bc4dcf2a5b3b"
++SRC_URI[sha256sum] = "c28406dc922e64560095ec3ec99feb8eddd3f96e7b6eed22309a5865d1eab226"
  
- inherit autotools pkgconfig update-alternatives ptest
- export ac_cv_sys_file_offset_bits = "64"
+ DEPENDS = "zlib bison-native libnsl2 flex-native openssl virtual/crypt"
+ 
+-inherit autotools-brokensep systemd update-rc.d
++inherit autotools-brokensep bash-completion systemd update-rc.d
+ # brokensep because | ../../monit-5.34.4/libmonit/src/util/Str.c:26:10: fatal error: Config.h: No such file or directory
+ 
+ EXTRA_AUTORECONF += "-I config"
