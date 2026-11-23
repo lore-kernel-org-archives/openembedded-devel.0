@@ -1,65 +1,65 @@
-Received: from mail-dl1-f54.google.com (mail-dl1-f54.google.com [74.125.82.54])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.48039.1795411867482134676
+Received: from mail-dy1-f172.google.com (mail-dy1-f172.google.com [74.125.82.172])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.48040.1795411869988424452
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 22 Nov 2026 21:31:07 -0800
+ Sun, 22 Nov 2026 21:31:10 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=rr+XXEZ8;
- spf=pass (domain: gmail.com, ip: 74.125.82.54, mailfrom: raj.khem@gmail.com)
-Received: by mail-dl1-f54.google.com with SMTP id a92af1059eb24-1b3beeaf6f9so3496160c88.0
-        for <openembedded-devel@lists.openembedded.org>; Sun, 22 Nov 2026 21:31:07 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=dQF4bl58;
+ spf=pass (domain: gmail.com, ip: 74.125.82.172, mailfrom: raj.khem@gmail.com)
+Received: by mail-dy1-f172.google.com with SMTP id 5a478bee46e88-3282db206d3so8807017eec.0
+        for <openembedded-devel@lists.openembedded.org>; Sun, 22 Nov 2026 21:31:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795411867; x=1796016667; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1795411869; x=1796016669; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=LEKRrB6bHSV7IAiQAQnNyXnFbwPDR2Cqd3UzNJXDI6o=;
-        b=rr+XXEZ8xTQD/c0gtL9rnGi3GD8GGecnDZCv982Vm8895qrUzhSa98o9TwF1EJNPmH
-         1OWOUsIY3hywBxl+ut2ji/FUcqsOHeBrShTckQetNdKMUziGE90+Bb0ARgaLUjdoZ8MX
-         iFu3n43tfHU8R/Gef1vMNiuMSPyePKs5dtkMPEAumhwD9wxxY0iCEZGAkHqw5m9ADA3f
-         VEpJnv8+8n5BMcUV/Q1mQ6VCwHFK3qD3BiEc6ESxHTrJDDwHieUSX13mD5CwcFFx8+59
-         UV1pmo71CI3mxVCiRKZb2TR/k5FpKb0q1PuEj7Jf6gbJJC1xMXpIrgkd0wUx1FpLt3nk
-         AsMg==
+        bh=BvpQzgDKXMaJYXVlt0rJUfTm52yl2FlINHPr4qhYjaM=;
+        b=dQF4bl58ms0GxR89UdyScL2VHUTFgRkMukh19AJeX/0jiITayJYKvhht3taz2YmcfG
+         SdvC7KUNLe91SapjQar2O1N0qGxdOTiw6VzX4KX7MyDjj1BoKni8TY1JwBi9jhaCRpjZ
+         ynNg0wkXKsh/UP8WuN4wuT3eYlxkc5vup/w6UKBKu5rtHbV3t1KbvLZPmWVg1AfkiA+O
+         8FlIQiy8UGqRX9xuVlzqnOtvtlxmG0t5mibxpDNOcGv82hJB9IF2GJSrdhI17l0tvijD
+         XCKUWQPnN4cPmOkJUVJsPl1J78pPev6yauT0MoWa9wUoOGnjaIFPlcnrv9FCuO+KgMak
+         dFtQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795411867; x=1796016667;
+        d=1e100.net; s=20260707; t=1795411869; x=1796016669;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=LEKRrB6bHSV7IAiQAQnNyXnFbwPDR2Cqd3UzNJXDI6o=;
-        b=jsKJE3qHSM4P5n4rhGT1PfavvIrvh4AfRvnLESfCgETAy8AgZ0glzBlwUo4006cIzi
-         oIkCaM53zyi8sKZSQ8t+mZpuSDeI5DjiKLT9ufYVXGECdRyn+SOm8RfULgzbpSIrrsSI
-         5Dgo5bm7+4dbX7uZ0vMjgUNQlvAImJ1z+wK88uO7Ks/rhlCut38CKJpBQ3Wq2Ek5XXdn
-         qblRlFNehXzZal2x+6xpap2gkCcRLxWRPuUgY8haRE5dLezgzo+/Io/t51Y9HwUqUyrN
-         ZqFlVGqWa1O1oOX1lFUknUUpc2RCy9Gfu5xMM4/rxEJSMh/JWRI/UvJ829EfJp1KN7ih
-         Ihmg==
-X-Gm-Message-State: APuU4Z9FX1R1v1/JaIVWpulU95wzsUF7lEv63uhr3/Q8Uo8+QuJyPUmA
-	joY/G9NC1q5NJ672nzE+eyKIlYniOmBXCADHwPYcAJUfn2B2VhDhrLOxrY/a6p3pIA4=
-X-Gm-Gg: AZFdTZdBxgAb+P+bML9tYHcwmlirtxcjOctMnnJCnEe/QeW+vQeXJKLURS4NYnLTHMa
-	z53CkouvdUmTU9SnBhWxbKWzWOQSDYMDUJOrWOGFvejuJ5le6osfnRoagG/iFl90eYIIwFDXkmf
-	0R6WLx0X1CGGFxb3Wo/cFpXdNTwQ0CVbPCXeZeGm767b0uR7CRTPOFIioRP9r0BYxRFQBZk6baL
-	o6cyJyl6PvNyuBaJSfsHvdaJ2tx/SjNGZpt/JCsLnVlHb7M+eBTFbwp0zlHl3N6cna71QwJFC1R
-	K+X4RZ4npIdCkIIExTToPoT+iD1hXtw+un43Ob/C549wHqwaKxGQajmFcqJM6kgW1dgrCQRFo4H
-	I8K4gz9Sxa75KsP2uqcGq2mILZFWjtg/I2gDjKDbXE3BULWo//u0jgrsFNnPY5xHWDqFocZ9f1M
-	VZmQu0S/ysi9PWC03fjt/eIDLvN+OSeMYGHFDZBSWDhSOF/DX0e2kw4LU8qqjsy9ENxtYts9MLQ
-	o0z76jmEytykFaYM/XKoaS8pO0d+kFUbsrUet75LpYoNcjx0e6gw8PyQwBFfiyxrEudmpgNyzGW
-	yXNSpCiXMJFt7QaE4TBT4iEXG0UjCGCZg3E3cAFEs3IwD/j+2w4PHBmSt9zxPU5f0kOTGC8PxLD
-	bo4LtBHGV4VU87WAPTMrqaxLoHb8KX2aK0KsEz1Vm4hwz/OCIcAsflvhLNZdZvvlKiO/KQZHLi4
-	k4F5CfgRKJ11jLWgU+jn0hKGtooGQzHgiAdxFEPEtQq6FhBxMLU55E3B31ErTRyeoAFkwNJ445O
-	ms7ChmYYmU+fItCZY40VVl5+3UR6mSU5qJ9AT7Rwa+MXVwxNeNDJ/YyWwYnYgsWSlSPBgn/ieNR
-	4VT4fsY2ex6m1O52PQEFNHHLfQ==
-X-Received: by 2002:a05:693c:8210:b0:386:b0f2:fb1a with SMTP id 5a478bee46e88-386b0f2fbbamr2254879eec.18.1795411866730;
-        Sun, 22 Nov 2026 21:31:06 -0800 (PST)
+        bh=BvpQzgDKXMaJYXVlt0rJUfTm52yl2FlINHPr4qhYjaM=;
+        b=O7yUIEIMGM8HBz+UzqRigQvvuEmO//mXSrChiYN+vxqNAXuNrYpa7A6d1FfFPMp2Mw
+         hIXViZDw+T9Zv+JMCLHf59dRHOQtCumSxtEXzQ7Bxkk8conqdSI6Q4VcL8C0MpZJxElf
+         uZ7MP9NFJbeD06Us89qmBOhMCNEfcW+uPU2WKGTlWYh4KgyKogM7t4qoQ5sQwC0voJOl
+         lnl9pIk9qsC71qBAhjAqcwZkW8YTwCGubRnkQ0tfFtso7xL9jfIQFZlNEosuAcHbBUIV
+         y5obqU3McF5gGdagAjZnBA2xlDu/zjU4AMKFwD2Z3LU71j5vyNOZ5Vpj1Wl/KV4k7qwt
+         k/cg==
+X-Gm-Message-State: APuU4Z8A+bMstllm2n05zW2CrClT1zHiHO2fH4bK9FINGxjFPxWRu8/A
+	MWdu2taSigVXCFCfO7XiQ9ERc4qJrLQqBPaHs+oMmD9eUTfW+2k+RW5MvVebHX3ZlNU=
+X-Gm-Gg: AZFdTZffKCj47A1B//EXEsWr9v2TmEwHZDXB2WINOv43nKvwQgq9lKNwQCKzdO6uhb2
+	6QKK9R3MTnZ5tNlLZPuIqdPbuHXzBSsbpCQ3+KyotrG1fVDx7/mwgauWMcXdGnMO3B2D5VRlHaP
+	BBaE/vyP39IIyOizasWNIZhiayuChbI2Dnb2akVHI3egpagSJl+78n/PGsZ9hbSkihQYrSFdcdS
+	rqBZ7iszqRLw85n7WjLDXnh67zPf4za7N/Wzg4n/BzawWCvRdfgyWRrS4O24frVWAB4Fk/Ayl8d
+	M4qb8VUK+Gdb8AFCAYtBE3SqoWyjp36BFRvyM33+U98oFT/+gorGRyE5Qwd2xL92j93oB2QXzeV
+	09VzYa7mcDumrFssyfvxjLi+b5k0q7MjDmoSKICf6IWDVYnHCheNNiPOaoDQS73Hl62g42PvlXi
+	9AevNozIa6YPBqX95HFlc2Sx4cZjhIigYEC6nFxwphYVw4alZRD8VflIUnVR/fqGSLkCVzhGSjK
+	p5GqIc2OXxUMnu/3ibymtNey7L4eqAE73vyNd9Mss//T5W2Otd56MmwTXoB3vmS0DSxgclVDep7
+	m/1CVCd0HVBT/mImKEXbbTM/OMnK3euTLaSmDM19fxkOzUO/TWlKr6lIn8f3EbFw77X+xxcch0m
+	UMKe7/fHOTGQzOxzQVH9CoXjd2AtXXznHJjNwJ0zLxeAYwa3LQ02YfwpRPBuM5S37q1gmU8FXr0
+	Hhkc/wDSeEgQ56whm4cBm0KcTR/TA5laZ/TNe5oRctpizRm3WsIAd7Bo7cRDQzwXQPBeG32Jhvk
+	jcfzwxDZbh4Nm2hIGn+KsJylat8/SLxiYn/meVPTglpuAQI/hwvm+avZw5SJOh0Nf5epLuNOfaL
+	jXO1
+X-Received: by 2002:a05:7301:150b:b0:36d:a466:9d0b with SMTP id 5a478bee46e88-3856ef47c9dmr10885548eec.19.1795411869309;
+        Sun, 22 Nov 2026 21:31:09 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-38567cafec4sm36573136eec.26.2026.11.22.21.31.05
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-38567cafec4sm36573136eec.26.2026.11.22.21.31.08
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 22 Nov 2026 21:31:06 -0800 (PST)
+        Sun, 22 Nov 2026 21:31:08 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-oe][PATCH 30/42] php: upgrade 8.5.13 -> 8.6.0
-Date: Sun, 22 Nov 2026 21:29:14 -0800
-Message-ID: <20261123052953.3658549-58-khem.raj@oss.qualcomm.com>
+Subject: [meta-oe][PATCH 32/42] rsyslog: upgrade 8.2606.0 -> 8.2610.0
+Date: Sun, 22 Nov 2026 21:29:16 -0800
+Message-ID: <20261123052953.3658549-60-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.1
 In-Reply-To: <20261123052953.3658549-1-khem.raj@oss.qualcomm.com>
 References: <20261123052953.3658549-1-khem.raj@oss.qualcomm.com>
@@ -67,125 +67,59 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Mon, 23 Nov 2026 05:31:11 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132845
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132847
 Content-Type: text/plain; charset="utf-8"
 
-New feature release PHP 8.6:
-- Partial function application, readonly property defaults,
-  #[\Override] on class constants, __debugInfo() on enums
-- New Time\Duration class, polling API and stream errors API
-- OpenSSL streams: TLS session resumption, external PSK and TLS 1.3
-  early data; new curl, GMP, Intl and SNMP features
-- Backward incompatible changes in several extensions (more
-  ValueError/TypeError checks); mbregex and others deprecated
-- Security fixes: CVE-2026-129182, CVE-2026-129289, CVE-2026-129291,
-  CVE-2026-129292, CVE-2026-129474, CVE-2026-129496, CVE-2026-129501,
-  CVE-2026-129538
+Includes releases 8.2608.0 and 8.2610.0:
+- New outputs omkinesis (Kinesis Data Streams) and omawslogshlc
+  (CloudWatch Logs HLC); new imkubernetes input
+- omfile: dynaFile paths are now confined below their base by default
+  and a followSymlinks setting was added
+- Queues: segmented disk-assisted storage, experimental producer-local
+  queue scope, and fixes for lost disk-assisted worker restarts
+- Optional strict input startup policy and generic output rate limits
+- OpenSSL 4 support and many bounds-checking and TLS fixes
 
-PHP 8.6 is relicensed from the PHP License 3.01 to BSD-3-Clause and
-folds the Zend license into it. The bundled libtool is now split into
-separate m4 files: drop all of them from configure.ac and install the
-system copies individually for phpize. The libtool macros reject
---with-pic, use --enable-pic.
-
-License-Update: PHP 8.6 is relicensed from PHP-3.01 to BSD-3-Clause
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- ...ure.ac-don-t-include-build-libtool.m4.patch | 15 +++++++++------
- .../php/{php_8.5.13.bb => php_8.6.0.bb}        | 18 ++++++++----------
- 2 files changed, 17 insertions(+), 16 deletions(-)
- rename meta-oe/recipes-devtools/php/{php_8.5.13.bb => php_8.6.0.bb} (95%)
+ .../rsyslog/rsyslog/disable-omfile-outchannel.patch        | 7 ++++---
+ .../rsyslog/{rsyslog_8.2606.0.bb => rsyslog_8.2610.0.bb}   | 2 +-
+ 2 files changed, 5 insertions(+), 4 deletions(-)
+ rename meta-oe/recipes-extended/rsyslog/{rsyslog_8.2606.0.bb => rsyslog_8.2610.0.bb} (99%)
 
-diff --git a/meta-oe/recipes-devtools/php/php/0001-configure.ac-don-t-include-build-libtool.m4.patch b/meta-oe/recipes-devtools/php/php/0001-configure.ac-don-t-include-build-libtool.m4.patch
-index ae57c012ff..f6bf80ce49 100644
---- a/meta-oe/recipes-devtools/php/php/0001-configure.ac-don-t-include-build-libtool.m4.patch
-+++ b/meta-oe/recipes-devtools/php/php/0001-configure.ac-don-t-include-build-libtool.m4.patch
-@@ -13,18 +13,21 @@ Signed-off-by: Changqing Li <changqing.li@windriver.com>
- update patch to 8.0.12
- Signed-off-by: Claude Bing <cbing@cybernetics.com>
- ---
-- configure.ac | 1 -
-- 1 file changed, 1 deletion(-)
-+ configure.ac | 6 ------
-+ 1 file changed, 6 deletions(-)
+diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog/disable-omfile-outchannel.patch b/meta-oe/recipes-extended/rsyslog/rsyslog/disable-omfile-outchannel.patch
+index a8bbe2b51e..a58fa4cadf 100644
+--- a/meta-oe/recipes-extended/rsyslog/rsyslog/disable-omfile-outchannel.patch
++++ b/meta-oe/recipes-extended/rsyslog/rsyslog/disable-omfile-outchannel.patch
+@@ -9,10 +9,11 @@ Patch is also applied in void linux
+ Upstream-Status: Pending
+ Signed-off-by: Khem Raj <raj.khem@gmail.com>
  
--diff --git a/configure.ac b/configure.ac
--index b0ea82bf..31933cca 100644
- --- a/configure.ac
- +++ b/configure.ac
--@@ -6,7 +6,6 @@ dnl ----------------------------------------------------------------------------
-- m4_include([build/ax_check_compile_flag.m4])
-+@@ -7,12 +7,6 @@
-  m4_include([build/ax_func_which_gethostbyname_r.m4])
-  m4_include([build/ax_gcc_func_attribute.m4])
-+ 
- -m4_include([build/libtool.m4])
-+-m4_include([build/ltoptions.m4])
-+-m4_include([build/ltsugar.m4])
-+-m4_include([build/ltversion.m4])
-+-m4_include([build/lt~obsolete.m4])
-+-
-  m4_include([build/php_cxx_compile_stdcxx.m4])
-  m4_include([build/php.m4])
-  m4_include([build/pkg.m4])
-diff --git a/meta-oe/recipes-devtools/php/php_8.5.13.bb b/meta-oe/recipes-devtools/php/php_8.6.0.bb
-similarity index 95%
-rename from meta-oe/recipes-devtools/php/php_8.5.13.bb
-rename to meta-oe/recipes-devtools/php/php_8.6.0.bb
-index 0fbcfd6ea2..b6cbf02a2f 100644
---- a/meta-oe/recipes-devtools/php/php_8.5.13.bb
-+++ b/meta-oe/recipes-devtools/php/php_8.6.0.bb
-@@ -2,8 +2,8 @@ SUMMARY = "A server-side, HTML-embedded scripting language"
- HOMEPAGE = "https://www.php.net"
- SECTION = "console/network"
- 
--LICENSE = "PHP-3.01"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=fd469cce1a919f0cc95bab7afb28d19d"
-+LICENSE = "BSD-3-Clause"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=31121fc749dab3726adb6deb79a59616"
- 
- BBCLASSEXTEND = "native"
- DEPENDS = "zlib bzip2 libxml2 virtual/libiconv php-native"
-@@ -32,7 +32,7 @@ UPSTREAM_CHECK_REGEX = "releases/tag/php-(?P<pver>\d+(\.\d+)+)"
- 
- S = "${UNPACKDIR}/php-${PV}"
- 
--SRC_URI[sha256sum] = "47d50c36016784a4a71f019cd7bfa29c31e4be0de22d3fa06095b280a6299e2f"
-+SRC_URI[sha256sum] = "9e233e38999a89f351a33ae6a7276d1caf5addcba11e09e3bbe3a8d25f411ff1"
- 
- CVE_PRODUCT = "php:php php_group:php"
- 
-@@ -62,7 +62,7 @@ COMMON_EXTRA_OECONF = "--enable-sockets \
-                        --enable-pcntl \
-                        --enable-shared \
-                        --disable-rpath \
--                       --with-pic \
-+                       --enable-pic \
-                        --libdir=${PHP_LIBDIR} \
+---- a/tests/omfile-outchannel.sh	2021-03-09 05:51:07.000000000 -0600
+-+++ b/tests/omfile-outchannel.sh	2022-05-26 15:55:23.358520256 -0500
+-@@ -1,5 +1,9 @@
++--- a/tests/omfile-outchannel.sh
+++++ b/tests/omfile-outchannel.sh
++@@ -1,6 +1,10 @@
+  #!/bin/bash
++ # SPDX-License-Identifier: Apache-2.0
+  # addd 2018-08-02 by RGerhards, released under ASL 2.0
+ +
+ +# This test fails for x86_64-musl, under GitHub's CI/CD. Disable for now.
+diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog_8.2606.0.bb b/meta-oe/recipes-extended/rsyslog/rsyslog_8.2610.0.bb
+similarity index 99%
+rename from meta-oe/recipes-extended/rsyslog/rsyslog_8.2606.0.bb
+rename to meta-oe/recipes-extended/rsyslog/rsyslog_8.2610.0.bb
+index 12036e32a8..caee233b2d 100644
+--- a/meta-oe/recipes-extended/rsyslog/rsyslog_8.2606.0.bb
++++ b/meta-oe/recipes-extended/rsyslog/rsyslog_8.2610.0.bb
+@@ -30,7 +30,7 @@ SRC_URI = "https://www.rsyslog.com/files/download/rsyslog/${BPN}-${PV}.tar.gz \
+ SRC_URI:append:libc-musl = " \
+     file://disable-omfile-outchannel.patch \
  "
- EXTRA_OECONF = "--enable-mbstring \
-@@ -134,7 +134,7 @@ LDFLAGS:append:riscv64 = " -latomic"
- EXTRA_OEMAKE = "INSTALL_ROOT=${D}"
+-SRC_URI[sha256sum] = "2574b3f3068e6955eb94ef5643e2b6a5b8585cc8eaa77209ff5cbc1e2e5f71e5"
++SRC_URI[sha256sum] = "7bdf95e81ea6c0ee5d586342d57d2a6e395b089fb3c67318a0dc555816de404b"
  
- do_configure:prepend () {
--    rm -f ${S}/build/libtool.m4 ${S}/ltmain.sh ${S}/aclocal.m4
-+    rm -f ${S}/build/libtool.m4 ${S}/build/lt*.m4 ${S}/ltmain.sh ${S}/aclocal.m4
-     find ${S} -name config.m4 | xargs -n1 sed -i 's!APXS_HTTPD=.*!APXS_HTTPD=${STAGING_SBINDIR_NATIVE}/httpd!'
- }
- 
-@@ -158,11 +158,9 @@ do_install:append:class-native() {
- }
- 
- do_install:prepend() {
--    cat ${STAGING_DATADIR}/aclocal/libtool.m4 \
--    ${STAGING_DATADIR}/aclocal/lt~obsolete.m4 \
--    ${STAGING_DATADIR}/aclocal/ltoptions.m4 \
--    ${STAGING_DATADIR}/aclocal/ltsugar.m4 \
--    ${STAGING_DATADIR}/aclocal/ltversion.m4 > ${S}/build/libtool.m4
-+    for m4 in libtool lt~obsolete ltoptions ltsugar ltversion; do
-+        cp ${STAGING_DATADIR}/aclocal/$m4.m4 ${S}/build/
-+    done
- }
- 
- do_install:prepend:class-target() {
+ UPSTREAM_CHECK_URI = "https://github.com/rsyslog/rsyslog/tags"
+ UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
