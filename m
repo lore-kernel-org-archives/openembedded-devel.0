@@ -1,65 +1,65 @@
-Received: from mail-dy1-f175.google.com (mail-dy1-f175.google.com [74.125.82.175])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.48526.1795411852975751891
+Received: from mail-dy1-f173.google.com (mail-dy1-f173.google.com [74.125.82.173])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.48529.1795411855954897484
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 22 Nov 2026 21:30:53 -0800
+ Sun, 22 Nov 2026 21:30:56 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=iKz9l2bc;
- spf=pass (domain: gmail.com, ip: 74.125.82.175, mailfrom: raj.khem@gmail.com)
-Received: by mail-dy1-f175.google.com with SMTP id 5a478bee46e88-3712b6d9843so2375079eec.1
-        for <openembedded-devel@lists.openembedded.org>; Sun, 22 Nov 2026 21:30:52 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=TQyQ6Og5;
+ spf=pass (domain: gmail.com, ip: 74.125.82.173, mailfrom: raj.khem@gmail.com)
+Received: by mail-dy1-f173.google.com with SMTP id 5a478bee46e88-3712b6d9843so2375112eec.1
+        for <openembedded-devel@lists.openembedded.org>; Sun, 22 Nov 2026 21:30:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795411852; x=1796016652; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1795411855; x=1796016655; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=dOkX1sSpBcTEptWpg556LGN4QsSwo3NOEm9uNpNtOzU=;
-        b=iKz9l2bcEURUakXrn/otEJx1x5PhsQDfF254GJWU7j4Y3n0Dqf1cYgtPTnLIq1q+Iv
-         ZF2K5KB1zotF+xB/JAlvi2Wg4MrrBTyt1nv1okIl6IrXSUYSVNPBLEkjKm5TNHKh5Sjl
-         JNqbhpDGZXGkid6wHOTCKaehxyE6j/UCem/7J430Xp64j6s2FxSAuHnu3ljL4tSLm9G2
-         7DyAHs8WiUMUQeicblvBqltKdN9koc6bJHcx+fjW2okmhDm6YoMvvJ2wIfwYLHZJu2ft
-         4CvE6+Vld21mYatPdZM5NezzIHGodR1dnOdkKlaOO7PON1kNh/jSr0tTQMQe1V2nLk+z
-         i0hA==
+        bh=RDJE6vvoCc+ipGTABXdgg0bVHWWKOiBwkfGKln4RfJM=;
+        b=TQyQ6Og5XYVvTO5lwteRUsif5mLjWr7Nl+ECsH2+wR6KNwiGTQAJhciNeErv7D3uiy
+         n1oc+6Q7G0cvFDjVgPhfecoSZ1eZXe7hDvWIiEZXUO6VXZf4CaNnlCDkW5oN628symnh
+         iqRnQMK2zE9yN7LCVYzqGWLTyODg3+AJaShNTh+g489ATujZHLMFwQesV6cwnZFi2Xxi
+         1xLlm3QlCPQqly0IeNHGO9IMx54qTjtUq5jU6D3/a/307mqHfsLewuFwoc7U8K9Q/rCl
+         T1Ownn+HzEXYgcqbPjrFb3O/1ENsPTw38HiILYHyd4VL4Xoc7moAVnNS0mWZrejZDYin
+         BIXg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795411852; x=1796016652;
+        d=1e100.net; s=20260707; t=1795411855; x=1796016655;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=dOkX1sSpBcTEptWpg556LGN4QsSwo3NOEm9uNpNtOzU=;
-        b=uNxZ1Q8PpE1ymfueBuys+yM0IXrUaaVKwi+NKzaBYuncwCIzhYjIQ2R5T+X3fae872
-         j2rjY6Mdcx/IDzqIGhfi4+KTpy2JmqphuHccpPtbCgDk9Ll2DN/29YOk6Koy49xqGgYw
-         3YNNIZu7rivS2GK6u4TumrXkMuber/auJsTtpzyOv+QBQ9oHiSHSmEstDxOay2Ix/9y5
-         KS2IdTTCKxEnuh4pcAu1uLcJe1K8sykJNtN+ElDHFvPPyZTIM3/Rqjjup9C1aQ2xzI2B
-         BXOrBbGue2I6kgc5oa/4ySlsGUJOVSwXZ5NYcoI1o/3b+WQ29colvDDg6uRNsIDbUWxR
-         RU9Q==
-X-Gm-Message-State: APuU4Z91qRHSiwhZsFCx5HMJGu94qZ64YfPvi6hXTziBfbfJMFBDm1j0
-	1McY/EzqglvTZ05fHo4g07ODdWd4dl8BYHGGP4ytOZ+xvfRmLSvqAK2QuOtX6i5SICk=
-X-Gm-Gg: AZFdTZdYNKGHRvkTY8EWcjvftq0qjJwZt/pZ5idLxozVFnJD/BdR7HAnj+87kjco3Fm
-	Lwy/I1M2YzVPaKXLQclEheY2R3CRl4ae/t0ah/QFXdoN8Ce/MLj1cQ61ZUrAeldohB/CANZalwc
-	kp4LWz2JqW1kDylxfelEfuO/jmJCOHeO5skJapaZlTCd09ty4sd75oiNGuHKzMbL7MwSoEGXamN
-	hlBBR1t4hj1NUNHBS8V5FAjHisC0HBWDJ8fAiegnOWJtT/T3j7CJ62UmOA71sgVWOdXfIG4aLe7
-	NKn97q72GHmDU9t/2CUi0szlRi5hPDn3UUBdT6ILis0q+syVy0wqn2zLRwt2HjGhKEStGZZc4/U
-	2oNJEO6FGYh2782YUUizDZJYccAgRughLQR+Cr2i+Lq8wgmsZ/4pvYiDjDlWHUSQlUXRV0QSk1g
-	G1mH0+Sfy0WC95c0WdsYSvr17YGL5O10vc9FiaKOTCWXK8ZrFDWJBu2aEoVHPcqBMB+CfhNOxfn
-	hoGOWuolxvMC99nPbRzL0VO8Qd5HeP71yneFcDjiQ3A3FHOE6SAX6IfLg4YvIl6HLNaP/OvdQv/
-	TdzwigpyvW0HakNdt38g5ARJ/zPZELB0QUDwz7GFMFxXumxXVSWDGvbis+MAvJCmNydqCEfmOl3
-	35TO6p1beyJk1+qgGx/TFEbknMwtP0S5RwCDk5MCF1gIE+T/Biu1jqFzz6/I0GzCvIRgsW6f683
-	C8ZdtB3L9whBXI2MMBZ0SfzZ7Ugkh+I/AmBegWKLBYkpzMhYkFcfQQPChjaK9yhsh24Jpka8FHX
-	CIM2SDq1buJ7AjJkvm5YX70GrkSuAkMHE3v/APYaI48yMTF/+wK/mGuiq8Qn7brT3YatEjXrg/I
-	V+F1
-X-Received: by 2002:a05:7301:3d19:b0:384:e31e:3c39 with SMTP id 5a478bee46e88-38571411024mr14115536eec.37.1795411852321;
-        Sun, 22 Nov 2026 21:30:52 -0800 (PST)
+        bh=RDJE6vvoCc+ipGTABXdgg0bVHWWKOiBwkfGKln4RfJM=;
+        b=SM4ASx8FyhGXBMaNhd9GJgyke92qxOJzqAtNHkt9TwYQ0V7UtD5B6N2EW/mTQK7afx
+         ZV9R224Wq13NZltlUiCObgnr1wofp20+Lq8uw5I0dC8EY1xiyd57k70fkuh3XK/gIb/N
+         Zej5CCd5TJFegY+I2oQRBrVTeN79PuZNE9jRQEibRPPEtrZaBh57WEHqW8k2lg6m733m
+         +5RCaxQNhxha6J5LFZU4r69lHD4guBYmMtOyplFHAWIm3aiNoHM+/ahuYOhJmj78bEQF
+         NdJdS6Dz1Nby6pSVKrBleiR+CBsvP8oLKSB7iUqXIjUjyJ5s4ZQ3J+gAE9RT7TSHZuxB
+         TzvQ==
+X-Gm-Message-State: APuU4Z8wHUA1m3pZqngyC3VKaWX++qoRE77Mh3Gp2UaLEq5NajbRIMfP
+	N4EZqtRcQJQACacg/LI2Wh8iz7m1zcwDDjFzEnK6En+TXxyG9GeDvcNhdgXE6GkS41Y=
+X-Gm-Gg: AZFdTZcw+gidC+p4gjEywysh0vb9qaaalfedWcNosiay59uUrhMvjKy1xBPaxIwj3DE
+	hhuEL+k0gxW5+peeSh/pVN603MGZw2FpzOifs2eoF8fgYhxK5Fq4U0dM5vW0/NdRJXFgoXaxB9I
+	0Sumy5HuemB+BU+3Q++uwLCUpFir2rg+RfATeZIuyopLhEJC9/Uy94r9WBzVb4RWaXZY4E6mHR3
+	9WdkYMMSYmp/HXNoBAa+s6rqrmPJvdddjBo24D8KPf8KSDIZuFKjGQmU5GmtIZDZx+67tYwM0U1
+	LjZkfwHvG1x+jP8XGahiwkp/dsNToUINDXFUFC+K55y61NzpNBBvUvAPecfAOWcNO6mlHkm/Lje
+	2C0QdVcAHxyIqtee2NiH/akZXrGT/ENMqtcwKWv39o8ynXqWiTitjvPWdit46Dy47CbGHHzFgEW
+	JVt+0i2sq6fhzkM2IHeAwFj9e8xPxyS+6djfHVhcISWXmIaOhs7W1uFXYa0E737NFQ0wY+C2hAo
+	7yUCr3o0/nJ/oUp2wmcz+dpFzcYiZ7JaQ1FeLr5vBKIy9gb21u542joE5mmxNMzOSKLClgau0Xd
+	t3iylbr7bIhwyXWAQhCA7AZy/kHPTWBNaY6j5MY1VZy4aZOJMLfDQPh6JyhFdJd9BOHLFArC2Wl
+	g8I2NESb/e3/XO2IRhu1CcCYN4ph8IHXttEqvyfD6eWasw1cSpubBjkEhuOe0zic6H+e7nLgKl+
+	K+JlUO/wM8Zc5zYHhWSIywSfMypNXvsyCqUGBtyeuRDTjhZpv/VYQ/9MU995f9V/wkx6EQ+9taF
+	utW9fdhD97rkFzvMsdL1XyZX1vokn2NPdurQBLv2Fo7l5QW2VBOyABCHvZceOJMO2HU2ow3eDfb
+	v02m
+X-Received: by 2002:a05:693c:8084:b0:36f:4981:da16 with SMTP id 5a478bee46e88-3857073f5ebmr10231326eec.25.1795411855271;
+        Sun, 22 Nov 2026 21:30:55 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-38567cafec4sm36573136eec.26.2026.11.22.21.30.50
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-38567cafec4sm36573136eec.26.2026.11.22.21.30.54
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 22 Nov 2026 21:30:51 -0800 (PST)
+        Sun, 22 Nov 2026 21:30:54 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-oe][PATCH 18/42] iperf3: upgrade 3.22 -> 3.22.1
-Date: Sun, 22 Nov 2026 21:29:02 -0800
-Message-ID: <20261123052953.3658549-46-khem.raj@oss.qualcomm.com>
+Subject: [meta-oe][PATCH 21/42] libconfig-general-perl: upgrade 2.67 -> 2.69
+Date: Sun, 22 Nov 2026 21:29:05 -0800
+Message-ID: <20261123052953.3658549-49-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.1
 In-Reply-To: <20261123052953.3658549-1-khem.raj@oss.qualcomm.com>
 References: <20261123052953.3658549-1-khem.raj@oss.qualcomm.com>
@@ -67,41 +67,33 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Mon, 23 Nov 2026 05:31:00 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132833
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132836
 Content-Type: text/plain; charset="utf-8"
 
-Bug fix release: iperf3 builds with OpenSSL 1 again, fixing a
-regression in 3.22; the 3.22 release notes gain an erratum about the
-swapped CVE IDs CVE-2026-101283 and CVE-2026-101276.
-
-3.22.1 is tagged on the 3.22.x branch, not on master.
+Validate incoming config hashes and forbid comment, here-doc and
+include markers in them, fixing CVE-2026-129820 and CVE-2026-129821
+(2.68). 2.69 only fixes the Changelog.
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- .../iperf3/{iperf3_3.22.bb => iperf3_3.22.1.bb}               | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-benchmark/iperf3/{iperf3_3.22.bb => iperf3_3.22.1.bb} (90%)
+ ...nfig-general-perl_2.67.bb => libconfig-general-perl_2.69.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-devtools/perl/{libconfig-general-perl_2.67.bb => libconfig-general-perl_2.69.bb} (87%)
 
-diff --git a/meta-oe/recipes-benchmark/iperf3/iperf3_3.22.bb b/meta-oe/recipes-benchmark/iperf3/iperf3_3.22.1.bb
-similarity index 90%
-rename from meta-oe/recipes-benchmark/iperf3/iperf3_3.22.bb
-rename to meta-oe/recipes-benchmark/iperf3/iperf3_3.22.1.bb
-index e6d60f611b..84a1bbcc09 100644
---- a/meta-oe/recipes-benchmark/iperf3/iperf3_3.22.bb
-+++ b/meta-oe/recipes-benchmark/iperf3/iperf3_3.22.1.bb
-@@ -12,12 +12,12 @@ BUGTRACKER = "https://github.com/esnet/iperf/issues"
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=f2eb355b6d3b9d63b6b7a861cdc62440"
+diff --git a/meta-oe/recipes-devtools/perl/libconfig-general-perl_2.67.bb b/meta-oe/recipes-devtools/perl/libconfig-general-perl_2.69.bb
+similarity index 87%
+rename from meta-oe/recipes-devtools/perl/libconfig-general-perl_2.67.bb
+rename to meta-oe/recipes-devtools/perl/libconfig-general-perl_2.69.bb
+index 775246c648..a3bb37e17c 100644
+--- a/meta-oe/recipes-devtools/perl/libconfig-general-perl_2.67.bb
++++ b/meta-oe/recipes-devtools/perl/libconfig-general-perl_2.69.bb
+@@ -8,7 +8,7 @@ SRCNAME = "Config-General"
  
--SRC_URI = "git://github.com/esnet/iperf.git;branch=master;protocol=https;tag=${PV} \
-+SRC_URI = "git://github.com/esnet/iperf.git;branch=3.22.x;protocol=https;tag=${PV} \
-            file://0002-Remove-pg-from-profile_CFLAGS.patch \
-            file://0001-configure.ac-check-for-CPP-prog.patch \
-           "
+ SRC_URI = "http://search.cpan.org/CPAN/authors/id/T/TL/TLINDEN/${SRCNAME}-${PV}.tar.gz"
  
--SRCREV = "926bd905501b792bd082d2200d1d1a84aa543e3a"
-+SRCREV = "acc0ed500fb2c421999948a72bb6a9e05af528d8"
+-SRC_URI[sha256sum] = "473d65127b23dac0e8039c01e28bc4072cb9a6e93e81a1ea4893cea08c698db0"
++SRC_URI[sha256sum] = "6538a47e6950bca0b0b6ac4c69a7a5e915fc52cf060346d935f16570fec86d43"
  
- RDEPENDS:${PN} = "libgcc"
+ S = "${UNPACKDIR}/${SRCNAME}-${PV}"
  
