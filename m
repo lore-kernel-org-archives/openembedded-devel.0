@@ -1,65 +1,65 @@
-Received: from mail-dy1-f169.google.com (mail-dy1-f169.google.com [74.125.82.169])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.48070.1795411910546930964
+Received: from mail-dy1-f174.google.com (mail-dy1-f174.google.com [74.125.82.174])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.48556.1795411905694129187
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 22 Nov 2026 21:31:50 -0800
+ Sun, 22 Nov 2026 21:31:45 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=T4K//Ly6;
- spf=pass (domain: gmail.com, ip: 74.125.82.169, mailfrom: raj.khem@gmail.com)
-Received: by mail-dy1-f169.google.com with SMTP id 5a478bee46e88-33fb4680717so8135009eec.1
-        for <openembedded-devel@lists.openembedded.org>; Sun, 22 Nov 2026 21:31:50 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=jDSg3vL8;
+ spf=pass (domain: gmail.com, ip: 74.125.82.174, mailfrom: raj.khem@gmail.com)
+Received: by mail-dy1-f174.google.com with SMTP id 5a478bee46e88-38644aedba1so4172081eec.0
+        for <openembedded-devel@lists.openembedded.org>; Sun, 22 Nov 2026 21:31:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795411910; x=1796016710; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1795411905; x=1796016705; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=wAx7xgKpLL72Mvp3s6oClsabXi3IGozXEJOEcXVokxM=;
-        b=T4K//Ly6UY/dj+TtwjRnDZzvGnlSHKhaRacYS57713qyic/8ytxF3A8dV43ZD6P4Ex
-         +jpGd71F/15xSrIl+p6K2IfvUyOavlQcqJlXH0dCLfdeiQ/jG3f/39Vgi1vXHGxWICCq
-         MZdjv7YcIOTm9KqK/R3W0/PV0ZA70WXYmUx+TfyIF9I+zVaK2r8VeLhsMp8YpCPmAjbb
-         LTsvaVb/uR389hUmWxxN+KOWl+nv3mVl3pPn5iKDW6Xg5qm7Fyiz3AUINnZy2KkJQLFb
-         CsaUpW9bvgkOXoNLGMpdPnCKgmUc6s0OjiJoA9QgR3vEcuoTn1nFv6REjv9cjyldmoD0
-         3D6A==
+        bh=2ctQ6sSevmWPVwKoiukR+DR+1AGHBeEX17eXSJ5oWOc=;
+        b=jDSg3vL83fcCUJ18ivQPG10DHu/kBH3Nagwegdj4u/M5EtE9ZNt0Da6BoX4K4GHOCm
+         EoFF94n7AVzRuaNE2/cUgrjdm2zLiGpAO3hSexbPcc+j4JfWzzBuhGetfdKVPxJFMlhb
+         darVF2ntSAjTybVg2VGeya3atAexQ0rWM5aj7iBf3OG2z0XHvJsiPLLlN2K2wxULmXce
+         qRMGMz8N/slNzXApzqE10wJ4HQQ44fUnpMl989ZUWHkfJl1/QNyTaneybuntD5NDK31r
+         m0WtvebKhlPG4epEk5gjoGcZQnxIL3UJN4oMfSxS2YalIaZLXa73SZAJXVQ/EoSiZgxl
+         tc6A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795411910; x=1796016710;
+        d=1e100.net; s=20260707; t=1795411905; x=1796016705;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=wAx7xgKpLL72Mvp3s6oClsabXi3IGozXEJOEcXVokxM=;
-        b=H3FNKaKpyCUbcGDjI112u86WFCzADzzhGh8TyexCOeJgEiHwy2c0I3bCJVP64kHZeD
-         +rUJYIDQhqTKTN4eJOBoN4bTqjL2ZS0PRvOyDZERghvh0ba4uZ8S9IpggCw32p/6Ay+v
-         85UP3yyT+GknQkOrH02NwAp4xBS07scDHw2ISczjWLUZIZtbNO85M+dShqhFfN5zX4iM
-         whRs4AoC6iJbpc2cZMu5YPs6lfSVwEx2anSXzWW/gEO9I8v+KFpZzp0zCanLZYBjtNpf
-         nWP1yPhlmKXU0iIhXRbkEOyRZJl+sXtpt/qM9bAGbKavA5EDR8ig6R3pP7gA9/D/Nvdp
-         2flA==
-X-Gm-Message-State: APuU4Z+Z1xrbKUhxvFEiUU+EkREd3ABWvDI/Z4PLhneASsI2TurIx7fS
-	EEk9rsdSZtxTIdXZ3ggcR4rCcXO4t9gapcO4kSccj7Z1Y77Sb5B4wuESusFBpSO8Pcs=
-X-Gm-Gg: AZFdTZd53AzKoaDuODG/uqzD5vnGPXrB14Z7FqVw3y5WVtATZB7hcx8WhrAViOKxNsK
-	MSwk3c/wPru6xeG0lkVA4LYelOHMJToheTbUDC6aaLybEMCg/syDVIS0CLI9GgDNJX80bdt/hRL
-	Nyj1q8vWT1x5Fz9tfHABhyHbjB+6L+DzDmG97yoQrl3yvMHGuSb7pYw8K/pNiX0jGwg7tj+Dn0X
-	20+G1CX9hw43R2rPMDC7wEJaXtJQsQdvOmZQ6gbubL+8bnAHoYzKsIU1K6IF8roeiinYv3MsR5F
-	J/KweUvUme0Jbc3ch+NSyIXFmGO/J97iLiPX2tj12q4sBC2SiQouKpK/05iuqqZnmgZcS2/B4MB
-	a7mEb8vQoYj7EZmFj1UamjrtlrMuQGRLXJs4Pz09zXKRD4+SCuMBmkJo+Dsc50AIXGGefC4n5Y7
-	twA+Nx8XVFFtsIQo6TDByh+DnoQj8Wi6iDzutlLiEj+P7xNTIOOtkRKyFJ4kpHVvvhorlhkQzaY
-	aSZks0I8WMNhNF/7Z+DoM4kY97zjoGw25SLJ12KIKkxhvLwcZsM4vyqOpS2aVZkhNCnEGvKFSzn
-	FsQKfxTbDjXE9G4bIAMMc/X+XLLL1oGNKwcnShuadcFJW5b+LdQ+v6O45As0TJVVuXGykAKTvAP
-	Eu4SEmiwkw4s5mjYPvFJuNOgl+Nhp+JMbLttFx56TCRD+7coUQdYJy3ODUYH46XKo0lzKbqoWhE
-	0rxKbt+zjFk3gzZUiAKYCb0sWk0dMcFp+UbpgH8w1uSxlmKLESWqjlTTqJx5Y6lFSOfkKglAu3I
-	GTsUNt8xyWrtd22Qp1q8JYKbx33NrgcfJC3Pe6jOuuXS28Wvfh90vBUhB+kvSi1fq7vQWrUf9zz
-	J+Pf
-X-Received: by 2002:a05:7300:2290:b0:379:24d9:cb98 with SMTP id 5a478bee46e88-3856925c033mr12077868eec.0.1795411909799;
-        Sun, 22 Nov 2026 21:31:49 -0800 (PST)
+        bh=2ctQ6sSevmWPVwKoiukR+DR+1AGHBeEX17eXSJ5oWOc=;
+        b=TKuq8fzz2T7oEjg/PXIS7XQQXz+osquadMaQqvbgxqXKz0MwGeRw3DeeCGfuArttxr
+         vpqoglHBR/pvf6arEwvcn7YJGOv6CUZ84ldyRjFUrAd9oHf1gXlVRQNhohgw7UjOxwY6
+         egGxhxDm/1EeVaKdu+9pTNcNRVsA+OSxUoLGrkIUbqzustjpOhbz4UQVtNoCNMT+EUK/
+         gM/bv9CWJLVXUF53UtKVd04uFcHuQ2so5fEgrCYixTED5kd0zKQ4h+gbhh5w4jdGRdQB
+         pKSquPY4EMksOq2OiUvyZ8NFNLN0jCYbCMwW6F6GzbK7O/1NB6PiXItHUSWAbWoa3p0i
+         KxNA==
+X-Gm-Message-State: APuU4Z/nhyExPigSA3dH8WSZOTRC+0w8egndvGFOy94mMr1BiErOioBE
+	JHFMB3tJaXmP8Uge0bveUnrK6T6hXPjuQH9CmgRfplFojOL1qkqTKZMeVqS8reUsa/Y=
+X-Gm-Gg: AZFdTZepOdrMEA4Yx4X+Udacb/tCQDwCGROjuwDb6xct3SDl13rSkLBIISIMMhVNWMm
+	tsKCWqlex8rXNmqRIGaUadjeVlCStyK/sl56/ZNjgLIAiHhOl5dw25qwRpld3zIRThB2j8Fpuaa
+	agWTeGtY+4z92EvJ/IYipq2NSzJ372s0WdI2IRaKzaGgXjXEBDhxFMIp8KAWvIKuJb1+3qiREdz
+	awM2aVv1DBdsDffMo4E9XGBPC7J0XPzVYlJSQmr07XhLTNV5axFvD4MxURvlCimxNVd8XbsIAI+
+	/GGY0gcrs2V/+WZWHtFljnB+sQdPp+cRUXcAC/DtwsdSJfzt6AAKh16f0YMBFg6fUGZzATcte0t
+	iDD0DAWOf/vUV3hPdXgROBpazBWpUi/PcK2LcSRhwDbPTqAo0ylnb+xN4gOuFk66QcBIPpt1+X0
+	tkDhEbbp3f5gl+C2lGAaxn8tU0MfHKIoap07ub4XdhLfqdfOol2SYgpGHeia2Pnfgb7JGfTPqM3
+	ZJUB3lr1INCMGwRoLQdQrRq1r8fbL0A3aTqciYNOaZcpP40coqc2vwnYdHY+AOFkNqkwLjjiX9P
+	bTXeqEcN7LpXXBFhfzWRcKh6FO5YSb3ft8V0KR8gMZ2frIljR2fxlUEuJC+m0+Z5rlrGUQUmDMJ
+	jS95/AS5lCusW38Ay4ZbURvhLEhAnLAUBw5AyoOj4EuqYDK1FcwryD8CQdh5cB00yKeuRY+Tg6h
+	u1lsEYn2i4SxnzhOJ0tQ2VpLer7u5e5KE6Gg/Fha0ObEuTqoV9QD5XhGzSA8hf44FplXKW11j2M
+	FIz2th+vZsejwhj09AncAvh7VgiHA0DYgDWYCuhah5qWLqHl64145ajviJPdEqd36NJK2RZ85TI
+	Zd9Y
+X-Received: by 2002:a05:693c:8843:b0:386:b429:fe0 with SMTP id 5a478bee46e88-386b429175cmr1247880eec.16.1795411905008;
+        Sun, 22 Nov 2026 21:31:45 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-38567cafec4sm36573136eec.26.2026.11.22.21.31.48
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-38567cafec4sm36573136eec.26.2026.11.22.21.31.44
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 22 Nov 2026 21:31:49 -0800 (PST)
+        Sun, 22 Nov 2026 21:31:44 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-webserver][PATCH 2/3] swagger-ui: upgrade 5.35.0 -> 5.35.1
-Date: Sun, 22 Nov 2026 21:29:49 -0800
-Message-ID: <20261123052953.3658549-93-khem.raj@oss.qualcomm.com>
+Subject: [meta-python][PATCH 15/16] python3-cachecontrol: upgrade 0.14.4 -> 0.15.0
+Date: Sun, 22 Nov 2026 21:29:45 -0800
+Message-ID: <20261123052953.3658549-89-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.1
 In-Reply-To: <20261123052953.3658549-1-khem.raj@oss.qualcomm.com>
 References: <20261123052953.3658549-1-khem.raj@oss.qualcomm.com>
@@ -67,31 +67,72 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Mon, 23 Nov 2026 05:31:54 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132880
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132876
 Content-Type: text/plain; charset="utf-8"
 
-Bug fix release: bumps the Docker nginx base image to 1.31.9-alpine.
+- Honor explicit expiration on cached permanent redirects
+- Parse Cache-Control directive names case-insensitively
+- Preserve username/password case in cache keys and CRLF bytes in
+  cached chunked bodies
+- Close discarded cached responses and SeparateBodyFileCache files
+- Handle malformed Date headers; treat invalid Expires as expired
+- Document security considerations
+
+Drop the uv_build bound patch; upstream allows uv_build < 0.14 now,
+which covers the 0.13.8 recipe.
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- .../swagger-ui/{swagger-ui_5.35.0.bb => swagger-ui_5.35.1.bb}   | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-webserver/recipes-devtools/swagger-ui/{swagger-ui_5.35.0.bb => swagger-ui_5.35.1.bb} (94%)
+ ...oml-Relax-the-uv_build-version-bound.patch | 23 -------------------
+ ...14.4.bb => python3-cachecontrol_0.15.0.bb} |  3 +--
+ 2 files changed, 1 insertion(+), 25 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python3-cachecontrol/0001-pyproject.toml-Relax-the-uv_build-version-bound.patch
+ rename meta-python/recipes-devtools/python/{python3-cachecontrol_0.14.4.bb => python3-cachecontrol_0.15.0.bb} (76%)
 
-diff --git a/meta-webserver/recipes-devtools/swagger-ui/swagger-ui_5.35.0.bb b/meta-webserver/recipes-devtools/swagger-ui/swagger-ui_5.35.1.bb
-similarity index 94%
-rename from meta-webserver/recipes-devtools/swagger-ui/swagger-ui_5.35.0.bb
-rename to meta-webserver/recipes-devtools/swagger-ui/swagger-ui_5.35.1.bb
-index df5c8a602c..08158e0b20 100644
---- a/meta-webserver/recipes-devtools/swagger-ui/swagger-ui_5.35.0.bb
-+++ b/meta-webserver/recipes-devtools/swagger-ui/swagger-ui_5.35.1.bb
-@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
+diff --git a/meta-python/recipes-devtools/python/python3-cachecontrol/0001-pyproject.toml-Relax-the-uv_build-version-bound.patch b/meta-python/recipes-devtools/python/python3-cachecontrol/0001-pyproject.toml-Relax-the-uv_build-version-bound.patch
+deleted file mode 100644
+index c492528341..0000000000
+--- a/meta-python/recipes-devtools/python/python3-cachecontrol/0001-pyproject.toml-Relax-the-uv_build-version-bound.patch
++++ /dev/null
+@@ -1,23 +0,0 @@
+-From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Sun, 15 Nov 2026 23:07:01 -0800
+-Subject: [PATCH] pyproject.toml: Relax the uv_build version bound
+-
+-uv_build is pinned to a narrow range upstream; build with the uv_build
+-version that OE ships.
+-
+-Upstream-Status: Inappropriate [OE-specific]
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- pyproject.toml | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+---- a/pyproject.toml
+-+++ b/pyproject.toml
+-@@ -1,5 +1,5 @@
+- [build-system]
+--requires = ["uv_build>=0.9.6,<0.10.0"]
+-+requires = ["uv_build>=0.9.6"]
+- build-backend = "uv_build"
+- 
+- [tool.uv.build-backend]
+diff --git a/meta-python/recipes-devtools/python/python3-cachecontrol_0.14.4.bb b/meta-python/recipes-devtools/python/python3-cachecontrol_0.15.0.bb
+similarity index 76%
+rename from meta-python/recipes-devtools/python/python3-cachecontrol_0.14.4.bb
+rename to meta-python/recipes-devtools/python/python3-cachecontrol_0.15.0.bb
+index 9b5ff0817d..c9bf84dc2d 100644
+--- a/meta-python/recipes-devtools/python/python3-cachecontrol_0.14.4.bb
++++ b/meta-python/recipes-devtools/python/python3-cachecontrol_0.15.0.bb
+@@ -3,8 +3,7 @@ HOMEPAGE = "https://pypi.org/project/CacheControl/"
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=6572692148079ebbbd800be4b9f36c6d"
  
- SRC_URI = "git://github.com/swagger-api/swagger-ui;branch=main;protocol=https;tag=v${PV}"
+-SRC_URI += "file://0001-pyproject.toml-Relax-the-uv_build-version-bound.patch"
+-SRC_URI[sha256sum] = "e6220afafa4c22a47dd0badb319f84475d79108100d04e26e8542ef7d3ab05a1"
++SRC_URI[sha256sum] = "52157b539eb64d85c8c793660e86cf05cf95fad7b98c8ef6846e4a0ddffdb193"
  
--SRCREV = "bc207af2a9c79d33f8af1899555f3e4ec67fbf89"
-+SRCREV = "8fd7a7d57514e63e3601b4c61f3cdbafe605af02"
- 
- CVE_STATUS[CVE-2016-1000229] = "fixed-version: fixed since 2.2.1"
+ inherit pypi python_uv_build
  
