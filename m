@@ -1,65 +1,65 @@
-Received: from mail-dy1-f182.google.com (mail-dy1-f182.google.com [74.125.82.182])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.48019.1795411827953692096
+Received: from mail-dy1-f179.google.com (mail-dy1-f179.google.com [74.125.82.179])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.48515.1795411835208646477
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 22 Nov 2026 21:30:27 -0800
+ Sun, 22 Nov 2026 21:30:35 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=tOn1yQB1;
- spf=pass (domain: gmail.com, ip: 74.125.82.182, mailfrom: raj.khem@gmail.com)
-Received: by mail-dy1-f182.google.com with SMTP id 5a478bee46e88-385d8a00598so3933938eec.1
-        for <openembedded-devel@lists.openembedded.org>; Sun, 22 Nov 2026 21:30:27 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=JS91bBVI;
+ spf=pass (domain: gmail.com, ip: 74.125.82.179, mailfrom: raj.khem@gmail.com)
+Received: by mail-dy1-f179.google.com with SMTP id 5a478bee46e88-385d8a00598so3934062eec.1
+        for <openembedded-devel@lists.openembedded.org>; Sun, 22 Nov 2026 21:30:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795411827; x=1796016627; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1795411835; x=1796016635; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=DHspyn6cEPp1791pNINYWoanY40a6ZfwWoKksUPOcuc=;
-        b=tOn1yQB1SMUtPPluxCv2jAiGSfYl0p17m9yI4+HIcRzAApl7ylGkatLyiEAwKdy4gG
-         5zciUmH3UJDo48PniJSfwkZzLrGMMhLbwsXaHXdKz3piBncltKjfiH9AuxDA9ivOudH2
-         eK8ApTSUGSVMK2AzrPjX5uOCbxL7O3woI5erKWdDkJKYHN3r0krdmhz+XfO5axdenL0d
-         e5uLhB1lyJCuZ34xQiQjTwztCkDiKNHKXhlnNsCmgrhIQM994XqkVrrODzEUc212trqI
-         DPO/94Idt7Qac6zInm8YA6WxFBTmsL3rk966Pj1N6biEwwBlEvhL/Dr1F1hPHD8MLORm
-         k7bQ==
+        bh=dBviZAVQcF7tBvaXjxwPUUCCk4yjfoWFaXHIPbPNaOg=;
+        b=JS91bBVIe5VJaC7BVjkk1fpUWgsDJpDuRHVivDMSctm17aAH7XK1wkeEVtAQEz5jDj
+         keG3qYXMVvuTElCz9ojqJNoqhOB5gSkctmQyr7IRmvsTPBB73fehasBK8m2nkK9rxeqp
+         HJV5z4ci0tkM2ZR48KY5MKW8J/R7tRIdSd1BJ3znKbnJS9gd2EgpauMp6fvJmWAhHA5Q
+         4w912lPWuc2HfYfytiVIZy5ITa5BeeBpwicVaazcur+qg5fFBi3AWah6Y5E44P46fkLo
+         cgffrjBOhTnG24P4z/LwKWZhOjX7Utof1YmdYfP1yfbwilFE/T1hcR19biGZ0op6t5kY
+         mdTA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795411827; x=1796016627;
+        d=1e100.net; s=20260707; t=1795411835; x=1796016635;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=DHspyn6cEPp1791pNINYWoanY40a6ZfwWoKksUPOcuc=;
-        b=GM2ZypEFp1Ljutf4YPjm5Z4ri8BA4+WUghEc5d/zaO3twW8M1mSfkdcrhoVA9LNq/k
-         nBa4L+lbLjdi/nxxehIRsCM5xiqm83jz5PaFNg9VFsarGB/JbN+Yvz1QS5IYGqnT44g8
-         KzdHyPxsJSrJyIxJQlJme45Xj1gz9kJC6dybamSuExB300K3j4hLl6lgOyHpz8GrDsPm
-         SLEZY6hQVMK5E8DFpjqOfx32GS3UEKcgZL3fPTVscnBvrKdLt4yFYkF6E3GqzE6nsMVx
-         5SjpG1u/e+w314UmSQMPubEcZP7CLBgFyF5gCkypWYUlidTHC7pYA/CmFibKQmXc5AAD
-         f20Q==
-X-Gm-Message-State: APuU4Z+/GdKUx+PDRwpbF/Tc+yZ+KJIPQSMkF/bBDZR0h5D/Asqycax+
-	t8o3muAkZPtH1r7WBkbIxp03WxwQ+tAYdW/1F05K4XhgEQQzP5g6LOmfEWHwyBa+jhQ=
-X-Gm-Gg: AZFdTZcPtdYF84U66gXMW9thpZcHJfsQjXwiRAHi50kNR/uCgJZZOaj84dn9RyLhFnm
-	NnRM+MvJdHT597GzHUOE1v6L9gUt+siutt2PQ3UeiThuIOjAPV/1xLge23tDtxIWHXL1QZqkUlH
-	FismM0xhszSYsmvU6uD0jDKLrnEiolign65rjk0x1TnnigKUdpING+Hqiw5xWuUedwjjemOc4I5
-	lqKytsLWx06j73Zg7ysHIxQtTr1JIpg9varyoa3M80Qt+dV6lHLc+Gxc9lN5Ntcttx0r6Y+nCia
-	jvAUkneem/TInPtic0ZcqdqMfEY1CddCyFplX7qrPqQMpWBXMhgq6ncIlSxUtJNdMhWp3ZSbqZg
-	MEKjDD5amKKgGavHD9SdOSQI/vEeNfmHlHzC6/H/z6IiYuf89NOdaYhBF2jvh4N3ChQnt2UQLJJ
-	7WI7ZvALKbqitMIpTdkivw43Tf9g2x1GX0C3GvD15pBKQc3aYXTw56gAvnvwGl4T8iduCLrKLIu
-	QrmQDj0WH4JUvhLn0cYSz25o5px734E8TJzFNhJaQKvJOoHDi4LJkeJSo9nkKG1q/U1jByE1r8h
-	lubNBdiyazFPh6Ay2QFDXvBdWyuPHizURC3MP729J3LXLXDRC5xiT145XCBMOgT4eUwSSOggZcF
-	Ihc2ru3Di7kcPRlB+ee9FWm/g9mcDzjpTWcv9WtY3Cahf3EyIp/S3PZY46NOtRnVVpMWJkV90e7
-	bFUXzM+ogo6nkM6UyT5kHRkBQtUsdHS//KLPq0bzPHbsRNES7bgRiUsFBX+tWlbO0bKUYrf1fXO
-	e28oSnWvnHDdq8gSvNRSO6W7ZKdlmMZgLhOfgCVX/H+PYZEjYy6bq65nx8q2QupCTUiL5rQf9wN
-	ti2i
-X-Received: by 2002:a05:7301:f02:b0:378:7434:a526 with SMTP id 5a478bee46e88-3856f8519d9mr10548806eec.14.1795411827278;
-        Sun, 22 Nov 2026 21:30:27 -0800 (PST)
+        bh=dBviZAVQcF7tBvaXjxwPUUCCk4yjfoWFaXHIPbPNaOg=;
+        b=Yoei43yCZT8RPnxkB14mEU59j6tyVkkb4yPEszg4wavtM3kcoYz5zQ9Gku0X7IaxF2
+         iiWhEquHoPAHZrelzzM/Paqa7zpov5rJ5t08oylYiG5to5Ya5IcY6is0rMXZrmaUbwQQ
+         dNVLS42NEMN4Ohsr5ibiX94xWo6PsBeXTGTazYlspvKTZxQaoEEVggxxFUErjAlsM2YE
+         aBs5hyFP6X7eVGalyGQxBY9h4JIzAVKt4qABff4/B/RFs2pr33mDCSNfQfrjcN/dh8lc
+         cJFLvU6c/CfCI20Jnvp4q0Q3GSQ+QMs7/MnMOME4zj5E6VChYR15GrLgzCzYTDNnMVPu
+         LRbQ==
+X-Gm-Message-State: APuU4Z/KNkwG3THmWNGoxF5KznEW3rVR8k/dcsy0eK7pDqYsuCftsCIy
+	Mn3HSqn1cmLipjK4ZcUumxt7P0Za8N206OMC6lG0aUnnsQXv6aAqCtiSYc1Uu9cTZ8A=
+X-Gm-Gg: AZFdTZehffbKGKyFJn6tqJkd5oH5kAK/f81Y9ZvTWJgLomwj3TaK5qKAEG3+vcHbh0L
+	WWuR/7+4QMi39d4gNVf1mqBmRHdxtaVUUcSF6OchPJGkkw3CQfgdEE7qW7prlmQhaiBbCde0NJd
+	v48MkIA8YHSbdNJIFD6lGtE/fZSklpvVVfuSDMQJzisjzAj10HRlWqi0VWJ+hqPOeUmrM3iKULL
+	xs1dJWGlDbe6umGdBMUcyW/D1LDp5BJafxXgW4GQkLhmZy6jALb46yhj2U/mhDxnMH0uA7+Z7EF
+	n+06XYAf7N2Wg7FgXB5cbUlFkcno+cPGEaK73YM20lNu6DZU5twkRMMeDb8VSn+J4+GDLwsaFAY
+	eWbnJI+PMrriJVDEW6JA7CgJ68J47It7JQ4ECX1dQoS/eE+v6DLC/Hj/HZvzfax1eHcx2upfLeS
+	3UgTjD09RayHNPw00CQie08gaOfG4UjJCQbGiWi9aTXQzo15eB/E+4fxXfhQbVLh/FCfA0HsX9D
+	hSx6hKOClx5BrEl0lG92DVN/s4b9QbRnHzVbEly4QY/U4E8rPcs6/+FBgfco8i7zZnw46a2Wu07
+	CMIKBgXNKuXy9pU1EBBb1HL47WSqVmvWlF7LefOteuWRo+shGAya8mIDC0B8fBwGfmE4J7Ks23X
+	0c1Pq43GBD9TAPB/0ra36Aga+WPTmgkjoIZ0tl3oxTudvWbjM6UdvV2cdDphb7ov8tQdPx2JSZ8
+	F5kbJ46RoQio31ue+sjbW8B4t4keCcHv3L4Jws8mj7jsfQQvVBd1rf/dUaF+QQZNqkPOk6opi9v
+	zFLNMepAN3P6INrlAuijEY0jTiOzI3cusIwiSnveXySR0eVPg9k2nTqIWKLoHle0hQgMrBfCsaG
+	h3TP
+X-Received: by 2002:a05:7301:211a:b0:373:5561:8d06 with SMTP id 5a478bee46e88-38570c36e7cmr9713393eec.37.1795411834538;
+        Sun, 22 Nov 2026 21:30:34 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-38567cafec4sm36573136eec.26.2026.11.22.21.30.26
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-38567cafec4sm36573136eec.26.2026.11.22.21.30.33
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 22 Nov 2026 21:30:26 -0800 (PST)
+        Sun, 22 Nov 2026 21:30:34 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-networking][PATCH 7/9] proftpd: upgrade 1.3.9e -> 1.3.9f
-Date: Sun, 22 Nov 2026 21:28:41 -0800
-Message-ID: <20261123052953.3658549-25-khem.raj@oss.qualcomm.com>
+Subject: [meta-oe][PATCH 03/42] bmap-writer: upgrade 1.0.6 -> 1.0.7
+Date: Sun, 22 Nov 2026 21:28:47 -0800
+Message-ID: <20261123052953.3658549-31-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.1
 In-Reply-To: <20261123052953.3658549-1-khem.raj@oss.qualcomm.com>
 References: <20261123052953.3658549-1-khem.raj@oss.qualcomm.com>
@@ -67,37 +67,33 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Mon, 23 Nov 2026 05:30:38 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132812
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132818
 Content-Type: text/plain; charset="utf-8"
 
-Bug fix release:
-- Fix possible stack overflow in the bundled glob(3) brace expansion
-- mod_sftp: fix segfault with SFTPCompression in <Global> and passphrase
-  prompts for OpenSSH-format keys (regressions)
-- FTPS over TLSv1.3 works again with OpenSSL 1.x
-- SITE COPY honors <Limit WRITE> for symlinks
-- SFTP OPEN with CREAT|EXCL fails correctly with HiddenStores
+- Allow writing images larger than 4 GiB on 32-bit platforms
+- Show write progress while the image is written, updated on a single
+  terminal line
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- .../proftpd/{proftpd_1.3.9e.bb => proftpd_1.3.9f.bb}            | 2 +-
+ .../bmap-writer/{bmap-writer_1.0.6.bb => bmap-writer_1.0.7.bb}  | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-networking/recipes-daemons/proftpd/{proftpd_1.3.9e.bb => proftpd_1.3.9f.bb} (99%)
+ rename meta-oe/recipes-support/bmap-writer/{bmap-writer_1.0.6.bb => bmap-writer_1.0.7.bb} (94%)
 
-diff --git a/meta-networking/recipes-daemons/proftpd/proftpd_1.3.9e.bb b/meta-networking/recipes-daemons/proftpd/proftpd_1.3.9f.bb
-similarity index 99%
-rename from meta-networking/recipes-daemons/proftpd/proftpd_1.3.9e.bb
-rename to meta-networking/recipes-daemons/proftpd/proftpd_1.3.9f.bb
-index 7f2cb71ec1..ce0d375fbf 100644
---- a/meta-networking/recipes-daemons/proftpd/proftpd_1.3.9e.bb
-+++ b/meta-networking/recipes-daemons/proftpd/proftpd_1.3.9f.bb
-@@ -4,7 +4,7 @@ HOMEPAGE = "http://www.proftpd.org"
- LICENSE = "GPL-2.0-or-later"
- LIC_FILES_CHKSUM = "file://COPYING;md5=fb0d1484d11915fa88a6a7702f1dc184"
+diff --git a/meta-oe/recipes-support/bmap-writer/bmap-writer_1.0.6.bb b/meta-oe/recipes-support/bmap-writer/bmap-writer_1.0.7.bb
+similarity index 94%
+rename from meta-oe/recipes-support/bmap-writer/bmap-writer_1.0.6.bb
+rename to meta-oe/recipes-support/bmap-writer/bmap-writer_1.0.7.bb
+index a11fc7ec75..24d5fe0e19 100644
+--- a/meta-oe/recipes-support/bmap-writer/bmap-writer_1.0.6.bb
++++ b/meta-oe/recipes-support/bmap-writer/bmap-writer_1.0.7.bb
+@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=e49f4652534af377a713df3d9dec60cb"
  
--SRCREV = "fc3f908a0d07fa3b17fbe1e3054b7520806bc75a"
-+SRCREV = "d06d978448e2f58007873f30ac14ce74873b00ae"
- BRANCH = "1.3.9"
+ SRC_URI = "git://github.com/embetrix/${BPN};branch=master;protocol=https;tag=${PV} \
+            "
+-SRCREV = "7662aad2fba224530c45afd511db9146dcb48ccf"
++SRCREV = "b11dda47508daef0dcdce629c4e6371db6cafcd4"
  
- SRC_URI = "git://github.com/proftpd/proftpd.git;branch=${BRANCH};protocol=https;tag=v${PV} \
+ DEPENDS = "libtinyxml2 libarchive"
+ inherit cmake pkgconfig
