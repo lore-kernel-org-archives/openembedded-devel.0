@@ -1,65 +1,65 @@
-Received: from mail-dy1-f176.google.com (mail-dy1-f176.google.com [74.125.82.176])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.48496.1795411803544610895
+Received: from mail-dy1-f181.google.com (mail-dy1-f181.google.com [74.125.82.181])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.48492.1795411798926387841
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 22 Nov 2026 21:30:03 -0800
+ Sun, 22 Nov 2026 21:29:58 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=T68ibmiC;
- spf=pass (domain: gmail.com, ip: 74.125.82.176, mailfrom: raj.khem@gmail.com)
-Received: by mail-dy1-f176.google.com with SMTP id 5a478bee46e88-33fb4680717so8132133eec.1
-        for <openembedded-devel@lists.openembedded.org>; Sun, 22 Nov 2026 21:30:03 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=D0o1Fa0C;
+ spf=pass (domain: gmail.com, ip: 74.125.82.181, mailfrom: raj.khem@gmail.com)
+Received: by mail-dy1-f181.google.com with SMTP id 5a478bee46e88-33fb4680717so8132009eec.1
+        for <openembedded-devel@lists.openembedded.org>; Sun, 22 Nov 2026 21:29:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795411803; x=1796016603; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1795411798; x=1796016598; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=2vlyIKR9sayWRFBGEN+MZQm0peM8mmT6DmR2iJW3LBg=;
-        b=T68ibmiCncWttv6RbGSS1G7Uly1cWXtfuRC0axn09HvmBFvB3CYxBgGMrG1ZVaQVY2
-         elaMPz1LD+oaOQU1e7VPiLaOpWb05Ko0PNCcgBNW9gMfxJHdrpS7s71jX4XaXVQ89r9I
-         XzHCC9uB8G0vOZG6z5xE8tKg+Nr0ep1rrrveQvpY9ArM9gXk/BzNrNX+zXmcN4gmsqUD
-         KuhfIFxCgYoCVSCKUupsAXyH3AeqBujpRZ/3XDx1XacTnuJGvYWNYHObjlFgsrl0wjno
-         7ENLLyrVc7tOmHAZ+fWF+zpovI33TFCQuqEc3dMSCU1HyM7xCA1LCjl4yTvfxBS7hIxY
-         ho0g==
+        bh=sGaDMFl4zQ66gA9HDpZhCu6Kwa8IJrfdqcyyBWXfTdA=;
+        b=D0o1Fa0CqveuS5D2jGG54KfjrpxjKuZUUtaRv0jie5BRiDQMmzFDvrvNZo2Mr1Gmo5
+         1ZI0/MDSJVUzq+9aV/BuZgZ1iN5Tp2w7OYhycyUN/cf15GNZbZcv9+2fky1i4xY6vzA1
+         d9U/S3LAn3JB/8hnuhV3uVDX6Cm2SyFtgW31kFpEs8KYhkBhsph8KkAn6k9Cz7iec3Sk
+         IHGeTMLj5iNTAxo00pt+wNtDkL3W/Qipis0fja2bd6DfDymF8gCVKv56eiA1yD2Mgm2N
+         Z9CfIT7ziyhtEbf52nrJys3TL2HHeulodkVcAWp4F5cB5mxqo+PHSAEzPzALAUNvzpGF
+         0ijg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795411803; x=1796016603;
+        d=1e100.net; s=20260707; t=1795411798; x=1796016598;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=2vlyIKR9sayWRFBGEN+MZQm0peM8mmT6DmR2iJW3LBg=;
-        b=SW3vqOh6R9BgUJ1sTqiDEbVOO4b2YqWgnuUZFUxPgHe8TYTPsG/gv7+rJtmFsgyQQU
-         Fo5+f+llXjazJUFogW2sZiHGmWNIyG11ET3q9JP4tkU7XMo/dzlHIL1xUNQyTmdgCZie
-         O6nJXX9qoIB8LgFqtlyDA9lf9RfxhvukZMVZzgi9Ql63SL/qclOSeD/re+cG2P/6GfyQ
-         Q2InOFCeTQEOWVPkrwTkAiQ7K1exOWt95ylWt+xsPWoAoE0P0vdjEaLy07UsgKJOSaiy
-         BnGAbBEc/Ve3pYliyT5uq3bFrJvUziEzqH9QkFfToYro1q18i9XKjb5uDbo9XkH2ujQm
-         GYWg==
-X-Gm-Message-State: APuU4Z9cEVzipvPo+cMjXKfJUfeLzr8+KTHCIUWOdaSqlcNa8YV1hhga
-	AzWbqlJV0O1swalkkd6p4KeFBjy41p7XZhMox0Bga2EBWF3V+0gjnwbbVmY2Po4PmyA=
-X-Gm-Gg: AZFdTZfaJf1eixJlJh2JF7qvqKK+h/49RV0o8B7VS380ktimkS0m8xS7/m3Kx2yGS6x
-	KU3V/uKny8/+xF6H7Jqo+Vtz0M0509UuhJXJvqtNYJPBK7ORTLbuXD+sNMGu0CcH3lKRnm8sWVn
-	BC8yjL/CXhiN9ZCKheodtGIFPV6xVtMdOGuzVFLRWTtIJCsmHhsndQteAJ3MLcIlbYHMnXXHcXo
-	BOsbh0joiFN06pozUMEdNutj6RyZ7F1jibteRJborVF9SDLVXUhKKq6jyr5XN4vQtW1B5ecv/H/
-	LLzc/rV7kgrLIqEKFYClu6Oq/6VrVBi7AcdhFdc5qEhJcvQ6h8Cp3FXTO0FNtugNSjasD1YiT5k
-	cysM1p1tMsvSrZoJFv+4rJdoTRwcvFGuEQ4LU9WV0S70f3cbvnz8azxBTTu7H635Fz4kYQSX4JV
-	h77+Ci75RbxXxKBbWYTC6Yd6GR7cwAPsavEaakzjKKjFM2Fx1/hduxiIM+ZjQ97mGgSeFadx+N6
-	SIi+Era76yfp6WI08zg8H9VUy/KrYz/cZ97WcHkRPMlkR+zEuzq94oa+kjAX9eurk5FAnM3N9/8
-	+3wag+3WQe7lh4YB3r5IGycaQ1Q6WUIhpaY9GQcGYJAZ26f3aiKaAWJvQh3vTRHxuyr7tFIWnkg
-	A+V7T4IRVAgM5bm3q5CAsWXsStvlHIdvgC6sSh8Pb0zU9I4xhe7QoBdfPCfkd/Oq9kecu8WvNzn
-	vdFNDZralhmyHNTV/r2nIxZ6/MoKMcf65ht7E7g0U82HVgSPsWeG8xqx9889Uf+skt0JyjQVwOt
-	boC0aEchThMua9aKcspAVd+I770l8l0gbufe653eEzKrBassDsA9TUJFC2pdgEp9QIyAlryfZZU
-	3lYj
-X-Received: by 2002:a05:7301:4209:b0:369:fc93:eda5 with SMTP id 5a478bee46e88-3857054b988mr11884850eec.39.1795411802896;
-        Sun, 22 Nov 2026 21:30:02 -0800 (PST)
+        bh=sGaDMFl4zQ66gA9HDpZhCu6Kwa8IJrfdqcyyBWXfTdA=;
+        b=Gofu4t3zM1VlSNWAjYvRay48uSav/qGrV/GzUI4zC4xDVoGB4a4zh70qNJSLew2IQy
+         C5cICIPlcRyz1YJ+ufs7fVDXyT5XI3a+ixIX3cejs50VILGR2DqhlsKmXc0NR5WQCqoe
+         6Me45SsfHH1fR6Nm9NkrAItvr4XcczjliNZ3S/JmRbkoytmzOKAOachej1NwVuvzjd9n
+         I9TQO+L4BEa6gSum1a3ENqQE5ryYjTdtCxaI2vxPuE7cjfE0gEjxiOPhOgCwsuD91i6j
+         LyH0e5UHOnGWedpY41Hq4Ig7FvYcOWQCbCiefycRtiih9zEGDSEhO4+C79DNiugFk6XH
+         QPiw==
+X-Gm-Message-State: APuU4Z+laZ6Bd10/9v+nGrb4eaD1UdCYrEZQOhOAkV66nEDmZt47qGey
+	FBn7gLrzuVUGw4mvMff5VW/Cda4BTqmE/vEBQxR3jY4lqVO7gxXfPj0WPlJOMNLVY04=
+X-Gm-Gg: AZFdTZeLYfNhCy5StR85qBSXlgeYt82TiQ9nNF/xS7rIiO4sySlNIN39vAGbLm70UoB
+	/GyoGZq5Wj7xWxbIpqu9bPW1eqvadTKR5f8J7RS4MS5NgF2K1c/y4eidgb7uzFSLv7Voay29nBh
+	D9u3eYGujUy++ddJKih448p8BnXSSqrGLZB8qZ1coaw/XKhzwMP72dBqW4VQCwipZIutSnuZPcN
+	NFxg1cOf2vaFBOvV6/ma4kK7gvgdBVSpqnCtJkdsXxOJ4EyFvhneKr+iwWHPp3DmwAjHWcRXBuK
+	Y52J6D+D/z5JtHnE8/KdkuJsesvlcnElhwfjFX+GIN5Kr7Q+PqqrdbRWEzh1rBPLmuxQo5xBdJn
+	aSo9Qzdnx4vJjCQJG0MeHV0X7VTn9tzEdoheOo8fbzUyNQ93trfAHOrmTQAWtzqf9RS4EfryvLA
+	djluqy5jOdlpiovNvGic1vuy3vG/kr72HgO+B0P1Q9ssEk11Aziuag77A/18c9wIVHMUo68wGKL
+	InqLeeEMVY4su9ErU5K2GmLwHdHd3AwKx/tgyqXSBCV8iE3YelPohvLStIk3jujrBtE0bX7Hgtv
+	FFcBX4bBsPHby6hRy3m9O5n2ydZosij/T+F6kcBd4GPzOBE6KR/pVeFhZioKbJnhAhT/t5Lh7pc
+	bqUVqgaCrqduTy8z11r5gBmBpxaJAYZlRDngGqEs0IpFRuLWq9qqklMdDGGhQVgN1/upNV1Iu0C
+	KcUVGhn2ChYhwDI7O6o1PfLEiq9aSWOyd0bYhWyvqFuYGQfHG3GEZLUJow1ZWaR5rkjpHqqm7Da
+	AJwcv7mBgzz4IfCCYFFWTJc6eKci9kg37Yk53BK4AWbrJhQrS9cZbXI4c/fvZCPQPbmDJVRBRwH
+	oP+T
+X-Received: by 2002:a05:7300:f498:b0:386:a716:916b with SMTP id 5a478bee46e88-386a7169544mr4458442eec.31.1795411798095;
+        Sun, 22 Nov 2026 21:29:58 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-38567cafec4sm36573136eec.26.2026.11.22.21.30.01
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-38567cafec4sm36573136eec.26.2026.11.22.21.29.57
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 22 Nov 2026 21:30:02 -0800 (PST)
+        Sun, 22 Nov 2026 21:29:57 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-gnome][PATCH 2/5] evince: upgrade 48.4 -> 48.5
-Date: Sun, 22 Nov 2026 21:28:22 -0800
-Message-ID: <20261123052953.3658549-6-khem.raj@oss.qualcomm.com>
+Subject: [meta-filesystems][PATCH 1/2] exfatprogs: upgrade 1.4.4 -> 1.4.5
+Date: Sun, 22 Nov 2026 21:28:18 -0800
+Message-ID: <20261123052953.3658549-2-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.1
 In-Reply-To: <20261123052953.3658549-1-khem.raj@oss.qualcomm.com>
 References: <20261123052953.3658549-1-khem.raj@oss.qualcomm.com>
@@ -67,38 +67,37 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Mon, 23 Nov 2026 05:30:06 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132793
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132789
 Content-Type: text/plain; charset="utf-8"
 
-Security fix release:
-- Fix use-after-free in the synctex parser (CVE-2026-63729)
-- DVI backend: fix heap/stack overflows and out-of-bounds reads and
-  writes in the PK, TFM, OFM, GF and VF font loaders and in DVI color
-  specials; detect short reads; fix an endless font search
-- Escape field codes in arguments passed to ev_spawn and escape
-  annotation text in the annotations sidebar
-- Fix bounds checks of accessible children in the view
+- mkfs.exfat: new options to set the volume serial, disk GUID and
+  partition GUID for deterministic filesystem images
+- mkfs.exfat: set the protective MBR disk signature to zero for GPT
+- fsck.exfat: faster duplicate filename detection, and no more false
+  duplicate-file repairs for names differing only in length
+- Version output goes to stdout again
+- Reject invalid boot-sector sector and cluster size bits
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- .../recipes-gnome/evince/{evince_48.4.bb => evince_48.5.bb}     | 2 +-
+ .../exfatprogs/{exfatprogs_1.4.4.bb => exfatprogs_1.4.5.bb}     | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-gnome/recipes-gnome/evince/{evince_48.4.bb => evince_48.5.bb} (95%)
+ rename meta-filesystems/recipes-utils/exfatprogs/{exfatprogs_1.4.4.bb => exfatprogs_1.4.5.bb} (93%)
 
-diff --git a/meta-gnome/recipes-gnome/evince/evince_48.4.bb b/meta-gnome/recipes-gnome/evince/evince_48.5.bb
-similarity index 95%
-rename from meta-gnome/recipes-gnome/evince/evince_48.4.bb
-rename to meta-gnome/recipes-gnome/evince/evince_48.5.bb
-index 5756fa5fcb..8883ff80e5 100644
---- a/meta-gnome/recipes-gnome/evince/evince_48.4.bb
-+++ b/meta-gnome/recipes-gnome/evince/evince_48.5.bb
-@@ -33,7 +33,7 @@ REQUIRED_DISTRO_FEATURES = "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'open
- def gnome_verdir(v):
-     return oe.utils.trim_version(v, 1)
+diff --git a/meta-filesystems/recipes-utils/exfatprogs/exfatprogs_1.4.4.bb b/meta-filesystems/recipes-utils/exfatprogs/exfatprogs_1.4.5.bb
+similarity index 93%
+rename from meta-filesystems/recipes-utils/exfatprogs/exfatprogs_1.4.4.bb
+rename to meta-filesystems/recipes-utils/exfatprogs/exfatprogs_1.4.5.bb
+index 294126a350..9429328645 100644
+--- a/meta-filesystems/recipes-utils/exfatprogs/exfatprogs_1.4.4.bb
++++ b/meta-filesystems/recipes-utils/exfatprogs/exfatprogs_1.4.5.bb
+@@ -14,7 +14,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+ SRC_URI = "https://github.com/${BPN}/${BPN}/releases/download/${PV}/${BP}.tar.xz \
+            file://0001-tests-upcase_table-use-dd-printf-instead-of-truncate.patch \
+            file://run-ptest"
+-SRC_URI[sha256sum] = "102bbdfd934776c12c6d83743a31ec648f8c2f1ddfa1832b6e13b6efd09412cb"
++SRC_URI[sha256sum] = "68464a07d90e9fda5475df68800b88eac2bc76076d157fd13cd8d936e0c369b0"
  
--SRC_URI[archive.sha256sum] = "f296c5c662886635d4cd597e8ac0afcde7982be4486533c2b7f095b268be8668"
-+SRC_URI[archive.sha256sum] = "0c7aba9485d0b6fb9f3e0ee75be916544744dc2ed9d58a2f9936a2e0434ac4a6"
- 
- GTKDOC_MESON_OPTION = "gtk_doc"
- 
+ UPSTREAM_CHECK_URI = "https://github.com/${BPN}/${BPN}/releases"
+ UPSTREAM_CHECK_REGEX = "releases/tag/(?P<pver>\d+(\.\d+)+)"
