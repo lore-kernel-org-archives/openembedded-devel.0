@@ -1,65 +1,65 @@
-Received: from mail-dy1-f178.google.com (mail-dy1-f178.google.com [74.125.82.178])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.48071.1795411913161290425
+Received: from mail-dy1-f174.google.com (mail-dy1-f174.google.com [74.125.82.174])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.48558.1795411911691752602
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 22 Nov 2026 21:31:53 -0800
+ Sun, 22 Nov 2026 21:31:51 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=dGX+J40P;
- spf=pass (domain: gmail.com, ip: 74.125.82.178, mailfrom: raj.khem@gmail.com)
-Received: by mail-dy1-f178.google.com with SMTP id 5a478bee46e88-38587f3de36so3516910eec.0
-        for <openembedded-devel@lists.openembedded.org>; Sun, 22 Nov 2026 21:31:53 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=deYAdMdv;
+ spf=pass (domain: gmail.com, ip: 74.125.82.174, mailfrom: raj.khem@gmail.com)
+Received: by mail-dy1-f174.google.com with SMTP id 5a478bee46e88-380c28f9e35so3962944eec.1
+        for <openembedded-devel@lists.openembedded.org>; Sun, 22 Nov 2026 21:31:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795411912; x=1796016712; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1795411911; x=1796016711; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=9aD3GIpiMO+kqndU6I7xMk4Ra9gyGQP5IgL/i/0OZmk=;
-        b=dGX+J40PBWdYKXdpeAAs2B57zbm+DoCcm/AyRrBvnlpF7zxFWFwEwUVYdm5M/1VEJp
-         YGrGIydIbsAxDr2SmORMk7dJLoto5Ft3nvpzGWc0yU+Dl6OCs88Hh9k6Oz3t2Yz1BMNq
-         KktyXgihZgfYfCBFABxAEP8p/tA/Fiyt/r/+HFiUSNqwm10Y2zjIevxZuK7hcmp0Nu4i
-         gztxIHzeJimrivVIvCeuDV2KB8d31lUdqYpPt575Xj/NbH2/xQ4nHuS19xF98MijQRST
-         JgdUbCKn4fRSbX8nDujZ1fEVeabo/H5t5QQ6MbgNRRfmhfjJ3wMBkRK52x4ktab0fT++
-         NX0g==
+        bh=lVutp6bTG3FijqOSiMy2C33Q8I7bUJI5o5kjuqvJbUY=;
+        b=deYAdMdvM3N0SLMU47hKcp4iuYwOVJBpInzY4E7vf4/+GW6bu/GqiVYY1ITpeG6sRf
+         kPUCLJ5EfAGk5rVoRqutyKfWqjynxjiZbU/VBqpvxmZdjPJthAu7fkftlvZeyNmq1oGj
+         vAscULOgjqB8PvQzx8rn6X6lRdZAx9/fqv7KWpuHAvxH0Ph7kLKOnqVLVf5dGk5CBXj9
+         Rif9wr8z7uA3yOCxPVYJ35yO8KAUvy11BQ6g1PtDP3IPjj/1x3Dr8+8wDnCqZpaeh05y
+         RqJQKny/G2KLlktMyX3UI2yyZ5lo+DJL/MjAXlzxYyg8Nat2/gZ4dR5FPO0z39JDJF70
+         r1GQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795411912; x=1796016712;
+        d=1e100.net; s=20260707; t=1795411911; x=1796016711;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=9aD3GIpiMO+kqndU6I7xMk4Ra9gyGQP5IgL/i/0OZmk=;
-        b=pVRmatUZxwOj4xO1zhztd8UBwjZLxzYMihGwRH7wf4/sszuX4ATQNZucoiYevoCuD7
-         EPQB9Dp/beCGEetB+NroGRf2nJuOa/6zedlqN1ElwweHfGMKhDr4lxx1VrdJOukcT58h
-         rcWJ7ZkdF+z4OecT90oI/6blPk2wBckfFNxisUJKeUAeY4VQWIZI/4U9hxKjkpXE7p4t
-         u7Ep3hmTT5Aa7bZM1rrFQ8la26Bg9bIV8oQN6Z24q7zk962Sb3LehcP3w0388cIySsfo
-         40GIiZgJfH728Q7ZllBIoOr3nHj6htH3aKu25XEfCC1BVpuIL6NWcng61V//cWZ537Cp
-         ViEw==
-X-Gm-Message-State: APuU4Z/hjHsJUEXcIqWSQwncefafhMJWkTq5EAQ2NHtqWD0IIVQ6yt15
-	5h4dVNv9pXPPNLsCnNH5CoiN56DA99fcCmki4gm8N7MU6CcAJJFsQ0Br6dQ4nsssafI=
-X-Gm-Gg: AZFdTZcFfJElYK49SJZo3uYdnCsfQrD4kZxwwLoMKGNPIrwjdosrmSyC8IkI4+/sgez
-	TWrxyme/4KpkVtDzBIHO3Si6tKtnpRRSpqapuUwp/G3pMX459E0WuN1VPq7yIosAkLmk1adPTt5
-	pPnjLwE1nD9Oc3skvWUR9CyTxbB0nkSPmZpSLdOzyKx4zRvFxORGkqlOaeAtJmm+qy+KSecDAsY
-	oRs7fDL0G9MiW1Xu3XeBT4rIMQBZsROmO9FncVECDe1T0xzafB9EFENEQpYWEmwVc2E8zjB/wag
-	5A2JL/tE1JgQVL7DmqNWxdGVru1GMrbQVynCaVhGKDArUFCili6E56Qh6zjtmAcbOLVtUM1HG/d
-	B1bRswF083jjq50LZvDG+HT1Rd7JxIaokBMnq3WInMmPRt9Iq+6rQClmrYgTrvNTOanSkKT+eUb
-	srybk4nQARmIzvcWZrWX0gylSA9z92Rj7BeBaH5pGrUHk38AD9FbrJ0fqt8NIxRy2dTdrPxboxj
-	lwXGTwccmgU7u4AER5/hhB8mZZ9QNv9OsCffnIuV5tPh+puYlSHPuuHKTIn0JjTDcEmb9jUcaMY
-	7B7Z4zgW9SFCPJvgx/dj15aej7fmtwQB+g5sHd91vn/Ufutx7lTFQzI2YbgxrBgjQyKebmU4eHC
-	T8KVHomBoryQD9KjFXMcW8nwUA0UbsF0uGeHm3RRvyvcbc0cItkGYlr8RW9niRdp/uRp5sVyouh
-	4538H7FP1xqJzXBUzrghSo8KjZY840i0aTa5euBFGsNlYvODyKBZ9fUiRDzb+Er3Z3bDfydMRtJ
-	kpsRHAzu8yyUVt8XguuiKdYmKT5rmvunk4DJgolV2FsnP1yxp4GEZNZUqOJ/TmEFH5B1FBW9J0u
-	Em26
-X-Received: by 2002:a05:7300:8807:b0:369:5583:bf4c with SMTP id 5a478bee46e88-3856ff5bb62mr11212222eec.28.1795411912446;
-        Sun, 22 Nov 2026 21:31:52 -0800 (PST)
+        bh=lVutp6bTG3FijqOSiMy2C33Q8I7bUJI5o5kjuqvJbUY=;
+        b=UGgAgmxvMU8e327BAI+yonla4WzyuwsTrAaVj4lIZ2pnT6ykeqNRfIf81pISXmsPct
+         XAKIXk4dbkARq5qgAY3aYUFy72ISRxloLW9pUGlFX+ikTtRnXZ+YpXGdxy4ek4stp9Zh
+         Wyrf5aSwk9Ja7PPwEevF87Cbg8SK7OlZeUPLzishSFYTqakOSJw0dO2eqZQahEBM1jG1
+         Mq7u2YGB5fUMsG9wz4zBDTtXW43dt+sir8Q002iI5uvUQYZiJVXvrslH/bY2CGnr+WaB
+         k5RDogIKnGFqXGdRutEYoO3cQeetrQVFTXvl3Otr8I9FfYhIxxE0vryF3xnZYorfyhnw
+         at3Q==
+X-Gm-Message-State: APuU4Z92pvNLL5E/bUYWMQlPfeQH9yrGu9v6ylattC8epLVDE4je9dEo
+	gletEQ0/J15Go0z2dkOYxY/+sS3T06HcOzMQ5gdgdPfvHTitu7pPFa3rZoZtySqVoL0=
+X-Gm-Gg: AZFdTZcX7XT0mhGO3pAdaCBE6BGnDDr6DqWE+FL96QSGwINQlVDY+VSJNS3hJGq4HRV
+	8/Kmf4D0wgJ/VO+fdzGFkjE4Ha1VxJ/ZBi1HAinjP+pWL67FVOWntPC9w85fQMgtdXFiE15rwON
+	FBeOWCtLBevkUe/D7to2iB9EWPDJ2ZvYOOkFOX3Z+7szgiuzvBBtuHASHW9vEgckowArqgaJ171
+	7bkZmblKBKtZzbSpAKrjsYASg2SCShfb03qyHLRZ3WH3TLTw0EBGqo0xxjIVckwJSinDeKqRGJe
+	Ku6uplLdI2/k/qKYdR70qi1/RVc3+afTW9P+1rL4p27Jeo10KGY9VYZNGBkqyrrR5FXjW8+gRk0
+	p/kxU5AriK+JvBfOEnjzT7Dheto1xnaJerjPDoCDwSJF2v/EKlNXfY3srKVdpF8iJeGTkOBhmyL
+	Fn0IOCgpBwVnoV361JkF3xzXeelZPxjuFNfpkKqsUx8d5oqa3996COf/Vjgz1yME9O0DzhMnSQo
+	Q3jTKPsE5VN9oGKOgQjZ7DMTrxkK68rcM5ffwGLRr1nLbuEMWkGdZuTYcaVTppJvMBWoER0rKi7
+	aaj9Oxb57P/9j5LwlDWYU+IBq/76+z0I47oShhUnJuQg7IVAgUPLIB5/34F1VJIMVeWF1pcwsZQ
+	RHeOK4dBvhaqrgyAlyfX3Gv32n5Cp6/M9hteTY7r+Q6HAnc7/u7IT1vqEwu5q3MG6roMVjzTP1p
+	4uh2+g8wLk0RaE3+5ROhllqrgoWZPb9sG/ZrVmxH9+sUX58W/eYi4rtPcexm7uCJBMQB74sazHe
+	MCtg199//HTQCnGapHpENMSXsb7M5jYSz1eBv/U81Wk1Pgbc2yoI9hcUPDqigsuXNg3+7Krl53j
+	BOtqQMovJH4+4BV69WTzSNAAVg==
+X-Received: by 2002:a05:7301:b8c:b0:36a:2f6c:490e with SMTP id 5a478bee46e88-384b3986ef2mr13428812eec.6.1795411910970;
+        Sun, 22 Nov 2026 21:31:50 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-38567cafec4sm36573136eec.26.2026.11.22.21.31.51
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-38567cafec4sm36573136eec.26.2026.11.22.21.31.49
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 22 Nov 2026 21:31:51 -0800 (PST)
+        Sun, 22 Nov 2026 21:31:50 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-xfce][PATCH] openzone: upgrade 1.2.4 -> 1.2.9
-Date: Sun, 22 Nov 2026 21:29:51 -0800
-Message-ID: <20261123052953.3658549-95-khem.raj@oss.qualcomm.com>
+Subject: [meta-webserver][PATCH 3/3] xdebug: upgrade 3.5.3 -> 3.6.0alpha1
+Date: Sun, 22 Nov 2026 21:29:50 -0800
+Message-ID: <20261123052953.3658549-94-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.1
 In-Reply-To: <20261123052953.3658549-1-khem.raj@oss.qualcomm.com>
 References: <20261123052953.3658549-1-khem.raj@oss.qualcomm.com>
@@ -67,72 +67,50 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Mon, 23 Nov 2026 05:31:54 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132882
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132881
 Content-Type: text/plain; charset="utf-8"
 
-- Add context-menu cursor and update aliases for current Breeze,
-  Adwaita and HTML5 browser cursors
-- Remove arrow aliases that broke Plasma on Wayland
-- Fix col-resize/row-resize aliases and a stray pixel in Black theme
-- Add a make install script; repackage for KDE installation
+First alpha of the 3.6 series:
+- Add support for PHP 8.6; drop support for PHP 8.0 and 8.1
+- Remove INI entries for changed and removed Xdebug 2 settings
+- Code coverage overhauled to fix inconsistent branch/path data
+- Reinit debugger per request in FrankenPHP worker mode
+- Fix multiple_sessions DBGp feature, a potential crash with
+  breakpoint line tracking, and the reported systemd private /tmp path
 
-The theme is maintained on GitHub now, and the exherbo mirror only has
-the 1.2.4 tarball. Fetch the v1.2.9 tag from git and build the themes
-with the upstream Makefile, which renders them with icon-slicer, instead
-of unpacking the prebuilt per-theme tarballs of the old release. Copy
-the built themes in do_install: the Makefile's install target moves
-them and keeps the build user's ownership. The installed themes are
-unchanged.
+3.5.3 refuses to build against PHP 8.6; 3.6.0alpha1 is the first
+release that supports it. Use 3.6.0~alpha1 as PV so that the final
+3.6.0 release sorts higher.
 
-Add UPSTREAM_CHECK_GITTAGREGEX for the vX.Y.Z tags. The COPYING change
-is only the copyright year.
-
-License-Update: copyright year updated in COPYING
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- .../{openzone_1.2.4.bb => openzone_1.2.9.bb}  | 20 +++++++++----------
- 1 file changed, 9 insertions(+), 11 deletions(-)
- rename meta-xfce/recipes-art/cursor-themes/{openzone_1.2.4.bb => openzone_1.2.9.bb} (54%)
+ .../xdebug/{xdebug_3.5.3.bb => xdebug_3.6.0alpha1.bb}  | 10 ++++++++--
+ 1 file changed, 8 insertions(+), 2 deletions(-)
+ rename meta-webserver/recipes-php/xdebug/{xdebug_3.5.3.bb => xdebug_3.6.0alpha1.bb} (76%)
 
-diff --git a/meta-xfce/recipes-art/cursor-themes/openzone_1.2.4.bb b/meta-xfce/recipes-art/cursor-themes/openzone_1.2.9.bb
-similarity index 54%
-rename from meta-xfce/recipes-art/cursor-themes/openzone_1.2.4.bb
-rename to meta-xfce/recipes-art/cursor-themes/openzone_1.2.9.bb
-index 8ba962fbd4..c32c8cf2c4 100644
---- a/meta-xfce/recipes-art/cursor-themes/openzone_1.2.4.bb
-+++ b/meta-xfce/recipes-art/cursor-themes/openzone_1.2.9.bb
-@@ -1,24 +1,22 @@
- SUMMARY = "X11 Mouse Theme"
--HOMEPAGE = "http://xfce-look.org/content/show.php/OpenZone?content=111343"
-+HOMEPAGE = "https://github.com/ducakar/openzone-cursors"
- SECTION = "x11/wm"
- LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://COPYING;md5=a4dd0d1066e1f1224b3bc4bbb206b754"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=15c85787ab411af36a78dfc20fdf7793"
+diff --git a/meta-webserver/recipes-php/xdebug/xdebug_3.5.3.bb b/meta-webserver/recipes-php/xdebug/xdebug_3.6.0alpha1.bb
+similarity index 76%
+rename from meta-webserver/recipes-php/xdebug/xdebug_3.5.3.bb
+rename to meta-webserver/recipes-php/xdebug/xdebug_3.6.0alpha1.bb
+index 6d18d7efe8..e7c996662d 100644
+--- a/meta-webserver/recipes-php/xdebug/xdebug_3.5.3.bb
++++ b/meta-webserver/recipes-php/xdebug/xdebug_3.6.0alpha1.bb
+@@ -5,9 +5,15 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=afd6ce4aa04fdc346e5b3c6e634bd75c"
  
--inherit allarch gtk-icon-cache
-+DEPENDS = "icon-slicer-native"
+ DEPENDS = "php re2c-native"
  
--SRC_URI = "https://mirrors.dotsrc.org/mirrors/exherbo/111343-OpenZone-${PV}.tar.xz"
--SRC_URI[sha256sum] = "db6fa6d0798aceb56998ce81382fa2246c77911d56b3b06e6aadee4cf5b4816e"
-+inherit allarch gtk-icon-cache
+-SRC_URI = "https://xdebug.org/files/xdebug-${PV}.tgz"
++# 3.6.0alpha1 is the first release that supports PHP 8.6
++PV = "3.6.0~alpha1"
++XDEBUG_VERSION = "3.6.0alpha1"
  
--S = "${UNPACKDIR}/OpenZone"
-+SRC_URI = "git://github.com/ducakar/openzone-cursors.git;protocol=https;branch=master;tag=v${PV}"
-+SRCREV = "18d11a476536fbf4d69bb981c4af934a44c95fc4"
+-SRC_URI[sha256sum] = "f073de91bea046106abf4d6071c963ea71e58571df6ce58948ceca89d121cb2d"
++SRC_URI = "https://xdebug.org/files/xdebug-${XDEBUG_VERSION}.tgz"
++
++SRC_URI[sha256sum] = "5f464dfbba2f2aec384f9a10cb42cbfb2b3c07274b70491c46080b707271fcde"
++
++S = "${UNPACKDIR}/xdebug-${XDEBUG_VERSION}"
  
--do_compile() {
--}
-+UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
- 
-+# The Makefile's install target moves the themes and keeps the build user's ownership
- do_install() {
-     install -d ${D}${datadir}/icons
--    for theme in `find -name '*.tar.xz'`; do
--        tar -Jxf ${theme} -C ${D}${datadir}/icons
--    done
-+    cp -R --no-preserve=ownership ${B}/OpenZone_* ${D}${datadir}/icons/
- }
- 
- python populate_packages:prepend () {
+ UPSTREAM_CHECK_URI = "https://github.com/xdebug/xdebug/releases"
+ UPSTREAM_CHECK_REGEX = "releases/tag/(?P<pver>\d+(\.\d+)+)$"
