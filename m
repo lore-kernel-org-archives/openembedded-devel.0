@@ -1,122 +1,102 @@
-Received: from metis.whiteo.stw.pengutronix.de (metis.whiteo.stw.pengutronix.de [185.203.201.7])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.51414.1795428941511640790
+Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com [209.85.128.45])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.51566.1795430145803479525
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 23 Nov 2026 02:15:42 -0800
+ Mon, 23 Nov 2026 02:35:46 -0800
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: pengutronix.de, ip: 185.203.201.7, mailfrom: f.pflug@pengutronix.de)
-Received: from dude06.red.stw.pengutronix.de ([2a0a:edc0:0:1101:1d::5c])
-	by metis.whiteo.stw.pengutronix.de with esmtp (Exim 4.92)
-	(envelope-from <f.pflug@pengutronix.de>)
-	id 1xVR5H-0002SX-G4; Mon, 23 Nov 2026 11:15:39 +0100
-From: Fabian Pflug <f.pflug@pengutronix.de>
+ dkim=pass header.i=@konsulko.com header.s=google header.b=q/N/nbw+;
+ spf=pass (domain: konsulko.com, ip: 209.85.128.45, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-wm1-f45.google.com with SMTP id 5b1f17b1804b1-4a207b02a2cso21872235e9.1
+        for <openembedded-devel@lists.openembedded.org>; Mon, 23 Nov 2026 02:35:45 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=konsulko.com; s=google; t=1795430144; x=1796034944; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=YieijP6nK797ulk5vFMbojuJm7lIn7fPabZu1cotYxk=;
+        b=q/N/nbw+NRyY6v3w6bwRepV0Ao/qprr6UtV11crAdLg4wV8xGXeCSeZjBwcZVxnwmD
+         gftEMJcyf+5TPYbhlQeFB+Pgp/6swkKbAs1JKKrScIKhEtBfbV3N6Rie4UPYhL0b97r5
+         j+wqXPHpB3Jz+XMTXd3llD016CDydpefCYWos=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1795430144; x=1796034944;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=YieijP6nK797ulk5vFMbojuJm7lIn7fPabZu1cotYxk=;
+        b=Cclr1SankhbFNYaiq2YbZrSZMCNX3jae4IW+vH0wajb3IhGa6LizwLRS9QtKYA96pn
+         vNB0jm+fs3d73wq+CdqAcv5ti9KJ1d40GCB5TJlx74KBDN6rxTgbaeMi1W4Jp4OVfyxi
+         vEq8bgP+UF0Gj+nUmZW4t+FIrxyhLZ/l678bjooxNPGErVkIvaPGg6e7/r2NxHeg6Fqe
+         P+FK5JqTwjm/VzGcnnpqKXKp0SrvwCdnHHCovduB9un4FNMZTpXX4vRR45r7xD3i0kKZ
+         KlyeKBBge2kIcZ46fNZWPhDDbjSjJjceigfeMkv5fG59stRnviWUTyDgDkKaqwpJhoXu
+         zPpg==
+X-Gm-Message-State: APuU4Z8I5CFZKnQOKpq/sIycOMUpyHwesCgRaBg7H8knB7TwhdXuzKNc
+	/h2eMZinlDubuPMH/cIqPQTtJIiv3sNaCJ9oXxeJRC4r10/Dk64NCqmSAIgGaXd7khzNSMQzObF
+	EswJC
+X-Gm-Gg: AZFdTZfGKe0n/T36suKQ7p9I9iPJaQ3Wv9z36dJu0Dji1HhLNfbCJZT4f36Okh0dFhg
+	GZoQJOtZtTdWwBxQwbwLF5lgvYinXFR3peT5FNTGqh55oRXeHbzo6c8C85Xp+AU5heQEDFYK0lC
+	NY5rCA434im4D1l9myjK2SEUNLEe1nsg4nS0e8pG4XavID3lm+9DmMuMDkb3DLzLgscnwGfSsk5
+	/X0NqhwxNmXSkXyL2sQn/v+1ocpuQjZIxu0gtxHlvngYWBrjvXcB8sbjXSStalIZpSzqQ6t1/Zk
+	M1fZA9AK56zNm/46wymfvcOZSCq3E7O7bX0AF1VfPBHWL7oH4nGHtCp23Mdmal7OM7rmqKDdazx
+	WrX/Rdewbz0SvdWorWKqJxyTz5QZtNjod4PuDLiJSAAEn1bdX1hBQU1TZC5Eh7BaD1NSzSMRzZJ
+	kjgCxqnEdqpb0sdx6N8GzUj88QFOqtV6+Xv3ROtfhP9O+JrfMQDRAncVndbRWdLAhxHcvzpuOl7
+	dNaulyKIzwRx2Ls+WLNjbrpchNO/Rcn6y95uod9n0wAQaCgAmaKY4acO3xUZcU1xUph/1hYhNcD
+	rrzowhT8l6Ez9kWcogmW6ukYCYu5zhmY1SVduuJZJ3brJx2m2O3WI2yF/ndtJ4HMol3faMz3zzl
+	Y2rvbRbbxYQg9V0cgK3jOqJOalLM/TwJgCM+hYkixjNG/YOUpXVwpDeYjof8OFiNlbwiW0rogJV
+	Q=
+X-Received: by 2002:a05:600c:1547:b0:4a2:397:73f6 with SMTP id 5b1f17b1804b1-4bb8880974amr253600435e9.8.1795430143736;
+        Mon, 23 Nov 2026 02:35:43 -0800 (PST)
+Return-Path: <leon.anavi@konsulko.com>
+Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4bb8849e598sm300120265e9.8.2026.11.23.02.35.42
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 23 Nov 2026 02:35:43 -0800 (PST)
+From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: yocto@pengutronix.de
-Subject: [meta-initramfs][PATCH] rsinit: add recipe for /init written in rust
-Date: Mon, 23 Nov 2026 11:14:38 +0100
-Message-ID: <20261123101533.3325486-1-f.pflug@pengutronix.de>
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH] python3-rstr: Upgrade 3.2.2 -> 4.0.0
+Date: Mon, 23 Nov 2026 12:35:40 +0200
+Message-ID: <20261123103540.3599606-1-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.47.3
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-SA-Exim-Connect-IP: 2a0a:edc0:0:1101:1d::5c
-X-SA-Exim-Mail-From: f.pflug@pengutronix.de
-X-SA-Exim-Scanned: No (on metis.whiteo.stw.pengutronix.de); SAEximRunCond expanded to false
-X-PTX-Original-Recipient: openembedded-devel@lists.openembedded.org
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Mon, 23 Nov 2026 10:15:43 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132886
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Mon, 23 Nov 2026 10:35:53 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132887
 Content-Type: text/plain; charset="utf-8"
 
-rsinit speeds up the boot by not having to parse all the bash scripts
-currently used in the initramfs and replacing it with a single binary
-written in rust.
+Upgrade to release 4.0.0:
 
-Signed-off-by: Fabian Pflug <f.pflug@pengutronix.de>
+- Refactor: Xeger and Rstr are distinct, Xeger no longer inherits
+  from XegerBase
+- Default to use SystemRandom() CSPRNG
+- Expose star_plus_limit as a property on Xeger
+- Fix error when regex specified a repeat larger than the star_plus
+  limit
+- Behavior change: explicit repeats (e.g. `a{1000}`) are not
+  restricted by star_plus_limit
+- Drops support for Pythons 3.7, 3.8, 3.9, 3.10 adds support for
+  3.12, 3.13, 3.14, 3.15, 3.16.
+
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../recipes-core/rsinit/rsinit-crates.inc     | 36 +++++++++++++++++++
- .../recipes-core/rsinit/rsinit_v0.1.0.bb      | 31 ++++++++++++++++
- 2 files changed, 67 insertions(+)
- create mode 100644 meta-initramfs/recipes-core/rsinit/rsinit-crates.inc
- create mode 100644 meta-initramfs/recipes-core/rsinit/rsinit_v0.1.0.bb
+ .../python/{python3-rstr_3.2.2.bb => python3-rstr_4.0.0.bb}     | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-rstr_3.2.2.bb => python3-rstr_4.0.0.bb} (80%)
 
-diff --git a/meta-initramfs/recipes-core/rsinit/rsinit-crates.inc b/meta-initramfs/recipes-core/rsinit/rsinit-crates.inc
-new file mode 100644
-index 0000000000..9970c4a913
---- /dev/null
-+++ b/meta-initramfs/recipes-core/rsinit/rsinit-crates.inc
-@@ -0,0 +1,36 @@
-+# Autogenerated with 'bitbake -c update_crates rsinit'
-+
-+# from Cargo.lock
-+SRC_URI += " \
-+    crate://crates.io/bitflags/2.13.0 \
-+    crate://crates.io/cfg-if/1.0.4 \
-+    crate://crates.io/cfg_aliases/0.2.1 \
-+    crate://crates.io/getrandom/0.2.17 \
-+    crate://crates.io/git-version/0.3.9 \
-+    crate://crates.io/git-version-macro/0.3.9 \
-+    crate://crates.io/json/0.12.4 \
-+    crate://crates.io/libc/0.2.186 \
-+    crate://crates.io/log/0.4.32 \
-+    crate://crates.io/nix/0.31.3 \
-+    crate://crates.io/proc-macro2/1.0.106 \
-+    crate://crates.io/quote/1.0.45 \
-+    crate://crates.io/syn/2.0.118 \
-+    crate://crates.io/unicode-ident/1.0.24 \
-+    crate://crates.io/wasi/0.11.1+wasi-snapshot-preview1 \
-+"
-+
-+SRC_URI[bitflags-2.13.0.sha256sum] = "b4388bee8683e3d04af747c73422af53102d2bd24d9eadb6cbc100baef4b43f8"
-+SRC_URI[cfg-if-1.0.4.sha256sum] = "9330f8b2ff13f34540b44e946ef35111825727b38d33286ef986142615121801"
-+SRC_URI[cfg_aliases-0.2.1.sha256sum] = "613afe47fcd5fac7ccf1db93babcb082c5994d996f20b8b159f2ad1658eb5724"
-+SRC_URI[getrandom-0.2.17.sha256sum] = "ff2abc00be7fca6ebc474524697ae276ad847ad0a6b3faa4bcb027e9a4614ad0"
-+SRC_URI[git-version-0.3.9.sha256sum] = "1ad568aa3db0fcbc81f2f116137f263d7304f512a1209b35b85150d3ef88ad19"
-+SRC_URI[git-version-macro-0.3.9.sha256sum] = "53010ccb100b96a67bc32c0175f0ed1426b31b655d562898e57325f81c023ac0"
-+SRC_URI[json-0.12.4.sha256sum] = "078e285eafdfb6c4b434e0d31e8cfcb5115b651496faca5749b88fafd4f23bfd"
-+SRC_URI[libc-0.2.186.sha256sum] = "68ab91017fe16c622486840e4c83c9a37afeff978bd239b5293d61ece587de66"
-+SRC_URI[log-0.4.32.sha256sum] = "953f07c43838f8e6f9758cab68bf5bed85465e7587ebe0b823f1bcd81978ad3a"
-+SRC_URI[nix-0.31.3.sha256sum] = "cf20d2fde8ff38632c426f1165ed7436270b44f199fc55284c38276f9db47c3d"
-+SRC_URI[proc-macro2-1.0.106.sha256sum] = "8fd00f0bb2e90d81d1044c2b32617f68fcb9fa3bb7640c23e9c748e53fb30934"
-+SRC_URI[quote-1.0.45.sha256sum] = "41f2619966050689382d2b44f664f4bc593e129785a36d6ee376ddf37259b924"
-+SRC_URI[syn-2.0.118.sha256sum] = "1b9ae57f904213ebb649ce6895b8a66c66f0203b9319718f69a5612a065b1422"
-+SRC_URI[unicode-ident-1.0.24.sha256sum] = "e6e4313cd5fcd3dad5cafa179702e2b244f760991f45397d14d4ebf38247da75"
-+SRC_URI[wasi-0.11.1+wasi-snapshot-preview1.sha256sum] = "ccf3ec651a847eb01de73ccad15eb7d99f80485de043efb2f370cd654f4ea44b"
-diff --git a/meta-initramfs/recipes-core/rsinit/rsinit_v0.1.0.bb b/meta-initramfs/recipes-core/rsinit/rsinit_v0.1.0.bb
-new file mode 100644
-index 0000000000..e2c5e71d54
---- /dev/null
-+++ b/meta-initramfs/recipes-core/rsinit/rsinit_v0.1.0.bb
-@@ -0,0 +1,31 @@
-+SUMMARY = "minimalistic init written in rust"
-+DESCRIPTION = "rsinit is a minimalistic single binary init for the initramfs for embedded systems"
-+HOMEPAGE = "https://github.com/pengutronix/rsinit"
-+
-+LICENSE = "GPL-2.0-only AND CC0-1.0"
-+LIC_FILES_CHKSUM = "file://LICENSES/GPL-2.0-only.txt;md5=570a9b3749dd0463a1778803b12a6dce \
-+                    file://LICENSES/CC0-1.0.txt;md5=65d3616852dbf7b1a6d4b53b00626032"
-+
-+SRC_URI = "git://github.com/pengutronix/rsinit.git;protocol=https;branch=main"
-+SRCREV = "${PV}"
-+
-+inherit cargo cargo-update-recipe-crates
-+
-+require ${BPN}-crates.inc
-+
-+INSANE_SKIP:${PN} += "already-stripped"
-+
-+PACKAGECONFIG ??= " \
-+    ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)} \
-+    reboot \
-+"
-+
-+PACKAGECONFIG[defaults] = ",--no-default-features"
-+PACKAGECONFIG[dmverity] = "--features dmverity"
-+PACKAGECONFIG[reboot] = "--features reboot-on-failure"
-+PACKAGECONFIG[systemd] = "--features systemd"
-+PACKAGECONFIG[usb9pfs] = "--features usb9pfs"
-+
-+# cargo installs everything into ${bindir}, which is normally /usr/bin.
-+# Not the best choice for the init system, which should reside under /init
-+bindir = ""
+diff --git a/meta-python/recipes-devtools/python/python3-rstr_3.2.2.bb b/meta-python/recipes-devtools/python/python3-rstr_4.0.0.bb
+similarity index 80%
+rename from meta-python/recipes-devtools/python/python3-rstr_3.2.2.bb
+rename to meta-python/recipes-devtools/python/python3-rstr_4.0.0.bb
+index 01c27127a8..f9803ab15b 100644
+--- a/meta-python/recipes-devtools/python/python3-rstr_3.2.2.bb
++++ b/meta-python/recipes-devtools/python/python3-rstr_4.0.0.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/leapfrogonline/rstr"
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=5c15c04f1cdbd42c6152066f0b02102a"
+ 
+-SRC_URI[sha256sum] = "c4a564d4dfb4472d931d145c43d1cf1ad78c24592142e7755b8866179eeac012"
++SRC_URI[sha256sum] = "1a1e7f304b0291edbc12955a9cb4093bfe1c7c1d48e0797e752bb3bf2a24574a"
+ 
+ inherit pypi python_setuptools_build_meta
+ 
 -- 
 2.47.3
 
