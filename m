@@ -1,157 +1,92 @@
-Received: from mail-dy1-f182.google.com (mail-dy1-f182.google.com [74.125.82.182])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.48368.1795411116900126878
+Received: from mail-dy1-f177.google.com (mail-dy1-f177.google.com [74.125.82.177])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.48001.1795411797908901972
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 22 Nov 2026 21:18:37 -0800
+ Sun, 22 Nov 2026 21:29:57 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@mvista.com header.s=google header.b=JXKtu8LS;
- spf=pass (domain: mvista.com, ip: 74.125.82.182, mailfrom: hprajapati@mvista.com)
-Received: by mail-dy1-f182.google.com with SMTP id 5a478bee46e88-3282db206d3so8789395eec.0
-        for <openembedded-devel@lists.openembedded.org>; Sun, 22 Nov 2026 21:18:36 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=AkOWnMMR;
+ spf=pass (domain: gmail.com, ip: 74.125.82.177, mailfrom: raj.khem@gmail.com)
+Received: by mail-dy1-f177.google.com with SMTP id 5a478bee46e88-385d8a00598so3933474eec.1
+        for <openembedded-devel@lists.openembedded.org>; Sun, 22 Nov 2026 21:29:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=mvista.com; s=google; t=1795411116; x=1796015916; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=nnNhsdIxJGONGvAXITY6ayQM3YgMN0YdozuqbqaWb4U=;
-        b=JXKtu8LSiIirfgXppnZRT4aSVEwcDfNu8OC+ES9iUKocpux0FLUyoBUEEa6b3MWGz4
-         bxz/WSWPZkDaXyRBIYPyi//+HjECyTR0gToeGLEkP/5NBmyxP1jBeIlmRwRi1Yd0zCqi
-         Qln1v4cXL+v5fgkwHFPqqbhi5Qiav4JGH3kcU=
+        d=gmail.com; s=20260707; t=1795411797; x=1796016597; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=rl42tKMNLtLNA1enHGhZinxfCFrGaSuRlYL8QJGoows=;
+        b=AkOWnMMRsS+m5M+0ywAFd5lWmGakP0B7n2CpOeCcfLh5yTZDmnK8w7ZGShOfpIL41B
+         vJpVaqv/CfEx0oUVn1k+d32HjtYbiK+0MHaOr3+fyFiIYZd3rwPfTL+0DNRVl8Ii0t6j
+         0JHRlhf/2UK8MVf+OroFlJmHBXWj2s6wb4Ds697YY3xRdv9E2ou9VYzDkS1tjK7V2t2s
+         dYMBiTzHs8wHAspIQxCU2n6vmvYGqrwjF3/VibhPXuhdn8N+ftY+An8mDx2Mt1mhfPZs
+         1+CroMC+3+/m8x7/rvhHrkupFDmnOyNW3zIo1aW8H6t6jt6dRZoPDQf/Wz1bTjIPJn7x
+         QSYg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795411116; x=1796015916;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=nnNhsdIxJGONGvAXITY6ayQM3YgMN0YdozuqbqaWb4U=;
-        b=SZSHc6uxE+qNPkFODRsfpRgPKmDWaKhWrNTImp1X38/qfo22DDcaAUjZ7k6IGgFSEw
-         l5mDu23NQUNLtIsVdbjdFncvUL1G9yHF2GXYIBVYKG4Gt8PqLziKSsDWyi1wUrXTYWuQ
-         /3FdSlRGRA8Eo10Jzip43ZTqO8YrEHPSobpuF4X/ePLfBEc/FD0prBeAnDBFGtYaKlBl
-         WJfzkSRnhaBnGid+04XvPhJcKa4qsQlkRR0iQ28M1WKtujS0xvYdO+u4woRKbP3LtGBo
-         ofrPUzToAIGTB21M/ir+ZhqPIqcoZOV5r7wcHk8VeX/1pcUHa+X+9/QibuZCIHOUSavM
-         ZBjg==
-X-Gm-Message-State: APuU4Z+tbcwlB1Dg7u69zhYGBe59D3G+2b+EQrvEsvsYzhFlP+te5+qN
-	NU2U92/K2Tjw6WD1IH4p2BBruueQeDeU9RryURhAbUAmrSFZUBuI9eXhCQp2+Hl7J63SJz5BX4V
-	0eRmUcXE=
-X-Gm-Gg: AZFdTZfOqpk6H17n2tPZQ2ThMyg5v3T2q4pKUVcqdC8pEfjUCGcjGXALsx9sHePc5RR
-	7QxnXjr1vrPMGUIWmedfHR2cr/NOEBfwVQaSvfavRRlauSljDZRbgiD9RANNIaj09vWSs0IM6Yv
-	/AQplM46sbhjaFZLGx9Rdz51iOaMG/ggW3LSTOMc5zwHvvaHlhMUBoysXyr7NLfFuTDCnkgSJsZ
-	tE1qkEjXet1SAGpODhSfVVbEaQPLHfuTRtdZo92+uNcADQZGn7YihWk3hHBwp1lwC1nRec1YPwW
-	HVi0nH6TJPL7LoWRyVz/d5Z7NtJwzcaxe/3Swn3EmDmE77LLiWtQPj03RZg0uUuMdYtsibOKQI5
-	i5nfi7i3GWS1Uo1w4DhQlovJaxcHWLMQMMC4XVqfY9c7KOYkTBr2in1Akgj+arJ4T8j00ryBaW5
-	7L8E12rwTrTsorjBkr15Py33fU7lCZOIPwUlv7vGyntsOfWvJ6Hmcxv5p9lZtsnXsoxoMcKoDwF
-	qrPzd5hX7bCYe/75I6CPpR1PpkdUgCEYJSpD92VaZfHhumibJJiNdbYPtBo0Uz0nXYZZq5MrOJh
-	gKHpvcFYSQ0WQXhjug4/vElsRUbr3WCeix3belk3
-X-Received: by 2002:a05:693c:41cf:10b0:370:a11f:dcb7 with SMTP id 5a478bee46e88-386b1067b60mr2102623eec.41.1795411116184;
-        Sun, 22 Nov 2026 21:18:36 -0800 (PST)
-Return-Path: <hprajapati@mvista.com>
-Received: from MVIN00013.mvista.com ([43.249.234.158])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-385646633d0sm54709673eec.3.2026.11.22.21.18.34
+        d=1e100.net; s=20260707; t=1795411797; x=1796016597;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=rl42tKMNLtLNA1enHGhZinxfCFrGaSuRlYL8QJGoows=;
+        b=ivOEpIfdnXCiw5TMbAoLjpRqN2OtrXPKFltNniP7R+Bi9lBIui4r5u36xNKSzlTBYA
+         CvK51L88s51xgE9tlbbeQwdmSuH++SWJSQxkYiWGTzVNThVFvhriVofCGN3jXfgo9H2j
+         hWverJjsAau0XDznxesAecMSGDl1NBtxzEXN+IcjHUCpeJI7JK5puRvux88xFcnONmGL
+         dAroSo13pMKeKD0qtZIU/9Qcpk+bTU/Qqm7d+Mjte7AhCo/iDy6DBO1Tp7O+OQV3SQey
+         YCKkqnAFh4nEglsbYviK2JwCMlS8wjQ+vQto6nP9/tYvWe+ckBarcFtdQMxEDaO9mADN
+         8vOg==
+X-Gm-Message-State: APuU4Z+lbUyZegvbS+8KfnSOKF551Pg2IuJXccyyTdIgFeWzHCz0dzWr
+	Si4uQ7Va/WAxi8GS9YKv62hETFsVfQTNctS4gJAOUR7JQx/j9gh8i7CPVfBLto3fZ+o=
+X-Gm-Gg: AZFdTZdzH45PBn73Vr0ra7mHAeZVaSRNi3ClF7yV0hIV/D199RdsSU0aBGFm7ZpVz9J
+	TgppjjcHMHiNh4BUi4xTkEG0Ust2DPfDE9ccfTzQkUOG0CGLhZf6dKTwUMoPnsE6GToRY2bi57U
+	JTrWVSjisbkbjLZx3gINHF/TB2U1OBT3oYz3CcF5W5NPVYgr0sujUVDp60a5pYZNNkO59Oc13Q+
+	S3zKnw4L3TuSGYDKeW+BKeyRUuqACEqJFEo5pS/VPBxrfu1M4aagk+UmX7dsobuI6iHIuDNGxEE
+	wzuILk2oA6Y38TtlVysUheBr/ooyfvoRKAXYj3tdQY9VFRcD/F6Tqhn801AoXNV3hNAuFtIS24/
+	eh308Ym4DBL995BAhPws/yL4YlpQmFT60MZxxBAkMyYG0qd8dpATuzm9qP0egcLgIVHFZTu/Z7y
+	5F74M97a19oBD1rybc32DPUi9ntp8YiSdMuker9pHt2ZYCV/mSskWmvSPk3s+liDg5e7sO+640G
+	4ZFI1s/sapupHaXwWXaYVeSuZc40e8Zuris2iu69JO0/o80JUdB6+JQIBbttc59OgAngz6IC4Uq
+	wbJkojtyeAn6Wm9h101u45qMtcQoSd2GwZchFHTG4/ijjoDS1vMzdASv0SNpK7wrDQL3AJJq1H0
+	BtgIU2afsAwvKPShzFkE2XNykwEsVy8owzCUJoTzzFxhVVznzYPfor2aWm1cUzh3CrWZvuD6tCS
+	cAf0piRJIhzzLd5eUek5ZYu9GxZJrVtDQmWaGxWlLIRre5o7F8ZLxGX8ukUGKWbbYFlcFCpogw/
+	nFCDI+I2LWTh8aGkSWiXQ0qCYUX1pw/n9UZgctw/+zlu9wpr8iMth7dGqtq5eDGUZMzxqKyONWO
+	VXk0
+X-Received: by 2002:a05:7300:fb97:b0:381:6ac8:ef2e with SMTP id 5a478bee46e88-3856ff5db0bmr14854577eec.25.1795411796988;
+        Sun, 22 Nov 2026 21:29:56 -0800 (PST)
+Return-Path: <raj.khem@gmail.com>
+Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-38567cafec4sm36573136eec.26.2026.11.22.21.29.55
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 22 Nov 2026 21:18:35 -0800 (PST)
-From: Hitendra Prajapati <hprajapati@mvista.com>
+        Sun, 22 Nov 2026 21:29:56 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
+X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Hitendra Prajapati <hprajapati@mvista.com>
-Subject: [meta-oe][scarthgap][PATCH 2/2] libdbi-perl: fix for CVE-2026-88816
-Date: Mon, 23 Nov 2026 10:48:21 +0530
-Message-ID: <20261123051821.43934-2-hprajapati@mvista.com>
-X-Mailer: git-send-email 2.50.1
-In-Reply-To: <20261123051821.43934-1-hprajapati@mvista.com>
-References: <20261123051821.43934-1-hprajapati@mvista.com>
+Cc: Khem Raj <khem.raj@oss.qualcomm.com>
+Subject: [meta-filesystems][PATCH 0/2] exfatprogs upgrade, remove logfsprogs
+Date: Sun, 22 Nov 2026 21:28:17 -0800
+Message-ID: <20261123052953.3658549-1-khem.raj@oss.qualcomm.com>
+X-Mailer: git-send-email 2.56.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Mon, 23 Nov 2026 05:18:44 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132787
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Mon, 23 Nov 2026 05:30:04 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132788
 Content-Type: text/plain; charset="utf-8"
 
-Pick the patch from [1], also referenced in the Debian report [2].
+Upgrade exfatprogs and remove logfsprogs, which has had no upstream commits
+since 2012 and whose filesystem was removed from Linux in 4.15.
 
-[1] https://github.com/perl5-dbi/dbi/commit/70962570212dc60a5428098cf2a0462ad5945851
-[2] https://security-tracker.debian.org/tracker/CVE-2026-88816
+Tested in Yoe CI with world builds for qemuarm64, qemuriscv64 and qemux86-64 and
+ptest images for qemuarm64 and qemux86-64, each with glibc/systemd and musl/sysvinit.
 
-Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
----
- .../perl/libdbi-perl/CVE-2026-88816.patch     | 59 +++++++++++++++++++
- .../perl/libdbi-perl_1.643.bb                 |  1 +
- 2 files changed, 60 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/perl/libdbi-perl/CVE-2026-88816.patch
+Khem Raj (2):
+  exfatprogs: upgrade 1.4.4 -> 1.4.5
+  logfsprogs: Remove recipe
 
-diff --git a/meta-oe/recipes-devtools/perl/libdbi-perl/CVE-2026-88816.patch b/meta-oe/recipes-devtools/perl/libdbi-perl/CVE-2026-88816.patch
-new file mode 100644
-index 0000000000..b4b0ddf32e
---- /dev/null
-+++ b/meta-oe/recipes-devtools/perl/libdbi-perl/CVE-2026-88816.patch
-@@ -0,0 +1,59 @@
-+From: "H.Merijn Brand - Tux" <linux@tux.freedom.nl>
-+Date: Thu, 10 Sep 2026 11:26:24 +0200
-+Subject: Fix FetchHashKeyName on IV/NV (CVE-2026-88816) (reported by Raj)
-+
-+Origin: https://github.com/perl5-dbi/dbi/commit/70962570212dc60a5428098cf2a0462ad5945851
-+Bug-Debian-Security: https://security-tracker.debian.org/tracker/CVE-2026-88816
-+
-+Backport Changes:
-+
-+The changes to ChangeLog, dbixs_rev.h, t/90sql_type_cast.t and lib/DBI/Changes.pm have been
-+omitted because they are not applicable to our current version.
-+Therefore, these files are not included in this patch.
-+
-+CVE: CVE-2026-88816
-+Upstream-Status: Backport [https://github.com/perl5-dbi/dbi/commit/70962570212dc60a5428098cf2a0462ad5945851]
-+Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
-+---
-+ DBI.xs      |  2 +-
-+ t/06attrs.t | 11 +++++++++++
-+ 2 files changed, 12 insertions(+), 1 deletion(-)
-+
-+diff --git a/DBI.xs b/DBI.xs
-+index 53889f0..5b770ef 100644
-+--- a/DBI.xs
-++++ b/DBI.xs
-+@@ -5332,7 +5332,7 @@ fetchrow_hashref(sth, keyattrib=Nullch)
-+     if (!keyattrib || !*keyattrib) {
-+         SV *kn = DBIc_FetchHashKeyName(imp_sth);
-+         if (kn && SvOK(kn))
-+-            keyattrib = SvPVX(kn);
-++            keyattrib = SvPV_nolen(kn); /* Also force stringification */
-+         else
-+             keyattrib = "NAME";
-+     }
-+diff --git a/t/06attrs.t b/t/06attrs.t
-+index 835e7db..37dad15 100644
-+--- a/t/06attrs.t
-++++ b/t/06attrs.t
-+@@ -328,6 +328,17 @@ check_inherited($drh, "ReadOnly", 1, 0);
-+ 
-+ }
-+ 
-++{   # CVE-2026-88816
-++    my $h = DBI->connect("dbi:ExampleP:", "", "", { RaiseError => 0, PrintError => 0 });
-++    $dbh->{FetchHashKeyName} = 42;
-++    my $s = $dbh->prepare("select mode,size,name from .");
-++    $s->execute;
-++    my @err;
-++    local $SIG{__DIE__} = sub { push @err => @_ };
-++    eval { $s->fetchrow_hashref; };
-++    like($err[0], qr{Can't use (?:attribute '42'|an undefined)}, "Invalid HashKeyName");
-++}
-++
-+ done_testing();
-+ 
-+ 1;
-+-- 
-+2.50.1
-+
-diff --git a/meta-oe/recipes-devtools/perl/libdbi-perl_1.643.bb b/meta-oe/recipes-devtools/perl/libdbi-perl_1.643.bb
-index 5328d6b8bd..3072ba76f8 100644
---- a/meta-oe/recipes-devtools/perl/libdbi-perl_1.643.bb
-+++ b/meta-oe/recipes-devtools/perl/libdbi-perl_1.643.bb
-@@ -20,6 +20,7 @@ SRC_URI = "http://search.cpan.org/CPAN/authors/id/T/TI/TIMB/DBI-${PV}.tar.gz \
-            file://CVE-2026-14739.patch \
-            file://CVE-2026-14740.patch \
-            file://CVE-2026-88815.patch \
-+           file://CVE-2026-88816.patch \
-            "
- SRC_URI[md5sum] = "352f80b1e23769c116082a90905d7398"
- SRC_URI[sha256sum] = "8a2b993db560a2c373c174ee976a51027dd780ec766ae17620c20393d2e836fa"
--- 
-2.50.1
+ .../0001-Add-LDFLAGS-to-linker-cmdline.patch  |  48 ------
+ ...licts-with-libc-namespace-about-setk.patch | 137 ------------------
+ ...smacros.h-for-major-minor-definition.patch |  24 ---
+ .../logfsprogs/logfsprogs_git.bb              |  29 ----
+ .../packagegroup-meta-filesystems.bb          |   1 -
+ ...xfatprogs_1.4.4.bb => exfatprogs_1.4.5.bb} |   2 +-
+ 6 files changed, 1 insertion(+), 240 deletions(-)
+ delete mode 100644 meta-filesystems/recipes-filesystems/logfsprogs/logfsprogs/0001-Add-LDFLAGS-to-linker-cmdline.patch
+ delete mode 100644 meta-filesystems/recipes-filesystems/logfsprogs/logfsprogs/0001-btree-Avoid-conflicts-with-libc-namespace-about-setk.patch
+ delete mode 100644 meta-filesystems/recipes-filesystems/logfsprogs/logfsprogs/0001-include-sys-sysmacros.h-for-major-minor-definition.patch
+ delete mode 100644 meta-filesystems/recipes-filesystems/logfsprogs/logfsprogs_git.bb
+ rename meta-filesystems/recipes-utils/exfatprogs/{exfatprogs_1.4.4.bb => exfatprogs_1.4.5.bb} (93%)
 
