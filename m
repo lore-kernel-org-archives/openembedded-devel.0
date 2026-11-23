@@ -1,65 +1,65 @@
-Received: from mail-dy1-f170.google.com (mail-dy1-f170.google.com [74.125.82.170])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.48009.1795411812239621548
+Received: from mail-dy1-f179.google.com (mail-dy1-f179.google.com [74.125.82.179])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.48008.1795411810851430836
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 22 Nov 2026 21:30:12 -0800
+ Sun, 22 Nov 2026 21:30:10 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=hBS4gHzl;
- spf=pass (domain: gmail.com, ip: 74.125.82.170, mailfrom: raj.khem@gmail.com)
-Received: by mail-dy1-f170.google.com with SMTP id 5a478bee46e88-380c28f9e35so3961808eec.1
-        for <openembedded-devel@lists.openembedded.org>; Sun, 22 Nov 2026 21:30:12 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=hrYCKqmh;
+ spf=pass (domain: gmail.com, ip: 74.125.82.179, mailfrom: raj.khem@gmail.com)
+Received: by mail-dy1-f179.google.com with SMTP id 5a478bee46e88-385d8a00598so3933670eec.1
+        for <openembedded-devel@lists.openembedded.org>; Sun, 22 Nov 2026 21:30:10 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795411812; x=1796016612; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1795411810; x=1796016610; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=vCHmAnXap+Zyj7OMounKubRCkaskWgSdadrOFLDw3c4=;
-        b=hBS4gHzlvOozqDVjcDUGwkx9JrvbpN0oHCisAKmF52wtBoh9X0ihuSdevXWFfbWslf
-         ygcH/pP29ebzmqzTfqGja1DcYIT6l+eCNe+nbGPxnydJj3vCMQdiPDcb0bjy6wDVy3Fw
-         rHiAuPVr52Lbnkeqcdvi1gsxDlFWgtzsWo4OrYQeqVYpCW7YEm1uI6eA+ylgwIwEN26L
-         JNjiT10YqQERwbEqUeyGv/59oV9mkjzDX/DhKpJaqWnnk3TlrMWXbwM4OjxCThYBrfsB
-         aH66i/D5MZiy+haeByWTM6hF0ByxPlbq+ng61SkSuIlo6n9znhww5xLLu0uw/baEhQor
-         ZyiA==
+        bh=Hp0GyZdFGowS7JDF594gBi1Dx712cmO1wSGFKCqH6ws=;
+        b=hrYCKqmhWkEJlSPmn8WnTWj+7cPoRsgHA+ozmLnAIlpgdcL5+mgH+SMYD7hzlGI/Fb
+         +FbStcLJIcI4MEzarJ6UyCfmeqz+BQKgC5cUGaZ0QPojF2VBJZrqCtG4gsIuenwOrSi0
+         2GReRE+h1nJrn85XzWafKTFsM15935HitLOksorLoy4wefRFOOvgo41o8R+6COKg/tfS
+         uHYuIiUupUcdQ5ip/FOpkl6mCcfSDkoTvyGOJ/jbhJXzvUaZuILtGhbFKXcEgpmfNVQR
+         Z1QMouhhcuxHuzgYEAmRDR8wD//4iWdvfUijNxLbYexS+tPZV+wy+kHkg2wmz/Zo2C0n
+         Htbg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795411812; x=1796016612;
+        d=1e100.net; s=20260707; t=1795411810; x=1796016610;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=vCHmAnXap+Zyj7OMounKubRCkaskWgSdadrOFLDw3c4=;
-        b=Exde71woUCYqpfNMDjJGWsxa7Ny+GEcRHkoA/YhGkcxXWcaBdcyMCuASJGMFJnb2QY
-         b2a6SPlTBwju55W9RogvC2pgGLHnJK5IPlWQO93YqLTXzYQqYGG6zjpXSIR7mjVtc1G4
-         N5h2qoIX2IY60PP8PdaM5aNMkJFr+JQ7CuOVzVzRMktDFFV1LZ+95r9KRS9eCpfS6l5Q
-         fRYLY6DlPEzQU3loQHg0u03Ku6qoFSeiplnsHUjo7VVstbWSv0cLElWU5IjrwxxFMgJ9
-         vJmPKhTls/vg+Y7M2qJFsUx4vRZodR4aewpPMxtH5U+iNBf4iHi1wlUn+1zuAaGo8dlp
-         virw==
-X-Gm-Message-State: APuU4Z9rDh9qZecedqIuZ9XffmuBU6dMD6bKqM0QoAJ0TsOp2DUuSjSv
-	17k2unRkP3eu6Ex3ydwH2miXKruU2LkYgHbZucHvHqAX41hlZU+SRlNtIAKwKnLTKho=
-X-Gm-Gg: AZFdTZcuCL5rmMGpugy4F0E8vYmhJi8xA0QXiYUb2kMsxkDdy7lRBrJTI3RjHkuy3Xx
-	dPlBwTtdVudEEkIPWQSvo7vd+KKKvcoeqmF/51YqOhBkJsCir6Cs6bBtzGiJkAU2agRE8YS2Nhr
-	DJ1CtLxOlQ8poPZ06c4BpBH8Alw7SddIzKAJ7E7tzhObKND10ON8g2FbZB3DIvjhaUiwnqxi/3y
-	7rulS/cdWcWK/tKZNXYMHB9+M+x+8x+xkUDhvJy5nxNHuBofrkTGehzTfBVu4OxSnHZgolrTK7g
-	UFMMKMSxbAtVKzIkUmYc6fZ/RUkg+ViUksinyDxGVCa54DOmFIdHB0m5wi0yvnVRwEREqk+jnbO
-	0dDKhSILyQkJRpjH8MB5nGO0Kt9jegzu3cXznO96uuI28nTYgp7piTy4DhGUc5ImPtpOrj9YEJ8
-	22vMy2LUpKtwBqKXqbbA2u1a89MS3L8Wp4ZBVaz9bLb9Dzq4yvgm9xl9yeQxds5W3EUtXVWz4LP
-	s2A45/06mzkxaHgAZnt9LLf3dIfsWNSE+KYIcNRm2MlGcFiyhQMp+MVpehTw4IDn97br9Pu/jRM
-	hdTOScf6VyQXS4rA1LiPxzSTuT+woZF9bi0JlqWjIAIYe2vjHb3ZqgJdUsdEG16uTG+fN3EtLIf
-	GoZLoMVSrISK1Wtqziu+xtB8FYJExs7SdedJUZ0cxVdPtokbm1LfTG7b9Pxn2s4pjRBDsv/jAiy
-	0zxTbEuAw0nV6kDI/i0yvE0i/HiMLs7dmv5mNKU0BqGSPTL4gU015daTGq7ix5nvmtGzShgsLK6
-	M+QwJTXPAoQ2bcaAs9TGuh4VI2A37yGkIyAaYWcUTb+AIlSicxTvC5bLrmzmLpo12rZwUQoHfRq
-	B7jo
-X-Received: by 2002:a05:7301:8616:b0:385:9424:5c08 with SMTP id 5a478bee46e88-38594245c66mr11875095eec.4.1795411811519;
-        Sun, 22 Nov 2026 21:30:11 -0800 (PST)
+        bh=Hp0GyZdFGowS7JDF594gBi1Dx712cmO1wSGFKCqH6ws=;
+        b=Rj9Ah5fN71drFr9QAHpNpq43cp8jaYHeRT6uNrqaYw/TCR3aM3imnBfMbgJKwjXbi5
+         ghBHRxbTL39M9jIaZokaYJwe/bYP3itueCohpu5Om0ESh8x2rV9Ump8ZQN4dOqvE1/C0
+         +zeJ43RRJiH0R8h2svI/KFB34YQy/B05WIk6K5oXTzF8HrK+mOCLuliqv96J07dN8bvE
+         z/JnAf4nukcC4aPlWRqNUTF4wLMr3aNlkQatcA1KgKlJO0zbUU5T6zGczrEv+Xcwnuzs
+         yGbynFlIY3BFHRF2Jy3zbsuw0YXpNZS5GPCinLpQ8y4HcfJkWKi4g61uLHdvA5k8WuSS
+         RW+w==
+X-Gm-Message-State: APuU4Z932mWL4CZpCJaGf+wXdrxwQV/yKvRKHG/FR5ea2ef2k8DSQmeO
+	RdilnakdJI/ZXTRpQDyfJVzNRzNEG99w7rSwO2SucZX/vs3OR/jMm5BPa6q7GHBZTSE=
+X-Gm-Gg: AZFdTZc3XYdwlWGzq0K6VgppsoXWzqV/FKc507enmc6kdVs9wUMpUpCMbe1tFusrcOH
+	i9gohtXOR+CPuB04y2xo+52Y3o3TfLvQ5a5UjGU9UoXSWhA84kMtfrRLWgkV+vYvYNdeAgyMA7+
+	PeSt2ur6yjRriVhEd0kghhtop3mLZN9nyc0OCBvftQ2zUQ10sWeRlLPmUqZKaKQkREI3TYdi7h6
+	c/LC1C2eteXwGglJr+U3yTrP2jUvGGdLhc+SqcuikDvmEzunxu5muGS86h51Gq8Z0AalnUdpTGN
+	88zJXIseSDEiiEt+wNlVrkrOLjw29xd/nMERWMcHrGgZuvfxL0B71h4fll9dfI254PZNY9vJ5fj
+	h51BkQEi7BIYCwpYkgmjv3b1GL2oJWI4DWoUT5o+N/XDYYybkTj8wcrAP1/kwguzCtWsdU5nts1
+	okqvY5/SvdOYbz2ApZlmT+MqcHPZS2qrOAjPFUL4UYyRRwWGI1KPBrlGM+buT+taf6P4aCbkDQF
+	QL2g8dy4is669U14fsQnGvbt1k90gUIkxmoV3ura3LNcyokDYdEvVkue3i7Bn1hOvbPsZZqHiXt
+	lTCQ4ebk2y9wmPfpMbBNV57FbkO/sQiUlhWZhfjMB0BoYw3SS03VQxjomMARNcUaYm+oFx/elEw
+	K45ZWLoLqyaP8gytQd6er6ijeKklth+q6G1NgjHqxp45Wa6PT4R+K+SI67abMav56jVNCbK97Ud
+	3G5UBO79/1GaiihZH8y+vN4M71atsSXmIdOxbAX+gA1dTdWvc8qBkyKUSKj4AlcqRVJ+XS5Wx2e
+	rTA7DAL970MeQWyH+6pI2hId9BQwo+uYKejEX8JccmzPlMBv3NnpyJZN8hSMpS0REeSlFdMMdvZ
+	NfEvRb2LkAYZInjyGL76yWt6ng==
+X-Received: by 2002:a05:693c:83cf:10b0:386:b526:24d1 with SMTP id 5a478bee46e88-386b52638e1mr1017014eec.9.1795411810187;
+        Sun, 22 Nov 2026 21:30:10 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-38567cafec4sm36573136eec.26.2026.11.22.21.30.10
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-38567cafec4sm36573136eec.26.2026.11.22.21.30.08
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 22 Nov 2026 21:30:10 -0800 (PST)
+        Sun, 22 Nov 2026 21:30:09 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-multimedia][PATCH 1/6] dav1d: upgrade 1.5.4 -> 1.5.5
-Date: Sun, 22 Nov 2026 21:28:28 -0800
-Message-ID: <20261123052953.3658549-12-khem.raj@oss.qualcomm.com>
+Subject: [meta-multimedia][PATCH 0/6] Recipe upgrades and tinyalsa update
+Date: Sun, 22 Nov 2026 21:28:27 -0800
+Message-ID: <20261123052953.3658549-11-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.1
 In-Reply-To: <20261123052953.3658549-1-khem.raj@oss.qualcomm.com>
 References: <20261123052953.3658549-1-khem.raj@oss.qualcomm.com>
@@ -67,35 +67,35 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Mon, 23 Nov 2026 05:30:16 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132799
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132798
 Content-Type: text/plain; charset="utf-8"
 
-Minor release focused on optimizations: new and faster x86 (SSE,
-AVX2, AVX-512), AArch64 and RISC-V assembly for CDEF, loop filter,
-loop restoration, intra prediction and more, plus faster refmvs,
-palette and film grain code. Fixes an out-of-bounds read in high
-bitdepth SGR AVX-512 assembly and several allocation-failure paths.
+Upgrade dav1d, libsrtp, libupnp, mpd and ncmpc, and move tinyalsa to the tip of
+master, dropping a patch that upstream now carries.
 
-AI-Generated: Uses Claude Code
-Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
----
- .../recipes-multimedia/dav1d/{dav1d_1.5.4.bb => dav1d_1.5.5.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Tested in Yoe CI with world builds for qemuarm64, qemuriscv64 and qemux86-64 and
+ptest images for qemuarm64 and qemux86-64, each with glibc/systemd and musl/sysvinit.
+
+Khem Raj (6):
+  dav1d: upgrade 1.5.4 -> 1.5.5
+  libsrtp: upgrade 2.8.1 -> 2.8.2
+  libupnp: upgrade 22.2.2 -> 22.2.4
+  mpd: upgrade 0.24.19 -> 0.24.20
+  ncmpc: upgrade 0.54 -> 0.55
+  tinyalsa: Upgrade to tip of trunk
+
+ .../{libupnp_22.2.2.bb => libupnp_22.2.4.bb}  |  2 +-
+ .../dav1d/{dav1d_1.5.4.bb => dav1d_1.5.5.bb}  |  2 +-
+ .../{mpd_0.24.19.bb => mpd_0.24.20.bb}        |  2 +-
+ .../musicpd/{ncmpc_0.54.bb => ncmpc_0.55.bb}  |  2 +-
+ ...ioctl-to-dispatch-through-plugin-ops.patch | 36 -------------------
+ .../tinyalsa/tinyalsa_2.0.0.bb                |  7 ++--
+ .../{libsrtp_2.8.1.bb => libsrtp_2.8.2.bb}    |  2 +-
+ 7 files changed, 9 insertions(+), 44 deletions(-)
+ rename meta-multimedia/recipes-connectivity/libupnp/{libupnp_22.2.2.bb => libupnp_22.2.4.bb} (98%)
  rename meta-multimedia/recipes-multimedia/dav1d/{dav1d_1.5.4.bb => dav1d_1.5.5.bb} (91%)
+ rename meta-multimedia/recipes-multimedia/musicpd/{mpd_0.24.19.bb => mpd_0.24.20.bb} (98%)
+ rename meta-multimedia/recipes-multimedia/musicpd/{ncmpc_0.54.bb => ncmpc_0.55.bb} (96%)
+ delete mode 100644 meta-multimedia/recipes-multimedia/tinyalsa/tinyalsa/0002-pcm-fix-pcm_ioctl-to-dispatch-through-plugin-ops.patch
+ rename meta-multimedia/recipes-support/libsrtp/{libsrtp_2.8.1.bb => libsrtp_2.8.2.bb} (94%)
 
-diff --git a/meta-multimedia/recipes-multimedia/dav1d/dav1d_1.5.4.bb b/meta-multimedia/recipes-multimedia/dav1d/dav1d_1.5.5.bb
-similarity index 91%
-rename from meta-multimedia/recipes-multimedia/dav1d/dav1d_1.5.4.bb
-rename to meta-multimedia/recipes-multimedia/dav1d/dav1d_1.5.5.bb
-index ed45711b12..7fb7db3288 100644
---- a/meta-multimedia/recipes-multimedia/dav1d/dav1d_1.5.4.bb
-+++ b/meta-multimedia/recipes-multimedia/dav1d/dav1d_1.5.5.bb
-@@ -7,7 +7,7 @@ LICENSE = "BSD-2-Clause"
- LIC_FILES_CHKSUM = "file://COPYING;md5=48d9210a87a24f62609b5a4f777d8dfe"
- 
- SRC_URI = "git://code.videolan.org/videolan/dav1d.git;protocol=https;nobranch=1"
--SRCREV = "54706fc6bc0cdecab7e9593974a4039cc038fca7"
-+SRCREV = "6c7bee685677fd997a431302be4fea8ea4017606"
- 
- DEPENDS:append:x86 = " nasm-native"
- DEPENDS:append:x86-64 = " nasm-native"
