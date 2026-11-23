@@ -1,92 +1,111 @@
-Received: from mail-dy1-f177.google.com (mail-dy1-f177.google.com [74.125.82.177])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.48001.1795411797908901972
+Received: from mail-dy1-f176.google.com (mail-dy1-f176.google.com [74.125.82.176])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.48495.1795411802584411571
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 22 Nov 2026 21:29:57 -0800
+ Sun, 22 Nov 2026 21:30:02 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=AkOWnMMR;
- spf=pass (domain: gmail.com, ip: 74.125.82.177, mailfrom: raj.khem@gmail.com)
-Received: by mail-dy1-f177.google.com with SMTP id 5a478bee46e88-385d8a00598so3933474eec.1
-        for <openembedded-devel@lists.openembedded.org>; Sun, 22 Nov 2026 21:29:57 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=XazwW90y;
+ spf=pass (domain: gmail.com, ip: 74.125.82.176, mailfrom: raj.khem@gmail.com)
+Received: by mail-dy1-f176.google.com with SMTP id 5a478bee46e88-38190551625so6113815eec.1
+        for <openembedded-devel@lists.openembedded.org>; Sun, 22 Nov 2026 21:30:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795411797; x=1796016597; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=rl42tKMNLtLNA1enHGhZinxfCFrGaSuRlYL8QJGoows=;
-        b=AkOWnMMRsS+m5M+0ywAFd5lWmGakP0B7n2CpOeCcfLh5yTZDmnK8w7ZGShOfpIL41B
-         vJpVaqv/CfEx0oUVn1k+d32HjtYbiK+0MHaOr3+fyFiIYZd3rwPfTL+0DNRVl8Ii0t6j
-         0JHRlhf/2UK8MVf+OroFlJmHBXWj2s6wb4Ds697YY3xRdv9E2ou9VYzDkS1tjK7V2t2s
-         dYMBiTzHs8wHAspIQxCU2n6vmvYGqrwjF3/VibhPXuhdn8N+ftY+An8mDx2Mt1mhfPZs
-         1+CroMC+3+/m8x7/rvhHrkupFDmnOyNW3zIo1aW8H6t6jt6dRZoPDQf/Wz1bTjIPJn7x
-         QSYg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795411797; x=1796016597;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=gmail.com; s=20260707; t=1795411802; x=1796016602; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=rl42tKMNLtLNA1enHGhZinxfCFrGaSuRlYL8QJGoows=;
-        b=ivOEpIfdnXCiw5TMbAoLjpRqN2OtrXPKFltNniP7R+Bi9lBIui4r5u36xNKSzlTBYA
-         CvK51L88s51xgE9tlbbeQwdmSuH++SWJSQxkYiWGTzVNThVFvhriVofCGN3jXfgo9H2j
-         hWverJjsAau0XDznxesAecMSGDl1NBtxzEXN+IcjHUCpeJI7JK5puRvux88xFcnONmGL
-         dAroSo13pMKeKD0qtZIU/9Qcpk+bTU/Qqm7d+Mjte7AhCo/iDy6DBO1Tp7O+OQV3SQey
-         YCKkqnAFh4nEglsbYviK2JwCMlS8wjQ+vQto6nP9/tYvWe+ckBarcFtdQMxEDaO9mADN
-         8vOg==
-X-Gm-Message-State: APuU4Z+lbUyZegvbS+8KfnSOKF551Pg2IuJXccyyTdIgFeWzHCz0dzWr
-	Si4uQ7Va/WAxi8GS9YKv62hETFsVfQTNctS4gJAOUR7JQx/j9gh8i7CPVfBLto3fZ+o=
-X-Gm-Gg: AZFdTZdzH45PBn73Vr0ra7mHAeZVaSRNi3ClF7yV0hIV/D199RdsSU0aBGFm7ZpVz9J
-	TgppjjcHMHiNh4BUi4xTkEG0Ust2DPfDE9ccfTzQkUOG0CGLhZf6dKTwUMoPnsE6GToRY2bi57U
-	JTrWVSjisbkbjLZx3gINHF/TB2U1OBT3oYz3CcF5W5NPVYgr0sujUVDp60a5pYZNNkO59Oc13Q+
-	S3zKnw4L3TuSGYDKeW+BKeyRUuqACEqJFEo5pS/VPBxrfu1M4aagk+UmX7dsobuI6iHIuDNGxEE
-	wzuILk2oA6Y38TtlVysUheBr/ooyfvoRKAXYj3tdQY9VFRcD/F6Tqhn801AoXNV3hNAuFtIS24/
-	eh308Ym4DBL995BAhPws/yL4YlpQmFT60MZxxBAkMyYG0qd8dpATuzm9qP0egcLgIVHFZTu/Z7y
-	5F74M97a19oBD1rybc32DPUi9ntp8YiSdMuker9pHt2ZYCV/mSskWmvSPk3s+liDg5e7sO+640G
-	4ZFI1s/sapupHaXwWXaYVeSuZc40e8Zuris2iu69JO0/o80JUdB6+JQIBbttc59OgAngz6IC4Uq
-	wbJkojtyeAn6Wm9h101u45qMtcQoSd2GwZchFHTG4/ijjoDS1vMzdASv0SNpK7wrDQL3AJJq1H0
-	BtgIU2afsAwvKPShzFkE2XNykwEsVy8owzCUJoTzzFxhVVznzYPfor2aWm1cUzh3CrWZvuD6tCS
-	cAf0piRJIhzzLd5eUek5ZYu9GxZJrVtDQmWaGxWlLIRre5o7F8ZLxGX8ukUGKWbbYFlcFCpogw/
-	nFCDI+I2LWTh8aGkSWiXQ0qCYUX1pw/n9UZgctw/+zlu9wpr8iMth7dGqtq5eDGUZMzxqKyONWO
-	VXk0
-X-Received: by 2002:a05:7300:fb97:b0:381:6ac8:ef2e with SMTP id 5a478bee46e88-3856ff5db0bmr14854577eec.25.1795411796988;
-        Sun, 22 Nov 2026 21:29:56 -0800 (PST)
+        bh=N4aziPkAolk/cvy7z1jSle7KSkBPBsr+bitzyfjcKD8=;
+        b=XazwW90yjltBNjP8oEbNN9UzDyVtIKkxdDBwPJckTnegO/K6V/ZqwIvCe9F9P08GfH
+         TY2xni9AWVFsdgEtoY78xhrXL0sK3qshi7Jn3X6XyE4SZk+AfklRWawjYXbbxMmoPy/y
+         97AXbkJbBZ24BWvELMq2wMzAuqPlBMVETbt9ejDy0wTJMoccpxB8rlVEei6AS/34mzOf
+         +FKAm94dc006OpxtAt8mDOunZe6iBDZ4Hr1X2weGUcToCMjWJXQOWvUrwKJugkFHOq4y
+         kStdl7lxkESziCZfyIYxvqqntQW3CTO/Eg9lcbyfp6C9HJNID99qBQNhT9W5jSUThnyd
+         jruA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1795411802; x=1796016602;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=N4aziPkAolk/cvy7z1jSle7KSkBPBsr+bitzyfjcKD8=;
+        b=0Pfp8mCpZeBVRPwTRQ8z3Xiih2SZug8NrtYlaFPQ87Pw3lNxotyyk0EKBSf/v7RSta
+         yxFeGANQvCRHkwdkkmd5Lw+LlxY3weEOfZg9GAVd2+vz180++dssiB3DFgkByiXX4ORl
+         1GLifExAjVwKkW3y2+35BwEWq4R9w2z45g7yQgcS1/8LmvHJEVSZQuYfpKoQ1Zx4tVQS
+         gP3gFOzPUEj42GT612ASBEE0QSYgfGVtUAo3ElR0/LnV2J7YUY4XkSVMz0/EJgFA3b3l
+         Qgf18LknWrTnEse5OAEmSw2Ar0EyCWK/UzlaAjqsxzAL/6RkmvsaTEgi2iEWIBXpamvH
+         Unbg==
+X-Gm-Message-State: APuU4Z/HxwPSxrE6+nQ7bP59GUBK9kFlQx8GPNQVNh42OmJ6bpGLBojr
+	J5UZugcebILM6z8FeU3gBdXOOqVZzB+s27VjhCgsKnnsUGKVkLrMiPvRPoLAs6/peF8=
+X-Gm-Gg: AZFdTZdsPT/A2pPlHlOaXXJXlvA/u5vSv6SGn6/pQGcRKdMPnSdTaniWlY02NlOVOrx
+	oa874n2NoYiC7sZ3wIkpdTX0dlSn4C37bZf7t8EOhtkPYqVwjrwjtwbrSw/yMmCk6DnomYHO+5C
+	NARTHQijQmse9y09vxPqGx6ccE5DSb4jpwb5Nq3NGOsgn+slkTwJqMY7b7mYA9e67843LTEe1Rg
+	2C8XkwMVurkeI/Yz2lAaEhbutCBl52ZINqfo3uaR7u+ykQo+GQ1Zi0o6bYwFzbluhfgho9DN3p7
+	id3Pk4qgWNvD1u4StxU8EtLj/Xly9oRRL5sFLFqLOacx0YsJ+XfY5ui7fYp9GMX8uOFX03XA5+K
+	uZF2EzBHvi3k4SBOkQGJ983a29jcZ3xHRIPyKnpelj8Koub3xPHm7HxNs2iT83u6ZdCu6N22mXi
+	/s3G+Qk0jGmAPaaLvRMeW/t59bUT94UDZmKTzJJ5vggBIFEnZ/FCPzMN++DmplfelwxcRs0Yxlr
+	aTI4OE20guPt6srbrHT45tBeRz4DUBy7lCC4bhkpfKYKiSJe/yeB155YRhVSc1wRlHN1EMOfiTE
+	dTK7PmH/u/FsUz2yYAyc5YEC/aOvV32rpjyXFD5GqQjw2xmr+ddA+osr3fTQKmH+fYgkFqniOGi
+	1i6XeeEiAVSLxFCXR1Z0+97+YN6L5PxYRK7tNgoz5UDyAypj+5G/pE+gI7kVKieXLPzWOPQv8Gp
+	XmkJ2qQQggyd6CUHIRjjp1nAQcaMSPD9GzU6rH4Tgtov+3ObqLKUjBLFkdYfrpMW95n4mb5UV77
+	js9xQJowXhTTNbLCp468fBgsZ3FRenawEMaDZsSZ1JMby4EwbVcc81IC1Kma839Rdq8ciKK4eH5
+	ZB+UXnDbr5ldTcHz1DKgTNihfA==
+X-Received: by 2002:a05:7301:6188:10b0:386:9ba8:2864 with SMTP id 5a478bee46e88-3869ba82acfmr6396948eec.0.1795411801814;
+        Sun, 22 Nov 2026 21:30:01 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-38567cafec4sm36573136eec.26.2026.11.22.21.29.55
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-38567cafec4sm36573136eec.26.2026.11.22.21.30.00
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 22 Nov 2026 21:29:56 -0800 (PST)
+        Sun, 22 Nov 2026 21:30:01 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-filesystems][PATCH 0/2] exfatprogs upgrade, remove logfsprogs
-Date: Sun, 22 Nov 2026 21:28:17 -0800
-Message-ID: <20261123052953.3658549-1-khem.raj@oss.qualcomm.com>
+Subject: [meta-gnome][PATCH 1/5] convey: upgrade 50.2 -> 51.0
+Date: Sun, 22 Nov 2026 21:28:21 -0800
+Message-ID: <20261123052953.3658549-5-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.1
+In-Reply-To: <20261123052953.3658549-1-khem.raj@oss.qualcomm.com>
+References: <20261123052953.3658549-1-khem.raj@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Mon, 23 Nov 2026 05:30:04 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132788
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132792
 Content-Type: text/plain; charset="utf-8"
 
-Upgrade exfatprogs and remove logfsprogs, which has had no upstream commits
-since 2012 and whose filesystem was removed from Linux in 4.15.
+- New layout combining the conversation list and message viewer
+- PGP encryption/decryption with Autocrypt support
+- Per-sender-address signatures with formatting and images
+- Unread filter, list unsubscribe and Reply to List buttons, proper
+  spell-check and manual proxy configuration
+- Fixes for All Inboxes search, empty drafts, unread counts, mailto:
+  handling and rendering of long messages
 
-Tested in Yoe CI with world builds for qemuarm64, qemuriscv64 and qemux86-64 and
-ptest images for qemuarm64 and qemux86-64, each with glibc/systemd and musl/sysvinit.
+Upstream tags releases without the -1 suffix now.
 
-Khem Raj (2):
-  exfatprogs: upgrade 1.4.4 -> 1.4.5
-  logfsprogs: Remove recipe
+AI-Generated: Uses Claude Code
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+---
+ .../convey/{convey_50.2.bb => convey_51.0.bb}                 | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-gnome/recipes-connectivity/convey/{convey_50.2.bb => convey_51.0.bb} (95%)
 
- .../0001-Add-LDFLAGS-to-linker-cmdline.patch  |  48 ------
- ...licts-with-libc-namespace-about-setk.patch | 137 ------------------
- ...smacros.h-for-major-minor-definition.patch |  24 ---
- .../logfsprogs/logfsprogs_git.bb              |  29 ----
- .../packagegroup-meta-filesystems.bb          |   1 -
- ...xfatprogs_1.4.4.bb => exfatprogs_1.4.5.bb} |   2 +-
- 6 files changed, 1 insertion(+), 240 deletions(-)
- delete mode 100644 meta-filesystems/recipes-filesystems/logfsprogs/logfsprogs/0001-Add-LDFLAGS-to-linker-cmdline.patch
- delete mode 100644 meta-filesystems/recipes-filesystems/logfsprogs/logfsprogs/0001-btree-Avoid-conflicts-with-libc-namespace-about-setk.patch
- delete mode 100644 meta-filesystems/recipes-filesystems/logfsprogs/logfsprogs/0001-include-sys-sysmacros.h-for-major-minor-definition.patch
- delete mode 100644 meta-filesystems/recipes-filesystems/logfsprogs/logfsprogs_git.bb
- rename meta-filesystems/recipes-utils/exfatprogs/{exfatprogs_1.4.4.bb => exfatprogs_1.4.5.bb} (93%)
-
+diff --git a/meta-gnome/recipes-connectivity/convey/convey_50.2.bb b/meta-gnome/recipes-connectivity/convey/convey_51.0.bb
+similarity index 95%
+rename from meta-gnome/recipes-connectivity/convey/convey_50.2.bb
+rename to meta-gnome/recipes-connectivity/convey/convey_51.0.bb
+index 2a28f5aef5..0722116b7b 100644
+--- a/meta-gnome/recipes-connectivity/convey/convey_50.2.bb
++++ b/meta-gnome/recipes-connectivity/convey/convey_51.0.bb
+@@ -32,12 +32,12 @@ DEPENDS = " \
+ inherit meson pkgconfig mime-xdg gsettings gtk-icon-cache gobject-introspection gnome-help vala features_check
+ 
+ SRC_URI = " \
+-    git://gitlab.gnome.org/donnybeelo/convey.git;protocol=https;branch=main;tag=${PV}-1 \
++    git://gitlab.gnome.org/donnybeelo/convey.git;protocol=https;branch=main;tag=${PV} \
+     file://0001-meson-do-not-store-build-paths-in-the-binary.patch \
+     file://0002-meson-do-not-check-for-the-iso-xml-files-and-the-C.u.patch \
+     file://0003-vala-unit-look-up-g-ir-compiler-with-find_program.patch \
+ "
+-SRCREV = "2a0b661bf1d7fde57b6dfcb7e09ce33d7b4b9f42"
++SRCREV = "d24c1da859fc9cc2cfb19872b1d8e972d4dc1a20"
+ 
+ REQUIRED_DISTRO_FEATURES = "gobject-introspection-data opengl"
+ 
