@@ -1,65 +1,65 @@
-Received: from mail-dy1-f177.google.com (mail-dy1-f177.google.com [74.125.82.177])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.48043.1795411875075403301
+Received: from mail-dl1-f45.google.com (mail-dl1-f45.google.com [74.125.82.45])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.48045.1795411878920021450
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 22 Nov 2026 21:31:15 -0800
+ Sun, 22 Nov 2026 21:31:18 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=cPBhefnU;
- spf=pass (domain: gmail.com, ip: 74.125.82.177, mailfrom: raj.khem@gmail.com)
-Received: by mail-dy1-f177.google.com with SMTP id 5a478bee46e88-38644aedba1so4171530eec.0
-        for <openembedded-devel@lists.openembedded.org>; Sun, 22 Nov 2026 21:31:15 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=Zuspc2yb;
+ spf=pass (domain: gmail.com, ip: 74.125.82.45, mailfrom: raj.khem@gmail.com)
+Received: by mail-dl1-f45.google.com with SMTP id a92af1059eb24-1a2761c69fbso1324248c88.0
+        for <openembedded-devel@lists.openembedded.org>; Sun, 22 Nov 2026 21:31:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795411874; x=1796016674; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1795411878; x=1796016678; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=zvy9Nasbo/i0Bugk+fICP6/Y92gSTYCuJw3XRlB2yYs=;
-        b=cPBhefnU+li4sSgbVqj6ZNO3dsaCu4A79WDsaA1cQwB7qEc4h8vQvTzvDJe/ratXOV
-         Iwx2d410auACXecuD5cU4/aKnmprvz71EfFPqJ8MzdSGl6hbc7XX1w0BW3xwA25nIUsd
-         b1WEQUzhAOdT0MXScS6iz2sZhUYvv0UoJyGHKWAOqiiXvC3Sf9RgU6kx/Qlw/4T/tEJU
-         YAnS/HJaR/X4aJj5NQ7i0g2FDvSm0WF0kHxDwwxoWj5Zh0SEbUCwk1s9NFFzlHj66LVZ
-         gI05s9ewfKYKgR7pStUYApu99HPhVd41+OXHQK3MzY/V+JWI8pr3hPCmikz+Cs2V16lx
-         3exQ==
+        bh=Y0Y/y9ymNZuOvh1F4uHRMUFXizOF5Ez87+PGUEtl8JI=;
+        b=Zuspc2ybL+22cP6cryCT36D03tJBXIrqxiBQ+YpOn5sKVDeQeygzzflEW4pf38fN9+
+         8qEaQKmt/noxY+m2eUkmmz4TotFp0kXbT0K3NBvqGuTDqNIG3LBWFU7MH2zWUGBkMIM0
+         DD+rPuGiOy9glda7kgP5X8kybmJRl+cmxzdWktPxObdOZD3DCSyak3SxQhgXWzc4M80j
+         ddJD6jhH3mSro5K8hi2sLqmbvoBtT88V/JAbVHXy0rv2ePDmlGEukrUwaZ3ePtxWDRbg
+         GdvDxvNTxctxeDrzkL5xfHoCzPAJF662fv+8PROB4SZxwQ2JaWkMJGoZZksufQ0Z2+2w
+         0JHQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795411874; x=1796016674;
+        d=1e100.net; s=20260707; t=1795411878; x=1796016678;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=zvy9Nasbo/i0Bugk+fICP6/Y92gSTYCuJw3XRlB2yYs=;
-        b=W63to+vimRhfFoH4U+in9cvccjCP47uNE2ogWgf30ZZsDXgjJJCDBAWI7wrjIH2EmF
-         QUqGtDh8T34N4CGYiJxNMHLjTaGL0+jake5MVJcw8MdWqVzY61dV/Jh362GN99x3iM6j
-         aH8H+kINuQeQbzoNiaOTXQlnDtZsdVqdc5qFyKTFt8jTYSOYac2U2NjArkLpHUmifc+Y
-         cFo7oBn20ekMnB+C23bB5gEq7tadW7A02qQm9JkEwOM2by2JmmHiWY9OltOVGa2TpXYJ
-         eZEYsUa3K93r5oDki6zGONc2/t4Bw9akELobUuN1ZnBOXIYT7Y0OZtuPyRMfgTq9d/YO
-         uz+Q==
-X-Gm-Message-State: APuU4Z82GNzEY+EdGc6on/ScX/bQtCmN7LfMNaCveo/0MAihGxlyG6Nq
-	nb58MwRH6T5wfR83BXidDtJWcdRECFu654b8IZXvAFQYs9qO6+G2INha0xxt7/ig+iE=
-X-Gm-Gg: AZFdTZf6oR7ybw2RjY69aZD1zNzgaVlAUJ1ryVYM14KNZZPMPtUo+KZwHPNALhoAJip
-	JOrA7o+RAFzFsWoRusdtKDKEWC0nvAhXLawCuYFi9cpqWUXXaG0h89wOHPxNx+0ZnNCN2UJ3DuR
-	/bbl3k95wMdm6v/jJrm57gRou7zGA4X6PRve7M+j9O9bK4FzsDfIpYCOd/YguEaYUx2euTufdtc
-	lwdy+GgTxhUxarVpcmFS9SYFz06Ktawor54n7jgG4/0ELWsURpVAiLTk1+lYcYvPphlduGNycZk
-	IqltOw0QVahYeFTICv7yHAl0QJLSALvmD7jaq3ocQC+2bqWLN03OCCXQWsEeRx91iuofAFcgSeI
-	TbFj76DSwZ0+LsBVfF7t1ge4oCYILwMQfu/k08vowOgifnykzn/iNwo091GdGMNLjRcgguCgp2G
-	VTqyg/VOl0fCPwV8UDq7XWcSgieX5EYe4DbWEuwbF0d0v1COjahdnBhMtqQuI54DgSWkLEYVAqV
-	tu0pS8qwq0TK9DxrUCQhE+gz5CcqdgcFv/eeNrK9eHFAh6PTVkk7tMNV7t3GhromB3q/vt8SV1m
-	isOYP8LDolMtH2vKwHsQhysc0OadBrRaCPY24V5pK+ajoHVwJ0B5g4M+3GKUYUmRa7w2L93N8c0
-	e6ldy9vkdtUsS8qVqHAt21Rrj+mpAtudsvSUhhWqTjNOMODaV2egsxH4XNJmCJNOhsRpBU0rdYH
-	N5eeFAFd88h9u0w5vTabavUjEofKQDYVgmwNOIOYO3ltIPL+HL4uzCf+gh0J44wbBldoUKdZ6R7
-	IIzfkZ7dRRlrccIuRvKxYXmobJzPr15Zf136OfJ3WO88T0fhY+ouSMycpfJnY7IKlIw6fRdyqua
-	kUUk
-X-Received: by 2002:a05:7301:4704:b0:383:729:cabe with SMTP id 5a478bee46e88-3856f8519ecmr11644856eec.19.1795411874351;
-        Sun, 22 Nov 2026 21:31:14 -0800 (PST)
+        bh=Y0Y/y9ymNZuOvh1F4uHRMUFXizOF5Ez87+PGUEtl8JI=;
+        b=vdwduKC0+eDSukR9yDV6D0paMVcxP2Vl6vZOhbB6wkaeyV7FBU3jbi5C2YLLDLaWTo
+         zVrzuG1dEfKc9tM87HYj04UXUGoO5LvE2oo0i6NyelgIQQORiMzfRGWwmUk3+7IKBZV8
+         PQ8nGL0xAJWRHSwXaZoZMVx3qtQz7NF6CcL96VasNKxA9wja9B3TkDdv9IC7eHnJ4ihB
+         SklzENLjo2mCkWeEsIPMHbH0/fvxwwbpP8TCLKzLZHboqSrxbG+l6mcjYGHxCW92swas
+         jnfJZLtSMfwF+MnCk5AybBWyXvJmnqHPK3u4qwcPlcwCcskfBorfJHzvzC+MLLKo13kp
+         ylgQ==
+X-Gm-Message-State: APuU4Z8VkOXZt9ZSkZVCGqZ71Z7cBh+QR9YvoJHDeqFzaTGWF5fD5X8G
+	msNqUOG0vHn7eq/VAiAxoAMH3Jd793q7HSTZ6pBg4qVMZwUhboZ4LY7YpzgaDJVq+mk=
+X-Gm-Gg: AZFdTZdI/FENOecXYxaPCXm3ctqnD5Wka5dFZA1G7KBCQe3Ev//ParBs9bXEGuRsj0c
+	Rrx4oUIPGBySnTXiNsuzRxzKhxxG+UePiks2WgFKaQ/KGMTO5kYUbcSDoboxmn5zZcWKc4v3xV3
+	S+73Te4b9Nfydn/YtCRHEoVu7EgYmi17YS6rlrm/2wMt2+4bAwVn+uxhjVqhVxGdqJIKp291jXS
+	m7bdSd9aGsA1Y8CYzJqGUbvCm0PV1OiRoVgLVgeh9vReRKbSb5yWPIRjE4AAgZiUWRvpgzew6xZ
+	ELlJ+mGEi0M+UEXsDnqpo7/6WlfKGvAcprc5NY4KUA5qiobXcmrACbZ/0SWTyqtL1iEqOQvtxT+
+	ej8rVCuejQazF2MeWjl2AVqVOTQytm0EuV667fpP1u+cNrKBMhOlSKcz5WSBXDxW6GflTcKxNHn
+	Qud1rFzOLby3K9OMnoauZj6Hen4iM5Zn5NNGiR9C3AO6bNl8EF1xiMkqnCn0yDc/ayYEQrIEdp6
+	1f3hD/zRMzVNYioGk2OPnFan6VIvJh8bODweX5yFlLE6SSSIuGmrOVnU/TwyS18vMuGErHuk/yK
+	LKfa0zha7CME6ZCuR10ylVbDHM0Xe61T7EJdLhiJjOaIr/uyw1BT8I/we+hs7Zac3cnlPWDI8OB
+	iev8WXheyDnAGMasWvKTLCE+QJB+w12kcN+eT7+syN2fXI/IvC+r7iHPmsXnYVenZrdcCH/uUmF
+	NmWlVSbQWqw0LrM+0UakaJuzyC6nGY8dO9mhneXrbXrFcKopz6FYNR388VdklCNfskwvzkrnj4a
+	Fx/YZxThMgb2ApYGm9IorLiZ9Kh76mS5+jetvvQNDX0rk8qvP4//f0Si0n5yYw6Y4VTracA5TcO
+	2bbljbfpgUbqNdkiXv6BVVhq4A==
+X-Received: by 2002:a05:693c:87cc:20b0:358:3426:d601 with SMTP id 5a478bee46e88-3856c0d0961mr11516087eec.2.1795411878184;
+        Sun, 22 Nov 2026 21:31:18 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-38567cafec4sm36573136eec.26.2026.11.22.21.31.13
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-38567cafec4sm36573136eec.26.2026.11.22.21.31.17
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 22 Nov 2026 21:31:13 -0800 (PST)
+        Sun, 22 Nov 2026 21:31:17 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-oe][PATCH 36/42] udisks2: upgrade 2.11.2 -> 2.12.0
-Date: Sun, 22 Nov 2026 21:29:20 -0800
-Message-ID: <20261123052953.3658549-64-khem.raj@oss.qualcomm.com>
+Subject: [meta-oe][PATCH 39/42] webkitgtk3: upgrade 2.52.6 -> 2.54.3
+Date: Sun, 22 Nov 2026 21:29:23 -0800
+Message-ID: <20261123052953.3658549-67-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.1
 In-Reply-To: <20261123052953.3658549-1-khem.raj@oss.qualcomm.com>
 References: <20261123052953.3658549-1-khem.raj@oss.qualcomm.com>
@@ -67,54 +67,119 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Mon, 23 Nov 2026 05:31:22 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132851
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132854
 Content-Type: text/plain; charset="utf-8"
 
-- Setting up loop devices now always requires polkit authorization
-- Encrypted.Unlock() gains a 'discard' option and honours crypttab
-  read-only/discard; Filesystem.Mount() 'as-user' always checks the
-  real caller
-- New udisksctl drive-set-standby command; NVMe capacity derived from
-  namespaces when TNVMCAP is missing; NVMe subsystem tracking
-- Missing polkit checks added for RestoreEncryptedHeader() and
-  HeaderBackup(); many TOCTOU, leak and NULL-dereference fixes
+New stable series 2.54:
+- Web process compositor switched from TextureMapper to Skia, with
+  batched painting; cairo 2D rendering option removed
+- New API: favicons, webkit_feature_list_find(), view magnification,
+  per-navigation User-Agent in WebKitWebsitePolicies
+- Many input method, rendering, media and gamepad fixes, GStreamer
+  1.28 and GCC 16 build support
+- Security fixes listed in WSA-2026-0006 and WSA-2026-0007
 
-2.12.0 is tagged on master, there is no 2.12.x branch. The COPYING
-change is only the copyright year.
+2.54 requires gstreamer-mpegts from gst-plugins-bad whenever video is
+enabled. Refresh the FindGI and __PAS_ALWAYS_INLINE patches.
 
-License-Update: copyright year updated in COPYING
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- .../udisks/{udisks2_2.11.2.bb => udisks2_2.12.0.bb}         | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-support/udisks/{udisks2_2.11.2.bb => udisks2_2.12.0.bb} (87%)
+ ...-variable-to-control-macro-__PAS_ALWAYS_I.patch | 14 +++++---------
+ ...-bare-system-include-dirs-from-g-ir-scann.patch | 10 +++++-----
+ .../{webkitgtk3_2.52.6.bb => webkitgtk3_2.54.3.bb} |  3 ++-
+ 3 files changed, 12 insertions(+), 15 deletions(-)
+ rename meta-oe/recipes-support/webkitgtk/{webkitgtk3_2.52.6.bb => webkitgtk3_2.54.3.bb} (98%)
 
-diff --git a/meta-oe/recipes-support/udisks/udisks2_2.11.2.bb b/meta-oe/recipes-support/udisks/udisks2_2.12.0.bb
-similarity index 87%
-rename from meta-oe/recipes-support/udisks/udisks2_2.11.2.bb
-rename to meta-oe/recipes-support/udisks/udisks2_2.12.0.bb
-index 5cf6431154..ddeff141c1 100644
---- a/meta-oe/recipes-support/udisks/udisks2_2.11.2.bb
-+++ b/meta-oe/recipes-support/udisks/udisks2_2.12.0.bb
-@@ -1,6 +1,6 @@
- SUMMARY = "udisks provides dbus interfaces for disks and storage devices"
- LICENSE = "GPL-2.0-or-later AND LGPL-2.0-or-later"
--LIC_FILES_CHKSUM = "file://COPYING;md5=dd79f6dbbffdbc8e86b086a8f0c0ef43"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=1c2da9358c6aacac4e4fbf1cb106cc1d"
+diff --git a/meta-oe/recipes-support/webkitgtk/webkitgtk3/0001-CMake-Add-a-variable-to-control-macro-__PAS_ALWAYS_I.patch b/meta-oe/recipes-support/webkitgtk/webkitgtk3/0001-CMake-Add-a-variable-to-control-macro-__PAS_ALWAYS_I.patch
+index b1139b857e..87f6608592 100644
+--- a/meta-oe/recipes-support/webkitgtk/webkitgtk3/0001-CMake-Add-a-variable-to-control-macro-__PAS_ALWAYS_I.patch
++++ b/meta-oe/recipes-support/webkitgtk/webkitgtk3/0001-CMake-Add-a-variable-to-control-macro-__PAS_ALWAYS_I.patch
+@@ -44,11 +44,9 @@ Signed-off-by: Jiaying Song <jiaying.song.cn@windriver.com>
+  Source/cmake/WebKitCompilerFlags.cmake              | 7 +++++++
+  2 files changed, 8 insertions(+), 1 deletion(-)
  
- DEPENDS = " \
-     glib-2.0-native \
-@@ -18,10 +18,10 @@ DEPENDS += "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
- RDEPENDS:${PN} = "acl"
+-diff --git a/Source/bmalloc/libpas/src/libpas/pas_utils_prefix.h b/Source/bmalloc/libpas/src/libpas/pas_utils_prefix.h
+-index 5d5fb38c..a554f700 100644
+ --- a/Source/bmalloc/libpas/src/libpas/pas_utils_prefix.h
+ +++ b/Source/bmalloc/libpas/src/libpas/pas_utils_prefix.h
+-@@ -44,7 +44,7 @@ __PAS_BEGIN_EXTERN_C;
++@@ -45,7 +45,7 @@
+  #define __SUSPICIOUS__
+  #define __BROKEN__
+  
+@@ -57,14 +55,12 @@ index 5d5fb38c..a554f700 100644
+  #define __PAS_ALWAYS_INLINE_BUT_NOT_INLINE __attribute__((__always_inline__))
+  #else
+  #define __PAS_ALWAYS_INLINE_BUT_NOT_INLINE
+-diff --git a/Source/cmake/WebKitCompilerFlags.cmake b/Source/cmake/WebKitCompilerFlags.cmake
+-index f5ec0a55..dfd741e7 100644
+ --- a/Source/cmake/WebKitCompilerFlags.cmake
+ +++ b/Source/cmake/WebKitCompilerFlags.cmake
+-@@ -503,3 +503,10 @@ endif ()
+- 
+- # FIXME: Enable pre-compiled headers for all ports <https://webkit.org/b/139438>
+- set(CMAKE_DISABLE_PRECOMPILE_HEADERS ON)
++@@ -635,3 +635,10 @@
++     # (see comment #28 in the link above).
++     WEBKIT_PREPEND_GLOBAL_COMPILER_FLAGS(-mno-lxc1-sxc1)
++ endif ()
+ +
+ +# It fails to compile with `gcc -Og`
+ +set(WEBKIT_NO_INLINE_HINTS OFF CACHE BOOL "Disable funtion attribute always_inline for WebKit")
+diff --git a/meta-oe/recipes-support/webkitgtk/webkitgtk3/0001-FindGI-drop-bare-system-include-dirs-from-g-ir-scann.patch b/meta-oe/recipes-support/webkitgtk/webkitgtk3/0001-FindGI-drop-bare-system-include-dirs-from-g-ir-scann.patch
+index e9e58c26d0..65a3371852 100644
+--- a/meta-oe/recipes-support/webkitgtk/webkitgtk3/0001-FindGI-drop-bare-system-include-dirs-from-g-ir-scann.patch
++++ b/meta-oe/recipes-support/webkitgtk/webkitgtk3/0001-FindGI-drop-bare-system-include-dirs-from-g-ir-scann.patch
+@@ -40,7 +40,7 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
  
- SRC_URI = " \
--    git://github.com/storaged-project/udisks.git;branch=2.11.x-branch;protocol=https \
-+    git://github.com/storaged-project/udisks.git;branch=master;protocol=https \
-     file://0001-Makefile.am-Dont-include-buildpath.patch \
- "
--SRCREV = "caffebe56d8208365cf0d62e0d05d31260d91156"
-+SRCREV = "a0c93953d483f259164fb284d03691f11fe28009"
+ --- a/Source/cmake/FindGI.cmake
+ +++ b/Source/cmake/FindGI.cmake
+-@@ -297,6 +297,15 @@ function(GI_INTROSPECT namespace nsversion header)
++@@ -297,6 +297,15 @@
+          if (NOT IS_ABSOLUTE "${incdir}")
+              get_filename_component(incdir "${incdir}" REALPATH BASE_DIR "${target_srcdir}")
+          endif ()
+@@ -56,7 +56,7 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
+          list(APPEND scanner_flags "-I${incdir}")
+      endforeach ()
+  
+-@@ -337,6 +346,13 @@ function(GI_INTROSPECT namespace nsversion header)
++@@ -337,6 +346,13 @@
+      # Generate .gir
+      set(target_def "$<TARGET_PROPERTY:${opt_TARGET},COMPILE_DEFINITIONS>")
+      set(target_inc "$<TARGET_PROPERTY:${opt_TARGET},INTERFACE_INCLUDE_DIRECTORIES>")
+@@ -67,6 +67,6 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
+ +    # compiler. The sysroot include path is added automatically, so dropping
+ +    # them is safe.
+ +    set(target_inc "$<FILTER:${target_inc},EXCLUDE,^/usr/(local/)?include$>")
+-     add_custom_command(
+-         OUTPUT "${gir_path}"
+-         COMMENT "Generating ${gir_name}.gir"
++     set(scanner_env "CC=${CMAKE_C_COMPILER}" "CFLAGS=${CMAKE_C_FLAGS}")
++     if (ENABLED_COMPILER_SANITIZERS)
++         string(JOIN " " sanitizer_flags ${ENABLED_COMPILER_SANITIZERS})
+diff --git a/meta-oe/recipes-support/webkitgtk/webkitgtk3_2.52.6.bb b/meta-oe/recipes-support/webkitgtk/webkitgtk3_2.54.3.bb
+similarity index 98%
+rename from meta-oe/recipes-support/webkitgtk/webkitgtk3_2.52.6.bb
+rename to meta-oe/recipes-support/webkitgtk/webkitgtk3_2.54.3.bb
+index a192f89b64..96bfd7754d 100644
+--- a/meta-oe/recipes-support/webkitgtk/webkitgtk3_2.52.6.bb
++++ b/meta-oe/recipes-support/webkitgtk/webkitgtk3_2.54.3.bb
+@@ -22,7 +22,7 @@ SRC_URI = "https://www.webkitgtk.org/releases/webkitgtk-${PV}.tar.xz \
+            file://fix-ftbfs-riscv64.patch \
+            file://0001-CMake-Add-a-variable-to-control-macro-__PAS_ALWAYS_I.patch \
+            "
+-SRC_URI[sha256sum] = "179a2ea3f8f6edd4be7f31fdc55afc57bd0729f1fba648c61d4181539ac116fc"
++SRC_URI[sha256sum] = "2779c1b46f88762e8400650271ba14452dc4e30b37059981552d8b562b7d0862"
  
- CVE_PRODUCT = "udisks"
+ inherit cmake pkgconfig gobject-introspection perlnative features_check upstream-version-is-even gi-docgen
  
+@@ -48,6 +48,7 @@ DEPENDS += " \
+           libnotify \
+           gstreamer1.0 \
+           gstreamer1.0-plugins-base \
++          gstreamer1.0-plugins-bad \
+           glib-2.0-native \
+           gettext-native \
+           libsoup \
