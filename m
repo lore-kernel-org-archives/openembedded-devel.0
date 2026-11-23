@@ -1,98 +1,99 @@
-Received: from mail-dy1-f171.google.com (mail-dy1-f171.google.com [74.125.82.171])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.48006.1795411807460340887
+Received: from mail-dy1-f169.google.com (mail-dy1-f169.google.com [74.125.82.169])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.48506.1795411817215814905
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 22 Nov 2026 21:30:07 -0800
+ Sun, 22 Nov 2026 21:30:17 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=GRqm3/5M;
- spf=pass (domain: gmail.com, ip: 74.125.82.171, mailfrom: raj.khem@gmail.com)
-Received: by mail-dy1-f171.google.com with SMTP id 5a478bee46e88-36a315ed211so3736263eec.0
-        for <openembedded-devel@lists.openembedded.org>; Sun, 22 Nov 2026 21:30:07 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=KZWGWafA;
+ spf=pass (domain: gmail.com, ip: 74.125.82.169, mailfrom: raj.khem@gmail.com)
+Received: by mail-dy1-f169.google.com with SMTP id 5a478bee46e88-3282db206d3so8805478eec.0
+        for <openembedded-devel@lists.openembedded.org>; Sun, 22 Nov 2026 21:30:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795411807; x=1796016607; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1795411817; x=1796016617; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=BTUofXBe3NqArsqFroUqx3dosbj+HTuaSA254JhnSjs=;
-        b=GRqm3/5MMYSJhszABElk9/ilpeWRLGG/ib9JlwADOs04Xq4KeuGPRc2lqdSNVplen8
-         Aerlx3ssbhebL/eE6CZfXI89fayWxL+c//jBIDB7ps9Oz21PAFC+h7ACbqB7DWDUga7R
-         yb2/ySXMdxRX+uFbj+s9pGgKRW84n8urgwCnBl3NjjMvhBdor+mheJTGAMoCla8eKlDx
-         BXMuln6juyRDUvRKWh8rbhh1Gp2FhNxzv2N/xnPWAyE9pnCOlTcfxqD+soH2fqJI1i5r
-         eyY9jP6GUCtJCE1JHaNK4GtCWxlhQcmxYMvoyOd9rd6fh3ECG9pfPbM/wiUosJq8H989
-         Q+9A==
+        bh=N3skCQOH3f6amcb0itAcDhz20Er8Z80OO/KjI+TPDJ4=;
+        b=KZWGWafA37NMdhHtry1ba97Ftf2J/sdU3ByZkL7vxteTBjuRQNi9T32ZcPDrkNH0wA
+         ffgSV1E2gnuuZYvO5i8YT96G6/GpMoWLMEQbjqlsB1+5qA0wC4l4rt5uLoDzu6ciaMxm
+         dmKTGolJbvy8+3Rlpmi7/IJFa2A8FrLtjsA6Km3eOkvex6gs9q6ip+qDgaF8COCc/WSN
+         ORyqdJca9KADaeEtvrxqwxbRGHDcdfihAXL0bUxglSsWRE7fMA2BlL8bN6dqjeHbjxk3
+         Ni8Zv9Nkp6HvTZrvntPyY0ypQMJIZIdfB7mQieUa5Ecz04uVKw6i67UvQQF38OHO72uy
+         F3FA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795411807; x=1796016607;
+        d=1e100.net; s=20260707; t=1795411817; x=1796016617;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=BTUofXBe3NqArsqFroUqx3dosbj+HTuaSA254JhnSjs=;
-        b=O6hCNIW0EJH+H7QClkv/PZp0OZ2FE7aPu1bKsubvcwqNn+jQla3cVNGv5qFP003DEE
-         9inJKHdGR2kJuLtg1zX5BuXha6hvMr2S0tVRAqA0BWcb8e/Js+aoyq6xvIukckZdLnye
-         HczfZzRikiN/jhvdC2Us01Vo9fEx8cLDwRFy/n5dubw8KXiP+poqs17enBD98pSqh2F7
-         Bt7yQ+o1jFcIewEhbGWXOtB3U8f4tenI3MxSZw/RcgswMX0DbgCfb6ddYiznLOjlLTIQ
-         /6YBsfBgnq1we+9l6W8nt0DOTSr08kSVt1kpnZQER/VPakPkL+9YGQfhXZ8O2xHd6QVS
-         1OFQ==
-X-Gm-Message-State: APuU4Z9gW3YZ3zsHYFxGzsmE6zDONiTNfHCqtV72sRF1VQ+wlPfC9Gxf
-	L07xe1AruGEf8NXBenq04c+c7QGch42F59DGzSzmFwW4GgBP3i5fjcRS0I6sthsTR+8=
-X-Gm-Gg: AZFdTZcaOARL9pxPYO1ip5m7DxlPy28k2+f+2204CWnoNd9hQjjBc1E65WbKY/Aw738
-	Vsv6ATli2h8UvoFAge7Dm6S0m6VBNJ+ZXSZhzM2/S2ZuPJ8ZH2LscDBS9bCHqH9eTOo5cfYFmeN
-	BGv3FCYCLdmNZjRw4GvP+qD9Q10vShzFt6v73mI0qmcs2B9lpsBmi0JPs5F+POKp8+I6/sWm64k
-	jZF0frBmkYUQvsFXswlDSSPaYcrlnmKxOUluO6dRDV0HIvfj8nySobodz97aEtDvPAMNs6w5+z+
-	IJwEEQdkqpHcM/ZiKkLUXhJg/ETPymOY4GBajoK+w/O/Tv9XkMwltVl+89NSqpZ1zuTgyjvEfLo
-	+Oq+kaxS6tPWWHcnRikWzMQj1YeVabMTC7zyUsqhf1KvNtS4Yo7PxDNjRKjaHwz7sZHukaEQI/t
-	7u+LPWmS/nopGZToF2n/j7fAMVmvehzqiCMZwZkxpvqnDUK21fHt3OClBiUJXW6nJ2tFYbwvumr
-	zExpBi4Pi/2Q7kTmO2dtmR03aGveLLAN4q132AYcwb8LpfogEbxRlb5lIrnabnBJU0w/PgCkU0J
-	va2NLIbarcI+UKUrlQrwiKau/SjdbH7tadd2rqB0H5q0zxV28gDyoTSvgA7G74pGruER9KqpErV
-	tltGTxl7tpdUMJxYffQjAh9eiY6azqAmHUzs9C9Y/8fmE7uo1OMHqggCv9/8rRHbXxGruLXzojE
-	voXdTglx1EwCHZDIkUTuZsKO6AqeEI/3lewpY0k8vN+HCwh7Wi+7D7nslMeg4dIWQO6I08wHPYn
-	HpNKZewUHLBW/Rq61dzcxKG2zOKDGlDL7YyhApvDVGcDb/z1It7ZTytjl92MaEf3WGDZbpljMuR
-	wLhL
-X-Received: by 2002:a05:7301:d18b:b0:386:b4f1:dab0 with SMTP id 5a478bee46e88-386b4f1e04fmr1207121eec.1.1795411806755;
-        Sun, 22 Nov 2026 21:30:06 -0800 (PST)
+        bh=N3skCQOH3f6amcb0itAcDhz20Er8Z80OO/KjI+TPDJ4=;
+        b=lGiuNxQsyTnlvw+ITnIndte+YIQrXl9Wr/8b7d4Mpq0wzNDvolT35vAnto6uqYRUKC
+         vVQjMs4VYrx4+h9i677cm8rrz9EGx6f6WV5p8+Xhg2cqK/Msd7ZjdnmooYAIa+lUbTxK
+         eXhWOraDAkef0dAl0Dhg+aBP1rnF1cH7fv//NLZRs2CYlMi0LEq6xbm0izVVildtKn9w
+         FNPCeQGp2tDf3LxIXyYKfzyMBfrJTBiNa4Y8KsNAk3qK5+6wJ6pVfilJ46YtdUK19xNV
+         6xF5GGl9jb+NMjQuH3bp6iKfbHdetzv+sTL7cUegggSlB88t7YsonxS293JOYbGJfBRG
+         PSTQ==
+X-Gm-Message-State: APuU4Z/WJ6qPgAdTFsOQLnYw8pjJ9q9N4fs3c6If/r6LQCIJcotA+wxf
+	lEgz6cw8UPaMKfzrAILdAr0+qv9O4xR3+cSutC96Ua5Xc79CunUpXdYgGF5u/Ryt67U=
+X-Gm-Gg: AZFdTZdmzjwg5kxsNQYgtpd4O/Ir3KV9ZaWLb40qpT5xWpdVusy/hXbYTV2MILKLbKB
+	rElY0FLWsyQhT0Cr1+WGVZ/PCTEjYUZ0VpViIId5AtNC4G2mNmenITCYpkWbYbd05b9v9PAergP
+	+O9XlDXeKT0MDlu203QFoLrai6/hVGh1MYgq4p85XoWDQpgn3T9lgqKDx4FaTq5kYdXXHWEifD0
+	WauV/vS/1Hmxh/WuAGGbUiFAzhg1qe83VAKBcYSi/6rLVD7zCiU9UdI93Yz4IwV1w6ovg+514o4
+	VyE38SWtorHhBuji1hqUkhwzVAqQAEFDG2msVwvdzMqclVe+IPxwEHQ0veW+gd//B/HZ/NqS9Wg
+	bwMHeKIl8JmVTW/k8XPQp2LfNTYFg40HTY9AwE7RuXWgkOsAHi71KaRPZh9MGcsozXaR7reMG1w
+	3WfBRw3Gksn4q5fmQm6+pph/X2j2XH1+GJfAqicoKkwEL00NI7OCGPLvTESRfRSXTqgPBnU1TEl
+	c5V0JU+WRAZxPLIPQO336f72GmV7vOgzsQlYs28vbW+BtI4cbbNJP0TA1dHzQbq7ngZ2x4TKERN
+	Exgl7V7YoWan9CeMF0+1ysy7+RXNo/JymV78E8H3lrNaX7jVZ2qjzsszug8NOg4GGhVccR83oel
+	hhV9quDEcQ9ZQxAjXBaDooLcu75S8jYBi/wFyOQfhzPm/RLWMrylDBc7nf6deyuJPY8vaTnRsQA
+	XcPZbGQxovLPyi6o4P5xpdNuPEEfAN23Jbhdp3S55MT4aIiBPldKLoKOaRSPjbyhLY2HCck1Upm
+	q+d6qjSAMj4vSAyWqux+T3Wt9EXQ/kLO/vSf7YLJh4qzXmslFv1eh35SJHig8tsp2iAJgbHIw6e
+	oQSh
+X-Received: by 2002:a05:7300:b597:b0:386:9e36:df0a with SMTP id 5a478bee46e88-3869e36e011mr10030280eec.13.1795411816585;
+        Sun, 22 Nov 2026 21:30:16 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-38567cafec4sm36573136eec.26.2026.11.22.21.30.05
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-38567cafec4sm36573136eec.26.2026.11.22.21.30.15
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 22 Nov 2026 21:30:06 -0800 (PST)
+        Sun, 22 Nov 2026 21:30:16 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-gnome][PATCH 5/5] libgtop: upgrade 2.41.3 -> 2.41.4
-Date: Sun, 22 Nov 2026 21:28:25 -0800
-Message-ID: <20261123052953.3658549-9-khem.raj@oss.qualcomm.com>
+Subject: [meta-multimedia][PATCH 5/6] ncmpc: upgrade 0.54 -> 0.55
+Date: Sun, 22 Nov 2026 21:28:32 -0800
+Message-ID: <20261123052953.3658549-16-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.1
 In-Reply-To: <20261123052953.3658549-1-khem.raj@oss.qualcomm.com>
 References: <20261123052953.3658549-1-khem.raj@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Mon, 23 Nov 2026 05:30:17 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132796
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Mon, 23 Nov 2026 05:30:27 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132803
 Content-Type: text/plain; charset="utf-8"
 
-Bug fix release: ensure null termination of a buffer and skip the
-colon when parsing smaps values.
+- New page switcher, redesigned search page and new connections page
+- Zeroconf support to find MPD on the local network
+- Build option "iconv" renamed to "charset"
+- Text input supports Ctrl-Left/Right/Delete; text_editor via $PATH
+- Fixes for %grouping% tag, lyrics display, an endless loop on queue
+  delete failure, and several crashes
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- .../libgtop/{libgtop_2.41.3.bb => libgtop_2.41.4.bb}            | 2 +-
+ .../recipes-multimedia/musicpd/{ncmpc_0.54.bb => ncmpc_0.55.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-gnome/recipes-gnome/libgtop/{libgtop_2.41.3.bb => libgtop_2.41.4.bb} (85%)
+ rename meta-multimedia/recipes-multimedia/musicpd/{ncmpc_0.54.bb => ncmpc_0.55.bb} (96%)
 
-diff --git a/meta-gnome/recipes-gnome/libgtop/libgtop_2.41.3.bb b/meta-gnome/recipes-gnome/libgtop/libgtop_2.41.4.bb
-similarity index 85%
-rename from meta-gnome/recipes-gnome/libgtop/libgtop_2.41.3.bb
-rename to meta-gnome/recipes-gnome/libgtop/libgtop_2.41.4.bb
-index 7131078994..31cd8ccdd1 100644
---- a/meta-gnome/recipes-gnome/libgtop/libgtop_2.41.3.bb
-+++ b/meta-gnome/recipes-gnome/libgtop/libgtop_2.41.4.bb
-@@ -7,7 +7,7 @@ inherit gnomebase lib_package gtk-doc gobject-introspection gettext upstream-ver
+diff --git a/meta-multimedia/recipes-multimedia/musicpd/ncmpc_0.54.bb b/meta-multimedia/recipes-multimedia/musicpd/ncmpc_0.55.bb
+similarity index 96%
+rename from meta-multimedia/recipes-multimedia/musicpd/ncmpc_0.54.bb
+rename to meta-multimedia/recipes-multimedia/musicpd/ncmpc_0.55.bb
+index 81ded9db1b..82065a14da 100644
+--- a/meta-multimedia/recipes-multimedia/musicpd/ncmpc_0.54.bb
++++ b/meta-multimedia/recipes-multimedia/musicpd/ncmpc_0.55.bb
+@@ -34,4 +34,4 @@ PACKAGECONFIG[outputs_screen] = "-Doutputs_screen=true,-Doutputs_screen=false"
+ PACKAGECONFIG[chat_screen] = "-Dchat_screen=true,-Dchat_screen=false"
  
- ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
- 
--SRC_URI[archive.sha256sum] = "775676df958e2ea2452f7568f28b2ea581063d312773dd5c0b7624c1b9b2da8c"
-+SRC_URI[archive.sha256sum] = "d3c18158549218835a00517d9c454a2de825ac7808efe84101a8b7e2a8ab6663"
- 
- UPSTREAM_CHECK_REGEX = "libgtop-(?P<pver>\d+(\.\d+)+).tar"
- 
+ SRC_URI = "git://github.com/MusicPlayerDaemon/ncmpc;branch=master;protocol=https"
+-SRCREV = "55a7653d82eada7e6813dcb1e965969ceeb74dc2"
++SRCREV = "92fcda4b392364b6efc1c07b29f60d59ce9408f2"
