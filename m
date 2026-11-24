@@ -1,114 +1,61 @@
-Received: from aer-iport-7.cisco.com (aer-iport-7.cisco.com [173.38.203.69])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.22261.1795539579049891358
+Received: from mta-65-225.siemens.flowmailer.net (mta-65-225.siemens.flowmailer.net [185.136.65.225])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.25281.1795543560355951584
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 24 Nov 2026 08:59:39 -0800
+ Tue, 24 Nov 2026 10:06:01 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=Ra52UnWP;
- spf=pass (domain: cisco.com, ip: 173.38.203.69, mailfrom: hthakar@cisco.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=cisco.com; i=@cisco.com; l=1757; q=dns/txt;
-  s=iport01; t=1795539579; x=1796749179;
-  h=from:to:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=J6HBHuHKNmUMGzOdtny3V+a+BtLvY595b1zBC/kNy+Y=;
-  b=Ra52UnWPjGAnCS+YnhP2yWgeNTdfWPy2+e5GalPmEHU7bh+DzWJiRYNh
-   18qEWkCQDl7OFf1wAMVwWNVnUGQVguru+YWXdq8TosLzrMnWx4QKMvRrj
-   rXP17we5cKc0+TzA4+wIC1rrvEXjBy4aOXcBgDfCZgUUabG3u5LKQce+f
-   ixsK5wXPeR+UTphXonAtIY0flJ/0xrKx8vMLV/9moqel6NvMBLRrj1kWv
-   Ba4n7XhbDVnYTs5mmu//SWoukDPvwEm6SNMLEveOGHJNOIrAg0vNtHavM
-   fp0JPKxSVKRlzYFYnUQSAzVl1scPskeeipRh/FMczBld2yqGEVXhZoTyr
-   Q==;
-X-CSE-ConnectionGUID: u7zyJPAPTAOe//cnx75Nbw==
-X-CSE-MsgGUID: cAg1Jdc/SCK/V9vIw5Ie0Q==
-X-IPAS-Result: =?us-ascii?q?A0BCAgCbwAVr/9NK/pBaglmCV3VgQ0mTWgFPgiGeLIF+D?=
- =?us-ascii?q?wEBAQ89FAQBAZMpAiY0CQ4BAgQDAgMBAQEBAQEBAQEBAQEKAQEFAQEBAgEHB?=
- =?us-ascii?q?YEOE4ZPDZBACwEYAV1cRIMCAYJ0AxG6dYF5M4EBgykBgVTbMwELFAGBOIVCi?=
- =?us-ascii?q?CV1AYR+JxsbgXKBFYNqhAqBBoV5BIIiPD4SjmuKHUiBHgNZLAFVEw0KCwcFg?=
- =?us-ascii?q?WgDNRIqFW4yHYEjOxeBBxsGBYEcgR6BEoEDXYErKF4hgQiBdgKCUYIAAgFJQ?=
- =?us-ascii?q?Q4HRVMJJUMSRyQiCBIJARMaLAqBGjU8CSY/FQxnCxoFYQgCDQx0ORAwHiQvB?=
- =?us-ascii?q?RomPhsKgQwnHx4bDgIfEAYWIQsgGA1IESw3FRkEPm4HlBeDGoEOLCCCDBGTa?=
- =?us-ascii?q?pF6oREKKIN5jCSVOhozqnKZCI4KllGEaoFoPIFZcBWDIglKGQ+XN8lIJjICA?=
- =?us-ascii?q?ToBAQcCBw4DC4FokACBfgEB?=
-IronPort-Data: A9a23:l3kJtahATFoJhpuHTh8giU4sX161NBEKZh0ujC45NGQN5FlHY01je
- htvWW6DbvmKajGhLYsnYd7n/BlXupDXndIwHFA6rHg1FC1jpJueD7x1DKtf0wB+jyHnZBg6h
- ynLQoCYdKjYdleF+FHwdOCn/SMhvU2xbuKUIPbePSxsThNTRi4kiBZy88Y0mYcAbeKRW2thg
- vus5ZeAULOZ82QsaDxNsvjf8EkHUMna4Vv0gHRvPZing3eG/5UlJMp3Db28KXL+Xr5VEoaSL
- 87fzKu093/u5BwkDNWoiN7TKiXmlZaLYGBiIlIPM0STqkAqSh4ai87XB9JAAatjsAhlqvgqo
- Dl7WTNcfi9yVkHEsLx1vxC1iEiSN4UekFPMCSDXXcB+UyQqflO0q8iCAn3aMqUFpfRmI1lnz
- cAxDz1KKRuFl73r5rikH7wEasQLdKEHPasWt2slyXTSCuwrBMmbBa7L/tRfmjw3g6iiH96HO
- 5ZfM2czKkucJUcWYz/7C7pm9AusrnnjczRboUi9rqss6G+Vxwt0uFToGISOJ4bRGZwF9qqej
- mnv8D3bDhpdD/e8jgTU7FOz287CxRquDer+E5X9rJaGmma7wXQeDhATX1a3rfS1z0KzRd9bA
- 0gV4TY1668q+UqmS9PwUxG1rDiDpBF0ZjZLO+Q38kSJj6HT+QvcXzBCRT9aY9tgv8gzLdA36
- mK0cxrSLWQHmNWopbi1r994cRva1fApEFI/
-IronPort-HdrOrdr: A9a23:143TH6p1K6sahbBCa0GaQucaV5obeYIsimQD101hICG9Ffbo9f
- xG88506faZslsssRIb6LO90de7IE80nKQdieJ6AV7IZmbbUQWTQL2KlbGD/xTQXwvj6+Vaya
- BsN4J6CNH2EBxGqPyS2njcLz7lq+P3l5xBQozlvhNQcT0=
-X-Talos-CUID: 9a23:PViHMGBXVxfqcVn6EzQ45l82IukdTlT6wTCXKEmoVjtPQqLAHA==
-X-Talos-MUID: =?us-ascii?q?9a23=3AwRDTpg1dX/dc4GJUj2BBvqG7UjUj6I2hUWIBmtI?=
- =?us-ascii?q?9kOrDC31uGijArTnve9py?=
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-AV: E=Sophos;i="6.27,231,1787011200"; 
-   d="scan'208";a="63523418"
-Received: from aer-l-core-10.cisco.com ([144.254.74.211])
-  by aer-iport-7.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 24 Nov 2026 16:59:36 +0000
-Received: from sjc-ads-5245.cisco.com (sjc-ads-5245.cisco.com [10.28.23.9])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by aer-l-core-10.cisco.com (Postfix) with ESMTPS id 73A9418000B7F
-	for <openembedded-devel@lists.openembedded.org>; Tue, 24 Nov 2026 16:59:36 +0000 (GMT)
-Received: by sjc-ads-5245.cisco.com (Postfix, from userid 1887505)
-	id 25F28CC1611; Tue, 24 Nov 2026 08:59:35 -0800 (PST)
-From: "Hetvi Thakar -X (hthakar - E INFOCHIPS PRIVATE LIMITED at Cisco)" <hthakar@cisco.com>
+ dkim=pass header.i=peter.marko@siemens.com header.s=fm1 header.b=g6a9EGe+;
+ spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.65.225, mailfrom: fm-256628-20261124180557914252a61300020766-vy_zn_@rts-flowmailer.siemens.com)
+Received: by mta-65-225.siemens.flowmailer.net with ESMTPSA id 20261124180557914252a61300020766
+        for <openembedded-devel@lists.openembedded.org>;
+        Tue, 24 Nov 2026 19:05:57 +0100
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm1;
+ d=siemens.com; i=peter.marko@siemens.com;
+ h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc;
+ bh=3O/6hS3t7IEBhZab2CexqVdKxhGYIM7TB3NIXcNKaMM=;
+ b=g6a9EGe+xyhzQGLnILsWrqibQleUDIuB5PhYPAeYEgCvyYR4H8HosKJPmnvSXgCcTuHsPZ
+ sfSTaehUz2IKaRC51NMWnFwlpiMSE5R4LzYcOjNJj5ASSi7Z2EXSspQGfxK/05+tbEgDhjTb
+ xUAoT3fAh6Y8rDZKn+82P0VfmU9jW+xFQ7T9UeBLuZj2/LTC7b/54OweG2oGIVpiNepK0OnB
+ YT5E6b9wiNsHJwqiYFe8kQWm91o2N02TApNjv2HocfPrbfl44K3hPV+1UHdpagMWEV1hojag
+ sZSCQyDRdpf45PG2snxHgwOtegymRLXs0x7v0i5Uq2ilNAH4EuPOQn2A==;
+From: Peter Marko <peter.marko@siemens.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-networking][wrynose][PATCH] wireshark: upgrade 4.6.9 -> 4.6.10
-Date: Tue, 24 Nov 2026 08:59:35 -0800
-Message-Id: <20261124165935.1874673-1-hthakar@cisco.com>
-X-Mailer: git-send-email 2.35.6
+Cc: Peter Marko <peter.marko@siemens.com>
+Subject: [meta-webserver][PATCH 1/2] nginx: set status for CVEs fixed in 1.30.7
+Date: Tue, 24 Nov 2026 19:05:42 +0100
+Message-ID: <20261124180543.25925-1-peter.marko@siemens.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Outbound-Client-TLS: ANONYMOUS;sjc-ads-5245.cisco.com [10.28.23.9];TLSv1.3;TLS_AES_256_GCM_SHA384;256
-X-Outbound-SMTP-Client: 10.28.23.9, sjc-ads-5245.cisco.com
-X-Outbound-Node: aer-l-core-10.cisco.com
+X-Flowmailer-Platform: Siemens
+Feedback-ID: 519:519-256628:519-21489:flowmailer
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Tue, 24 Nov 2026 16:59:41 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132956
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Tue, 24 Nov 2026 18:06:04 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132957
 Content-Type: text/plain; charset="utf-8"
 
-From: Khem Raj <khem.raj@oss.qualcomm.com>
+From: Peter Marko <peter.marko@siemens.com>
 
-Security fix release: fixes 39 vulnerabilities (wnpa-sec-2026-111 to
-wnpa-sec-2026-149, CVE-2026-130434..CVE-2026-130469), mostly crashes,
-infinite loops and memory leaks in many protocol dissectors (RTSE,
-NBAP, Kafka, TLS, SDP, PROFINET, ...) and file parsers (ERF, Ascend,
-Android Logcat, K12xx), plus iLBC/AMR codec crashes. Also fixes the
-LoRaWAN decryption ZDI-CAN-32851 issue and assorted dissector bugs.
+All these have CPE entries like "0.9.6 < *", which tries to say which is
+the minimal verison affected.
+This however marks the CVE as vulnerable, becuase it is in range (less
+than *), entry like "1.30.0 < 1.30.7" cannot overrule that.
 
-AI-Generated: Uses Claude Code
-Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
-(cherry picked from commit 628b7976f16720056f7ca03333ef4bebdf2f81de)
-Signed-off-by: Hetvi Thakar <hthakar@cisco.com>
+Signed-off-by: Peter Marko <peter.marko@siemens.com>
 ---
- .../wireshark/{wireshark_4.6.9.bb => wireshark_4.6.10.bb}       | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-networking/recipes-support/wireshark/{wireshark_4.6.9.bb => wireshark_4.6.10.bb} (97%)
+ meta-webserver/recipes-httpd/nginx/nginx_1.30.7.bb | 7 +++++++
+ 1 file changed, 7 insertions(+)
 
-diff --git a/meta-networking/recipes-support/wireshark/wireshark_4.6.9.bb b/meta-networking/recipes-support/wireshark/wireshark_4.6.10.bb
-similarity index 97%
-rename from meta-networking/recipes-support/wireshark/wireshark_4.6.9.bb
-rename to meta-networking/recipes-support/wireshark/wireshark_4.6.10.bb
-index 1a10eb08e8..99ab82a7af 100644
---- a/meta-networking/recipes-support/wireshark/wireshark_4.6.9.bb
-+++ b/meta-networking/recipes-support/wireshark/wireshark_4.6.10.bb
-@@ -31,7 +31,7 @@ SRC_URI:append:class-native = " file://0001-don-t-look-for-iconv.h-for-native-bu
- 
- UPSTREAM_CHECK_URI = "https://1.as.dl.wireshark.org/src/all-versions"
- 
--SRC_URI[sha256sum] = "d062d416a1ab3a49975aafe3a671c882dde0562ccd71b078808ceb59d465fc0f"
-+SRC_URI[sha256sum] = "268f41bdf8acee561b670217cf6ea74cf9e779477543e59f92f1cd00294a03dd"
- 
- PE = "1"
- 
--- 
-2.35.6
-
+diff --git a/meta-webserver/recipes-httpd/nginx/nginx_1.30.7.bb b/meta-webserver/recipes-httpd/nginx/nginx_1.30.7.bb
+index 9c2ec8cddb..93a1e00ed7 100644
+--- a/meta-webserver/recipes-httpd/nginx/nginx_1.30.7.bb
++++ b/meta-webserver/recipes-httpd/nginx/nginx_1.30.7.bb
+@@ -13,3 +13,10 @@ CVE_STATUS[CVE-2026-97629] = "fixed-version: Fixed since 1.30.6"
+ CVE_STATUS[CVE-2026-42055] = "fixed-version: Fixed since 1.30.3"
+ CVE_STATUS[CVE-2026-48142] = "fixed-version: Fixed since 1.30.3"
+ CVE_STATUS[CVE-2026-90439] = "fixed-version: Fixed since 1.30.5"
++CVE_STATUS[CVE-2026-113425] = "fixed-version: Fixed since 1.30.7"
++CVE_STATUS[CVE-2026-121810] = "fixed-version: Fixed since 1.30.7"
++CVE_STATUS[CVE-2026-123007] = "fixed-version: Fixed since 1.30.7"
++CVE_STATUS[CVE-2026-123633] = "fixed-version: Fixed since 1.30.7"
++CVE_STATUS[CVE-2026-123634] = "fixed-version: Fixed since 1.30.7"
++CVE_STATUS[CVE-2026-123640] = "fixed-version: Fixed since 1.30.7"
++CVE_STATUS[CVE-2026-125283] = "fixed-version: Fixed since 1.30.7"
