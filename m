@@ -1,249 +1,427 @@
-Received: from mx1.white.stw.pengutronix.de (mx1.white.stw.pengutronix.de [185.203.200.13])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.21872.1795538520002439526
+Received: from mail-wr1-f51.google.com (mail-wr1-f51.google.com [209.85.221.51])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.21735.1795538586234754998
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 24 Nov 2026 08:42:01 -0800
+ Tue, 24 Nov 2026 08:43:06 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@pengutronix.de header.s=20260414 header.b=G3UKqEWn;
- spf=pass (domain: pengutronix.de, ip: 185.203.200.13, mailfrom: mfe@pengutronix.de)
-Received: from ptx.office.stw.pengutronix.de (ptx.office.stw.4.pengutronix.de [10.9.0.3])
-	(Authenticated sender: relay-from-ptx.office.stw.pengutronix.de)
-	by mx1.white.stw.pengutronix.de (Postfix) with ESMTPSA id C1D0E201FF7;
-	Tue, 24 Nov 2026 17:41:52 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=pengutronix.de;
-	s=20260414; t=1795538512;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=WKCFffV+TKEuMz0XJVRJNG13Iv7Wj2YuDCKyCReoDS4=;
-	b=G3UKqEWnwdwb2YvayWKxQTyATRCPX2zYdUSRCOlwesHWAy4dDrvn2gzBcsdhozEvnPLpZe
-	E01NvUiMk/1YfUX6kbBUPiu3l4Kil3yZfYk+5Q2JUl9pll6IyvyJUZmUmO3qRJCNrm8NrG
-	F/MNW2KzINZWpaOq7qbf2rFuKy9Tbw/VuL8IrJI7PthzBJbpFRn4HYVMNk6ti/ZvpTDLJt
-	mK7UH5ILq56GZtqymMLLi685hiIs2spxp7LlB/g0XeihRUCfZ1qHWCnhh2oyXNQ/qxQCLk
-	66KgUvl6hmoMhVD0WPlik57/Xswd8VbjDUTvaT3NVLn2dCiTWfN6ymMR4AaSOA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=pengutronix.de;
-	s=20260414; t=1795538512;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=WKCFffV+TKEuMz0XJVRJNG13Iv7Wj2YuDCKyCReoDS4=;
-	b=Vy6YMRFlxbRqTUzeTj/gePKNyH8rl94wcWwLD3VU48YwNq+G/uWsjNf34Gn+yMif5RRPtS
-	3fsgT9kAaxYuXbbljy27tibI0chPEDHGDOxDh9YZhcTUSNJvq7dFj1fmv+x/dYofjVdHsc
-	H30BduMy0IfWbE5hE2HPWEzRq4pEOOc97UMSQyt+UfZ5Tzwy/6oIPhfkk64/R6TxiOHjke
-	MVTxWZf0GTFMZOn9RBlnL3gvacD0jHPmqnOWexr4Kdtes/wo8ntGvqXrCYyATlqP4dS3AG
-	2PqPRmPyR2iCIT2phuAWAkPfwp+8UCifF30a6lAep4t2itVdReqfsitS0RrQ9g==
-ARC-Authentication-Results: i=1;
-	ORIGINATING;
-	auth=pass smtp.auth=relay-from-ptx.office.stw.pengutronix.de smtp.mailfrom=mfe@pengutronix.de
-ARC-Seal: i=1; s=20260414; d=pengutronix.de; t=1795538512; a=rsa-sha256;
-	cv=none;
-	b=CJW6WBQIkB9bPEobdlcrznyJLjYNBA3dsWdlzW7yU1Du/YPUL5CB7kQylN3ndjpsvM46Ly
-	z8VkctBM1es+l7wvGZ0aCYjQs9VU9zpPhqUd8ORtOvsOEX/V3uKDJsIH/otnHkFPTU5mfJ
-	sTXd2n+l5ZMUI65rFuoxWQdvJD+LZX9P9TJxAZxfTmuTcWIR4GnJMBKcmANyN5My7jLbEt
-	+QA/Jx1zcDX2fQ0Mcka3z03g151lxqazJvwct279G0WdF34sVsERWnsY8e2mGz5C4dCuvH
-	cN3wC70HTSLiIkZX7ecnO5xl5AGPFuUCL04BtRoZV7lcI3VTrE0axA9mNPMgJw==
-Received: by ptx.office.stw.pengutronix.de (Postfix, from userid 1064)
-	id A424E1BF3F0; Tue, 24 Nov 2026 17:41:52 +0100 (CET)
-Date: Tue, 24 Nov 2026 17:41:52 +0100
-From: Marco Felsch <m.felsch@pengutronix.de>
-To: Khem Raj <raj.khem@gmail.com>
-Cc: Fabian Pflug <f.pflug@pengutronix.de>, khem.raj@oss.qualcomm.com, 
-	openembedded-devel@lists.openembedded.org, yocto@pengutronix.de
-Subject: Re: [oe] [yocto] [meta-initramfs][PATCH] rsinit: add recipe for
- /init written in rust
-Message-ID: <kxldhbqfbewjkjr3idksokecmjfyfsznst2phlwsnuealzeftn@knwddty63nxn>
-References: <20261123101533.3325486-1-f.pflug@pengutronix.de>
- <ckxwzsldrxqucqv2hrf2vbixryv57tjnghwm5q3vzfsn244ucm@3naoywqkyuxy>
- <CAMKF1srGB20M0F--WUdkWMA6B64JdYXvzC82CUQaoFHUq9Rb=Q@mail.gmail.com>
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=bJ5PxJiX;
+ spf=pass (domain: gmail.com, ip: 209.85.221.51, mailfrom: alex.kiernan@gmail.com)
+Received: by mail-wr1-f51.google.com with SMTP id ffacd0b85a97d-490f38e9688so3372847f8f.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 24 Nov 2026 08:43:06 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20260707; t=1795538584; x=1796143384; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=9PraKuzT+qstSfs/BjvZp9Nz+Tgtg8hUP5/7KpFl8Tw=;
+        b=bJ5PxJiXM2wG/DlFOVsDo72aVxcE7sULpx+GWSyfZ4TLhvR35FleQ9Ic9PR4sCVLbc
+         uK1m8flmQHleFf53FlNXXCjA/tOagmDPjlao8xELZT4cp/1Fd7rh/iEBYOaYYWh6EvtI
+         xSFWSCjwiYlA1xsOV8JWD18fO2UYxXyd9wbriZJue6XHayju6XH5KcVfik4M5CKwXN4v
+         ++NO9jrqoJnyVIM+WtxgQbWATTo29eriLUcT8y1l1BCOBw1h1qFcD9HwSoYAB3YDvVXE
+         NNi6Qnxwgj/+ZzO/DZtBU6mdADef5MXSRJ3pWiI2u06egatA0elE8xIkSOTsgD2d5Q+m
+         rdZw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1795538584; x=1796143384;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=9PraKuzT+qstSfs/BjvZp9Nz+Tgtg8hUP5/7KpFl8Tw=;
+        b=DAQOqqdkTAc8C6irUrYIm8EIA4FZocYZcXYAFHqbGHFubqXKCXk0efVNRZ9PjYM1zk
+         h8ELc7Ebdbr66OQixBG0fsE++6PAdFBhEj0DP/JVZLme4wJqGzHHSVA6BeW72lPVgLeo
+         TyvfjSdpLnFbeO1z+0IAiNkUuNXqnJNkO2ZfncUOYaktkKe+K/gDlejk44jHi9AqZ32K
+         2aNq69TBX8+Y9lmFSB4lALqIVXElDz4xD/lee3hBWUgU3IZYIUV0Nx11HbEhz92fLG5/
+         VC6bNsyRIYmDgzJqFm1O9PmodR2zAK+TsoH6KsQQlE0ZoVnxLyoVJkgOI8beEUFgOurY
+         Btig==
+X-Gm-Message-State: APuU4Z9e1mfd/BqkKIgqRVhh9OYvGF53FqUCA4ePROZXNo5S+VgNzTQD
+	hiEJGQ0lWEpDocBc/dXcH4aItb2j02Daxg0Vivo/aOJcpnbG31O4QIY+HT4bPg==
+X-Gm-Gg: AZFdTZfvWvMBirxmGEwjrsj/b/mTGXjUiWSbGE/eFukiYr86fx9YWVNQOC953w70Xps
+	zWyXfbUeuDZC6MbvveUH6OBuX7Cp3Z80tiwNX74x1SVdwpOU4j88swNE+7CZlViolO7zA6DEvnv
+	sxYWVcNNxsSUcfGIOUutE5hO+g7KrW1R9Gjn8QEeFI209o0fdFn38K32aihBjAhvKF1TMFqyqDp
+	GjvXZV6fCZDSKJI2Zytu7/3sETpVSl0VTsjS3LbsBmf5D3rEM1hJIckvEOiiisEyFoIoOa71lTa
+	WfLKxMZoOSOzjzoSCaBqHVdunmvwEaKj0kYj5cWkdc2sIGTbMJBLZ3JEZ2OXOZ4TTgGAuEoR0S4
+	z6p0TeiNOW+OHo47PQZx+A8gbQYXJVh4455984xLpJYbRW23nYkIbhvmVlxXo/csdQfwid5Ja02
+	lo5HYoZ66oUehRgtZSFy4hQRSaqLWoYEkPBmOBjGopP2SfbtC/7sX6ppu6ytx0mGBwnZcAtFwWt
+	4FftaPB+RQUvnjD4a4mkQOhjzEVEldixeEwjEcvtonHiHDe1+0dXLDFiKAkuP7k3I+s3KeRkrF3
+	L5hHu1MY+4pgdXVQlGZLUEhk/f1ZIfs82xwAT1hGO0OQtg4D9qcjqNcYGwh0qG4TXNkDMBdfSvZ
+	W+XK95zS8LrbFNg==
+X-Received: by 2002:a05:6000:438a:b0:48e:127a:c914 with SMTP id ffacd0b85a97d-4aa545e25cdmr39653477f8f.5.1795538584196;
+        Tue, 24 Nov 2026 08:43:04 -0800 (PST)
+Return-Path: <alex.kiernan@gmail.com>
+Received: from localhost.localdomain (cust18-dsl93-89-130.idnet.net. [93.89.130.18])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4ab6a67f281sm27223198f8f.22.2026.11.24.08.43.03
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 24 Nov 2026 08:43:03 -0800 (PST)
+From: Alex Kiernan <alex.kiernan@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Alex Kiernan <alex.kiernan@gmail.com>
+Subject: [meta-oe][PATCH 1/2] neatvnc: backport the nettle 4 port and its fixes
+Date: Tue, 24 Nov 2026 16:42:42 +0000
+Message-ID: <20261124164242.60688-2-alex.kiernan@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <CAMKF1srGB20M0F--WUdkWMA6B64JdYXvzC82CUQaoFHUq9Rb=Q@mail.gmail.com>
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Tue, 24 Nov 2026 16:42:11 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132953
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Tue, 24 Nov 2026 16:43:11 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132954
+Content-Type: text/plain; charset="utf-8"
 
-On 26-11-24 08:29, Khem Raj wrote:
-> On Tue, Nov 24, 2026 at 8:09=E2=80=AFAM Marco Felsch via openembedded-d=
-evel
-> <m.felsch=3Dpengutronix.de@lists.openembedded.org> wrote:
->=20
-> > Hi Khem,
-> >
-> > sorry for the noise, but this patch was sent prematurely and we notic=
-ed
-> > that you already applied it to master.
-> >
-> > Is it possible to revert the patch from master? Our goal is to get th=
-e
-> > recipe into oe-core instead.
-> >
->=20
-> Please provide needed fixes in meta-oe itself, getting into OE-Core is
-> better
-> justified that way eventually since there is a higher bar to be include=
-d in
-> OE-Core
+neatvnc 1.0.4's nettle backend does not build against nettle 4.0, which
+oe-core now has. Upstream has ported it, and fixed two crashes the port
+introduced: the WebSocket handshake passed the hash size where the hash
+type belongs (a SIGSEGV on every connection), and nettle 4 aborts the
+Apple Diffie-Hellman login because base16_decode_update() now takes the
+output buffer's size. None of this is in a release yet.
 
-If I got your right, the shall be:
- 1) We send fixes patches on top of the merged patch.
- 2) Once everything is in place we can try to move from meta-oe to
-    oe-core?
+AI-Generated: Claude Opus 5.5 (Claude Code)
+Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
+---
+ .../0001-Use-nettle-hogweed-version-4.patch   |  83 +++++++++
+ ...pto-Remove-hash-digest-size-argument.patch | 160 ++++++++++++++++++
+ ...ake-Fix-crypto_hash_many-argument-mi.patch |  27 +++
+ ...ypto-fix-base16-decode-buffer-length.patch |  29 ++++
+ .../recipes-graphics/neatvnc/neatvnc_1.0.4.bb |   7 +-
+ 5 files changed, 305 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-graphics/neatvnc/neatvnc/0001-Use-nettle-hogweed-version-4.patch
+ create mode 100644 meta-oe/recipes-graphics/neatvnc/neatvnc/0002-crypto-Remove-hash-digest-size-argument.patch
+ create mode 100644 meta-oe/recipes-graphics/neatvnc/neatvnc/0003-stream-ws-handshake-Fix-crypto_hash_many-argument-mi.patch
+ create mode 100644 meta-oe/recipes-graphics/neatvnc/neatvnc/0004-crypto-fix-base16-decode-buffer-length.patch
 
-Regards,
-  Marco
-
-
-
->=20
->=20
-> >
-> > Regards,
-> >   Marco
-> >
-> > On 26-11-23 11:14, Fabian Pflug wrote:
-> > > rsinit speeds up the boot by not having to parse all the bash scrip=
-ts
-> > > currently used in the initramfs and replacing it with a single bina=
-ry
-> > > written in rust.
-> > >
-> > > Signed-off-by: Fabian Pflug <f.pflug@pengutronix.de>
-> > > ---
-> > >  .../recipes-core/rsinit/rsinit-crates.inc     | 36 +++++++++++++++=
-++++
-> > >  .../recipes-core/rsinit/rsinit_v0.1.0.bb      | 31 +++++++++++++++=
+diff --git a/meta-oe/recipes-graphics/neatvnc/neatvnc/0001-Use-nettle-hogweed-version-4.patch b/meta-oe/recipes-graphics/neatvnc/neatvnc/0001-Use-nettle-hogweed-version-4.patch
+new file mode 100644
+index 000000000000..e5335080aaf9
+--- /dev/null
++++ b/meta-oe/recipes-graphics/neatvnc/neatvnc/0001-Use-nettle-hogweed-version-4.patch
+@@ -0,0 +1,83 @@
++From 9056d5fc68c2a84bdbbf089fcbac9e2ba7d093cb Mon Sep 17 00:00:00 2001
++From: Andri Yngvason <andri@yngvason.is>
++Date: Sun, 17 May 2026 09:57:07 +0000
++Subject: [PATCH 1/4] Use nettle & hogweed version 4
 +
-> > >  2 files changed, 67 insertions(+)
-> > >  create mode 100644 meta-initramfs/recipes-core/rsinit/rsinit-crate=
-s.inc
-> > >  create mode 100644 meta-initramfs/recipes-core/rsinit/rsinit_v0.1.=
-0.bb
-> > >
-> > > diff --git a/meta-initramfs/recipes-core/rsinit/rsinit-crates.inc
-> > b/meta-initramfs/recipes-core/rsinit/rsinit-crates.inc
-> > > new file mode 100644
-> > > index 0000000000..9970c4a913
-> > > --- /dev/null
-> > > +++ b/meta-initramfs/recipes-core/rsinit/rsinit-crates.inc
-> > > @@ -0,0 +1,36 @@
-> > > +# Autogenerated with 'bitbake -c update_crates rsinit'
-> > > +
-> > > +# from Cargo.lock
-> > > +SRC_URI +=3D " \
-> > > +    crate://crates.io/bitflags/2.13.0 \
-> > > +    crate://crates.io/cfg-if/1.0.4 \
-> > > +    crate://crates.io/cfg_aliases/0.2.1 \
-> > > +    crate://crates.io/getrandom/0.2.17 \
-> > > +    crate://crates.io/git-version/0.3.9 \
-> > > +    crate://crates.io/git-version-macro/0.3.9 \
-> > > +    crate://crates.io/json/0.12.4 \
-> > > +    crate://crates.io/libc/0.2.186 \
-> > > +    crate://crates.io/log/0.4.32 \
-> > > +    crate://crates.io/nix/0.31.3 \
-> > > +    crate://crates.io/proc-macro2/1.0.106 \
-> > > +    crate://crates.io/quote/1.0.45 \
-> > > +    crate://crates.io/syn/2.0.118 \
-> > > +    crate://crates.io/unicode-ident/1.0.24 \
-> > > +    crate://crates.io/wasi/0.11.1+wasi-snapshot-preview1 \
-> > > +"
-> > > +
-> > > +SRC_URI[bitflags-2.13.0.sha256sum] =3D
-> > "b4388bee8683e3d04af747c73422af53102d2bd24d9eadb6cbc100baef4b43f8"
-> > > +SRC_URI[cfg-if-1.0.4.sha256sum] =3D
-> > "9330f8b2ff13f34540b44e946ef35111825727b38d33286ef986142615121801"
-> > > +SRC_URI[cfg_aliases-0.2.1.sha256sum] =3D
-> > "613afe47fcd5fac7ccf1db93babcb082c5994d996f20b8b159f2ad1658eb5724"
-> > > +SRC_URI[getrandom-0.2.17.sha256sum] =3D
-> > "ff2abc00be7fca6ebc474524697ae276ad847ad0a6b3faa4bcb027e9a4614ad0"
-> > > +SRC_URI[git-version-0.3.9.sha256sum] =3D
-> > "1ad568aa3db0fcbc81f2f116137f263d7304f512a1209b35b85150d3ef88ad19"
-> > > +SRC_URI[git-version-macro-0.3.9.sha256sum] =3D
-> > "53010ccb100b96a67bc32c0175f0ed1426b31b655d562898e57325f81c023ac0"
-> > > +SRC_URI[json-0.12.4.sha256sum] =3D
-> > "078e285eafdfb6c4b434e0d31e8cfcb5115b651496faca5749b88fafd4f23bfd"
-> > > +SRC_URI[libc-0.2.186.sha256sum] =3D
-> > "68ab91017fe16c622486840e4c83c9a37afeff978bd239b5293d61ece587de66"
-> > > +SRC_URI[log-0.4.32.sha256sum] =3D
-> > "953f07c43838f8e6f9758cab68bf5bed85465e7587ebe0b823f1bcd81978ad3a"
-> > > +SRC_URI[nix-0.31.3.sha256sum] =3D
-> > "cf20d2fde8ff38632c426f1165ed7436270b44f199fc55284c38276f9db47c3d"
-> > > +SRC_URI[proc-macro2-1.0.106.sha256sum] =3D
-> > "8fd00f0bb2e90d81d1044c2b32617f68fcb9fa3bb7640c23e9c748e53fb30934"
-> > > +SRC_URI[quote-1.0.45.sha256sum] =3D
-> > "41f2619966050689382d2b44f664f4bc593e129785a36d6ee376ddf37259b924"
-> > > +SRC_URI[syn-2.0.118.sha256sum] =3D
-> > "1b9ae57f904213ebb649ce6895b8a66c66f0203b9319718f69a5612a065b1422"
-> > > +SRC_URI[unicode-ident-1.0.24.sha256sum] =3D
-> > "e6e4313cd5fcd3dad5cafa179702e2b244f760991f45397d14d4ebf38247da75"
-> > > +SRC_URI[wasi-0.11.1+wasi-snapshot-preview1.sha256sum] =3D
-> > "ccf3ec651a847eb01de73ccad15eb7d99f80485de043efb2f370cd654f4ea44b"
-> > > diff --git a/meta-initramfs/recipes-core/rsinit/rsinit_v0.1.0.bb
-> > b/meta-initramfs/recipes-core/rsinit/rsinit_v0.1.0.bb
-> > > new file mode 100644
-> > > index 0000000000..e2c5e71d54
-> > > --- /dev/null
-> > > +++ b/meta-initramfs/recipes-core/rsinit/rsinit_v0.1.0.bb
-> > > @@ -0,0 +1,31 @@
-> > > +SUMMARY =3D "minimalistic init written in rust"
-> > > +DESCRIPTION =3D "rsinit is a minimalistic single binary init for t=
-he
-> > initramfs for embedded systems"
-> > > +HOMEPAGE =3D "https://github.com/pengutronix/rsinit"
-> > > +
-> > > +LICENSE =3D "GPL-2.0-only AND CC0-1.0"
-> > > +LIC_FILES_CHKSUM =3D
-> > "file://LICENSES/GPL-2.0-only.txt;md5=3D570a9b3749dd0463a1778803b12a6=
-dce \
-> > > +
-> > file://LICENSES/CC0-1.0.txt;md5=3D65d3616852dbf7b1a6d4b53b00626032"
-> > > +
-> > > +SRC_URI =3D "git://
-> > github.com/pengutronix/rsinit.git;protocol=3Dhttps;branch=3Dmain"
-> > > +SRCREV =3D "${PV}"
-> > > +
-> > > +inherit cargo cargo-update-recipe-crates
-> > > +
-> > > +require ${BPN}-crates.inc
-> > > +
-> > > +INSANE_SKIP:${PN} +=3D "already-stripped"
-> > > +
-> > > +PACKAGECONFIG ??=3D " \
-> > > +    ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', =
-'',
-> > d)} \
-> > > +    reboot \
-> > > +"
-> > > +
-> > > +PACKAGECONFIG[defaults] =3D ",--no-default-features"
-> > > +PACKAGECONFIG[dmverity] =3D "--features dmverity"
-> > > +PACKAGECONFIG[reboot] =3D "--features reboot-on-failure"
-> > > +PACKAGECONFIG[systemd] =3D "--features systemd"
-> > > +PACKAGECONFIG[usb9pfs] =3D "--features usb9pfs"
-> > > +
-> > > +# cargo installs everything into ${bindir}, which is normally /usr=
-/bin.
-> > > +# Not the best choice for the init system, which should reside und=
-er
-> > /init
-> > > +bindir =3D ""
-> > > --
-> > > 2.47.3
-> > >
-> > >
-> > >
-> >
-> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> > Links: You receive all messages sent to this group.
-> > View/Reply Online (#132951):
-> > https://lists.openembedded.org/g/openembedded-devel/message/132951
-> > Mute This Topic: https://lists.openembedded.org/mt/122431108/1997914
-> > Group Owner: openembedded-devel+owner@lists.openembedded.org
-> > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsu=
-b [
-> > raj.khem@gmail.com]
-> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> >
-> >
++Upstream-Status: Backport [https://github.com/any1/neatvnc/commit/5b190f0fd9e6]
++Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
++---
++ meson.build                | 6 ++++--
++ src/crypto/nettle/cipher.c | 8 ++++----
++ src/crypto/nettle/hash.c   | 2 +-
++ 3 files changed, 9 insertions(+), 7 deletions(-)
++
++diff --git a/meson.build b/meson.build
++index cf8d67423f9c..b79606729e94 100644
++--- a/meson.build
+++++ b/meson.build
++@@ -61,8 +61,10 @@ libm = cc.find_library('m', required: false)
++ pixman = dependency('pixman-1')
++ libturbojpeg = dependency('libturbojpeg', required: get_option('jpeg'))
++ gnutls = dependency('gnutls', required: get_option('tls'))
++-nettle = dependency('nettle', required: get_option('nettle'))
++-hogweed = dependency('hogweed', required: get_option('nettle'))
+++nettle = dependency('nettle', required: get_option('nettle'),
+++                    version: ['>=4.0', '<5.0'])
+++hogweed = dependency('hogweed', required: get_option('nettle'),
+++                     version: ['>=4.0', '<5.0'])
++ gmp = dependency('gmp', required: get_option('nettle'))
++ zlib = dependency('zlib')
++ gbm = dependency('gbm', required: get_option('gbm'))
++diff --git a/src/crypto/nettle/cipher.c b/src/crypto/nettle/cipher.c
++index 0dd2262f09cc..6eb8770f2119 100644
++--- a/src/crypto/nettle/cipher.c
+++++ b/src/crypto/nettle/cipher.c
++@@ -119,7 +119,7 @@ static bool crypto_cipher_aes_eax_encrypt(struct crypto_cipher* self,
++ 			(uint8_t*)dst->data + dst->len, src);
++ 	dst->len += src_len;
++ 
++-	nettle_eax_aes128_digest(&self->enc_ctx.aes_eax.ctx, 16, mac);
+++	nettle_eax_aes128_digest(&self->enc_ctx.aes_eax.ctx, mac);
++ 
++ 	return true;
++ }
++@@ -131,7 +131,7 @@ static ssize_t crypto_cipher_aes_eax_decrypt(struct crypto_cipher* self,
++ 	crypto_aes_eax_update_nonce(&self->dec_ctx.aes_eax);
++ 	nettle_eax_aes128_update(&self->dec_ctx.aes_eax.ctx, ad_len, ad);
++ 	nettle_eax_aes128_decrypt(&self->dec_ctx.aes_eax.ctx, len, dst, src);
++-	nettle_eax_aes128_digest(&self->dec_ctx.aes_eax.ctx, 16, mac);
+++	nettle_eax_aes128_digest(&self->dec_ctx.aes_eax.ctx, mac);
++ 	return len;
++ }
++ 
++@@ -179,7 +179,7 @@ static bool crypto_cipher_aes256_eax_encrypt(struct crypto_cipher* self,
++ 			(uint8_t*)dst->data + dst->len, src);
++ 	dst->len += src_len;
++ 
++-	EAX_DIGEST(&self->enc_ctx.aes256_eax.ctx, aes256_encrypt, 16, mac);
+++	EAX_DIGEST(&self->enc_ctx.aes256_eax.ctx, aes256_encrypt, mac);
++ 
++ 	return true;
++ }
++@@ -191,7 +191,7 @@ static ssize_t crypto_cipher_aes256_eax_decrypt(struct crypto_cipher* self,
++ 	crypto_aes256_eax_update_nonce(&self->dec_ctx.aes256_eax);
++ 	EAX_UPDATE(&self->dec_ctx.aes256_eax.ctx, aes256_encrypt, ad_len, ad);
++ 	EAX_DECRYPT(&self->dec_ctx.aes256_eax.ctx, aes256_encrypt, len, dst, src);
++-	EAX_DIGEST(&self->dec_ctx.aes256_eax.ctx, aes256_encrypt, 16, mac);
+++	EAX_DIGEST(&self->dec_ctx.aes256_eax.ctx, aes256_encrypt, mac);
++ 	return len;
++ }
++ 
++diff --git a/src/crypto/nettle/hash.c b/src/crypto/nettle/hash.c
++index 71318f4a1c0b..9fbfe5f7c717 100644
++--- a/src/crypto/nettle/hash.c
+++++ b/src/crypto/nettle/hash.c
++@@ -21,7 +21,7 @@
++ #include <stdlib.h>
++ #include <nettle/md5.h>
++ #include <nettle/sha1.h>
++-#include <nettle/sha.h>
+++#include <nettle/sha2.h>
++ 
++ struct crypto_hash {
++ 	union {
+diff --git a/meta-oe/recipes-graphics/neatvnc/neatvnc/0002-crypto-Remove-hash-digest-size-argument.patch b/meta-oe/recipes-graphics/neatvnc/neatvnc/0002-crypto-Remove-hash-digest-size-argument.patch
+new file mode 100644
+index 000000000000..526b446cf402
+--- /dev/null
++++ b/meta-oe/recipes-graphics/neatvnc/neatvnc/0002-crypto-Remove-hash-digest-size-argument.patch
+@@ -0,0 +1,160 @@
++From 11dc4a4ce000fd3de7699da939195726b147d5de Mon Sep 17 00:00:00 2001
++From: Andri Yngvason <andri@yngvason.is>
++Date: Tue, 19 May 2026 21:23:59 +0000
++Subject: [PATCH 2/4] crypto: Remove hash digest size argument
++
++This has been removed in nettle 4.
++
++Upstream-Status: Backport [https://github.com/any1/neatvnc/commit/f97805deaaea]
++Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
++---
++ include/crypto.h          |  7 +++----
++ src/auth/apple-dh.c       |  3 +--
++ src/auth/rsa-aes.c        | 16 ++++++++--------
++ src/crypto/nettle/hash.c  | 14 +++++++-------
++ src/stream/ws/handshake.c |  3 +--
++ 5 files changed, 20 insertions(+), 23 deletions(-)
++
++diff --git a/include/crypto.h b/include/crypto.h
++index 9a1aee415f12..1e5886f7b2fe 100644
++--- a/include/crypto.h
+++++ b/include/crypto.h
++@@ -88,12 +88,11 @@ void crypto_hash_del(struct crypto_hash* self);
++ 
++ void crypto_hash_append(struct crypto_hash* self, const uint8_t* src,
++ 		size_t len);
++-void crypto_hash_digest(struct crypto_hash* self, uint8_t* dst,
++-		size_t len);
+++void crypto_hash_digest(struct crypto_hash* self, uint8_t* dst);
++ 
++-void crypto_hash_one(uint8_t* dst, size_t dst_len, enum crypto_hash_type type,
+++void crypto_hash_one(uint8_t* dst, enum crypto_hash_type type,
++ 		const uint8_t* src, size_t src_len);
++-void crypto_hash_many(uint8_t* dst, size_t dst_len, enum crypto_hash_type type,
+++void crypto_hash_many(uint8_t* dst, enum crypto_hash_type type,
++ 		const struct crypto_data_entry *src);
++ 
++ // RSA
++diff --git a/src/auth/apple-dh.c b/src/auth/apple-dh.c
++index 43833970892c..238561861155 100644
++--- a/src/auth/apple-dh.c
+++++ b/src/auth/apple-dh.c
++@@ -78,8 +78,7 @@ int apple_dh_handle_response(struct nvnc_client* client)
++ 	crypto_key_del(shared_secret);
++ 
++ 	uint8_t hash[16] = {};
++-	crypto_hash_one(hash, sizeof(hash), CRYPTO_HASH_MD5, shared_buf,
++-			sizeof(shared_buf));
+++	crypto_hash_one(hash, CRYPTO_HASH_MD5, shared_buf, sizeof(shared_buf));
++ 
++ 	struct crypto_cipher* cipher;
++ 	cipher = crypto_cipher_new(NULL, hash, CRYPTO_CIPHER_AES128_ECB);
++diff --git a/src/auth/rsa-aes.c b/src/auth/rsa-aes.c
++index dea2e7c84e2d..d2f217d4c501 100644
++--- a/src/auth/rsa-aes.c
+++++ b/src/auth/rsa-aes.c
++@@ -154,8 +154,8 @@ static int on_rsa_aes_challenge(struct nvnc_client* client)
++ 
++ 	// ClientSessionKey = the first 16 bytes of SHA1(ServerRandom || ClientRandom)
++ 	uint8_t client_session_key[32];
++-	crypto_hash_many(client_session_key, client_rsa_aes_hash_len(client),
++-			client->rsa.hash_type, (const struct crypto_data_entry[]) {
+++	crypto_hash_many(client_session_key, client->rsa.hash_type,
+++			(const struct crypto_data_entry[]) {
++ 		{ client->rsa.challenge, client->rsa.challenge_len },
++ 		{ client_random, client->rsa.challenge_len },
++ 		{}
++@@ -163,8 +163,8 @@ static int on_rsa_aes_challenge(struct nvnc_client* client)
++ 
++ 	// ServerSessionKey = the first 16 bytes of SHA1(ClientRandom || ServerRandom)
++ 	uint8_t server_session_key[32];
++-	crypto_hash_many(server_session_key, client_rsa_aes_hash_len(client),
++-			client->rsa.hash_type, (const struct crypto_data_entry[]) {
+++	crypto_hash_many(server_session_key, client->rsa.hash_type,
+++			(const struct crypto_data_entry[]) {
++ 		{ client_random, client->rsa.challenge_len },
++ 		{ client->rsa.challenge, client->rsa.challenge_len },
++ 		{}
++@@ -195,8 +195,8 @@ static int on_rsa_aes_challenge(struct nvnc_client* client)
++ 	uint32_t client_key_len_be = htonl(client_key_len * 8);
++ 
++ 	uint8_t server_hash[32] = {};
++-	crypto_hash_many(server_hash, client_rsa_aes_hash_len(client),
++-			client->rsa.hash_type, (const struct crypto_data_entry[]) {
+++	crypto_hash_many(server_hash, client->rsa.hash_type,
+++			(const struct crypto_data_entry[]) {
++ 		{ (uint8_t*)&server_key_len_be, 4 },
++ 		{ server_modulus, server_key_len },
++ 		{ server_exponent, server_key_len },
++@@ -249,8 +249,8 @@ static int on_rsa_aes_client_hash(struct nvnc_client* client)
++ 	uint32_t client_key_len_be = htonl(client_key_len * 8);
++ 
++ 	uint8_t client_hash[32] = {};
++-	crypto_hash_many(client_hash, client_rsa_aes_hash_len(client),
++-			client->rsa.hash_type, (const struct crypto_data_entry[]) {
+++	crypto_hash_many(client_hash, client->rsa.hash_type,
+++			(const struct crypto_data_entry[]) {
++ 		{ (uint8_t*)&client_key_len_be, 4 },
++ 		{ client_modulus, client_key_len },
++ 		{ client_exponent, client_key_len },
++diff --git a/src/crypto/nettle/hash.c b/src/crypto/nettle/hash.c
++index 9fbfe5f7c717..832953305d44 100644
++--- a/src/crypto/nettle/hash.c
+++++ b/src/crypto/nettle/hash.c
++@@ -31,7 +31,7 @@ struct crypto_hash {
++ 	} ctx;
++ 
++ 	void (*update)(void* ctx, size_t len, const uint8_t* src);
++-	void (*digest)(void* ctx, size_t len, uint8_t* dst);
+++	void (*digest)(void* ctx, uint8_t* dst);
++ };
++ 
++ struct crypto_hash* crypto_hash_new(enum crypto_hash_type type)
++@@ -75,27 +75,27 @@ void crypto_hash_append(struct crypto_hash* self, const uint8_t* src,
++ 	self->update(&self->ctx, len, src);
++ }
++ 
++-void crypto_hash_digest(struct crypto_hash* self, uint8_t* dst, size_t len)
+++void crypto_hash_digest(struct crypto_hash* self, uint8_t* dst)
++ {
++-	self->digest(&self->ctx, len, dst);
+++	self->digest(&self->ctx, dst);
++ }
++ 
++-void crypto_hash_one(uint8_t* dst, size_t dst_len, enum crypto_hash_type type,
+++void crypto_hash_one(uint8_t* dst, enum crypto_hash_type type,
++ 		const uint8_t* src, size_t src_len)
++ {
++ 	struct crypto_hash *hash = crypto_hash_new(type);
++ 	crypto_hash_append(hash, src, src_len);
++-	crypto_hash_digest(hash, dst, dst_len);
+++	crypto_hash_digest(hash, dst);
++ 	crypto_hash_del(hash);
++ }
++ 
++-void crypto_hash_many(uint8_t* dst, size_t dst_len, enum crypto_hash_type type,
+++void crypto_hash_many(uint8_t* dst, enum crypto_hash_type type,
++ 		const struct crypto_data_entry *src)
++ {
++ 	struct crypto_hash *hash = crypto_hash_new(type);
++ 	for (int i = 0; src[i].data && src[i].len; ++i)
++ 		crypto_hash_append(hash, src[i].data, src[i].len);
++-	crypto_hash_digest(hash, dst, dst_len);
+++	crypto_hash_digest(hash, dst);
++ 	crypto_hash_del(hash);
++ }
++ 
++diff --git a/src/stream/ws/handshake.c b/src/stream/ws/handshake.c
++index 80881189236e..aa0db3f9f2c2 100644
++--- a/src/stream/ws/handshake.c
+++++ b/src/stream/ws/handshake.c
++@@ -79,8 +79,7 @@ ssize_t ws_handshake(char* output, size_t output_maxlen, const char* input)
++ 		goto failure;
++ 
++ 	uint8_t hash[20];
++-	crypto_hash_many(hash, sizeof(hash), CRYPTO_HASH_SHA1,
++-			(struct crypto_data_entry[]){
+++	crypto_hash_many(hash, sizeof(hash), (struct crypto_data_entry[]){
++ 		{ (uint8_t*)challenge, strlen(challenge) },
++ 		{ (uint8_t*)magic_uuid, strlen(magic_uuid) },
++ 		{}
+diff --git a/meta-oe/recipes-graphics/neatvnc/neatvnc/0003-stream-ws-handshake-Fix-crypto_hash_many-argument-mi.patch b/meta-oe/recipes-graphics/neatvnc/neatvnc/0003-stream-ws-handshake-Fix-crypto_hash_many-argument-mi.patch
+new file mode 100644
+index 000000000000..4be9ac9c6d79
+--- /dev/null
++++ b/meta-oe/recipes-graphics/neatvnc/neatvnc/0003-stream-ws-handshake-Fix-crypto_hash_many-argument-mi.patch
+@@ -0,0 +1,27 @@
++From 0c1a96814ac70ae59905cfbb013c3d6e3147b703 Mon Sep 17 00:00:00 2001
++From: Andri Yngvason <andri@yngvason.is>
++Date: Thu, 30 Jul 2026 10:35:25 +0000
++Subject: [PATCH 3/4] stream: ws: handshake: Fix crypto_hash_many argument
++ mixup
++
++This fixes mistake in f97805deaaea489a1c8c851324163a92a3125195.
++
++Upstream-Status: Backport [https://github.com/any1/neatvnc/commit/8e0d226064d0]
++Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
++---
++ src/stream/ws/handshake.c | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/src/stream/ws/handshake.c b/src/stream/ws/handshake.c
++index aa0db3f9f2c2..9cb6f1c58856 100644
++--- a/src/stream/ws/handshake.c
+++++ b/src/stream/ws/handshake.c
++@@ -79,7 +79,7 @@ ssize_t ws_handshake(char* output, size_t output_maxlen, const char* input)
++ 		goto failure;
++ 
++ 	uint8_t hash[20];
++-	crypto_hash_many(hash, sizeof(hash), (struct crypto_data_entry[]){
+++	crypto_hash_many(hash, CRYPTO_HASH_SHA1, (struct crypto_data_entry[]){
++ 		{ (uint8_t*)challenge, strlen(challenge) },
++ 		{ (uint8_t*)magic_uuid, strlen(magic_uuid) },
++ 		{}
+diff --git a/meta-oe/recipes-graphics/neatvnc/neatvnc/0004-crypto-fix-base16-decode-buffer-length.patch b/meta-oe/recipes-graphics/neatvnc/neatvnc/0004-crypto-fix-base16-decode-buffer-length.patch
+new file mode 100644
+index 000000000000..b550495b7a71
+--- /dev/null
++++ b/meta-oe/recipes-graphics/neatvnc/neatvnc/0004-crypto-fix-base16-decode-buffer-length.patch
+@@ -0,0 +1,29 @@
++From 556ea1d187a70c08c99d0871c8920e3f7874664f Mon Sep 17 00:00:00 2001
++From: Chad Voegele <chad@voegele.me>
++Date: Thu, 11 Jun 2026 12:41:03 +0000
++Subject: [PATCH 4/4] crypto: fix base16 decode buffer length
++
++Upstream-Status: Backport [https://github.com/any1/neatvnc/commit/8057ec4ad673]
++Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
++---
++ src/crypto/nettle/key.c | 3 +--
++ 1 file changed, 1 insertion(+), 2 deletions(-)
++
++diff --git a/src/crypto/nettle/key.c b/src/crypto/nettle/key.c
++index 3b69de259436..45e53187fc22 100644
++--- a/src/crypto/nettle/key.c
+++++ b/src/crypto/nettle/key.c
++@@ -91,7 +91,7 @@ static void initialise_p(mpz_t p)
++ 		"15728E5A8AACAA68FFFFFFFFFFFFFFFF";
++ 
++ 	char buf[256];
++-	size_t len = 0;
+++	size_t len = sizeof(buf);
++ 	struct base16_decode_ctx ctx;
++ 	nettle_base16_decode_init(&ctx);
++ 	nettle_base16_decode_update(&ctx, &len, (uint8_t*)buf, sizeof(s) - 1, s);
++@@ -174,4 +174,3 @@ struct crypto_key* crypto_derive_shared_secret(
++ 
++ 	return shared;
++ }
++-
+diff --git a/meta-oe/recipes-graphics/neatvnc/neatvnc_1.0.4.bb b/meta-oe/recipes-graphics/neatvnc/neatvnc_1.0.4.bb
+index 44e3b156f9b9..c341b21a6405 100644
+--- a/meta-oe/recipes-graphics/neatvnc/neatvnc_1.0.4.bb
++++ b/meta-oe/recipes-graphics/neatvnc/neatvnc_1.0.4.bb
+@@ -4,7 +4,12 @@ HOMEPAGE = "https://github.com/any1/neatvnc"
+ LICENSE = "ISC"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=94fc374e7174f41e3afe0f027ee59ff7"
+ 
+-SRC_URI = "git://github.com/any1/neatvnc;branch=v1.0;protocol=https;tag=v${PV}"
++SRC_URI = "git://github.com/any1/neatvnc;branch=v1.0;protocol=https;tag=v${PV} \
++           file://0001-Use-nettle-hogweed-version-4.patch \
++           file://0002-crypto-Remove-hash-digest-size-argument.patch \
++           file://0003-stream-ws-handshake-Fix-crypto_hash_many-argument-mi.patch \
++           file://0004-crypto-fix-base16-decode-buffer-length.patch \
++           "
+ 
+ SRCREV = "ffce32d6d04e702d5d8055e28e038c7f68a0caf4"
+ 
