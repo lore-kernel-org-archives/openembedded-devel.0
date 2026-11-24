@@ -1,119 +1,174 @@
-Received: from aer-iport-2.cisco.com (aer-iport-2.cisco.com [173.38.203.52])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.12883.1795503942030029846
+Received: from aer-iport-5.cisco.com (aer-iport-5.cisco.com [173.38.203.67])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.14659.1795513233513539187
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 23 Nov 2026 23:05:42 -0800
+ Tue, 24 Nov 2026 01:40:34 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=jdGYxbwX;
- spf=pass (domain: cisco.com, ip: 173.38.203.52, mailfrom: asparmar@cisco.com)
+ dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=hdZTc9Sx;
+ spf=pass (domain: cisco.com, ip: 173.38.203.67, mailfrom: devanshp@cisco.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=cisco.com; i=@cisco.com; l=1676; q=dns/txt;
-  s=iport01; t=1795503942; x=1796713542;
-  h=from:to:cc:subject:date:message-id:mime-version:
+  d=cisco.com; i=@cisco.com; l=3683; q=dns/txt;
+  s=iport01; t=1795513233; x=1796722833;
+  h=from:to:subject:date:message-id:mime-version:
    content-transfer-encoding;
-  bh=bDq1dGj4A6u44bM8u2JE9bYixy0/XUQQ24/5gtXF9aE=;
-  b=jdGYxbwXa37qvtePG+mQHvBSlEr1BebWL1x3hK++6fU6aTuMtToBVOD3
-   Yi3y7KwNJhMyZIhWJtPEXtIHpJwc6dN8JRtj0y9yacB6Eoo6YzQ32EyhD
-   noBaosvzaM9sx4EcK7lvegWXOa+iIUMmOk16dCtQRpNqYKv1mMjne2ezg
-   K3XEkxUM3dKVfCdptwfSTal3Oj0QLlwNxgwJWywoZmLFoKpfSBrc+2rfe
-   j7DYiNLCf1mVC96pHRM7yXVXcF1w8iQyaeD5Hw/xfarIEcZHMRjsg9s3g
-   +ybQAO+y8ISPmSswQlzMMYHOWJVg+webfQx/CZz/90obvBJ0jEqDCbHU8
-   Q==;
-X-CSE-ConnectionGUID: B51JjTC+TPO7A1/+lnn8QQ==
-X-CSE-MsgGUID: fyXc1H97TMieN85nPK+gzg==
-X-IPAS-Result: =?us-ascii?q?A0BDAgAxNgVr/8xK/pBRCYJZgld1YUJJlkueLIF+DwEBA?=
- =?us-ascii?q?Q89FAQBAYISgi1GjiQCJjQJDgECBAMCAwEBAQEBAQEBAQEBAQoBAQUBAQECA?=
- =?us-ascii?q?QcFgQ4Thk8NkBU2ARgBGxIwXEQJgnkBgnQCARG6MRs3giyBAYMpAT8CQ1DbM?=
- =?us-ascii?q?wELFAEFgTOFQogkdoR9JxsbgXKECXaBBYFcAQMYgRp5hXkEgiKBDIFyjHmKG?=
- =?us-ascii?q?kiBHgNZLAFVEw0KCwcFgWgDNRIqFW4yHYEjOxeBBxsGBYEcgR6BEoEDXYErK?=
- =?us-ascii?q?F0BIYEIgXYCglGCAAIBSUEOB0VTCSVDEkckIggSCQETGiwKgRo1PAkmPxUMZ?=
- =?us-ascii?q?wsaBWEIAg0MdDkQMB4kLwUaJj4bCoEMJx8eGw4CHxAGFiELGxgNSBEsNxUZB?=
- =?us-ascii?q?D5uB5QUgxgCgQ4rAYEfTVGTYJIEgTWfXAoog3mMJJU6GjOEBKZumQiCWYZDh?=
- =?us-ascii?q?G6WBE2EaoFoPIFHCwdwFYMiCUoZD445hWqDFMlIIzUCOwEBBwIHDgMLgWiRf?=
- =?us-ascii?q?gEB?=
-IronPort-Data: A9a23:i7/+/a71NO/QPCTom1qVIAxRtG/GchMFZxGqfqrLsTDasY5as4F+v
- jZLXWqOM6rYNGDwctF+b47kpB5QvJHTy4dmSwA9rSkwZn8b8sCt6fZ1gavT04J+CuWZESqLO
- u1HMoGowPgcFyGa+1H1dOi78BGQ7InQLpLkEunIJyttcgFtTSYlmHpLlvUw6mJSqYDR7zil5
- 5Wo/KUzBHf/g2QqaztOt/rawP9SlK2aVA0w7wRWic9j5Dcyp1FNZLoDKKe4KWfPQ4U8NoaSW
- +bZwbilyXjS9hErB8nNuu6TnpoiG+O60aCm0xK6aoD66vRwjnVaPpUTaJLwXXxqZwChxLid/
- jniWauYEm/FNoWU8AgUvoIx/ytWZcWq85efSZSzXFD6I0DuKxPRL/tS4E4eF9BB2ORLKiJyz
- dtHAWlKLRSFgbKP+efuIgVsrpxLwMjDNY4F/3UlxjbDALN+GtbIQr7B4plT2zJYasJmRKqCI
- ZBENXwwMFKaO0En1lQ/UPrSmM+hnWH2aThRsnqepLE85C7YywkZPL3FboCKJIDQFZQ9ckCwq
- HP29D3ZU04mEd2S72rY9EqPxeDdknauMG4VPPjinhJwu3WU3mEVBRgcWFe3rPX8hkOgVtZ3L
- 00P5jFoqrA/8kGuRNTxUxC05nmesXYht8F4GuAgrQXIwa3O7kPBXS4PTyVKb5ots8peqSEW6
- 2JlVujBXVRH2IB5g1rEnltIhVte4RQoEFI=
-IronPort-HdrOrdr: A9a23:TOiFFKArmzglfdblHemA55DYdb4zR+YMi2TDGXofdfUzSL38qy
- nAppUmPHPP5Qr5O0tQ++xoRpPhfZq0z/cciuMs1NyZMjUO1lHFEGhK1/qH/9SZIVycysdtkY
- F9bqN5FNr8SXJ+jcr8/U2ENuxI+qjhzEht7t2utkuEimpRGsdd0zs=
-X-Talos-CUID: 9a23:Bkt/mW8//qhU1sm2I26Vv2RJQ+InTlae8E/3fGbhTiVtTrvFcGbFrQ==
-X-Talos-MUID: 9a23:MwItqAk/oxKihcrR4JkGdnpsJfdjuoT/V3wokJgg65SCDQ8zNCWS2WE=
+  bh=q6HT1z70uZiihphmCrQz0DMxnYJ+DxKSpwHVycnkVyo=;
+  b=hdZTc9SxCaLLY6pwx2wwLlwD3958Azxr1HWfyThLz1Js3gbqO64+y03z
+   eCtiv/ChyI4Xwk1+jf4yeVvmoc0+ufgEPy3cO+K4yAAlIZxJDte/qLCwM
+   zRV4oVMdnnqh/d6JnsB8l3TP5YtMlXMlipGZFhcBF/6TYwu0gpQKWwGH5
+   Dy8+IpLzUAaiOEtsFGgTywP0rQ0oZ/aigqYMWKLAGDuUdDCpjgY+wmnwl
+   THFkNNJuFfKvZrbRGB8Ywg/sk03razSv6h9CF+0h6JPWTG6fIjidp6TRv
+   iXfxrxsN4aYX0VQgLlBirApXIAcaa434Q5n6nScOsQUymfa+8HfyHULf9
+   A==;
+X-CSE-ConnectionGUID: 3sUetO7IR26GkMuizuHTtw==
+X-CSE-MsgGUID: 72ElGmq/Qai7/6rNfjTzTg==
+X-IPAS-Result: =?us-ascii?q?A0DJAgC4WQVr/9VK/pBaglmCV3VgHSZJlCqCIYEWilOSQ?=
+ =?us-ascii?q?4F+DwEBAQ9EDQQBAZMpAiY0CQ4BAgQDAgMBAQEBAQEBAQEBAQEKAQEFAQEBA?=
+ =?us-ascii?q?gEHBYEOE4ZPDZASATgBGAFZAwECTwsjIYMCAYI6AzcDEbpmgiyBAYMpAYFU2?=
+ =?us-ascii?q?EwNgloBCxQBgTiFQoMAhSRdGYR9JxsbgXKBFYJ0doEFgRpCAogmBIIigQyBV?=
+ =?us-ascii?q?B6MeQKBT4hJSIEeA1ksAVUTDQoLBwWBaAM1EioVbjIdgSM7F4EHGwYFgRyBH?=
+ =?us-ascii?q?oESgQNdgSsoXiGBCIF2AoJRggACAUlBDgdFUwklQxJHJCIIEgkBExosCoEaN?=
+ =?us-ascii?q?TwJJj8VDGcLGgVhCAINDHQ5EDAeJC8FGiY+GwqBDCcfHhsOAh8QBhYhCxsYD?=
+ =?us-ascii?q?UgRLDcVGQQ+bgeUFIMaewkKAQckgRE8plSgIHEKKIN5jCSPPoV8GjOEBIFXk?=
+ =?us-ascii?q?kOSVIcVkXOLN4JThAqSR4RqgWg8gVlwFYMiCUoZD44tAQsLg2DOWyYyAgkzA?=
+ =?us-ascii?q?QcCBw8CgXORfgEB?=
+IronPort-Data: A9a23:ts646KJ10Jcfwk9GFE+RhpQlxSXFcZb7ZxGr2PjKsXjdYENS1DUEm
+ 2tKXjuCOKvbZWCmfowkbtzl8E8AsMDWx4dhHQEd+CA2RRqmiyZq6fd1j6vUF3nPRiEWZBs/t
+ 63yUvGZcoZpCCea9k3wWlTYhSEU/bmSQbbhA/LzNCl0RAt1IA8skhsLd9QR2uaEuvDnRVnS0
+ T/Oi5eHYgH8gmQvajh8B5+r8XuDgtyj4Fv0gXRmDRx7lAe2v2UYCpsZOZawIxPQKqFIHvS3T
+ vr017qw+GXU5X8FUrtJRZ6iLyXm6paLVeS/oiI+t5qK23CulQRuukoPD8fwXG8M49m/c3+d/
+ /0W3XC4YV9B0qQhA43xWTEAe811FfUuFLMqvRFTvOTLp3AqfUcAzN01F3w7IapH29wtX05N0
+ OEZOi0tUgyc0rfeLLKTEoGAh+wqIdOuOMYUvWttiGiDS/0nWpvEBa7N4Le03h9p2pwIR6uCI
+ ZVFL2A2N3wsYDUXUrsTIJ4zgu6unXnnWzZZs1mS46Ew5gA/ySQviOGzYICPK7RmQ+0KxGuci
+ WffuF3wA05dasa5xzi54E6j07qncSTTHdh6+KeD3vlyjVuew2YeBBEbWR63rOe0jma6WslDM
+ AoT4icooK04+UCnQ9W7WAe3yENopTYVVsAVF6gx7xuAj/OOpQ2YHWMDCDVGbbTKqfMLeNDj7
+ XfR9/uBONClmOT9pa61nltMkQ6PBA==
+IronPort-HdrOrdr: A9a23:G8qVQaP5LWyBoMBcTvGjsMiBIKoaSvp037BN7TESdfU7SKKlfq
+ yV8cjztiWE6wr5JktApTnoAsDpKhnhHPVOjrX5U43PYOCfgguVBbAny5f+yDv9HCC73Otc2a
+ B8N5VaMrTLfD1HZQKQ2njeLz7mq+P3lJyVuQ==
+X-Talos-CUID: 9a23:oxn4yW9KTIVpxFp3Bg+VvxUPJ805VSL89i2ODEydFGd7VZ2pVUDFrQ==
+X-Talos-MUID: 9a23:izNO5AnfzluGfzHWO8zwdno9bupszKG3T3kEkMpB5dOiOy5MKQuS2WE=
 X-IronPort-Anti-Spam-Filtered: true
 X-IronPort-AV: E=Sophos;i="6.27,230,1787011200"; 
-   d="scan'208";a="62764289"
-Received: from aer-l-core-03.cisco.com ([144.254.74.204])
-  by aer-iport-2.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 24 Nov 2026 07:05:38 +0000
-Received: from sjc-ads-20495.cisco.com (sjc-ads-20495.cisco.com [171.70.188.248])
+   d="scan'208";a="60168229"
+Received: from aer-l-core-12.cisco.com ([144.254.74.213])
+  by aer-iport-5.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 24 Nov 2026 09:40:31 +0000
+Received: from sjc-ads-4935.cisco.com (sjc-ads-4935.cisco.com [10.28.39.199])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
 	 client-signature RSA-PSS (4096 bits) client-digest SHA256)
 	(Client CN "ciscoit-managed-infra-smtp-auth.cisco.com", Issuer "Internal Private TLS SubCA" (verified OK))
-	by aer-l-core-03.cisco.com (Postfix) with ESMTPS id BD15118000860;
-	Tue, 24 Nov 2026 07:05:37 +0000 (GMT)
-Received: by sjc-ads-20495.cisco.com (Postfix, from userid 1877012)
-	id 4B697CC1634; Mon, 23 Nov 2026 23:05:36 -0800 (PST)
-From: "Ashishkumar Parmar X (asparmar - E INFOCHIPS PRIVATE LIMITED at Cisco)" <asparmar@cisco.com>
+	by aer-l-core-12.cisco.com (Postfix) with ESMTPS id ED6D318000AC2
+	for <openembedded-devel@lists.openembedded.org>; Tue, 24 Nov 2026 09:40:30 +0000 (GMT)
+Received: by sjc-ads-4935.cisco.com (Postfix, from userid 1887503)
+	id 9D2C0CC2EF3; Tue, 24 Nov 2026 01:40:29 -0800 (PST)
+From: "Devansh Patel -X (devanshp - E INFOCHIPS PRIVATE LIMITED at Cisco)" <devanshp@cisco.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: xe-linux-external@cisco.com,
-	Ashishkumar Parmar <asparmar@cisco.com>
-Subject: [meta-oe][wrynose][PATCH] openldap: mark CVE-2020-15719 as disputed
-Date: Mon, 23 Nov 2026 23:05:32 -0800
-Message-Id: <20261124070532.4047734-1-asparmar@cisco.com>
+Subject: [meta-oe][PATCH] jq: backport CVE-2026-40164 entropy follow-up
+Date: Tue, 24 Nov 2026 01:40:29 -0800
+Message-Id: <20261124094029.1550975-1-devanshp@cisco.com>
 X-Mailer: git-send-email 2.35.6
 MIME-Version: 1.0
-X-Auto-Response-Suppress: DR, OOF, AutoReply
-X-Outbound-Client-TLS: VERIFIED;sjc-ads-20495.cisco.com [171.70.188.248];TLSv1.3;TLS_AES_256_GCM_SHA384;256;ciscoit-managed-infra-smtp-auth.cisco.com
-X-Outbound-SMTP-Client: 171.70.188.248, sjc-ads-20495.cisco.com
-X-Outbound-Node: aer-l-core-03.cisco.com
 Content-Transfer-Encoding: 8bit
+X-Outbound-Client-TLS: VERIFIED;sjc-ads-4935.cisco.com [10.28.39.199];TLSv1.3;TLS_AES_256_GCM_SHA384;256;ciscoit-managed-infra-smtp-auth.cisco.com
+X-Outbound-SMTP-Client: 10.28.39.199, sjc-ads-4935.cisco.com
+X-Outbound-Node: aer-l-core-12.cisco.com
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Tue, 24 Nov 2026 07:50:40 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132936
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Tue, 24 Nov 2026 09:40:43 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132937
 Content-Type: text/plain; charset="utf-8"
 
-From: Ashishkumar Parmar <asparmar@cisco.com>
+From: Devansh Patel <devanshp@cisco.com>
 
-CVE-2020-15719 concerns third-party OpenLDAP packages that assert
-RFC6125 support. Upstream rejected ITS9266 because stock OpenLDAP
-implements the LDAP certificate identity rules from RFC4513.
+Backport the upstream follow-up to the CVE-2026-40164 hash seed fix.
+Prefer getentropy() and try /dev/urandom if getentropy() fails.
 
-The recipe carries no downstream TLS verification changes. Its two
-source patches only adjust build stripping and version metadata.
-Retain the documented TLS_REQSAN policy and record the upstream
-dispute instead of applying the Red Hat downstream policy patch.
+https://github.com/jqlang/jq/commit/32580f5d83f4321588a1ebf8e3893f7fbecefe4e
 
-References:
-https://bugs.openldap.org/show_bug.cgi?id=9266
-https://nvd.nist.gov/vuln/detail/CVE-2020-15719
-
-Signed-off-by: Ashishkumar Parmar <asparmar@cisco.com>
+Signed-off-by: Devansh Patel <devanshp@cisco.com>
 ---
- meta-oe/recipes-support/openldap/openldap_2.6.13.bb | 4 ++++
- 1 file changed, 4 insertions(+)
+ .../jq/jq/CVE-2026-40164-follow-up.patch      | 61 +++++++++++++++++++
+ meta-oe/recipes-devtools/jq/jq_1.8.2.bb       |  1 +
+ 2 files changed, 62 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/jq/jq/CVE-2026-40164-follow-up.patch
 
-diff --git a/meta-oe/recipes-support/openldap/openldap_2.6.13.bb b/meta-oe/recipes-support/openldap/openldap_2.6.13.bb
-index 59f20d0f08..63f61ead52 100644
---- a/meta-oe/recipes-support/openldap/openldap_2.6.13.bb
-+++ b/meta-oe/recipes-support/openldap/openldap_2.6.13.bb
-@@ -23,6 +23,10 @@ SRC_URI = "http://www.openldap.org/software/download/OpenLDAP/openldap-release/$
- 
- SRC_URI[sha256sum] = "d693b49517a42efb85a1a364a310aed16a53d428d1b46c0d31ef3fba78fcb656"
- 
-+# Upstream rejects the RFC6125 report for stock OpenLDAP, which uses RFC4513.
-+# https://bugs.openldap.org/show_bug.cgi?id=9266
-+CVE_STATUS[CVE-2020-15719] = "disputed: Upstream ITS9266 rejects this report for stock OpenLDAP; this recipe carries no third-party TLS changes asserting RFC6125 support."
+diff --git a/meta-oe/recipes-devtools/jq/jq/CVE-2026-40164-follow-up.patch b/meta-oe/recipes-devtools/jq/jq/CVE-2026-40164-follow-up.patch
+new file mode 100644
+index 0000000000000000000000000000000000000000..18d5fc1a02d5f4488744e89368c0de43628c99ae
+--- /dev/null
++++ b/meta-oe/recipes-devtools/jq/jq/CVE-2026-40164-follow-up.patch
+@@ -0,0 +1,61 @@
++From 5465d963cefed0f5f58cba2278f697c7ef77548d Mon Sep 17 00:00:00 2001
++From: Brandon <breakouttradersc@gmail.com>
++Date: Fri, 25 Sep 2026 03:39:06 -0400
++Subject: [PATCH] Prefer getentropy() over arc4random() to seed the string hash
++ (#3629)
 +
- DEPENDS = "util-linux groff-native"
++glibc's arc4random() aborts with "Fatal glibc error: cannot get entropy
++for arc4random" when the kernel lacks getrandom(2), so jq died on
++startup on older kernels once 0c7d133 began seeding the hash on every
++run.  getentropy() merely returns -1/ENOSYS there, so prefer it, and
++route its failure through the existing `/dev/urandom` path - which works
++on precisely those kernels -- instead of a guessable `getpid() ^ time()`.
++
++CVE: CVE-2026-40164
++Upstream-Status: Backport [https://github.com/jqlang/jq/commit/32580f5d83f4321588a1ebf8e3893f7fbecefe4e]
++
++Signed-off-by: Devansh Patel <devanshp@cisco.com>
++---
++ src/jv.c | 19 ++++++++++++-------
++ 1 file changed, 12 insertions(+), 7 deletions(-)
++
++diff --git a/src/jv.c b/src/jv.c
++index 48a63e6e55cacc3b3ad316586469605c6978a805..76d2bf82fb62f9436dc134d86fae2ee26168ba58 100644
++--- a/src/jv.c
+++++ b/src/jv.c
++@@ -1210,12 +1210,18 @@ static pthread_once_t hash_seed_once = PTHREAD_ONCE_INIT;
++ 
++ static void jvp_hash_seed_init(void) {
++   uint32_t seed;
++-#if defined(HAVE_ARC4RANDOM)
++-  seed = arc4random();
++-#elif defined(HAVE_GETENTROPY)
++-  if (getentropy(&seed, sizeof(seed)) != 0)
++-    seed = (uint32_t)getpid() ^ (uint32_t)time(NULL);
++-#else
+++  /* Prefer getentropy() over arc4random(): glibc's arc4random() aborts the
+++   * process when the kernel lacks getrandom(2) (#3584), while getentropy()
+++   * merely fails, letting us fall back to /dev/urandom. */
+++#if defined(HAVE_GETENTROPY)
+++  if (getentropy(&seed, sizeof(seed)) == 0) {
+++    hash_seed = seed;
+++    return;
+++  }
+++#elif defined(HAVE_ARC4RANDOM)
+++  hash_seed = arc4random();
+++  return;
+++#endif
++   int fd = open("/dev/urandom", O_RDONLY);
++   if (fd >= 0) {
++     if (read(fd, &seed, sizeof(seed)) != 4)
++@@ -1224,7 +1230,6 @@ static void jvp_hash_seed_init(void) {
++   } else {
++     seed = (uint32_t)getpid() ^ (uint32_t)time(NULL);
++   }
++-#endif
++   hash_seed = seed;
++ }
++ 
++-- 
++2.35.6
++
+diff --git a/meta-oe/recipes-devtools/jq/jq_1.8.2.bb b/meta-oe/recipes-devtools/jq/jq_1.8.2.bb
+index 0bbe6e009fea16c29c439b1211b07963cbc446fd..4d21670e0f5acc2eb7bddf1951ea22df1ffddea2 100644
+--- a/meta-oe/recipes-devtools/jq/jq_1.8.2.bb
++++ b/meta-oe/recipes-devtools/jq/jq_1.8.2.bb
+@@ -12,6 +12,7 @@ SRCREV = "34f7186b86743a083a589741b6cea95293524108"
  
- inherit autotools-brokensep update-rc.d systemd pkgconfig
+ SRC_URI = "git://github.com/jqlang/jq.git;protocol=https;branch=master;tag=jq-${PV} \
+            file://run-ptest \
++           file://CVE-2026-40164-follow-up.patch \
+            "
+ 
+ CVE_PRODUCT = "jq_project:jq jqlang:jq"
 -- 
 2.35.6
 
