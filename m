@@ -1,260 +1,316 @@
-Received: from aer-iport-1.cisco.com (aer-iport-1.cisco.com [173.38.203.51])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.11751.1795496988092403056
+Received: from aer-iport-3.cisco.com (aer-iport-3.cisco.com [173.38.203.53])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.12223.1795500040552522772
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 23 Nov 2026 21:09:50 -0800
+ Mon, 23 Nov 2026 22:00:41 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=LXIvqjKz;
- spf=pass (domain: cisco.com, ip: 173.38.203.51, mailfrom: hthakar@cisco.com)
+ dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=L5JOIWd4;
+ spf=pass (domain: cisco.com, ip: 173.38.203.53, mailfrom: yurade@cisco.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=cisco.com; i=@cisco.com; l=7843; q=dns/txt;
-  s=iport01; t=1795496990; x=1796706590;
+  d=cisco.com; i=@cisco.com; l=10537; q=dns/txt;
+  s=iport01; t=1795500040; x=1796709640;
   h=from:to:subject:date:message-id:in-reply-to:references:
    mime-version:content-transfer-encoding;
-  bh=Mwljbu8l08wRCWcivJwwEsG16q4mkDxvmKenpHgr02A=;
-  b=LXIvqjKzs1FK96vGEtNzkMktUeEglq80dVZ+CUU6jxKN8OtaUyBQhcM7
-   UB4J0wNnMhXcE2jeqWslDDyix4Zi+mXCF5IxDgnzgBPJxCNRLzPxJSlQs
-   Av6mnzfas5OQpVAzkEaGgPfLbZHBuAKBkdA7vRSBjz766ooVQqfxKWxxj
-   FK4WGxnXlHNXkuZkx5DPkxDRZuhabYAJvSVVsc8YLsXP/8hrcCh87Thzh
-   RkBDherZkQdMt+hjep02aeK0RGvaetI2DlCanivsI5av2E5WeXtGoqP+R
-   3AcUZW5MQiZULcI6JeuSpKetgcslFMGKYIpDBKWvlW1xA6Ve783xDJUXb
-   g==;
-X-CSE-ConnectionGUID: peFoDlUxT2e1cSfjy0rrKg==
-X-CSE-MsgGUID: ETj/RiBpR5qj4BTMMAgzpA==
-X-IPAS-Result: =?us-ascii?q?A0BNAgBOGgVr/8xK/pBaHgEBCxIMggULgld1YUJJA4RUj?=
- =?us-ascii?q?1OCIQOBE4pTkkOBfg8BAQEPRA0EAQGEP0YCjiICJjQJDgECBAMCAwEBAQEBA?=
- =?us-ascii?q?QEBAQEBAQoBAQUBAQECAQcFgQ4Thk8NkBIBAgEDIw8BGAE9CRMDAQIDAiYCA?=
- =?us-ascii?q?iALIwgQCYMCAYI6AzcCARGfZZskeoEygQGDKQGBVNhMDYJaAQsUAYEKLoVCg?=
- =?us-ascii?q?wAgAYUDXRgBRIQ5JxsbgXKBFYEXgV12gQWBGkICgSeEFYJqBIIiehKBVI0XA?=
- =?us-ascii?q?oFPiElIgQIcA1ksAVUTDQoLBwWBaAM1EioVbjIdgSM7Fy9YGwYFgRyBHoESg?=
- =?us-ascii?q?QNdgSsoXiGBCIF2AoJRggACAUlBDgdFUwklQxJHJCIIEgkBExosCoEaNTwJJ?=
- =?us-ascii?q?j8VDGcLGgVhCAINDHQ5EDAeJC8FGiY+GwqBDCcfHhsOAh8QBhYhCxsYDUgRL?=
- =?us-ascii?q?DcVGQQ9AW4HlBSDGmABLQEII1AGRVERCAMkEaNDgiGgIHEKKIN5jCSPPoV8G?=
- =?us-ascii?q?jOFW6UXC5h9jgqECoUHjFgLJjeEaoFoPIFZcBWDIglKGQ+OOYNrR4QJgRTId?=
- =?us-ascii?q?yM1AgkDLwEBBwIHDgMLgWiQACyBUgEB?=
-IronPort-Data: A9a23:GqhN9K0dhCK94Hk0w/bD5Ydwkn2cJEfYwER7XKvMYLTBsI5bpzIGn
- GMbCj2EOvrfYTGjKY8iYY/n8kwBsJ7RztVjTQto3Hw8FHgiRegpqji6wuYcGwvIc6UvmWo+t
- 512huHodZ5yEzmE4Ef3b9ANlFEkvYmQXL3wFeXYDS54QA5gWU8JhAlq8wIDqtYAbeORXUXX5
- rsen+WFYAX7gmcuaTpOg06+gEoHUMra6WtwUmMWPZinjHeG/1EJAZQWI72GLneQauF8Au6gS
- u/f+6qy92Xf8g1FIovNfmHTKxBirhb6ZGBiu1IOM0SQqkEqSh8ajs7XAMEhhXJ/0F1lqTzeJ
- OJl7vRcQS9xVkHFdX90vxNwS0mSNoUekFPLzOTWXcG7lyX7n3XQL/pGFEwYOqEcx/ZLW2wX/
- scWKiFVdAqgiLfjqF67YrEEasULJcTxeYdasXZ6wHSBVrAtQIvIROPB4towMDUY35wSW6yDO
- 4xGNXw1NEiojx5nYj/7DLo+gOehhXDlWzZZs1mS46Ew5gA/ySQviuexbIuEILRmQ+14okTfn
- GPs516kGxNGHuC67BOK4GqF07qncSTTHdh6+KeD3vlyjVuew2YeBBEbWR63rOe0jma6WslDM
- AoT4icooK04+UCnQ9W7WAe3yENopTYVVsAVF6gx7xuAj/KPpQ2YHWMDCDVGbbTKqfMLeNDj7
- XfR9/uBONClmOH9pa61nltMkQ6PBA==
-IronPort-HdrOrdr: A9a23:27bCyqxAMBbWlo/vVf7uKrPwDr1zdoMgy1knxilNoHtuA6ulfq
- GV7ZAmPHDP5gr5NEtMpTnEAtjifZq+z+8R3WBuB9aftWDd0QPCRr2Kr7GSoQEIcBeQygcy78
- tdmtBFaOHYPBxdkdvw5hW+HpILxdmK973tuMLlpk0dKz2Dr8pbnn9E4sHxKDwOeDV7
-X-Talos-CUID: 9a23:CeQBd22uO6jg+yEF7web87xfAs0LdVHZ8WfseULhAl1nSqzNU0Wz9/Yx
-X-Talos-MUID: =?us-ascii?q?9a23=3A/wFJ0w1WXkFsKLNOF6qMBP1lmDUjzpisT3oMu40?=
- =?us-ascii?q?85tCGaQZMHhK0gyava9py?=
+  bh=fJfkSJju4qBcP/psoaa+0Dlp29jj+Ai+tNKjW7RVtRQ=;
+  b=L5JOIWd4egDA6I1eZa8I4KYmOlCLDIbEmWlXfkvnLzMFdKUYMPT/Wn03
+   8ibuneg57C5o0pYwveYqUpcu6xnZ0AIfk8lmfHdnxKSiqGWoZV1EWNW/F
+   MPn2rnH93ydSe+zopAM4RdRNQaKFSqsXKQjWjYOTMbzkk7itIyx2H6TE6
+   x+/t+eIWXPIqG2pIQDAJvtoBZxFnJRNxs6X+Ac9Bf1LF15Ozi0aQIUJKw
+   NUTvxAvWZrY7/BdhqhdRFOop2UszfI54jiANg0jNpeHxIbTAO5KXYiW3p
+   M7u0UZFbmRdj2gEjEAjBfijw1qbl+gI0ig3n6sqWmm28NqHjfCJQBpIpU
+   w==;
+X-CSE-ConnectionGUID: RRRFFFonTB6w9HNDs9yIjg==
+X-CSE-MsgGUID: +xt5gwuvT+e6isdufZrTow==
+X-IPAS-Result: =?us-ascii?q?A0ATBABBJgVr/9NK/pBaglmCV3VgQ0kDlCeCIQOKTIhYi?=
+ =?us-ascii?q?wWBfg8BAQEPRA0EAQGEP0YCjiICJjQJDgECBAMCAwEBAQEBAQEBAQEBAQoBA?=
+ =?us-ascii?q?QUBAQECAQcFgQ4Thk8NkBIBAgEDJwsBGAEbIhwDAQIvKyMIGYMCAYJ0AxG6b?=
+ =?us-ascii?q?oF5M4EBgykBPwJDUNlLgWgBCxQBgTiFQogkXRgBhH0nG4FJRIEVgTuCL4EFg?=
+ =?us-ascii?q?VwBAYEnEYZuBIMugVSNFwKBT4hJSIEeA1ksAVUTDQoLBwWBaAM1EioVbjIdg?=
+ =?us-ascii?q?SM7F4EHGwYFgRyBHoESgQNdgSsoXiGBCIF2AoJRggACAUlBDgdFUwklQxJHJ?=
+ =?us-ascii?q?CIIEgkBExosCoEaNTwJJj8VDGcLGgVhCAINDHQ5EDAeJC8FGiY+GwqBDCcfH?=
+ =?us-ascii?q?hsOAh8QBhYhCxsYDUgRLDcVGQQ+bgeUFIIocgGBDQEqAYEgZA8Zkz8ykgSBN?=
+ =?us-ascii?q?Z9chCuMJJU6GjOFW6UXC5h9jgqGVY8sUIRqgWg8gUcLBzMaCBsVgyIJShkPj?=
+ =?us-ascii?q?isOC4NggX+DZch3JjICCQMvAQEHAgcOAwuBaJAAASeBVgEB?=
+IronPort-Data: A9a23:jlhND6lJHm8zEv39ja6Buz/o5gzUJ0RdPkR7XQ2eYbSJt1+Wr1Gzt
+ xIWXjiGafiOamfxL4wiOd+w9hwE7MTVmNNiTwZor3wyRltH+JHPbTi7wugcHM8zwunrFh8PA
+ xA2M4GYRCwMZiaC4Errav6x9yQUOZigHtLUEPTDNj16WThqQSIgjQMLs+Mii+aEu/Dha++2k
+ Y20+ZK31GONgWYubDtNsfnb8nuDgdyr0N8mlg1mDRx0lAe2e0k9VPo3Oay3Jn3kdYhYdsbSb
+ /rD1ryw4lTC9B4rDN6/+p6jGqHdauePVeQmoiM+t5mK2nCulARrukoIHKZ0hXNsttm8t4sZJ
+ OOhGnCHYVxB0qXkwIzxWvTDes10FfUuFLTveRBTvSEPpqHLWyOE/hlgMK05FbciwMhZL2ZIy
+ dZGN2EtSDyY1vOXwr3uH4GAhux7RCXqFIoSoDRkiDreF/tjGMiFSKTR7tge1zA17ixMNa+CO
+ 4xDNGYpM0iGOUQWUrsUIMpWcOOAl2TlejFVgFmUvqEwpWPUyWSd1ZCzaIGEKoDTG625mG7bt
+ n6b8HvkHC1ZOYKe0jaY/EC2uujQyHaTtIU6UefQGuRRqFqLy2oeDRcbWVe2rby1h1CzX/pbK
+ lcI4WwptaU0+UmhQ9XxUhH+p2SL1iPwQPJZHvd/7ESGzbDZpl/BQGMFVTVGLtchsafaWAAX6
+ 7NApPuxbRQHjVFfYSv1Gmu8xd9qBRUoEA==
+IronPort-HdrOrdr: A9a23:PjgL6qhS26VXjT+maih5h1Uw2nBQXvYji2hC6mlwRA09TyX+rb
+ HLoB1173HJYVoqNU3I3OrwW5VoIkmskKKdn7NxAV7KZmCP0wGVxcNZnOnfKlbbdBEWmNQw6U
+ 4ZSchDIey1K0RmhsDn5wT9OdMhzN6btJ2Mv47lvhBQpcUAUdAY0++/YTzrdHFLeA==
+X-Talos-CUID: 9a23:wUrwMG7VAt45S2KJddssznQuNO4LdXvh5inPcm+eJX04WZyXRgrF
+X-Talos-MUID: =?us-ascii?q?9a23=3AcY+m+A/NPeiEKZvpi+e2Nz+Qf4R4//mhF10TrdY?=
+ =?us-ascii?q?L5cifOTF+CS2hiyviFw=3D=3D?=
 X-IronPort-Anti-Spam-Filtered: true
 X-IronPort-AV: E=Sophos;i="6.27,229,1787011200"; 
-   d="scan'208";a="62744992"
-Received: from aer-l-core-03.cisco.com ([144.254.74.204])
-  by aer-iport-1.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 24 Nov 2026 05:09:46 +0000
-Received: from sjc-ads-2020.cisco.com (sjc-ads-2020.cisco.com [171.70.61.208])
+   d="scan'208";a="60398416"
+Received: from aer-l-core-10.cisco.com ([144.254.74.211])
+  by aer-iport-3.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 24 Nov 2026 06:00:38 +0000
+Received: from sjc-ads-7310.cisco.com (sjc-ads-7310.cisco.com [10.30.220.95])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
 	 client-signature RSA-PSS (4096 bits) client-digest SHA256)
 	(Client CN "ciscoit-managed-infra-smtp-auth.cisco.com", Issuer "Internal Private TLS SubCA" (verified OK))
-	by aer-l-core-03.cisco.com (Postfix) with ESMTPS id 8E1C9180006C5
-	for <openembedded-devel@lists.openembedded.org>; Tue, 24 Nov 2026 05:09:45 +0000 (GMT)
-Received: by sjc-ads-2020.cisco.com (Postfix, from userid 1887505)
-	id D137ACC51C1; Mon, 23 Nov 2026 21:09:42 -0800 (PST)
-From: "Hetvi Thakar -X (hthakar - E INFOCHIPS PRIVATE LIMITED at Cisco)" <hthakar@cisco.com>
+	by aer-l-core-10.cisco.com (Postfix) with ESMTPS id 0C18918000B73
+	for <openembedded-devel@lists.openembedded.org>; Tue, 24 Nov 2026 06:00:38 +0000 (GMT)
+Received: by sjc-ads-7310.cisco.com (Postfix, from userid 1889728)
+	id AB7C6CC12A8; Mon, 23 Nov 2026 22:00:36 -0800 (PST)
+From: Yogita Urade <yurade@cisco.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-python][scarthgap][PATCH 10/12]  python3-virtualenv: fix CVE-2026-113719
-Date: Mon, 23 Nov 2026 21:09:40 -0800
-Message-Id: <20261124050942.1795310-11-hthakar@cisco.com>
+Subject: [oe][meta-python][wrynose][PATCH 2/5] python3-twisted: Fix CVE-2026-115877
+Date: Mon, 23 Nov 2026 22:00:32 -0800
+Message-Id: <20261124060035.1651451-3-yurade@cisco.com>
 X-Mailer: git-send-email 2.35.6
-In-Reply-To: <20261124050942.1795310-1-hthakar@cisco.com>
-References: <20261124050942.1795310-1-hthakar@cisco.com>
+In-Reply-To: <20261124060035.1651451-1-yurade@cisco.com>
+References: <20261124060035.1651451-1-yurade@cisco.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Outbound-Client-TLS: VERIFIED;sjc-ads-2020.cisco.com [171.70.61.208];TLSv1.3;TLS_AES_256_GCM_SHA384;256;ciscoit-managed-infra-smtp-auth.cisco.com
-X-Outbound-SMTP-Client: 171.70.61.208, sjc-ads-2020.cisco.com
-X-Outbound-Node: aer-l-core-03.cisco.com
+X-Outbound-Client-TLS: VERIFIED;sjc-ads-7310.cisco.com [10.30.220.95];TLSv1.3;TLS_AES_256_GCM_SHA384;256;ciscoit-managed-infra-smtp-auth.cisco.com
+X-Outbound-SMTP-Client: 10.30.220.95, sjc-ads-7310.cisco.com
+X-Outbound-Node: aer-l-core-10.cisco.com
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Tue, 24 Nov 2026 05:09:54 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132919
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Tue, 24 Nov 2026 06:00:45 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132922
 Content-Type: text/plain; charset="utf-8"
 
-From: Hetvi Thakar <hthakar@cisco.com>
+This patch applies the upstream fix as referenced in [5],
+using the commit shown in [1], [2] and [3].
 
-This patch applies the upstream fix as referenced in [2], using the
-commit shown in [1]. Adapt metadata cleanup to virtualenv 20.25.3 and keep deletion within the
-environment while preserving metadata parent directories.
+[1] https://github.com/twisted/twisted/commit/1616f702d36eda8990a5a5b22ad70fab140a7eb1
+[2] https://github.com/twisted/twisted/commit/022b6f7feb5980166c71f54e2c0d8f4f21ff6e1a
+[3] https://github.com/twisted/twisted/commit/9b826a307b1f5d16df84bce2bdb2a3c70dabf06c
+[4] https://nvd.nist.gov/vuln/detail/CVE-2026-115877
+[5] https://github.com/twisted/twisted/pull/12755
+[6] https://github.com/twisted/twisted/security/advisories/GHSA-q7qq-6mhp-9rc4
 
-[1] https://github.com/pypa/virtualenv/commit/e3cea6fa10a50fa29cf1fdddd772458fba076d5f
-[2] https://github.com/pypa/virtualenv/security/advisories/GHSA-hhxq-47xx-j5xx
-
-Signed-off-by: Hetvi Thakar <hthakar@cisco.com>
+Signed-off-by: Yogita Urade <yurade@cisco.com>
 ---
- .../python3-virtualenv/CVE-2026-113719.patch  | 141 ++++++++++++++++++
- .../python/python3-virtualenv_20.25.3.bb      |   1 +
- 2 files changed, 142 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-virtualenv/CVE-2026-113719.patch
+ .../python3-twisted/CVE-2026-115877_p1.patch  | 71 +++++++++++++++++
+ .../python3-twisted/CVE-2026-115877_p2.patch  | 30 +++++++
+ .../python3-twisted/CVE-2026-115877_p3.patch  | 78 +++++++++++++++++++
+ .../python/python3-twisted_25.5.0.bb          |  3 +
+ 4 files changed, 182 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-twisted/CVE-2026-115877_p1.patch
+ create mode 100644 meta-python/recipes-devtools/python/python3-twisted/CVE-2026-115877_p2.patch
+ create mode 100644 meta-python/recipes-devtools/python/python3-twisted/CVE-2026-115877_p3.patch
 
-diff --git a/meta-python/recipes-devtools/python/python3-virtualenv/CVE-2026-113719.patch b/meta-python/recipes-devtools/python/python3-virtualenv/CVE-2026-113719.patch
+diff --git a/meta-python/recipes-devtools/python/python3-twisted/CVE-2026-115877_p1.patch b/meta-python/recipes-devtools/python/python3-twisted/CVE-2026-115877_p1.patch
 new file mode 100644
-index 0000000000..646679ddfa
+index 0000000000..3f824788b8
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-virtualenv/CVE-2026-113719.patch
-@@ -0,0 +1,141 @@
-+From e3cea6fa10a50fa29cf1fdddd772458fba076d5f Mon Sep 17 00:00:00 2001
-+From: =?UTF-8?q?Bern=C3=A1t=20G=C3=A1bor?= <gaborjbernat@gmail.com>
-+Date: Sat, 17 Oct 2026 03:19:58 -0700
-+Subject: [PATCH] 🐛 fix(seed): contain metadata cleanup (#3428)
-+MIME-Version: 1.0
-+Content-Type: text/plain; charset=UTF-8
-+Content-Transfer-Encoding: 8bit
++++ b/meta-python/recipes-devtools/python/python3-twisted/CVE-2026-115877_p1.patch
+@@ -0,0 +1,71 @@
++From 1616f702d36eda8990a5a5b22ad70fab140a7eb1 Mon Sep 17 00:00:00 2001
++From: arkmarta <arkadiuszmarta@proton.me>
++Date: Fri, 31 Jul 2026 14:04:59 +0200
++Subject: [PATCH] Reject a bare CR or LF in an HTTP header value (#12754)
 +
-+CVE: CVE-2026-113719
-+Upstream-Status: Backport [https://github.com/pypa/virtualenv/commit/e3cea6fa10a50fa29cf1fdddd772458fba076d5f]
++CVE: CVE-2026-115877
++Upstream-Status: Backport [https://github.com/twisted/twisted/commit/1616f702d36eda8990a5a5b22ad70fab140a7eb1]
 +
-+Backport Changes:
-+ - Refresh the metadata-cleanup changes for the older untyped PipInstall
-+   implementation and its logging interface.
-+ - Replace the newer upstream pytest fixture changes with compatible
-+   unittest checks; omit docs/changelog/3428.bugfix.rst.
-+
-+Signed-off-by: Hetvi Thakar <hthakar@cisco.com>
++Signed-off-by: Yogita Urade <yurade@cisco.com>
 +---
-+ .../seed/embed/via_app_data/pip_install/base.py    | 26 ++++++---
-+ tests/unit/seed/embed/test_cve_2026_113719.py      | 65 ++++++++++++++++++++++
-+ 2 files changed, 84 insertions(+), 7 deletions(-)
++ src/twisted/web/http.py                    |  4 +++-
++ src/twisted/web/newsfragments/12754.bugfix |  1 +
++ src/twisted/web/test/test_http.py          | 22 ++++++++++++++++++++++
++ 3 files changed, 26 insertions(+), 1 deletion(-)
++ create mode 100644 src/twisted/web/newsfragments/12754.bugfix
 +
-+diff --git a/src/virtualenv/seed/embed/via_app_data/pip_install/base.py b/src/virtualenv/seed/embed/via_app_data/pip_install/base.py
-+index 961cd425125269cd87404cfd34c0aec7eb28c2b3..e8a5670f6c627683fb8cae7bd764bd021fcd2291 100644
-+--- a/src/virtualenv/seed/embed/via_app_data/pip_install/base.py
-++++ b/src/virtualenv/seed/embed/via_app_data/pip_install/base.py
-+@@ -146,10 +146,10 @@ class PipInstall(ABC):
-+         paths = (p for p in in_folders if p.stem.split("-")[0] == dist_name and p.suffix == ".dist-info" and p.is_dir())
-+         existing_dist = next(paths, None)
-+         if existing_dist is not None:
-+-            self._uninstall_dist(existing_dist)
-++            self._uninstall_dist(existing_dist, self._creator.dest)
++diff --git a/src/twisted/web/http.py b/src/twisted/web/http.py
++index c2894fbd2..2ac611105 100644
++--- a/src/twisted/web/http.py
+++++ b/src/twisted/web/http.py
++@@ -2509,7 +2509,9 @@ class HTTPChannel(basic.LineReceiver, policies.TimeoutMixin):
++             return False
 + 
-+     @staticmethod
-+-    def _uninstall_dist(dist):
-++    def _uninstall_dist(dist, env_dir):
-+         dist_base = dist.parent
-+         logging.debug("uninstall existing distribution %s from %s", dist.stem, dist_base)
++         data = data.strip(b" \t")
++-        if b"\x00" in data:
+++        # Reject NUL, CR, and LF in a header value (RFC 9110 section 5.5); a
+++        # bare CR or LF would let a lenient proxy smuggle a following header.
+++        if b"\x00" in data or b"\r" in data or b"\n" in data:
++             self._respondToBadRequestAndDisconnect()
++             return False
 + 
-+@@ -169,12 +169,24 @@ class PipInstall(ABC):
-+             if not any(p in base_dirs for p in path.parents):  # only add if not already added as a base dir
-+                 paths.add(path)
-+ 
-+-        for path in sorted(paths):  # actually remove stuff in a stable order
-+-            if path.exists():
-+-                if path.is_dir() and not path.is_symlink():
-+-                    safe_delete(path)
-++        root = env_dir.resolve()
-++        metadata_parents = set(dist.resolve().parents)
-++        for entry in sorted(paths):
-++            if entry.exists() or entry.is_symlink():
-++                linked = entry.is_symlink()
-++                # Unlinking the final link leaves its target intact; parent links still affect containment.
-++                resolved = entry.parent.resolve() / entry.name if linked else entry.resolve()
-++                if root not in resolved.parents or resolved in metadata_parents:
-++                    logging.warning(
-++                        "skip removal of %s listed by %s: not inside environment %s or a parent of the metadata",
-++                        entry,
-++                        dist.name,
-++                        root,
-++                    )
-++                elif entry.is_dir() and not linked:
-++                    safe_delete(entry)
-+                 else:
-+-                    path.unlink()
-++                    entry.unlink()
-+ 
-+     def clear(self):
-+         if self._image_dir.exists():
-+diff --git a/tests/unit/seed/embed/test_cve_2026_113719.py b/tests/unit/seed/embed/test_cve_2026_113719.py
++diff --git a/src/twisted/web/newsfragments/12754.bugfix b/src/twisted/web/newsfragments/12754.bugfix
 +new file mode 100644
-+index 0000000000000000000000000000000000000000..c6330e5a9849e42c861454230cbb96aa5c1b428b
++index 000000000..9d42c4682
 +--- /dev/null
-++++ b/tests/unit/seed/embed/test_cve_2026_113719.py
-+@@ -0,0 +1,65 @@
-++import os
-++import tempfile
-++import unittest
-++from pathlib import Path
+++++ b/src/twisted/web/newsfragments/12754.bugfix
++@@ -0,0 +1 @@
+++twisted.web.http.HTTPChannel.headerReceived now rejects a header value that contains a bare carriage return or line feed, closing a request-smuggling gap where such a value could hide a following header from the parser (RFC 9110 section 5.5).
++diff --git a/src/twisted/web/test/test_http.py b/src/twisted/web/test/test_http.py
++index 3b4460c12..1c4bd8a21 100644
++--- a/src/twisted/web/test/test_http.py
+++++ b/src/twisted/web/test/test_http.py
++@@ -2209,6 +2209,28 @@ class ParsingTests(unittest.TestCase):
++                 [b"GET / HTTP/1.1", b"Host: foo.example", header, b"", b""]
++             )
++ 
+++    def test_invalidHeaderValueCRLF(self):
+++        """
+++        A header value containing a bare CR or LF is rejected with a 400, as
+++        required by RFC 9110 section 5.5; accepting it would let a following
+++        header be hidden from the parser and enable request smuggling. The bytes
+++        are fed directly because L{runRequest} normalises a bare LF to CRLF.
+++        """
+++        for value in [
+++            b"a\nContent-Length: 5",  # bare LF hiding a header
+++            b"a\rContent-Length: 5",  # bare CR hiding a header
+++            b"a\nb",  # bare LF
+++            b"a\rb",  # bare CR
+++        ]:
+++            channel = http.HTTPChannel()
+++            transport = StringTransport()
+++            channel.makeConnection(transport)
+++            channel.dataReceived(
+++                b"GET / HTTP/1.1\r\nHost: foo.example\r\nx-foo: " + value + b"\r\n\r\n"
+++            )
+++            self.assertTrue(transport.disconnecting)
+++            self.assertEqual(transport.value(), b"HTTP/1.1 400 Bad Request\r\n\r\n")
 ++
-++from virtualenv.seed.embed.via_app_data.pip_install.base import PipInstall
-++
-++
-++class TestMetadataCleanup(unittest.TestCase):
-++    def setUp(self):
-++        self.directory = tempfile.TemporaryDirectory()
-++        self.root = Path(self.directory.name)
-++        self.env = self.root / "env"
-++        self.packages = self.env / "lib" / "python" / "site-packages"
-++        self.dist = self.packages / "pip-1.dist-info"
-++        self.dist.mkdir(parents=True)
-++        self.package = self.packages / "pip"
-++        self.package.mkdir()
-++        (self.package / "__init__.py").write_text("", encoding="utf-8")
-++
-++    def tearDown(self):
-++        self.directory.cleanup()
-++
-++    def test_regular_packages_and_launchers_are_removed(self):
-++        launcher = self.env / "bin" / "pip"
-++        launcher.parent.mkdir()
-++        launcher.write_text("launcher", encoding="utf-8")
-++        (self.dist / "top_level.txt").write_text("pip\n", encoding="utf-8")
-++        (self.dist / "RECORD").write_text("../../../bin/pip,,\n", encoding="utf-8")
-++        PipInstall._uninstall_dist(self.dist, self.env)
-++        self.assertFalse(self.dist.exists())
-++        self.assertFalse(self.package.exists())
-++        self.assertFalse(launcher.exists())
-++        self.assertTrue(self.env.is_dir())
-++
-++    def test_environment_and_metadata_parents_are_preserved(self):
-++        (self.dist / "top_level.txt").write_text("\n.\n" + str(self.env) + "\npip\n", encoding="utf-8")
-++        PipInstall._uninstall_dist(self.dist, self.env)
-++        self.assertTrue(self.env.is_dir())
-++        self.assertTrue(self.packages.is_dir())
-++        self.assertFalse(self.package.exists())
-++        self.assertFalse(self.dist.exists())
-++
-++    def test_entries_outside_environment_are_preserved(self):
-++        outside = self.root / "untouched"
-++        outside.write_text("keep", encoding="utf-8")
-++        (self.dist / "RECORD").write_text(str(outside) + ",,\n", encoding="utf-8")
-++        PipInstall._uninstall_dist(self.dist, self.env)
-++        self.assertEqual(outside.read_text(encoding="utf-8"), "keep")
-++        self.assertFalse(self.dist.exists())
-++
-++    @unittest.skipIf(os.name == "nt", "requires POSIX symlink support")
-++    def test_final_links_are_removed_without_touching_targets(self):
-++        outside = self.root / "untouched"
-++        outside.mkdir()
-++        (outside / "data").write_text("keep", encoding="utf-8")
-++        link = self.packages / "linked"
-++        link.symlink_to(outside, target_is_directory=True)
-++        dangling = self.packages / "dangling"
-++        dangling.symlink_to(self.root / "missing")
-++        (self.dist / "top_level.txt").write_text("linked\ndangling\n", encoding="utf-8")
-++        PipInstall._uninstall_dist(self.dist, self.env)
-++        self.assertFalse(link.is_symlink())
-++        self.assertFalse(dangling.is_symlink())
-++        self.assertEqual((outside / "data").read_text(encoding="utf-8"), "keep")
-diff --git a/meta-python/recipes-devtools/python/python3-virtualenv_20.25.3.bb b/meta-python/recipes-devtools/python/python3-virtualenv_20.25.3.bb
-index c6f300f7bc..fb5c03f923 100644
---- a/meta-python/recipes-devtools/python/python3-virtualenv_20.25.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-virtualenv_20.25.3.bb
-@@ -21,6 +21,7 @@ SRC_URI += "file://CVE-2026-22702.patch \
-             file://CVE-2026-113723.patch \
-             file://bash-prompt-state-followup.patch \
-             file://CVE-2026-113720.patch \
-+            file://CVE-2026-113719.patch \
- "
- SRC_URI[sha256sum] = "7bb554bbdfeaacc3349fa614ea5bff6ac300fc7c335e9facf3a3bcfc703f45be"
++     def test_headerLimitPerRequest(self):
++         """
++         C{HTTPChannel} enforces the limit of C{HTTPChannel.maxHeaders} per
+diff --git a/meta-python/recipes-devtools/python/python3-twisted/CVE-2026-115877_p2.patch b/meta-python/recipes-devtools/python/python3-twisted/CVE-2026-115877_p2.patch
+new file mode 100644
+index 0000000000..9929fd9c5c
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-twisted/CVE-2026-115877_p2.patch
+@@ -0,0 +1,30 @@
++From 022b6f7feb5980166c71f54e2c0d8f4f21ff6e1a Mon Sep 17 00:00:00 2001
++From: arkmarta <arkadiuszmarta@proton.me>
++Date: Fri, 31 Jul 2026 14:30:02 +0200
++Subject: [PATCH] web: check a header value for NUL CR and LF in one pass
++
++CVE: CVE-2026-115877
++Upstream-Status: Backport [https://github.com/twisted/twisted/commit/022b6f7feb5980166c71f54e2c0d8f4f21ff6e1a]
++
++Signed-off-by: Yogita Urade <yurade@cisco.com>
++---
++ src/twisted/web/http.py | 6 +++---
++ 1 file changed, 3 insertions(+), 3 deletions(-)
++
++diff --git a/src/twisted/web/http.py b/src/twisted/web/http.py
++index 2ac611105..b6ee3e5a5 100644
++--- a/src/twisted/web/http.py
+++++ b/src/twisted/web/http.py
++@@ -2509,9 +2509,9 @@ class HTTPChannel(basic.LineReceiver, policies.TimeoutMixin):
++             return False
++ 
++         data = data.strip(b" \t")
++-        # Reject NUL, CR, and LF in a header value (RFC 9110 section 5.5); a
++-        # bare CR or LF would let a lenient proxy smuggle a following header.
++-        if b"\x00" in data or b"\r" in data or b"\n" in data:
+++        # A header value must not contain NUL, CR, or LF (RFC 9110 section 5.5).
+++        # A bare CR or LF here would let a lenient proxy smuggle a header.
+++        if len(data.translate(None, b"\x00\r\n")) != len(data):
++             self._respondToBadRequestAndDisconnect()
++             return False
++ 
+diff --git a/meta-python/recipes-devtools/python/python3-twisted/CVE-2026-115877_p3.patch b/meta-python/recipes-devtools/python/python3-twisted/CVE-2026-115877_p3.patch
+new file mode 100644
+index 0000000000..10508544d8
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-twisted/CVE-2026-115877_p3.patch
+@@ -0,0 +1,78 @@
++From 9b826a307b1f5d16df84bce2bdb2a3c70dabf06c Mon Sep 17 00:00:00 2001
++From: arkmarta <arkadiuszmarta@proton.me>
++Date: Sat, 1 Aug 2026 07:41:38 +0200
++Subject: [PATCH] web: address review, fold header control-char tests into one
++
++CVE: CVE-2026-115877
++Upstream-Status: Backport [https://github.com/twisted/twisted/commit/9b826a307b1f5d16df84bce2bdb2a3c70dabf06c]
++
++Signed-off-by: Yogita Urade <yurade@cisco.com>
++---
++ src/twisted/web/http.py           |  1 -
++ src/twisted/web/test/test_http.py | 36 +++++++++++--------------------
++ 2 files changed, 13 insertions(+), 24 deletions(-)
++
++diff --git a/src/twisted/web/http.py b/src/twisted/web/http.py
++index b6ee3e5a5..32c164fcc 100644
++--- a/src/twisted/web/http.py
+++++ b/src/twisted/web/http.py
++@@ -2510,7 +2510,6 @@ class HTTPChannel(basic.LineReceiver, policies.TimeoutMixin):
++ 
++         data = data.strip(b" \t")
++         # A header value must not contain NUL, CR, or LF (RFC 9110 section 5.5).
++-        # A bare CR or LF here would let a lenient proxy smuggle a header.
++         if len(data.translate(None, b"\x00\r\n")) != len(data):
++             self._respondToBadRequestAndDisconnect()
++             return False
++diff --git a/src/twisted/web/test/test_http.py b/src/twisted/web/test/test_http.py
++index 1c4bd8a21..fd362fd41 100644
++--- a/src/twisted/web/test/test_http.py
+++++ b/src/twisted/web/test/test_http.py
++@@ -2194,34 +2194,24 @@ class ParsingTests(unittest.TestCase):
++                 [b"GET / HTTP/1.1", b"Host: foo.example", header, b"", b""]
++             )
++ 
++-    def test_invalidHeaderValueNUL(self):
+++    def test_invalidHeaderValueControlChars(self) -> None:
++         """
++-        A request with a header value that contains a NUL byte
++-        is rejected with a 400 status code.
++-        """
++-        for header in [
++-            b"x-foo: \x00",  # NUL byte
++-            b"x-foo: a\x00",  # trailing NUL
++-            b"x-foo: \x00baz",  # leading NUL
++-            b"x-foo:  \x00\x00\x00x0\0 ",  # lots of NULs
++-        ]:
++-            self.assertRequestRejected(
++-                [b"GET / HTTP/1.1", b"Host: foo.example", header, b"", b""]
++-            )
++-
++-    def test_invalidHeaderValueCRLF(self):
++-        """
++-        A header value containing a bare CR or LF is rejected with a 400, as
++-        required by RFC 9110 section 5.5; accepting it would let a following
++-        header be hidden from the parser and enable request smuggling. The bytes
++-        are fed directly because L{runRequest} normalises a bare LF to CRLF.
+++        A header value containing NUL, CR, or LF is rejected with a 400 (RFC
+++        9110 section 5.5). A bare CR or LF would additionally let a following
+++        header be hidden from the parser, enabling request smuggling.
++         """
++         for value in [
++-            b"a\nContent-Length: 5",  # bare LF hiding a header
++-            b"a\rContent-Length: 5",  # bare CR hiding a header
++-            b"a\nb",  # bare LF
+++            b"\x00",  # NUL
+++            b"a\x00",  # trailing NUL
+++            b"\x00baz",  # leading NUL
++             b"a\rb",  # bare CR
+++            b"a\rContent-Length: 5",  # bare CR hiding a header
++         ]:
+++            self.assertRequestRejected(
+++                [b"GET / HTTP/1.1", b"Host: foo.example", b"x-foo: " + value, b"", b""]
+++            )
+++        # runRequest normalises a bare LF to CRLF, so feed those bytes directly.
+++        for value in [b"a\nb", b"a\nContent-Length: 5"]:
++             channel = http.HTTPChannel()
++             transport = StringTransport()
++             channel.makeConnection(transport)
+diff --git a/meta-python/recipes-devtools/python/python3-twisted_25.5.0.bb b/meta-python/recipes-devtools/python/python3-twisted_25.5.0.bb
+index 978627077f..78e74fa491 100644
+--- a/meta-python/recipes-devtools/python/python3-twisted_25.5.0.bb
++++ b/meta-python/recipes-devtools/python/python3-twisted_25.5.0.bb
+@@ -17,6 +17,9 @@ SRC_URI += "file://CVE-2026-42304_p1.patch \
+            file://CVE-2026-83813_p3.patch \
+            file://CVE-2026-83813_p4.patch \
+            file://CVE-2026-83813-regression.patch \
++           file://CVE-2026-115877_p1.patch \
++           file://CVE-2026-115877_p2.patch \
++           file://CVE-2026-115877_p3.patch \
+            "
  
+ SRC_URI[sha256sum] = "1deb272358cb6be1e3e8fc6f9c8b36f78eb0fa7c2233d2dbe11ec6fee04ea316"
 -- 
-2.35.6
+2.53.0
 
