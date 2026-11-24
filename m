@@ -1,71 +1,72 @@
-Received: from aer-iport-8.cisco.com (aer-iport-8.cisco.com [173.38.203.70])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.12459.1795500042234081347
+Received: from aer-iport-1.cisco.com (aer-iport-1.cisco.com [173.38.203.51])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.12224.1795500042120444151
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 23 Nov 2026 22:00:42 -0800
+ Mon, 23 Nov 2026 22:00:43 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=ZpSY9xq0;
- spf=pass (domain: cisco.com, ip: 173.38.203.70, mailfrom: yurade@cisco.com)
+ dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=a4RjYBRX;
+ spf=pass (domain: cisco.com, ip: 173.38.203.51, mailfrom: yurade@cisco.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=cisco.com; i=@cisco.com; l=9636; q=dns/txt;
-  s=iport01; t=1795500042; x=1796709642;
+  d=cisco.com; i=@cisco.com; l=13522; q=dns/txt;
+  s=iport01; t=1795500043; x=1796709643;
   h=from:to:subject:date:message-id:in-reply-to:references:
    mime-version:content-transfer-encoding;
-  bh=w6/hhazQT4QMvJwcFtEJPFLCd1DZCQFSNIhEwGVYLW8=;
-  b=ZpSY9xq0aqTxeH+QOLh3ca4/x7kWteAr4zlI3s5cp04HNg8CLBSry7us
-   NLJrDQ0saRnH8GwTkARIH2eb7yKP6rItkO7Fx2xLoC0t57fBIo4g0J4Tr
-   bpqGVuXz0cZ1PEJBNjRcdK8KTce/J3PnHeBGSk1PQjvEGFJKVX2RQmeG2
-   5lXmcTJZ+rBGnRDkhi0qZC+FbiIMRYuF+AiM+QBo2s0qiQ2S40jFVevUu
-   KNKA/1xeIFsgl5Dnq9/glLFHT75Z/e9YB1pEWC+YIkenILHOPtplhc2Gv
-   z09YIZliS1yTB3bkkODyjDy6lFsz+gIQdJNd/jaeqDZGObaYMKkx90o93
-   Q==;
-X-CSE-ConnectionGUID: g8D8Ym7ETc2fDQma8ywy7w==
-X-CSE-MsgGUID: ESn0HmZ8QtODBtRw1ZAlJQ==
-X-IPAS-Result: =?us-ascii?q?A0ASBABBJgVr/9FK/pBaglmCV3VgQ0mUKoIhA4pMk12Bf?=
- =?us-ascii?q?g8BAQEPRA0EAQGEP0YCjiICJjQJDgECBAMCAwEBAQEBAQEBAQEBAQoBAQUBA?=
- =?us-ascii?q?QECAQcFgQ4Thk8NkBIBAgEDHQoLARgBPRwDAQIvKyMIGYMCAYJ0AxG6boF5M?=
- =?us-ascii?q?4EBgykBPwJDUNlLgWgBCxQBgTiFQogkXRgBRIQ5JxuBSUSCUIIvgQWBXAEBg?=
- =?us-ascii?q?S0LEIZeBIINgSGBVI0XAoFPiElIgR4DWSwBVRMNCgsHBYFoAzUSKhVuMh2BI?=
- =?us-ascii?q?zsXgQcbBgWBHIEegRKBA12BKyheIYEIgXYCglGCAAIBSUEOB0VTCSVDEkckI?=
- =?us-ascii?q?ggSCQETGiwKgRo1PAkmPxUMZwsaBWEIAg0MdDkQMB4kLwUaJj4bCoEMJx8eG?=
- =?us-ascii?q?w4CHxAGFiELGxgNSBEsNxUZBD5uB5QUgxoOH2EBKxR9gSIbpVOhEYQrjCSVO?=
- =?us-ascii?q?hozqnILmH2OCoZVj3yEaoFoPIFHCwczGggbFYMiCUoZD445g2uBf4NlyHcmM?=
- =?us-ascii?q?gIJMgEBBwIHDgMLgWiQAYF9AQE?=
-IronPort-Data: A9a23:OYC5DavT0jkneceZkwtLE6ZatufnVANfMUV32f8akzHdYApBsoF/q
- tZmKW2AOa6KYTD9fdByb4nlphsP7JTRz9ZqQVQ5+ytgFiJBgMeUXt7xwmUckM+xwmwvaGo9s
- q3yv/GZdJhcokf0/0nrb/656ykmiMlkf5KkYMbcICd9WAR4fykojBNnioYRj5Vh6TSDK1vlV
- eja/YuFZzdJ5xYuajhKsvvZ80s11BjPkGpwUmIWNKgjUGD2zxH5PLpHTYmtIn3xRJVjH+LSb
- 47r0LGj82rFyAwmA9Wjn6yTWhVirmn6ZFXmZtJ+AsBOszAazsAA+v9T2Mk0NS+7vw60c+VZk
- 72hg3AfpTABZcUgkMxFO/VR/roX0aduoNcrKlDn2SCfItGvn3bEm51T4E8K0YIw9bZbUVBLq
- tEkI2oDQimGjrKn36PkVbw57igjBJGD0II3s3x6iDWcBvE8TNWbE+PB5MRT23E7gcUm8fT2P
- pZFL2AyMFKfP1sVYgZ/5JEWxI9EglHubidRpF+9rqss6G+Vxwt0uFToGISNI4HVG5kL9qqej
- k/9+TzZByNKDcC45RCZyG31tMbLvxquDer+E5X9rJaGmma7wXQeDhATX1a3rfS1z0KzRd9bA
- 0gV4TY1668q+UqmS9PwUxG1rDiDpBF0ZjZLO+Q38kSJj6HT+QvcXjhCRT9aY9tgv8gzLdA36
- mK0cxrSLWQHmNWopbi1r994cRva1fApEFI/
-IronPort-HdrOrdr: A9a23:TW675K7XrUaW70xrTgPXwOTXdLJyesId70hD6qkXc20wTiX2ra
+  bh=g4REPV/0QhJjfunmx6sL2fXubqIggCHFc6Bu/akOTRY=;
+  b=a4RjYBRXygcYVwabJN2/NknM9k2o1A36quOao5HRdBgZ0ZXyubanJBe+
+   ayYV48upebyyWRf3HMzDHeNYZvoqa35ACrp1koyITbXh97VT43yjMhO5Q
+   wrYoUf0+mM8lHh8xgT3rN4RNQUuY/LVLxjXdHo6o8wUU0e0+8wJTPnEU8
+   /Pz1L6LBZ3HL/XC+03BOaL1Ad23/WFRm4cbW929p+PN/1mgvmsqCG90Px
+   EqJiuncUaBBd2BIx+fffRPgYYzOISADlWJ30ZI4hS+zaoaFtyoqpYXdw+
+   qan1v/HSwX75stPY3B8Dqzg7VVI/+ccJZwFI64f/tuAaf3vFsR1MIHJ8U
+   g==;
+X-CSE-ConnectionGUID: T6tQXJZ9So+t27oRpt9hTA==
+X-CSE-MsgGUID: e5OJkcMKRK+oSbjoP0lI9g==
+X-IPAS-Result: =?us-ascii?q?A0BLAgBEJQVr/9FK/pBaHgE8DA4LgVmCV3VgQ0mUKoIhA?=
+ =?us-ascii?q?54pFIFqDwEBAQ9EDQQBAYQ/RgKOIgImNAkOAQIEAwIDAQEBAQEBAQEBAQEBC?=
+ =?us-ascii?q?gEBBQEBAQIBBwWBDhOGTw2QEgECAQMnCwEYARsiHAMBAi8rIwgZgwIBgnQDE?=
+ =?us-ascii?q?bppgXkzgQGDKQE/AkNQ2UuBaAELFAGBOIVCiCRdGAGEfScbgUlEhH+BBYFcA?=
+ =?us-ascii?q?QGBJx8Bhl8Egg2BIYFUgyKDGoZbAoFPiElIgR4DWSwBVRMNCgsHBYFoAzUSK?=
+ =?us-ascii?q?hVuMh2BIzsXgQcbBgWBHIEegRKBA12BKyheIYEIgXYCglGCAAIBSUEOB0VTC?=
+ =?us-ascii?q?SVDEkckIggSCQETGiwKgRo1PAkmPxUMZwsaBWEIAg0MdDkQMB4kLwUaJj4bC?=
+ =?us-ascii?q?oEMJx8eGw4CHxAGFiELGxgNSBEsNxUZBD5uB5QUgihiEIEOASsEcFFOKKVmo?=
+ =?us-ascii?q?RGEK4wklToaM4QEgVeSQ4wkhjALmH2OCoh5jHBohGqBaDyBRwsHMxoIGxWDI?=
+ =?us-ascii?q?glKGQ+OOYNrgX9LgxrIdyYyAgkyAQEHAgcOAwuBaJAAAgIkB4FPAQE?=
+IronPort-Data: A9a23:DQtMbqOAOklLLkvvrR3wlsFynXyQoLVcMsEvi/4bfWQNrUp3gzdSn
+ zZJDD+COvzfZGejfot+PNzn/UkB75CBx9I2G3M5pCpnJ55oRWUpJjg4wmPYZX76whjrFRo/h
+ ykmQoCeap1yFjmM/ErF3oHJ9RFUzbuPSqf3FNnKMyVwQR4MYCo6gHqPocZh6mJTqYb/WVzlV
+ e/a+ZWFZgb8gWUsaAr41orawP9RlKWq0N8nlgRWicBj5Df2i3QTBZQDEqC9R1OQapVUBOOzW
+ 9HYx7i/+G7Dlz91Yj9yuu+mGqGiaue60Tmm0hK6aYD76vRxjnBaPpIACRYpQRw/ZwNlMDxG4
+ I4lWZSYEW/FN0BX8QgXe0Ew/ypWZcWq9FJbSJSymZT78qHIT5fj68kwEHgGH79JweE0HTsR8
+ sYANGENUjnW0opawJrjIgVtrs0uNozveYgYoHwllWGfBvc9SpeFSKLPjTNa9G5s2oYUQKqYO
+ JZfM2I+BPjDS0Un1lM/GY8kleulrnL+aDZf7lmSoMLb5kCNllMsjui1YbI5fPSHGOJ3nU29h
+ VjlvGPCCBMdDISb6GuKpyfEaujn2HmTtJgpPLqg+/hnhVeeymAeBFgaWEW2pdG9i1WiQJRYM
+ 0ES9y8koKQ++UDtScPyNyBUu1aNswRZX59bFPc3rVndjKHV+A2eQGMDS1atdeAbiSP/fhRyv
+ nfhoj8jLWYHXGG9IZ5FyoqpkA==
+IronPort-HdrOrdr: A9a23:1fDs7K6uU2bjiFf+dgPXwOTXdLJyesId70hD6qkXc20wTiX2ra
  6TdZgguCMczQxhO03I+urwXZVoP0m8yXcd2+B4Vt2ftUvdyQmVxepZgrcKrQeNJ8SHzI5g/J
  YlVbRiA9vtClU/p8P77A6kV+sE+rC8gceVbSO09QYVcemsAJsQiTtENg==
-X-Talos-CUID: =?us-ascii?q?9a23=3AJwAZlWmy8g+xo4NsAf62ZmIwbLvXOXKN4CfhJhC?=
- =?us-ascii?q?VNW0zRpGsTFbA6bx1zNU7zg=3D=3D?=
-X-Talos-MUID: 9a23:KUozxwSwavWNkw8MRXTBvzc6FMJas52yL2wnja8Z4vutMQ5JbmI=
+X-Talos-CUID: =?us-ascii?q?9a23=3AwMr9MWt6bYVXPfSVu+0zdhn66IsZLGHk/FXicnS?=
+ =?us-ascii?q?/SnozF7qvUUPB+J9Nxp8=3D?=
+X-Talos-MUID: =?us-ascii?q?9a23=3AFci3JQ2RCTkn5GyLMBLWWcOJaTUj7vmJKkMGtLY?=
+ =?us-ascii?q?8mIqDDiZyPA/FiBXmTdpy?=
 X-IronPort-Anti-Spam-Filtered: true
 X-IronPort-AV: E=Sophos;i="6.27,229,1787011200"; 
-   d="scan'208";a="60157646"
+   d="scan'208";a="62756809"
 Received: from aer-l-core-08.cisco.com ([144.254.74.209])
-  by aer-iport-8.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 24 Nov 2026 06:00:38 +0000
+  by aer-iport-1.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 24 Nov 2026 06:00:38 +0000
 Received: from sjc-ads-7310.cisco.com (sjc-ads-7310.cisco.com [10.30.220.95])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
 	 client-signature RSA-PSS (4096 bits) client-digest SHA256)
 	(Client CN "ciscoit-managed-infra-smtp-auth.cisco.com", Issuer "Internal Private TLS SubCA" (verified OK))
-	by aer-l-core-08.cisco.com (Postfix) with ESMTPS id 11DB418000279
+	by aer-l-core-08.cisco.com (Postfix) with ESMTPS id 070BB180001A2
 	for <openembedded-devel@lists.openembedded.org>; Tue, 24 Nov 2026 06:00:38 +0000 (GMT)
 Received: by sjc-ads-7310.cisco.com (Postfix, from userid 1889728)
-	id B87C5CC124A; Mon, 23 Nov 2026 22:00:36 -0800 (PST)
+	id A8BCACC12A7; Mon, 23 Nov 2026 22:00:36 -0800 (PST)
 From: Yogita Urade <yurade@cisco.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [oe][meta-python][wrynose][PATCH 4/5] python3-twisted: Fix CVE-2026-115776
-Date: Mon, 23 Nov 2026 22:00:34 -0800
-Message-Id: <20261124060035.1651451-5-yurade@cisco.com>
+Subject: [oe][meta-python][wrynose][PATCH 1/5] python3-twisted: Fix CVE-2026-83813
+Date: Mon, 23 Nov 2026 22:00:31 -0800
+Message-Id: <20261124060035.1651451-2-yurade@cisco.com>
 X-Mailer: git-send-email 2.35.6
 In-Reply-To: <20261124060035.1651451-1-yurade@cisco.com>
 References: <20261124060035.1651451-1-yurade@cisco.com>
@@ -76,237 +77,321 @@ X-Outbound-SMTP-Client: 10.30.220.95, sjc-ads-7310.cisco.com
 X-Outbound-Node: aer-l-core-08.cisco.com
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Tue, 24 Nov 2026 06:00:46 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132924
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132925
 Content-Type: text/plain; charset="utf-8"
 
-This patch applies the upstream fix as referenced in [3],
-using the commit shown in [1].
+This series applies the upstream endpoint-validation fix in [1] to Twisted
+25.5.0 and carries the related address-map cleanup as separate patches.
 
-[1] https://github.com/twisted/twisted/commit/ac90fb7b0ab73688a581fcd9a7c0577ec8ca3059
-[2] https://github.com/twisted/twisted/commit/01f8cff7753c1edac132380b2ea939fa6bdbab30
-[3] https://nvd.nist.gov/vuln/detail/CVE-2026-115776
+CVE-2026-83813_p2.patch adapts the timeout cleanup from [2] to the 25.5.0
+DNSDatagramProtocol hook. CVE-2026-83813_p3.patch retains only the successful-
+response cleanup from [3], omitting its shared response-handler refactor,
+names/client.py changes, logger migration, and related typing changes.
+CVE-2026-83813_p4.patch applies [4]'s correction, making timeout cleanup
+tolerant if protocol shutdown has already removed the map entry. These changes
+are interrelated: p2 adds timeout cleanup, p3 clears successful queries, and
+p4 makes the timeout cleanup safe after shutdown.
+
+The upstream regression test in [5] targets a newer DatagramProtocolTests
+harness and does not apply directly to Twisted 25.5.0. The series carries an
+adapted version in CVE-2026-83813-regression.patch after p1 through p4. It
+checks wrong response IDs, hosts, and ports before accepting the expected
+endpoint, and verifies address-map cleanup after success and timeout.
+
+Backport the DNS response-origin validation fix from Twisted PR #12700
+[7] to Twisted 25.5.0. The backport selects the five upstream commits
+needed for the fix and its regression coverage, retaining only relevant
+hunks where an upstream commit also contains unrelated changes.
+
+[1] https://github.com/twisted/twisted/commit/b53e1c3477c209b5609a1c74cf9e48373b5879ac
+[2] https://github.com/twisted/twisted/commit/fce7991ca2a2c17f3e8f86fb18c2aa17eed2c7e1
+[3] https://github.com/twisted/twisted/commit/83f2165703766ba1fd7dc40638ac462bae6924d1
+[4] https://github.com/twisted/twisted/commit/f6ee6cf35053382a356ec6f0fff490734737e06c
+[5] https://github.com/twisted/twisted/commit/80d4907046def3e839b30dfff860564cb0311082
+[6] https://nvd.nist.gov/vuln/detail/cve-2026-83813
+[7] https://github.com/twisted/twisted/pull/12700
 
 Signed-off-by: Yogita Urade <yurade@cisco.com>
 ---
- .../python3-twisted/CVE-2026-115776_p1.patch  | 111 ++++++++++++++++++
- .../python3-twisted/CVE-2026-115776_p2.patch  |  79 +++++++++++++
- .../python/python3-twisted_25.5.0.bb          |   2 +
- 3 files changed, 192 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-twisted/CVE-2026-115776_p1.patch
- create mode 100644 meta-python/recipes-devtools/python/python3-twisted/CVE-2026-115776_p2.patch
+ .../CVE-2026-83813-regression.patch           | 62 +++++++++++++++++++
+ .../python3-twisted/CVE-2026-83813_p1.patch   | 62 +++++++++++++++++++
+ .../python3-twisted/CVE-2026-83813_p2.patch   | 36 +++++++++++
+ .../python3-twisted/CVE-2026-83813_p3.patch   | 35 +++++++++++
+ .../python3-twisted/CVE-2026-83813_p4.patch   | 28 +++++++++
+ .../python/python3-twisted_25.5.0.bb          |  5 ++
+ 6 files changed, 228 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-twisted/CVE-2026-83813-regression.patch
+ create mode 100644 meta-python/recipes-devtools/python/python3-twisted/CVE-2026-83813_p1.patch
+ create mode 100644 meta-python/recipes-devtools/python/python3-twisted/CVE-2026-83813_p2.patch
+ create mode 100644 meta-python/recipes-devtools/python/python3-twisted/CVE-2026-83813_p3.patch
+ create mode 100644 meta-python/recipes-devtools/python/python3-twisted/CVE-2026-83813_p4.patch
 
-diff --git a/meta-python/recipes-devtools/python/python3-twisted/CVE-2026-115776_p1.patch b/meta-python/recipes-devtools/python/python3-twisted/CVE-2026-115776_p1.patch
+diff --git a/meta-python/recipes-devtools/python/python3-twisted/CVE-2026-83813-regression.patch b/meta-python/recipes-devtools/python/python3-twisted/CVE-2026-83813-regression.patch
 new file mode 100644
-index 0000000000..ceb5c3139e
+index 0000000000..864cad2a99
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-twisted/CVE-2026-115776_p1.patch
-@@ -0,0 +1,111 @@
-+From ac90fb7b0ab73688a581fcd9a7c0577ec8ca3059 Mon Sep 17 00:00:00 2001
-+From: arkmarta <arkadiuszmarta@proton.me>
-+Date: Wed, 5 Aug 2026 11:14:11 +0200
-+Subject: [PATCH] words: bound the IRC server line buffer (Fixes #12770)
++++ b/meta-python/recipes-devtools/python/python3-twisted/CVE-2026-83813-regression.patch
+@@ -0,0 +1,62 @@
++From 80d4907046def3e839b30dfff860564cb0311082 Mon Sep 17 00:00:00 2001
++From: Glyph <code@glyph.im>
++Date: Wed, 15 Jul 2026 21:06:23 -0700
++Subject: [PATCH] failing test for the problem
 +
-+CVE: CVE-2026-115776
-+Upstream-Status: Backport [https://github.com/twisted/twisted/commit/ac90fb7b0ab73688a581fcd9a7c0577ec8ca3059]
++CVE: CVE-2026-83813
++Upstream-Status: Backport [https://github.com/twisted/twisted/commit/80d4907046def3e839b30dfff860564cb0311082]
++
++Backport Changes:
++- Adapted the upstream regression test to the Twisted 25.5.0 test harness.
++  Kept the response-ID, host, and port rejection checks; added downstream
++  assertions for address-map cleanup after success and timeout. Omitted unrelated
++  test-harness modernization.
 +
 +Signed-off-by: Yogita Urade <yurade@cisco.com>
 +---
-+ src/twisted/words/newsfragments/12770.bugfix |  1 +
-+ src/twisted/words/protocols/irc.py           | 21 ++++++++++++++
-+ src/twisted/words/test/test_irc.py           | 29 ++++++++++++++++++++
-+ 3 files changed, 51 insertions(+)
-+ create mode 100644 src/twisted/words/newsfragments/12770.bugfix
++ src/twisted/names/test/test_dns.py | 23 +++++++++++++++++++++++
++ 1 file changed, 23 insertions(+)
 +
-+diff --git a/src/twisted/words/newsfragments/12770.bugfix b/src/twisted/words/newsfragments/12770.bugfix
-+new file mode 100644
-+index 000000000..6bf3a63ee
-+--- /dev/null
-++++ b/src/twisted/words/newsfragments/12770.bugfix
-+@@ -0,0 +1 @@
-++twisted.words.protocols.irc.IRC now limits the length of a single line, so a peer can no longer exhaust server memory by sending data without a line delimiter.
-+diff --git a/src/twisted/words/protocols/irc.py b/src/twisted/words/protocols/irc.py
-+index 2906fa562..1123cdc4a 100644
-+--- a/src/twisted/words/protocols/irc.py
-++++ b/src/twisted/words/protocols/irc.py
-+@@ -255,6 +255,9 @@ class IRC(protocol.Protocol):
-+     """
++diff --git a/src/twisted/names/test/test_dns.py b/src/twisted/names/test/test_dns.py
++index 3b8f6e1..66bbbac 100644
++--- a/src/twisted/names/test/test_dns.py
+++++ b/src/twisted/names/test/test_dns.py
++@@ -1304,6 +1304,28 @@ class DatagramProtocolTests(unittest.TestCase):
++         self.proto.datagramReceived(m.toStr(), ("127.0.0.1", 21345))
++         return d
 + 
-+     buffer = ""
-++    # Longest line accepted, matching twisted.protocols.basic.LineReceiver.
-++    # An unterminated line would otherwise grow self.buffer without bound.
-++    MAX_LENGTH = 16384
-+     hostname = None
-+ 
-+     encoding: Optional[str] = None
-+@@ -415,8 +418,15 @@ class IRC(protocol.Protocol):
-+         # Put the (possibly empty) element after the last LF back in the
-+         # buffer
-+         self.buffer = lines.pop()
-++        if len(self.buffer) > self.MAX_LENGTH:
-++            # An unterminated line too long to be a valid message.
-++            line, self.buffer = self.buffer, ""
-++            return self.lineLengthExceeded(line)
-+ 
-+         for line in lines:
-++            if len(line) > self.MAX_LENGTH:
-++                self.buffer = ""
-++                return self.lineLengthExceeded(line)
-+             if len(line) <= 2:
-+                 # This is a blank line, at best.
-+                 continue
-+@@ -429,6 +439,17 @@ class IRC(protocol.Protocol):
-+ 
-+             self.handleCommand(command, prefix, params)
-+ 
-++    def lineLengthExceeded(self, line):
+++    def test_discardedResponses(self):
 ++        """
-++        Called when a line longer than C{MAX_LENGTH} is received. The default
-++        behaviour, matching L{twisted.protocols.basic.LineReceiver}, drops the
-++        connection.
-++
-++        @param line: The line which exceeded the length limit.
-++        @type line: L{str}
+++        Responses to queries sent with the wrong host address or port are
+++        ignored until a response from the queried endpoint arrives.
 ++        """
-++        return self.transport.loseConnection()
+++        d = self.proto.query(("127.0.0.1", 21345), [dns.Query(b"foo")], id=4321)
+++        m = dns.Message()
+++        m.id = 1234
+++        m.answers = [dns.RRHeader(payload=dns.Record_A(address="1.2.3.4"))]
+++        self.proto.datagramReceived(m.toStr(), ("127.0.0.1", 21345))
+++        self.assertNoResult(d)
+++        m.id = 4321
+++        self.proto.datagramReceived(m.toStr(), ("127.0.0.2", 21345))
+++        self.assertNoResult(d)
+++        self.proto.datagramReceived(m.toStr(), ("127.0.0.1", 21346))
+++        self.assertNoResult(d)
+++        self.proto.datagramReceived(m.toStr(), ("127.0.0.1", 21345))
+++        self.assertEqual(
+++            self.successResultOf(d).answers[0].payload.dottedQuad(), "1.2.3.4"
+++        )
+++        self.assertEqual(self.proto._addressValidation, {})
 ++
-+     def handleCommand(self, command, prefix, params):
++     def test_queryTimeout(self):
 +         """
-+         Determine the function to call for the given command and call it with
-+diff --git a/src/twisted/words/test/test_irc.py b/src/twisted/words/test/test_irc.py
-+index c30cfc522..cd400f9ed 100644
-+--- a/src/twisted/words/test/test_irc.py
-++++ b/src/twisted/words/test/test_irc.py
-+@@ -1522,6 +1522,35 @@ class BasicServerFunctionalityTests(IRCTestCase):
-+             bufferValue = bufferValue.decode("utf-8")
-+         self.assertEqual(bufferValue, s)
++         Test that query timeouts after some seconds.
++@@ -1312,6 +1334,7 @@ class DatagramProtocolTests(unittest.TestCase):
++         self.assertEqual(len(self.proto.liveMessages), 1)
++         self.clock.advance(10)
++         self.assertFailure(d, dns.DNSQueryTimeoutError)
+++        self.assertEqual(self.proto._addressValidation, {})
++         self.assertEqual(len(self.proto.liveMessages), 0)
++         return d
 + 
-++    def test_dataReceivedBoundsUnterminatedLine(self) -> None:
-++        """
-++        A line longer than L{irc.IRC.MAX_LENGTH} that arrives without a
-++        delimiter is not buffered without bound. The buffer is cleared and the
-++        connection is dropped, matching L{twisted.protocols.basic.LineReceiver}.
-++        """
-++        self.p.dataReceived(b"A" * (self.p.MAX_LENGTH + 1))
-++        self.assertEqual(self.p.buffer, "")
-++        self.assertTrue(self.t.closed)
-++
-++    def test_dataReceivedDropsOverlongTerminatedLine(self) -> None:
-++        """
-++        A delimited line longer than L{irc.IRC.MAX_LENGTH} is dropped rather
-++        than dispatched.
-++        """
-++        self.p.dataReceived(b"A" * (self.p.MAX_LENGTH + 1) + b"\n")
-++        self.assertEqual(self.p.buffer, "")
-++        self.assertTrue(self.t.closed)
-++
-++    def test_dataReceivedAcceptsBoundedInput(self) -> None:
-++        """
-++        Input under the length limit is buffered normally and the connection is
-++        left open.
-++        """
-++        self.p.dataReceived(b"\r\n")
-++        self.p.dataReceived(b"AB")
-++        self.assertEqual(self.p.buffer, "AB")
-++        self.assertFalse(self.t.closed)
-++
-+     def test_sendMessage(self):
-+         """
-+         Passing a command and parameters to L{IRC.sendMessage} results in a
-diff --git a/meta-python/recipes-devtools/python/python3-twisted/CVE-2026-115776_p2.patch b/meta-python/recipes-devtools/python/python3-twisted/CVE-2026-115776_p2.patch
++-- 
++2.35.6
+diff --git a/meta-python/recipes-devtools/python/python3-twisted/CVE-2026-83813_p1.patch b/meta-python/recipes-devtools/python/python3-twisted/CVE-2026-83813_p1.patch
 new file mode 100644
-index 0000000000..55ecb71a66
+index 0000000000..18f5306acd
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-twisted/CVE-2026-115776_p2.patch
-@@ -0,0 +1,79 @@
-+From 01f8cff7753c1edac132380b2ea939fa6bdbab30 Mon Sep 17 00:00:00 2001
-+From: arkmarta <arkadiuszmarta@proton.me>
-+Date: Sat, 8 Aug 2026 08:25:06 +0200
-+Subject: [PATCH] bound the IRC server line length
++++ b/meta-python/recipes-devtools/python/python3-twisted/CVE-2026-83813_p1.patch
+@@ -0,0 +1,62 @@
++From b53e1c3477c209b5609a1c74cf9e48373b5879ac Mon Sep 17 00:00:00 2001
++From: Glyph <code@glyph.im>
++Date: Wed, 15 Jul 2026 21:14:40 -0700
++Subject: [PATCH] drop responses sent from the wrong host or port
 +
-+CVE: CVE-2026-115776
-+Upstream-Status: Backport [https://github.com/twisted/twisted/commit/01f8cff7753c1edac132380b2ea939fa6bdbab30]
++CVE: CVE-2026-83813
++Upstream-Status: Backport [https://github.com/twisted/twisted/commit/b53e1c3477c209b5609a1c74cf9e48373b5879ac]
 +
 +Signed-off-by: Yogita Urade <yurade@cisco.com>
 +---
-+ src/twisted/words/newsfragments/12770.bugfix |  2 +-
-+ src/twisted/words/protocols/irc.py           | 19 ++++++++++++-------
-+ 2 files changed, 13 insertions(+), 8 deletions(-)
++ src/twisted/names/dns.py | 12 ++++++++++--
++ 1 file changed, 10 insertions(+), 2 deletions(-)
 +
-+diff --git a/src/twisted/words/newsfragments/12770.bugfix b/src/twisted/words/newsfragments/12770.bugfix
-+index 6bf3a63ee..2a62e440f 100644
-+--- a/src/twisted/words/newsfragments/12770.bugfix
-++++ b/src/twisted/words/newsfragments/12770.bugfix
-+@@ -1 +1 @@
-+-twisted.words.protocols.irc.IRC now limits the length of a single line, so a peer can no longer exhaust server memory by sending data without a line delimiter.
-++twisted.words.protocols.irc.IRC.dataReceived now limits the length of a single line, so a peer can no longer exhaust server memory by sending data without a line delimiter.
-+diff --git a/src/twisted/words/protocols/irc.py b/src/twisted/words/protocols/irc.py
-+index 1123cdc4a..2249edd99 100644
-+--- a/src/twisted/words/protocols/irc.py
-++++ b/src/twisted/words/protocols/irc.py
-+@@ -252,11 +252,14 @@ def parseModes(modes, params, paramModes=("", "")):
-+ class IRC(protocol.Protocol):
-+     """
-+     Internet Relay Chat server protocol.
++diff --git a/src/twisted/names/dns.py b/src/twisted/names/dns.py
++index ca5079454..650194842 100644
++--- a/src/twisted/names/dns.py
+++++ b/src/twisted/names/dns.py
++@@ -3346,13 +3346,17 @@ class DNSDatagramProtocol(DNSMixin, protocol.DatagramProtocol):
++ 
++     resends = None
++ 
++-    def stopProtocol(self):
+++    # map of message-id:address
+++    _addressValidation: dict[int, tuple[str, int]]
 ++
-++    @cvar MAX_LENGTH: The maximum length of a line to allow. A received line
-++        longer than this drops the connection, matching
-++        L{twisted.protocols.basic.LineReceiver}, so an unterminated line cannot
-++        grow the buffer without bound. Default is 16384.
-+     """
+++    def stopProtocol(self) -> None:
++         """
++         Stop protocol: reset state variables.
++         """
++         self.liveMessages = {}
++         self.resends = {}
++-        self.transport = None
+++        self.transport = None  # type:ignore[assignment]
+++        self._addressValidation = {}
 + 
-+     buffer = ""
-+-    # Longest line accepted, matching twisted.protocols.basic.LineReceiver.
-+-    # An unterminated line would otherwise grow self.buffer without bound.
-+     MAX_LENGTH = 16384
-+     hostname = None
++     def startProtocol(self):
++         """
++@@ -3360,6 +3364,7 @@ class DNSDatagramProtocol(DNSMixin, protocol.DatagramProtocol):
++         """
++         self.liveMessages = {}
++         self.resends = {}
+++        self._addressValidation = {}
 + 
-+@@ -421,12 +424,14 @@ class IRC(protocol.Protocol):
-+         if len(self.buffer) > self.MAX_LENGTH:
-+             # An unterminated line too long to be a valid message.
-+             line, self.buffer = self.buffer, ""
-+-            return self.lineLengthExceeded(line)
-++            self.lineLengthExceeded(line)
-++            return
++     def writeMessage(self, message, address):
++         """
++@@ -3395,6 +3400,8 @@ class DNSDatagramProtocol(DNSMixin, protocol.DatagramProtocol):
++             return
 + 
-+         for line in lines:
-+             if len(line) > self.MAX_LENGTH:
-+                 self.buffer = ""
-+-                return self.lineLengthExceeded(line)
-++                self.lineLengthExceeded(line)
++         if m.id in self.liveMessages:
+++            if self._addressValidation[m.id] != addr:
 ++                return
-+             if len(line) <= 2:
-+                 # This is a blank line, at best.
-+                 continue
-+@@ -439,16 +444,16 @@ class IRC(protocol.Protocol):
++             d, canceller = self.liveMessages[m.id]
++             del self.liveMessages[m.id]
++             canceller.cancel()
++@@ -3443,6 +3450,7 @@ class DNSDatagramProtocol(DNSMixin, protocol.DatagramProtocol):
++         def writeMessage(m):
++             self.writeMessage(m, address)
 + 
-+             self.handleCommand(command, prefix, params)
+++        self._addressValidation[id] = address
++         return self._query(queries, timeout, id, writeMessage)
 + 
-+-    def lineLengthExceeded(self, line):
-++    def lineLengthExceeded(self, line: str) -> None:
++ 
+diff --git a/meta-python/recipes-devtools/python/python3-twisted/CVE-2026-83813_p2.patch b/meta-python/recipes-devtools/python/python3-twisted/CVE-2026-83813_p2.patch
+new file mode 100644
+index 0000000000..787839bcae
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-twisted/CVE-2026-83813_p2.patch
+@@ -0,0 +1,36 @@
++From fce7991ca2a2c17f3e8f86fb18c2aa17eed2c7e1 Mon Sep 17 00:00:00 2001
++From: Glyph <code@glyph.im>
++Date: Thu, 16 Jul 2026 09:14:36 -0700
++Subject: [PATCH] add documentation to these variables
++
++CVE: CVE-2026-83813
++Upstream-Status: Backport [https://github.com/twisted/twisted/commit/fce7991ca2a2c17f3e8f86fb18c2aa17eed2c7e1]
++
++Backport Changes:
++- Port the address-validation timeout cleanup into the 25.5.0
++  DNSDatagramProtocol._clearFailed hook. Variable documentation and typing
++  changes from upstream are omitted. Successful-response cleanup is carried
++  separately, followed by the f6ee6cf3 timeout-cleanup correction.
++
++Signed-off-by: Yogita Urade <yurade@cisco.com>
++---
++ src/twisted/names/dns.py | 4 ++++
++ 1 file changed, 4 insertions(+)
++
++diff --git a/src/twisted/names/dns.py b/src/twisted/names/dns.py
++index 11eb805..7c29ed0 100644
++--- a/src/twisted/names/dns.py
+++++ b/src/twisted/names/dns.py
++@@ -3246,6 +3246,10 @@ class DNSDatagramProtocol(DNSMixin, protocol.DatagramProtocol):
++     def startListening(self):
++         self._reactor.listenUDP(0, self, maxPacketSize=512)
++ 
+++    def _clearFailed(self, deferred, id):
+++        del self._addressValidation[id]
+++        super()._clearFailed(deferred, id)
+++
++     def datagramReceived(self, data, addr):
 +         """
-+         Called when a line longer than C{MAX_LENGTH} is received. The default
-+         behaviour, matching L{twisted.protocols.basic.LineReceiver}, drops the
-+         connection.
++         Read a datagram, extract the message in it and trigger the associated
++-- 
++2.35.6
+diff --git a/meta-python/recipes-devtools/python/python3-twisted/CVE-2026-83813_p3.patch b/meta-python/recipes-devtools/python/python3-twisted/CVE-2026-83813_p3.patch
+new file mode 100644
+index 0000000000..55f2ceb92e
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-twisted/CVE-2026-83813_p3.patch
+@@ -0,0 +1,35 @@
++From 83f2165703766ba1fd7dc40638ac462bae6924d1 Mon Sep 17 00:00:00 2001
++From: Glyph <code@glyph.im>
++Date: Fri, 17 Jul 2026 22:27:03 -0700
++Subject: [PATCH] refactor duplicate response handling
++
++more type annotations to make sure we don't make any mistakes
++
++CVE: CVE-2026-83813
++Upstream-Status: Backport [https://github.com/twisted/twisted/commit/83f2165703766ba1fd7dc40638ac462bae6924d1]
++
++Backport Changes:
++- Keep only successful-response address-map cleanup in the existing
++  Twisted 25.5.0 UDP handler. Omit the shared response-handler refactor,
++  names/client.py changes, logger migration, and related typing changes.
++  Timeout cleanup is carried separately by p2 and corrected by p4.
++
++Signed-off-by: Yogita Urade <yurade@cisco.com>
++---
++ src/twisted/names/dns.py | 1 +
++ 1 file changed, 1 insertion(+)
++
++diff --git a/src/twisted/names/dns.py b/src/twisted/names/dns.py
++index 7c29ed0..9b4e8e0 100644
++--- a/src/twisted/names/dns.py
+++++ b/src/twisted/names/dns.py
++@@ -3277,6 +3277,7 @@ class DNSDatagramProtocol(DNSMixin, protocol.DatagramProtocol):
++                 return
++             d, canceller = self.liveMessages[m.id]
++             del self.liveMessages[m.id]
+++            self._addressValidation.pop(m.id)
++             canceller.cancel()
++             # XXX we shouldn't need this hack of catching exception on callback()
++             try:
++-- 
++2.35.6
+diff --git a/meta-python/recipes-devtools/python/python3-twisted/CVE-2026-83813_p4.patch b/meta-python/recipes-devtools/python/python3-twisted/CVE-2026-83813_p4.patch
+new file mode 100644
+index 0000000000..ab3d3721b2
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-twisted/CVE-2026-83813_p4.patch
+@@ -0,0 +1,28 @@
++From f6ee6cf35053382a356ec6f0fff490734737e06c Mon Sep 17 00:00:00 2001
++From: Glyph <code@glyph.im>
++Date: Sat, 18 Jul 2026 08:20:07 -0700
++Subject: [PATCH] quash errors in validation per review
++
++CVE: CVE-2026-83813
++Upstream-Status: Backport [https://github.com/twisted/twisted/commit/f6ee6cf35053382a356ec6f0fff490734737e06c]
++
++Signed-off-by: Yogita Urade <yurade@cisco.com>
++---
++ src/twisted/names/dns.py | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/src/twisted/names/dns.py b/src/twisted/names/dns.py
++index 9b4e8e0..ea59a70 100644
++--- a/src/twisted/names/dns.py
+++++ b/src/twisted/names/dns.py
++@@ -3247,7 +3247,7 @@ class DNSDatagramProtocol(DNSMixin, protocol.DatagramProtocol):
++         self._reactor.listenUDP(0, self, maxPacketSize=512)
 + 
-+         @param line: The line which exceeded the length limit.
-+-        @type line: L{str}
-+         """
-+-        return self.transport.loseConnection()
-++        assert self.transport is not None
-++        self.transport.loseConnection()
++     def _clearFailed(self, deferred, id):
++-        del self._addressValidation[id]
+++        self._addressValidation.pop(id, None)
++         super()._clearFailed(deferred, id)
 + 
-+     def handleCommand(self, command, prefix, params):
-+         """
++     def datagramReceived(self, data, addr):
++-- 
++2.35.6
 diff --git a/meta-python/recipes-devtools/python/python3-twisted_25.5.0.bb b/meta-python/recipes-devtools/python/python3-twisted_25.5.0.bb
-index 7ba179c455..72dc23e3fb 100644
+index 9b40191964..978627077f 100644
 --- a/meta-python/recipes-devtools/python/python3-twisted_25.5.0.bb
 +++ b/meta-python/recipes-devtools/python/python3-twisted_25.5.0.bb
-@@ -22,6 +22,8 @@ SRC_URI += "file://CVE-2026-42304_p1.patch \
-            file://CVE-2026-115877_p3.patch \
-            file://CVE-2026-115774_p1.patch \
-            file://CVE-2026-115774_p2.patch \
-+           file://CVE-2026-115776_p1.patch \
-+           file://CVE-2026-115776_p2.patch \
+@@ -12,6 +12,11 @@ SRC_URI += "file://CVE-2026-42304_p1.patch \
+            file://CVE-2026-42304_p4.patch \
+            file://CVE-2026-42304_p5.patch \
+            file://CVE-2026-42304_p6.patch \
++           file://CVE-2026-83813_p1.patch \
++           file://CVE-2026-83813_p2.patch \
++           file://CVE-2026-83813_p3.patch \
++           file://CVE-2026-83813_p4.patch \
++           file://CVE-2026-83813-regression.patch \
             "
  
  SRC_URI[sha256sum] = "1deb272358cb6be1e3e8fc6f9c8b36f78eb0fa7c2233d2dbe11ec6fee04ea316"
