@@ -1,109 +1,112 @@
-Received: from aer-iport-5.cisco.com (aer-iport-5.cisco.com [173.38.203.67])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.14697.1795513459803292266
+Received: from aer-iport-6.cisco.com (aer-iport-6.cisco.com [173.38.203.68])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.14513.1795513749734606834
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 24 Nov 2026 01:44:21 -0800
+ Tue, 24 Nov 2026 01:49:10 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=TQJubUjs;
- spf=pass (domain: cisco.com, ip: 173.38.203.67, mailfrom: devanshp@cisco.com)
+ dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=cSmAg4Ig;
+ spf=pass (domain: cisco.com, ip: 173.38.203.68, mailfrom: devanshp@cisco.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=cisco.com; i=@cisco.com; l=1933; q=dns/txt;
-  s=iport01; t=1795513460; x=1796723060;
+  d=cisco.com; i=@cisco.com; l=1283; q=dns/txt;
+  s=iport01; t=1795513749; x=1796723349;
   h=from:to:subject:date:message-id:mime-version:
    content-transfer-encoding;
-  bh=rP1XUcXJH7hMy66ATKcPQoF4P0IwIoP4chhhExEZzEE=;
-  b=TQJubUjsorxmywQmN8XSkaNaFqTFLiYN+5ylIQR5zJji3nXK64gsDege
-   WJ+MQDs00Qsldo+U/wfsBhM2HSSNlQC/XsbG5zXfa4jAhvIP2fGjTgPpx
-   Bi2h/RtRSD+dkqLamUgOqUqwvGoPefLi/XqMSLr7fP/8LThaAm78oeG2d
-   EmwJdynx5vRunjeryJ80ZEFVYI+ceM8OlOBCGMxUKolW27Lur+BFHwHUu
-   UnpkRroFG7gV1IAgc8s9uXsJ84MoebqJyFqriKH5mCPxv6G8S5+C+zyp7
-   r/wQNxPEsyRN6PPfGE1IANeBRaBgIDdav15y+BEad4nFtGYyJzOf6lfau
+  bh=oSeB56gcRmAw0vNifUctHUuq/qYtMXPvdKWBZoiDkV8=;
+  b=cSmAg4Igwt6aTDeKt/8k688FbiXLnLib2WH7cu4ycLTRU9toy7CUqdo0
+   IZyD/QCxpmiZQQ6uxZt2hQj3tGA8XgdDL728vUQDPi27SU+MtEQEirbUf
+   0IJa+CK5qhU1XJR9AzEtQ+4fCbHOIUXzrPeJdtD5Dscmo2/QdJ5INNBlm
+   Keews4W/T9cnUY01IsNidd0j2m1RiMrNSjfwz+HReQ9+oI/KIJz9R+FgW
+   HAtTRIIca/ir1Jd6VH7wGCr09UajfOkQVQDxCiBPiUHaOTf+MYEGHxRUl
+   fytmVTcGfMFu0quI1Q+PgGvau7YAAWaCTkTkr5l0w6sKHX4IK18Wqblxz
    A==;
-X-CSE-ConnectionGUID: nZH1olSDRwas6ig4JYmZtQ==
-X-CSE-MsgGUID: kpZcHKh5TySa5kpSCBu3iQ==
-X-IPAS-Result: =?us-ascii?q?A0BCAgC4WQVr/8xK/pBaglmCV3VgQ0kDlCeCIZ4sgX4PA?=
- =?us-ascii?q?QEBDzQdBAEBhD+OagImNAkOAQIEAwIDAQEBAQEBAQEBAQEBCgEBBQEBAQIBB?=
- =?us-ascii?q?wWBDhOGTw2QSwEYAV1cHQEmgwIBgnQDEQa6YIIsgQGDKQExBQkCQ1DbMwELF?=
- =?us-ascii?q?AGBOIVCiCR1AYR9JxsbgXKBFYNqgQWBUAwCAoIrhXkEX4FDgQyCVowVihpIg?=
- =?us-ascii?q?R4DWSwBVRMNCgsHBYFoAzUSKhVuMh2BIzsXgQcbBgWBHIEegRKBA12BKyheI?=
- =?us-ascii?q?YEIgXYCglGCAAIBSUEOB0VTCSVDEkckIggSCQETGiwKgRo1PAkmPxUMZwsaB?=
- =?us-ascii?q?WEIAg0MdDkQMB4kLwUaJj4bCoEMJx8eGw4CHxAGFiELGxgNSBEsNxUZBD5uB?=
- =?us-ascii?q?5N7GYIefD1RLASBDXMBJxGTbJF4oREKKIN5jCSVOhozhASmbguYfYJZizGVe?=
- =?us-ascii?q?FmEaoFoPIFGDAdwFTuCZwlKGQ+OOYNrzlsmMgIMBSsBBwIHDwKBc5F+AQE?=
-IronPort-Data: A9a23:3WxLCK8kZV1qtBH6pyw7DrUD13+TJUtcMsCJ2f8bNWPcYEJGY0x3z
- 2cbWjrTaa6KNGahc9klbtjgp04HvpPVxodhHQZtrH1EQiMRo6IpJzg2wmQcns+2BpeeJK6yx
- 5xGMrEsFOhtEDmB4E/rYuK8xZVF/fngbqLmD+LZMTxGSwZhSSMw4TpugOdRbrRA2bBVOCvT/
- 4mtyyHjEAX9gWAtazhPs/jrRC5H5ZwehhtJ5jTSWtgT1LPuvyF9JI4SI6i3M0z5TuF8dsamR
- /zOxa2O5WjQ+REgELuNyt4XpWVTH9Y+lSDX4pZnc/DKbipq/0Te4Y5nXBYoUnq7vh3S9zxHJ
- HqhgrTrIeshFvWkdO3wyHC0GQkmVUFN0OevzXRSLaV/wmWeG0YAzcmCA2kwD61B/eJMLVtR/
- OdGKT9RTCGGtf6PlefTpulE3qzPLeHiMZlavjRryivUSK59B5vCWK7No9Rf2V/chOgXQaqYP
- ZdFL2UzKk6YP3WjOX9PYH46tOulmHD5aD1AgFmUvqEwpWPUyWSd1ZCzaIOLK4TUGK25mG6bv
- lDN30f5Xy0LD9XCyiK+2Vix3e72yHaTtIU6UefQGuRRqFqLy2oeDRcbWVe2rby1h1CzX/pbK
- lcI4WwptaU0+UmhQ9XxUhH+p2SL1iPwQPJZHvd/7ESGzbDZpl7CQGMFVTVGLtchsafaWAAX6
- 7NApPuxbRQHjVFfYSn1Gmu8xd9qBRUoEA==
-IronPort-HdrOrdr: A9a23:NODihK2ZPEYcWCJ+zSnEQQqjBIIkLtp133Aq2lEZdPUzSL37qy
- nAppomPHPP5Qr5O0tQ+uxoRpPgfZq0z/cciuMs1NyZMzUO1lHFEGgb1+vf6gylPTHi/ehA0q
- olWa1/BNrsSWVet6/BkWyF+xJK+qjhzEhu7t2uq0tQcQ==
-X-Talos-CUID: 9a23:Rxz6x2+uQx7bjHP4ZvaVv0gmOpkidkbx9mjZOBG5BjpLebinVWbFrQ==
-X-Talos-MUID: =?us-ascii?q?9a23=3AYRiYqw+598J298fuFsDfuriQf8Rw0a+OK0BQrYQ?=
- =?us-ascii?q?9spSHLRdbESrGjQ3iFw=3D=3D?=
+X-CSE-ConnectionGUID: INaw/DlUTc6QNkN+uIvFPg==
+X-CSE-MsgGUID: O3DPuCReSMqUiAi/7DcVcA==
+X-IPAS-Result: =?us-ascii?q?A0BAAgBZWwVr/8pK/pBaglmCV3VgQ0kDlCeCIZ4sgX4PA?=
+ =?us-ascii?q?QEBDz0UBAEBkykCJjQJDgECBAMCAwEBAQEBAQEBAQEBAQoBAQUBAQECAQcFg?=
+ =?us-ascii?q?Q4Thk8NkEsBdlxEgwIBgnQDEQa6XoIsgQGDWwKBIdszAQUGFAGBOIVCiCR2h?=
+ =?us-ascii?q?H0nGxuBcoR/gQWBXAIDgUVlhXkEgiKBDIFyjHmKGkiBHgNZLAFVEw0KCwcFg?=
+ =?us-ascii?q?WgDNRIqFW4yHYEjOxeBBxsGBYEcgR6BEoEDXYErKF4hgQiBdgKCUYIAAgFJQ?=
+ =?us-ascii?q?Q4HRVMJJUMSRyQiCBIJARMaLAqBGjU8CSY/FQxnCxoFYQgCDQx0ORAwHiQvB?=
+ =?us-ascii?q?RomPhsKgQwnHx4bDgIfEAYWIQsbGA1IESw3FRkEPm4HlBSDGgGBDSwggUxAE?=
+ =?us-ascii?q?aVkoREKKIN5jCSVOhozqnKZCI4KllGEaoFoPIFZcBWDIhJBGQ+OOYh+yUgmM?=
+ =?us-ascii?q?g4wAQcCBw8CgXORfgEB?=
+IronPort-Data: A9a23:TqAImqAygm1gARVW/37iw5YqxClBgxIJ4kV8jS/XYbTApGxx1jMOy
+ TFLWGCHOPmJNDSjKN50aYW+oUoPvcDXzdZgOVdlrnsFo1CmBibm6XV1Cm+qYkt+++WaFBoPA
+ /02M4eGcYZsCC+G+39BC5C5xVFkz6aEW7HgP+DNPyF1VGdMRTwo4f5Zs7ZRbrVA357jXGthh
+ fuo+5eBYQb/gGYuWo4pw/vrRC1H7ayaVAww5jTSVdgT1HfCmn8cCo4oJK3ZBxPQXolOE+emc
+ P3Ixbe/83mx109F5gSNy+uTnuUiG9Y+DCDW4pZkc/HKbitq+kTe5p0G2M80Mi+7vdkmc+dZk
+ 72hvbToIesg0zaldO41C3G0GAkmVUFKFSOuzXWX6aSuI0P6n3TE4tNnEwYaObAk8bhOJ2Jot
+ uE5Nh41YUXW7w626OrTpuhEj8k5ac2uN4QFtzQ4lHfSDO0tRtbIRKCiCd1whWtswJoTQbCBO
+ 4xDMWAHgBfoO3WjPn8bBYw3mvyonlH0ciZTrxSeoq9fD237klQpiOa3aoa9ltqiYp55pluzn
+ G/92n3EAzgbc4OzwgSO2yf57gPItWahMG4IL5W/7vNsjViZy2AfBRFTWValrP2Rjk+lR8kZL
+ FQZ/Ccrp6U++EGnCN7nUHWFTGWstxMGHt4VGOog5UTVk+zf4h2SAS4PSTsphMEaifLajAcCj
+ jeh9+4FzxQ22FFJYRpxLoupkA4=
+IronPort-HdrOrdr: A9a23:JyFw0a/T1IHUgHoO20Buk+DoI+orL9Y04lQ7vn2ZLiYlEPBw+P
+ rBoB1273LJYVUqKRIdcK67WZVoKEm0nfUe3WB7B9iftWfd1FdAVLsD0aLShxv9Bib56ulRkY
+ 1kc6R4FZnMKGISt7ee3OF9eOxQp+VuN8uT9IPj80s=
+X-Talos-CUID: =?us-ascii?q?9a23=3A1qFUOmlpoFwhT1fhnBWqH7u42HzXOVz7xWiXD0u?=
+ =?us-ascii?q?FNW03cZuWbxyN2b1Kq8U7zg=3D=3D?=
+X-Talos-MUID: 9a23:T0i/ggthfl7k1csG482no2pODNpD2amVLVkwkLwH/JaoPhJ7EmLI
 X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-AV: E=Sophos;i="6.27,230,1787011200"; 
-   d="scan'208";a="60169065"
-Received: from aer-l-core-03.cisco.com ([144.254.74.204])
-  by aer-iport-5.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 24 Nov 2026 09:44:16 +0000
+X-IronPort-AV: E=Sophos;i="6.27,229,1787011200"; 
+   d="scan'208";a="60006224"
+Received: from aer-l-core-01.cisco.com ([144.254.74.202])
+  by aer-iport-6.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 24 Nov 2026 09:49:06 +0000
 Received: from sjc-ads-4935.cisco.com (sjc-ads-4935.cisco.com [10.28.39.199])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
 	 client-signature RSA-PSS (4096 bits) client-digest SHA256)
 	(Client CN "ciscoit-managed-infra-smtp-auth.cisco.com", Issuer "Internal Private TLS SubCA" (verified OK))
-	by aer-l-core-03.cisco.com (Postfix) with ESMTPS id A426F180006C5
-	for <openembedded-devel@lists.openembedded.org>; Tue, 24 Nov 2026 09:44:16 +0000 (GMT)
+	by aer-l-core-01.cisco.com (Postfix) with ESMTPS id D71A234429
+	for <openembedded-devel@lists.openembedded.org>; Tue, 24 Nov 2026 09:49:05 +0000 (GMT)
 Received: by sjc-ads-4935.cisco.com (Postfix, from userid 1887503)
-	id 56894CCA798; Tue, 24 Nov 2026 01:44:15 -0800 (PST)
+	id 8CF58CC2EF3; Tue, 24 Nov 2026 01:49:04 -0800 (PST)
 From: "Devansh Patel -X (devanshp - E INFOCHIPS PRIVATE LIMITED at Cisco)" <devanshp@cisco.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-networking][PATCH] open-vm-tools: Ignore CVE-2026-123894
-Date: Tue, 24 Nov 2026 01:44:15 -0800
-Message-Id: <20261124094415.1554442-1-devanshp@cisco.com>
+Subject: [meta-networking][PATCH] tnftp: mark CVE-2004-1294 as fixed
+Date: Tue, 24 Nov 2026 01:49:04 -0800
+Message-Id: <20261124094904.1559178-1-devanshp@cisco.com>
 X-Mailer: git-send-email 2.35.6
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Outbound-Client-TLS: VERIFIED;sjc-ads-4935.cisco.com [10.28.39.199];TLSv1.3;TLS_AES_256_GCM_SHA384;256;ciscoit-managed-infra-smtp-auth.cisco.com
 X-Outbound-SMTP-Client: 10.28.39.199, sjc-ads-4935.cisco.com
-X-Outbound-Node: aer-l-core-03.cisco.com
+X-Outbound-Node: aer-l-core-01.cisco.com
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Tue, 24 Nov 2026 09:44:24 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132943
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Tue, 24 Nov 2026 09:49:15 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132946
 Content-Type: text/plain; charset="utf-8"
 
 From: Devansh Patel <devanshp@cisco.com>
 
-Analysis:
-- The SAML token signature bypass affects VMware Tools for
-  Windows. Exploitation requires Guest Alias mapping. [1]
-- The vendor FAQ does not list other guest operating systems as
-  affected. [2]
-- This recipe builds Linux open-vm-tools and disables VGAuth.
-- Hence ignoring the CVE for now.
+CVE-2004-1294 was fixed upstream in tnftp 20050103 [1]. The
+20260211 source used by this recipe retains the mget() check that
+rejects server-provided filenames outside the local directory [2].
 
-Reference:
-[1] https://support.broadcom.com/web/ecx/support-content-notification/-/external/content/SecurityAdvisories/0/39495
-[2] https://github.com/vmware/vcf-security-and-compliance-guidelines/blob/main/security-advisories/vmsa-2026-0009/README.md#13-do-i-have-to-update-vmware-tools
+Record the fixed version so CVE scanning does not report this
+already-fixed issue.
+
+[1] https://security.gentoo.org/glsa/200501-24
+[2] https://ftp.netbsd.org/pub/NetBSD/misc/tnftp/tnftp-20260211.tar.gz
 
 Signed-off-by: Devansh Patel <devanshp@cisco.com>
 ---
- .../recipes-support/open-vm-tools/open-vm-tools_13.1.0.bb     | 4 ++++
- 1 file changed, 4 insertions(+)
+ meta-networking/recipes-support/tnftp/tnftp_20260211.bb | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/meta-networking/recipes-support/open-vm-tools/open-vm-tools_13.1.0.bb b/meta-networking/recipes-support/open-vm-tools/open-vm-tools_13.1.0.bb
-index 5739c05d726794c0178e6756a86109081e770a8d..49135d4f7e940812e55f4c3ec674f8353b9fa042 100644
---- a/meta-networking/recipes-support/open-vm-tools/open-vm-tools_13.1.0.bb
-+++ b/meta-networking/recipes-support/open-vm-tools/open-vm-tools_13.1.0.bb
-@@ -124,3 +124,7 @@ python() {
- CVE_PRODUCT = "open-vm-tools vmware:tools vmware:open_vm_tools"
- CVE_STATUS[CVE-2014-4199] = "fixed-version: No action required. The current version (12.3.5) is not affected by the CVE which affects version 10.0.3"
- CVE_STATUS[CVE-2014-4200] = "fixed-version: No action required. The current version (12.3.5) is not affected by the CVE which affects version 10.0.3"
+diff --git a/meta-networking/recipes-support/tnftp/tnftp_20260211.bb b/meta-networking/recipes-support/tnftp/tnftp_20260211.bb
+index 70123eaa86..2f878da9e6 100644
+--- a/meta-networking/recipes-support/tnftp/tnftp_20260211.bb
++++ b/meta-networking/recipes-support/tnftp/tnftp_20260211.bb
+@@ -13,6 +13,9 @@ HOMEPAGE = "https://en.wikipedia.org/wiki/Tnftp"
+ SECTION = "net"
+ LICENSE = "BSD-2-Clause"
+ 
++# Fixed upstream in 20050103: https://security.gentoo.org/glsa/200501-24
++CVE_STATUS[CVE-2004-1294] = "fixed-version: Fixed upstream in 20050103"
 +
-+# VMSA-2026-0009.1, section 3e: VMware Tools for Windows only.
-+# https://support.broadcom.com/web/ecx/support-content-notification/-/external/content/SecurityAdvisories/0/39495
-+CVE_STATUS[CVE-2026-123894] = "not-applicable-platform: Affects VMware Tools for Windows; this recipe builds Linux open-vm-tools."
+ DEPENDS = "ncurses"
+ 
+ SRC_URI = "https://ftp.netbsd.org/pub/NetBSD/misc/tnftp/${BPN}-${PV}.tar.gz \
+-- 
+2.35.6
+
