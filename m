@@ -1,26 +1,26 @@
-Received: from aer-iport-1.cisco.com (aer-iport-1.cisco.com [173.38.203.51])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.14457.1795513457942173337
+Received: from aer-iport-5.cisco.com (aer-iport-5.cisco.com [173.38.203.67])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.14697.1795513459803292266
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 24 Nov 2026 01:44:18 -0800
+ Tue, 24 Nov 2026 01:44:20 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=SavnbQK2;
- spf=pass (domain: cisco.com, ip: 173.38.203.51, mailfrom: devanshp@cisco.com)
+ dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=LE3KsmQ0;
+ spf=pass (domain: cisco.com, ip: 173.38.203.67, mailfrom: devanshp@cisco.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
   d=cisco.com; i=@cisco.com; l=1938; q=dns/txt;
-  s=iport01; t=1795513458; x=1796723058;
+  s=iport01; t=1795513459; x=1796723059;
   h=from:to:subject:date:message-id:mime-version:
    content-transfer-encoding;
-  bh=vno3PrQoFZZHIXv0GJKIv61p1/xTH0ZsURVlScsVDCI=;
-  b=SavnbQK2Njprn3jbqXTwj4pAmda4JHZIUKrtFJwWk+SUirYjmUE19RW2
-   fyLDUr65CNrFrnjEyL4K605HHQTH+C/U87MwN3TuRRZzIwQvCdgn1mnmP
-   EnNkEtOp86wdZnV3YZltJut5/+EnNOt52RSAtDe+YGqpzIQuc2IiCaGSM
-   ZJSvkSYvzN0z0sDHSx45ad5YqsyjtMlM+v1g/Tkmsltp8I9vx4Vzb6pqk
-   WAF8gzAE4DQLrdpI5nzd4UTOkxr/RvFU4bdac8PAskFptHPbk6gAB2pEP
-   sX+bTHPwajbf12YBnYsv0S5PHjpoUyLVd+O19vMoAvyaP+AwLUXmnmrWS
+  bh=LfK/IK9oGlAFgWxYidHqEyZWJ26TlqXsT0AtLy5a9fY=;
+  b=LE3KsmQ0Dv0+MtRIj8VBIfPp+j4+mVsMwurDReTc25dleuS4qv3UD4+y
+   fObfd2E8TL4nTls4Dq0ST0YjgzPI5NvS/hrZ22TXe86XvuO9dlkAISMpI
+   qUMCA/m8vm19P8xSZivZ2rD9a3eJQu7DFJKaYwMb76s8uE0G1qqdvZJ6U
+   5GOI8hf/j4WHn7n4kV21fNKUAeSnxY1dziFf6vHx+bWpTP+RGZD/msUVY
+   no/6PMXd4a98uf6KlN98+q+UuflxF8JL+JzA3LUvazjuuaFx4UARcZdg1
+   0GFn6ll/JiiEz2a/by290zuTo4QjLrcCng45CJ34kmQP5hQ1daUq3NqvV
    g==;
-X-CSE-ConnectionGUID: yxUTAo2oQHmDv1+Stsc/zw==
-X-CSE-MsgGUID: sBVUOuZ6RfefJiWEz3fW7A==
-X-IPAS-Result: =?us-ascii?q?A0BCAgC4WQVr/89K/pBaglmCV3VgQ0kDlCeCIZ4sgX4PA?=
+X-CSE-ConnectionGUID: JGVsmuerTBaP6CHh1c7Lng==
+X-CSE-MsgGUID: w7gAvM/TSXO+dXJpyocvzw==
+X-IPAS-Result: =?us-ascii?q?A0BCAgC4WQVr/9RK/pBaglmCV3VgQ0kDlCeCIZ4sgX4PA?=
  =?us-ascii?q?QEBDzQdBAEBhD+OagImNAkOAQIEAwIDAQEBAQEBAQEBAQEBCgEBBQEBAQIBB?=
  =?us-ascii?q?wWBDhOGTw2QSwEYAV1cHQEmgwIBgnQDEQa6YIIsgQGDKQExBQkCQ1DbMwELF?=
  =?us-ascii?q?AGBOIVCiCR1AYR9JxsbgXKBFYNqgQWBUAwCAoIrhXkEX4FDgQyCVowVihpIg?=
@@ -30,51 +30,51 @@ X-IPAS-Result: =?us-ascii?q?A0BCAgC4WQVr/89K/pBaglmCV3VgQ0kDlCeCIZ4sgX4PA?=
  =?us-ascii?q?5N7GYIefD1RLASBDXMBJxGTbJF4oREKKIN5jCSVOhozhASmbguYfYJZizGVe?=
  =?us-ascii?q?FmEaoFoPIFGDAdwFTuCZwlKGQ+OOYNrzlsmMgIMBSoBAQcCBw4DC4FokX4BA?=
  =?us-ascii?q?Q?=
-IronPort-Data: A9a23:PD+YVK9QBm+XOz7IapfRDrUD13+TJUtcMsCJ2f8bNWPcYEJGY0x3z
- mYXWW/Ua6uPZWL9L94lao22p0kCvpHVzIJhG1dq+SlEQiMRo6IpJzg2wmQcns+2BpeeJK6yx
- 5xGMrEsFOhtEDmB4E/rYuK8xZVF/fngbqLmD+LZMTxGSwZhSSMw4TpugOdRbrRA2bBVOCvT/
- 4mtyyHjEAX9gWAtazhPs/jrRC5H5ZwehhtJ5jTSWtgT1LPuvyF9JI4SI6i3M0z5TuF8dsamR
- /zOxa2O5WjQ+REgELuNyt4XpWVTH9Y+lSDX4pZnc/DKbipq/0Te4Y5nXBYoUnq7vh3S9zxHJ
- HqhgrTrIeshFvWkdO3wyHC0GQkmVUFN0OevzXRSLaV/wmWeG0YAzcmCA2knLbAk0+EtBlhu8
- NAGcXM2cguIwPCplefTpulE3qzPLeHiMZlavjRryivUSK54B5vCWK7No9Rf2V/chOgXQaqYP
- ZdFL2UzKk6YPHWjOX9PYH46tOulmHD5aD1AgFmUvqEwpWPUyWSd1ZCzaoWEIYfbHK25mG6Dj
- Fz72HnLXCsUOdK9yAWo4CmiubDmyHaTtIU6UefQGuRRqFqLy2oeDRcbWVe2rby1h1CzX/pbK
- lcI4WwptaU0+UmhQ9XxUhH+p2SL1iPwQPJZHvd/7ESGzbDZpl7HQGMFVTVGLtchsafaWAAX6
- 7NApPuxbRQHjVFfYSv1Gmu8xd9qBRUoEA==
-IronPort-HdrOrdr: A9a23:Do/gEqsFpTepqRb5ZLLDIVvn7skDRtV00zEX/kB9WHVpm6uj5q
- KTdZsguyMc5Ax9ZJhCo6HiBED/exLhHPdOiOF7V4tKNzOIhILHFu1fBPPZowHIKmnZ6vNX07
- tmfuxVDd39CkU/sOPBiTPIdurJBLK8gceVbSC09QYIcT1X
-X-Talos-CUID: 9a23:HTI/P26KAH/Qt18AQNss5V4pJukiKHrk7HL8PRb7MnpyQ/qHVgrF
-X-Talos-MUID: =?us-ascii?q?9a23=3AkQ2pKQwqb4uW58FhjwlqAsX7CiaaqL+ENn0qjKd?=
- =?us-ascii?q?YgceJOw5xBBqP1zqIHaZyfw=3D=3D?=
+IronPort-Data: A9a23:q/Tg8ayADPafi0PPLTB6t+dgxyrEfRIJ4+MujC+fZmUNrF6WrkVVy
+ jMXDWyPbPiKYjT9eNkgao6zoRsG6J+HzYBiTQs9rFhgHilAwSbn6Xt1DatR0we6dJCroJdPt
+ p1GAjX4BJlqCCKa/lH9aOWJQUBUjcmgXqD7BPPPJhd/TAplTDZJoR94kobVuKYw6TSCK13L4
+ 4yaT/H3Ygf/hWctaDlMscpvlTs21BjMkGJA1rABTagjUG/2zxE9EJ8ZLKetGHr0KqE8NvK6X
+ evK0Iai9Wrf+Ro3Yvv9+losWhRXKlJ6FVHmZkt+A8BOsDAbzsAB+vpT2M4nVKtio27hc+adZ
+ zl6ncfYpQ8BZsUgkQmGOvVSO3kW0aZuoNcrLZUj2CCe5xWuTpfi/xlhJGMZA5Yd5+ttPUtHz
+ aIzCDBUZU+nge3jldpXSsE07igiBMDmJsYb/3pn1zycVK9gSpHYSKKM7thdtNsyrpkSQbCEO
+ pZfNmYpNk2aC/FMEg9/5JYWkOq2j3/kcyVwo1OOrq1x6G/WpOB0+Oa1aYSEIoLSLSlTtlnHq
+ UvY2iPFOSE9d9Cv6yKU9XmylPCayEsXX6pXTtVU7MVCh0WewGEWAhAaWVa35PW0lEO6c9ZeM
+ FAPvC02oK4/8UamQtXwU1u/unHsg/IHc9NdCag+rQqK0KeRul/fDWkfRTkHY9sj3CMreQEXO
+ payt4uBLVRSXHe9EBpxKp/8QeuOBBUo
+IronPort-HdrOrdr: A9a23:vxOCZaDGSxSWdSHlHemc55DYdb4zR+YMi2TDsHoBKyC9Hfb3qy
+ nDppkmPHzP+VUssQ8b+OxoUZPoKRi3yXcf2+Ys1NmZMDUOwFHJEKhSqa3/3jbnByryssRZ1a
+ tmbuxCLeeYNykesS4/izPIdOrJB7K8gcSVuds=
+X-Talos-CUID: 9a23:RF1oD2wPP0tj9qlmgZ5LBgU2Nf4+d2DQ1kv6KnfmIkZpEbbKbVmfrfY=
+X-Talos-MUID: =?us-ascii?q?9a23=3ACj+rOQ4rGlEog3yX6KM82T1lxox3vKuHFmVKra4?=
+ =?us-ascii?q?2nIqIBQ5oKjCWkiaoF9o=3D?=
 X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-AV: E=Sophos;i="6.27,229,1787011200"; 
-   d="scan'208";a="62793391"
-Received: from aer-l-core-06.cisco.com ([144.254.74.207])
-  by aer-iport-1.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 24 Nov 2026 09:44:16 +0000
+X-IronPort-AV: E=Sophos;i="6.27,230,1787011200"; 
+   d="scan'208";a="60169060"
+Received: from aer-l-core-11.cisco.com ([144.254.74.212])
+  by aer-iport-5.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 24 Nov 2026 09:44:16 +0000
 Received: from sjc-ads-4935.cisco.com (sjc-ads-4935.cisco.com [10.28.39.199])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
 	 client-signature RSA-PSS (4096 bits) client-digest SHA256)
 	(Client CN "ciscoit-managed-infra-smtp-auth.cisco.com", Issuer "Internal Private TLS SubCA" (verified OK))
-	by aer-l-core-06.cisco.com (Postfix) with ESMTPS id C4CC31800048C
+	by aer-l-core-11.cisco.com (Postfix) with ESMTPS id D5CCC180001FD
 	for <openembedded-devel@lists.openembedded.org>; Tue, 24 Nov 2026 09:44:15 +0000 (GMT)
 Received: by sjc-ads-4935.cisco.com (Postfix, from userid 1887503)
-	id 725C6CC2EF3; Tue, 24 Nov 2026 01:44:14 -0800 (PST)
+	id 88FB8CC2EFA; Tue, 24 Nov 2026 01:44:14 -0800 (PST)
 From: "Devansh Patel -X (devanshp - E INFOCHIPS PRIVATE LIMITED at Cisco)" <devanshp@cisco.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-networking][wrynose][PATCH] open-vm-tools: Ignore CVE-2026-123894
+Subject: [meta-networking][blacksail][PATCH] open-vm-tools: Ignore CVE-2026-123894
 Date: Tue, 24 Nov 2026 01:44:14 -0800
-Message-Id: <20261124094414.1554322-1-devanshp@cisco.com>
+Message-Id: <20261124094414.1554373-1-devanshp@cisco.com>
 X-Mailer: git-send-email 2.35.6
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Outbound-Client-TLS: VERIFIED;sjc-ads-4935.cisco.com [10.28.39.199];TLSv1.3;TLS_AES_256_GCM_SHA384;256;ciscoit-managed-infra-smtp-auth.cisco.com
 X-Outbound-SMTP-Client: 10.28.39.199, sjc-ads-4935.cisco.com
-X-Outbound-Node: aer-l-core-06.cisco.com
+X-Outbound-Node: aer-l-core-11.cisco.com
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Tue, 24 Nov 2026 09:44:24 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132941
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132942
 Content-Type: text/plain; charset="utf-8"
 
 From: Devansh Patel <devanshp@cisco.com>
@@ -97,7 +97,7 @@ Signed-off-by: Devansh Patel <devanshp@cisco.com>
  1 file changed, 4 insertions(+)
 
 diff --git a/meta-networking/recipes-support/open-vm-tools/open-vm-tools_13.0.10.bb b/meta-networking/recipes-support/open-vm-tools/open-vm-tools_13.0.10.bb
-index a48d1ce88d29277a3ffe990584432c75d7d58a29..ead116bbb160697c5fdf315591dec3b58b30e632 100644
+index 088494c91bea155f6d91cc2106b3db328e32a8ee..f0e808fa3a00c565971c5240da1c2f3520c19f2b 100644
 --- a/meta-networking/recipes-support/open-vm-tools/open-vm-tools_13.0.10.bb
 +++ b/meta-networking/recipes-support/open-vm-tools/open-vm-tools_13.0.10.bb
 @@ -124,3 +124,7 @@ python() {
