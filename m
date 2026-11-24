@@ -1,108 +1,169 @@
-Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com [209.85.128.52])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.21157.1795536498660273683
+Received: from mx1.white.stw.pengutronix.de (mx1.white.stw.pengutronix.de [185.203.200.13])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.20926.1795536543317853294
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 24 Nov 2026 08:08:19 -0800
+ Tue, 24 Nov 2026 08:09:04 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=ACUuNjtn;
- spf=pass (domain: konsulko.com, ip: 209.85.128.52, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-wm1-f52.google.com with SMTP id 5b1f17b1804b1-4a35d5d4a20so46460095e9.2
-        for <openembedded-devel@lists.openembedded.org>; Tue, 24 Nov 2026 08:08:18 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1795536497; x=1796141297; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=tqFjnPaSA7JR8Iz7pKRIbem3601VRbUW4MxVk3NUgJk=;
-        b=ACUuNjtnl/+5QBXOGOQns/kwnKlflTqLnbe5xa84pjY3BJyMX7aiGnegNmoIr1pKzQ
-         f+NOzPtKsa9+1yPRnmK6ohn+QsSmEF453JAdssKKeq85PsBlAVhZVBxl8oqEah6Iim+i
-         nXGBtCy6XxUNylq7M5MK1E81hLy31S3LO0jL8=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795536497; x=1796141297;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=tqFjnPaSA7JR8Iz7pKRIbem3601VRbUW4MxVk3NUgJk=;
-        b=bHDcS2LmmHTnrK+lFUXeOJCN8rv+09qHexft6atdaAluchYbgCj9LAeZ/WkjAjMGXJ
-         KLqYBdVzE44An74ekZbx4lKIkL9bRTCk2Z7Wj/mAkVeWSl3n7ODX2Zv3lsAsvDc870DJ
-         rW92ipgHLq+mhet840i7XGBNsEn0ti64ZkhTs088vWAZPi3pmmEydu0++pDUgSDhP6dZ
-         OZBEG0ePU1D+qVANKZgPUS0pzH+daJWe4ZF8BopMvrfv34duX1nZxva5TvU1GWRvTzZM
-         mp68Uo6zTgIU5PfF70AzXS/E7S6UDWcKAToCLNFJeYB87FyUBhS5f1Uj0GkL03yHCnQB
-         LkYg==
-X-Gm-Message-State: APuU4Z87thYvW0A4dO+DHzcGqY+s4Eo6FYoVsJdQF6TI54B4bOhIt3SU
-	ST/MEgSN1lx8RJG+vqFAPekYPecS5gi6wT+gtllSlPwkFWuT3IEMawMChQu1Iwbr0MifcGZ6M9L
-	BfCNk
-X-Gm-Gg: AZFdTZdjyXqr/DWYDsTZN1eY2HB2THFENOTSUZqdRUqGQaCfXQ5xX1uPhNx4Cw8vSxo
-	07asbQCNv9IGwEjcj0sNBLgZiILj31aQyzY1AdmcYQtHBUmZYv18q1A4TBQATRYGm5QaG3iH4Pc
-	tp8htptoPvzhvJ9WqRY46VL7L1JuK3bAm1/NHz/P08LOQh5Hs2O9zYB5f7iEbzB5gFWliSIFWZU
-	fOCoXr7b6XNjrfsclcnSRwHlKv4nnTUozW61w9qWGAOUirRGZo5TEYWL8ppe2aIfueHyQOpsHcj
-	ivIuJadbHPqyoxkwfBtYzfGGj1rW89KG9le1+fjI9Q1SiLF/RByiDeJe+GKXDpX8ys9mRM/AG78
-	/7Wm2Wbwooo6q5lex3vR7YN7zjN0qRNYWsz1emL3PEWzchXswxCCB9PHiCWtVAwVNrTmN2B027y
-	eS+frmxpznj5DmUy0oIZLkenPdkDs3+FRZElBpy16eCr7gRLKLBz06YF2F99Kc16qA0KQVnDHbM
-	PNS42poPUSmiLMLHwliJmt9RiKQZoclNQarAmSM1btLAKHr94K8TU6af2vnMgRixyRVR54lQNwa
-	jmG1QZC9xlPg/YO1gWf+/YmRtaADVs8ifqOBWzS0JkZVl6vTExOS7ky4c14bNR6t4tieFtBywJk
-	bvkEyWFdUnPGLdA0ITGNarYbEytn+Xu3+cCsExEu1Qb4g43/YIsSXRQ==
-X-Received: by 2002:a05:600c:4584:b0:4bb:5de1:e90f with SMTP id 5b1f17b1804b1-4bb88819bcdmr302026735e9.31.1795536496933;
-        Tue, 24 Nov 2026 08:08:16 -0800 (PST)
-Return-Path: <leon.anavi@konsulko.com>
-Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4bb88f148aasm175096705e9.0.2026.11.24.08.08.16
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 24 Nov 2026 08:08:16 -0800 (PST)
-From: Leon Anavi <leon.anavi@konsulko.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH] python3-passlib: Upgrade 1.7.4 -> 1.9.5
-Date: Tue, 24 Nov 2026 18:08:13 +0200
-Message-ID: <20261124160813.1698824-1-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.47.3
+ dkim=pass header.i=@pengutronix.de header.s=20260414 header.b=aIz+7VWF;
+ spf=pass (domain: pengutronix.de, ip: 185.203.200.13, mailfrom: mfe@pengutronix.de)
+Received: from ptx.office.stw.pengutronix.de (ptx.office.stw.4.pengutronix.de [10.9.0.3])
+	(Authenticated sender: relay-from-ptx.office.stw.pengutronix.de)
+	by mx1.white.stw.pengutronix.de (Postfix) with ESMTPSA id BB4CA202031;
+	Tue, 24 Nov 2026 17:08:56 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=pengutronix.de;
+	s=20260414; t=1795536536;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=aryS5hVrwEn2GTxKINj4mBBUvlg+q3UkhRxE7Zue8l0=;
+	b=aIz+7VWFVvL8CZBrado/hzimWPw1x3+/akODv7PHj1d12gXjsDwRJZAsn+miSI651NvDTH
+	CiQITCqHgftOoC6CgJFBpVqHla7JHe8LVFo7zHg1qnSDBRqGlrwODNdixtirUVM5fJY60e
+	e9vz1B7eM4zY2mTb4QMAlWOECqFzzFCmoSWmloIBdWJhFlGQaPHdB0aI66R5/6TGRlWCEq
+	rzVljJn+B+8L6BvAIKJP+aYY8JVrXuoRTte2+L0rwIZU5VUN1yf3s2XRLqmxpsf41S095L
+	31ouvLR3svP5cfYHn/sDuQfc53sEjA/rwQP3T54oymZ0kDEwxWIxEzh4nQMZRw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=pengutronix.de;
+	s=20260414; t=1795536536;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=aryS5hVrwEn2GTxKINj4mBBUvlg+q3UkhRxE7Zue8l0=;
+	b=Ld1FsuSQJpm/LnIvLqHX3zexG9Ybq+gOFqcUwzcAtRIj7PEPLqcMYXrMKVNS3nceBPBawm
+	SL5SWOittmm8FSoLBmScymGmGusVL/XyvuFcgCLhKLeMZfy1n/0+5ftDPUCQilIka6loEQ
+	EBrHqMG5zBmkUgxr6JkDUiE1TXXx97jP0latX75e7+2nsq0TeRxRRX/7SDg8NqEUFw4hob
+	p5+diibOLV+d2XbfZQHMhnun/0MHS0UcUdcVLbNMuZqJ1FXwXhWOgFJqoku3/45Mui9UV1
+	HVv30PQd6jhUUVYFrCDq353hWDyO2QyvQZAIUtlEasb08CgiCuy3Yk2xuOboBg==
+ARC-Authentication-Results: i=1;
+	ORIGINATING;
+	auth=pass smtp.auth=relay-from-ptx.office.stw.pengutronix.de smtp.mailfrom=mfe@pengutronix.de
+ARC-Seal: i=1; s=20260414; d=pengutronix.de; t=1795536536; a=rsa-sha256;
+	cv=none;
+	b=dD9EFu055T4RKd2fPPa9MBy31wmLXl4yVz/1TXJWj9OGfE3l0lJjwz5cd7wrWDtBJiZp25
+	QwPugcsEDsyAMRDiYGJRCn4OoQPaqlLdxiJ0DOg/AgFrjhRzfqYTk4uF2MMYmbU2snDhqp
+	rVBFfhxCTrXjch6tq6agrdsHhf2UlZNwCDn37/i6Yr7gwXnaa6jCWMZOGzP5tazB4XE22p
+	GIAiRODFMGkn9N0JfXNN+pXV4EPkoUTmqOoFqSussNoDBU1gx4KMKj2VJGMCBWqAmQoa3s
+	YUm97Fys/1Mx+jQAsQVUsBcMl+WhPUSait6d2tDSHiP2yAPWk4yZ/1uLi1bTBA==
+Received: by ptx.office.stw.pengutronix.de (Postfix, from userid 1064)
+	id 9B7211BF7BF; Tue, 24 Nov 2026 17:08:56 +0100 (CET)
+Date: Tue, 24 Nov 2026 17:08:56 +0100
+From: Marco Felsch <m.felsch@pengutronix.de>
+To: Fabian Pflug <f.pflug@pengutronix.de>, khem.raj@oss.qualcomm.com
+Cc: openembedded-devel@lists.openembedded.org, yocto@pengutronix.de
+Subject: Re: [yocto] [meta-initramfs][PATCH] rsinit: add recipe for /init
+ written in rust
+Message-ID: <ckxwzsldrxqucqv2hrf2vbixryv57tjnghwm5q3vzfsn244ucm@3naoywqkyuxy>
+References: <20261123101533.3325486-1-f.pflug@pengutronix.de>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20261123101533.3325486-1-f.pflug@pengutronix.de>
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Tue, 24 Nov 2026 16:08:21 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132950
-Content-Type: text/plain; charset="utf-8"
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Tue, 24 Nov 2026 16:09:10 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132951
 
-Upgrade to release 1.9.5:
+Hi Khem,
 
-- Fixes regression in backend logic for argon2 and bcrypt
+sorry for the noise, but this patch was sent prematurely and we noticed
+that you already applied it to master.
 
-Fixes:
+Is it possible to revert the patch from master? Our goal is to get the
+recipe into oe-core instead.
 
-WARNING: python3-passlib-1.9.5-r0 do_check_backend: QA Issue:
-inherits setuptools3 but has pyproject.toml specifying backend
-hatchling.build, use the correct class [pep517-backend]
+Regards,
+  Marco
 
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
----
- .../{python3-passlib_1.7.4.bb => python3-passlib_1.9.5.bb}  | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-passlib_1.7.4.bb => python3-passlib_1.9.5.bb} (81%)
-
-diff --git a/meta-python/recipes-devtools/python/python3-passlib_1.7.4.bb b/meta-python/recipes-devtools/python/python3-passlib_1.9.5.bb
-similarity index 81%
-rename from meta-python/recipes-devtools/python/python3-passlib_1.7.4.bb
-rename to meta-python/recipes-devtools/python/python3-passlib_1.9.5.bb
-index d83c37e850..c8c176de98 100644
---- a/meta-python/recipes-devtools/python/python3-passlib_1.7.4.bb
-+++ b/meta-python/recipes-devtools/python/python3-passlib_1.9.5.bb
-@@ -9,9 +9,9 @@ HOMEPAGE = "https://foss.heptapod.net/python-libs/passlib/wikis/home"
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=c8449c5e10474d113ab787ed2753bafe"
- 
--SRC_URI[sha256sum] = "defd50f72b65c5402ab2c573830a6978e5f202ad0d984793c8dde2c4152ebe04"
-+SRC_URI[sha256sum] = "15d39a9b2044a86f341a2e443170e4e9a6d71fe0266fe28b91032a8ca723f8aa"
- 
--inherit pypi setuptools3
-+inherit pypi python_setuptools_build_meta python_hatchling
- 
- RDEPENDS:${PN} += "\
-     python3-misc \
-@@ -20,4 +20,4 @@ RDEPENDS:${PN} += "\
-     python3-netclient \
- "
- 
--BBCLASSEXTEND = "native"
-\ No newline at end of file
-+BBCLASSEXTEND = "native"
--- 
-2.47.3
-
+On 26-11-23 11:14, Fabian Pflug wrote:
+> rsinit speeds up the boot by not having to parse all the bash scripts
+> currently used in the initramfs and replacing it with a single binary
+> written in rust.
+> 
+> Signed-off-by: Fabian Pflug <f.pflug@pengutronix.de>
+> ---
+>  .../recipes-core/rsinit/rsinit-crates.inc     | 36 +++++++++++++++++++
+>  .../recipes-core/rsinit/rsinit_v0.1.0.bb      | 31 ++++++++++++++++
+>  2 files changed, 67 insertions(+)
+>  create mode 100644 meta-initramfs/recipes-core/rsinit/rsinit-crates.inc
+>  create mode 100644 meta-initramfs/recipes-core/rsinit/rsinit_v0.1.0.bb
+> 
+> diff --git a/meta-initramfs/recipes-core/rsinit/rsinit-crates.inc b/meta-initramfs/recipes-core/rsinit/rsinit-crates.inc
+> new file mode 100644
+> index 0000000000..9970c4a913
+> --- /dev/null
+> +++ b/meta-initramfs/recipes-core/rsinit/rsinit-crates.inc
+> @@ -0,0 +1,36 @@
+> +# Autogenerated with 'bitbake -c update_crates rsinit'
+> +
+> +# from Cargo.lock
+> +SRC_URI += " \
+> +    crate://crates.io/bitflags/2.13.0 \
+> +    crate://crates.io/cfg-if/1.0.4 \
+> +    crate://crates.io/cfg_aliases/0.2.1 \
+> +    crate://crates.io/getrandom/0.2.17 \
+> +    crate://crates.io/git-version/0.3.9 \
+> +    crate://crates.io/git-version-macro/0.3.9 \
+> +    crate://crates.io/json/0.12.4 \
+> +    crate://crates.io/libc/0.2.186 \
+> +    crate://crates.io/log/0.4.32 \
+> +    crate://crates.io/nix/0.31.3 \
+> +    crate://crates.io/proc-macro2/1.0.106 \
+> +    crate://crates.io/quote/1.0.45 \
+> +    crate://crates.io/syn/2.0.118 \
+> +    crate://crates.io/unicode-ident/1.0.24 \
+> +    crate://crates.io/wasi/0.11.1+wasi-snapshot-preview1 \
+> +"
+> +
+> +SRC_URI[bitflags-2.13.0.sha256sum] = "b4388bee8683e3d04af747c73422af53102d2bd24d9eadb6cbc100baef4b43f8"
+> +SRC_URI[cfg-if-1.0.4.sha256sum] = "9330f8b2ff13f34540b44e946ef35111825727b38d33286ef986142615121801"
+> +SRC_URI[cfg_aliases-0.2.1.sha256sum] = "613afe47fcd5fac7ccf1db93babcb082c5994d996f20b8b159f2ad1658eb5724"
+> +SRC_URI[getrandom-0.2.17.sha256sum] = "ff2abc00be7fca6ebc474524697ae276ad847ad0a6b3faa4bcb027e9a4614ad0"
+> +SRC_URI[git-version-0.3.9.sha256sum] = "1ad568aa3db0fcbc81f2f116137f263d7304f512a1209b35b85150d3ef88ad19"
+> +SRC_URI[git-version-macro-0.3.9.sha256sum] = "53010ccb100b96a67bc32c0175f0ed1426b31b655d562898e57325f81c023ac0"
+> +SRC_URI[json-0.12.4.sha256sum] = "078e285eafdfb6c4b434e0d31e8cfcb5115b651496faca5749b88fafd4f23bfd"
+> +SRC_URI[libc-0.2.186.sha256sum] = "68ab91017fe16c622486840e4c83c9a37afeff978bd239b5293d61ece587de66"
+> +SRC_URI[log-0.4.32.sha256sum] = "953f07c43838f8e6f9758cab68bf5bed85465e7587ebe0b823f1bcd81978ad3a"
+> +SRC_URI[nix-0.31.3.sha256sum] = "cf20d2fde8ff38632c426f1165ed7436270b44f199fc55284c38276f9db47c3d"
+> +SRC_URI[proc-macro2-1.0.106.sha256sum] = "8fd00f0bb2e90d81d1044c2b32617f68fcb9fa3bb7640c23e9c748e53fb30934"
+> +SRC_URI[quote-1.0.45.sha256sum] = "41f2619966050689382d2b44f664f4bc593e129785a36d6ee376ddf37259b924"
+> +SRC_URI[syn-2.0.118.sha256sum] = "1b9ae57f904213ebb649ce6895b8a66c66f0203b9319718f69a5612a065b1422"
+> +SRC_URI[unicode-ident-1.0.24.sha256sum] = "e6e4313cd5fcd3dad5cafa179702e2b244f760991f45397d14d4ebf38247da75"
+> +SRC_URI[wasi-0.11.1+wasi-snapshot-preview1.sha256sum] = "ccf3ec651a847eb01de73ccad15eb7d99f80485de043efb2f370cd654f4ea44b"
+> diff --git a/meta-initramfs/recipes-core/rsinit/rsinit_v0.1.0.bb b/meta-initramfs/recipes-core/rsinit/rsinit_v0.1.0.bb
+> new file mode 100644
+> index 0000000000..e2c5e71d54
+> --- /dev/null
+> +++ b/meta-initramfs/recipes-core/rsinit/rsinit_v0.1.0.bb
+> @@ -0,0 +1,31 @@
+> +SUMMARY = "minimalistic init written in rust"
+> +DESCRIPTION = "rsinit is a minimalistic single binary init for the initramfs for embedded systems"
+> +HOMEPAGE = "https://github.com/pengutronix/rsinit"
+> +
+> +LICENSE = "GPL-2.0-only AND CC0-1.0"
+> +LIC_FILES_CHKSUM = "file://LICENSES/GPL-2.0-only.txt;md5=570a9b3749dd0463a1778803b12a6dce \
+> +                    file://LICENSES/CC0-1.0.txt;md5=65d3616852dbf7b1a6d4b53b00626032"
+> +
+> +SRC_URI = "git://github.com/pengutronix/rsinit.git;protocol=https;branch=main"
+> +SRCREV = "${PV}"
+> +
+> +inherit cargo cargo-update-recipe-crates
+> +
+> +require ${BPN}-crates.inc
+> +
+> +INSANE_SKIP:${PN} += "already-stripped"
+> +
+> +PACKAGECONFIG ??= " \
+> +    ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)} \
+> +    reboot \
+> +"
+> +
+> +PACKAGECONFIG[defaults] = ",--no-default-features"
+> +PACKAGECONFIG[dmverity] = "--features dmverity"
+> +PACKAGECONFIG[reboot] = "--features reboot-on-failure"
+> +PACKAGECONFIG[systemd] = "--features systemd"
+> +PACKAGECONFIG[usb9pfs] = "--features usb9pfs"
+> +
+> +# cargo installs everything into ${bindir}, which is normally /usr/bin.
+> +# Not the best choice for the init system, which should reside under /init
+> +bindir = ""
+> -- 
+> 2.47.3
+> 
+> 
+> 
