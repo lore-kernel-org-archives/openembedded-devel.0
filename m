@@ -1,565 +1,269 @@
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.57686.1795451474172176230
+Received: from aer-iport-1.cisco.com (aer-iport-1.cisco.com [173.38.203.51])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.11751.1795496988092403056
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 23 Nov 2026 08:31:14 -0800
+ Mon, 23 Nov 2026 21:09:48 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@kernel.org header.s=k20260515 header.b=fRLqQPNd;
- spf=pass (domain: kernel.org, ip: 172.105.4.254, mailfrom: devnull+patrick.vogelaar.belden.com@kernel.org)
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
-	by tor.source.kernel.org (Postfix) with ESMTP id 83BB062364;
-	Mon, 23 Nov 2026 16:31:13 +0000 (UTC)
-Authentication-Results: smtp.kernel.org; arc=none smtp.remote-ip=100.80.115.77
-ARC-Seal: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256; cv=none;
-	t=1795451473;
-	b=YahQeJ8wDcBbq13wiH8ZDCvnN1kzeTfEBX0YRoH29xGEtls+HLBt46gmTohXdB67Is5S
-	 YwPCqE6B3eAZJZejpcFGbdf4740Q2T2irEnJlWyDUnm0x4PGTAbOqyKWeXBD0w79rakbI
-	 Loa7qLyBnAdYK5DPR9R704WwlRTK7ZiRqygjMCjfTfNWV+HA+W6aJomXkqT8o1ZAqYJjT
-	 KVEEDFQSyAFRsPwh1k/R84HWK5lBgKImM4WeqcQblumxHiF3g8h4yFXm+mjWRnFc6T2M4
-	 otdjhvquCXsyA2SVfgvoGu0JMAPvcM0MP+caNilEoTTjnzuOgC1KEqYmksAeGsywKYg==
-ARC-Message-Signature: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795451473;
-	h=DKIM-Signature:Received:From:Date:Subject:MIME-Version:Content-Type:
-	 Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
-	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
-	 X-Original-From:Reply-To:Content-Transfer-Encoding;
-	bh=U7MFp21/ETlCvzR8oHyFdFaXS50TRS6TDYvWMMal1FM=;
-	b=xc80nKQ8f9ZU3h681IKWINvXOp/9OEW2qepv9BUllCn4QjOuHuc7joFwOAvBn2lae+4q
-	 nuEHhoMPQ1gztbuHZ4R+XBtKB1c/8F9z2elbacdWW1lzrsHPJHTheznSNIsJyv+ZmrVnk
-	 FdBSBeOaog1d5hUdYHqPvg81AnE4IhMI9Qr9DSo1oZoy6QHNYZB6O1D+ZIdUdp729GfrD
-	 bJWUxiFNjWMbsPHkplmty+WrWReRfQck7pojP4/qEgAbZFulbYb5yZze63F2Hr0/MK3qE
-	 m7Fi9BYNWBVE9zhBRatO2PV8HH/EAn+v8zPjcLXRe67aRzciOIkDUGGnVIdn+v/5ueA==
-ARC-Authentication-Results: i=1; smtp.kernel.org; 
-	arc=none smtp.remote-ip=100.80.115.77
-Received: from lkml.kernel.org (nexus.subspace.kernel.org [100.80.115.77])
+ dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=JSjqLnPi;
+ spf=pass (domain: cisco.com, ip: 173.38.203.51, mailfrom: hthakar@cisco.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+  d=cisco.com; i=@cisco.com; l=8336; q=dns/txt;
+  s=iport01; t=1795496988; x=1796706588;
+  h=from:to:subject:date:message-id:in-reply-to:references:
+   mime-version:content-transfer-encoding;
+  bh=/15FUcI2x2paAYbuKnfI1SEY1fc4hQtDA/m4m0JsX0g=;
+  b=JSjqLnPiimOsxfz7ogweZ5Usi/8MibG11PAxY0D0Fl/kyx5PrLwJoEUt
+   +OPSX/aoa4hJNXE/IdN1A70AQT2hGLzdLHOGK+sUXs8psK4oTHpeopLZR
+   M+J7NIVCn7Js7rJn6QRmDv4F+BdyrKB2FDtn5WvdmFDYt7m8Ce+5a4bdO
+   UHKV/WiiEWFakMGSI1F9ZjyCI7SxiI89b9sJMu/E/7YuEcm1jAqFNiD3K
+   +wjtHMTHCpZ4Lh5Kp4BV8gJxXJUyBmrf1jsyzhLtESFRAkm3w12snbc7E
+   Cq8dlOXd21mnigXy0eyd9YL/LBqG3Gn4x6Gzz8Bchgky+PQkoh0Az9rhm
+   Q==;
+X-CSE-ConnectionGUID: wC1xHJ74RlKm2UCVMxiNGQ==
+X-CSE-MsgGUID: +2+2QsciQYajRr3+X7rn7w==
+X-IPAS-Result: =?us-ascii?q?A0AGAwBOGgVr/85K/pBaglmCV3VhQkmEV49TgTVsA4tmh?=
+ =?us-ascii?q?WqMWYF+DwEBAQ9EDQQBAYQ/RgKOIgImNgcOAQIEAwIDAQEBAQEBAQEBAQEBC?=
+ =?us-ascii?q?gEBBQEBAQIBBwWBDhOGTw2QEgECAQMjBAsBGAE9HAMBAgMCJgICIAsjCBmDA?=
+ =?us-ascii?q?gGCOgM3AgERuwl6fzOBAYMpAYFU2EwNgloBCxQBgQouhUKDACABhQNdGAFEh?=
+ =?us-ascii?q?DknGxuBcoQJdoEFgRpCAoU8gmoEgiKBDIFUHjEzjBUCgU+ISUiBAhwDWSwBV?=
+ =?us-ascii?q?RMNCgsHBYFoAzUSKhVuMh2BIzsXL1gbBgWBHIEegRKBA12BKyheIYEIgXYCg?=
+ =?us-ascii?q?lGCAAIBSUEOB0VTCSVDEkckIggSCQETGiwKgRo1PAkmPxUMZwsaBWEIAg0Md?=
+ =?us-ascii?q?DkQMB4kLwUaJj4bCoEMJx8eGw4CHxAGFiELGxgNSBEsNxUZBD0BbgeUFIMaA?=
+ =?us-ascii?q?Q0jXQErgRkHQJNYBZBDgiGgIHEKKIN5ihSCEI8+hXwaM4QElBqSVAuYfYJZi?=
+ =?us-ascii?q?zGECpFfG02EaoFvATSBWXAVO4JnCUoZD44vCguDYM5bIzUCCTIBAQcCBwEMA?=
+ =?us-ascii?q?QMLgWiQACyBUgEB?=
+IronPort-Data: A9a23:YvUUtKJ16gSfAJ5OFE+RhZQlxSXFcZb7ZxGr2PjKsXjdYENS3jNSn
+ DdOD2qEMv+MYmajKdF2Povlpk9XvZ+HxtdiSgEd+CA2RRqmiyZq6fd1j6vUF3nPRiEWZBs/t
+ 63yUvGZcoZpCCea9k3wWlTYhSEU/bmSQbbhA/LzNCl0RAt1IA8skhsLd9QR2uaEuvDnRVnS0
+ T/Oi5eHYgH8gmQvajh8B5+r8XuDgtyj4Fv0gXRmDRx7lAe2v2UYCpsZOZawIxPQKqFIHvS3T
+ vr017qw+GXU5X8FUrtJRZ6iLyXm6paLVeS/oiI+t5qK23CulQRuukoPD8fwXG8M49m/c3+d/
+ /0W3XC4YV9B0qQhA43xWTEAe811FfUuFLMqvRFTvOTLp3AqfUcAzN1xJxgmHa9HptxzImQUy
+ NcmDSAMSD+60rfeLLKTEoGAh+wqIdOuOMYUvWttiGmES/0nWpvEBa7N4Le03h9p2pwIR6uCI
+ ZVFL2A3MnwsYDUXUrsTIJIinO6rj2PXeDxDo1XTrq0yi4TW5FIrj+SxYYqKEjCMbYYP3Ryhv
+ WnHxlXwACsAb5+vliCDrW3504cjmgu+Aur+DoaQ8eZnhlCWzGEfBBAaEFe2v/S9okq/QM5Eb
+ UsM9ywjqKI/+ECmQp/6RRLQnZKflhcRQZ9UVuY98gzIkveS6AeCDW9CRTlEADA7iPILqfUR/
+ gfht7vU6fZH6dV5lVr1Gm+okA6P
+IronPort-HdrOrdr: A9a23:gYMATqkuOOuDg8RHIruav/YMSmHpDfIO3DAbv31ZSRFFG/Fw8P
+ re+8jztCWE7Ar5N0tPpTntAsS9qDbnhP1ICOoqTNKftXfd2VdARbsKheCJ/9SjIVydygc378
+ hdmsZFZOEYdWIbse/KpC+lDt0n3N6LtIqshevY0jNRaDsCUdAH0++8YTzranGfg2J9dOMEKK
+ Y=
+X-Talos-CUID: =?us-ascii?q?9a23=3AH0k3CGtKEEFD7Ga3n0I6sRo26Is6WSTN7FWPf3W?=
+ =?us-ascii?q?8KmMzdZarbE+R3oxdxp8=3D?=
+X-Talos-MUID: =?us-ascii?q?9a23=3AkYZHtw4vC36E3EA5+wlDoJiNxowruef0MVsGkKw?=
+ =?us-ascii?q?3ssu+L3czC2iHimuoF9o=3D?=
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-AV: E=Sophos;i="6.27,229,1787011200"; 
+   d="scan'208";a="62744987"
+Received: from aer-l-core-05.cisco.com ([144.254.74.206])
+  by aer-iport-1.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 24 Nov 2026 05:09:44 +0000
+Received: from sjc-ads-2020.cisco.com (sjc-ads-2020.cisco.com [171.70.61.208])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
-	(No client certificate requested)
-	by smtp.kernel.org (Postfix) with ESMTPS id AF3E61F000CF;
-	Mon, 23 Nov 2026 16:31:01 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795451473;
-	bh=U7MFp21/ETlCvzR8oHyFdFaXS50TRS6TDYvWMMal1FM=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To;
-	b=fRLqQPNdB599aJL0br2xt0vNQu7a+JOswQcSAFD5bJf45dJIo5ueLljSRylZYyQIS
-	 KnP3GiOyPdPOw1CDySg28Vc8+3yVmbmVC6nlqDgvjORO/wyM8IYjbhkAoGX+C5zdy3
-	 v1O/SazOx1vmZl0QR9oyswDzB4h73SLTlOZ16YcgkrCEjGJmtJzKBYygZHxpWwNKYS
-	 y6ZPyyuSsHio+RJ/IZC1JwIaf9muyO2ULoemaHc1phpmaqxllMSdk5g149ekGl3ZjQ
-	 jahR37WPRhgsnKvwsb2CyWdlXuKnDs6C9gNUNpmvEXYVxPDlrV96oHIJcMGaL+QKDM
-	 YN4yoz2GW2x7A==
-Received: from nexus.subspace.kernel.org (localhost [IPv6:::1])
-	by lkml.kernel.org (Postfix) with ESMTP id 9276F4C56C;
-	Mon, 23 Nov 2026 16:30:54 +0000 (UTC)
-From: Patrick Vogelaar via B4 Relay <devnull+patrick.vogelaar.belden.com@kernel.org>
-Date: Mon, 23 Nov 2026 17:30:44 +0100
-Subject: [meta-webserver][scarthgap][PATCH 5/5] nginx: fix for
- CVE-2026-113425
-MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Message-Id: <20261123-fix_nginx2root-v1-5-1b30332ed757@belden.com>
-References: <20261123-fix_nginx2root-v1-0-1b30332ed757@belden.com>
-In-Reply-To: <20261123-fix_nginx2root-v1-0-1b30332ed757@belden.com>
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
+	 client-signature RSA-PSS (4096 bits) client-digest SHA256)
+	(Client CN "ciscoit-managed-infra-smtp-auth.cisco.com", Issuer "Internal Private TLS SubCA" (verified OK))
+	by aer-l-core-05.cisco.com (Postfix) with ESMTPS id 0388118000231
+	for <openembedded-devel@lists.openembedded.org>; Tue, 24 Nov 2026 05:09:44 +0000 (GMT)
+Received: by sjc-ads-2020.cisco.com (Postfix, from userid 1887505)
+	id A6852CC124D; Mon, 23 Nov 2026 21:09:42 -0800 (PST)
+From: "Hetvi Thakar -X (hthakar - E INFOCHIPS PRIVATE LIMITED at Cisco)" <hthakar@cisco.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Patrick Vogelaar <patrick.vogelaar@belden.com>, 
- patrick.vogelaar.dev@mailbox.org
-X-Mailer: b4 0.16.0
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1795451453; l=19523;
- i=patrick.vogelaar@belden.com; s=20240201; h=from:subject:message-id;
- bh=bOBqLCZWpnZg6p/zIFDYxdGRnhGDx9i08rXRsGKspSE=;
- b=tBGtTe7PSm+/xp8QsVdSJ7OvX++2w6VD9iStx3GYyiMJ2K8FQ5rTlp8JMnMXcky0LqGejVohn
- odOUdVm/j6XBLB3wdusp43OPpJhFLK2TceIYI83RTC2baA6nDvUG2ls
-X-Developer-Key: i=patrick.vogelaar@belden.com; a=ed25519;
- pk=w0QU8RmOR3hQv1DxMcz6KmySeE8yqbvO0xC1ZSSUNqY=
-X-Endpoint-Received: by B4 Relay for patrick.vogelaar@belden.com/20240201
- with auth_id=125
-X-Original-From: Patrick Vogelaar <patrick.vogelaar@belden.com>
-Reply-To: patrick.vogelaar@belden.com
-Content-Transfer-Encoding: 7bit
+Subject: [meta-python][scarthgap][PATCH 02/12]  python3-virtualenv: fix CVE-2026-113776
+Date: Mon, 23 Nov 2026 21:09:32 -0800
+Message-Id: <20261124050942.1795310-3-hthakar@cisco.com>
+X-Mailer: git-send-email 2.35.6
+In-Reply-To: <20261124050942.1795310-1-hthakar@cisco.com>
+References: <20261124050942.1795310-1-hthakar@cisco.com>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+X-Outbound-Client-TLS: VERIFIED;sjc-ads-2020.cisco.com [171.70.61.208];TLSv1.3;TLS_AES_256_GCM_SHA384;256;ciscoit-managed-infra-smtp-auth.cisco.com
+X-Outbound-SMTP-Client: 171.70.61.208, sjc-ads-2020.cisco.com
+X-Outbound-Node: aer-l-core-05.cisco.com
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Mon, 23 Nov 2026 16:31:17 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132908
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Tue, 24 Nov 2026 05:09:52 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132909
+Content-Type: text/plain; charset="utf-8"
 
-From: Patrick Vogelaar <patrick.vogelaar@belden.com>
+From: Hetvi Thakar <hthakar@cisco.com>
 
-Pick patch [0], [1], [2], [3] and [4] as mentioned in [5].
+Backport upstream commit 602b26623a724827ff171bf11fef4ad186d01f74
+to substitute activation-template placeholders in one pass. This keeps
+placeholder names inside already quoted values unchanged.
 
-[0] https://github.com/nginx/nginx/commit/9e811a43119ac902f0d0296fb4afb34bb063cf1b
-[1] https://github.com/nginx/nginx/commit/df9d8d940ecb83a50b1e55ccc296d0a29cfe774c
-[2] https://github.com/nginx/nginx/commit/e2d23d45fa93ed236a9cdedcb54271e0a064c4f3
-[3] https://github.com/nginx/nginx/commit/5deda780a9d5d1bcd5c6731d3118fa090ae900cc
-[4] https://github.com/nginx/nginx/commit/4c5ace9f1d5419334a2e6772a0885ee7ed3d6e91
-[5] https://security-tracker.debian.org/tracker/CVE-2026-113425
+Retain renderer checks and Bash/Python activation coverage for literal
+placeholder names, adapted to virtualenv 20.25.3.
 
-Signed-off-by: Patrick Vogelaar <patrick.vogelaar@belden.com>
+Signed-off-by: Hetvi Thakar <hthakar@cisco.com>
 ---
- .../nginx/nginx-1.26.3/CVE-2026-113425-01.patch    |  94 +++++++++++++++++
- .../nginx/nginx-1.26.3/CVE-2026-113425-02.patch    |  44 ++++++++
- .../nginx/nginx-1.26.3/CVE-2026-113425-03.patch    |  87 ++++++++++++++++
- .../nginx/nginx-1.26.3/CVE-2026-113425-04.patch    |  72 +++++++++++++
- .../nginx/nginx-1.26.3/CVE-2026-113425-05.patch    | 116 +++++++++++++++++++++
- meta-webserver/recipes-httpd/nginx/nginx_1.26.3.bb |   5 +
- 6 files changed, 418 insertions(+)
+ .../python3-virtualenv/CVE-2026-113776.patch  | 148 ++++++++++++++++++
+ .../python/python3-virtualenv_20.25.3.bb      |   1 +
+ 2 files changed, 149 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-virtualenv/CVE-2026-113776.patch
 
-diff --git a/meta-webserver/recipes-httpd/nginx/nginx-1.26.3/CVE-2026-113425-01.patch b/meta-webserver/recipes-httpd/nginx/nginx-1.26.3/CVE-2026-113425-01.patch
+diff --git a/meta-python/recipes-devtools/python/python3-virtualenv/CVE-2026-113776.patch b/meta-python/recipes-devtools/python/python3-virtualenv/CVE-2026-113776.patch
 new file mode 100644
-index 0000000000..17bf039918
+index 0000000000..c956aaa0f8
 --- /dev/null
-+++ b/meta-webserver/recipes-httpd/nginx/nginx-1.26.3/CVE-2026-113425-01.patch
-@@ -0,0 +1,94 @@
-+From cb07812b72e5f90a159a0e81e4669a115e8a2c2c Mon Sep 17 00:00:00 2001
-+From: Maxim Dounin <mdounin@mdounin.ru>
-+Date: Sat, 20 Jun 2026 05:04:41 +0300
-+Subject: [PATCH 06/10] Mail: updated ngx_mail_send() to set handlers on
-+ s->quit.
++++ b/meta-python/recipes-devtools/python/python3-virtualenv/CVE-2026-113776.patch
+@@ -0,0 +1,148 @@
++From 602b26623a724827ff171bf11fef4ad186d01f74 Mon Sep 17 00:00:00 2001
++From: Bernát Gábor <gaborjbernat@gmail.com>
++Date: Wed, 30 Sep 2026 23:01:05 -0700
++Subject: [PATCH] Merge commit from fork
 +
-+Most notably, this fixes potential issues when a fatal error message is
-+sent with ngx_mail_send() with s->quit set, but the read handler is not
-+updated.  Despite s->quit, ngx_mail_send() might not be able to send the
-+error message immediately, and the read handler might be called on read
-+events.  In particular, in ngx_mail_auth_http_block_read() and in
-+ngx_mail_proxy_block_read() this could potentially cause accesses to
-+freed memory or already closed connections in ngx_handle_read_event()
-+error handling code paths.
++instantiate_template replaced one placeholder at a time across the whole
++template, so a placeholder name inside an already quoted value, such as a
++parent directory named __VIRTUAL_NAME__, was rewritten from inside the
++finished literal. The second value's quotes closed the first, and the rest
++of the path ran as code in bash, fish, xonsh and activate_this.py; in csh
++the prompt display tokens broke activate.csh the same way.
 +
-+Reported by Evan Hellman,
-+https://github.com/freenginx/nginx/issues/23
-+https://github.com/freenginx/nginx/issues/24
++Build every token's final text first and substitute them in one regex pass,
++with the csh display tokens joining that pass through substitutions().
 +
-+Signed-off-by: Vadim Zhestikov <v.zhestikov@f5.com>
-+Origin: <https://freenginx.org/hg/nginx/rev/87725983f346>
++CVE: CVE-2026-113776
++Upstream-Status: Backport [https://github.com/pypa/virtualenv/commit/602b26623a724827ff171bf11fef4ad186d01f74]
 +
-+(cherry picked from commit 9e811a43119ac902f0d0296fb4afb34bb063cf1b)
-+CVE:CVE-2026-113425
-+Upstream-Status: Backport [https://github.com/nginx/nginx/commit/9e811a43119ac902f0d0296fb4afb34bb063cf1b]
++Backport Changes:
++ - Retain the untyped 20.25.3 method signatures. Omit the newer C shell
++   display-token override, whose tokens and helpers are absent here.
++ - Exercise literal placeholder names through unittest renderer and actual
++   Bash/Python activation checks for the older test layout.
 +
-+Signed-off-by: Patrick Vogelaar <patrick.vogelaar@belden.com>
++Signed-off-by: Hetvi Thakar <hthakar@cisco.com>
 +---
-+ src/mail/ngx_mail_handler.c | 21 +++++++++++++++++----
-+ 1 file changed, 17 insertions(+), 4 deletions(-)
++ src/virtualenv/activation/via_template.py     | 21 ++++++--
++ tests/unit/activation/test_cve_2026_113776.py | 73 +++++++++++++++++++++++++++
++ 2 files changed, 90 insertions(+), 4 deletions(-)
 +
-+diff --git a/src/mail/ngx_mail_handler.c b/src/mail/ngx_mail_handler.c
-+index 1167df3fb..5a8b59446 100644
-+--- a/src/mail/ngx_mail_handler.c
-++++ b/src/mail/ngx_mail_handler.c
-+@@ -14,6 +14,7 @@
-+ static void ngx_mail_proxy_protocol_handler(ngx_event_t *rev);
-+ static void ngx_mail_init_session_handler(ngx_event_t *rev);
-+ static void ngx_mail_init_session(ngx_connection_t *c);
-++static void ngx_mail_block_read(ngx_event_t *rev);
++diff --git a/src/virtualenv/activation/via_template.py b/src/virtualenv/activation/via_template.py
++index 1f532213c3a915a113b780cc0ee1a0cdb0f841a2..a1c7b5b62a0062a1ffc8591bf05ba2254dcccc7e 100644
++--- a/src/virtualenv/activation/via_template.py
+++++ b/src/virtualenv/activation/via_template.py
++@@ -1,6 +1,7 @@
++ from __future__ import annotations
 + 
-+ #if (NGX_MAIL_SSL)
-+ static void ngx_mail_ssl_init_connection(ngx_ssl_t *ssl, ngx_connection_t *c);
-+@@ -415,8 +416,6 @@ ngx_mail_verify_cert(ngx_mail_session_t *s, ngx_connection_t *c)
-+         s->out = cscf->protocol->cert_error;
-+         s->quit = 1;
-+ 
-+-        c->write->handler = ngx_mail_send;
-+-
-+         ngx_mail_send(s->connection->write);
-+         return NGX_ERROR;
-+     }
-+@@ -436,8 +435,6 @@ ngx_mail_verify_cert(ngx_mail_session_t *s, ngx_connection_t *c)
-+             s->out = cscf->protocol->no_cert;
-+             s->quit = 1;
-+ 
-+-            c->write->handler = ngx_mail_send;
-+-
-+             ngx_mail_send(s->connection->write);
-+             return NGX_ERROR;
-+         }
-+@@ -818,6 +815,11 @@ again:
-+ 
-+     ngx_add_timer(c->write, cscf->timeout);
-+ 
-++    if (s->quit) {
-++        c->read->handler = ngx_mail_block_read;
-++        c->write->handler = ngx_mail_send;
-++    }
++ import os
+++import re
++ import shlex
++ import sys
++ from abc import ABC, abstractmethod
++@@ -72,10 +73,22 @@ class ViaTemplateActivator(Activator, ABC):
++         # read content as binary to avoid platform specific line normalization (\n -> \r\n)
++         binary = read_binary(self.__module__, template)
++         text = binary.decode("utf-8", errors="strict")
++-        for key, value in replacements.items():
++-            value_uni = self._repr_unicode(creator, value)
++-            text = text.replace(key, self.quote(value_uni))
++-        return text
+++        substitutions = self.substitutions(replacements, creator)
+++        # one pass over the template, so a placeholder name inside an already quoted value (a path component named
+++        # __VIRTUAL_NAME__) stays data instead of being rewritten by a later key from inside the finished literal
+++        pattern = re.compile("|".join(re.escape(key) for key in sorted(substitutions, key=len, reverse=True)))
+++        return pattern.sub(lambda match: substitutions[match.group()], text)
 ++
-+     if (ngx_handle_write_event(c->write, 0) != NGX_OK) {
-+         ngx_mail_close_connection(c);
-+         return;
-+@@ -936,6 +938,17 @@ ngx_mail_session_internal_server_error(ngx_mail_session_t *s)
-+ }
-+ 
-+ 
-++static void
-++ngx_mail_block_read(ngx_event_t *rev)
-++{
-++    ngx_log_debug0(NGX_LOG_DEBUG_MAIL, rev->log, 0, "mail block read");
+++    def substitutions(self, replacements, creator):
+++        """Map each placeholder to the final text that replaces it in the template.
 ++
-++    if (ngx_handle_read_event(rev, 0) != NGX_OK) {
-++        ngx_mail_close_connection(rev->data);
-++    }
-++}
+++        :param replacements: the raw placeholder values
+++        :param creator: the creator of the environment
 ++
+++        :returns: the placeholder to substituted text mapping
 ++
-+ void
-+ ngx_mail_close_connection(ngx_connection_t *c)
-+ {
-+-- 
-+2.43.0
-+
-diff --git a/meta-webserver/recipes-httpd/nginx/nginx-1.26.3/CVE-2026-113425-02.patch b/meta-webserver/recipes-httpd/nginx/nginx-1.26.3/CVE-2026-113425-02.patch
-new file mode 100644
-index 0000000000..b0a2ed8946
---- /dev/null
-+++ b/meta-webserver/recipes-httpd/nginx/nginx-1.26.3/CVE-2026-113425-02.patch
-@@ -0,0 +1,44 @@
-+From 602d172c5721bfcfb116314e18ef07ac7c96bdc7 Mon Sep 17 00:00:00 2001
-+From: Vadim Zhestikov <v.zhestikov@f5.com>
-+Date: Wed, 4 Nov 2026 09:54:11 -0800
-+Subject: [PATCH 07/10] Mail: fixed use-after-free on client reset during
-+ auth_http request
-+
-+When a client command starts an auth_http request, the default reply
-+set by the POP3, IMAP and SMTP auth state handlers remains in s->out,
-+though it is never used: the actual reply depends on the auth_http
-+response.  With ngx_mail_send() as the client write handler, the reply
-+could be sent before the authentication result was known, and if the
-+client reset the connection, the failed send destroyed the session
-+while the auth_http connection still referenced it.
-+
-+The queued reply is now discarded when the auth_http request starts,
-+similarly to ngx_mail_proxy_init().
-+
-+Reported by Xint.io.
-+
-+(cherry picked from commit df9d8d940ecb83a50b1e55ccc296d0a29cfe774c)
-+CVE:CVE-2026-113425
-+Upstream-Status: Backport [https://github.com/nginx/nginx/commit/df9d8d940ecb83a50b1e55ccc296d0a29cfe774c]
-+
-+Signed-off-by: Patrick Vogelaar <patrick.vogelaar@belden.com>
-+---
-+ src/mail/ngx_mail_auth_http_module.c | 2 ++
-+ 1 file changed, 2 insertions(+)
-+
-+diff --git a/src/mail/ngx_mail_auth_http_module.c b/src/mail/ngx_mail_auth_http_module.c
-+index 27f64b92e..0e8b5209c 100644
-+--- a/src/mail/ngx_mail_auth_http_module.c
-++++ b/src/mail/ngx_mail_auth_http_module.c
-+@@ -216,6 +216,8 @@ ngx_mail_auth_http_init(ngx_mail_session_t *s)
-+     ctx->peer.connection->data = s;
-+     ctx->peer.connection->pool = s->connection->pool;
+++        """
+++        return {key: self.quote(self._repr_unicode(creator, value)) for key, value in replacements.items()}
 + 
-++    s->out.len = 0;
++     @staticmethod
++     def _repr_unicode(creator, value):  # noqa: ARG004
++diff --git a/tests/unit/activation/test_cve_2026_113776.py b/tests/unit/activation/test_cve_2026_113776.py
++new file mode 100644
++index 0000000000000000000000000000000000000000..3a767dd44a92882b9705d7ff847928dc1e7a2b78
++--- /dev/null
+++++ b/tests/unit/activation/test_cve_2026_113776.py
++@@ -0,0 +1,73 @@
+++"""Keep placeholder names in activation values as literal data."""
+++from __future__ import annotations
 ++
-+     s->connection->read->handler = ngx_mail_auth_http_block_read;
-+     ctx->peer.connection->read->handler = ngx_mail_auth_http_read_handler;
-+     ctx->peer.connection->write->handler = ngx_mail_auth_http_write_handler;
-+-- 
-+2.43.0
-+
-diff --git a/meta-webserver/recipes-httpd/nginx/nginx-1.26.3/CVE-2026-113425-03.patch b/meta-webserver/recipes-httpd/nginx/nginx-1.26.3/CVE-2026-113425-03.patch
-new file mode 100644
-index 0000000000..e9b67e1559
---- /dev/null
-+++ b/meta-webserver/recipes-httpd/nginx/nginx-1.26.3/CVE-2026-113425-03.patch
-@@ -0,0 +1,87 @@
-+From 4c09e093caaabc001fa129c52caeec0d48364499 Mon Sep 17 00:00:00 2001
-+From: Vadim Zhestikov <v.zhestikov@f5.com>
-+Date: Wed, 4 Nov 2026 09:54:11 -0800
-+Subject: [PATCH 08/10] Mail: blocked client writes while waiting for auth_http
-+ response
-+
-+While waiting for the auth_http response, the client read handler is
-+ngx_mail_auth_http_block_read(), but the write handler was left as
-+ngx_mail_send(), so a client write event during the wait was handled
-+by a function which can close the client connection, destroying the
-+session while the auth_http connection still referenced it.
-+
-+The client write handler is now blocked while waiting for the auth_http
-+response, with proper cleanup on errors, and restored right after the
-+auth_http connection is closed.
-+
-+(cherry picked from commit e2d23d45fa93ed236a9cdedcb54271e0a064c4f3)
-+CVE:CVE-2026-113425
-+Upstream-Status: Backport [https://github.com/nginx/nginx/commit/e2d23d45fa93ed236a9cdedcb54271e0a064c4f3]
-+
-+Signed-off-by: Patrick Vogelaar <patrick.vogelaar@belden.com>
-+---
-+ src/mail/ngx_mail_auth_http_module.c | 27 +++++++++++++++++++++++++++
-+ 1 file changed, 27 insertions(+)
-+
-+diff --git a/src/mail/ngx_mail_auth_http_module.c b/src/mail/ngx_mail_auth_http_module.c
-+index 0e8b5209c..58f7ee61b 100644
-+--- a/src/mail/ngx_mail_auth_http_module.c
-++++ b/src/mail/ngx_mail_auth_http_module.c
-+@@ -70,6 +70,7 @@ static void ngx_mail_auth_sleep_handler(ngx_event_t *rev);
-+ static ngx_int_t ngx_mail_auth_http_parse_header_line(ngx_mail_session_t *s,
-+     ngx_mail_auth_http_ctx_t *ctx);
-+ static void ngx_mail_auth_http_block_read(ngx_event_t *rev);
-++static void ngx_mail_auth_http_block_write(ngx_event_t *wev);
-+ static void ngx_mail_auth_http_dummy_handler(ngx_event_t *ev);
-+ static ngx_buf_t *ngx_mail_auth_http_create_request(ngx_mail_session_t *s,
-+     ngx_pool_t *pool, ngx_mail_auth_http_conf_t *ahcf);
-+@@ -219,6 +220,7 @@ ngx_mail_auth_http_init(ngx_mail_session_t *s)
-+     s->out.len = 0;
-+ 
-+     s->connection->read->handler = ngx_mail_auth_http_block_read;
-++    s->connection->write->handler = ngx_mail_auth_http_block_write;
-+     ctx->peer.connection->read->handler = ngx_mail_auth_http_read_handler;
-+     ctx->peer.connection->write->handler = ngx_mail_auth_http_write_handler;
-+ 
-+@@ -690,6 +692,8 @@ ngx_mail_auth_http_process_headers(ngx_mail_session_t *s,
-+ 
-+             ngx_close_connection(ctx->peer.connection);
-+ 
-++            s->connection->write->handler = ngx_mail_send;
+++import json
+++import os
+++from pathlib import Path
+++import shutil
+++import subprocess
+++import sys
+++import tempfile
+++from types import SimpleNamespace
+++import unittest
+++from unittest.mock import patch
 ++
-+             if (ctx->err.len) {
-+ 
-+                 ngx_log_error(NGX_LOG_INFO, s->connection->log, 0,
-+@@ -1122,6 +1126,29 @@ ngx_mail_auth_http_block_read(ngx_event_t *rev)
-+ }
-+ 
-+ 
-++static void
-++ngx_mail_auth_http_block_write(ngx_event_t *wev)
-++{
-++    ngx_connection_t          *c;
-++    ngx_mail_session_t        *s;
-++    ngx_mail_auth_http_ctx_t  *ctx;
-++
-++    ngx_log_debug0(NGX_LOG_DEBUG_MAIL, wev->log, 0,
-++                   "mail auth http block write");
-++
-++    if (ngx_handle_write_event(wev, 0) != NGX_OK) {
-++        c = wev->data;
-++        s = c->data;
-++
-++        ctx = ngx_mail_get_module_ctx(s, ngx_mail_auth_http_module);
-++
-++        ngx_close_connection(ctx->peer.connection);
-++        ngx_destroy_pool(ctx->pool);
-++        ngx_mail_session_internal_server_error(s);
-++    }
-++}
+++from virtualenv.activation import BashActivator, PythonActivator
+++from virtualenv.run import cli_run
 ++
 ++
-+ static void
-+ ngx_mail_auth_http_dummy_handler(ngx_event_t *ev)
-+ {
-+-- 
-+2.43.0
-+
-diff --git a/meta-webserver/recipes-httpd/nginx/nginx-1.26.3/CVE-2026-113425-04.patch b/meta-webserver/recipes-httpd/nginx/nginx-1.26.3/CVE-2026-113425-04.patch
-new file mode 100644
-index 0000000000..b38c34564a
---- /dev/null
-+++ b/meta-webserver/recipes-httpd/nginx/nginx-1.26.3/CVE-2026-113425-04.patch
-@@ -0,0 +1,72 @@
-+From 24408a432f0110f3baf78e306198ebe35d61d82f Mon Sep 17 00:00:00 2001
-+From: Vadim Zhestikov <v.zhestikov@f5.com>
-+Date: Wed, 4 Nov 2026 09:54:11 -0800
-+Subject: [PATCH 09/10] Mail: blocked client writes while connecting to
-+ upstream
-+
-+While connecting to the upstream and reading its greeting, the client
-+read handler is ngx_mail_proxy_block_read(), but the client write
-+handler was left as it was.  If ngx_handle_write_event() failed in it,
-+the client connection was closed without the upstream one, and the next
-+upstream event accessed the freed session.
-+
-+The client write handler is now ngx_mail_proxy_block_write(), which
-+closes both connections on errors the same way
-+ngx_mail_proxy_block_read() does.
-+
-+(cherry picked from commit 5deda780a9d5d1bcd5c6731d3118fa090ae900cc)
-+CVE: CVE-2026-113425
-+Upstream-Status: Backport [https://github.com/nginx/nginx/commit/5deda780a9d5d1bcd5c6731d3118fa090ae900cc]
-+
-+Signed-off-by: Patrick Vogelaar <patrick.vogelaar@belden.com>
-+---
-+ src/mail/ngx_mail_proxy_module.c | 19 +++++++++++++++++++
-+ 1 file changed, 19 insertions(+)
-+
-+diff --git a/src/mail/ngx_mail_proxy_module.c b/src/mail/ngx_mail_proxy_module.c
-+index efed9ab3e..de09f2ad3 100644
-+--- a/src/mail/ngx_mail_proxy_module.c
-++++ b/src/mail/ngx_mail_proxy_module.c
-+@@ -24,6 +24,7 @@ typedef struct {
-+ 
-+ 
-+ static void ngx_mail_proxy_block_read(ngx_event_t *rev);
-++static void ngx_mail_proxy_block_write(ngx_event_t *wev);
-+ static void ngx_mail_proxy_pop3_handler(ngx_event_t *rev);
-+ static void ngx_mail_proxy_imap_handler(ngx_event_t *rev);
-+ static void ngx_mail_proxy_smtp_handler(ngx_event_t *rev);
-+@@ -165,6 +166,7 @@ ngx_mail_proxy_init(ngx_mail_session_t *s, ngx_addr_t *peer)
-+     p->upstream.connection->pool = s->connection->pool;
-+ 
-+     s->connection->read->handler = ngx_mail_proxy_block_read;
-++    s->connection->write->handler = ngx_mail_proxy_block_write;
-+     p->upstream.connection->write->handler = ngx_mail_proxy_write_handler;
-+ 
-+     pcf = ngx_mail_get_module_srv_conf(s, ngx_mail_proxy_module);
-+@@ -223,6 +225,23 @@ ngx_mail_proxy_block_read(ngx_event_t *rev)
-+ }
-+ 
-+ 
-++static void
-++ngx_mail_proxy_block_write(ngx_event_t *wev)
-++{
-++    ngx_connection_t    *c;
-++    ngx_mail_session_t  *s;
-++
-++    ngx_log_debug0(NGX_LOG_DEBUG_MAIL, wev->log, 0, "mail proxy block write");
-++
-++    if (ngx_handle_write_event(wev, 0) != NGX_OK) {
-++        c = wev->data;
-++        s = c->data;
-++
-++        ngx_mail_proxy_close_session(s);
-++    }
-++}
-++
-++
-+ static void
-+ ngx_mail_proxy_pop3_handler(ngx_event_t *rev)
-+ {
-+-- 
-+2.43.0
-+
-diff --git a/meta-webserver/recipes-httpd/nginx/nginx-1.26.3/CVE-2026-113425-05.patch b/meta-webserver/recipes-httpd/nginx/nginx-1.26.3/CVE-2026-113425-05.patch
-new file mode 100644
-index 0000000000..5636eabdc8
---- /dev/null
-+++ b/meta-webserver/recipes-httpd/nginx/nginx-1.26.3/CVE-2026-113425-05.patch
-@@ -0,0 +1,116 @@
-+From 092dab10a5ba4d5d8e951a6284fc493915ef5e34 Mon Sep 17 00:00:00 2001
-+From: Vadim Zhestikov <v.zhestikov@f5.com>
-+Date: Wed, 4 Nov 2026 09:54:11 -0800
-+Subject: [PATCH 10/10] Mail: blocked client writes while resolving SMTP client
-+
-+While the SMTP client address and name are being resolved, the client
-+read handler is ngx_mail_smtp_block_reading(), but the client write
-+handler was ngx_mail_send().  If ngx_handle_write_event() failed in it,
-+the client connection was closed, but the resolver context was not
-+cancelled, and the resolver handler accessed the freed session when the
-+resolving completed or timed out.
-+
-+The client write handler is now ngx_mail_smtp_block_writing(), which
-+cancels the resolver context on errors the same way
-+ngx_mail_smtp_block_reading() does.  ngx_mail_send() is restored in
-+ngx_mail_smtp_greeting(), which is also needed with smtp_greeting_delay,
-+where the error is sent without s->quit, and in
-+ngx_mail_smtp_resolve_addr_handler() before the posted name resolving,
-+where s->resolver_ctx still points to a context which is already done.
-+
-+(cherry picked from commit 4c5ace9f1d5419334a2e6772a0885ee7ed3d6e91)
-+CVE: CVE-2026-113425
-+Upstream-Status: Backport [https://github.com/nginx/nginx/commit/4c5ace9f1d5419334a2e6772a0885ee7ed3d6e91]
-+
-+Signed-off-by: Patrick Vogelaar <patrick.vogelaar@belden.com>
-+---
-+ src/mail/ngx_mail_smtp_handler.c | 38 ++++++++++++++++++++++++++++++++
-+ 1 file changed, 38 insertions(+)
-+
-+diff --git a/src/mail/ngx_mail_smtp_handler.c b/src/mail/ngx_mail_smtp_handler.c
-+index e68ceedfd..d5b3408fd 100644
-+--- a/src/mail/ngx_mail_smtp_handler.c
-++++ b/src/mail/ngx_mail_smtp_handler.c
-+@@ -16,6 +16,7 @@ static void ngx_mail_smtp_resolve_addr_handler(ngx_resolver_ctx_t *ctx);
-+ static void ngx_mail_smtp_resolve_name(ngx_event_t *rev);
-+ static void ngx_mail_smtp_resolve_name_handler(ngx_resolver_ctx_t *ctx);
-+ static void ngx_mail_smtp_block_reading(ngx_event_t *rev);
-++static void ngx_mail_smtp_block_writing(ngx_event_t *wev);
-+ static void ngx_mail_smtp_greeting(ngx_mail_session_t *s, ngx_connection_t *c);
-+ static void ngx_mail_smtp_invalid_pipelining(ngx_event_t *rev);
-+ static ngx_int_t ngx_mail_smtp_create_buffer(ngx_mail_session_t *s,
-+@@ -91,6 +92,7 @@ ngx_mail_smtp_init_session(ngx_mail_session_t *s, ngx_connection_t *c)
-+ 
-+     s->resolver_ctx = ctx;
-+     c->read->handler = ngx_mail_smtp_block_reading;
-++    c->write->handler = ngx_mail_smtp_block_writing;
-+ 
-+     if (ngx_resolve_addr(ctx) != NGX_OK) {
-+         ngx_mail_close_connection(c);
-+@@ -144,6 +146,7 @@ ngx_mail_smtp_resolve_addr_handler(ngx_resolver_ctx_t *ctx)
-+                    "address resolved: %V", &s->host);
-+ 
-+     c->read->handler = ngx_mail_smtp_resolve_name;
-++    c->write->handler = ngx_mail_send;
-+ 
-+     ngx_post_event(c->read, &ngx_posted_events);
-+ }
-+@@ -175,6 +178,7 @@ ngx_mail_smtp_resolve_name(ngx_event_t *rev)
-+ 
-+     s->resolver_ctx = ctx;
-+     c->read->handler = ngx_mail_smtp_block_reading;
-++    c->write->handler = ngx_mail_smtp_block_writing;
-+ 
-+     if (ngx_resolve_name(ctx) != NGX_OK) {
-+         ngx_mail_close_connection(c);
-+@@ -277,6 +281,38 @@ ngx_mail_smtp_block_reading(ngx_event_t *rev)
-+ }
-+ 
-+ 
-++static void
-++ngx_mail_smtp_block_writing(ngx_event_t *wev)
-++{
-++    ngx_connection_t    *c;
-++    ngx_mail_session_t  *s;
-++    ngx_resolver_ctx_t  *ctx;
-++
-++    c = wev->data;
-++    s = c->data;
-++
-++    ngx_log_debug0(NGX_LOG_DEBUG_MAIL, c->log, 0, "smtp writing blocked");
-++
-++    if (ngx_handle_write_event(wev, 0) != NGX_OK) {
-++
-++        if (s->resolver_ctx) {
-++            ctx = s->resolver_ctx;
-++
-++            if (ctx->handler == ngx_mail_smtp_resolve_addr_handler) {
-++                ngx_resolve_addr_done(ctx);
-++
-++            } else if (ctx->handler == ngx_mail_smtp_resolve_name_handler) {
-++                ngx_resolve_name_done(ctx);
-++            }
-++
-++            s->resolver_ctx = NULL;
+++class TemplateSubstitutionTests(unittest.TestCase):
+++    def test_replacement_values_are_not_rescanned(self):
+++        values = {
+++            "__VIRTUAL_ENV__": "/parent__VIRTUAL_NAME__/owner's env",
+++            "__VIRTUAL_NAME__": "plain",
+++            "__VIRTUAL_PROMPT__": "show __VIRTUAL_ENV__ literally",
 ++        }
+++        template = "\n".join(values).encode()
+++        for activator_type in (BashActivator, PythonActivator):
+++            activator = activator_type(SimpleNamespace(prompt=None))
+++            expected = "\n".join(activator.quote(value) for value in values.values())
+++            for order in (list(values), list(reversed(values))):
+++                with self.subTest(activator=activator_type.__name__, order=order), patch(
+++                    "virtualenv.activation.via_template.read_binary", return_value=template
+++                ):
+++                    result = activator.instantiate_template({key: values[key] for key in order}, "template", None)
+++                    self.assertEqual(result, expected)
 ++
-++        ngx_mail_close_connection(c);
-++    }
-++}
+++    def test_longest_token_is_matched_first(self):
+++        activator = BashActivator(SimpleNamespace(prompt=None))
+++        with patch("virtualenv.activation.via_template.read_binary", return_value=b"__TOKEN__LONG __UNKNOWN__"):
+++            result = activator.instantiate_template({"__TOKEN__": "short", "__TOKEN__LONG": "long"}, "template", None)
+++        self.assertEqual(result, "long __UNKNOWN__")
+++
+++    def test_activation_preserves_placeholder_names_in_path_and_prompt(self):
+++        bash = shutil.which("bash")
+++        if bash is None:
+++            self.skipTest("bash is not installed")
+++        with tempfile.TemporaryDirectory() as directory:
+++            dest = Path(directory) / "parent__VIRTUAL_NAME__" / "owner's env"
+++            prompt = "plain __VIRTUAL_ENV__ and __VIRTUAL_NAME__"
+++            cli_run([
+++                "--without-pip", "--no-periodic-update", "--activators", "bash,python",
+++                "--prompt", prompt, str(dest),
+++            ])
+++            result = subprocess.run(
+++                [bash, "--noprofile", "--norc", "-c",
+++                 '. "$1"; printf "%s\\n%s\\n" "$VIRTUAL_ENV" "$VIRTUAL_ENV_PROMPT"',
+++                 "activation-check", str(dest / "bin/activate")],
+++                check=True, capture_output=True, text=True,
+++            )
+++            self.assertEqual(result.stdout.splitlines(), [str(dest), prompt])
+++            code = (
+++                "import json, os, runpy, sys; runpy.run_path(sys.argv[1]); "
+++                "print(json.dumps([os.environ['VIRTUAL_ENV'], os.environ['VIRTUAL_ENV_PROMPT']]))"
+++            )
+++            result = subprocess.run(
+++                [sys.executable, "-c", code, str(dest / "bin/activate_this.py")],
+++                check=True, capture_output=True, text=True, env=os.environ.copy(),
+++            )
+++            self.assertEqual(json.loads(result.stdout), [str(dest), prompt])
 ++
 ++
-+ static void
-+ ngx_mail_smtp_greeting(ngx_mail_session_t *s, ngx_connection_t *c)
-+ {
-+@@ -301,6 +337,8 @@ ngx_mail_smtp_greeting(ngx_mail_session_t *s, ngx_connection_t *c)
-+         ngx_post_event(c->read, &ngx_posted_events);
-+     }
-+ 
-++    c->write->handler = ngx_mail_send;
-++
-+     if (sscf->greeting_delay) {
-+          c->read->handler = ngx_mail_smtp_invalid_pipelining;
-+          return;
-+-- 
-+2.43.0
-+
-diff --git a/meta-webserver/recipes-httpd/nginx/nginx_1.26.3.bb b/meta-webserver/recipes-httpd/nginx/nginx_1.26.3.bb
-index 06c33d7846..856bc87492 100644
---- a/meta-webserver/recipes-httpd/nginx/nginx_1.26.3.bb
-+++ b/meta-webserver/recipes-httpd/nginx/nginx_1.26.3.bb
-@@ -13,6 +13,11 @@ SRC_URI:append = " \
-                   file://CVE-2026-123634-02.patch \
-                   file://CVE-2026-123633.patch \
-                   file://CVE-2026-121810.patch \
-+                  file://CVE-2026-113425-01.patch \
-+                  file://CVE-2026-113425-02.patch \
-+                  file://CVE-2026-113425-03.patch \
-+                  file://CVE-2026-113425-04.patch \
-+                  file://CVE-2026-113425-05.patch \
-                   "
+++if __name__ == "__main__":
+++    unittest.main()
+diff --git a/meta-python/recipes-devtools/python/python3-virtualenv_20.25.3.bb b/meta-python/recipes-devtools/python/python3-virtualenv_20.25.3.bb
+index c9aad9fc3c..c13c1b96ba 100644
+--- a/meta-python/recipes-devtools/python/python3-virtualenv_20.25.3.bb
++++ b/meta-python/recipes-devtools/python/python3-virtualenv_20.25.3.bb
+@@ -8,6 +8,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=0ce089158cf60a8ab6abb452b6405538"
  
- SRC_URI[sha256sum] = "69ee2b237744036e61d24b836668aad3040dda461fe6f570f1787eab570c75aa"
-
+ SRC_URI += "file://CVE-2026-22702.patch \
+             file://CVE-2024-53899.patch \
++            file://CVE-2026-113776.patch \
+             file://powershell-curly-quotes.patch \
+ "
+ SRC_URI[sha256sum] = "7bb554bbdfeaacc3349fa614ea5bff6ac300fc7c335e9facf3a3bcfc703f45be"
 -- 
-2.43.0
-
+2.35.6
 
