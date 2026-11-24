@@ -1,94 +1,114 @@
-Received: from mail-wr1-f44.google.com (mail-wr1-f44.google.com [209.85.221.44])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.21905.1795538591290234132
+Received: from aer-iport-7.cisco.com (aer-iport-7.cisco.com [173.38.203.69])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.22261.1795539579049891358
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 24 Nov 2026 08:43:11 -0800
+ Tue, 24 Nov 2026 08:59:39 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=LWk4+XK+;
- spf=pass (domain: gmail.com, ip: 209.85.221.44, mailfrom: alex.kiernan@gmail.com)
-Received: by mail-wr1-f44.google.com with SMTP id ffacd0b85a97d-490f38e9688so3372925f8f.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 24 Nov 2026 08:43:11 -0800 (PST)
+ dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=Ra52UnWP;
+ spf=pass (domain: cisco.com, ip: 173.38.203.69, mailfrom: hthakar@cisco.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795538589; x=1796143389; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=w4d+VvCvdqPhhu1ETLdslZK5bOYmGGj4vj+cmASOfrg=;
-        b=LWk4+XK+JPOQMKWg17tGtofDgl0LL9p2MAMBfgEaVWXtVazT0iIi8RcncqSY1LDqUz
-         Ra2zsWpXOmHfyl7J7KDCQhtLWBzRfXOihhS0MSrVlgMJFg1y4eYtROt/KPdjIxAstKMZ
-         s3PTq4PFf8C7wnWjkTz2FelvYlLMReK8HBHDiR+Y8EidEsNgPL17q7/6FTWBPPKIYCVA
-         wJ6k48WOW2uMHGw1xp8Asmac5qyP5O2bPfr5ruTP1oPBcK5Njx5QjBeBgfAnUS/aaX+5
-         k8aTKR8E2hJETpjbFzjEtWtMqGcePhYohN7JgqyypEgx/UFAsCRJkDZMkMxwV5YpUDP9
-         iYFA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795538589; x=1796143389;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=w4d+VvCvdqPhhu1ETLdslZK5bOYmGGj4vj+cmASOfrg=;
-        b=d7+vr8SaibCc0YLlZKDn1xVqMkHCi41znCOZSWUnswFBqUlyV4NzaFzMkvsm7Kc59i
-         RqRw5IAriRLx3XztIKVG+MIYbiIR1yCydnyxtRYKTvwcjEPK/HbiQQ6/mRWYxD/rw5nj
-         sd9C1wMmDmWEsYtUhDaoBB3ADYgljGGGLWKJIY5/MIQYc0nzt6Bvn35Ya1roe0v0Fuu1
-         r/Afge2PKCYFSjc5U+5qpMGRnAGuhspbv0DvVuIwQdt1PKnYI8yUke29zc4I8u4e3g8I
-         N20hxf6k0LQA0u2exePQ8enQ63UiDYHHSC3SWfWqVvpmcHOli/7CJgyI2Eim6QQLcHJI
-         sKPA==
-X-Gm-Message-State: APuU4Z9zqkJ9vzar9goEr8wRLKLyBmQFBu9nbOL7GipzEC+3W7YwzjvV
-	8k+m3++ja0EPw1qQLXQbNIP/yBeGpHO/ZdyZYo5ehODjJeAZ+xwsSWyv8ulz8A==
-X-Gm-Gg: AZFdTZfVuzjT5pA6GVGdipwrFZGAn+Xbus2aQjzDzfpkYl8TgsxH5uzLS4jvlxPnoE7
-	cUaXXYUZbj8Co8Zyi7eMUJNaX5TAWX6ZlLudiYvDaI6W8jchvZGhSTq+J5t8fzSrcp0x+kCtCBh
-	7WnRubRoHpStBSgo9AuNs1ZTLQMYtwRS+FWJkI8icqK1EUkZnL4Vki5EzjUrOOFV1rHLEzyYsHF
-	s8xDnugQDot0z3+f4DIbqOdf5fvWpUSEX7HgocPC9CE0T30EIcibmHKKAYiztJ2+f8jBxoob3IW
-	7hUMXbVQ0hWVjrvWCW+TfwHeFwVSasnm4drAoDXKUqwq9r9n03mG64FJeSLBhAOfv8Ehpo1CVM9
-	hcz8gI6rIL4m3xhLr7zd0JpOJmchBXyHafi/Hk2u8nIcHWfdQtXht7l9jvvpaYBihXe86oMtyNQ
-	gYv7bl+Ac6g5LSOCaCAV8zSaUeqLaHexu6ARYuPYUBU/Y2p1WWRfdzQ4twtItCWCpwe1bEn3nfq
-	rx2HCLZXCMG+8wGVbDY1Gm1W4Eb6hDBkzdGLQ3Z1aSOgFcu71DznT5Zn8Gx9neExNxGx0TIoeAt
-	b7Lbr1ggvmnJ0/8ReVnijq3NP3R4mk3UB2/TZtc65/2mOSsbdPBet0yq+XrxG6hEFOqbFOrHC5m
-	fgBPjwcVAfn5eVg==
-X-Received: by 2002:a5d:45c9:0:b0:49d:f98f:4666 with SMTP id ffacd0b85a97d-4abb0f3c85dmr23217339f8f.11.1795538589374;
-        Tue, 24 Nov 2026 08:43:09 -0800 (PST)
-Return-Path: <alex.kiernan@gmail.com>
-Received: from localhost.localdomain (cust18-dsl93-89-130.idnet.net. [93.89.130.18])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4ab6a67f281sm27223198f8f.22.2026.11.24.08.43.08
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 24 Nov 2026 08:43:08 -0800 (PST)
-From: Alex Kiernan <alex.kiernan@gmail.com>
+  d=cisco.com; i=@cisco.com; l=1757; q=dns/txt;
+  s=iport01; t=1795539579; x=1796749179;
+  h=from:to:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=J6HBHuHKNmUMGzOdtny3V+a+BtLvY595b1zBC/kNy+Y=;
+  b=Ra52UnWPjGAnCS+YnhP2yWgeNTdfWPy2+e5GalPmEHU7bh+DzWJiRYNh
+   18qEWkCQDl7OFf1wAMVwWNVnUGQVguru+YWXdq8TosLzrMnWx4QKMvRrj
+   rXP17we5cKc0+TzA4+wIC1rrvEXjBy4aOXcBgDfCZgUUabG3u5LKQce+f
+   ixsK5wXPeR+UTphXonAtIY0flJ/0xrKx8vMLV/9moqel6NvMBLRrj1kWv
+   Ba4n7XhbDVnYTs5mmu//SWoukDPvwEm6SNMLEveOGHJNOIrAg0vNtHavM
+   fp0JPKxSVKRlzYFYnUQSAzVl1scPskeeipRh/FMczBld2yqGEVXhZoTyr
+   Q==;
+X-CSE-ConnectionGUID: u7zyJPAPTAOe//cnx75Nbw==
+X-CSE-MsgGUID: cAg1Jdc/SCK/V9vIw5Ie0Q==
+X-IPAS-Result: =?us-ascii?q?A0BCAgCbwAVr/9NK/pBaglmCV3VgQ0mTWgFPgiGeLIF+D?=
+ =?us-ascii?q?wEBAQ89FAQBAZMpAiY0CQ4BAgQDAgMBAQEBAQEBAQEBAQEKAQEFAQEBAgEHB?=
+ =?us-ascii?q?YEOE4ZPDZBACwEYAV1cRIMCAYJ0AxG6dYF5M4EBgykBgVTbMwELFAGBOIVCi?=
+ =?us-ascii?q?CV1AYR+JxsbgXKBFYNqhAqBBoV5BIIiPD4SjmuKHUiBHgNZLAFVEw0KCwcFg?=
+ =?us-ascii?q?WgDNRIqFW4yHYEjOxeBBxsGBYEcgR6BEoEDXYErKF4hgQiBdgKCUYIAAgFJQ?=
+ =?us-ascii?q?Q4HRVMJJUMSRyQiCBIJARMaLAqBGjU8CSY/FQxnCxoFYQgCDQx0ORAwHiQvB?=
+ =?us-ascii?q?RomPhsKgQwnHx4bDgIfEAYWIQsgGA1IESw3FRkEPm4HlBeDGoEOLCCCDBGTa?=
+ =?us-ascii?q?pF6oREKKIN5jCSVOhozqnKZCI4KllGEaoFoPIFZcBWDIglKGQ+XN8lIJjICA?=
+ =?us-ascii?q?ToBAQcCBw4DC4FokACBfgEB?=
+IronPort-Data: A9a23:l3kJtahATFoJhpuHTh8giU4sX161NBEKZh0ujC45NGQN5FlHY01je
+ htvWW6DbvmKajGhLYsnYd7n/BlXupDXndIwHFA6rHg1FC1jpJueD7x1DKtf0wB+jyHnZBg6h
+ ynLQoCYdKjYdleF+FHwdOCn/SMhvU2xbuKUIPbePSxsThNTRi4kiBZy88Y0mYcAbeKRW2thg
+ vus5ZeAULOZ82QsaDxNsvjf8EkHUMna4Vv0gHRvPZing3eG/5UlJMp3Db28KXL+Xr5VEoaSL
+ 87fzKu093/u5BwkDNWoiN7TKiXmlZaLYGBiIlIPM0STqkAqSh4ai87XB9JAAatjsAhlqvgqo
+ Dl7WTNcfi9yVkHEsLx1vxC1iEiSN4UekFPMCSDXXcB+UyQqflO0q8iCAn3aMqUFpfRmI1lnz
+ cAxDz1KKRuFl73r5rikH7wEasQLdKEHPasWt2slyXTSCuwrBMmbBa7L/tRfmjw3g6iiH96HO
+ 5ZfM2czKkucJUcWYz/7C7pm9AusrnnjczRboUi9rqss6G+Vxwt0uFToGISOJ4bRGZwF9qqej
+ mnv8D3bDhpdD/e8jgTU7FOz287CxRquDer+E5X9rJaGmma7wXQeDhATX1a3rfS1z0KzRd9bA
+ 0gV4TY1668q+UqmS9PwUxG1rDiDpBF0ZjZLO+Q38kSJj6HT+QvcXzBCRT9aY9tgv8gzLdA36
+ mK0cxrSLWQHmNWopbi1r994cRva1fApEFI/
+IronPort-HdrOrdr: A9a23:143TH6p1K6sahbBCa0GaQucaV5obeYIsimQD101hICG9Ffbo9f
+ xG88506faZslsssRIb6LO90de7IE80nKQdieJ6AV7IZmbbUQWTQL2KlbGD/xTQXwvj6+Vaya
+ BsN4J6CNH2EBxGqPyS2njcLz7lq+P3l5xBQozlvhNQcT0=
+X-Talos-CUID: 9a23:PViHMGBXVxfqcVn6EzQ45l82IukdTlT6wTCXKEmoVjtPQqLAHA==
+X-Talos-MUID: =?us-ascii?q?9a23=3AwRDTpg1dX/dc4GJUj2BBvqG7UjUj6I2hUWIBmtI?=
+ =?us-ascii?q?9kOrDC31uGijArTnve9py?=
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-AV: E=Sophos;i="6.27,231,1787011200"; 
+   d="scan'208";a="63523418"
+Received: from aer-l-core-10.cisco.com ([144.254.74.211])
+  by aer-iport-7.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 24 Nov 2026 16:59:36 +0000
+Received: from sjc-ads-5245.cisco.com (sjc-ads-5245.cisco.com [10.28.23.9])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by aer-l-core-10.cisco.com (Postfix) with ESMTPS id 73A9418000B7F
+	for <openembedded-devel@lists.openembedded.org>; Tue, 24 Nov 2026 16:59:36 +0000 (GMT)
+Received: by sjc-ads-5245.cisco.com (Postfix, from userid 1887505)
+	id 25F28CC1611; Tue, 24 Nov 2026 08:59:35 -0800 (PST)
+From: "Hetvi Thakar -X (hthakar - E INFOCHIPS PRIVATE LIMITED at Cisco)" <hthakar@cisco.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Alex Kiernan <alex.kiernan@gmail.com>
-Subject: [meta-oe][PATCH 2/2] neatvnc: drop hogweed from the nettle PACKAGECONFIG
-Date: Tue, 24 Nov 2026 16:42:44 +0000
-Message-ID: <20261124164242.60688-4-alex.kiernan@gmail.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20261124164242.60688-2-alex.kiernan@gmail.com>
-References: <20261124164242.60688-2-alex.kiernan@gmail.com>
+Subject: [meta-networking][wrynose][PATCH] wireshark: upgrade 4.6.9 -> 4.6.10
+Date: Tue, 24 Nov 2026 08:59:35 -0800
+Message-Id: <20261124165935.1874673-1-hthakar@cisco.com>
+X-Mailer: git-send-email 2.35.6
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-Outbound-Client-TLS: ANONYMOUS;sjc-ads-5245.cisco.com [10.28.23.9];TLSv1.3;TLS_AES_256_GCM_SHA384;256
+X-Outbound-SMTP-Client: 10.28.23.9, sjc-ads-5245.cisco.com
+X-Outbound-Node: aer-l-core-10.cisco.com
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Tue, 24 Nov 2026 16:43:21 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132955
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Tue, 24 Nov 2026 16:59:41 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132956
 Content-Type: text/plain; charset="utf-8"
 
-hogweed is a library the nettle recipe builds (libhogweed), not a recipe
-of its own, so enabling the nettle PACKAGECONFIG failed with "Nothing
-PROVIDES 'hogweed'". nettle already provides it. With the nettle 4 port
-backported, neatvnc's nettle backend now builds and links against
-libnettle and libhogweed.
+From: Khem Raj <khem.raj@oss.qualcomm.com>
 
-Fixes: cd6cafd1040d ("neatvnc: add nettle PACKAGECONFIG, disabled by default")
-AI-Generated: Claude Opus 5.5 (Claude Code)
-Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
+Security fix release: fixes 39 vulnerabilities (wnpa-sec-2026-111 to
+wnpa-sec-2026-149, CVE-2026-130434..CVE-2026-130469), mostly crashes,
+infinite loops and memory leaks in many protocol dissectors (RTSE,
+NBAP, Kafka, TLS, SDP, PROFINET, ...) and file parsers (ERF, Ascend,
+Android Logcat, K12xx), plus iLBC/AMR codec crashes. Also fixes the
+LoRaWAN decryption ZDI-CAN-32851 issue and assorted dissector bugs.
+
+AI-Generated: Uses Claude Code
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+(cherry picked from commit 628b7976f16720056f7ca03333ef4bebdf2f81de)
+Signed-off-by: Hetvi Thakar <hthakar@cisco.com>
 ---
- meta-oe/recipes-graphics/neatvnc/neatvnc_1.0.4.bb | 2 +-
+ .../wireshark/{wireshark_4.6.9.bb => wireshark_4.6.10.bb}       | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-networking/recipes-support/wireshark/{wireshark_4.6.9.bb => wireshark_4.6.10.bb} (97%)
 
-diff --git a/meta-oe/recipes-graphics/neatvnc/neatvnc_1.0.4.bb b/meta-oe/recipes-graphics/neatvnc/neatvnc_1.0.4.bb
-index c341b21a6405..470a80f1152a 100644
---- a/meta-oe/recipes-graphics/neatvnc/neatvnc_1.0.4.bb
-+++ b/meta-oe/recipes-graphics/neatvnc/neatvnc_1.0.4.bb
-@@ -18,7 +18,7 @@ DEPENDS = "libdrm pixman aml zlib"
+diff --git a/meta-networking/recipes-support/wireshark/wireshark_4.6.9.bb b/meta-networking/recipes-support/wireshark/wireshark_4.6.10.bb
+similarity index 97%
+rename from meta-networking/recipes-support/wireshark/wireshark_4.6.9.bb
+rename to meta-networking/recipes-support/wireshark/wireshark_4.6.10.bb
+index 1a10eb08e8..99ab82a7af 100644
+--- a/meta-networking/recipes-support/wireshark/wireshark_4.6.9.bb
++++ b/meta-networking/recipes-support/wireshark/wireshark_4.6.10.bb
+@@ -31,7 +31,7 @@ SRC_URI:append:class-native = " file://0001-don-t-look-for-iconv.h-for-native-bu
  
- PACKAGECONFIG ??= ""
- PACKAGECONFIG[tls] = "-Dtls=enabled,-Dtls=disabled,gnutls"
--PACKAGECONFIG[nettle] = "-Dnettle=enabled,-Dnettle=disabled,nettle hogweed gmp"
-+PACKAGECONFIG[nettle] = "-Dnettle=enabled,-Dnettle=disabled,nettle gmp"
- PACKAGECONFIG[jpeg] = "-Djpeg=enabled,-Djpeg=disabled,libjpeg-turbo"
- PACKAGECONFIG[examples] = "-Dexamples=true,-Dexamples=false,libpng"
- PACKAGECONFIG[benchmarks] = "-Dbenchmarks=true,-Dbenchmarks=false,libpng"
+ UPSTREAM_CHECK_URI = "https://1.as.dl.wireshark.org/src/all-versions"
+ 
+-SRC_URI[sha256sum] = "d062d416a1ab3a49975aafe3a671c882dde0562ccd71b078808ceb59d465fc0f"
++SRC_URI[sha256sum] = "268f41bdf8acee561b670217cf6ea74cf9e779477543e59f92f1cd00294a03dd"
+ 
+ PE = "1"
+ 
+-- 
+2.35.6
+
