@@ -1,79 +1,79 @@
-Received: from aer-iport-5.cisco.com (aer-iport-5.cisco.com [173.38.203.67])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.14659.1795513233513539187
+Received: from aer-iport-2.cisco.com (aer-iport-2.cisco.com [173.38.203.52])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.14660.1795513233790950911
  for <openembedded-devel@lists.openembedded.org>;
  Tue, 24 Nov 2026 01:40:34 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=hdZTc9Sx;
- spf=pass (domain: cisco.com, ip: 173.38.203.67, mailfrom: devanshp@cisco.com)
+ dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=h6ClHnQ/;
+ spf=pass (domain: cisco.com, ip: 173.38.203.52, mailfrom: devanshp@cisco.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=cisco.com; i=@cisco.com; l=3683; q=dns/txt;
-  s=iport01; t=1795513233; x=1796722833;
+  d=cisco.com; i=@cisco.com; l=4163; q=dns/txt;
+  s=iport01; t=1795513234; x=1796722834;
   h=from:to:subject:date:message-id:mime-version:
    content-transfer-encoding;
-  bh=q6HT1z70uZiihphmCrQz0DMxnYJ+DxKSpwHVycnkVyo=;
-  b=hdZTc9SxCaLLY6pwx2wwLlwD3958Azxr1HWfyThLz1Js3gbqO64+y03z
-   eCtiv/ChyI4Xwk1+jf4yeVvmoc0+ufgEPy3cO+K4yAAlIZxJDte/qLCwM
-   zRV4oVMdnnqh/d6JnsB8l3TP5YtMlXMlipGZFhcBF/6TYwu0gpQKWwGH5
-   Dy8+IpLzUAaiOEtsFGgTywP0rQ0oZ/aigqYMWKLAGDuUdDCpjgY+wmnwl
-   THFkNNJuFfKvZrbRGB8Ywg/sk03razSv6h9CF+0h6JPWTG6fIjidp6TRv
-   iXfxrxsN4aYX0VQgLlBirApXIAcaa434Q5n6nScOsQUymfa+8HfyHULf9
-   A==;
-X-CSE-ConnectionGUID: 3sUetO7IR26GkMuizuHTtw==
-X-CSE-MsgGUID: 72ElGmq/Qai7/6rNfjTzTg==
-X-IPAS-Result: =?us-ascii?q?A0DJAgC4WQVr/9VK/pBaglmCV3VgHSZJlCqCIYEWilOSQ?=
+  bh=rVhhN9uwPYVGPmUedwq9yY/MKVwmq1Jf7sOLBF2fUKM=;
+  b=h6ClHnQ/blBDy5Ldt//dorNBuC2S73QzmrCm87eJVXdDwhdvl+mP51tn
+   eBLuMssRghZkOAuSwMPRuzXudCsaEBUICG9US+787aom39SZKmAf1qvh1
+   ypow29FNTNNel+ZpgXKeTVA8lppknaVshjNx2oAPWthpuI2Ha4cfq/qqV
+   VB1uvFbOyc92AWh/C+ijubAZ35fzzgj92DsjvvPvxCalufxsmNsq2ED/S
+   Wbiv6N9uU3jqqHKNkxFm6InB+imO8sjHsdDkd1UgRzPB3b8Sc6h0QYtds
+   mrGcXealklySPs6GvlqMLKCLDSDXDf4gPceZaFQvF1eKvuECREEM3vW/a
+   Q==;
+X-CSE-ConnectionGUID: 1WjpWiPVQd+/phAc6xtTog==
+X-CSE-MsgGUID: UTB6QStLR/2MV5JuZCCvhw==
+X-IPAS-Result: =?us-ascii?q?A0DJAgBeWgVr/9RK/pBaglmCV3VgHSZJlCqCIYEWilOSQ?=
  =?us-ascii?q?4F+DwEBAQ9EDQQBAZMpAiY0CQ4BAgQDAgMBAQEBAQEBAQEBAQEKAQEFAQEBA?=
  =?us-ascii?q?gEHBYEOE4ZPDZASATgBGAFZAwECTwsjIYMCAYI6AzcDEbpmgiyBAYMpAYFU2?=
- =?us-ascii?q?EwNgloBCxQBgTiFQoMAhSRdGYR9JxsbgXKBFYJ0doEFgRpCAogmBIIigQyBV?=
- =?us-ascii?q?B6MeQKBT4hJSIEeA1ksAVUTDQoLBwWBaAM1EioVbjIdgSM7F4EHGwYFgRyBH?=
- =?us-ascii?q?oESgQNdgSsoXiGBCIF2AoJRggACAUlBDgdFUwklQxJHJCIIEgkBExosCoEaN?=
- =?us-ascii?q?TwJJj8VDGcLGgVhCAINDHQ5EDAeJC8FGiY+GwqBDCcfHhsOAh8QBhYhCxsYD?=
- =?us-ascii?q?UgRLDcVGQQ+bgeUFIMaewkKAQckgRE8plSgIHEKKIN5jCSPPoV8GjOEBIFXk?=
- =?us-ascii?q?kOSVIcVkXOLN4JThAqSR4RqgWg8gVlwFYMiCUoZD44tAQsLg2DOWyYyAgkzA?=
- =?us-ascii?q?QcCBw8CgXORfgEB?=
-IronPort-Data: A9a23:ts646KJ10Jcfwk9GFE+RhpQlxSXFcZb7ZxGr2PjKsXjdYENS1DUEm
- 2tKXjuCOKvbZWCmfowkbtzl8E8AsMDWx4dhHQEd+CA2RRqmiyZq6fd1j6vUF3nPRiEWZBs/t
- 63yUvGZcoZpCCea9k3wWlTYhSEU/bmSQbbhA/LzNCl0RAt1IA8skhsLd9QR2uaEuvDnRVnS0
- T/Oi5eHYgH8gmQvajh8B5+r8XuDgtyj4Fv0gXRmDRx7lAe2v2UYCpsZOZawIxPQKqFIHvS3T
- vr017qw+GXU5X8FUrtJRZ6iLyXm6paLVeS/oiI+t5qK23CulQRuukoPD8fwXG8M49m/c3+d/
- /0W3XC4YV9B0qQhA43xWTEAe811FfUuFLMqvRFTvOTLp3AqfUcAzN01F3w7IapH29wtX05N0
- OEZOi0tUgyc0rfeLLKTEoGAh+wqIdOuOMYUvWttiGiDS/0nWpvEBa7N4Le03h9p2pwIR6uCI
- ZVFL2A2N3wsYDUXUrsTIJ4zgu6unXnnWzZZs1mS46Ew5gA/ySQviOGzYICPK7RmQ+0KxGuci
- WffuF3wA05dasa5xzi54E6j07qncSTTHdh6+KeD3vlyjVuew2YeBBEbWR63rOe0jma6WslDM
- AoT4icooK04+UCnQ9W7WAe3yENopTYVVsAVF6gx7xuAj/OOpQ2YHWMDCDVGbbTKqfMLeNDj7
- XfR9/uBONClmOT9pa61nltMkQ6PBA==
-IronPort-HdrOrdr: A9a23:G8qVQaP5LWyBoMBcTvGjsMiBIKoaSvp037BN7TESdfU7SKKlfq
- yV8cjztiWE6wr5JktApTnoAsDpKhnhHPVOjrX5U43PYOCfgguVBbAny5f+yDv9HCC73Otc2a
- B8N5VaMrTLfD1HZQKQ2njeLz7mq+P3lJyVuQ==
-X-Talos-CUID: 9a23:oxn4yW9KTIVpxFp3Bg+VvxUPJ805VSL89i2ODEydFGd7VZ2pVUDFrQ==
-X-Talos-MUID: 9a23:izNO5AnfzluGfzHWO8zwdno9bupszKG3T3kEkMpB5dOiOy5MKQuS2WE=
+ =?us-ascii?q?EwNgloBCxQBgTiFQoMAhSRdGYR9JxsbgXKBFYJ0doEFgRpCAoEnhn8EgiKBD?=
+ =?us-ascii?q?IFUHox5AoFPiElIgR4DWSwBVRMNCgsHBYFoAzUSKhVuMh2BIzsXgQcbBgWBH?=
+ =?us-ascii?q?IEegRKBA12BKyheIYEIgXYCglGCAAIBSUEOB0VTCSVDEkckIggSCQETGiwKg?=
+ =?us-ascii?q?Ro1PAkmPxUMZwsaBWEIAg0MdDkQMB4kLwUaJj4bCoEMJx8eGw4CHxAGFiELG?=
+ =?us-ascii?q?xgNSBEsNxUZBD5uB5QUgxp7CQoBByQgcTwwpiSgIHEKKIN5jCSPPoV8GjOEB?=
+ =?us-ascii?q?IFXkkOSVIcVkXOLN4JThAqSEDeEaoFoPIFZcBWDIglKGQ+OLQELC4NgzlsmM?=
+ =?us-ascii?q?gIJMgEBBwIHDgMLgWiQAIF+AQE?=
+IronPort-Data: A9a23:0wcxDq58y26AwfHBajS1WgxRtG/GchMFZxGqfqrLsTDasY5as4F+v
+ mQYXG+OOP+CamP1c40gPIznoE1U6JGEx9MwSVBk+yA2Zn8b8sCt6fZ1gavT04J+CuWZESqLO
+ u1HMoGowPgcFyGa+1H1dOi78BGQ7InQLpLkEunIJyttcgFtTSYlmHpLlvUw6mJSqYDR7zil5
+ 5Wo/KUzBHf/g2QqaztOt/rawP9SlK2aVA0w7wRWic9j5Dcyp1FNZLoDKKe4KWfPQ4U8NoaSW
+ +bZwbilyXjS9hErB8nNuu6TnpoiG+O60aCm0xK6aoD66vRwjnVaPpUTaJLwXXxqZwChxLid/
+ jniWauYEm/FNoWU8AgUvoIx/ytWZcWq85efSZSzXFD6I0DuKxPRL/tS4E4eZLIa4tl2OV93+
+ b9fMDAkZU6Tm96xz+fuIgVsrpxLwMjDNY4F/3UlxjbDALN/GNbIQr7B4plT2zJYasJmRKqCI
+ ZBENXwwMFKaOkcn1lQ/UPrSmM+ki2f2dSZYsHqepLE85C7YywkZPL3FboCKKoDbFZ49ckCwm
+ 17soV3CHjUgc4a692en70CHrfHPgnauMG4VPPjinhJwu3WU3mEVBRgcWFe3rPX8hkOgVtZ3L
+ 00P5jFoqrA/8kGuRNTxUxC05nmesXYht8F4GuAgrQXIwa3O7kPAXy4PTyVKb5ots8peqSEW6
+ 2JlVujBXVRH2IB5g1rEnltIhVte4RQoEFI=
+IronPort-HdrOrdr: A9a23:++ejzKDEnRu3zDjlHemc55DYdb4zR+YMi2TDsHoBKyC9Hfb3qy
+ nDppkmPHzP+VUssQ8b+OxoUZPoKRi3yXcf2+Ys1NmZMDUOwFHJEKhSqa3/3jbnByryssRZ1a
+ tmbuxCLeeYNykesS4/izPIdOrJB7K8gcSVuds=
+X-Talos-CUID: 9a23:JRaFyW2OEcCe9qavYLEuwrxfQ/8nakLc9EnpLwz/EWZAQ+OFVWOX9/Yx
+X-Talos-MUID: 9a23:GL25sAhNCSehN1JrXPv3p8MpCftCvZ2VFGQ31s8jhZSmKB5bECmdk2Hi
 X-IronPort-Anti-Spam-Filtered: true
 X-IronPort-AV: E=Sophos;i="6.27,230,1787011200"; 
-   d="scan'208";a="60168229"
-Received: from aer-l-core-12.cisco.com ([144.254.74.213])
-  by aer-iport-5.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 24 Nov 2026 09:40:31 +0000
+   d="scan'208";a="62784983"
+Received: from aer-l-core-11.cisco.com ([144.254.74.212])
+  by aer-iport-2.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 24 Nov 2026 09:40:31 +0000
 Received: from sjc-ads-4935.cisco.com (sjc-ads-4935.cisco.com [10.28.39.199])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
 	 client-signature RSA-PSS (4096 bits) client-digest SHA256)
 	(Client CN "ciscoit-managed-infra-smtp-auth.cisco.com", Issuer "Internal Private TLS SubCA" (verified OK))
-	by aer-l-core-12.cisco.com (Postfix) with ESMTPS id ED6D318000AC2
-	for <openembedded-devel@lists.openembedded.org>; Tue, 24 Nov 2026 09:40:30 +0000 (GMT)
+	by aer-l-core-11.cisco.com (Postfix) with ESMTPS id 14F79180001FD
+	for <openembedded-devel@lists.openembedded.org>; Tue, 24 Nov 2026 09:40:31 +0000 (GMT)
 Received: by sjc-ads-4935.cisco.com (Postfix, from userid 1887503)
-	id 9D2C0CC2EF3; Tue, 24 Nov 2026 01:40:29 -0800 (PST)
+	id BD987CC2EFA; Tue, 24 Nov 2026 01:40:29 -0800 (PST)
 From: "Devansh Patel -X (devanshp - E INFOCHIPS PRIVATE LIMITED at Cisco)" <devanshp@cisco.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH] jq: backport CVE-2026-40164 entropy follow-up
+Subject: [meta-oe][blacksail][PATCH] jq: backport CVE-2026-40164 entropy follow-up
 Date: Tue, 24 Nov 2026 01:40:29 -0800
-Message-Id: <20261124094029.1550975-1-devanshp@cisco.com>
+Message-Id: <20261124094029.1551023-1-devanshp@cisco.com>
 X-Mailer: git-send-email 2.35.6
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Outbound-Client-TLS: VERIFIED;sjc-ads-4935.cisco.com [10.28.39.199];TLSv1.3;TLS_AES_256_GCM_SHA384;256;ciscoit-managed-infra-smtp-auth.cisco.com
 X-Outbound-SMTP-Client: 10.28.39.199, sjc-ads-4935.cisco.com
-X-Outbound-Node: aer-l-core-12.cisco.com
+X-Outbound-Node: aer-l-core-11.cisco.com
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Tue, 24 Nov 2026 09:40:43 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132937
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132938
 Content-Type: text/plain; charset="utf-8"
 
 From: Devansh Patel <devanshp@cisco.com>
@@ -81,22 +81,25 @@ From: Devansh Patel <devanshp@cisco.com>
 Backport the upstream follow-up to the CVE-2026-40164 hash seed fix.
 Prefer getentropy() and try /dev/urandom if getentropy() fails.
 
+Remove the redundant fixed-version entry so the patch CVE tag
+reports the fix without a duplicate status warning.
+
 https://github.com/jqlang/jq/commit/32580f5d83f4321588a1ebf8e3893f7fbecefe4e
 
 Signed-off-by: Devansh Patel <devanshp@cisco.com>
 ---
  .../jq/jq/CVE-2026-40164-follow-up.patch      | 61 +++++++++++++++++++
- meta-oe/recipes-devtools/jq/jq_1.8.2.bb       |  1 +
- 2 files changed, 62 insertions(+)
+ meta-oe/recipes-devtools/jq/jq_1.8.2.bb       |  3 +-
+ 2 files changed, 63 insertions(+), 1 deletion(-)
  create mode 100644 meta-oe/recipes-devtools/jq/jq/CVE-2026-40164-follow-up.patch
 
 diff --git a/meta-oe/recipes-devtools/jq/jq/CVE-2026-40164-follow-up.patch b/meta-oe/recipes-devtools/jq/jq/CVE-2026-40164-follow-up.patch
 new file mode 100644
-index 0000000000000000000000000000000000000000..18d5fc1a02d5f4488744e89368c0de43628c99ae
+index 0000000000000000000000000000000000000000..47ba4ddb1cfeadeb11137d76fddbec2c411becde
 --- /dev/null
 +++ b/meta-oe/recipes-devtools/jq/jq/CVE-2026-40164-follow-up.patch
 @@ -0,0 +1,61 @@
-+From 5465d963cefed0f5f58cba2278f697c7ef77548d Mon Sep 17 00:00:00 2001
++From fc85f740b3a926a385683a7ca08b4898858f7940 Mon Sep 17 00:00:00 2001
 +From: Brandon <breakouttradersc@gmail.com>
 +Date: Fri, 25 Sep 2026 03:39:06 -0400
 +Subject: [PATCH] Prefer getentropy() over arc4random() to seed the string hash
@@ -158,7 +161,7 @@ index 0000000000000000000000000000000000000000..18d5fc1a02d5f4488744e89368c0de43
 +2.35.6
 +
 diff --git a/meta-oe/recipes-devtools/jq/jq_1.8.2.bb b/meta-oe/recipes-devtools/jq/jq_1.8.2.bb
-index 0bbe6e009fea16c29c439b1211b07963cbc446fd..4d21670e0f5acc2eb7bddf1951ea22df1ffddea2 100644
+index 9f586eb18d32419f6f71a7e80d63545d1aa8bb9f..1c2e73eed5403720e26f24045f9437cb21daa280 100644
 --- a/meta-oe/recipes-devtools/jq/jq_1.8.2.bb
 +++ b/meta-oe/recipes-devtools/jq/jq_1.8.2.bb
 @@ -12,6 +12,7 @@ SRCREV = "34f7186b86743a083a589741b6cea95293524108"
@@ -169,6 +172,12 @@ index 0bbe6e009fea16c29c439b1211b07963cbc446fd..4d21670e0f5acc2eb7bddf1951ea22df
             "
  
  CVE_PRODUCT = "jq_project:jq jqlang:jq"
+@@ -51,4 +52,4 @@ BBCLASSEXTEND = "native"
+ 
+ CVE_STATUS_GROUPS += "CVE_STATUS_FIXED_ALREADY"
+ CVE_STATUS_FIXED_ALREADY[status] = "fixed-version: The issue is fixed in v1.8.2"
+-CVE_STATUS_FIXED_ALREADY = "CVE-2026-33948 CVE-2026-39979 CVE-2026-40164 CVE-2026-44777"
++CVE_STATUS_FIXED_ALREADY = "CVE-2026-33948 CVE-2026-39979 CVE-2026-44777"
 -- 
 2.35.6
 
