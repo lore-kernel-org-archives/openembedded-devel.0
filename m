@@ -1,3241 +1,800 @@
-Received: from aer-iport-5.cisco.com (aer-iport-5.cisco.com [173.38.203.67])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.36148.1795584013072891348
+Received: from aer-iport-8.cisco.com (aer-iport-8.cisco.com [173.38.203.70])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.36150.1795584016827035741
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 24 Nov 2026 21:20:15 -0800
+ Tue, 24 Nov 2026 21:20:17 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=MHc7FV41;
- spf=pass (domain: cisco.com, ip: 173.38.203.67, mailfrom: asparmar@cisco.com)
+ dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=QSVE1+14;
+ spf=pass (domain: cisco.com, ip: 173.38.203.70, mailfrom: asparmar@cisco.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=cisco.com; i=@cisco.com; l=115517; q=dns/txt;
-  s=iport01; t=1795584015; x=1796793615;
+  d=cisco.com; i=@cisco.com; l=26571; q=dns/txt;
+  s=iport01; t=1795584017; x=1796793617;
   h=from:to:subject:date:message-id:in-reply-to:references:
    mime-version:content-transfer-encoding;
-  bh=ek2/d2o1fxtDUfecH8gih2AqlTS1BrtPbYZXPSjK96c=;
-  b=MHc7FV41gDhKCXfJeZ1wqPWstMdN2p9e8fp8m52tyMg3auJJiS4eaean
-   IzdbQVlWfAeBBr4uswX9zHU686AI4/Kl4IqyHo8rbCtt/Yv3Q5esUKFrQ
-   iL6fp7H/5z3A9qJcVafPMnCHRF6UBsS1cyclrFuy0vgkovQoI+ljnBTML
-   9MxJ7wZ0b3cNumIEVNeDf/HpSpVfi3CHzLQRAzbvkswcwNyL/C6ulP9gj
-   edCWYGBlON8mksKqEuvpElFFjnLTHyCFEza1I7MsrQ0ziF2uNMevsCJxu
-   tizrHm81FhSzuUZDrEOuKkGYSOMU2mwHhcYSvDGqj4a3FPDH5ceAr4+pF
-   g==;
-X-CSE-ConnectionGUID: abeOMya6SqCNe0jFaeN1Hw==
-X-CSE-MsgGUID: +x83GMpmQBCpUq2USNRxzg==
-X-IPAS-Result: =?us-ascii?q?A0AhAAAhbQZr/85K/pBRCRwBAQEBAQEHAQESAQEEBAEBg?=
- =?us-ascii?q?XwHAQELAYJWdWFCSQOMb4c4giEDgROCCo4zjFkUgWoPAQEBD0QJBAQBAYQ/R?=
- =?us-ascii?q?gKOIgImNAkOAQIEAwIDAQEBAQEBAQEBAQEBCgEBBQEBAQIBBwWBDhOGFQY0D?=
- =?us-ascii?q?YdagSSHFAECAQMaAQwLARkbAx8cAgEBAhYZJAcjCBkegmQBgnEDAgERugOBe?=
- =?us-ascii?q?TOBAYJmRENBUNszAQsUAYE4AYFyg0+IJV0YAUSEOicbG4FygRWCdHaBBYFRC?=
- =?us-ascii?q?wEBAgGBFhsDAQsHVYYHBIINFYEMgVQYBmQJgheDGIZZAoFJiFJIgR4DWSwBV?=
- =?us-ascii?q?RMNCgsHBYFoAzUSKhVuMh2BIzsXgQcbBgWBHIEegRKBA12BKyheIYEIgXUCg?=
- =?us-ascii?q?lGCAAIBSUEOB0VTCSVDEkckIggSCQETGiwKgRo1PAkmPxUMZwsaBWEIAg0Md?=
- =?us-ascii?q?DkQMBwkLwUZJjwbCoEMJx0eGQ4CKQYWIQs0GA1IESw3FRkEPm4HlBOCKGELB?=
- =?us-ascii?q?gEBLAQMNQINDQEHDAgOAQEEEwkCLQcBJAQGDAcCBiMKBwELCAQBEAcHAhoFB?=
- =?us-ascii?q?QEBBwENAgQCFgKBI5EyGwkBAQE5j2OCIYE1nh6BPgoog3mMJI40hwYaM4QET?=
- =?us-ascii?q?YEKpRcLmH2CWYJ6gy6CJhCCU4JhBoYSC4ELiyYfAwoICwMKAxY3hGqBaDyBU?=
- =?us-ascii?q?QEHcBU7gmcJShkPWIJjinADCwuDYIUTUch3IzUCAQMFAy8BAQcCBw4DC4Fok?=
- =?us-ascii?q?AABASYEA29gAQE?=
-IronPort-Data: A9a23:11+yGq1wioD/8vcjBfbD5YRwkn2cJEfYwER7XKvMYLTBsI5bp2AEz
- zEeW2iPb66DMGr1Kdp/PInnoBkBvsPdytZnGgtp3Hw8FHgiRegpqji6wuYcGwvIc6UvmWo+t
- 512huHodZ5yEzmE4Ef3b9ANlFEkvYmQXL3wFeXYDS54QA5gWU8JhAlq8wIDqtYAbeORXUXX5
- rsen+WFYAX7gmcubzpNg06+gEoHUMra6WtwUmMWPZinjHeG/1EJAZQWI72GLneQauF8Au6gS
- u/f+6qy92Xf8g1FIovNfmHTKxBirhb6ZGBiu1IOM0SQqkEqSh8ajs7XAMEhhXJ/0F1lqTzeJ
- OJl7vRcQS9xVkHFdX90vxNwS0mSNoUekFPLzOTWXcG7lyX7n3XQL/pGBUs7GqgJ87hMGEpo+
- KQaBjkASEmjmLfjqF67YrEEasULJcTxeYdasXZ6wHSBULAtQIvIROPB4towMDUY35wSW6yDO
- 4xGNXw1NEqojx5nYj/7DLo3h/+hnHz2aRVTqUmeouw85G27IAlZjuC2a4qJIYXiqcN93VbI/
- U3j52HAKDoCCcXF9AGjyGK+ibqa9c/8cMdIfFGizdZtmFCVy2kZBREaWFf+rfSnh0qWX9NEN
- 1dS/TIjq6U3/kGnQtTxGRqirxa5UgU0UtdKVul/4waXx++MvkCSB3MPSXhKb9lOWNIKeAHGH
- 2Shx7vBbQGDepXPIZ5B3t94dQ+PBBU=
-IronPort-HdrOrdr: A9a23:hm2tVqEZnhnIy58bpLqExMeALOsnbusQ8zAXPidKOHhom6Oj+f
- xG8M536fawskdzZJhCo6HkBED/exLhHPdOiOF7V4tKHjOW2ldAR7sM0WKN+VHd8lXFltJ15O
- NHb7V0DsH2ABxRiMb35xT9LvMbqeP3l5xBQYzlvg5QpcYAUdAH0ztE
-X-Talos-CUID: =?us-ascii?q?9a23=3AV8+LH2lbI0W9FrsQOw9EZ0jOzKjXOXTXwVD1Mkb?=
- =?us-ascii?q?mMn9CbrDNS3GZ9YU9s9U7zg=3D=3D?=
-X-Talos-MUID: 9a23:XIvu4Qg6kfBGUDFqd+qxMcMpd9c4uIuLEEU0u74ehtDeCBdWASePg2Hi
+  bh=8tdrVAwA3X49bFWKriRb22nqa3GbOmxKh2TPBbHtKDs=;
+  b=QSVE1+14Vuf35+kXE1eTxdGvR3heQbUat7z1sfQqrBd88n/xIOLHTv1z
+   DBc3TvRmCEH7tOrLWFKhGtt0O0gYR2hJkgWZOLpTbEw2cHd3R3qJNfXvt
+   dUlTlhE6UXaBm4sNS+qc6HtVwfZBXZMPuph30BH8wRI0jsfzf5dM2FC88
+   XDWteNTSAgEiJ4O7+sPmCZPZLBXg11EJ9xWDDS0oOy7+5Zx+Wg8EIR6L7
+   LCk+0hoy8WNIBFn4fU7GRW8qngrtgGwlN/mjOyM34H9AD1AWEufKpzz/F
+   oluINuudmp8g9EKCPmnkqfCJcPcn8F30uTO3crHzQ0g9UceC4t7i4WFwH
+   Q==;
+X-CSE-ConnectionGUID: /4dzo9deT82PNsghdHJsAA==
+X-CSE-MsgGUID: bf1peMZLTD27gN545cfNDw==
+X-IPAS-Result: =?us-ascii?q?A0BLAgAsbAZr/8xK/pBaglmCGD91YUJJA5QngiEDkVCMW?=
+ =?us-ascii?q?YF+DwEBAQ9EDQQBAYQ/RgKOIgImNAkOAQIEAwIDAQEBAQEBAQEBAQEBCgEBB?=
+ =?us-ascii?q?QEBAQIBBwWBDhOGTw2QEgECAQMaDQsBGAE9HAMBAi8rIwgQCYIqWAGCdAIBE?=
+ =?us-ascii?q?boEgXkzgQGDKQGBVNszAQsUAYE4gg2DNYglXRgBhH4nGxuBcoEVg2qBBYFcA?=
+ =?us-ascii?q?oE4EAmGVQSCIoEMgVSBAowRAoFJiFJIgR4DWSwBVRMNCgsHBYFoAzUSKhVuM?=
+ =?us-ascii?q?h2BIzsXgQcbBgWBHIEegRKBA12BKyheIYEIgXUCglGCAAIBSUEOB0VTCSVDE?=
+ =?us-ascii?q?kckIggSCQETGiwKgRo1PAkmPxUMZwsaBWEIAg0MdDkQMBwkLwUZJjwbCoEMJ?=
+ =?us-ascii?q?x0eGQ4CKQYWIQs0GA1IESw3FRkEPm4HlBODCwkHPT4GDQEFAhQKBQGBIE0XK?=
+ =?us-ascii?q?BY4kmcBFTCPWIIioREKKIN5jCSVOhozhASUGpJUC5h9glmLMZVjBhgDTYRqg?=
+ =?us-ascii?q?Wg8gVlwFTuCZwlKGQ+OKwMLC4NgzlsjNQIJAy8BAQcCBw4DC4FokAABAQIkg?=
+ =?us-ascii?q?VYBAQ?=
+IronPort-Data: A9a23:edVe4a4+CPuzEOmUmSSDRQxRtG/GchMFZxGqfqrLsTDasY5as4F+v
+ mUcXGHUPPzeYGX8fNAlbN7lpEMFu5+DxtBgSAdv+CE2Zn8b8sCt6fZ1gavT04J+CuWZESqLO
+ u1HMoGowPgcFyGa+1H1dOi78BGQ7InQLpLkEunIJyttcgFtTSYlmHpLlvUw6mJSqYDR7zil5
+ 5Wo/KUzBHf/g2QqaztOsPrZwP9SlK2aVA0w7wRWic9j5Dcyp1FNZLoDKKe4KWfPQ4U8NoaSW
+ +bZwbilyXjS9hErB8nNuu6TnpoiG+O60aCm0xK6aoD66vRwjnVaPpUTaJLwXXxqZwChxLid/
+ jniWauYEm/FNoWU8AgUvoIx/ytWZcWq85efSZSzXFD6I0DuKxPRL/tS4E4eetEU6OEmDWxyp
+ aYgDisCbhyjpfmf6efuIgVsrpxLwMjDNY4F/3UlxjbDALN+GtbIQr7B4plT2zJYasJmRKqCI
+ ZBENXwwMFKaO0En1lQ/UPrSmM+hnWH2aThRsnqepLE85C7YywkZPL3FboKOJIDTGJ49ckCwr
+ Gyf52ncMDUmGIbAxhzYri+niMnjgnauMG4VPPjinhJwu3WU3mEVBRgcWFe3rPX8hkOgVtZ3L
+ 00P5jFoqrA/8kGuRNTxUxC05nmesXYht8F4GuAgrQXIwa3O7kPBXS4PTyVKb5ots8peqSEW6
+ 2JlVujBXVRH2IB5g1rEnltIhVte4RQoEFI=
+IronPort-HdrOrdr: A9a23:dpMixquV8yckZDLxWH7LTrM17skDWtV00zEX/kB9WHVpm6uj5q
+ STdZsguyMc5Ax9ZJhko6HiBEDiewK4yXcK2+gs1N6ZNWGM0ldAbrsSj7cKqAeOJ8SRzIJgPN
+ 9bE5RWOZnXEUVwi9r87U2TFtYtx8TCzYWT7N2uqEuEiWpRGthdB8ATMHf8LnFL
+X-Talos-CUID: =?us-ascii?q?9a23=3AskZ7V2jUYzlDobgkXZ114l1x8jJuNSHR3nCBL0K?=
+ =?us-ascii?q?EWTxRbqaaSVOw2rhNup87?=
+X-Talos-MUID: =?us-ascii?q?9a23=3AEEsOxAwQ63OkrFPrY1y4wOq0UQ2aqK6gUVgAtKc?=
+ =?us-ascii?q?ih+XeaiNWZmvAhzqRbpByfw=3D=3D?=
 X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-AV: E=Sophos;i="6.27,232,1787011200"; 
-   d="scan'208";a="60338431"
-Received: from aer-l-core-05.cisco.com ([144.254.74.206])
-  by aer-iport-5.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 25 Nov 2026 05:20:11 +0000
+X-IronPort-AV: E=Sophos;i="6.27,229,1787011200"; 
+   d="scan'208";a="60364153"
+Received: from aer-l-core-03.cisco.com ([144.254.74.204])
+  by aer-iport-8.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 25 Nov 2026 05:20:12 +0000
 Received: from sjc-ads-20495.cisco.com (sjc-ads-20495.cisco.com [171.70.188.248])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
 	 client-signature RSA-PSS (4096 bits) client-digest SHA256)
 	(Client CN "ciscoit-managed-infra-smtp-auth.cisco.com", Issuer "Internal Private TLS SubCA" (verified OK))
-	by aer-l-core-05.cisco.com (Postfix) with ESMTPS id BE15D180008D3
-	for <openembedded-devel@lists.openembedded.org>; Wed, 25 Nov 2026 05:20:10 +0000 (GMT)
+	by aer-l-core-03.cisco.com (Postfix) with ESMTPS id 4AB3B1800022F
+	for <openembedded-devel@lists.openembedded.org>; Wed, 25 Nov 2026 05:20:12 +0000 (GMT)
 Received: by sjc-ads-20495.cisco.com (Postfix, from userid 1877012)
-	id 750CBCBF222; Tue, 24 Nov 2026 21:20:09 -0800 (PST)
+	id 82A13CBF22F; Tue, 24 Nov 2026 21:20:09 -0800 (PST)
 From: "Ashishkumar Parmar X (asparmar - E INFOCHIPS PRIVATE LIMITED at Cisco)" <asparmar@cisco.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-python][wrynose][PATCH 03/10] python3-aiohttp: fix CVE-2026-128125
-Date: Tue, 24 Nov 2026 21:19:59 -0800
-Message-Id: <20261125052006.3116497-4-asparmar@cisco.com>
+Subject: [meta-python][wrynose][PATCH 07/10] python3-aiohttp: fix CVE-2026-128129
+Date: Tue, 24 Nov 2026 21:20:03 -0800
+Message-Id: <20261125052006.3116497-8-asparmar@cisco.com>
 X-Mailer: git-send-email 2.35.6
 In-Reply-To: <20261125052006.3116497-1-asparmar@cisco.com>
 References: <20261125052006.3116497-1-asparmar@cisco.com>
 MIME-Version: 1.0
 X-Outbound-Client-TLS: VERIFIED;sjc-ads-20495.cisco.com [171.70.188.248];TLSv1.3;TLS_AES_256_GCM_SHA384;256;ciscoit-managed-infra-smtp-auth.cisco.com
 X-Outbound-SMTP-Client: 171.70.188.248, sjc-ads-20495.cisco.com
-X-Outbound-Node: aer-l-core-05.cisco.com
+X-Outbound-Node: aer-l-core-03.cisco.com
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Wed, 25 Nov 2026 05:22:52 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132981
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Wed, 25 Nov 2026 05:23:12 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132982
 Content-Type: text/plain; charset="utf-8"
 
 From: Ashishkumar Parmar <asparmar@cisco.com>
 
-This patch applies the client cookie resource limits for CVE-2026-128125
+This patch applies the upgrade-tail flow control fix for CVE-2026-128129
 from the upstream stable branch [1].
 
-Limit parsed response cookies, retained cookies and outgoing Cookie
-headers while preserving explicit per-request cookies.
+Pause reads while upgraded request data fills the bounded tail and
+resume safely when an upgrade is accepted or declined.
 
 The embedded backport notes describe the required prerequisite or
 follow-up changes and the adaptations to the current APIs.
 
-[1] https://github.com/aio-libs/aiohttp/commit/6963ee0befec1502b6bb7b4db6c72d044c08f4fa
-[2] https://github.com/aio-libs/aiohttp/commit/f1750ba2cd59ece20932c57e6096f878c2d29aa6
-[3] https://github.com/aio-libs/aiohttp/commit/f2c0280fe7d9857378add2619abd4661b1b13e1c
-[4] https://github.com/aio-libs/aiohttp/security/advisories/GHSA-5pv8-vvhc-h7jv
+[1] https://github.com/aio-libs/aiohttp/commit/3d850ee9b92573c7e913821cbcb96005beb3f4df
+[2] https://github.com/aio-libs/aiohttp/commit/716c83d2b697e56fd74f95a1aa3a451fd2fb02e8
+[3] https://github.com/aio-libs/aiohttp/security/advisories/GHSA-pw86-h8fm-j323
 
 Signed-off-by: Ashishkumar Parmar <asparmar@cisco.com>
 ---
- .../python3-aiohttp/CVE-2026-128125.patch     | 3115 +++++++++++++++++
- .../python/python3-aiohttp_3.13.5.bb          |    1 +
- 2 files changed, 3116 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-128125.patch
+ .../python3-aiohttp/CVE-2026-128129.patch     | 677 ++++++++++++++++++
+ .../python/python3-aiohttp_3.13.5.bb          |   1 +
+ 2 files changed, 678 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-128129.patch
 
-diff --git a/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-128125.patch b/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-128125.patch
+diff --git a/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-128129.patch b/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-128129.patch
 new file mode 100644
-index 0000000000..c564ba70ab
+index 0000000000..70235cda0e
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-128125.patch
-@@ -0,0 +1,3115 @@
-+From 180406642ba5a1fb8db7637e7e21b3b398e117e9 Mon Sep 17 00:00:00 2001
-+From: "J. Nick Koston" <nick@koston.org>
-+Date: Sun, 4 Oct 2026 16:03:11 -0500
-+Subject: [PATCH] [PR #13930/b1f6c87b backport][3.14] Add limits for client
-+ cookie handling (#13942)
++++ b/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-128129.patch
+@@ -0,0 +1,677 @@
++From 4a4fb46343ee9407de28754700a5620aa1cdc1d2 Mon Sep 17 00:00:00 2001
++From: Sam Bull <git@sambull.org>
++Date: Sat, 22 Aug 2026 15:03:24 +0100
++Subject: [PATCH] Fix limit on message tail (#13501) (#13511)
 +
-+Fixes
-+#123
++(cherry picked from commit c207cadb257e0959b192ffca0548eca8c71eb96a)
 +
-+CVE: CVE-2026-128125
-+Upstream-Status: Backport [https://github.com/aio-libs/aiohttp/commit/6963ee0befec1502b6bb7b4db6c72d044c08f4fa]
++CVE: CVE-2026-128129
++Upstream-Status: Backport [https://github.com/aio-libs/aiohttp/commit/3d850ee9b92573c7e913821cbcb96005beb3f4df]
 +
 +Backport Changes:
-+- Rebase the cookie storage changes onto the current source context.
-+- Fold the private update helper and defensive Morsel copying from
-+  https://github.com/aio-libs/aiohttp/commit/f1750ba2cd59ece20932c57e6096f878c2d29aa6.
-+  The helper carries absolute expiry and trusted-parser validation through
-+  loading and insertion without changing the public API. Private copies
-+  keep caller mutation from invalidating checked cookie state and cached
-+  lengths used by the limits.
-+- Preserve the current per-request jar constructor arguments while using
-+  the unlimited jar for explicit request cookies.
-+- Adapt regressions to the current ClientResponse constructor and private
-+  host-only cookie metadata. Omit the cookies-view regression because that
-+  public property is absent. Keep the prerequisite's ownership regressions
-+  and normalized-copy expectations.
-+- Use the printable-octal fixtures in tests/test_cookie_helpers.py from
-+  https://github.com/aio-libs/aiohttp/commit/f2c0280fe7d9857378add2619abd4661b1b13e1c.
-+  The existing fixtures expect acceptance of decoded control characters,
-+  which the fixed parser rejects.
-+- Omit the async conversions for
-+  test_save_creates_private_cookie_file and
-+  test_save_preserves_existing_cookie_file_permissions in
-+  tests/test_cookiejar.py because these tests are absent.
-+- Omit release notes, contributor and reference-documentation updates.
-+  Retain the security regressions and temporary-jar benchmark adjustment.
++- Retain the current _request_parser and _upgrade attribute names.
++- Fold the declined-upgrade replay guard and regression tests from
++  716c83d2b697e56fd74f95a1aa3a451fd2fb02e8. Without its guard the
++  pipelined WebSocket handshake test times out after ordinary queued
++  responses consume the buffered frame data as HTTP.
++- Retain the upstream dummy_reader fixture and WebSocketReader import
++  required by the added parser-handoff regression test.
++- Keep the socket-read bound local to the regression tests because the
++  current helpers module does not expose DEFAULT_CHUNK_SIZE.
++- Omit CHANGES/13501.bugfix.rst, which records an upstream release note.
 +
-+Co-authored-by: iamibi <8592115+iamibi@users.noreply.github.com>
-+Co-authored-by: Sam Bull <git@sambull.org>
 +Signed-off-by: Ashishkumar Parmar <asparmar@cisco.com>
 +---
-+ aiohttp/_cookie_helpers.py         |  254 ++++---
-+ aiohttp/client.py                  |    4 +-
-+ aiohttp/cookiejar.py               |  445 ++++++++++--
-+ tests/test_benchmarks_cookiejar.py |    4 +-
-+ tests/test_client_functional.py    |  127 ++++
-+ tests/test_client_response.py      |   26 +
-+ tests/test_cookie_helpers.py       |  524 +++++++++-----
-+ tests/test_cookiejar.py            | 1042 +++++++++++++++++++++++++++-
-+ 8 files changed, 2077 insertions(+), 349 deletions(-)
++ aiohttp/web_protocol.py                |  67 ++++++--
++ tests/test_web_functional.py           | 221 +++++++++++++++++++++++++
++ tests/test_web_protocol.py             |  90 ++++++++++
++ tests/test_web_websocket_functional.py | 155 +++++++++++++++++
++ 4 files changed, 522 insertions(+), 11 deletions(-)
 +
-+diff --git a/aiohttp/_cookie_helpers.py b/aiohttp/_cookie_helpers.py
-+index 10e2e0e..3ec0d40 100644
-+--- a/aiohttp/_cookie_helpers.py
-++++ b/aiohttp/_cookie_helpers.py
-+@@ -6,8 +6,8 @@ These are not part of the public API and may change without notice.
-+ """
++diff --git a/aiohttp/web_protocol.py b/aiohttp/web_protocol.py
++index c04aa10..5968d10 100644
++--- a/aiohttp/web_protocol.py
+++++ b/aiohttp/web_protocol.py
++@@ -164,6 +164,7 @@ class RequestHandler(BaseProtocol):
++         "_msg_queue_resume_size",
++         "_msg_queue_paused",
++         "_message_tail",
+++        "_read_bufsize",
++         "_handler_waiter",
++         "_waiter",
++         "_task_handler",
++@@ -209,6 +210,7 @@ class RequestHandler(BaseProtocol):
++         # Low-water mark: resume reading once the queue drains to half the limit
++         # so we refill in batches instead of churning pause/resume per request.
++         self._msg_queue_resume_size = MAX_MSG_QUEUE_SIZE // 2
+++        self._read_bufsize = read_bufsize
++         self._msg_queue_paused = False
++         super().__init__(loop)
 + 
-+ import re
-+-from http.cookies import Morsel
-+-from typing import List, Optional, Sequence, Tuple, cast
-++from http.cookies import CookieError, Morsel
-++from typing import List, Sequence, Tuple
++@@ -421,6 +423,9 @@ class RequestHandler(BaseProtocol):
++             self._payload_parser.feed_data(self._message_tail)
++             self._message_tail = b""
 + 
-+ from .log import internal_logger
-+ 
-+@@ -43,6 +43,18 @@ _COOKIE_BOOL_ATTRS = frozenset(  # AKA Morsel._flags
-+     ("secure", "httponly", "partitioned")
-+ )
-+ 
-++# Implementation limits as permitted by RFC 6265 Section 6.1.
-++_MAX_COOKIES_PER_RESPONSE = 50
-++_MAX_COOKIE_PAIR_LENGTH = 4096
-++_MAX_COOKIE_ATTRIBUTE_VALUE_LENGTH = 1024
-++# Like Chromium's ParsedCookie::kMaxPairs, but more lenient.
-++_MAX_COOKIE_ATTRIBUTES = 32
+++        if self._msg_queue_paused:
+++            self._resume_msg_queue_reading()
 ++
-++# Where the next attribute can start: skips runs of ";" and whitespace.
-++_ATTRIBUTE_START_RE = re.compile(r"[^;\s]", re.ASCII)
-++_COOKIE_FORBIDDEN_CTL_RE = re.compile(r"[\x00-\x08\x0a-\x1f\x7f]")
-++_COOKIE_CTL_RE = re.compile(r"[\x00-\x1f\x7f]")
-++
-+ # SimpleCookie's pattern for parsing cookies with relaxed validation
-+ # Based on http.cookies pattern but extended to allow more characters in cookie names
-+ # to handle real-world cookies (fixes #2683)
-+@@ -100,7 +112,9 @@ def preserve_morsel_with_coded_value(cookie: Morsel[str]) -> Morsel[str]:
-+         A Morsel object with preserved coded_value
-+ 
-+     """
-+-    mrsl_val = cast("Morsel[str]", cookie.get(cookie.key, Morsel()))
-++    # Don't look up cookie.key in the Morsel: it maps attribute names, so a
-++    # cookie named ``path`` would return the Path attribute.
-++    mrsl_val: Morsel[str] = Morsel()
-+     # We use __setstate__ instead of the public set() API because it allows us to
-+     # bypass validation and set already validated state. This is more stable than
-+     # setting protected attributes directly and unlikely to change since it would
-+@@ -164,10 +178,9 @@ def parse_cookie_header(header: str) -> List[Tuple[str, Morsel[str]]]:
-+     There are no attributes in Cookie headers - even names that match
-+     attribute names (like 'path' or 'secure') should be treated as cookies.
-+ 
-+-    This parser uses the same regex-based approach as parse_set_cookie_headers
-+-    to properly handle quoted values that may contain semicolons. When the
-+-    regex fails to match a malformed cookie, it falls back to simple parsing
-+-    to ensure subsequent cookies are not lost
-++    This parser uses _COOKIE_PATTERN to properly handle quoted values that may
-++    contain semicolons. When the regex fails to match a malformed cookie, it
-++    falls back to simple parsing to ensure subsequent cookies are not lost
-+     https://github.com/aio-libs/aiohttp/issues/11632
-+ 
-+     Args:
-+@@ -186,7 +199,7 @@ def parse_cookie_header(header: str) -> List[Tuple[str, Morsel[str]]]:
-+ 
-+     invalid_names = []
-+     while i < n:
-+-        # Use the same pattern as parse_set_cookie_headers to find cookies
-++        # Find the next cookie-pair
-+         match = _COOKIE_PATTERN.match(header, i)
-+         if not match:
-+             # Fallback for malformed cookies https://github.com/aio-libs/aiohttp/issues/11632
-+@@ -244,95 +257,152 @@ def parse_cookie_header(header: str) -> List[Tuple[str, Morsel[str]]]:
-+     return cookies
-+ 
-+ 
-+-def parse_set_cookie_headers(headers: Sequence[str]) -> List[Tuple[str, Morsel[str]]]:
-++def _encoded_length(text: str) -> int | None:
-++    """Return the UTF-8 length of text, or None if it can't be encoded."""
-++    if text.isascii():
-++        return len(text)
-++    try:
-++        return len(text.encode("utf-8"))
-++    except UnicodeEncodeError:
-++        return None
-++
-++
-++def _apply_cookie_attributes(morsel: Morsel[str], attributes: str) -> None:
-++    """Set the recognized attributes from the text after the cookie-pair.
-++
-++    The field must already be free of control characters other than tab.
-++    """
-++    # Walk with the cookie pattern so a quoted value keeps its ";". Missing
-++    # semicolons between attributes are tolerated; every match is an attribute
-++    # of this cookie, never a new cookie.
-++    index = 0
-++    end = len(attributes)
-++    for _ in range(_MAX_COOKIE_ATTRIBUTES):
-++        if index >= end:
-++            break
-++        if (attribute_match := _COOKIE_PATTERN.match(attributes, index)) is None:
-++            # Skip a malformed segment and any run of ";" or whitespace after it.
-++            if (
-++                not (next_index := attributes.find(";", index) + 1)
-++                or (start := _ATTRIBUTE_START_RE.search(attributes, next_index)) is None
-++            ):
-++                break
-++            index = start.start()
-++            continue
-++        index = attribute_match.end()
-++        lower_key = attribute_match.group("key").lower()
-++        if lower_key not in _COOKIE_KNOWN_ATTRS:
-++            # RFC 6265 Section 5.2: ignore unknown attributes.
-++            continue
-++        if lower_key not in morsel._reserved:  # type: ignore[attr-defined]
-++            # Python versions before 3.14 do not expose Partitioned.
-++            continue
-++
-++        # The key and value are checked here, so skip Morsel.__setitem__'s checks.
-++        if lower_key in _COOKIE_BOOL_ATTRS:
-++            # Like Firefox, a flag's value is ignored.
-++            dict.__setitem__(morsel, lower_key, True)
-++            continue
-++        attr_value = attribute_match.group("val") or ""
-++        if (
-++            len(attr_value) <= _MAX_COOKIE_ATTRIBUTE_VALUE_LENGTH
-++            and attr_value.isascii()
-++            and attr_value[:1] != '"'
-++            and "\t" not in attr_value
-++        ):
-++            # The field has no other control characters and nothing to unquote.
-++            dict.__setitem__(morsel, lower_key, attr_value)
-++            continue
-++        attr_value_length = _encoded_length(attr_value)
-++        if (
-++            attr_value_length is None
-++            or attr_value_length > _MAX_COOKIE_ATTRIBUTE_VALUE_LENGTH
-++        ):
-++            continue
-++        # Patched CPython rejects control characters, even ones produced by
-++        # unquoting, so ignore such an attribute rather than raise.
-++        if _COOKIE_CTL_RE.search(value := _unquote(attr_value)) is None:
-++            dict.__setitem__(morsel, lower_key, value)
-++
-++
-++def _parse_quoted_pair(header: str) -> tuple[str, str, int] | None:
-++    """Parse a first pair whose quoted value contains ";".
-++
-++    aiohttp has always accepted these. Returns the name, the quoted value and
-++    where the attributes start, or None to split at the first ";" instead.
-+     """
-+-    Parse cookie headers using a vendored version of SimpleCookie parsing.
-+-
-+-    This implementation is based on SimpleCookie.__parse_string to ensure
-+-    compatibility with how SimpleCookie parses cookies, including handling
-+-    of malformed cookies with missing semicolons.
-+-
-+-    This function is used for both Cookie and Set-Cookie headers in order to be
-+-    forgiving. Ideally we would have followed RFC 6265 Section 5.2 (for Cookie
-+-    headers) and RFC 6265 Section 4.2.1 (for Set-Cookie headers), but the
-+-    real world data makes it impossible since we need to be a bit more forgiving.
-+-
-+-    NOTE: This implementation differs from SimpleCookie in handling unmatched quotes.
-+-    SimpleCookie will stop parsing when it encounters a cookie value with an unmatched
-+-    quote (e.g., 'cookie="value'), causing subsequent cookies to be silently dropped.
-+-    This implementation handles unmatched quotes more gracefully to prevent cookie loss.
-+-    See https://github.com/aio-libs/aiohttp/issues/7993
-++    match = _COOKIE_PATTERN.match(header)
-++    if match is None or not (value := match.group("val")):
-++        return None
-++    if not (value.startswith('"') and value.endswith('"') and ";" in value):
-++        return None
-++    tail = header[match.end("val") :].lstrip(" \t")
-++    if tail and not tail.startswith(";"):
-++        return None
-++    return match.group("key"), value, len(header) - len(tail) + bool(tail)
-++
-++
-++def parse_set_cookie_headers(headers: Sequence[str]) -> list[tuple[str, Morsel[str]]]:
-++    """Parse Set-Cookie fields into at most one cookie per field.
-++
-++    Fields with control characters, oversized or nameless pairs, names outside
-++    the allowlist, or tabs in the pair are skipped.
-+     """
-+-    parsed_cookies: List[Tuple[str, Morsel[str]]] = []
-++    parsed_cookies: list[tuple[str, Morsel[str]]] = []
-++    over_limit = 0
-++
-++    for position, header in enumerate(headers):
-++        if len(parsed_cookies) >= _MAX_COOKIES_PER_RESPONSE:
-++            over_limit = len(headers) - position
-++            break
-++        if not header or _COOKIE_FORBIDDEN_CTL_RE.search(header) is not None:
-++            continue
-+ 
-+-    for header in headers:
-+-        if not header:
-++        if (pair_end := header.find(";")) == -1:
-++            pair_end = attributes_start = len(header)
-++        else:
-++            attributes_start = pair_end + 1
-++        # A quote before the first ";" may start a quoted value containing ";".
-++        if header.find('"', 0, pair_end) != -1 and (
-++            quoted := _parse_quoted_pair(header)
-++        ):
-++            key, coded_value, attributes_start = quoted
-++        else:
-++            key, sep, coded_value = header[:pair_end].partition("=")
-++            if not sep:
-++                continue
-++
-++        key = key.strip(" \t")
-++        coded_value = coded_value.strip(" \t")
-++
-++        if not key:
-++            continue
-++        if not _COOKIE_NAME_RE.match(key):
-++            internal_logger.warning("Can not load cookies: Illegal cookie name %r", key)
-++            continue
-++        pair_length = _encoded_length(key + coded_value)
-++        if pair_length is None or pair_length > _MAX_COOKIE_PAIR_LENGTH:
-+             continue
-+ 
-+-        # Parse cookie string using SimpleCookie's algorithm
-+-        i = 0
-+-        n = len(header)
-+-        current_morsel: Optional[Morsel[str]] = None
-+-        morsel_seen = False
-+-
-+-        while 0 <= i < n:
-+-            # Start looking for a cookie
-+-            match = _COOKIE_PATTERN.match(header, i)
-+-            if not match:
-+-                # No more cookies
-+-                break
-++        value = _unquote(coded_value)
-++        if _COOKIE_CTL_RE.search(value) is not None:
-++            continue
-++        morsel: Morsel[str] = Morsel()
-++        try:
-++            morsel.__setstate__(  # type: ignore[attr-defined]
-++                {"key": key, "value": value, "coded_value": coded_value}
-++            )
-++        except CookieError:
-++            continue
-+ 
-+-            key, value = match.group("key"), match.group("val")
-+-            i = match.end(0)
-+-            lower_key = key.lower()
-+-
-+-            if key[0] == "$":
-+-                if not morsel_seen:
-+-                    # We ignore attributes which pertain to the cookie
-+-                    # mechanism as a whole, such as "$Version".
-+-                    continue
-+-                # Process as attribute
-+-                if current_morsel is not None:
-+-                    attr_lower_key = lower_key[1:]
-+-                    if attr_lower_key in _COOKIE_KNOWN_ATTRS:
-+-                        current_morsel[attr_lower_key] = value or ""
-+-            elif lower_key in _COOKIE_KNOWN_ATTRS:
-+-                if not morsel_seen:
-+-                    # Invalid cookie string - attribute before cookie
-+-                    break
-+-                if lower_key in _COOKIE_BOOL_ATTRS:
-+-                    # Boolean attribute with any value should be True
-+-                    if current_morsel is not None and current_morsel.isReservedKey(key):
-+-                        current_morsel[lower_key] = True
-+-                elif value is None:
-+-                    # Invalid cookie string - non-boolean attribute without value
-+-                    break
-+-                elif current_morsel is not None:
-+-                    # Regular attribute with value
-+-                    current_morsel[lower_key] = _unquote(value)
-+-            elif value is not None:
-+-                # This is a cookie name=value pair
-+-                # Validate the name
-+-                if key in _COOKIE_KNOWN_ATTRS or not _COOKIE_NAME_RE.match(key):
-+-                    internal_logger.warning(
-+-                        "Can not load cookies: Illegal cookie name %r", key
-+-                    )
-+-                    current_morsel = None
-+-                else:
-+-                    # Create new morsel
-+-                    current_morsel = Morsel()
-+-                    # Preserve the original value as coded_value (with quotes if present)
-+-                    # We use __setstate__ instead of the public set() API because it allows us to
-+-                    # bypass validation and set already validated state. This is more stable than
-+-                    # setting protected attributes directly and unlikely to change since it would
-+-                    # break pickling.
-+-                    current_morsel.__setstate__(  # type: ignore[attr-defined]
-+-                        {"key": key, "value": _unquote(value), "coded_value": value}
-+-                    )
-+-                    parsed_cookies.append((key, current_morsel))
-+-                    morsel_seen = True
-+-            else:
-+-                # Invalid cookie string - no value for non-attribute
-+-                break
-++        _apply_cookie_attributes(morsel, header[attributes_start:])
-++        parsed_cookies.append((key, morsel))
-+ 
-++    if (invalid := len(headers) - over_limit - len(parsed_cookies)) or over_limit:
-++        internal_logger.debug(
-++            "Ignored %d invalid Set-Cookie field(s) and %d over the %d-cookie limit",
-++            invalid,
-++            over_limit,
-++            _MAX_COOKIES_PER_RESPONSE,
-++        )
-+     return parsed_cookies
-+diff --git a/aiohttp/client.py b/aiohttp/client.py
-+index 1eae60a..fafc5d3 100644
-+--- a/aiohttp/client.py
-++++ b/aiohttp/client.py
-+@@ -91,7 +91,7 @@ from .connector import (
-+     TCPConnector as TCPConnector,
-+     UnixConnector as UnixConnector,
-+ )
-+-from .cookiejar import CookieJar
-++from .cookiejar import CookieJar, _UnlimitedCookieJar
-+ from .helpers import (
-+     _SENTINEL,
-+     DEBUG,
-+@@ -691,7 +691,7 @@ class ClientSession:
-+                     all_cookies = self._cookie_jar.filter_cookies(url)
-+ 
-+                     if cookies is not None:
-+-                        tmp_cookie_jar = CookieJar(
-++                        tmp_cookie_jar = _UnlimitedCookieJar(
-+                             quote_cookie=self._cookie_jar.quote_cookie,
-+                             treat_as_secure_origin=frozenset(
-+                                 self._cookie_jar.treat_as_secure_origin
-+diff --git a/aiohttp/cookiejar.py b/aiohttp/cookiejar.py
-+index 3b2c490..f8e89df 100644
-+--- a/aiohttp/cookiejar.py
-++++ b/aiohttp/cookiejar.py
-+@@ -5,6 +5,7 @@ import datetime
-+ import heapq
-+ import itertools
-+ import json
-++import math
-+ import os  # noqa
-+ import pathlib
-+ import pickle
-+@@ -12,31 +13,40 @@ import re
-+ import time
-+ import warnings
-+ from collections import defaultdict
-+-from collections.abc import Mapping
-++from collections.abc import Mapping, Sequence
-+ from http.cookies import BaseCookie, Morsel, SimpleCookie
-+ from typing import (
-+-    DefaultDict,
-+-    Dict,
-+     Iterable,
-+     Iterator,
-+     List,
-+     Optional,
-+-    Set,
-+     Tuple,
-+     Union,
-++    cast,
-+ )
-+ 
-+ from yarl import URL
-+ 
-+-from ._cookie_helpers import preserve_morsel_with_coded_value
-++from ._cookie_helpers import (
-++    _COOKIE_CTL_RE,
-++    _encoded_length,
-++    parse_set_cookie_headers,
-++    preserve_morsel_with_coded_value,
-++)
-+ from .abc import AbstractCookieJar, ClearCookiePredicate
-+ from .helpers import is_ip_address
-++from .log import internal_logger
-+ from .typedefs import LooseCookies, PathLike, StrOrURL
-+ 
-+ __all__ = ("CookieJar", "DummyCookieJar")
-+ 
-+ 
-+ CookieItem = Union[str, "Morsel[str]"]
-++_JarKey = tuple[str, str]  # (domain, path)
-++_CookieKey = tuple[str, str, str]  # (domain, path, name)
-++# A built morsel, its encoded name=value length and the cookie's key.
-++_MorselEntry = tuple["Morsel[str]", int, _CookieKey]
-++_UNLIMITED_COOKIE_KEY: _CookieKey = ("", "", "")
-+ 
-+ # We cache these string methods here as their use is in performance critical code.
-+ _FORMAT_PATH = "{}/{}".format
-+@@ -48,6 +58,16 @@ _FORMAT_DOMAIN_REVERSED = "{1}.{0}".format
-+ _MIN_SCHEDULED_COOKIE_EXPIRATION = 100
-+ _SIMPLE_COOKIE = SimpleCookie()
-+ 
-++# Private, non-configurable limits for the built-in jar.
-++# Eviction follows Firefox's CookieStorage.
-++_MAX_COOKIES_PER_DOMAIN = 180
-++_COOKIE_QUOTA_PER_DOMAIN = 150
-++_MAX_COOKIES_TOTAL = 3300
-++_COOKIE_QUOTA_TOTAL = 3000
-++_MAX_COOKIES_PER_REQUEST = 150
-++_MAX_COOKIE_HEADER_LENGTH = 8190
-++_COOKIE_HEADER_PREFIX_LENGTH = len(b"Cookie: ")
-++
-+ # Not persisted; the absolute deadline is saved instead.
-+ _RELATIVE_EXPIRY_ATTRS = frozenset(("max-age", "expires"))
-+ 
-+@@ -90,6 +110,8 @@ class _RestrictedCookieUnpickler(pickle.Unpickler):
-+ class CookieJar(AbstractCookieJar):
-+     """Implements cookie storage adhering to RFC 6265."""
-+ 
-++    _limits_enabled = True
-++
-+     DATE_TOKENS_RE = re.compile(
-+         r"[\x09\x20-\x2F\x3B-\x40\x5B-\x60\x7B-\x7E]*"
-+         r"(?P<token>[\x00-\x08\x0A-\x1F\d:a-zA-Z\x7F-\xFF]+)"
-+@@ -133,14 +155,12 @@ class CookieJar(AbstractCookieJar):
-+         loop: Optional[asyncio.AbstractEventLoop] = None,
-+     ) -> None:
-+         super().__init__(loop=loop)
-+-        self._cookies: DefaultDict[Tuple[str, str], SimpleCookie] = defaultdict(
-+-            SimpleCookie
-+-        )
-+-        self._morsel_cache: DefaultDict[Tuple[str, str], Dict[str, Morsel[str]]] = (
-+-            defaultdict(dict)
-++        self._cookies: defaultdict[_JarKey, SimpleCookie] = defaultdict(SimpleCookie)
-++        self._morsel_cache: defaultdict[_JarKey, dict[str, _MorselEntry]] = defaultdict(
-++            dict
-+         )
-+         # Cookie identity is (domain, path, name).
-+-        self._host_only_cookies: Set[Tuple[str, str, str]] = set()
-++        self._host_only_cookies: set[_CookieKey] = set()
-+         self._unsafe = unsafe
-+         self._quote_cookie = quote_cookie
-+         if treat_as_secure_origin is None:
-+@@ -158,8 +178,12 @@ class CookieJar(AbstractCookieJar):
-+                     for url in treat_as_secure_origin
-+                 }
-+             )
-+-        self._expire_heap: List[Tuple[float, Tuple[str, str, str]]] = []
-+-        self._expirations: Dict[Tuple[str, str, str], float] = {}
-++        self._expire_heap: list[tuple[float, _CookieKey]] = []
-++        self._expirations: dict[_CookieKey, float] = {}
-++        self._access_generations: dict[_CookieKey, int] = {}
-++        self._next_access_generation = 0
-++        self._domain_counts: dict[str, int] = {}
-++        self._cookie_count = 0
-+ 
-+     @property
-+     def quote_cookie(self) -> bool:
-+@@ -211,30 +235,69 @@ class CookieJar(AbstractCookieJar):
-+         compatibility with existing cookie files.
-+ 
-+         Replaces the current jar contents; loaded cookies pass through the
-+-        same acceptance rules as :meth:`update_cookies`.
-++        same acceptance rules as :meth:`update_cookies`. A malformed file
-++        raises and leaves the jar unchanged.
-+ 
-+         :param file_path: Path to file from where cookies will be
-+             imported, :class:`str` or :class:`pathlib.Path` instance.
-+         """
-+         file_path = pathlib.Path(file_path)
-+-        # Try JSON format first
-++        # Try JSON format first; only a file that isn't JSON is a legacy pickle.
-+         try:
-+             with file_path.open(mode="r", encoding="utf-8") as f:
-+                 data = json.load(f)
-+-            self._load_json_data(data)
-+         except (json.JSONDecodeError, UnicodeDecodeError, ValueError):
-+-            # Fall back to legacy pickle format with restricted unpickler
-+-            with file_path.open(mode="rb") as f:
-+-                self._cookies = _RestrictedCookieUnpickler(f).load()
-++            pass
-++        else:
-++            self._load_json_data(data)
-++            return
-++        # Fall back to legacy pickle format with restricted unpickler
-++        with file_path.open(mode="rb") as f:
-++            pickled = _RestrictedCookieUnpickler(f).load()
-++        loaded = self._new_loading_jar()
-++        for (domain, _), cookies in pickled.items():
-++            response_url = URL.build(scheme="https", host=domain) if domain else URL()
-++            for name, morsel in cookies.items():
-++                loaded._update_cookies({name: morsel}, response_url, copy_morsels=False)
-++        self._replace_contents(loaded)
-++
-++    def _new_loading_jar(self) -> "CookieJar":
-++        return CookieJar(
-++            unsafe=self._unsafe,
-++            quote_cookie=self._quote_cookie,
-++            treat_as_secure_origin=self._treat_as_secure_origin,
-++            loop=self._loop,
-++        )
-++
-++    def _replace_contents(self, loaded: "CookieJar") -> None:
-++        # Refill the existing mapping so views from the cookies property stay live.
-++        cookies = self._cookies
-++        cookies.clear()
-++        cookies.update(loaded._cookies)
-++        self.__dict__.update(loaded.__dict__)
-++        self._cookies = cookies
-+ 
-+     def _load_json_data(
-+         self, data: dict[str, dict[str, dict[str, str | bool | float]]]
-+     ) -> None:
-+-        """Replace contents, routing cookies through update_cookies()."""
-+-        self.clear()
-++        """Replace contents, routing cookies through _update_cookies()."""
-++        # Fill a new jar and adopt its state only once every record is in,
-++        # so a bad file leaves this one unchanged.
-++        loaded = self._new_loading_jar()
-+         for compound_key, cookie_data in data.items():
-+             domain, path = compound_key.split("|", 1)
-+             for name, morsel_data in cookie_data.items():
-++                expiration: float | None = None
-++                if (raw_expiration := morsel_data.get("expires_timestamp")) is not None:
-++                    try:
-++                        expiration = float(raw_expiration)
-++                        if not math.isfinite(expiration):
-++                            raise ValueError(expiration)
-++                    except (OverflowError, TypeError, ValueError) as exc:
-++                        raise ValueError(
-++                            f"Cookie {name!r} in {compound_key!r}: "
-++                            "expiration timestamp must be a finite number"
-++                        ) from exc
-+                 morsel: Morsel[str] = Morsel()
-+                 # Use __setstate__ to bypass validation, same pattern
-+                 # used in _build_morsel and _cookie_helpers.
-+@@ -259,11 +322,13 @@ class CookieJar(AbstractCookieJar):
-+                 response_url = (
-+                     URL.build(scheme="https", host=domain) if domain else URL()
-+                 )
-+-                self.update_cookies({name: morsel}, response_url)
-+-                # Restore the absolute deadline; update_cookies() schedules none.
-+-                if (exp := morsel_data.get("expires_timestamp")) is not None:
-+-                    self._expire_cookie(float(exp), domain, path, name)
-+-        self._do_expiration()
-++                loaded._update_cookies(
-++                    {name: morsel},
-++                    response_url,
-++                    copy_morsels=False,
-++                    expiration=expiration,
-++                )
-++        self._replace_contents(loaded)
-+ 
-+     def clear(self, predicate: Optional[ClearCookiePredicate] = None) -> None:
-+         if predicate is None:
-+@@ -272,6 +337,9 @@ class CookieJar(AbstractCookieJar):
-+             self._morsel_cache.clear()
-+             self._host_only_cookies.clear()
-+             self._expirations.clear()
-++            self._access_generations.clear()
-++            self._domain_counts.clear()
-++            self._cookie_count = 0
-+             return
-+ 
-+         now = time.time()
-+@@ -302,7 +370,7 @@ class CookieJar(AbstractCookieJar):
-+         This function does not iterate self to avoid unnecessary expiration
-+         checks.
-+         """
-+-        return sum(len(cookie.values()) for cookie in self._cookies.values())
-++        return self._cookie_count
-+ 
-+     def _do_expiration(self) -> None:
-+         """Remove expired cookies."""
-+@@ -347,12 +415,80 @@ class CookieJar(AbstractCookieJar):
-+         if to_del:
-+             self._delete_cookies(to_del)
-+ 
-+-    def _delete_cookies(self, to_del: List[Tuple[str, str, str]]) -> None:
-++    def _delete_cookies(self, to_del: list[_CookieKey]) -> None:
-+         for domain, path, name in to_del:
-+-            self._host_only_cookies.discard((domain, path, name))
-+-            self._cookies[(domain, path)].pop(name, None)
-+-            self._morsel_cache[(domain, path)].pop(name, None)
-+-            self._expirations.pop((domain, path, name), None)
-++            cookie_key = (domain, path, name)
-++            jar_key = (domain, path)
-++            self._host_only_cookies.discard(cookie_key)
-++            if (cookies := self._cookies.get(jar_key)) is not None:
-++                if cookies.pop(name, None) is not None:
-++                    self._cookie_count -= 1
-++                    if domain_count := self._domain_counts[domain] - 1:
-++                        self._domain_counts[domain] = domain_count
-++                    else:
-++                        del self._domain_counts[domain]
-++                if not cookies:
-++                    del self._cookies[jar_key]
-++            if (morsels := self._morsel_cache.get(jar_key)) is not None:
-++                morsels.pop(name, None)
-++                if not morsels:
-++                    del self._morsel_cache[jar_key]
-++            self._expirations.pop(cookie_key, None)
-++            self._access_generations.pop(cookie_key, None)
-++
-++    def _make_room(self, domain: str, secure: bool) -> bool:
-++        """Evict for a new cookie like Firefox; False drops the new cookie.
-++
-++        Mirrors AddCookie and FindStaleCookies: expired, then non-secure,
-++        cookies go first, least recently used first; secure cookies are only
-++        evicted for another secure cookie.
-++        """
-++        if self._domain_counts.get(domain, 0) >= _MAX_COOKIES_PER_DOMAIN:
-++            self._do_expiration()
-++            count = self._domain_counts.get(domain, 0)
-++            # Leave room so the domain ends at its quota.
-++            if (excess := count - _COOKIE_QUOTA_PER_DOMAIN + 1) <= 0:
-++                return True
-++            non_secure: list[tuple[int, _CookieKey]] = []
-++            secure_keys: list[tuple[int, _CookieKey]] = []
-++            for (cookie_domain, path), cookies in self._cookies.items():
-++                if cookie_domain != domain:
-++                    continue
-++                for name, cookie in cookies.items():
-++                    cookie_key = (domain, path, name)
-++                    entry = (self._access_generations.get(cookie_key, 0), cookie_key)
-++                    (secure_keys if cookie["secure"] else non_secure).append(entry)
-++            if not (candidates := non_secure):
-++                if count < _MAX_COOKIES_PER_DOMAIN:  # expiry freed a slot
-++                    return True
-++                if not secure:
-++                    return False
-++                candidates = secure_keys
-++            candidates.sort()
-++            evicted = candidates[:excess]
-++            self._delete_cookies([key for _, key in evicted])
-++            internal_logger.debug(
-++                "Evicted %d cookie(s) for %s over the %d-cookie domain limit",
-++                len(evicted),
-++                domain,
-++                _MAX_COOKIES_PER_DOMAIN,
-++            )
-++        else:
-++            self._purge_cookies()
-++        return True
-++
-++    def _purge_cookies(self) -> None:
-++        """Evict expired, then least recently used, cookies down to the total."""
-++        self._do_expiration()
-++        if (excess := self._cookie_count - _COOKIE_QUOTA_TOTAL) <= 0:
-++            return
-++        generations = self._access_generations
-++        self._delete_cookies(sorted(generations, key=generations.__getitem__)[:excess])
-++        internal_logger.debug(
-++            "Evicted %d cookie(s) over the %d-cookie total limit",
-++            excess,
-++            _MAX_COOKIES_TOTAL,
-++        )
-+ 
-+     def _expire_cookie(self, when: float, domain: str, path: str, name: str) -> None:
-+         cookie_key = (domain, path, name)
-+@@ -364,6 +500,36 @@ class CookieJar(AbstractCookieJar):
-+ 
-+     def update_cookies(self, cookies: LooseCookies, response_url: URL = URL()) -> None:
-+         """Update cookies."""
-++        self._update_cookies(cookies, response_url, copy_morsels=True)
-++
-++    def update_cookies_from_headers(
-++        self, headers: Sequence[str], response_url: URL
-++    ) -> None:
-++        """Update cookies from raw Set-Cookie headers."""
-++        hostname = response_url.raw_host
-++        if not self._unsafe and is_ip_address(hostname):
-++            # Reject IP-origin cookies before parsing the fields.
-++            return
-++        if headers and (cookies_to_update := parse_set_cookie_headers(headers)):
-++            # The freshly parsed Morsels are not shared with the caller,
-++            # so they can be stored and normalized without a defensive copy.
-++            # The parser only produces cookies that can be sent.
-++            self._update_cookies(
-++                cookies_to_update,
-++                response_url,
-++                copy_morsels=False,
-++                check_sendable=False,
-++            )
-++
-++    def _update_cookies(
-++        self,
-++        cookies: LooseCookies,
-++        response_url: URL,
-++        *,
-++        copy_morsels: bool,
-++        expiration: float | None = None,
-++        check_sendable: bool = True,
-++    ) -> None:
-+         hostname = response_url.raw_host
-+ 
-+         if not self._unsafe and is_ip_address(hostname):
-+@@ -378,6 +544,9 @@ class CookieJar(AbstractCookieJar):
-+                 tmp = SimpleCookie()
-+                 tmp[name] = cookie  # type: ignore[assignment]
-+                 cookie = tmp[name]
-++            elif copy_morsels:
-++                # TODO(https://github.com/python/typeshed/pull/16346): Remove cast
-++                cookie = cast("Morsel[str]", cookie.copy())
-+ 
-+             domain = cookie["domain"]
-+ 
-+@@ -408,41 +577,90 @@ class CookieJar(AbstractCookieJar):
-+             path = path.rstrip("/")
-+ 
-+             if not domain and hostname is not None:
-+-                self._host_only_cookies.add((hostname, path, name))
-+-                domain = cookie["domain"] = hostname
-++                host_only = True
-++                domain = hostname
-+             else:
-+-                # A cookie with an explicit Domain attribute replaces any
-+-                # host-only cookie with the same (domain, path, name) identity.
-+-                self._host_only_cookies.discard((domain, path, name))
-++                host_only = False
-+ 
-+-            if max_age := cookie["max-age"]:
-++            deadline: float | None = None
-++            if expiration is not None:
-++                # Saved jars pass an absolute deadline.
-++                deadline = expiration
-++            elif max_age := cookie["max-age"]:
-+                 try:
-+                     delta_seconds = int(max_age)
-+                     # https://datatracker.ietf.org/doc/html/rfc6265#section-5.2.2
-+                     if delta_seconds <= 0:
-+-                        max_age_expiration = 0.0
-++                        deadline = 0.0
-+                     else:
-+                         # Cap first to protect against OverflowError on next line.
-+                         delta_seconds = min(delta_seconds, self.MAX_TIME)
-+-                        max_age_expiration = min(
-+-                            time.time() + delta_seconds, self.MAX_TIME
-+-                        )
-+-                    self._expire_cookie(max_age_expiration, domain, path, name)
-++                        deadline = min(time.time() + delta_seconds, self.MAX_TIME)
-+                 except ValueError:
-+                     cookie["max-age"] = ""
-+ 
-+             elif expires := cookie["expires"]:
-+                 if expire_time := self._parse_date(expires):
-+-                    self._expire_cookie(expire_time, domain, path, name)
-++                    deadline = expire_time
-+                 else:
-+                     cookie["expires"] = ""
-+ 
-++            if check_sendable and self._limits_enabled and not self._can_send(cookie):
-++                internal_logger.debug(
-++                    "Dropped cookie %r for %s: it can't be sent in a Cookie header",
-++                    name,
-++                    domain,
-++                )
-++                continue
-++
-+             key = (domain, path)
-+-            if self._cookies[key].get(name) != cookie:
-++            cookie_key = (domain, path, name)
-++            bucket = self._cookies.get(key)
-++            stored = None if bucket is None else bucket.get(name)
-++            if (
-++                stored is None
-++                and self._limits_enabled
-++                and (
-++                    self._domain_counts.get(domain, 0) >= _MAX_COOKIES_PER_DOMAIN
-++                    or self._cookie_count >= _MAX_COOKIES_TOTAL
-++                )
-++                # Like Firefox, a cookie that only deletes never evicts others.
-++                and (deadline is None or deadline > time.time())
-++                and not self._make_room(domain, bool(cookie["secure"]))
-++            ):
-++                internal_logger.debug(
-++                    "Dropped cookie %r for %s: its domain is full of Secure cookies",
-++                    name,
-++                    domain,
-++                )
-++                continue
-++
-++            if host_only:
-++                self._host_only_cookies.add(cookie_key)
-++                cookie["domain"] = domain
-++            else:
-++                # A cookie with an explicit Domain attribute replaces any
-++                # host-only cookie with the same (domain, path, name) identity.
-++                self._host_only_cookies.discard(cookie_key)
-++            if deadline is not None:
-++                self._expire_cookie(deadline, domain, path, name)
-++            elif self._expirations:
-++                # RFC 6265 5.3 step 11: a replacement doesn't inherit expiry.
-++                self._expirations.pop(cookie_key, None)
-++
-++            if stored != cookie:
-+                 # Don't blow away the cache if the same
-+                 # cookie gets set again
-++                if stored is None:
-++                    self._cookie_count += 1
-++                    self._domain_counts[domain] = self._domain_counts.get(domain, 0) + 1
-+                 self._cookies[key][name] = cookie
-+-                self._morsel_cache[key].pop(name, None)
-++                if (morsels := self._morsel_cache.get(key)) is not None:
-++                    morsels.pop(name, None)
-++            if self._limits_enabled:
-++                # Like Firefox, each stored cookie gets its own access time.
-++                self._next_access_generation += 1
-++                self._access_generations[cookie_key] = self._next_access_generation
-+ 
-+         self._do_expiration()
-+ 
-+@@ -476,31 +694,29 @@ class CookieJar(AbstractCookieJar):
-+                 request_origin = request_url.origin()
-+             is_not_secure = request_origin not in self._treat_as_secure_origin
-+ 
-++        # Last (most specific) matching cookie per name wins.
-++        selected: dict[str, _MorselEntry] = {}
-++
-+         # Send shared cookie
-+         key = ("", "")
-+-        for c in self._cookies[key].values():
-+-            if is_not_secure and c["secure"]:
-+-                continue
-+-
-+-            # Check cache first
-+-            if c.key in self._morsel_cache[key]:
-+-                filtered[c.key] = self._morsel_cache[key][c.key]
-+-                continue
-+-
-+-            # Build and cache the morsel
-+-            mrsl_val = self._build_morsel(c)
-+-            self._morsel_cache[key][c.key] = mrsl_val
-+-            filtered[c.key] = mrsl_val
-++        if key in self._cookies:
-++            morsels = self._morsel_cache[key]
-++            for name, cookie in self._cookies[key].items():
-++                if is_not_secure and cookie["secure"]:
-++                    continue
-++                if (entry := morsels.get(name)) is None:
-++                    entry = morsels[name] = self._morsel_entry(key, name, cookie)
-++                selected[name] = entry
-+ 
-+-        if is_ip_address(hostname):
-+-            if not self._unsafe:
-+-                return filtered
-+-            domains: Iterable[str] = (hostname,)
-+-        else:
-++        if not is_ip_address(hostname):
-+             # Get all the subdomains that might match a cookie (e.g. "foo.bar.com", "bar.com", "com")
-+-            domains = itertools.accumulate(
-++            domains: Iterable[str] = itertools.accumulate(
-+                 reversed(hostname.split(".")), _FORMAT_DOMAIN_REVERSED
-+             )
-++        elif self._unsafe:
-++            domains = (hostname,)
-++        else:
-++            domains = ()
-+ 
-+         # Get all the path prefixes that might match a cookie (e.g. "", "/foo", "/foo/bar")
-+         paths = itertools.accumulate(request_url.path.split("/"), _FORMAT_PATH)
-+@@ -510,8 +726,9 @@ class CookieJar(AbstractCookieJar):
-+         path_len = len(request_url.path)
-+         # Point 2: https://www.rfc-editor.org/rfc/rfc6265.html#section-5.4
-+         for p in pairs:
-+-            if p not in self._cookies:
-++            if p == ("", "") or p not in self._cookies:
-+                 continue
-++            morsels = self._morsel_cache[p]
-+             for name, cookie in self._cookies[p].items():
-+                 domain = cookie["domain"]
-+ 
-+@@ -525,18 +742,80 @@ class CookieJar(AbstractCookieJar):
-+                 if is_not_secure and cookie["secure"]:
-+                     continue
-+ 
-+-                # We already built the Morsel so reuse it here
-+-                if name in self._morsel_cache[p]:
-+-                    filtered[name] = self._morsel_cache[p][name]
-+-                    continue
-++                if (entry := morsels.get(name)) is None:
-++                    entry = morsels[name] = self._morsel_entry(p, name, cookie)
-++                # Re-insert so the order tracks specificity, for the header and
-++                # the over-limit fallback.
-++                selected.pop(name, None)
-++                selected[name] = entry
-++
-++        if self._limits_enabled:
-++            # Each cookie after the first adds a "; " separator.
-++            header_length = _COOKIE_HEADER_PREFIX_LENGTH - 2 + 2 * len(selected)
-++            header_length += sum(entry[1] for entry in selected.values())
-++            if (
-++                len(selected) > _MAX_COOKIES_PER_REQUEST
-++                or header_length > _MAX_COOKIE_HEADER_LENGTH
-++            ):
-++                return self._filter_cookies_within_limits(selected, hostname)
-++            self._touch_cookies([entry[2] for entry in selected.values()])
-++        # Bypass BaseCookie.__setitem__, which stores Morsel values as-is.
-++        dict.update(filtered, {name: entry[0] for name, entry in selected.items()})
-++        return filtered
-+ 
-+-                # Build and cache the morsel
-+-                mrsl_val = self._build_morsel(cookie)
-+-                self._morsel_cache[p][name] = mrsl_val
-+-                filtered[name] = mrsl_val
-++    def _filter_cookies_within_limits(
-++        self, selected: dict[str, _MorselEntry], hostname: str
-++    ) -> "BaseCookie[str]":
-++        """Admit the most specific cookies first so a host's own cookies win."""
-++        header_length = _COOKIE_HEADER_PREFIX_LENGTH - 2  # no "; " before the first
-++        admitted: list[tuple[str, _MorselEntry]] = []
-++        for name, entry in reversed(selected.items()):
-++            if len(admitted) >= _MAX_COOKIES_PER_REQUEST:
-++                break
-++            if header_length + 2 + entry[1] > _MAX_COOKIE_HEADER_LENGTH:
-++                continue
-++            header_length += 2 + entry[1]
-++            admitted.append((name, entry))
-+ 
-++        filtered: BaseCookie[str] = BaseCookie()
-++        for name, entry in reversed(admitted):
-++            dict.__setitem__(filtered, name, entry[0])
-++        self._touch_cookies([entry[2] for _, entry in admitted])
-++        internal_logger.debug(
-++            "Omitted %d cookie(s) for %s over the %d-cookie"
-++            " or %d-octet Cookie header limit",
-++            len(selected) - len(admitted),
-++            hostname,
-++            _MAX_COOKIES_PER_REQUEST,
-++            _MAX_COOKIE_HEADER_LENGTH,
-++        )
-+         return filtered
-+ 
-++    @staticmethod
-++    def _can_send(cookie: Morsel[str]) -> bool:
-++        """Return whether the cookie can be written to a Cookie header."""
-++        # Whichever of value and coded_value is sent, CPython builds with the
-++        # CVE-2026-3644 patch also reject control characters in either.
-++        text = f"{cookie.key}={cookie.value}{cookie.coded_value}"
-++        return _COOKIE_CTL_RE.search(text) is None and _encoded_length(text) is not None
-++
-++    def _morsel_entry(
-++        self, jar_key: _JarKey, name: str, cookie: Morsel[str]
-++    ) -> _MorselEntry:
-++        """Build the morsel to send with its length in the Cookie header."""
-++        morsel = self._build_morsel(cookie)
-++        length = _encoded_length(f"{morsel.key}={morsel.coded_value}")
-++        assert length is not None  # Checked before storing.
-++        return morsel, length, jar_key + (name,)
-++
-++    def _touch_cookies(self, cookie_keys: Sequence[_CookieKey]) -> None:
-++        """Record one access generation for cookies used together, like Firefox."""
-++        self._next_access_generation += 1
-++        generation = self._next_access_generation
-++        generations = self._access_generations
-++        for cookie_key in cookie_keys:
-++            generations[cookie_key] = generation
-++
-+     def _build_morsel(self, cookie: Morsel[str]) -> Morsel[str]:
-+         """Build a morsel for sending, respecting quote_cookie setting."""
-+         if self._quote_cookie and cookie.coded_value and cookie.coded_value[0] == '"':
-+@@ -634,6 +913,19 @@ class CookieJar(AbstractCookieJar):
-+         return calendar.timegm((year, month, day, hour, minute, second, -1, -1, -1))
-+ 
-+ 
-++class _UnlimitedCookieJar(CookieJar):
-++    """Jar for per-request cookies, which the jar limits don't apply to."""
-++
-++    _limits_enabled = False
-++
-++    def _morsel_entry(
-++        self, jar_key: _JarKey, name: str, cookie: Morsel[str]
-++    ) -> _MorselEntry:
-++        # The length and LRU key only serve the limits. These cookies skip the
-++        # storage check, so an unencodable one is left for the writer to report.
-++        return self._build_morsel(cookie), 0, _UNLIMITED_COOKIE_KEY
-++
-++
-+ class DummyCookieJar(AbstractCookieJar):
-+     """Implements a dummy cookie storage.
-+ 
-+@@ -664,5 +956,10 @@ class DummyCookieJar(AbstractCookieJar):
-+     def update_cookies(self, cookies: LooseCookies, response_url: URL = URL()) -> None:
++     def eof_received(self) -> None:
 +         pass
 + 
-++    def update_cookies_from_headers(
-++        self, headers: Sequence[str], response_url: URL
-++    ) -> None:
-++        """Ignore raw Set-Cookie fields without parsing them."""
-++
-+     def filter_cookies(self, request_url: URL) -> "BaseCookie[str]":
-+         return SimpleCookie()
-+diff --git a/tests/test_benchmarks_cookiejar.py b/tests/test_benchmarks_cookiejar.py
-+index 7856615..f95e5f0 100644
-+--- a/tests/test_benchmarks_cookiejar.py
-++++ b/tests/test_benchmarks_cookiejar.py
-+@@ -5,7 +5,7 @@ from http.cookies import BaseCookie
-+ from pytest_codspeed import BenchmarkFixture
-+ from yarl import URL
++@@ -464,6 +469,11 @@ class RequestHandler(BaseProtocol):
++         # no parser, just store
++         elif self._payload_parser is None and self._upgrade and data:
++             self._message_tail += data
+++            if (
+++                not self._msg_queue_paused
+++                and len(self._message_tail) >= self._read_bufsize
+++            ):
+++                self._pause_msg_queue_reading()
 + 
-+-from aiohttp.cookiejar import CookieJar
-++from aiohttp.cookiejar import CookieJar, _UnlimitedCookieJar
++         # feed payload
++         elif data:
++@@ -485,6 +495,10 @@ class RequestHandler(BaseProtocol):
++                 pass
 + 
-+ 
-+ async def test_load_cookies_into_temp_cookiejar(benchmark: BenchmarkFixture) -> None:
-+@@ -20,7 +20,7 @@ async def test_load_cookies_into_temp_cookiejar(benchmark: BenchmarkFixture) ->
-+ 
-+     @benchmark
-+     def _run() -> None:
-+-        tmp_cookie_jar = CookieJar()
-++        tmp_cookie_jar = _UnlimitedCookieJar()
-+         tmp_cookie_jar.update_cookies(cookies)
-+         req_cookies = tmp_cookie_jar.filter_cookies(url)
-+         all_cookies.load(req_cookies)
-+diff --git a/tests/test_client_functional.py b/tests/test_client_functional.py
-+index 7530ada..c2b14ee 100644
-+--- a/tests/test_client_functional.py
-++++ b/tests/test_client_functional.py
-+@@ -62,6 +62,7 @@ from aiohttp.client_exceptions import (
-+ from aiohttp.client_reqrep import ClientRequest
-+ from aiohttp.compression_utils import DEFAULT_MAX_DECOMPRESS_SIZE
-+ from aiohttp.connector import Connection
-++from aiohttp.cookiejar import _MAX_COOKIES_PER_REQUEST
-+ from aiohttp.http_exceptions import DecompressSizeError
-+ from aiohttp.http_writer import StreamWriter
-+ from aiohttp.payload import (
-+@@ -1605,6 +1606,62 @@ async def test_HTTP_302_max_redirects(aiohttp_client) -> None:
-+     assert ctx.value.request_info.method == "GET"
-+ 
-+ 
-++async def test_redirect_cookie_storage_is_bounded(
-++    aiohttp_client: AiohttpClient,
-++) -> None:
-++    """Large Set-Cookie fields across redirects keep jar and cache state bounded."""
-++    redirect_count = 10
-++    fields_per_response = 20
-++    ignored_attribute = "x" * 7400
-++    received_cookie_headers: list[str] = []
++     def _resume_msg_queue_reading(self) -> None:
+++        # Tested empty-first so a read_bufsize of 0 cannot wedge the connection.
+++        if self._message_tail and len(self._message_tail) >= self._read_bufsize:
+++            return
 ++
-++    async def handler(request: web.Request) -> web.Response:
-++        received_cookie_headers.append(request.headers.get(hdrs.COOKIE, ""))
-++        count = int(request.match_info["count"])
-++        if count:
-++            response = web.Response(
-++                status=302, headers={hdrs.LOCATION: f"/redirect/{count - 1}"}
-++            )
-++        else:
-++            response = web.Response()
-++        for index in range(fields_per_response):
-++            response.headers.add(
-++                hdrs.SET_COOKIE,
-++                f"cookie{count}_{index}=value; junk={ignored_attribute}",
-++            )
-++        return response
++         if not self._upgrade:
++             # Reparse buffered pipelined requests while still marked paused so
++             # a refill past the limit does not re-pause an already-paused
++@@ -765,25 +779,56 @@ class RequestHandler(BaseProtocol):
++         prematurely.
++         """
++         request._finish()
++-        if self._request_parser is not None:
 ++
-++    app = web.Application()
-++    app.router.add_get(r"/redirect/{count:\d+}", handler)
-++    jar = aiohttp.CookieJar(unsafe=True)
-++    client = await aiohttp_client(app, cookie_jar=jar)
-++
-++    async with client.get(
-++        f"/redirect/{redirect_count}", max_redirects=redirect_count + 1
-++    ) as response:
-++        assert response.status == 200
-++        assert len(response.history) == redirect_count
-++        assert len(response.cookies) == fields_per_response
-++        assert len(response.headers.getall(hdrs.SET_COOKIE)) == fields_per_response
-++
-++    response_bytes = (
-++        (redirect_count + 1)
-++        * fields_per_response
-++        * len(f"Set-Cookie: cookie10_15=value; junk={ignored_attribute}".encode())
-++    )
-++    assert response_bytes > 1024 * 1024
-++    max_cookies = aiohttp.cookiejar._MAX_COOKIES_PER_DOMAIN
-++    assert redirect_count * fields_per_response > max_cookies
-++    assert aiohttp.cookiejar._COOKIE_QUOTA_PER_DOMAIN < len(jar) <= max_cookies
-++    assert sum(map(len, jar._morsel_cache.values())) <= max_cookies
-++    assert all(
-++        aiohttp.cookiejar._COOKIE_HEADER_PREFIX_LENGTH + len(value.encode())
-++        <= aiohttp.cookiejar._MAX_COOKIE_HEADER_LENGTH
-++        for value in received_cookie_headers
-++        if value
-++    )
-++
-++
-+ async def test_HTTP_200_GET_WITH_PARAMS(aiohttp_client) -> None:
-+     async def handler(request):
-+         return web.Response(
-+@@ -2785,6 +2842,76 @@ async def test_cookies_per_request(aiohttp_client) -> None:
-+         assert 200 == resp.status
-+ 
-+ 
-++async def test_per_request_cookies_are_not_jar_limited(
-++    aiohttp_client: AiohttpClient,
-++) -> None:
-++    cookies = {f"cookie{i}": "value" for i in range(_MAX_COOKIES_PER_REQUEST + 1)}
-++
-++    async def handler(request: web.Request) -> web.Response:
-++        assert request.cookies.keys() == cookies.keys()
-++        return web.Response()
-++
-++    app = web.Application()
-++    app.router.add_get("/", handler)
-++    client = await aiohttp_client(app)
-++
-++    async with client.get("/", cookies=cookies) as response:
-++        assert response.status == 200
-++
-++
-++async def test_explicit_cookie_header_is_not_jar_limited(
-++    aiohttp_client: AiohttpClient,
-++) -> None:
-++    count = _MAX_COOKIES_PER_REQUEST + 1
-++    cookie_header = "; ".join(f"cookie{i}=value" for i in range(count))
-++
-++    async def handler(request: web.Request) -> web.Response:
-++        assert request.headers[hdrs.COOKIE] == cookie_header
-++        assert len(request.cookies) == count
-++        return web.Response()
-++
-++    app = web.Application()
-++    app.router.add_get("/", handler)
-++    client = await aiohttp_client(app)
-++
-++    async with client.get("/", headers={hdrs.COOKIE: cookie_header}) as response:
-++        assert response.status == 200
-++
-++
-++@pytest.mark.parametrize(
-++    ("set_cookie", "name", "value"),
-++    (("path=unquoted", "path", "unquoted"), ('secure="quoted"', "secure", "quoted")),
-++)
-++async def test_reserved_cookie_name_round_trip(
-++    aiohttp_client: AiohttpClient,
-++    set_cookie: str,
-++    name: str,
-++    value: str,
-++) -> None:
-++    """Reserved attribute words are valid cookie names in first position."""
-++    received_cookies: dict[str, str] = {}
-++
-++    async def set_handler(request: web.Request) -> web.Response:
-++        response = web.Response(status=302, headers={hdrs.LOCATION: "/receive"})
-++        response.headers.add(hdrs.SET_COOKIE, set_cookie)
-++        return response
-++
-++    async def receive_handler(request: web.Request) -> web.Response:
-++        received_cookies.update(request.cookies)
-++        return web.Response()
-++
-++    app = web.Application()
-++    app.router.add_get("/set", set_handler)
-++    app.router.add_get("/receive", receive_handler)
-++    client = await aiohttp_client(app, cookie_jar=aiohttp.CookieJar(unsafe=True))
-++
-++    async with client.get("/set") as response:
-++        assert response.status == 200
-++        assert response.history[0].cookies[name].value == value
-++
-++    assert received_cookies == {name: value}
-++
-++
-+ async def test_cookies_redirect(aiohttp_client) -> None:
-+     async def redirect1(request):
-+         ret = web.Response(status=301, headers={"Location": "/redirect2"})
-+diff --git a/tests/test_client_response.py b/tests/test_client_response.py
-+index a5061e0..24e64c9 100644
-+--- a/tests/test_client_response.py
-++++ b/tests/test_client_response.py
-+@@ -13,6 +13,7 @@ from yarl import URL
-+ 
-+ import aiohttp
-+ from aiohttp import ClientSession, hdrs, http
-++from aiohttp._cookie_helpers import _MAX_COOKIES_PER_RESPONSE
-+ from aiohttp.client_reqrep import ClientResponse, RequestInfo
-+ from aiohttp.helpers import TimerNoop
-+ from aiohttp.multipart import BadContentDispositionHeader
-+@@ -1414,6 +1415,31 @@ def test_response_duplicate_cookie_names(
-+     assert response.cookies["user-pref"].value == "light"  # Last one wins
+++        # Handle feeding the message tail following an upgrade request that
+++        # was declined.
+++        # The upgrade request is the last request before the parser paused,
+++        # so wait for self._messages to be empty.
+++        # payload_parser is not None if the upgrade was accepted.
+++        if (
+++            self._upgrade
+++            and not self._messages
+++            and self._payload_parser is None
+++            and self._request_parser is not None
+++        ):
++             self._request_parser.set_upgraded(False)
++             self._upgrade = False
++             if self._message_tail:
++-                messages, _upgraded, tail = self._request_parser.feed_data(
++-                    self._message_tail
++-                )
+++                messages: Sequence[_MsgType]
+++                try:
+++                    messages, upgraded, tail = self._request_parser.feed_data(
+++                        self._message_tail
+++                    )
+++                except HttpProcessingError as parse_exc:
+++                    # Garbage (or an oversized request line) buffered behind the
+++                    # upgrade: answer 400 instead of letting the error escape
+++                    # and lose this response, like data_received() does.
+++                    messages = [
+++                        (
+++                            _ErrInfo(
+++                                status=400,
+++                                exc=parse_exc,
+++                                message=parse_exc.message,
+++                            ),
+++                            EMPTY_PAYLOAD,
+++                        )
+++                    ]
+++                    upgraded = False
+++                    tail = b""
+++                # A further upgrade request in the tail buffers its own remainder.
+++                self._upgrade = upgraded
++                 self._message_tail = tail
++                 for msg, payload in messages:
++                     self._request_count += 1
++                     self._messages.append((msg, payload))
++-                # Pause the transport, like in data_received().
++-                if (
++-                    not self._msg_queue_paused
++-                    and len(self._messages) >= self._max_msg_queue_size
++-                ):
+++                if len(self._messages) >= self._max_msg_queue_size:
+++                    # Pause the transport, like in data_received().
++                     self._pause_msg_queue_reading()
++-                # This should not be possible. If a future refactor results in
++-                # this failing, update the code to set the waiter.
+++                elif self._msg_queue_paused:
+++                    # Resume reading now the tail has been parsed.
+++                    self._resume_msg_queue_reading()
+++                # This shouldn't be possible. If a future refactor results in this
+++                # failing, then the code may need to be updated to set the waiter.
++                 assert self._waiter is None
++         try:
++             prepare_meth = resp.prepare
++diff --git a/tests/test_web_functional.py b/tests/test_web_functional.py
++index c5c4b5b..c9146ca 100644
++--- a/tests/test_web_functional.py
+++++ b/tests/test_web_functional.py
++@@ -26,8 +26,11 @@ from aiohttp import (
++     multipart,
++     web,
++ )
+++from aiohttp._websocket.writer import WebSocketWriter
+++from aiohttp.base_protocol import BaseProtocol
++ from aiohttp.compression_utils import ZLibBackend, ZLibCompressObjProtocol
++ from aiohttp.hdrs import CONTENT_LENGTH, CONTENT_TYPE, TRANSFER_ENCODING
+++from aiohttp.http import WSMsgType
++ from aiohttp.pytest_plugin import AiohttpClient, AiohttpServer
++ from aiohttp.streams import StreamReader
++ from aiohttp.typedefs import Handler
++@@ -1871,6 +1874,224 @@ async def test_http1_pipelined_behind_declined_upgrade_served_once(
++     assert len(set(handled)) == len(handled)
 + 
 + 
-++def test_response_cookies_are_bounded_but_raw_headers_remain_available(
-++    loop: asyncio.AbstractEventLoop, session: ClientSession
-++) -> None:
-++    response = ClientResponse(
-++        "get",
-++        URL("http://example.com"),
-++        request_info=mock.Mock(),
-++        writer=WriterMock(),
-++        continue100=None,
-++        timer=TimerNoop(),
-++        traces=[],
-++        loop=loop,
-++        session=session,
-++    )
-++    cookie_headers = tuple(
-++        f"cookie{i}=value" for i in range(_MAX_COOKIES_PER_RESPONSE + 1)
-++    )
-++    headers = CIMultiDict(("Set-Cookie", value) for value in cookie_headers)
-++    response._headers = CIMultiDictProxy(headers)
-++    response._raw_cookie_headers = cookie_headers
-++
-++    assert len(response.cookies) == _MAX_COOKIES_PER_RESPONSE
-++    assert response.headers.getall("Set-Cookie") == list(cookie_headers)
+++DEFAULT_CHUNK_SIZE = 256 * 1024
 ++
 ++
-+ def test_response_raw_cookie_headers_preserved(
-+     loop: asyncio.AbstractEventLoop, session: ClientSession
-+ ) -> None:
-+diff --git a/tests/test_cookie_helpers.py b/tests/test_cookie_helpers.py
-+index 767e1ea..2f0e754 100644
-+--- a/tests/test_cookie_helpers.py
-++++ b/tests/test_cookie_helpers.py
-+@@ -73,6 +73,24 @@ def test_preserve_morsel_with_coded_value_no_coded_value() -> None:
-+     assert result.coded_value == "simple_value"
-+ 
-+ 
-++@pytest.mark.parametrize("name", sorted(Morsel._reserved))  # type: ignore[attr-defined]
-++@pytest.mark.parametrize("coded_value", ("value", '"value"'))
-++def test_preserve_morsel_with_reserved_cookie_name(name: str, coded_value: str) -> None:
-++    """A cookie named like an attribute, such as ``path``, is preserved."""
-++    cookie: Morsel[str] = Morsel()
-++    cookie.__setstate__(  # type: ignore[attr-defined]
-++        {"key": name, "value": "value", "coded_value": coded_value}
-++    )
-++
-++    result = preserve_morsel_with_coded_value(cookie)
-++
-++    assert result is not cookie
-++    assert result.key == name
-++    assert result.value == "value"
-++    assert result.coded_value == coded_value
-++    assert result.OutputString() == f"{name}={coded_value}"
-++
-++
-+ def test_parse_set_cookie_headers_simple() -> None:
-+     """Test parse_set_cookie_headers with simple cookies."""
-+     headers = ["name=value", "session=abc123"]
-+@@ -88,6 +106,184 @@ def test_parse_set_cookie_headers_simple() -> None:
-+     assert result[1][1].value == "abc123"
-+ 
-+ 
-++def test_parse_set_cookie_headers_limits_accepted_fields() -> None:
-++    """Malformed fields do not consume the 50-cookie response budget."""
-++    limit = helpers._MAX_COOKIES_PER_RESPONSE
-++    headers = ["not-a-cookie"] * 10 + [f"cookie{i}=value" for i in range(limit + 1)]
-++
-++    result = parse_set_cookie_headers(headers)
-++
-++    assert len(result) == limit
-++    assert result[-1][0] == f"cookie{limit - 1}"
-++
-++
-++def test_parse_set_cookie_headers_duplicate_consumes_response_budget() -> None:
-++    limit = helpers._MAX_COOKIES_PER_RESPONSE
-++    headers = [f"cookie{i}=value" for i in range(limit - 1)]
-++    headers.extend(("cookie0=replaced", "not_stored=over-limit"))
-++
-++    result = parse_set_cookie_headers(headers)
-++
-++    assert len(result) == helpers._MAX_COOKIES_PER_RESPONSE
-++    assert result[-1][0] == "cookie0"
-++    assert all(name != "not_stored" for name, _ in result)
-++
-++
-++def test_parse_set_cookie_headers_attribute_value_limits() -> None:
-++    accepted_path = "/" + "x" * (helpers._MAX_COOKIE_ATTRIBUTE_VALUE_LENGTH - 1)
-++    ignored_path = accepted_path + "x"
-++
-++    accepted = parse_set_cookie_headers([f"cookie=value; Path={accepted_path}"])
-++    ignored = parse_set_cookie_headers([f"cookie=value; Path={ignored_path}"])
-++
-++    assert accepted[0][1]["path"] == accepted_path
-++    assert ignored[0][1]["path"] == ""
-++
-++
-++def test_parse_set_cookie_headers_many_unknown_attributes() -> None:
-++    result = parse_set_cookie_headers(["cookie=value;" + "unknown=x;" * 1000])
-++
-++    assert len(result) == 1
-++    assert result[0][0] == "cookie"
-++    assert "unknown" not in result[0][1]
-++
-++
-++@pytest.mark.parametrize(
-++    ("attribute", "path", "secure"),
-++    (
-++        ('Path="/\u00e9"', "/\u00e9", ""),
-++        ('Path="/\udcff"', "", ""),
-++        ('Secure="\udcff"', "", True),
-++        ('Path="/a\tb"', "", ""),
-++        ('Path="/' + "\u00e9" * 600 + '"', "", ""),
-++    ),
-++)
-++def test_parse_set_cookie_headers_quoted_attribute_values(
-++    attribute: str, path: str, secure: str | bool
-++) -> None:
-++    result = parse_set_cookie_headers([f"cookie=value; {attribute}"])
-++
-++    assert result[0][1]["path"] == path
-++    assert result[0][1]["secure"] == secure
-++
-++
-++@pytest.mark.parametrize(
-++    "header",
-++    ("c=v; Path=/x; =junk", "c=v; =junk; Path=/x", "c=v; Path=/x; =junk;; ;"),
-++)
-++def test_parse_set_cookie_headers_skips_malformed_attribute(header: str) -> None:
-++    result = parse_set_cookie_headers([header])
-++
-++    assert result[0][1]["path"] == "/x"
-++
-++
-++@pytest.mark.parametrize(
-++    "header",
-++    (
-++        'a=b; Path="/x\\012y"; Secure',
-++        'a=b; Comment="hi\\011there"; Secure',
-++        'a=b; Comment="hi\tthere"; Secure',
-++    ),
-++)
-++def test_parse_set_cookie_headers_ignores_attribute_with_control_character(
-++    header: str,
-++) -> None:
-++    """Control characters, even from unquoting, drop just the attribute."""
-++    result = parse_set_cookie_headers([header])
-++
-++    assert len(result) == 1
-++    assert result[0][1]["path"] == ""
-++    assert result[0][1]["comment"] == ""
-++    assert result[0][1]["secure"] is True
-++
-++
-++def test_parse_set_cookie_headers_limits_attributes_per_field() -> None:
-++    limit = helpers._MAX_COOKIE_ATTRIBUTES
-++    within = "c=v; " + "x=1; " * (limit - 1) + "Path=/within"
-++    beyond = "c=v; " + "x=1; " * limit + "Path=/beyond"
-++
-++    assert parse_set_cookie_headers([within])[0][1]["path"] == "/within"
-++    assert parse_set_cookie_headers([beyond])[0][1]["path"] == ""
-++
-++
-++@pytest.mark.parametrize(
-++    ("headers", "message"),
-++    (
-++        (["ok=1", "", "bad\x01=1", "nameless"], "Ignored 3 invalid"),
-++        (
-++            [f"c{i}=1" for i in range(helpers._MAX_COOKIES_PER_RESPONSE + 2)],
-++            "and 2 over the 50-cookie limit",
-++        ),
-++    ),
-++)
-++def test_parse_set_cookie_headers_logs_dropped_fields(
-++    caplog: pytest.LogCaptureFixture, headers: list[str], message: str
-++) -> None:
-++    with caplog.at_level(logging.DEBUG, logger="aiohttp.internal"):
-++        parse_set_cookie_headers(headers)
-++
-++    assert message in caplog.text
-++
-++
-++def test_parse_set_cookie_headers_valid_fields_log_nothing(
-++    caplog: pytest.LogCaptureFixture,
-++) -> None:
-++    with caplog.at_level(logging.DEBUG, logger="aiohttp.internal"):
-++        parse_set_cookie_headers(["a=1; Path=/", "b=2"])
-++
-++    assert not caplog.records
-++
-++
-++def test_parse_set_cookie_headers_quoted_value_with_trailing_text() -> None:
-++    # Text after the closing quote means the quoted value isn't the whole
-++    # pair, so the pair ends at the first semicolon.
-++    result = parse_set_cookie_headers(['name="a;b" junk; Path=/x'])
-++
-++    assert len(result) == 1
-++    assert result[0][1].coded_value == '"a'
-++    assert result[0][1]["path"] == "/x"
-++
-++
-++def test_parse_set_cookie_headers_skips_rejected_morsels(
+++async def test_upgrade_tail_is_byte_limited(
+++    aiohttp_server: AiohttpServer,
 ++    monkeypatch: pytest.MonkeyPatch,
 ++) -> None:
-++    original_setstate = Morsel.__setstate__  # type: ignore[attr-defined]
+++    """Bytes buffered behind an in-flight upgrade must not grow unbounded.
 ++
-++    def setstate(self: Morsel[str], state: dict[str, str]) -> None:
-++        if state["key"] == "rejected":
-++            raise CookieError()
-++        original_setstate(self, state)
-++
-++    monkeypatch.setattr("aiohttp._cookie_helpers.Morsel.__setstate__", setstate)
-++
-++    result = parse_set_cookie_headers(["rejected=value", "kept=value"])
-++
-++    assert [name for name, _ in result] == ["kept"]
-++
-++
-++@pytest.mark.parametrize("flag", ("Secure", "HttpOnly"))
-++def test_parse_set_cookie_headers_flag_values_are_ignored(flag: str) -> None:
-++    """An oversized value doesn't strip the flag, as in Firefox."""
-++    value = "x" * (helpers._MAX_COOKIE_ATTRIBUTE_VALUE_LENGTH + 1)
-++
-++    result = parse_set_cookie_headers([f"cookie=value; {flag}={value}"])
-++
-++    assert result[0][1][flag.lower()] is True
-++
-++
-++@pytest.mark.parametrize(
-++    "header",
-++    (
-++        'cookie="a\x00b"',
-++        'cookie="a\x1fb"',
-++        'cookie="a\x7fb"',
-++        "cookie=value; unknown=a\x07b",
-++    ),
-++)
-++def test_parse_set_cookie_headers_rejects_control_characters(header: str) -> None:
-++    assert parse_set_cookie_headers([header]) == []
-++
-++
-+ def test_parse_set_cookie_headers_with_attributes() -> None:
-+     """Test parse_set_cookie_headers with cookie attributes."""
-+     headers = [
-+@@ -168,8 +364,6 @@ def test_parse_set_cookie_headers_empty_and_invalid() -> None:
-+         "=value",  # No name
-+         "name=",  # Empty value (should be accepted)
-+         "justname",  # No value (should be skipped)
-+-        "path=/",  # Reserved attribute as name (should be skipped)
-+-        "Domain=.com",  # Reserved attribute as name (should be skipped)
-+     ]
-+ 
-+     result = parse_set_cookie_headers(headers)
-+@@ -180,6 +374,45 @@ def test_parse_set_cookie_headers_empty_and_invalid() -> None:
-+     assert result[0][1].value == ""
-+ 
-+ 
-++def test_parse_set_cookie_headers_trims_wsp_and_preserves_first_equals() -> None:
-++    result = parse_set_cookie_headers(["\t name \t=\t value=rest \t; Path=/"])
-++
-++    assert len(result) == 1
-++    assert result[0][0] == "name"
-++    assert result[0][1].value == "value=rest"
-++
-++
-++@pytest.mark.parametrize(
-++    "header",
-++    (
-++        "nameless-value",
-++        "name with internal space=value",
-++        "name=value\twith-tab",
-++    ),
-++)
-++def test_parse_set_cookie_headers_rejects_unserializable_pairs(header: str) -> None:
-++    """Pairs that BaseCookie can't serialize unambiguously are rejected."""
-++    assert parse_set_cookie_headers([header]) == []
-++
-++
-++def test_parse_set_cookie_headers_rejects_surrogateescaped_value() -> None:
-++    assert parse_set_cookie_headers(['name="\udcff"']) == []
-++
-++
-++@pytest.mark.parametrize("name", ("Path", "Secure", "Domain"))
-++def test_parse_set_cookie_headers_accepts_attribute_names_as_cookie_names(
-++    name: str,
-++) -> None:
-++    """Attribute names are ordinary token cookie-names in first position."""
-++    result = parse_set_cookie_headers([f"{name}=value; unknown=ignored"])
-++
-++    assert len(result) == 1
-++    assert result[0][0] == name
-++    assert result[0][1].key == name
-++    assert result[0][1].value == "value"
-++    assert "unknown" not in result[0][1]
-++
-++
-+ def test_parse_set_cookie_headers_quoted_values() -> None:
-+     """Test parse_set_cookie_headers handles quoted values correctly."""
-+     headers = [
-+@@ -197,49 +430,36 @@ def test_parse_set_cookie_headers_quoted_values() -> None:
-+ 
-+ 
-+ @pytest.mark.parametrize(
-+-    "header",
-++    ("header", "expected_name", "expected_value"),
-+     [
-+-        'session="abc;xyz"; token=123',
-+-        'data="value;with;multiple;semicolons"; next=cookie',
-+-        'complex="a=b;c=d"; simple=value',
-++        ('session="abc;xyz"; token=123', "session", "abc;xyz"),
-++        (
-++            'data="value;with;multiple;semicolons"; next=cookie',
-++            "data",
-++            "value;with;multiple;semicolons",
-++        ),
-++        ('complex="a=b;c=d"; simple=value', "complex", "a=b;c=d"),
-+     ],
-+ )
-+-def test_parse_set_cookie_headers_semicolon_in_quoted_values(header: str) -> None:
-+-    """
-+-    Test that semicolons inside properly quoted values are handled correctly.
-+-
-+-    Cookie values can contain semicolons when properly quoted. This test ensures
-+-    that our parser handles these cases correctly, matching SimpleCookie behavior.
-+-    """
-+-    # Test with SimpleCookie
-+-    sc = SimpleCookie()
-+-    sc.load(header)
-+-
-+-    # Test with our parser
-++def test_parse_set_cookie_headers_semicolon_in_quoted_values(
-++    header: str, expected_name: str, expected_value: str
-++) -> None:
-++    """Semicolons in a quoted value do not create additional cookies."""
-+     result = parse_set_cookie_headers([header])
-+-
-+-    # Should parse the same number of cookies
-+-    assert len(result) == len(sc)
-+-
-+-    # Verify each cookie matches SimpleCookie
-+-    for (name, morsel), (sc_name, sc_morsel) in zip(result, sc.items()):
-+-        assert name == sc_name
-+-        assert morsel.value == sc_morsel.value
-++    assert len(result) == 1
-++    assert result[0][0] == expected_name
-++    assert result[0][1].value == expected_value
-+ 
-+ 
-+ def test_parse_set_cookie_headers_multiple_cookies_same_header() -> None:
-+-    """Test parse_set_cookie_headers with multiple cookies in one header."""
-+-    # Note: SimpleCookie includes the comma as part of the first cookie's value
-++    """A Set-Cookie field creates exactly one cookie."""
-+     headers = ["cookie1=value1, cookie2=value2"]
-+ 
-+     result = parse_set_cookie_headers(headers)
-+ 
-+-    # Should parse as two separate cookies
-+-    assert len(result) == 2
-++    assert len(result) == 1
-+     assert result[0][0] == "cookie1"
-+-    assert result[0][1].value == "value1,"  # Comma is included in the value
-+-    assert result[1][0] == "cookie2"
-+-    assert result[1][1].value == "value2"
-++    assert result[0][1].value == "value1, cookie2=value2"
-+ 
-+ 
-+ @pytest.mark.parametrize(
-+@@ -352,25 +572,28 @@ def test_parse_set_cookie_headers_case_insensitive_attrs() -> None:
-+ 
-+ 
-+ def test_parse_set_cookie_headers_unknown_attrs_ignored() -> None:
-+-    """Test that unknown attributes are treated as new cookies (same as SimpleCookie)."""
-++    """Unknown attributes do not create additional cookies."""
-+     headers = [
-+         "cookie=value; Path=/; unknownattr=ignored; HttpOnly",
-+     ]
-+ 
-+     result = parse_set_cookie_headers(headers)
-+ 
-+-    # SimpleCookie treats unknown attributes with values as new cookies
-+-    assert len(result) == 2
-+-
-+-    # First cookie
-++    assert len(result) == 1
-+     assert result[0][0] == "cookie"
-+     assert result[0][1]["path"] == "/"
-+-    assert result[0][1]["httponly"] == ""  # Not set on first cookie
-++    assert result[0][1]["httponly"] is True
-++
-+ 
-+-    # Second cookie (the unknown attribute)
-+-    assert result[1][0] == "unknownattr"
-+-    assert result[1][1].value == "ignored"
-+-    assert result[1][1]["httponly"] is True  # HttpOnly applies to this cookie
-++def test_parse_set_cookie_headers_tolerates_missing_attribute_semicolons() -> None:
-++    result = parse_set_cookie_headers(
-++        ["cookie=value; Path=/ Max-Age=60; unknown=ignored Secure"]
-++    )
-++
-++    assert len(result) == 1
-++    assert result[0][1]["path"] == "/"
-++    assert result[0][1]["max-age"] == "60"
-++    assert result[0][1]["secure"] is True
-+ 
-+ 
-+ def test_parse_set_cookie_headers_complex_real_world() -> None:
-+@@ -655,28 +878,14 @@ def test_cookie_pattern_performance() -> None:
-+ 
-+ 
-+ def test_parse_set_cookie_headers_issue_7993_double_quotes() -> None:
-+-    """
-+-    Test that cookies with unmatched opening quotes don't break parsing of subsequent cookies.
-+-
-+-    This reproduces issue #7993 where a cookie containing an unmatched opening double quote
-+-    causes subsequent cookies to be silently dropped.
-+-    NOTE: This only fixes the specific case where a value starts with a quote but doesn't
-+-    end with one (e.g., 'cookie="value'). Other malformed quote cases still behave like
-+-    SimpleCookie for compatibility.
-+-    """
-+-    # Test case from the issue
-++    """Unknown segments with unmatched quotes remain attributes of one cookie."""
-+     headers = ['foo=bar; baz="qux; foo2=bar2']
-+ 
-+     result = parse_set_cookie_headers(headers)
-+ 
-+-    # Should parse all cookies correctly
-+-    assert len(result) == 3
-++    assert len(result) == 1
-+     assert result[0][0] == "foo"
-+     assert result[0][1].value == "bar"
-+-    assert result[1][0] == "baz"
-+-    assert result[1][1].value == '"qux'  # Unmatched quote included
-+-    assert result[2][0] == "foo2"
-+-    assert result[2][1].value == "bar2"
-+ 
-+ 
-+ def test_parse_set_cookie_headers_empty_headers() -> None:
-+@@ -713,50 +922,20 @@ def test_parse_set_cookie_headers_invalid_cookie_syntax() -> None:
-+     assert result == []
-+ 
-+ 
-+-def test_parse_set_cookie_headers_illegal_cookie_names(
-+-    caplog: pytest.LogCaptureFixture,
-+-) -> None:
-+-    """
-+-    Test that illegal cookie names are rejected.
-+-
-+-    Note: When a known attribute name is used as a cookie name at the start,
-+-    parsing stops early (before any warning can be logged). Warnings are only
-+-    logged when illegal names appear after a valid cookie.
-+-    """
-+-    # Cookie name that is a known attribute (illegal) - parsing stops early
-+-    result = parse_set_cookie_headers(["path=value; domain=test"])
-+-    assert result == []
-+-
-++def test_parse_set_cookie_headers_illegal_cookie_names() -> None:
-++    """Test that illegal cookie names are rejected."""
-+     # Cookie name that doesn't match the pattern
-+     result = parse_set_cookie_headers(["=value"])
-+     assert result == []
-+ 
-+-    # Valid cookie after illegal one - parsing stops at illegal
-+-    result = parse_set_cookie_headers(["domain=bad; good=value"])
-++    # A later valid pair cannot rescue an invalid first cookie-pair.
-++    result = parse_set_cookie_headers(["bad name=value; good=value"])
-+     assert result == []
-+ 
-+-    # Illegal cookie name that appears after a valid cookie triggers warning
-++    # An illegal segment after a valid cookie is an ignored attribute.
-+     result = parse_set_cookie_headers(["good=value; Path=/; invalid,cookie=value;"])
-+     assert len(result) == 1
-+     assert result[0][0] == "good"
-+-    assert "Illegal cookie name 'invalid,cookie'" in caplog.text
-+-
-+-
-+-def test_parse_set_cookie_headers_attributes_before_cookie() -> None:
-+-    """Test that attributes before any cookie are invalid."""
-+-    # Path attribute before cookie
-+-    result = parse_set_cookie_headers(["Path=/; name=value"])
-+-    assert result == []
-+-
-+-    # Domain attribute before cookie
-+-    result = parse_set_cookie_headers(["Domain=.example.com; name=value"])
-+-    assert result == []
-+-
-+-    # Multiple attributes before cookie
-+-    result = parse_set_cookie_headers(
-+-        ["Path=/; Domain=.example.com; Secure; name=value"]
-+-    )
-+-    assert result == []
-+ 
-+ 
-+ def test_parse_set_cookie_headers_attributes_without_values() -> None:
-+@@ -766,86 +945,78 @@ def test_parse_set_cookie_headers_attributes_without_values() -> None:
-+     assert len(result) == 1
-+     assert result[0][1]["secure"] is True
-+ 
-+-    # Non-boolean attribute without value (invalid, stops parsing)
-++    # A non-boolean attribute without a value is empty.
-+     result = parse_set_cookie_headers(["name=value; Path"])
-+     assert len(result) == 1
-+-    # Path without value stops further attribute parsing
-++    assert result[0][1]["path"] == ""
-+ 
-+-    # Multiple cookies, invalid attribute in middle
-++    # It doesn't stop later attributes from applying.
-+     result = parse_set_cookie_headers(["name=value; Path; Secure"])
-+     assert len(result) == 1
-+-    # Secure is not parsed because Path without value stops parsing
-++    assert result[0][1]["path"] == ""
-++    assert result[0][1]["secure"] is True
-+ 
-+ 
-+ def test_parse_set_cookie_headers_dollar_prefixed_names() -> None:
-+-    """Test handling of cookie names starting with $."""
-+-    # $Version without preceding cookie (ignored)
-++    """A dollar-prefixed first cookie-pair is still the field's one cookie."""
-+     result = parse_set_cookie_headers(["$Version=1; name=value"])
-+     assert len(result) == 1
-+-    assert result[0][0] == "name"
-++    assert result[0][0] == "$Version"
-+ 
-+-    # Multiple $ prefixed without cookie (all ignored)
-++    # Later segments remain attributes and do not create another cookie.
-+     result = parse_set_cookie_headers(["$Version=1; $Path=/; $Domain=.com; name=value"])
-+     assert len(result) == 1
-+-    assert result[0][0] == "name"
-++    assert result[0][0] == "$Version"
-+ 
-+-    # $ prefix at start is ignored, cookie follows
-+     result = parse_set_cookie_headers(["$Unknown=123; valid=cookie"])
-+     assert len(result) == 1
-+-    assert result[0][0] == "valid"
-++    assert result[0][0] == "$Unknown"
-+ 
-+ 
-+ def test_parse_set_cookie_headers_dollar_attributes() -> None:
-+-    """Test handling of $ prefixed attributes after cookies."""
-+-    # Test multiple $ attributes with cookie (case-insensitive like SimpleCookie)
-++    """Dollar-prefixed attributes are unknown and ignored."""
-+     result = parse_set_cookie_headers(["name=value; $Path=/test; $Domain=.example.com"])
-+     assert len(result) == 1
-+     assert result[0][0] == "name"
-+-    assert result[0][1]["path"] == "/test"
-+-    assert result[0][1]["domain"] == ".example.com"
-++    assert result[0][1]["path"] == ""
-++    assert result[0][1]["domain"] == ""
-+ 
-+     # Test unknown $ attribute (should be ignored)
-+     result = parse_set_cookie_headers(["name=value; $Unknown=test"])
-+     assert len(result) == 1
-+     assert result[0][0] == "name"
-+-    # $Unknown should not be set
-++    assert "$unknown" not in result[0][1]
-+ 
-+     # Test $ attribute with empty value
-+     result = parse_set_cookie_headers(["name=value; $Path="])
-+     assert len(result) == 1
-+     assert result[0][1]["path"] == ""
-+ 
-+-    # Test case sensitivity compatibility with SimpleCookie
-++    # Case does not make a dollar-prefixed attribute recognized.
-+     result = parse_set_cookie_headers(["test=value; $path=/lower; $PATH=/upper"])
-+     assert len(result) == 1
-+-    # Last one wins, and it's case-insensitive
-+-    assert result[0][1]["path"] == "/upper"
-++    assert result[0][1]["path"] == ""
-+ 
-+ 
-+ def test_parse_set_cookie_headers_attributes_after_illegal_cookie() -> None:
-+-    """
-+-    Test that attributes after an illegal cookie name are handled correctly.
-+-
-+-    This covers the branches where current_morsel is None because an illegal
-+-    cookie name was encountered.
-+-    """
-++    """Test that attributes after an illegal cookie name are handled correctly."""
-+     # Illegal cookie followed by $ attribute
-+     result = parse_set_cookie_headers(["good=value; invalid,cookie=bad; $Path=/test"])
-+     assert len(result) == 1
-+     assert result[0][0] == "good"
-+-    # $Path should be ignored since current_morsel is None after illegal cookie
-++    assert result[0][1]["path"] == ""
-+ 
-+     # Illegal cookie followed by boolean attribute
-+     result = parse_set_cookie_headers(["good=value; invalid,cookie=bad; HttpOnly"])
-+     assert len(result) == 1
-+     assert result[0][0] == "good"
-+-    # HttpOnly should be ignored since current_morsel is None
-++    assert result[0][1]["httponly"] is True
-+ 
-+     # Illegal cookie followed by regular attribute with value
-+     result = parse_set_cookie_headers(["good=value; invalid,cookie=bad; Max-Age=3600"])
-+     assert len(result) == 1
-+     assert result[0][0] == "good"
-+-    # Max-Age should be ignored since current_morsel is None
-++    assert result[0][1]["max-age"] == "3600"
-+ 
-+     # Multiple attributes after illegal cookie
-+     result = parse_set_cookie_headers(
-+@@ -853,16 +1024,13 @@ def test_parse_set_cookie_headers_attributes_after_illegal_cookie() -> None:
-+     )
-+     assert len(result) == 1
-+     assert result[0][0] == "good"
-+-    # All attributes should be ignored after illegal cookie
-++    assert result[0][1]["httponly"] is True
-++    assert result[0][1]["max-age"] == "60"
-++    assert result[0][1]["domain"] == ".com"
-+ 
-+ 
-+ def test_parse_set_cookie_headers_unmatched_quotes_compatibility() -> None:
-+-    """
-+-    Test that most unmatched quote scenarios behave like SimpleCookie.
-+-
-+-    For compatibility, we only handle the specific case of unmatched opening quotes
-+-    (e.g., 'cookie="value'). Other cases behave the same as SimpleCookie.
-+-    """
-++    """Malformed later segments never create more cookies from one field."""
-+     # Cases that SimpleCookie and our parser both fail to parse completely
-+     incompatible_cases = [
-+         'cookie1=val"ue; cookie2=value2',  # codespell:ignore
-+@@ -872,20 +1040,8 @@ def test_parse_set_cookie_headers_unmatched_quotes_compatibility() -> None:
-+     ]
-+ 
-+     for header in incompatible_cases:
-+-        # Test SimpleCookie behavior
-+-        sc = SimpleCookie()
-+-        sc.load(header)
-+-        sc_cookies = list(sc.items())
-+-
-+-        # Test our parser behavior
-+         result = parse_set_cookie_headers([header])
-+-
-+-        # Both should parse the same cookies (partial parsing)
-+-        assert len(result) == len(sc_cookies), (
-+-            f"Header: {header}\n"
-+-            f"SimpleCookie parsed: {len(sc_cookies)} cookies\n"
-+-            f"Our parser parsed: {len(result)} cookies"
-+-        )
-++        assert len(result) <= 1
-+ 
-+     # The case we specifically fix (unmatched opening quote)
-+     fixed_case = 'cookie1=value1; cookie2="unmatched; cookie3=value3'
-+@@ -895,15 +1051,11 @@ def test_parse_set_cookie_headers_unmatched_quotes_compatibility() -> None:
-+     sc.load(fixed_case)
-+     assert len(sc) == 1  # Only cookie1
-+ 
-+-    # Our parser handles it better
-++    # The first cookie-pair remains available; the rest are attributes.
-+     result = parse_set_cookie_headers([fixed_case])
-+-    assert len(result) == 3  # All three cookies
-++    assert len(result) == 1
-+     assert result[0][0] == "cookie1"
-+     assert result[0][1].value == "value1"
-+-    assert result[1][0] == "cookie2"
-+-    assert result[1][1].value == '"unmatched'
-+-    assert result[2][0] == "cookie3"
-+-    assert result[2][1].value == "value3"
-+ 
-+ 
-+ def test_parse_set_cookie_headers_expires_attribute() -> None:
-+@@ -923,12 +1075,26 @@ def test_parse_set_cookie_headers_expires_attribute() -> None:
-+ 
-+ 
-+ def test_parse_set_cookie_headers_edge_cases() -> None:
-+-    """Test various edge cases."""
-+-    # Very long cookie values
-+-    long_value = "x" * 4096
-+-    result = parse_set_cookie_headers([f"name={long_value}"])
-++    """Cookie name and value are limited to 4096 encoded octets."""
-++    boundary_value = "x" * 4092
-++    result = parse_set_cookie_headers([f"name={boundary_value}"])
-+     assert len(result) == 1
-+-    assert result[0][1].value == long_value
-++    assert result[0][1].value == boundary_value
-++
-++    assert parse_set_cookie_headers([f"name={boundary_value}x"]) == []
-++
-++
-++def test_parse_set_cookie_headers_counts_coded_quoted_octets() -> None:
-++    coded_value = '"' + r"\a" * 2046 + 'x"'
-++    assert len(b"n") + len(coded_value.encode()) == 4096
-++
-++    result = parse_set_cookie_headers([f"n={coded_value}"])
-++    assert len(result) == 1
-++    assert len(result[0][1].value) < 4096
-++
-++    over_limit = coded_value[:-1] + 'x"'
-++    assert len(b"n") + len(over_limit.encode()) == 4097
-++    assert parse_set_cookie_headers([f"n={over_limit}"]) == []
-+ 
-+ 
-+ def test_parse_set_cookie_headers_various_date_formats_issue_4327() -> None:
-+@@ -1095,13 +1261,13 @@ def test_parse_set_cookie_headers_date_formats_with_attributes() -> None:
-+ @pytest.mark.parametrize(
-+     ("header", "expected_name", "expected_value", "expected_coded"),
-+     [
-+-        # Test cookie values with octal escape sequences
-+-        (r'name="\012newline\012"', "name", "\nnewline\n", r'"\012newline\012"'),
-++        # Test cookie values with octal escape sequences (printable chars only)
-++        (r'name="\050parens\051"', "name", "(parens)", r'"\050parens\051"'),
-+         (
-+-            r'tab="\011separated\011values"',
-+-            "tab",
-+-            "\tseparated\tvalues",
-+-            r'"\011separated\011values"',
-++            r'punct="\053plus\053values"',
-++            "punct",
-++            "+plus+values",
-++            r'"\053plus\053values"',
-+         ),
-+         (
-+             r'mixed="hello\040world\041"',
-+@@ -1110,10 +1276,10 @@ def test_parse_set_cookie_headers_date_formats_with_attributes() -> None:
-+             r'"hello\040world\041"',
-+         ),
-+         (
-+-            r'complex="\042quoted\042 text with \012 newline"',
-++            r'complex="\042quoted\042 text with \055 hyphen"',
-+             "complex",
-+-            '"quoted" text with \n newline',
-+-            r'"\042quoted\042 text with \012 newline"',
-++            '"quoted" text with - hyphen',
-++            r'"\042quoted\042 text with \055 hyphen"',
-+         ),
-+     ],
-+ )
-+@@ -1789,3 +1955,37 @@ def test_unquote_compatibility_with_simplecookie(test_value: str) -> None:
-+         f"our={_unquote(test_value)!r}, "
-+         f"SimpleCookie={simplecookie_unquote(test_value)!r}"
-+     )
-++
-++
-++@pytest.mark.parametrize(
-++    "header",
-++    (
-++        pytest.param(r'name="\012newline\012"', id="newline-octal-012"),
-++        pytest.param(r'tab="\011separated\011values"', id="tab-octal-011"),
-++        pytest.param(r'del="\177"', id="delete-octal-177"),
-++    ),
-++)
-++def test_parse_set_cookie_headers_ctl_chars_from_octal(header: str) -> None:
-++    """Controls introduced by compatibility unquoting are always rejected."""
-++    assert parse_set_cookie_headers([header]) == []
-++
-++
-++def test_parse_set_cookie_headers_literal_ctl_chars() -> None:
-++    r"""Ensure literal control characters in a cookie value don't crash the parser.
-++
-++    If the raw header itself contains a control character (e.g. BEL \\x07),
-++    both the decoded value and coded_value are unsalvageable.  The parser
-++    should gracefully skip the cookie instead of raising CookieError.
+++    A request the parser flagged as an upgrade has no payload, so everything
+++    arriving while its handler runs is buffered whole until the handler either
+++    prepares a websocket or answers normally. Only ``read_bufsize`` of it may be
+++    held before reading is paused, regardless of how much is sent.
 ++    """
-++    assert parse_set_cookie_headers(['name="a\x07b"']) == []
+++    # Above the default so a ceiling that ignores read_bufsize fails the lower
+++    # bound, and well below what is sent so no cap at all fails the upper one.
+++    read_bufsize = 1024 * 1024
+++    handler_started = asyncio.Event()
+++    release_handler = asyncio.Event()
+++    reading_paused = asyncio.Event()
+++    max_tail = 0
+++    data_received = RequestHandler.data_received
+++
+++    def observe_data_received(self: RequestHandler, data: bytes) -> None:
+++        nonlocal max_tail
+++        data_received(self, data)
+++        if self._message_tail:
+++            max_tail = max(max_tail, len(self._message_tail))
+++            if self._msg_queue_paused:
+++                reading_paused.set()
+++
+++    monkeypatch.setattr(RequestHandler, "data_received", observe_data_received)
+++
+++    async def upgrade_handler(request: web.Request) -> web.Response:
+++        handler_started.set()
+++        await release_handler.wait()
+++        return web.Response(text="declined")
+++
+++    app = web.Application()
+++    app.router.add_get("/upgrade", upgrade_handler)
+++    server = await aiohttp_server(app, read_bufsize=read_bufsize)
+++
+++    chunk = b"A" * (64 * 1024)
+++    chunks = (4 * 1024 * 1024) // len(chunk)
+++
+++    reader, writer = await asyncio.open_connection(server.host, server.port)
+++    try:
+++        writer.write(
+++            b"GET /upgrade HTTP/1.1\r\nHost: localhost\r\n"
+++            b"Connection: Upgrade\r\nUpgrade: websocket\r\n\r\n"
+++        )
+++        await writer.drain()
+++        await asyncio.wait_for(handler_started.wait(), 1)
+++
+++        async def send_until_paused() -> None:
+++            for _ in range(chunks):  # pragma: no branch
+++                if reading_paused.is_set():
+++                    break
+++                writer.write(chunk)
+++                await writer.drain()
+++
+++        sender = asyncio.create_task(send_until_paused())
+++        try:
+++            # Only elapses if nothing caps the buffer, in which case the
+++            # assertions below report what was actually buffered.
+++            with suppress(asyncio.TimeoutError):
+++                await asyncio.wait_for(reading_paused.wait(), 5)
+++        finally:
+++            sender.cancel()
+++            with suppress(asyncio.CancelledError):
+++                await sender
+++    finally:
+++        release_handler.set()
+++        writer.close()
+++        with suppress(ConnectionResetError, BrokenPipeError):
+++            await writer.wait_closed()
+++
+++    assert reading_paused.is_set(), f"reading never paused, buffered {max_tail} bytes"
+++    # pause_reading() only takes effect after the read in flight, and asyncio
+++    # reads at most DEFAULT_CHUNK_SIZE per call, so one extra chunk may land.
+++    assert read_bufsize <= max_tail < read_bufsize + DEFAULT_CHUNK_SIZE
 ++
 ++
-++def test_parse_set_cookie_headers_literal_ctl_chars_preserves_others() -> None:
-++    """Ensure a cookie with literal control chars doesn't break subsequent cookies."""
-++    result = parse_set_cookie_headers(['bad="a\x07b"; good=value', "another=cookie"])
-++    # "good" is an attribute of "bad" (same header), so it's not a separate cookie.
-++    # "another" is in a separate header and must always be preserved.
-++    assert any(name == "another" for name, _ in result)
+++async def test_upgrade_tail_resumes_reading_after_websocket_prepare(
+++    aiohttp_server: AiohttpServer,
+++    monkeypatch: pytest.MonkeyPatch,
+++) -> None:
+++    """A websocket paused while its tail filled up must keep reading.
+++
+++    A client may pipeline frames straight after the handshake request, filling
+++    the tail buffer and pausing reading before the handler prepares. Once the
+++    websocket owns the connection the tail is handed over, so reading has to
+++    resume or whatever the client sent meanwhile is never read.
+++    """
+++    handshake_seen = asyncio.Event()
+++    reading_paused = asyncio.Event()
+++    release_handler = asyncio.Event()
+++    last_received = asyncio.Event()
+++    received: list[str] = []
+++    data_received = RequestHandler.data_received
+++
+++    def observe_data_received(self: RequestHandler, data: bytes) -> None:
+++        data_received(self, data)
+++        if self._msg_queue_paused:
+++            reading_paused.set()
+++
+++    monkeypatch.setattr(RequestHandler, "data_received", observe_data_received)
+++
+++    async def ws_handler(request: web.Request) -> web.WebSocketResponse:
+++        handshake_seen.set()
+++        await release_handler.wait()
+++        ws = web.WebSocketResponse()
+++        await ws.prepare(request)
+++        async for msg in ws:  # pragma: no branch
+++            assert isinstance(msg.data, str)
+++            received.append(msg.data)
+++            if msg.data == "last":
+++                last_received.set()
+++                break
+++        return ws
+++
+++    app = web.Application()
+++    app.router.add_get("/ws", ws_handler)
+++    read_bufsize = 64 * 1024
+++    server = await aiohttp_server(app, read_bufsize=read_bufsize)
+++
+++    # Enough pipelined frames to fill the tail, so reading must pause.
+++    frame_payload = "B" * (32 * 1024)
+++    frames = (read_bufsize // len(frame_payload)) + 2
+++
+++    reader, writer = await asyncio.open_connection(server.host, server.port)
+++    try:
+++        writer.write(
+++            b"GET /ws HTTP/1.1\r\nHost: localhost\r\n"
+++            b"Connection: Upgrade\r\nUpgrade: websocket\r\n"
+++            b"Sec-WebSocket-Key: dGhlIHNhbXBsZSBub25jZQ==\r\n"
+++            b"Sec-WebSocket-Version: 13\r\n\r\n"
+++        )
+++        await writer.drain()
+++        await asyncio.wait_for(handshake_seen.wait(), 1)
+++
+++        # Encode client frames off to the side, as tests/test_websocket_writer.py
+++        # does, and put the bytes on the wire ourselves.
+++        encoded = bytearray()
+++        frame_transport = mock.create_autospec(
+++            asyncio.Transport, spec_set=True, instance=True
+++        )
+++        # Defaults to a truthy Mock, which WebSocketWriter reads as closing.
+++        frame_transport.is_closing.return_value = False
+++        frame_transport.write.side_effect = encoded.extend
+++        ws_writer = WebSocketWriter(
+++            mock.create_autospec(BaseProtocol, spec_set=True, instance=True),
+++            frame_transport,
+++            use_mask=True,
+++        )
+++
+++        for _ in range(frames):
+++            await ws_writer.send_frame(frame_payload.encode(), WSMsgType.TEXT)
+++        writer.write(encoded)
+++        await writer.drain()
+++        await asyncio.wait_for(reading_paused.wait(), 5)
+++
+++        # Sent while reading is paused, so this frame is only ever read if the
+++        # handover to the websocket resumes the transport.
+++        encoded.clear()
+++        await ws_writer.send_frame(b"last", WSMsgType.TEXT)
+++        writer.write(encoded)
+++        await writer.drain()
+++        release_handler.set()
+++
+++        await asyncio.wait_for(reader.readuntil(b"\r\n\r\n"), 5)
+++        await asyncio.wait_for(last_received.wait(), 5)
+++    finally:
+++        release_handler.set()
+++        writer.close()
+++        with suppress(ConnectionResetError, BrokenPipeError):
+++            await writer.wait_closed()
+++
+++    assert received == [frame_payload] * frames + ["last"]
 ++
 ++
-++# Tests for parse_cookie_header (RFC 6265 compliant Cookie header parser)
-+diff --git a/tests/test_cookiejar.py b/tests/test_cookiejar.py
-+index 4c7107c..891a84e 100644
-+--- a/tests/test_cookiejar.py
-++++ b/tests/test_cookiejar.py
-+@@ -6,8 +6,10 @@ import json
-+ import logging
-+ import pathlib
-+ import pickle
-++import random
-+ import sys
-+ import unittest
-++from collections import Counter
-+ from http.cookies import BaseCookie, Morsel, SimpleCookie
-+ from operator import not_
-+ from pathlib import Path
-+@@ -18,7 +20,12 @@ import pytest
-+ from freezegun import freeze_time
-+ from yarl import URL
+++async def test_bad_pipelined_data_behind_declined_upgrade_answers_400(
+++    aiohttp_server: AiohttpServer,
+++) -> None:
+++    """Junk buffered behind an upgrade must not swallow the upgrade response.
+++
+++    The tail is only parsed once the handler answers, so a parse error there
+++    has to be reported as a 400 like it would be from data_received(); letting
+++    it escape loses the response that was about to be written.
+++    """
+++
+++    async def upgrade_handler(request: web.Request) -> web.Response:
+++        return web.Response(text="declined")
+++
+++    app = web.Application()
+++    app.router.add_get("/upgrade", upgrade_handler)
+++    server = await aiohttp_server(app)
+++
+++    reader, writer = await asyncio.open_connection(server.host, server.port)
+++    try:
+++        writer.write(
+++            b"GET /upgrade HTTP/1.1\r\nHost: localhost\r\n"
+++            b"Connection: Upgrade\r\nUpgrade: websocket\r\n\r\n"
+++            b"\x00" * 64
+++        )
+++        await writer.drain()
+++        response = await asyncio.wait_for(reader.read(), 5)
+++    finally:
+++        writer.close()
+++        with suppress(ConnectionResetError, BrokenPipeError):
+++            await writer.wait_closed()
+++
+++    assert b"declined" in response, response
+++    # A 400 only follows if the parse error was reported instead of escaping,
+++    # and "declined" only arrives if it did not abort this response first.
+++    assert b" 400 " in response, response
+++
+++
++ @pytest.mark.parametrize("decompressed_size", [4 * 1024 * 1024, 32 * 1024 * 1024])
++ async def test_unread_compressed_body_drain_is_bounded(
++     aiohttp_server: AiohttpServer,
++diff --git a/tests/test_web_protocol.py b/tests/test_web_protocol.py
++index 879be20..a3bce7b 100644
++--- a/tests/test_web_protocol.py
+++++ b/tests/test_web_protocol.py
++@@ -3,6 +3,7 @@ from unittest import mock
 + 
-++import aiohttp.cookiejar as cookiejar_module
-+ from aiohttp import CookieJar, DummyCookieJar
-++from aiohttp._cookie_helpers import (
-++    _MAX_COOKIE_ATTRIBUTE_VALUE_LENGTH,
-++    _MAX_COOKIES_PER_RESPONSE,
-++)
++ import pytest
 + 
+++from aiohttp.http import WebSocketReader
++ from aiohttp.web_protocol import RequestHandler
++ from aiohttp.web_server import Server
 + 
-+ def dump_cookiejar() -> bytes:  # pragma: no cover
-+@@ -54,6 +61,48 @@ def cookies_to_send():
++@@ -17,6 +18,13 @@ def dummy_manager() -> Server:
 +     )
 + 
 + 
-++def _write_saved(tmp_path: Path, data: object) -> Path:
-++    file_path = tmp_path / "cookies.json"
-++    file_path.write_text(json.dumps(data), encoding="utf-8")
-++    return file_path
+++@pytest.fixture
+++def dummy_reader() -> tuple[WebSocketReader, mock.Mock]:
+++    m = mock.create_autospec(WebSocketReader, spec_set=True, instance=True)
+++    m.feed_data.return_value = False, b""
+++    return m, m
 ++
 ++
-++def _saved_cookie(
-++    name: str, value: str = "value", **fields: object
-++) -> dict[str, object]:
-++    """Build a record in the format CookieJar.save() writes."""
-++    return {
-++        "key": name,
-++        "value": value,
-++        "coded_value": value,
-++        "domain": "example.com",
-++        **fields,
-++    }
-++
-++
-++_TRIM = (
-++    cookiejar_module._MAX_COOKIES_PER_DOMAIN - cookiejar_module._COOKIE_QUOTA_PER_DOMAIN
-++)
-++
-++
-++def _make_morsel(
-++    name: str,
-++    value: str = "value",
-++    *,
-++    domain: str = "example.com",
-++    path: str = "/",
-++    secure: bool = False,
-++) -> Morsel[str]:
-++    cookies = SimpleCookie()
-++    cookies[name] = value
-++    morsel = cookies[name]
-++    morsel["domain"] = domain
-++    morsel["path"] = path
-++    if secure:
-++        morsel["secure"] = True
-++    return morsel
-++
-++
-+ @pytest.fixture
-+ def cookies_to_send_with_expired():
-+     return SimpleCookie(
-+@@ -163,12 +212,13 @@ def test_domain_matching() -> None:
-+ async def test_constructor(loop, cookies_to_send, cookies_to_receive) -> None:
-+     jar = CookieJar(loop=loop)
-+     jar.update_cookies(cookies_to_send)
-+-    jar_cookies = SimpleCookie()
-+-    for cookie in jar:
-+-        dict.__setitem__(jar_cookies, cookie.key, cookie)
-+-    expected_cookies = cookies_to_send
-+-    assert jar_cookies == expected_cookies
-+-    assert jar._loop is loop
-++    jar_cookies = {cookie.key: cookie for cookie in jar}
-++    assert jar_cookies.keys() == cookies_to_send.keys()
-++    for name, expected in cookies_to_send.items():
-++        # The jar stores normalized copies, so only the parts that
-++        # normalization must not touch are compared here.
-++        assert jar_cookies[name].value == expected.value
-++        assert jar_cookies[name].coded_value == expected.coded_value
++ def test_pause_msg_queue_reading_without_transport(
++     loop: asyncio.AbstractEventLoop,
++     dummy_manager: Server,
++@@ -65,6 +73,88 @@ def test_resume_msg_queue_reading_without_transport(
++     assert handler._msg_queue_paused is False
 + 
 + 
-+ async def test_constructor_with_expired(
-+@@ -184,7 +234,7 @@ async def test_constructor_with_expired(
-+     assert jar._loop is loop
-+ 
-+ 
-+-def test_save_load(tmp_path, loop, cookies_to_send, cookies_to_receive) -> None:
-++async def test_save_load(tmp_path, loop, cookies_to_send, cookies_to_receive) -> None:
-+     file_path = pathlib.Path(str(tmp_path)) / "aiohttp.test.cookie"
-+ 
-+     # export cookie jar
-+@@ -199,10 +249,15 @@ def test_save_load(tmp_path, loop, cookies_to_send, cookies_to_receive) -> None:
-+     for cookie in jar_load:
-+         jar_test[cookie.key] = cookie
-+ 
-+-    assert jar_test == cookies_to_receive
-++    # The jar stores normalized copies of the received cookies, so the
-++    # round-tripped contents are compared against the saved jar itself.
-++    jar_expected = SimpleCookie()
-++    for cookie in jar_save:
-++        dict.__setitem__(jar_expected, cookie.key, cookie)
-++    assert jar_test == jar_expected
-+ 
-+ 
-+-def test_save_load_partitioned_cookies(tmp_path, loop) -> None:
-++async def test_save_load_partitioned_cookies(tmp_path, loop) -> None:
-+     file_path = pathlib.Path(str(tmp_path)) / "aiohttp.test2.cookie"
-+     # export cookie jar
-+     jar_save = CookieJar(loop=loop)
-+@@ -1217,10 +1272,8 @@ async def test_filter_cookies_does_not_leak_memory() -> None:
-+         assert len(filtered) == 1
-+         assert "test_cookie" in filtered
-+ 
-+-    # Storage size should not grow significantly
-+-    # Only the shared cookie entry ('', '') may be added
-+-    final_storage_size = len(jar._cookies)
-+-    assert final_storage_size <= initial_storage_size + 1
-++    # Storage size should not grow
-++    assert len(jar._cookies) == initial_storage_size
-+ 
-+     # Verify _morsel_cache doesn't leak either
-+     # It should only have entries for domains/paths where cookies exist
-+@@ -1229,8 +1282,7 @@ async def test_filter_cookies_does_not_leak_memory() -> None:
-+ 
-+     # Verify no empty entries were created for domain-path combinations
-+     for key, cookies in jar._cookies.items():
-+-        if key != ("", ""):  # Skip the shared cookie entry
-+-            assert len(cookies) > 0, f"Empty cookie entry found for {key}"
-++        assert len(cookies) > 0, f"Empty cookie entry found for {key}"
-+ 
-+     # Verify _morsel_cache entries correspond to actual cookies
-+     for key, morsels in jar._morsel_cache.items():
-+@@ -1480,6 +1532,35 @@ async def test_update_cookies_from_headers_overwrites_same_cookie() -> None:
-+     assert filtered["session"].value == "new-value"
-+ 
-+ 
-++async def test_response_cookie_limit_counts_deletions() -> None:
-++    jar = CookieJar()
-++    url = URL("https://example.com/")
-++    jar.update_cookies({"existing": "value"}, url)
-++    headers = ["existing=; Max-Age=0"]
-++    headers.extend(f"cookie{i}=value" for i in range(_MAX_COOKIES_PER_RESPONSE - 1))
-++    headers.append("over-limit=value")
-++
-++    jar.update_cookies_from_headers(headers, url)
-++
-++    names = {cookie.key for cookie in jar}
-++    assert "existing" not in names
-++    assert f"cookie{_MAX_COOKIES_PER_RESPONSE - 2}" in names
-++    assert "over-limit" not in names
-++
-++
-++async def test_response_cookie_limit_precedes_domain_validation() -> None:
-++    jar = CookieJar()
-++    headers = [
-++        f"invalid{i}=value; Domain=other.example"
-++        for i in range(_MAX_COOKIES_PER_RESPONSE)
-++    ]
-++    headers.append("over-limit=value")
-++
-++    jar.update_cookies_from_headers(headers, URL("https://example.com/"))
-++
-++    assert not jar
-++
-++
-+ async def test_dummy_cookie_jar_update_cookies_from_headers() -> None:
-+     """Test that DummyCookieJar ignores update_cookies_from_headers."""
-+     jar: DummyCookieJar = DummyCookieJar()
-+@@ -1524,7 +1605,7 @@ async def test_shared_cookie_cache_population() -> None:
-+     assert "shared" in jar._morsel_cache[("", "")]
-+ 
-+     # Verify the cached morsel is the same one returned
-+-    cached_morsel = jar._morsel_cache[("", "")]["shared"]
-++    cached_morsel = jar._morsel_cache[("", "")]["shared"][0]
-+     assert cached_morsel is filtered["shared"]
-+ 
-+ 
-+@@ -1776,7 +1857,12 @@ async def test_load_falls_back_to_pickle(
-+     for cookie in jar_load:
-+         jar_test[cookie.key] = cookie
-+ 
-+-    assert jar_test == cookies_to_receive
-++    assert jar_test.keys() == cookies_to_receive.keys()
-++    for name, expected in cookies_to_receive.items():
-++        # The jar stores normalized copies, so only the parts that
-++        # normalization must not touch are compared here.
-++        assert jar_test[name].value == expected.value
-++        assert jar_test[name].coded_value == expected.coded_value
-+ 
-+ 
-+ async def test_save_load_json_roundtrip(
-+@@ -2056,3 +2142,925 @@ async def test_update_cookies_negative_max_age_beyond_float_range_expires() -> N
-+ 
-+     assert "sid" not in jar.filter_cookies(url)
-+     assert len(jar) == 0
-++
-++
-++async def test_dummy_cookie_jar_does_not_parse_headers() -> None:
-++    with mock.patch.object(cookiejar_module, "parse_set_cookie_headers") as parse:
-++        DummyCookieJar().update_cookies_from_headers(
-++            ["other=value"], URL("http://example.com/")
-++        )
-++    parse.assert_not_called()
-++
-++
-++async def test_safe_cookie_jar_rejects_ip_before_parsing() -> None:
-++    with mock.patch.object(cookiejar_module, "parse_set_cookie_headers") as parse:
-++        CookieJar().update_cookies_from_headers(
-++            ["other=value"], URL("http://127.0.0.1/")
-++        )
-++    parse.assert_not_called()
-++
-++
-++async def test_cookie_jar_limits_cookies_per_domain(
-++    caplog: pytest.LogCaptureFixture,
+++def test_resume_msg_queue_reading_stays_paused_for_full_tail(
+++    loop: asyncio.AbstractEventLoop,
+++    dummy_manager: Server,
 ++) -> None:
-++    jar = CookieJar()
-++    url = URL("https://example.com/")
-++    cookies = [
-++        ("secure-cookie", _make_morsel("secure-cookie", secure=True)),
-++        *(
-++            (f"cookie{i}", _make_morsel(f"cookie{i}"))
-++            for i in range(cookiejar_module._MAX_COOKIES_PER_DOMAIN)
-++        ),
-++    ]
+++    """Resume is refused while an in-flight upgrade holds read_bufsize of tail.
 ++
-++    with caplog.at_level(logging.DEBUG, logger="aiohttp.internal"):
-++        jar.update_cookies(cookies, url)
-++
-++    assert caplog.messages == [
-++        f"Evicted {_TRIM + 1} cookie(s) for example.com over the 180-cookie"
-++        " domain limit"
-++    ]
-++    # Adding to a full domain trims it back to its quota, oldest
-++    # non-secure cookies first.
-++    assert len(jar) == cookiejar_module._COOKIE_QUOTA_PER_DOMAIN
-++    names = {cookie.key for cookie in jar}
-++    assert "secure-cookie" in names
-++    assert f"cookie{_TRIM}" not in names
-++    assert f"cookie{_TRIM + 1}" in names
-++
-++
-++def _fill_domain(jar: CookieJar, url: URL, *, secure: bool) -> None:
-++    jar.update_cookies(
-++        [
-++            (f"cookie{i}", _make_morsel(f"cookie{i}", secure=secure))
-++            for i in range(cookiejar_module._MAX_COOKIES_PER_DOMAIN)
-++        ],
-++        url,
-++    )
-++    assert len(jar) == cookiejar_module._MAX_COOKIES_PER_DOMAIN
-++
-++
-++async def test_cookie_jar_replacement_updates_eviction_recency() -> None:
-++    jar = CookieJar()
-++    url = URL("https://example.com/")
-++    _fill_domain(jar, url, secure=False)
-++
-++    jar.update_cookies({"cookie0": "replaced"}, url)
-++    jar.update_cookies({"new": "value"}, url)
-++
-++    names = {cookie.key for cookie in jar}
-++    assert "cookie0" in names
-++    assert "cookie1" not in names
-++    assert "new" in names
-++
-++
-++async def test_cookie_jar_full_secure_domain_drops_new_non_secure_cookie(
-++    caplog: pytest.LogCaptureFixture,
-++) -> None:
-++    jar = CookieJar()
-++    url = URL("https://example.com/")
-++    _fill_domain(jar, url, secure=True)
-++
-++    morsel = _make_morsel("new")
-++    morsel["max-age"] = "3600"
-++    with caplog.at_level(logging.DEBUG, logger="aiohttp.internal"):
-++        jar.update_cookies({"new": morsel}, url)
-++
-++    assert "Dropped cookie 'new' for example.com" in caplog.text
-++
-++    assert len(jar) == cookiejar_module._MAX_COOKIES_PER_DOMAIN
-++    assert "new" not in {cookie.key for cookie in jar}
-++    assert ("example.com", "", "new") not in jar._host_only_cookies
-++
-++
-++async def test_cookie_jar_full_secure_domain_evicts_for_new_secure_cookie() -> None:
-++    jar = CookieJar()
-++    url = URL("https://example.com/")
-++    _fill_domain(jar, url, secure=True)
-++
-++    jar.update_cookies({"new": _make_morsel("new", secure=True)}, url)
-++
-++    assert len(jar) == cookiejar_module._COOKIE_QUOTA_PER_DOMAIN
-++    names = {cookie.key for cookie in jar}
-++    assert "new" in names
-++    assert f"cookie{_TRIM}" not in names
-++    assert f"cookie{_TRIM + 1}" in names
-++
-++
-++async def test_cookie_jar_evicts_expired_before_live_cookies() -> None:
-++    jar = CookieJar()
-++    url = URL("https://example.com/")
-++    with freeze_time("2030-01-01") as freezer:
-++        _fill_domain(jar, url, secure=False)
-++        short_lived = _make_morsel("short-lived", secure=True)
-++        short_lived["max-age"] = "10"
-++        # Replacing an existing cookie in a full domain never evicts.
-++        jar.update_cookies(
-++            {f"cookie{cookiejar_module._MAX_COOKIES_PER_DOMAIN - 1}": short_lived}, url
-++        )
-++        assert len(jar) == cookiejar_module._MAX_COOKIES_PER_DOMAIN
-++
-++        freezer.tick(60)
-++        jar.update_cookies({"new": _make_morsel("new")}, url)
-++
-++    names = {cookie.key for cookie in jar}
-++    assert len(jar) == cookiejar_module._COOKIE_QUOTA_PER_DOMAIN
-++    assert f"cookie{cookiejar_module._MAX_COOKIES_PER_DOMAIN - 1}" not in names
-++    assert "cookie0" not in names
-++    assert f"cookie{_TRIM - 1}" not in names
-++    assert f"cookie{_TRIM}" in names
-++    assert "new" in names
-++
-++
-++async def test_cookie_jar_deleting_cookie_does_not_evict() -> None:
-++    jar = CookieJar()
-++    url = URL("https://example.com/")
-++    _fill_domain(jar, url, secure=False)
-++
-++    jar.update_cookies_from_headers(["unknown=; Max-Age=0"], url)
-++
-++    assert len(jar) == cookiejar_module._MAX_COOKIES_PER_DOMAIN
-++
-++
-++async def test_cookie_jar_expired_cookies_make_room_in_full_domain() -> None:
-++    jar = CookieJar()
-++    url = URL("https://example.com/")
-++    with freeze_time("2030-01-01") as freezer:
-++        cookies = []
-++        for i in range(cookiejar_module._MAX_COOKIES_PER_DOMAIN):
-++            morsel = _make_morsel(f"cookie{i}")
-++            if i < 40:
-++                morsel["max-age"] = "10"
-++            cookies.append((f"cookie{i}", morsel))
-++        jar.update_cookies(cookies, url)
-++        freezer.tick(60)
-++
-++        jar.update_cookies({"new": _make_morsel("new")}, url)
-++
-++    names = {cookie.key for cookie in jar}
-++    assert len(jar) == cookiejar_module._MAX_COOKIES_PER_DOMAIN - 40 + 1
-++    assert "cookie40" in names
-++    assert "new" in names
-++
-++
-++async def test_cookie_jar_expired_secure_cookies_admit_non_secure_cookie() -> None:
-++    jar = CookieJar()
-++    url = URL("https://example.com/")
-++    with freeze_time("2030-01-01") as freezer:
-++        jar.update_cookies({"other": "value"}, URL("https://other.example/"))
-++        cookies = []
-++        for i in range(cookiejar_module._MAX_COOKIES_PER_DOMAIN):
-++            morsel = _make_morsel(f"cookie{i}", secure=True)
-++            if i < 5:
-++                morsel["max-age"] = "10"
-++            cookies.append((f"cookie{i}", morsel))
-++        jar.update_cookies(cookies, url)
-++        freezer.tick(60)
-++
-++        # Like Firefox, freed expired cookies make room without evicting
-++        # live secure ones.
-++        jar.update_cookies({"new": _make_morsel("new")}, url)
-++
-++    names = {cookie.key for cookie in jar}
-++    assert len(jar) == cookiejar_module._MAX_COOKIES_PER_DOMAIN - 5 + 2
-++    assert "new" in names
-++    assert "other" in names
-++    assert "cookie5" in names
-++
-++
-++async def test_cookie_jar_purge_expired_cookies_keep_live_ones() -> None:
-++    jar = CookieJar(unsafe=True)
-++    with freeze_time("2030-01-01") as freezer:
-++        cookies = []
-++        for domain_index in range(66):
-++            for cookie_index in range(50):
-++                name = f"cookie{domain_index}_{cookie_index}"
-++                morsel = _make_morsel(name, domain=f"domain{domain_index}.example")
-++                if domain_index < 6:
-++                    morsel["max-age"] = "10"
-++                cookies.append((name, morsel))
-++        jar.update_cookies(cookies)
-++        freezer.tick(60)
-++
-++        jar.update_cookies(
-++            {"cookie66_0": _make_morsel("cookie66_0", domain="domain66.example")}
-++        )
-++
-++    names = {cookie.key for cookie in jar}
-++    assert len(jar) == cookiejar_module._COOKIE_QUOTA_TOTAL + 1
-++    assert "cookie0_0" not in names
-++    assert "cookie6_0" in names
-++    assert "cookie66_0" in names
-++
-++
-++async def test_filter_cookies_host_cookies_win_over_parent_domain_cookies() -> None:
-++    jar = CookieJar()
-++    sibling = URL("https://other.example.com/")
-++    for batch in range(3):
-++        jar.update_cookies_from_headers(
-++            [f"p{batch}_{i}=v; Domain=example.com" for i in range(50)], sibling
-++        )
-++    jar.update_cookies_from_headers(["session=mine"], URL("https://app.example.com/"))
-++
-++    filtered = jar.filter_cookies(URL("https://app.example.com/"))
-++
-++    assert len(filtered) == cookiejar_module._MAX_COOKIES_PER_REQUEST
-++    assert filtered["session"].value == "mine"
-++
-++
-++async def test_quoted_path_with_semicolon_keeps_its_scope() -> None:
-++    jar = CookieJar()
-++    jar.update_cookies_from_headers(
-++        ['sid=1; Path="/account/secure;v=1"'],
-++        URL("https://example.com/account/secure/page"),
-++    )
-++
-++    assert [cookie["path"] for cookie in jar] == ["/account/secure;v=1"]
-++    assert not jar.filter_cookies(URL("https://example.com/account/secure/other"))
-++
-++
-++async def test_update_cookies_unquotes_domain_and_path_attributes() -> None:
-++    jar = CookieJar()
-++    jar.update_cookies_from_headers(
-++        ['a=1; Domain="example.com"; Path="/app"'], URL("https://example.com/")
-++    )
-++
-++    assert set(jar.filter_cookies(URL("https://sub.example.com/app"))) == {"a"}
-++
-++
-++@pytest.mark.parametrize(
-++    ("response_url", "domain"),
-++    ((URL("https://example.com/"), "example.com"), (URL(), "")),
-++)
-++async def test_filter_cookies_tracks_stored_cookie_name(
-++    response_url: URL, domain: str
-++) -> None:
-++    jar = CookieJar()
-++    cookies: SimpleCookie = SimpleCookie()
-++    cookies["real"] = "value"
-++    jar.update_cookies({"alias": cookies["real"]}, response_url)
-++
-++    jar.filter_cookies(URL("https://example.com/"))
-++
-++    assert set(jar._access_generations) == {(domain, "", "alias")}
-++
-++
-++async def test_filter_cookies_cached_length_counts_octets() -> None:
-++    jar = CookieJar(quote_cookie=False)
-++    url = URL("https://example.com/")
-++    # 8 + len("a=") + 2 * 4089 octets is 8,188: "a" fits alone, "a" and "b" don't.
-++    jar.update_cookies({"a": "\u00e9" * 4089}, url)
-++    assert set(jar.filter_cookies(url)) == {"a"}
-++
-++    jar.update_cookies({"b": "xx"}, url)
-++
-++    # "b" is admitted first; the cached "a" must be measured in octets.
-++    assert set(jar.filter_cookies(url)) == {"b"}
-++
-++
-++async def test_cookie_jar_send_updates_eviction_recency() -> None:
-++    jar = CookieJar()
-++    url = URL("https://example.com/hit")
-++    cookies = [("sent", _make_morsel("sent", path="/hit"))]
-++    cookies.extend(
-++        (f"cookie{i}", _make_morsel(f"cookie{i}", path="/miss"))
-++        for i in range(cookiejar_module._MAX_COOKIES_PER_DOMAIN - 1)
-++    )
-++    jar.update_cookies(cookies, url)
-++
-++    assert set(jar.filter_cookies(url)) == {"sent"}
-++    jar.update_cookies({"new": "value"}, url)
-++
-++    names = {cookie.key for cookie in jar}
-++    assert "sent" in names
-++    assert "cookie0" not in names
-++
-++
-++async def test_cookie_jar_limits_total_cookies(
-++    caplog: pytest.LogCaptureFixture,
-++) -> None:
-++    jar = CookieJar(unsafe=True)
-++    cookies = [
-++        (
-++            f"cookie{domain_index}_{cookie_index}",
-++            _make_morsel(
-++                f"cookie{domain_index}_{cookie_index}",
-++                domain=f"domain{domain_index}.example",
-++            ),
-++        )
-++        for domain_index in range(66)
-++        for cookie_index in range(50)
-++    ]
-++    assert len(cookies) == cookiejar_module._MAX_COOKIES_TOTAL
-++
-++    jar.update_cookies(cookies)
-++
-++    assert len(jar) == cookiejar_module._MAX_COOKIES_TOTAL
-++    assert any(cookie.key == "cookie0_0" for cookie in jar)
-++
-++    with caplog.at_level(logging.DEBUG, logger="aiohttp.internal"):
-++        jar.update_cookies(
-++            {"cookie66_0": _make_morsel("cookie66_0", domain="domain66.example")}
-++        )
-++
-++    assert caplog.messages == ["Evicted 300 cookie(s) over the 3300-cookie total limit"]
-++    # The jar is purged back to the total, oldest first, before adding.
-++    assert len(jar) == cookiejar_module._COOKIE_QUOTA_TOTAL + 1
-++    names = {cookie.key for cookie in jar}
-++    assert "cookie5_49" not in names
-++    assert "cookie6_0" in names
-++    assert "cookie66_0" in names
-++
-++
-++async def test_cookie_jar_load_resets_recency_and_applies_limits(
-++    tmp_path: Path,
-++) -> None:
-++    data = {
-++        "example.com|": {
-++            f"cookie{i}": _saved_cookie(f"cookie{i}")
-++            for i in range(cookiejar_module._MAX_COOKIES_PER_DOMAIN + 1)
-++        }
-++    }
-++    file_path = _write_saved(tmp_path, data)
-++    jar = CookieJar()
-++    jar.update_cookies({"old": "value"}, URL("https://old.example/"))
-++
-++    jar.load(file_path)
-++
-++    assert len(jar) == cookiejar_module._COOKIE_QUOTA_PER_DOMAIN
-++    names = {cookie.key for cookie in jar}
-++    assert "old" not in names
-++    assert f"cookie{_TRIM}" not in names
-++    assert f"cookie{_TRIM + 1}" in names
-++    assert f"cookie{cookiejar_module._MAX_COOKIES_PER_DOMAIN}" in names
-++
-++
-++@pytest.mark.parametrize("deadline", ["nan", "inf", "-inf", "not-a-number", 10**1000])
-++async def test_cookie_jar_load_rejects_invalid_expiration(
-++    tmp_path: Path, deadline: str | int
-++) -> None:
-++    data = {
-++        "example.com|": {"cookie": _saved_cookie("cookie", expires_timestamp=deadline)}
-++    }
-++    file_path = _write_saved(tmp_path, data)
-++    jar = CookieJar()
-++
-++    with pytest.raises(
-++        ValueError,
-++        match=r"Cookie 'cookie' in 'example.com\|': expiration timestamp must be",
-++    ) as exc_info:
-++        jar.load(file_path)
-++
-++    assert exc_info.value.__cause__ is not None
-++    assert len(jar) == 0
-++    assert not jar._expirations
-++    assert not jar._expire_heap
-++
-++
-++async def test_cookie_jar_save_load_round_trips_numeric_attribute(
-++    tmp_path: Path,
-++) -> None:
-++    url = URL("https://example.com/")
-++    cookies: SimpleCookie = SimpleCookie()
-++    cookies["sid"] = "value"
-++    cookies["sid"]["version"] = 1
-++    jar = CookieJar()
-++    jar.update_cookies(cookies, url)
-++    file_path = tmp_path / "cookies.json"
-++    jar.save(file_path)
-++
-++    loaded = CookieJar()
-++    loaded.load(file_path)
-++
-++    assert [cookie.key for cookie in loaded] == ["sid"]
-++
-++
-++@pytest.mark.parametrize(("attr", "value"), (("path", 5), ("max-age", ["invalid"])))
-++async def test_cookie_jar_load_invalid_attribute_leaves_jar_unchanged(
-++    tmp_path: Path, attr: str, value: object
-++) -> None:
-++    record = _saved_cookie("sid")
-++    record[attr] = value
-++    file_path = _write_saved(tmp_path, {"example.com|/": {"sid": record}})
-++    jar = CookieJar()
-++    jar.update_cookies({"existing": "value"}, URL("https://example.com/"))
-++
-++    with pytest.raises(TypeError):
-++        jar.load(file_path)
-++
-++    assert [cookie.key for cookie in jar] == ["existing"]
-++
-++
-++async def test_cookie_jar_load_failure_leaves_jar_unchanged(tmp_path: Path) -> None:
-++    deadline = 4102444800.0
-++    cookies = {
-++        f"cookie{i}": _saved_cookie(f"cookie{i}", expires_timestamp=deadline)
-++        for i in range(1000)
-++    }
-++    cookies["invalid"] = _saved_cookie("invalid", expires_timestamp="nan")
-++    file_path = _write_saved(tmp_path, {"example.com|": cookies})
-++    jar = CookieJar()
-++    jar.update_cookies({"existing": "value"}, URL("https://example.com/"))
-++
-++    with pytest.raises(ValueError, match="must be a finite number"):
-++        jar.load(file_path)
-++
-++    assert [cookie.key for cookie in jar] == ["existing"]
-++
-++
-++async def test_oversized_secure_value_keeps_cookie_off_plain_http() -> None:
-++    jar = CookieJar()
-++    jar.update_cookies_from_headers(
-++        [f"sid=1; Secure={'x' * (_MAX_COOKIE_ATTRIBUTE_VALUE_LENGTH + 1)}"],
-++        URL("https://example.com/"),
-++    )
-++
-++    assert "sid" in jar.filter_cookies(URL("https://example.com/"))
-++    assert "sid" not in jar.filter_cookies(URL("http://example.com/"))
-++
-++
-++def _assert_consistent(jar: CookieJar) -> None:
-++    """Check the jar's bookkeeping against the cookies it stores."""
-++    stored = {
-++        (domain, path, name)
-++        for (domain, path), cookies in jar._cookies.items()
-++        for name in cookies
-++    }
-++    assert jar._cookie_count == len(stored) == len(jar)
-++    assert jar._domain_counts == Counter(domain for domain, _, _ in stored)
-++    assert set(jar._access_generations) == stored
-++    assert all(
-++        generation <= jar._next_access_generation
-++        for generation in jar._access_generations.values()
-++    )
-++    assert jar._host_only_cookies <= stored
-++    assert set(jar._expirations) <= stored
-++    for jar_key, morsels in jar._morsel_cache.items():
-++        for name, (morsel, _, cookie_key) in morsels.items():
-++            assert cookie_key == jar_key + (name,)
-++            assert cookie_key in stored
-++            assert morsel.value == jar._cookies[jar_key][name].value
-++
-++
-++async def test_cookie_jar_bookkeeping_stays_consistent(
-++    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
-++) -> None:
-++    # Small limits so eviction, purging and output limits happen often.
-++    monkeypatch.setattr(cookiejar_module, "_MAX_COOKIES_PER_DOMAIN", 6)
-++    monkeypatch.setattr(cookiejar_module, "_COOKIE_QUOTA_PER_DOMAIN", 4)
-++    monkeypatch.setattr(cookiejar_module, "_MAX_COOKIES_TOTAL", 14)
-++    monkeypatch.setattr(cookiejar_module, "_COOKIE_QUOTA_TOTAL", 10)
-++    monkeypatch.setattr(cookiejar_module, "_MAX_COOKIES_PER_REQUEST", 5)
-++    rng = random.Random(13930)
-++    hosts = ("example.com", "a.example.com", "b.example.com", "c.a.example.com")
-++    file_path = tmp_path / "cookies.json"
-++    jar = CookieJar()
-++
-++    def random_url() -> URL:
-++        return URL(f"{rng.choice(('http', 'https'))}://{rng.choice(hosts)}/x/y")
-++
-++    for _ in range(3000):
-++        operation = rng.randrange(10)
-++        if operation < 5:
-++            field = f"c{rng.randrange(10)}={rng.choice(('1', '2', 'x' * 40))}"
-++            if rng.random() < 0.5:
-++                field += f"; Domain={rng.choice(hosts[:3])}"
-++            if rng.random() < 0.5:
-++                field += f"; Path={rng.choice(('/', '/x'))}"
-++            if rng.random() < 0.4:
-++                field += "; Secure"
-++            if rng.random() < 0.3:
-++                field += f"; Max-Age={rng.choice(('0', '3600'))}"
-++            jar.update_cookies_from_headers([field], random_url())
-++        elif operation == 5:
-++            jar.update_cookies({f"c{rng.randrange(10)}": "v"}, random_url())
-++        elif operation == 6:
-++            jar.filter_cookies(random_url())
-++        elif operation == 7:
-++            jar.clear(lambda morsel: bool(morsel["secure"]))
-++        elif operation == 8:
-++            if rng.random() < 0.5:
-++                jar.clear_domain(rng.choice(hosts))
-++            else:
-++                jar.save(file_path)
-++                jar.load(file_path)
-++        elif rng.random() < 0.1:
-++            jar.clear()
-++        _assert_consistent(jar)
-++
-++
-++async def test_cookie_jar_save_load_round_trips_stored_name(tmp_path: Path) -> None:
-++    url = URL("https://example.com/")
-++    cookies: SimpleCookie = SimpleCookie()
-++    cookies["real"] = "value"
-++    jar = CookieJar()
-++    jar.update_cookies({"alias": cookies["real"]}, url)
-++    file_path = tmp_path / "cookies.json"
-++    jar.save(file_path)
-++
-++    loaded = CookieJar()
-++    loaded.load(file_path)
-++
-++    assert loaded.filter_cookies(url).output(header="", sep=";") == (
-++        jar.filter_cookies(url).output(header="", sep=";")
-++    )
-++
-++
-++async def test_cookie_jar_update_compacts_expirations_after_limit_eviction() -> None:
-++    jar = CookieJar()
-++    cookies: list[tuple[str, Morsel[str]]] = []
-++    for index in range(1000):
-++        name = f"cookie{index}"
-++        morsel = _make_morsel(name)
-++        morsel["max-age"] = "3600"
-++        cookies.append((name, morsel))
-++
-++    jar.update_cookies(cookies, URL("https://example.com/"))
-++
-++    assert (
-++        cookiejar_module._COOKIE_QUOTA_PER_DOMAIN
-++        < len(jar)
-++        <= cookiejar_module._MAX_COOKIES_PER_DOMAIN
-++    )
-++    assert len(jar._expirations) == len(jar)
-++    assert len(jar._expire_heap) <= max(
-++        cookiejar_module._MIN_SCHEDULED_COOKIE_EXPIRATION, 2 * len(jar._expirations)
-++    )
-++
-++
-++async def test_session_cookie_replacement_drops_old_expiry() -> None:
-++    jar = CookieJar()
-++    url = URL("https://example.com/")
-++    with freeze_time("2030-01-01") as freezer:
-++        jar.update_cookies_from_headers(["sid=old; Max-Age=60"], url)
-++        jar.update_cookies_from_headers(["sid=new"], url)
-++        freezer.tick(120)
-++
-++        assert jar.filter_cookies(url)["sid"].value == "new"
-++
-++
-++async def test_cookie_jar_load_session_replacement_drops_old_expiry(
-++    tmp_path: Path,
-++) -> None:
-++    with freeze_time("2030-01-01") as freezer:
-++        deadline = datetime.datetime.now(datetime.timezone.utc).timestamp() + 60
-++        file_path = _write_saved(
-++            tmp_path,
-++            {
-++                "example.com|": {
-++                    "sid": _saved_cookie("sid", "old", expires_timestamp=deadline)
-++                },
-++                "example.com|/": {"sid": _saved_cookie("sid", "new")},
-++            },
-++        )
-++        jar = CookieJar()
-++        jar.load(file_path)
-++        freezer.tick(120)
-++
-++        assert jar.filter_cookies(URL("https://example.com/"))["sid"].value == "new"
-++
-++
-++async def test_cookie_jar_load_replacement_clears_stale_expiration(
-++    tmp_path: Path,
-++) -> None:
-++    file_path = _write_saved(
-++        tmp_path,
-++        {
-++            "example.com|": {
-++                "sid": _saved_cookie("sid", "expired", expires_timestamp=0.0)
-++            },
-++            "example.com|/": {"sid": _saved_cookie("sid", "live")},
-++        },
-++    )
-++    jar = CookieJar()
-++
-++    jar.load(file_path)
-++
-++    assert len(jar) == 1
-++    assert jar.filter_cookies(URL("https://example.com/"))["sid"].value == "live"
-++
-++
-++async def test_cookie_jar_load_rejected_collision_keeps_expiration(
-++    tmp_path: Path,
-++) -> None:
-++    file_path = _write_saved(
-++        tmp_path,
-++        {
-++            "example.com|": {
-++                "sid": _saved_cookie("sid", "expired", expires_timestamp=0.0)
-++            },
-++            "other.example|": {"sid": _saved_cookie("sid", "rejected")},
-++        },
-++    )
-++    jar = CookieJar()
-++
-++    jar.load(file_path)
-++
-++    assert len(jar) == 0
-++
-++
-++async def test_cookie_jar_load_alternating_same_deadline_keeps_heap_bounded(
-++    tmp_path: Path,
-++) -> None:
-++    deadline = 4102444800.0
-++    data = {
-++        f"example.com|source{index}": {
-++            "sid": _saved_cookie(
-++                "sid",
-++                str(index),
-++                path="/",
-++                **(
-++                    {"expires_timestamp": deadline}
-++                    if index % 2 == 0 or index == 999
-++                    else {}
-++                ),
-++            )
-++        }
-++        for index in range(1000)
-++    }
-++    file_path = _write_saved(tmp_path, data)
-++    jar = CookieJar()
-++
-++    jar.load(file_path)
-++
-++    cookie_key = ("example.com", "", "sid")
-++    assert len(jar) == 1
-++    assert jar.filter_cookies(URL("https://example.com/"))["sid"].value == "999"
-++    assert jar._expirations == {cookie_key: deadline}
-++    assert len(jar._expire_heap) <= max(
-++        cookiejar_module._MIN_SCHEDULED_COOKIE_EXPIRATION, 2 * len(jar._expirations)
-++    )
-++
-++    with mock.patch("aiohttp.cookiejar.time.time", return_value=deadline + 1):
-++        jar._do_expiration()
-++
-++    assert len(jar) == 0
-++    assert jar._expire_heap == []
-++
-++
-++async def test_cookie_jar_load_expired_normalized_collisions_clear_heap(
-++    tmp_path: Path,
-++) -> None:
-++    data: dict[str, dict[str, dict[str, object]]] = {}
-++    for index in range(1000):
-++        name = f"cookie{index}"
-++        base = _saved_cookie(name, path="/")
-++        data[f"example.com|future{index}"] = {
-++            name: {**base, "expires_timestamp": 4102444800.0}
-++        }
-++        data[f"example.com|expired{index}"] = {name: {**base, "expires_timestamp": 0.0}}
-++    file_path = _write_saved(tmp_path, data)
-++    jar = CookieJar()
-++
-++    jar.load(file_path)
-++
-++    assert len(jar) == 0
-++    assert not jar._expirations
-++    assert not jar._expire_heap
-++
-++
-++async def test_cookie_jar_load_expires_before_eviction(tmp_path: Path) -> None:
-++    cookies = {
-++        f"cookie{i}": _saved_cookie(f"cookie{i}", expires_timestamp=4102444800.0)
-++        for i in range(cookiejar_module._MAX_COOKIES_PER_DOMAIN)
-++    }
-++    cookies["expired"] = _saved_cookie("expired", expires_timestamp=0.0)
-++    file_path = _write_saved(tmp_path, {"example.com|": cookies})
-++
-++    jar = CookieJar()
-++    jar.load(file_path)
-++
-++    names = {cookie.key for cookie in jar}
-++    assert len(jar) == cookiejar_module._MAX_COOKIES_PER_DOMAIN
-++    assert "cookie0" in names
-++    assert "expired" not in names
-++    assert len(jar._access_generations) == len(jar)
-++    assert len(jar._expirations) == len(jar)
-++
-++
-++async def test_cookie_jar_load_cleans_evicted_expiry_metadata(tmp_path: Path) -> None:
-++    cookies = {
-++        f"cookie{i}": _saved_cookie(f"cookie{i}", secure=True)
-++        for i in range(cookiejar_module._MAX_COOKIES_PER_DOMAIN)
-++    }
-++    cookies["nonsecure"] = _saved_cookie("nonsecure", expires_timestamp=4102444800.0)
-++    file_path = _write_saved(tmp_path, {"example.com|": cookies})
-++
-++    jar = CookieJar()
-++    jar.load(file_path)
-++
-++    rejected_key = ("example.com", "", "nonsecure")
-++    assert len(jar) == cookiejar_module._MAX_COOKIES_PER_DOMAIN
-++    assert rejected_key not in jar._access_generations
-++    assert rejected_key not in jar._expirations
-++
-++
-++async def test_delete_cookies_cleans_access_metadata() -> None:
-++    jar = CookieJar()
-++    url = URL("https://example.com/")
-++    jar.update_cookies({"cookie": "value"}, url)
-++    jar.filter_cookies(url)
-++    cookie_key = ("example.com", "", "cookie")
-++    assert cookie_key in jar._access_generations
-++
-++    jar._delete_cookies([("example.com", "", "missing")])
-++    assert len(jar) == 1
-++
-++    jar._delete_cookies([cookie_key])
-++
-++    assert cookie_key not in jar._access_generations
-++    assert ("example.com", "") not in jar._cookies
-++    assert ("example.com", "") not in jar._morsel_cache
-++
-++
-++@pytest.mark.parametrize(
-++    ("cookie_count", "expected_count"),
-++    (
-++        (cookiejar_module._MAX_COOKIES_PER_REQUEST,) * 2,
-++        (
-++            cookiejar_module._MAX_COOKIES_PER_REQUEST + 1,
-++            cookiejar_module._MAX_COOKIES_PER_REQUEST,
-++        ),
-++    ),
-++)
-++async def test_filter_cookies_limits_cookie_count(
-++    cookie_count: int, expected_count: int
-++) -> None:
-++    jar = CookieJar()
-++    hostname = "a.b.c.example.com"
-++    domains = ("com", "example.com", "c.example.com", "b.c.example.com")
-++    cookies = [
-++        (
-++            f"cookie{domain_index}_{cookie_index}",
-++            _make_morsel(f"cookie{domain_index}_{cookie_index}", domain=domain),
-++        )
-++        for domain_index, domain in enumerate(domains)
-++        for cookie_index in range(50)
-++    ]
-++    jar.update_cookies(cookies[:cookie_count], URL(f"https://{hostname}/"))
-++
-++    filtered = jar.filter_cookies(URL(f"https://{hostname}/"))
-++
-++    assert len(filtered) == expected_count
-++
-++
-++async def test_filter_cookies_logs_cookies_over_the_limits(
-++    caplog: pytest.LogCaptureFixture,
-++) -> None:
-++    url = URL("https://example.com/")
-++    jar = CookieJar()
-++    jar.update_cookies({"small": "v", "big": "x" * 8200}, url)
-++
-++    with caplog.at_level(logging.DEBUG, logger="aiohttp.internal"):
-++        assert set(jar.filter_cookies(url)) == {"small"}
-++        jar.update_cookies({"big": "x"}, url)
-++        assert set(jar.filter_cookies(url)) == {"small", "big"}
-++
-++    assert caplog.messages == [
-++        "Omitted 1 cookie(s) for example.com over the 150-cookie"
-++        " or 8190-octet Cookie header limit"
-++    ]
-++
-++
-++async def test_filter_cookies_limits_complete_header_length() -> None:
-++    jar = CookieJar()
-++    url = URL("https://example.com/")
-++    exact_value = "x" * (cookiejar_module._MAX_COOKIE_HEADER_LENGTH - 10)
-++    jar.update_cookies({"a": exact_value}, url)
-++
-++    exact = jar.filter_cookies(url)
-++
-++    assert cookiejar_module._COOKIE_HEADER_PREFIX_LENGTH + len(
-++        exact.output(header="", sep=";").strip().encode()
-++    ) == (cookiejar_module._MAX_COOKIE_HEADER_LENGTH)
-++
-++    jar.update_cookies({"a": exact_value + "x"}, url)
-++    assert not jar.filter_cookies(url)
-++
-++
-++async def test_filter_cookies_counts_the_real_separator() -> None:
-++    """Two cookies whose real Cookie header is exactly the limit are both sent."""
-++    jar = CookieJar()
-++    url = URL("https://example.com/")
-++    pairs = len("Cookie: ") + len("a=") + len("; ") + len("b=") + 10
-++    jar.update_cookies(
-++        {
-++            "a": "x" * (cookiejar_module._MAX_COOKIE_HEADER_LENGTH - pairs),
-++            "b": "y" * 10,
-++        },
-++        url,
-++    )
-++
-++    filtered = jar.filter_cookies(url)
-++    header = "Cookie: " + filtered.output(header="", sep=";").strip()
-++
-++    assert set(filtered) == {"a", "b"}
-++    assert len(header.encode()) == cookiejar_module._MAX_COOKIE_HEADER_LENGTH
-++
-++
-++async def test_filter_cookies_limits_do_not_restore_shadowed_domain_cookie() -> None:
-++    jar = CookieJar()
-++    jar.update_cookies_from_headers(
-++        [
-++            "sid=shared; Domain=example.com; Path=/",
-++            f"a={'x' * 4080}; Domain=example.com; Path=/",
-++            f"b={'y' * 4070}; Domain=example.com; Path=/",
-++        ],
-++        URL("https://other.example.com/"),
-++    )
-++    jar.update_cookies_from_headers(
-++        [f"sid={'GOOD' * 10}; Path=/"],
-++        URL("https://app.example.com/"),
-++    )
-++
-++    filtered = jar.filter_cookies(URL("https://app.example.com/"))
-++
-++    assert filtered["sid"].value == "GOOD" * 10
-++    assert "a" not in filtered
-++    assert cookiejar_module._COOKIE_HEADER_PREFIX_LENGTH + len(
-++        filtered.output(header="", sep="; ").strip().encode()
-++    ) <= (cookiejar_module._MAX_COOKIE_HEADER_LENGTH)
-++
-++
-++def _jar_with_raw_cookie(value: str) -> CookieJar:
-++    jar = CookieJar()
-++    morsel: Morsel[str] = Morsel()
-++    # Bypass validation: CPython builds with the CVE-2026-3644 patch reject
-++    # control characters in Morsel.__setstate__().
-++    morsel._key, morsel._value = "cookie", value  # type: ignore[attr-defined]
-++    morsel._coded_value = f'"{value}"'  # type: ignore[attr-defined]
-++    jar.update_cookies({"cookie": morsel}, URL("https://example.com/"))
-++    return jar
-++
-++
-++@pytest.mark.parametrize("value", ("a\x07b", "\udcff"))
-++async def test_update_cookies_rejects_cookie_that_cannot_be_sent(
-++    caplog: pytest.LogCaptureFixture, value: str
-++) -> None:
-++    url = URL("https://example.com/")
-++    with caplog.at_level(logging.DEBUG, logger="aiohttp.internal"):
-++        jar = _jar_with_raw_cookie(value)
-++    jar.update_cookies({"ok": "value"}, url)
-++
-++    assert [cookie.key for cookie in jar] == ["ok"]
-++    assert set(jar.filter_cookies(url)) == {"ok"}
-++    assert "Dropped cookie 'cookie' for example.com" in caplog.text
-++
-++
-++async def test_unlimited_jar_leaves_unencodable_cookie_to_the_writer() -> None:
-++    jar = cookiejar_module._UnlimitedCookieJar()
-++    jar.update_cookies({"a": "\udcff"})
-++
-++    assert jar.filter_cookies(URL("https://example.com/"))["a"].value == "\udcff"
-++
-++
-++async def test_cookie_jar_load_skips_cookie_that_cannot_be_sent(tmp_path: Path) -> None:
-++    file_path = _write_saved(
-++        tmp_path,
-++        {
-++            "example.com|": {
-++                "good": _saved_cookie("good"),
-++                "bad": _saved_cookie("bad", "\udcff"),
-++            }
-++        },
-++    )
-++    jar = CookieJar()
-++
-++    jar.load(file_path)
-++
-++    assert [cookie.key for cookie in jar] == ["good"]
-++
-++
-++async def test_update_cookies_copies_caller_morsel() -> None:
-++    """Test that mutating a Morsel after update_cookies() does not change the jar.
-++
-++    https://github.com/aio-libs/aiohttp/issues/13634
+++    The tail is drained by set_parser()/finish_response(), so resuming before
+++    then would let the buffer grow past its ceiling one read at a time.
 ++    """
-++    jar = CookieJar()
-++    url = URL("http://example.com/")
-++    sc = SimpleCookie()
-++    sc["auth"] = "original-value"
-++    jar.update_cookies({"auth": sc["auth"]}, url)
+++    handler = RequestHandler(dummy_manager, loop=loop, read_bufsize=1024)
+++    transport = mock.create_autospec(asyncio.Transport, spec_set=True, instance=True)
+++    handler.transport = transport
+++    handler._upgrade = True
+++    handler._msg_queue_paused = True
+++    handler._message_tail = b"x" * 1024
 ++
-++    # Mutate the caller's Morsel after the jar has stored it.
-++    sc["auth"].set("auth", "mutated-value", "mutated-value")
+++    handler._resume_msg_queue_reading()
 ++
-++    assert jar.filter_cookies(url)["auth"].value == "original-value"
+++    assert handler._msg_queue_paused is True
+++    transport.resume_reading.assert_not_called()
 ++
 ++
-++async def test_update_cookies_does_not_mutate_caller_morsel() -> None:
-++    """Test that update_cookies() normalization does not leak into the caller's Morsel.
+++def test_resume_msg_queue_reading_with_room_left_in_tail(
+++    loop: asyncio.AbstractEventLoop,
+++    dummy_manager: Server,
+++) -> None:
+++    """A tail under read_bufsize does not hold the transport paused."""
+++    handler = RequestHandler(dummy_manager, loop=loop, read_bufsize=1024)
+++    transport = mock.create_autospec(asyncio.Transport, spec_set=True, instance=True)
+++    handler.transport = transport
+++    handler._upgrade = True
+++    handler._msg_queue_paused = True
+++    handler._message_tail = b"x" * 1023
 ++
-++    https://github.com/aio-libs/aiohttp/issues/13634
+++    handler._resume_msg_queue_reading()
+++
+++    assert handler._msg_queue_paused is False
+++    transport.resume_reading.assert_called_once_with()
+++
+++
+++def test_resume_msg_queue_reading_with_zero_read_bufsize(
+++    loop: asyncio.AbstractEventLoop,
+++    dummy_manager: Server,
+++) -> None:
+++    """An empty tail resumes even when read_bufsize leaves it no room.
+++
+++    Guards the degenerate ``read_bufsize=0`` case: comparing sizes alone would
+++    match an empty tail and wedge the connection paused for good.
 ++    """
-++    jar = CookieJar()
-++    sc = SimpleCookie()
-++    sc["sid"] = "value"
-++    jar.update_cookies({"sid": sc["sid"]}, URL("http://example.com/sub/page"))
+++    handler = RequestHandler(dummy_manager, loop=loop, read_bufsize=0)
+++    transport = mock.create_autospec(asyncio.Transport, spec_set=True, instance=True)
+++    handler.transport = transport
+++    handler._upgrade = True
+++    handler._msg_queue_paused = True
 ++
-++    # The jar normalizes its private copy, not the caller's object.
-++    assert sc["sid"]["domain"] == ""
-++    assert sc["sid"]["path"] == ""
+++    handler._resume_msg_queue_reading()
 ++
-++    filtered = jar.filter_cookies(URL("http://example.com/sub/page"))
-++    assert filtered["sid"].value == "value"
+++    assert handler._msg_queue_paused is False
+++    transport.resume_reading.assert_called_once_with()
+++
+++
+++def test_set_parser_resumes_reading_paused_for_tail(
+++    loop: asyncio.AbstractEventLoop,
+++    dummy_manager: Server,
+++    dummy_reader: tuple[WebSocketReader, mock.Mock],
+++) -> None:
+++    """Handing a full tail to the upgraded protocol resumes reading."""
+++    handler = RequestHandler(dummy_manager, loop=loop, read_bufsize=1024)
+++    transport = mock.create_autospec(asyncio.Transport, spec_set=True, instance=True)
+++    handler.transport = transport
+++    handler._upgrade = True
+++    handler._msg_queue_paused = True
+++    handler._message_tail = b"x" * 1024
+++
+++    handler.set_parser(dummy_reader[0])
+++
+++    dummy_reader[1].feed_data.assert_called_once_with(b"x" * 1024)
+++    assert handler._message_tail == b""
+++    assert handler._msg_queue_paused is False
+++    transport.resume_reading.assert_called_once_with()
+++
+++
++ def test_resume_reading_stays_paused_for_msg_queue(
++     loop: asyncio.AbstractEventLoop,
++     dummy_manager: Server,
++diff --git a/tests/test_web_websocket_functional.py b/tests/test_web_websocket_functional.py
++index 871987e..6035b77 100644
++--- a/tests/test_web_websocket_functional.py
+++++ b/tests/test_web_websocket_functional.py
++@@ -13,6 +13,7 @@ import aiohttp
++ from aiohttp import web
++ from aiohttp.http import WSCloseCode, WSMsgType
++ from aiohttp.pytest_plugin import AiohttpClient, AiohttpServer
+++from aiohttp.web_protocol import MAX_MSG_QUEUE_SIZE
++ 
++ 
++ async def test_websocket_can_prepare(loop, aiohttp_client) -> None:
++@@ -1422,3 +1423,157 @@ async def test_websocket_prepared_property(
++     assert msg.type is WSMsgType.TEXT
++     assert msg.data == "test"
++     await ws.close()
+++
+++
+++def _raw_get(path: str) -> bytes:
+++    return f"GET {path} HTTP/1.1\r\nHost: localhost\r\n\r\n".encode("ascii")
+++
+++
+++_RAW_UPGRADE = (
+++    b"GET /ws HTTP/1.1\r\n"
+++    b"Host: localhost\r\n"
+++    b"Upgrade: websocket\r\n"
+++    b"Connection: Upgrade\r\n"
+++    b"Sec-WebSocket-Key: dGhlIHNhbXBsZSBub25jZQ==\r\n"
+++    b"Sec-WebSocket-Version: 13\r\n"
+++    b"\r\n"
+++)
+++
+++
+++def _masked_text_frame(payload: bytes) -> bytes:
+++    """Build a client text frame; frames sent to a server must be masked."""
+++    assert len(payload) < 126
+++    mask = b"\x37\xfa\x21\x3d"
+++    return (
+++        b"\x81"
+++        + bytes((0x80 | len(payload),))
+++        + mask
+++        + bytes(b ^ mask[i % 4] for i, b in enumerate(payload))
+++    )
+++
+++
+++async def test_websocket_frames_pipelined_behind_request_burst(
+++    aiohttp_server: AiohttpServer,
+++) -> None:
+++    """A websocket upgraded from within a request burst still reads frames.
+++
+++    The parser stops at the upgrade request and buffers everything after it,
+++    which is websocket data once the handshake succeeds. Answering the requests
+++    queued ahead of the upgrade must neither consume that buffer as HTTP nor
+++    leave the transport paused by the pipeline queue after switching protocols.
+++    """
+++    # More than the queue holds, so reading pauses and the parser buffers.
+++    pipelined_requests = MAX_MSG_QUEUE_SIZE + 8
+++    handled: list[str] = []
+++
+++    async def handler(request: web.Request) -> web.Response:
+++        handled.append(request.path)
+++        return web.Response()
+++
+++    async def ws_handler(request: web.Request) -> web.WebSocketResponse:
+++        ws = web.WebSocketResponse()
+++        await ws.prepare(request)
+++        await ws.send_str(await ws.receive_str())
+++        return ws
+++
+++    app = web.Application()
+++    app.router.add_get("/ws", ws_handler)
+++    app.router.add_get("/{tail:.*}", handler)
+++    server = await aiohttp_server(app)
+++
+++    reader, writer = await asyncio.open_connection(server.host, server.port)
+++    try:
+++        writer.write(
+++            b"".join(_raw_get(f"/r{i}") for i in range(pipelined_requests))
+++            + _RAW_UPGRADE
+++            + _masked_text_frame(b"frame-ok")
+++        )
+++        await writer.drain()
+++
+++        # Without the fix the frame is eaten by the http parser and the paused
+++        # transport is never resumed, so nothing is echoed back.
+++        await asyncio.wait_for(reader.readuntil(b"\x81\x08frame-ok"), timeout=10)
+++    finally:
+++        writer.close()
+++        with contextlib.suppress(ConnectionResetError, BrokenPipeError):
+++            await writer.wait_closed()
+++
+++    assert handled == [f"/r{i}" for i in range(pipelined_requests)]
+++
+++
+++async def test_pipelined_request_after_declined_upgrade_behind_burst(
+++    aiohttp_server: AiohttpServer,
+++) -> None:
+++    """A declined upgrade replays its tail even when queued behind a request.
+++
+++    Only the upgrade request's own response settles whether the buffered bytes
+++    are websocket data or pipelined HTTP, so an earlier request completing must
+++    leave them alone and the declining response still has to replay them.
+++    """
+++    handled: list[str] = []
+++
+++    async def handler(request: web.Request) -> web.Response:
+++        handled.append(request.path)
+++        return web.Response(text=f"{request.path[1:]}-ok")
+++
+++    async def ws_handler(request: web.Request) -> NoReturn:
+++        raise web.HTTPUpgradeRequired()
+++
+++    app = web.Application()
+++    app.router.add_get("/ws", ws_handler)
+++    app.router.add_get("/{tail:.*}", handler)
+++    server = await aiohttp_server(app)
+++
+++    reader, writer = await asyncio.open_connection(server.host, server.port)
+++    try:
+++        writer.write(_raw_get("/first") + _RAW_UPGRADE + _raw_get("/second"))
+++        await writer.drain()
+++
+++        # Without the replay the trailing request stalls until keep-alive expires.
+++        data = await asyncio.wait_for(reader.readuntil(b"second-ok"), timeout=10)
+++    finally:
+++        writer.close()
+++        with contextlib.suppress(ConnectionResetError, BrokenPipeError):
+++            await writer.wait_closed()
+++
+++    assert handled == ["/first", "/second"]
+++    assert data.count(b"HTTP/1.1 200 OK") == 2, data
+++    assert b"426" in data, data
+++
+++
+++async def test_pipelined_request_after_two_declined_upgrades(
+++    aiohttp_server: AiohttpServer,
+++) -> None:
+++    """A second upgrade inside a replayed tail buffers its own remainder again.
+++
+++    Replaying a declined upgrade's tail can turn up another upgrade request,
+++    which puts the parser back into upgraded mode. Losing that leaves the bytes
+++    behind the second upgrade buffered with nothing left to replay them.
+++    """
+++    handled: list[str] = []
+++
+++    async def handler(request: web.Request) -> web.Response:
+++        handled.append(request.path)
+++        return web.Response(text="second-ok")
+++
+++    async def ws_handler(request: web.Request) -> NoReturn:
+++        raise web.HTTPUpgradeRequired()
+++
+++    app = web.Application()
+++    app.router.add_get("/ws", ws_handler)
+++    app.router.add_get("/{tail:.*}", handler)
+++    server = await aiohttp_server(app)
+++
+++    reader, writer = await asyncio.open_connection(server.host, server.port)
+++    try:
+++        writer.write(_RAW_UPGRADE + _RAW_UPGRADE + _raw_get("/second"))
+++        await writer.drain()
+++
+++        data = await asyncio.wait_for(reader.readuntil(b"second-ok"), timeout=10)
+++    finally:
+++        writer.close()
+++        with contextlib.suppress(ConnectionResetError, BrokenPipeError):
+++            await writer.wait_closed()
+++
+++    assert handled == ["/second"]
+++    assert data.count(b"HTTP/1.1 426 ") == 2, data
 diff --git a/meta-python/recipes-devtools/python/python3-aiohttp_3.13.5.bb b/meta-python/recipes-devtools/python/python3-aiohttp_3.13.5.bb
-index 293d15fdaa..bfd8912a0d 100644
+index 06e0156e14..1ddfec27aa 100644
 --- a/meta-python/recipes-devtools/python/python3-aiohttp_3.13.5.bb
 +++ b/meta-python/recipes-devtools/python/python3-aiohttp_3.13.5.bb
-@@ -35,6 +35,7 @@ SRC_URI += " \
-     file://CVE-2026-123817_p1.patch \
-     file://CVE-2026-123817_p2.patch \
-     file://CVE-2026-128124.patch \
-+    file://CVE-2026-128125.patch \
+@@ -39,6 +39,7 @@ SRC_URI += " \
+     file://CVE-2026-128126.patch \
+     file://CVE-2026-128127.patch \
+     file://CVE-2026-128128.patch \
++    file://CVE-2026-128129.patch \
  "
  
  CVE_PRODUCT = "aiohttp:aiohttp"
