@@ -1,65 +1,65 @@
-Received: from mail-dy1-f174.google.com (mail-dy1-f174.google.com [74.125.82.174])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.37928.1795594069485453720
+Received: from mail-dy1-f176.google.com (mail-dy1-f176.google.com [74.125.82.176])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.37929.1795594070372762094
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 25 Nov 2026 00:07:49 -0800
+ Wed, 25 Nov 2026 00:07:50 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=B9M8TyxE;
- spf=pass (domain: gmail.com, ip: 74.125.82.174, mailfrom: raj.khem@gmail.com)
-Received: by mail-dy1-f174.google.com with SMTP id 5a478bee46e88-380c28f9e35so6623381eec.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 25 Nov 2026 00:07:49 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=0g66VZvS;
+ spf=pass (domain: gmail.com, ip: 74.125.82.176, mailfrom: raj.khem@gmail.com)
+Received: by mail-dy1-f176.google.com with SMTP id 5a478bee46e88-38190551625so10923962eec.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 25 Nov 2026 00:07:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795594069; x=1796198869; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1795594070; x=1796198870; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=qvGHb8TovePELMOdHtEsJ08RygzS3Bxnanea15ccBCo=;
-        b=B9M8TyxEy4upIMNy+xJHhe/JgLODerJ+Q9sa0UAL1LduNXKxDzebAzGS7UFOQqk/to
-         YHmlKq+wrGI9uQQ+UhkDHDq2e8+E02/XQ/hiFDWcU3iXqJQAVUL9j2i7auwTL+ZDlK36
-         KC9FByUY4Wv7AlXVY4QbWfvmoTMBVVvrCqBsjzTQEcrl/6Q5COevvHXHmcK0Hkq4eUui
-         tbRMmV2Zku3uRNHGccQ4Lctf1U87ksoD8DqFMijdbumXmeaY7WMh7eUyX9VoM7/VAEOe
-         8Ybzf4RCQ4IFcyFHbCXil7veqC5PLR1E+K4eITsIwgDcgjpqnElgYid6NYnT6YAXREzG
-         96eA==
+        bh=5JWoer/PlOxrXrtE+uW+RP/mljaUtzoNWAW88crQl9M=;
+        b=0g66VZvSRKE1XGzeUE07i2zaV1pp9LT99I/MRx9op/KZ0dS/5HpSLKobPLT3UxzUjY
+         W+n6VIvz6NPyaej1AIg5mvpevwcb84aD8y/qsRL6tcPX2VqoAtK810PXz/0tJTIPknz8
+         LRSPjLr91c+BPGbrBBNDjVS8XNN8hsUg5YNeigSS89YG+Z9HcNTojIuUf60LSmytjfFY
+         8o6GHtnyfQ4YVmX4hCSD0QhJcUtGXuzDv91t9TjVtV6aP90qZPtK7srhGaVydpra1O2k
+         jG9xB1Qt8tmepJvFC7xQM3ZH0paSkExPeYOq8c6zYHj34AmJLxTe7dhXLsYz7y/NiKlk
+         mZsQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795594069; x=1796198869;
+        d=1e100.net; s=20260707; t=1795594070; x=1796198870;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=qvGHb8TovePELMOdHtEsJ08RygzS3Bxnanea15ccBCo=;
-        b=cdLoX1GM257RnaAh/fuJEcC7WGzqfuGhSG0iUmUZ98dmh7raHLEqFCCGx4ZHArxmYN
-         KI0fP4+z+t8GDmiXaxZzBA6jeyHxxBD4SkTlxATs6621vdA4jfPPQz/5+9wt5QioRF3m
-         X03C2jipIjhDgw68sc0uWhJLw1QmtN+bJAbQkvMBM0xjrYLTx/Rno+VsdLJJB1UkhtOB
-         vvDXcXnNLDBBHgxA4cn1OOb282iutX9IlOyL+amjTHMNqPX+i7WQVKnQ+hvNbmp+xbSX
-         xUSbXsIaqJ47EyrnO7T76+ZPbTRdwK91a9d8seb/ekZDaMNJ/zJVYeOBJCXE20TX0x4o
-         UieA==
-X-Gm-Message-State: APuU4Z/RXy5nqTsnM2mFkO9Jtmtmg1AEtFushgtZ6zaNb5RZ3xA8YfjL
-	p4SI/XSXB9y/qhkTXKYbZn1qgczgFOQDV8LQWJnYtVOARM2fyasW5VCbK/aOQjo/
-X-Gm-Gg: AZFdTZf83o+NgiZ2wm+I3E39dsaWLAI5UDoypI6htCRRPhJAGOCt+2kkm8/ho0D3xIs
-	HnPQxYMNvxCs3WoahMeDSsaiTCCBzMQeauFJU+3WLSuD+a3WFkjGf4duMBi7yb/bNg6siyx6yyb
-	kywWN9/uqsLwVlEgSiHDjcskQR/umtxFhk98lodCREY7ajELWnFo4QYgUJjK2GVxN8quri0tqzN
-	aW0Dsyau+KS701iqts6xk8rwHtsbi42sQXLdsrMSfxEx8L3QIO/+p1I1JCFfaDfgr3RoLIreGU6
-	b/8Xh877nem7XkP0BNYpKKv+qldcTDcHe/FXCRXPW9oiN98pTFdSpeRdTMWQ9LBP53pvHgVKL1n
-	CGvxKFi2AsqKDMIJcSK5uB0iXrWqMeHBbaBc2d2CKv4L7E5cZUzV+y7zpL24ubYyJdkVg845vLw
-	uHJaLieq/joQ9IoSMbiUIUZpwVp1l9hBPq76bZSygYM5BHgRCbLy9N4imM7uVmZEiLv/THHc0W9
-	nZhZzXDE6a9Q3df8FHo9mugc5Dwp7zCsDwDiQr4/FORYNE7B4Qh/c7wSxQo6Wu9iaAn05XUZcb8
-	2hi4feCcyyMp+ac5bEv4/SQcGZlXHGLGNkAnbxp94V0+xP+07/yRmM3vC1J1EVMNG9YBmYx44Pp
-	aW08Oz758fyUMIBZYQtJ6dwqUO7KXK6b3D8Aw14Ae+/QgGzXgIzvXchiNnGtZgdUWflA84M2+pY
-	0C5Joth90GtvgSlyFuuBdZdLXIcIWodBN0HCXX/Y+YFvhJJIdcHKnHVo1theoFJsYvMCePJ6/ad
-	RtZHvvZl1tLHantzIkmi6Q4UZncHkqxxN5AS7RybGG1sMI/LjAVma9luLAZfrs3dVuNOJ9mmGL6
-	xcgVTQ==
-X-Received: by 2002:a05:7300:a9c:b0:386:c453:dfd8 with SMTP id 5a478bee46e88-386c453e1demr3832130eec.14.1795594068510;
-        Wed, 25 Nov 2026 00:07:48 -0800 (PST)
+        bh=5JWoer/PlOxrXrtE+uW+RP/mljaUtzoNWAW88crQl9M=;
+        b=lnq/8Ibgca8hFIsAW6EMSGvVk48h/2sVrBQqQoeXFFZTNmL4DQKS2Qa67AlJvla66Y
+         BfJVyvJKUZuiMqXvKmqjr8yb0bMZh6qmjh/cQbFiEu0pGqvmZC0VygUefzW9821kKl18
+         yefz5BVHTV/ZSPnorPzUnmIDWegNDKm+amgp8BgWaAUdru6xcDvniQEKD7ln6eOrWX1H
+         wNZBIf/zj/k00eM0adI+H69LesronxPk0MPCnvPTBix3dB0OBeGoQbxoBzBHRZXcn80f
+         R2xgjD3ndQl7MBXCr1I3rBkOyIA1QiUVcVjvGL4afvBwtf7qnKWsirO+QzDrC2j91qwz
+         TBig==
+X-Gm-Message-State: APuU4Z/L2ftGZY3g85tHwu3ptMxQ4uKcQQQgCJ7Ehb1mF1ZuCsmi1Mzk
+	gnjs5gBc6x8xFWjF4n6rYVKr7vq2+b5PLObv7Zl3RiR2A3J2+DLTvNUXWKxYv28x
+X-Gm-Gg: AZFdTZc3tq59R288UotIYRS0qlgyGSsoKH6A/Ked1B/I+TA1TO1bI/YStPDq3B1mJhi
+	4FqgwZmsDkXsyQ1VWmrpilzn2qe2h0Zi4vF8lyP2Q43jwtD79a7uDWBJ4Fv8mFOj8aOQlDNtqrE
+	ncZONsVji9FufkBo0nLMFVWwJIj5aWcrUTo9WT9YJ1I0TgVBbjQ3Kd08HuLNRS53rDMM2veUzpx
+	87cfohwv2M6jevFADcvLUHRBBSJrXNxNnBueKba25eFbDxL3xcZfNl98UXz8oVlosUV+zEMAmRD
+	9HxGuHkJ8fe9lCwZyJqqJ64wvaSjcGz6jylzVt9Kxv48kO4361OTGTS4KOLzuyOsyU3QuWhYb4z
+	I7UncedLJkrZ0VV4ljr4gp4VWRZfbzqPT/zc+Dnc+aGj4OHuhR9SazP6uJN7rGv3EuZbi5aOHl7
+	TrXyY+ef5e87wyceqMeytkJYRsBQ5tk/D4v6mzjkcaS/MuWNhCJGTeYEggwIAsmdzEleYfxZ6Xk
+	XlQ3uUpwrFsodZyUUcxq0GeObABkdRE0Y0NN1ZPxRu/aNBiCFITJGSYg9PXEcvFON5mOHogTU6Y
+	xJWz0opjbVlel94/pTW8/ES3VLjv61Kg0KGnHiriDY/nwS6PwCyMRXkZ7XmJmgFyHbREz2HMViG
+	KdJNaubUap1gl2Z3vW9lnXLg+quhqcd38pEUpUsbQdzxLm0guMu+Yz45G8G8JBnOLeuKWY9JiXo
+	6UTnlre1C2HOu0MsgNjDfXJFb0VCB4x2pVGEGMhwr29P2Xm4SfBHWtrf90ULbmD/cnxNROydsPR
+	4AYl6SEngG+3pFI3fiMc/GVBX4aTuphhnEF1S6+CHQqrbgi97tASNuz+9uB5mNnK+SldBR1C3tj
+	8z5j
+X-Received: by 2002:a05:693c:8209:b0:383:e7af:c28d with SMTP id 5a478bee46e88-3856f14d5b2mr17842890eec.9.1795594069654;
+        Wed, 25 Nov 2026 00:07:49 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-385646633d0sm90997971eec.3.2026.11.25.00.07.47
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-385646633d0sm90997971eec.3.2026.11.25.00.07.48
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 25 Nov 2026 00:07:47 -0800 (PST)
+        Wed, 25 Nov 2026 00:07:49 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-oe][PATCH 03/55] libgpiod: Fix intermittent gpiocli multiple lines monitor ptest failure
-Date: Wed, 25 Nov 2026 00:06:19 -0800
-Message-ID: <20261125080732.2419614-9-khem.raj@oss.qualcomm.com>
+Subject: [meta-oe][PATCH 04/55] snapper: upgrade 0.13.1 -> 0.13.2
+Date: Wed, 25 Nov 2026 00:06:20 -0800
+Message-ID: <20261125080732.2419614-10-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.1
 In-Reply-To: <20261125080732.2419614-1-khem.raj@oss.qualcomm.com>
 References: <20261125080732.2419614-1-khem.raj@oss.qualcomm.com>
@@ -67,100 +67,66 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Wed, 25 Nov 2026 08:07:51 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/133006
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/133007
 Content-Type: text/plain; charset="utf-8"
 
-test_monitor_multiple_lines_by_name has the same race which was fixed
-in test_monitor_all_lines_on_request: it toggles line foo twice, with
-line xyz in between, before reading any event. gpio-sim delivers both
-changes of foo as one interrupt when they happen before it is handled,
-so the rising edge is lost:
+- Add snapper-sync script and service to synchronize the highest
+  snapshot number, and allow disabling all-time unique snapshot numbers
+- snbk: new meta-parse command validates info.xml checksums using
+  libcrypto, so OpenSSL is now a build dependency; libsnapper soversion
+  bumped to 8.2.0
+- Improve error handling when snapperd is disconnected from D-Bus or the
+  client uid cannot be detected; service files now depend on dbus
+- Fix LVM device name parsing with escaped hyphens, CRLF handling in
+  config files and a memory leak on error paths
+- Hardening: validate STOMP content-length before reading frames,
+  validate unsigned JSON config values in the zypp plugin, handle NULL
+  D-Bus connections in pam_snapper
 
-  ASSERT: '45056166795 falling "foo" 45056147828 rising  "xyz"' did not
-  match '[0-9]+ rising\s+"foo"'
-
-Wait for each event before triggering the next one. In a qemux86-64
-guest this took the test from 13 of 20 runs failing to none, and
-ptest-runner libgpiod passed 12 of 12 runs on the rebuilt image.
+Add openssl to DEPENDS for the libcrypto check, and point CAT_BIN at the
+target cat, which the new snbk tool would otherwise take from the build
+host. Add an upstream check that skips the yast-snapper tags in the same
+repository.
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- ...for-each-event-in-test_monitor_multi.patch | 55 +++++++++++++++++++
- .../libgpiod/libgpiod_2.3.2.bb                |  1 +
- 2 files changed, 56 insertions(+)
- create mode 100644 meta-oe/recipes-support/libgpiod/libgpiod-2.x/0002-dbus-tests-wait-for-each-event-in-test_monitor_multi.patch
+ .../snapper/{snapper_0.13.1.bb => snapper_0.13.2.bb}   | 10 +++++++---
+ 1 file changed, 7 insertions(+), 3 deletions(-)
+ rename meta-oe/recipes-support/snapper/{snapper_0.13.1.bb => snapper_0.13.2.bb} (86%)
 
-diff --git a/meta-oe/recipes-support/libgpiod/libgpiod-2.x/0002-dbus-tests-wait-for-each-event-in-test_monitor_multi.patch b/meta-oe/recipes-support/libgpiod/libgpiod-2.x/0002-dbus-tests-wait-for-each-event-in-test_monitor_multi.patch
-new file mode 100644
-index 0000000000..f38859d354
---- /dev/null
-+++ b/meta-oe/recipes-support/libgpiod/libgpiod-2.x/0002-dbus-tests-wait-for-each-event-in-test_monitor_multi.patch
-@@ -0,0 +1,55 @@
-+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Sun, 1 Nov 2026 03:45:13 +0000
-+Subject: [PATCH] dbus: tests: wait for each event in
-+ test_monitor_multiple_lines_by_name
-+
-+The test pulls line foo up, line xyz up and line foo down again in quick
-+succession and only then reads the monitor output, which is the same
-+race test_monitor_all_lines_on_request had. Two changes of the same line
-+that happen before the gpio-sim interrupt is handled are delivered as
-+one interrupt, and as edge detection is set to both edges the kernel
-+derives the edge type from the line value read in the handler. The
-+rising edge on foo is then lost and only a falling edge is reported,
-+timestamped after the rising edge on xyz:
-+
-+  ASSERT: '45056166795 falling "foo" 45056147828 rising  "xyz"' did not
-+  match '[0-9]+ rising\s+"foo"'
-+
-+This fails intermittently, in 13 of 20 runs in a qemux86-64 guest.
-+
-+Wait for each event before triggering the next one. Matching the next
-+line of output instead of searching all of it also makes the test
-+verify that the change of line bar, which is not monitored, is ignored.
-+
-+Upstream-Status: Submitted [https://lore.kernel.org/linux-gpio/20261125080045.2410076-2-raj.khem@gmail.com/]
-+AI-Generated: Uses Claude Code
-+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
-+---
-+ dbus/client/gpiocli-test.bash | 10 +++++-----
-+ 1 file changed, 5 insertions(+), 5 deletions(-)
-+
-+diff --git a/dbus/client/gpiocli-test.bash b/dbus/client/gpiocli-test.bash
-+index ede69c9..ebddcbf 100755
-+--- a/dbus/client/gpiocli-test.bash
-++++ b/dbus/client/gpiocli-test.bash
-+@@ -1376,14 +1376,14 @@ test_monitor_multiple_lines_by_name() {
-+ 	dut_run gpiocli monitor foo xyz
-+ 
-+ 	gpiosim_set_pull sim0 1 pull-up
-++	dut_regex_match "[0-9]+ rising\\s+\"foo\""
-++
-+ 	gpiosim_set_pull sim0 5 pull-up # This should be ignored
-+ 	gpiosim_set_pull sim0 11 pull-up
-+-	gpiosim_set_pull sim0 1 pull-down
-++	dut_regex_match "[0-9]+ rising\\s+\"xyz\""
-+ 
-+-	dut_read
-+-	output_regex_match "[0-9]+ rising\\s+\"foo\""
-+-	output_regex_match "[0-9]+ rising\\s+\"xyz\""
-+-	output_regex_match "[0-9]+ falling\\s+\"foo\""
-++	gpiosim_set_pull sim0 1 pull-down
-++	dut_regex_match "[0-9]+ falling\\s+\"foo\""
-+ 
-+ 	gpiodbus_release_request "$request"
-+ }
-diff --git a/meta-oe/recipes-support/libgpiod/libgpiod_2.3.2.bb b/meta-oe/recipes-support/libgpiod/libgpiod_2.3.2.bb
-index b77ca581a9..2cf1b0f563 100644
---- a/meta-oe/recipes-support/libgpiod/libgpiod_2.3.2.bb
-+++ b/meta-oe/recipes-support/libgpiod/libgpiod_2.3.2.bb
-@@ -26,6 +26,7 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/${BPN}-2.x:"
- SRC_URI += " \
-     file://gpio-manager.init \
-     file://0001-dbus-tests-wait-for-each-event-in-test_monitor_all_l.patch \
-+    file://0002-dbus-tests-wait-for-each-event-in-test_monitor_multi.patch \
- "
+diff --git a/meta-oe/recipes-support/snapper/snapper_0.13.1.bb b/meta-oe/recipes-support/snapper/snapper_0.13.2.bb
+similarity index 86%
+rename from meta-oe/recipes-support/snapper/snapper_0.13.1.bb
+rename to meta-oe/recipes-support/snapper/snapper_0.13.2.bb
+index aa8547b33d..920a4fb274 100644
+--- a/meta-oe/recipes-support/snapper/snapper_0.13.1.bb
++++ b/meta-oe/recipes-support/snapper/snapper_0.13.2.bb
+@@ -3,13 +3,16 @@ HOMEPAGE = "https://github.com/openSUSE/snapper"
+ LICENSE = "GPL-2.0-only"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
  
- SRC_URI[sha256sum] = "dc48fb87cd72019745acb201599caf559556b5d913844df0ed011067d19e9a6b"
+-DEPENDS = "acl boost btrfs-tools dbus e2fsprogs json-c libxml2 lvm2 ncurses zlib"
++DEPENDS = "acl boost btrfs-tools dbus e2fsprogs json-c libxml2 lvm2 ncurses openssl zlib"
+ 
+ # Build separation is slightly broken
+ inherit autotools-brokensep pkgconfig gettext manpages
+ 
+-SRC_URI = "git://github.com/openSUSE/snapper.git;protocol=https;branch=master"
+-SRCREV = "8cfc33817b91dbf7194d7fd043dc378026d01db5"
++SRC_URI = "git://github.com/openSUSE/snapper.git;protocol=https;branch=master;tag=v${PV}"
++SRCREV = "43475845a712bc2327cec2ed641063df406705de"
++
++# The repository also carries yast-snapper tags
++UPSTREAM_CHECK_GITTAGREGEX = "^v(?P<pver>\d+(\.\d+)+)$"
+ 
+ EXTRA_OECONF += "--disable-zypp"
+ 
+@@ -24,6 +27,7 @@ export RM_BIN = "${bindir}/rm"
+ export RMDIR_BIN = "${bindir}/rmdir"
+ export MKDIR_BIN = "${bindir}/mkdir"
+ export TOUCH_BIN = "${bindir}/touch"
++export CAT_BIN = "${bindir}/cat"
+ export CP_BIN = "${bindir}/cp"
+ export REALPATH_BIN = "${bindir}/realpath"
+ export SHA256SUM_BIN = "${bindir}/sha256sum"
