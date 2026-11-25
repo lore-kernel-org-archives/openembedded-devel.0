@@ -1,65 +1,65 @@
-Received: from mail-dy1-f179.google.com (mail-dy1-f179.google.com [74.125.82.179])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.37938.1795594100933248898
+Received: from mail-dy1-f177.google.com (mail-dy1-f177.google.com [74.125.82.177])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.37940.1795594103270127243
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 25 Nov 2026 00:08:20 -0800
+ Wed, 25 Nov 2026 00:08:23 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=GIeQ5n2d;
- spf=pass (domain: gmail.com, ip: 74.125.82.179, mailfrom: raj.khem@gmail.com)
-Received: by mail-dy1-f179.google.com with SMTP id 5a478bee46e88-38190551625so10924661eec.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 25 Nov 2026 00:08:20 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=tP0zJNoY;
+ spf=pass (domain: gmail.com, ip: 74.125.82.177, mailfrom: raj.khem@gmail.com)
+Received: by mail-dy1-f177.google.com with SMTP id 5a478bee46e88-38190551625so10924727eec.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 25 Nov 2026 00:08:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795594100; x=1796198900; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1795594103; x=1796198903; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=2FBj0qscUA/37QWKcvPuQBhShVmnJjw2jNRc4s5J7oI=;
-        b=GIeQ5n2dof9GBgxBsAYxokJucJrbTbtzjG933hTgfAlSi4lPT6/XJM2KzOcrJ4KUUd
-         VRS7zvSE0IvL6b2zkAz0YDc/cjRb8HZv3SxdUM9nwdoFZdV48UiifhDFNwBflikYDPcL
-         5u/xTi6OjqMhekSOs7yJm2kecSrMwLkz1Uve4bHudFjy4E9HkGoRU+qS4qyFYf4AVC5w
-         2zlgqFRBQNp8EMAt2WXTBn6+Vr3NMtFWA4TDGgv9WekNh4AOHPR2VtMHlAgm+/nSIA+3
-         qUffU+FM450d8vDTzwjWm2lOdEEfK03VUnkX5SU8WCuK8a2YvhNNDRuLCHw+mt4l7N7Z
-         plzQ==
+        bh=cJ26WEOWgYEOqe9/q4XYcUCGyt+u7wl9c5PGaxOobF8=;
+        b=tP0zJNoYuje6prSImzyRkpFE3PuM0q1jOgMl34tri0kJg+gNvtNkkCuIT3mXP8qshX
+         YHBXek0HFxXLWC1oQcncxNTsjBIKq0RWJVHTV66L6Gk3slue0gOLhpLNh1/0PHkoen7q
+         wD0AzDY1E1ezj2V5GAz9agqUvuKgZz5wOIXYfHg0Ihk/SxbSn3td3JotMQrbeSr7eyLf
+         UyWRbjkoVN6/rdky8e4JTZHzYh4lyxkp9FDWQGwpJJqqeVwp2sb6riqOpaxJv3TBAVvb
+         ULlKJ70vIqsdSpQGzpSa4e35yuZ7n6ZV0woBI7tPNaxr8juoaaoW0EZ/SLNhEh22D6Ay
+         tM9Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795594100; x=1796198900;
+        d=1e100.net; s=20260707; t=1795594103; x=1796198903;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=2FBj0qscUA/37QWKcvPuQBhShVmnJjw2jNRc4s5J7oI=;
-        b=1yfzL/C6sOLTJAbUd/DlDiM9WDuUn6nVWdFr9zygSJ8kMr5h5vpBFjXgEzAuhF7WPE
-         W9T25xak9/i1tJ/AzZox/sskNu2PixUTEUxsDPpiY+n1rHJhTMBeFpssUKpxfODriY0g
-         b4wK0LyCfCq0jW77mWb6+0zgiDwkOvZ5Vwv0JR0wgynG5yb8kBswuFb6bdrixMyne/Jq
-         J7NYjGhMD7IFSpbrZDoh+zQrT66mRdNCsdTVOjSubR90CNHQaOicjY5DT6dD31s7dSmD
-         E3fWHo63rOpDS8Jf2Vw884mr6vRlEdtDhWw5Td0+vRgenIRmCLrebzOfhhMRsXYSgeb8
-         qpmQ==
-X-Gm-Message-State: APuU4Z8DCvq/DNoocSXb4hDPTeY6vqzxeZmLuKKu8sPrGnFErkwJYbIt
-	TTObyyjFfqJHIwcCNIYQ6fgTTxlXYbJ+uEq6DeIyBSIlXOA74b84hu2BKsAh4TeU
-X-Gm-Gg: AZFdTZf5E8p5PIRl0tUtX8/rBQOxXED2qRu5sYFIZZ7J+3OfgNx1KqqHGv3O4abmWKZ
-	Rjbm54/ESiWKcC5DMerBHmGK1lDyxVmQj7pMKs0AZI9XiSjZxPOllVz+StTYUru97ZHKYkyfq64
-	ysEbHoa66cIj++WniiPtt9z2mX/ve237dwFXGEx5OZFv5R4hBBWj7V0bUWbZcoyLwKFu8kkhodt
-	73Rph42fLvzCwDYqhEqZMPq4FjgHuQZVTMACCMrA0/0RWVRYDFPpcR0CoY8/EUIcjimBXZ6EK5O
-	9UmUKjvZTHL2hREl4KSUh8pTaK7x2bfcMrkgyq68yNvtwMk+JGGoMBb4vf8XD7emjwpqJaZsQcu
-	g2ftuUF3hX1+Gi/yrI/eHB/aYy7bshqJkIzZ5FJf0xPLVoJQVW3IPDBo8Qu0Bw2ssCEQpjIPWvo
-	SQMxVJGbc3WDJ+iqwtObFXVVoCe321jUt2tuB9mv9ouIA9X16HJh+tlQg0urh5NnAe2IPppjF7m
-	Mxs+xcazQVO9M0byoAcFuFSkJSKoCI7Vbhb0+gt1ROCw79AgtCI61kVybSyTxuAuF5NFdPPz5OP
-	+3TCHeBD8gqj6Xu6ce2xHFxOWLsKwjyj5o7IJVztvSDFgAuWSmP6CKwvG/e3OdML+r7xtp8he87
-	AzTWn/0TjlyR9Ig7Tydc5yAwDuqu/lQQkmFM9RhC9Af4DOSmhUq0JikWINIIRwuNPcO6m66nUVG
-	PzA2JEjL7slE9Y+KMLnuId6aldCALpUfrvPwq0gsymcvOTID9xoFXeDVXH+sWnS2BKRU/LC01l2
-	HOxC5xu1x38ucOU8F+mqQOWqvQ98iEWAB4W3tAZSdZST36T292HnpkkaP8jT+LS3JBX8Qd05wjR
-	S3dF
-X-Received: by 2002:a05:693c:8642:20b0:386:9e22:ca4c with SMTP id 5a478bee46e88-3869e22cc7emr15585867eec.35.1795594100193;
-        Wed, 25 Nov 2026 00:08:20 -0800 (PST)
+        bh=cJ26WEOWgYEOqe9/q4XYcUCGyt+u7wl9c5PGaxOobF8=;
+        b=gLonJUqVZwEPJtfDxh9Kb3vR11kLl9wXzPbucVnrCqN7Ai18yns99xqHVNCHAC9txW
+         Oy46B4rf5r+HkWzPGygKs9eqFoIOpjTQaRF305YY5Fykzf3ai3JpfRyB0uNQvHbBYy6T
+         wcSWwkveGJa5iXYsq6WICHhPqxDaCXCsbKiSotaJWPWOVsiXrBVKFNZp5y45pmDoSkz9
+         OIDZcc8pluO0lCcN2ZA7hiO6rFu1ABy4xI10YiqmyCEgIGo+MXFIEBPT9hNbzG0sCjv7
+         OCBT8RocMBJPtkhcMu7A4dn1b/u5GSYkTfH8aWr/G0r5mnPA0g9n70uoz1zZeLZV4OzO
+         vf9g==
+X-Gm-Message-State: APuU4Z/taDWoHiY1sdMCv8NgXB/JLKdqi5aj/Y14PyhHWIjri+HsPKeY
+	YVeEx36ng1bG372CAsAyMzcA6J61SesXfvcBCncSmHb2yyYLQ4kbLIPjtFb+1PMC
+X-Gm-Gg: AZFdTZdEVOqXahxpZ5j4JbJSTUQF222U40KZU1Muy8zeHbzHy16LDujCUlPcznxOB8G
+	vR/udQtl5YIluseIURzFakVgowi+bqUoPoZvQkqhChpIH8j8C9GmGh/aGtfCvTwPKVCs99R4G+c
+	GbtfcXtMkekhBQlvPKAtoDFA2RWog+gTQwwCqp8zXTA+AQ+PVREgcBIk0JkHjhDVmRlKVb/Iog4
+	0uuGBRtBL1xPewxpOpRtsX3wOv6CaqeEMEE3RXw/w04OoOYt1UUUKD/ZZiNfmb89bVKAYPrIC/m
+	caeOcHgcI1d+WtUJMRqA6ORfn6MePISyIv5Px1aVZsAYt3DKAG6bVqsv4eEhVxCPzfDbHiKIIV5
+	wrs0HcXoncNtwpDGwp3O8NruK2kNQ6WDbm4bG/GQ1r3WQuTFHa38dmP9r2juC1MkYB+g/75WEz8
+	RbMYXgno6w0uT4KKmy5BF1ZNssZy7mCgz2dSu/Nw2nAlnZnDRVUD/zqVjyRdk3RfsMr6jJrqG6o
+	866NiHh1OUgh4czfrGvFoMvmcqD/dycK7bq/v/LB1urQKX+7R/aSld5nlITtnSZjOfqTvMwAFDU
+	1LY/xTCt8Mk54H4PSMBSIB+tyyHPVwYaiNplztv0C8NDuyK8kOKH8it//P9yGmQruTWIJfW4ZFq
+	8RloPBVvJdVbN27pl1FELd63G6ZcWId33AnLSTaXrbTJRweVj2DYDvsCNTkRq3jW1lUI64zEuak
+	o8s0EJ5OIL+hjUth4jXZQxO2JKyCL9VLMThIobfPDHY1sOdcIPfdUysUkxrz2mLEd9koBLrPPPe
+	/44meldbbc5LXX7KJE0vnjVJGdfMlIQ15VvP7Maemy15nsBj8ygRbcPmBhzpfW9DL1g6MRwViIA
+	Yj9G
+X-Received: by 2002:a05:7301:1884:b0:374:ba43:ae2e with SMTP id 5a478bee46e88-3856f65eccamr16690151eec.14.1795594101757;
+        Wed, 25 Nov 2026 00:08:21 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-385646633d0sm90997971eec.3.2026.11.25.00.08.19
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-385646633d0sm90997971eec.3.2026.11.25.00.08.20
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 25 Nov 2026 00:08:19 -0800 (PST)
+        Wed, 25 Nov 2026 00:08:21 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-oe][PATCH 30/55] ceres-solver: Support Eigen 5
-Date: Wed, 25 Nov 2026 00:06:46 -0800
-Message-ID: <20261125080732.2419614-36-khem.raj@oss.qualcomm.com>
+Subject: [meta-oe][PATCH 31/55] libeigen: upgrade 3.4.1 -> 5.0.1
+Date: Wed, 25 Nov 2026 00:06:47 -0800
+Message-ID: <20261125080732.2419614-37-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.1
 In-Reply-To: <20261125080732.2419614-1-khem.raj@oss.qualcomm.com>
 References: <20261125080732.2419614-1-khem.raj@oss.qualcomm.com>
@@ -67,140 +67,1160 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Wed, 25 Nov 2026 08:08:24 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/133033
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/133034
 Content-Type: text/plain; charset="utf-8"
 
-Eigen 5.0 uses strict version matching in Eigen3ConfigVersion.cmake,
-so find_package(Eigen3 3.3) rejects 5.0.x and configure fails. Its
-runtime thin/full SVD options are also deprecated in favour of
-compile-time options.
+Eigen 5.0 switches to semantic versioning (WORLD version stays 3, so
+the eigen3 include dir, eigen3.pc and Eigen3 CMake package remain).
+- Requires C++14; EIGEN_HAS_CXX11 and similar macros removed
+- CMake package modernized; Eigen3ConfigVersion uses strict matching,
+  so users need a range such as 3.3...5 to accept 5.x
+- LGPL code removed; Eigen::all/last moved to Eigen::placeholders;
+  including internal src/ headers is now an error
+- Runtime thin/full SVD options deprecated; aligned_allocator no
+  longer derives from std::allocator; Euler angles and RNG changed
+- 5.0.1 fixes alignment issues and a missing <version> include
 
-Backport the upstream fix, which searches for the version range
-3.3...5 first and falls back to the old lookup for Eigen 3.x configs,
-and uses compile-time SVD options with Eigen >= 5. The CMake hunk is
-adjusted for 2.2.0, whose minimum is Eigen 3.3 instead of 3.3.4.
+Drop both backported patches (LGPL removal and the trivial
+eigen_packet_wrapper constructor), they are part of 5.0. Track the 5.0
+branch and the release tag, and add an upstream version check. Disable
+the docs and demos, which now default on for top-level builds, and
+clear the pre-release/build strings so the generated Eigen/Version
+says 5.0.1 instead of 5.0.1-dev+<hash>. The GPL licence file is now
+only in the bench/btl benchmark suite, so point LIC_FILES_CHKSUM there;
+it is not installed.
 
-Add UPSTREAM_CHECK_GITTAGREGEX matching release tags only.
+License-Update: COPYING.GPL dropped upstream (GPL now only via
+bench/btl/COPYING); COPYING.MPL2 http->https URL and whitespace fix.
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- .../0001-Support-Eigen3-5.0.0.patch           | 91 +++++++++++++++++++
- .../ceres-solver/ceres-solver_2.2.0.bb        |  5 +-
- 2 files changed, 95 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-support/ceres-solver/ceres-solver/0001-Support-Eigen3-5.0.0.patch
+ ...igen_packet_wrapper-trivial-for-c-11.patch |   26 -
+ ...0001-Remove-LGPL-Code-and-references.patch | 1030 -----------------
+ .../{libeigen_3.4.1.bb => libeigen_5.0.1.bb}  |   20 +-
+ 3 files changed, 12 insertions(+), 1064 deletions(-)
+ delete mode 100644 meta-oe/recipes-support/libeigen/libeigen/0001-Make-eigen_packet_wrapper-trivial-for-c-11.patch
+ delete mode 100644 meta-oe/recipes-support/libeigen/libeigen/0001-Remove-LGPL-Code-and-references.patch
+ rename meta-oe/recipes-support/libeigen/{libeigen_3.4.1.bb => libeigen_5.0.1.bb} (65%)
 
-diff --git a/meta-oe/recipes-support/ceres-solver/ceres-solver/0001-Support-Eigen3-5.0.0.patch b/meta-oe/recipes-support/ceres-solver/ceres-solver/0001-Support-Eigen3-5.0.0.patch
-new file mode 100644
-index 0000000000..2873e4d995
---- /dev/null
-+++ b/meta-oe/recipes-support/ceres-solver/ceres-solver/0001-Support-Eigen3-5.0.0.patch
-@@ -0,0 +1,91 @@
-+From f9b7b6651b108136a16df44d91fb31735645f5a7 Mon Sep 17 00:00:00 2001
-+From: Sergiu Deitsch <sergiu.deitsch@gmail.com>
-+Date: Sun, 28 Sep 2025 08:35:06 +0200
-+Subject: [PATCH] Support Eigen3 5.0.0
-+
-+Change-Id: I5cf476a6d8c090861f4ea4a254a35d39e36a6d68
-+
-+Adjusted for 2.2.0, which still requires Eigen 3.3 instead of 3.3.4.
-+
-+Upstream-Status: Backport [https://github.com/ceres-solver/ceres-solver/commit/f9b7b6651b108136a16df44d91fb31735645f5a7]
-+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
-+---
-+ CMakeLists.txt                     | 27 ++++++++++++++++++++++++++-
-+ internal/ceres/covariance_impl.cc  |  5 +++++
-+ internal/ceres/invert_psd_matrix.h |  4 ++++
-+ 3 files changed, 35 insertions(+), 1 deletion(-)
-+
-+diff --git a/CMakeLists.txt b/CMakeLists.txt
-+index 8e49c19..a186e99 100644
-+--- a/CMakeLists.txt
-++++ b/CMakeLists.txt
-+@@ -180,9 +180,34 @@ endif (IOS)
-+ 
-+ unset(CERES_COMPILE_OPTIONS)
-+ 
-++# We call find_package multiple time with different versioning scheme to support
-++# both Eigen3 3.x and 5.x. If the first invocation fails and Eigen3_DIR was set
-++# to a possible location, e.g., during cross-compilation, failure to locate the
-++# package will unset the variable. To avoid losing the path hint, we save it and
-++# reuse it in the second find_package call.
-++set (_Ceres_Eigen3_DIR)
-++
-++if (Eigen3_DIR)
-++  set (_Ceres_Eigen3_DIR "${Eigen3_DIR}")
-++endif (Eigen3_DIR)
-++
-+ # Eigen.
-+ # Eigen delivers Eigen3Config.cmake since v3.3.3
-+-find_package(Eigen3 3.3 REQUIRED)
-++find_package(Eigen3 3.3...5 NO_MODULE)
-++
-++if (NOT Eigen3_FOUND)
-++  if (_Ceres_Eigen3_DIR)
-++    set (Eigen3_DIR "${_Ceres_Eigen3_DIR}")
-++  endif (_Ceres_Eigen3_DIR)
-++  # Eigen3's CMake package config prior to 5.0.0 does not support version ranges
-++  # with different major version components. To ensure backward compatibility,
-++  # we locate the package using the previous version scheme as a fallback
-++  # mechanism.
-++  find_package(Eigen3 3.3 REQUIRED)
-++endif (NOT Eigen3_FOUND)
-++
-++unset (_Ceres_Eigen3_DIR)
-++
-+ if (Eigen3_FOUND)
-+   message("-- Found Eigen version ${Eigen3_VERSION}: ${Eigen3_DIR}")
-+   if (CMAKE_SYSTEM_PROCESSOR MATCHES "^(aarch64.*|AARCH64.*)" AND
-+diff --git a/internal/ceres/covariance_impl.cc b/internal/ceres/covariance_impl.cc
-+index 6e8362d..deb0ce1 100644
-+--- a/internal/ceres/covariance_impl.cc
-++++ b/internal/ceres/covariance_impl.cc
-+@@ -723,8 +723,13 @@ bool CovarianceImpl::ComputeCovarianceValuesUsingDenseSVD() {
-+   }
-+   event_logger.AddEvent("ConvertToDenseMatrix");
-+ 
-++#if EIGEN_VERSION_AT_LEAST(5, 0, 0)
-++  Eigen::BDCSVD<Matrix, Eigen::ComputeThinU | Eigen::ComputeThinV> svd(
-++      dense_jacobian);
-++#else   // !EIGEN_VERSION_AT_LEAST(5, 0, 0)
-+   Eigen::BDCSVD<Matrix> svd(dense_jacobian,
-+                             Eigen::ComputeThinU | Eigen::ComputeThinV);
-++#endif  // EIGEN_VERSION_AT_LEAST(5, 0, 0)
-+ 
-+   event_logger.AddEvent("SingularValueDecomposition");
-+ 
-+diff --git a/internal/ceres/invert_psd_matrix.h b/internal/ceres/invert_psd_matrix.h
-+index bc74900..34a4698 100644
-+--- a/internal/ceres/invert_psd_matrix.h
-++++ b/internal/ceres/invert_psd_matrix.h
-+@@ -68,7 +68,11 @@ typename EigenTypes<kSize, kSize>::Matrix InvertPSDMatrix(
-+ 
-+   // For a thin SVD the number of columns of the matrix need to be dynamic.
-+   using SVDMType = typename EigenTypes<kSize, Eigen::Dynamic>::Matrix;
-++#if EIGEN_VERSION_AT_LEAST(5, 0, 0)
-++  Eigen::JacobiSVD<SVDMType, Eigen::ComputeThinU | Eigen::ComputeThinV> svd(m);
-++#else   // !EIGEN_VERSION_AT_LEAST(5, 0, 0)
-+   Eigen::JacobiSVD<SVDMType> svd(m, Eigen::ComputeThinU | Eigen::ComputeThinV);
-++#endif  // EIGEN_VERSION_AT_LEAST(5, 0, 0)
-+   return svd.solve(MType::Identity(size, size));
-+ }
-+ 
-diff --git a/meta-oe/recipes-support/ceres-solver/ceres-solver_2.2.0.bb b/meta-oe/recipes-support/ceres-solver/ceres-solver_2.2.0.bb
-index 5368bdeeb4..5c6eaf4395 100644
---- a/meta-oe/recipes-support/ceres-solver/ceres-solver_2.2.0.bb
-+++ b/meta-oe/recipes-support/ceres-solver/ceres-solver_2.2.0.bb
-@@ -5,8 +5,11 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=3585a26c9cd9ec0cb36a7d65542878ca"
+diff --git a/meta-oe/recipes-support/libeigen/libeigen/0001-Make-eigen_packet_wrapper-trivial-for-c-11.patch b/meta-oe/recipes-support/libeigen/libeigen/0001-Make-eigen_packet_wrapper-trivial-for-c-11.patch
+deleted file mode 100644
+index 855bf01ae9..0000000000
+--- a/meta-oe/recipes-support/libeigen/libeigen/0001-Make-eigen_packet_wrapper-trivial-for-c-11.patch
++++ /dev/null
+@@ -1,26 +0,0 @@
+-From 0295f81a835ef69e2bacd9e75ab5782eca398720 Mon Sep 17 00:00:00 2001
+-From: =?UTF-8?q?Antonio=20S=C3=A1nchez?= <cantonios@google.com>
+-Date: Thu, 2 Oct 2025 17:53:19 +0000
+-Subject: [PATCH] Make `eigen_packet_wrapper` trivial for c++11.
+-
+-Upstream-Status: Backport [https://gitlab.com/libeigen/eigen/-/commit/0295f81a835ef69e2bacd9e75ab5782eca398720]
+----
+- Eigen/src/Core/GenericPacketMath.h | 4 ++++
+- 1 file changed, 4 insertions(+)
+-
+-diff --git a/Eigen/src/Core/GenericPacketMath.h b/Eigen/src/Core/GenericPacketMath.h
+-index af45f3936..4aeb77de8 100644
+---- a/Eigen/src/Core/GenericPacketMath.h
+-+++ b/Eigen/src/Core/GenericPacketMath.h
+-@@ -160,7 +160,11 @@ struct eigen_packet_wrapper
+- {
+-   EIGEN_ALWAYS_INLINE operator T&() { return m_val; }
+-   EIGEN_ALWAYS_INLINE operator const T&() const { return m_val; }
+-+#if EIGEN_HAS_CXX11
+-+  EIGEN_ALWAYS_INLINE eigen_packet_wrapper() = default;
+-+#else
+-   EIGEN_ALWAYS_INLINE eigen_packet_wrapper() {};
+-+#endif
+-   EIGEN_ALWAYS_INLINE eigen_packet_wrapper(const T &v) : m_val(v) {}
+-   EIGEN_ALWAYS_INLINE eigen_packet_wrapper& operator=(const T &v) {
+-     m_val = v;
+diff --git a/meta-oe/recipes-support/libeigen/libeigen/0001-Remove-LGPL-Code-and-references.patch b/meta-oe/recipes-support/libeigen/libeigen/0001-Remove-LGPL-Code-and-references.patch
+deleted file mode 100644
+index 697f3dfa82..0000000000
+--- a/meta-oe/recipes-support/libeigen/libeigen/0001-Remove-LGPL-Code-and-references.patch
++++ /dev/null
+@@ -1,1030 +0,0 @@
+-From 5e7b53a3268e7cdc81e358825a8c84f06289866c Mon Sep 17 00:00:00 2001
+-From: =?UTF-8?q?Antonio=20S=C3=A1nchez?= <cantonios@google.com>
+-Date: Wed, 8 Feb 2023 01:25:06 +0000
+-Subject: [PATCH] Remove LGPL Code and references.
+-
+-Upstream-Status: Backport [https://gitlab.com/libeigen/eigen/-/commit/e256ad1823c2eddd6954241ddc99bfeb7bb29cb3]
+----
+- COPYING.LGPL                                  | 502 ------------------
+- COPYING.README                                |  16 +-
+- Eigen/src/Core/util/NonMPL2.h                 |   3 -
+- .../IncompleteCholesky.h                      |   3 +-
+- bench/tensors/eigen_sycl_bench.sh             |   1 -
+- bench/tensors/eigen_sycl_bench_contract.sh    |   2 +-
+- doc/PreprocessorDirectives.dox                |   3 -
+- test/mpl2only.cpp                             |  24 -
+- unsupported/Eigen/IterativeSolvers            |   6 -
+- .../IterativeSolvers/ConstrainedConjGrad.h    | 187 -------
+- .../IterativeSolvers/IterationController.h    | 154 ------
+- 11 files changed, 4 insertions(+), 897 deletions(-)
+- delete mode 100644 COPYING.LGPL
+- delete mode 100644 Eigen/src/Core/util/NonMPL2.h
+- delete mode 100644 test/mpl2only.cpp
+- delete mode 100644 unsupported/Eigen/src/IterativeSolvers/ConstrainedConjGrad.h
+- delete mode 100644 unsupported/Eigen/src/IterativeSolvers/IterationController.h
+-
+-diff --git a/COPYING.LGPL b/COPYING.LGPL
+-deleted file mode 100644
+-index 4362b4915..000000000
+---- a/COPYING.LGPL
+-+++ /dev/null
+-@@ -1,502 +0,0 @@
+--                  GNU LESSER GENERAL PUBLIC LICENSE
+--                       Version 2.1, February 1999
+--
+-- Copyright (C) 1991, 1999 Free Software Foundation, Inc.
+-- 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+-- Everyone is permitted to copy and distribute verbatim copies
+-- of this license document, but changing it is not allowed.
+--
+--[This is the first released version of the Lesser GPL.  It also counts
+-- as the successor of the GNU Library Public License, version 2, hence
+-- the version number 2.1.]
+--
+--                            Preamble
+--
+--  The licenses for most software are designed to take away your
+--freedom to share and change it.  By contrast, the GNU General Public
+--Licenses are intended to guarantee your freedom to share and change
+--free software--to make sure the software is free for all its users.
+--
+--  This license, the Lesser General Public License, applies to some
+--specially designated software packages--typically libraries--of the
+--Free Software Foundation and other authors who decide to use it.  You
+--can use it too, but we suggest you first think carefully about whether
+--this license or the ordinary General Public License is the better
+--strategy to use in any particular case, based on the explanations below.
+--
+--  When we speak of free software, we are referring to freedom of use,
+--not price.  Our General Public Licenses are designed to make sure that
+--you have the freedom to distribute copies of free software (and charge
+--for this service if you wish); that you receive source code or can get
+--it if you want it; that you can change the software and use pieces of
+--it in new free programs; and that you are informed that you can do
+--these things.
+--
+--  To protect your rights, we need to make restrictions that forbid
+--distributors to deny you these rights or to ask you to surrender these
+--rights.  These restrictions translate to certain responsibilities for
+--you if you distribute copies of the library or if you modify it.
+--
+--  For example, if you distribute copies of the library, whether gratis
+--or for a fee, you must give the recipients all the rights that we gave
+--you.  You must make sure that they, too, receive or can get the source
+--code.  If you link other code with the library, you must provide
+--complete object files to the recipients, so that they can relink them
+--with the library after making changes to the library and recompiling
+--it.  And you must show them these terms so they know their rights.
+--
+--  We protect your rights with a two-step method: (1) we copyright the
+--library, and (2) we offer you this license, which gives you legal
+--permission to copy, distribute and/or modify the library.
+--
+--  To protect each distributor, we want to make it very clear that
+--there is no warranty for the free library.  Also, if the library is
+--modified by someone else and passed on, the recipients should know
+--that what they have is not the original version, so that the original
+--author's reputation will not be affected by problems that might be
+--introduced by others.
+--
+--  Finally, software patents pose a constant threat to the existence of
+--any free program.  We wish to make sure that a company cannot
+--effectively restrict the users of a free program by obtaining a
+--restrictive license from a patent holder.  Therefore, we insist that
+--any patent license obtained for a version of the library must be
+--consistent with the full freedom of use specified in this license.
+--
+--  Most GNU software, including some libraries, is covered by the
+--ordinary GNU General Public License.  This license, the GNU Lesser
+--General Public License, applies to certain designated libraries, and
+--is quite different from the ordinary General Public License.  We use
+--this license for certain libraries in order to permit linking those
+--libraries into non-free programs.
+--
+--  When a program is linked with a library, whether statically or using
+--a shared library, the combination of the two is legally speaking a
+--combined work, a derivative of the original library.  The ordinary
+--General Public License therefore permits such linking only if the
+--entire combination fits its criteria of freedom.  The Lesser General
+--Public License permits more lax criteria for linking other code with
+--the library.
+--
+--  We call this license the "Lesser" General Public License because it
+--does Less to protect the user's freedom than the ordinary General
+--Public License.  It also provides other free software developers Less
+--of an advantage over competing non-free programs.  These disadvantages
+--are the reason we use the ordinary General Public License for many
+--libraries.  However, the Lesser license provides advantages in certain
+--special circumstances.
+--
+--  For example, on rare occasions, there may be a special need to
+--encourage the widest possible use of a certain library, so that it becomes
+--a de-facto standard.  To achieve this, non-free programs must be
+--allowed to use the library.  A more frequent case is that a free
+--library does the same job as widely used non-free libraries.  In this
+--case, there is little to gain by limiting the free library to free
+--software only, so we use the Lesser General Public License.
+--
+--  In other cases, permission to use a particular library in non-free
+--programs enables a greater number of people to use a large body of
+--free software.  For example, permission to use the GNU C Library in
+--non-free programs enables many more people to use the whole GNU
+--operating system, as well as its variant, the GNU/Linux operating
+--system.
+--
+--  Although the Lesser General Public License is Less protective of the
+--users' freedom, it does ensure that the user of a program that is
+--linked with the Library has the freedom and the wherewithal to run
+--that program using a modified version of the Library.
+--
+--  The precise terms and conditions for copying, distribution and
+--modification follow.  Pay close attention to the difference between a
+--"work based on the library" and a "work that uses the library".  The
+--former contains code derived from the library, whereas the latter must
+--be combined with the library in order to run.
+--
+--                  GNU LESSER GENERAL PUBLIC LICENSE
+--   TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION
+--
+--  0. This License Agreement applies to any software library or other
+--program which contains a notice placed by the copyright holder or
+--other authorized party saying it may be distributed under the terms of
+--this Lesser General Public License (also called "this License").
+--Each licensee is addressed as "you".
+--
+--  A "library" means a collection of software functions and/or data
+--prepared so as to be conveniently linked with application programs
+--(which use some of those functions and data) to form executables.
+--
+--  The "Library", below, refers to any such software library or work
+--which has been distributed under these terms.  A "work based on the
+--Library" means either the Library or any derivative work under
+--copyright law: that is to say, a work containing the Library or a
+--portion of it, either verbatim or with modifications and/or translated
+--straightforwardly into another language.  (Hereinafter, translation is
+--included without limitation in the term "modification".)
+--
+--  "Source code" for a work means the preferred form of the work for
+--making modifications to it.  For a library, complete source code means
+--all the source code for all modules it contains, plus any associated
+--interface definition files, plus the scripts used to control compilation
+--and installation of the library.
+--
+--  Activities other than copying, distribution and modification are not
+--covered by this License; they are outside its scope.  The act of
+--running a program using the Library is not restricted, and output from
+--such a program is covered only if its contents constitute a work based
+--on the Library (independent of the use of the Library in a tool for
+--writing it).  Whether that is true depends on what the Library does
+--and what the program that uses the Library does.
+--
+--  1. You may copy and distribute verbatim copies of the Library's
+--complete source code as you receive it, in any medium, provided that
+--you conspicuously and appropriately publish on each copy an
+--appropriate copyright notice and disclaimer of warranty; keep intact
+--all the notices that refer to this License and to the absence of any
+--warranty; and distribute a copy of this License along with the
+--Library.
+--
+--  You may charge a fee for the physical act of transferring a copy,
+--and you may at your option offer warranty protection in exchange for a
+--fee.
+--
+--  2. You may modify your copy or copies of the Library or any portion
+--of it, thus forming a work based on the Library, and copy and
+--distribute such modifications or work under the terms of Section 1
+--above, provided that you also meet all of these conditions:
+--
+--    a) The modified work must itself be a software library.
+--
+--    b) You must cause the files modified to carry prominent notices
+--    stating that you changed the files and the date of any change.
+--
+--    c) You must cause the whole of the work to be licensed at no
+--    charge to all third parties under the terms of this License.
+--
+--    d) If a facility in the modified Library refers to a function or a
+--    table of data to be supplied by an application program that uses
+--    the facility, other than as an argument passed when the facility
+--    is invoked, then you must make a good faith effort to ensure that,
+--    in the event an application does not supply such function or
+--    table, the facility still operates, and performs whatever part of
+--    its purpose remains meaningful.
+--
+--    (For example, a function in a library to compute square roots has
+--    a purpose that is entirely well-defined independent of the
+--    application.  Therefore, Subsection 2d requires that any
+--    application-supplied function or table used by this function must
+--    be optional: if the application does not supply it, the square
+--    root function must still compute square roots.)
+--
+--These requirements apply to the modified work as a whole.  If
+--identifiable sections of that work are not derived from the Library,
+--and can be reasonably considered independent and separate works in
+--themselves, then this License, and its terms, do not apply to those
+--sections when you distribute them as separate works.  But when you
+--distribute the same sections as part of a whole which is a work based
+--on the Library, the distribution of the whole must be on the terms of
+--this License, whose permissions for other licensees extend to the
+--entire whole, and thus to each and every part regardless of who wrote
+--it.
+--
+--Thus, it is not the intent of this section to claim rights or contest
+--your rights to work written entirely by you; rather, the intent is to
+--exercise the right to control the distribution of derivative or
+--collective works based on the Library.
+--
+--In addition, mere aggregation of another work not based on the Library
+--with the Library (or with a work based on the Library) on a volume of
+--a storage or distribution medium does not bring the other work under
+--the scope of this License.
+--
+--  3. You may opt to apply the terms of the ordinary GNU General Public
+--License instead of this License to a given copy of the Library.  To do
+--this, you must alter all the notices that refer to this License, so
+--that they refer to the ordinary GNU General Public License, version 2,
+--instead of to this License.  (If a newer version than version 2 of the
+--ordinary GNU General Public License has appeared, then you can specify
+--that version instead if you wish.)  Do not make any other change in
+--these notices.
+--
+--  Once this change is made in a given copy, it is irreversible for
+--that copy, so the ordinary GNU General Public License applies to all
+--subsequent copies and derivative works made from that copy.
+--
+--  This option is useful when you wish to copy part of the code of
+--the Library into a program that is not a library.
+--
+--  4. You may copy and distribute the Library (or a portion or
+--derivative of it, under Section 2) in object code or executable form
+--under the terms of Sections 1 and 2 above provided that you accompany
+--it with the complete corresponding machine-readable source code, which
+--must be distributed under the terms of Sections 1 and 2 above on a
+--medium customarily used for software interchange.
+--
+--  If distribution of object code is made by offering access to copy
+--from a designated place, then offering equivalent access to copy the
+--source code from the same place satisfies the requirement to
+--distribute the source code, even though third parties are not
+--compelled to copy the source along with the object code.
+--
+--  5. A program that contains no derivative of any portion of the
+--Library, but is designed to work with the Library by being compiled or
+--linked with it, is called a "work that uses the Library".  Such a
+--work, in isolation, is not a derivative work of the Library, and
+--therefore falls outside the scope of this License.
+--
+--  However, linking a "work that uses the Library" with the Library
+--creates an executable that is a derivative of the Library (because it
+--contains portions of the Library), rather than a "work that uses the
+--library".  The executable is therefore covered by this License.
+--Section 6 states terms for distribution of such executables.
+--
+--  When a "work that uses the Library" uses material from a header file
+--that is part of the Library, the object code for the work may be a
+--derivative work of the Library even though the source code is not.
+--Whether this is true is especially significant if the work can be
+--linked without the Library, or if the work is itself a library.  The
+--threshold for this to be true is not precisely defined by law.
+--
+--  If such an object file uses only numerical parameters, data
+--structure layouts and accessors, and small macros and small inline
+--functions (ten lines or less in length), then the use of the object
+--file is unrestricted, regardless of whether it is legally a derivative
+--work.  (Executables containing this object code plus portions of the
+--Library will still fall under Section 6.)
+--
+--  Otherwise, if the work is a derivative of the Library, you may
+--distribute the object code for the work under the terms of Section 6.
+--Any executables containing that work also fall under Section 6,
+--whether or not they are linked directly with the Library itself.
+--
+--  6. As an exception to the Sections above, you may also combine or
+--link a "work that uses the Library" with the Library to produce a
+--work containing portions of the Library, and distribute that work
+--under terms of your choice, provided that the terms permit
+--modification of the work for the customer's own use and reverse
+--engineering for debugging such modifications.
+--
+--  You must give prominent notice with each copy of the work that the
+--Library is used in it and that the Library and its use are covered by
+--this License.  You must supply a copy of this License.  If the work
+--during execution displays copyright notices, you must include the
+--copyright notice for the Library among them, as well as a reference
+--directing the user to the copy of this License.  Also, you must do one
+--of these things:
+--
+--    a) Accompany the work with the complete corresponding
+--    machine-readable source code for the Library including whatever
+--    changes were used in the work (which must be distributed under
+--    Sections 1 and 2 above); and, if the work is an executable linked
+--    with the Library, with the complete machine-readable "work that
+--    uses the Library", as object code and/or source code, so that the
+--    user can modify the Library and then relink to produce a modified
+--    executable containing the modified Library.  (It is understood
+--    that the user who changes the contents of definitions files in the
+--    Library will not necessarily be able to recompile the application
+--    to use the modified definitions.)
+--
+--    b) Use a suitable shared library mechanism for linking with the
+--    Library.  A suitable mechanism is one that (1) uses at run time a
+--    copy of the library already present on the user's computer system,
+--    rather than copying library functions into the executable, and (2)
+--    will operate properly with a modified version of the library, if
+--    the user installs one, as long as the modified version is
+--    interface-compatible with the version that the work was made with.
+--
+--    c) Accompany the work with a written offer, valid for at
+--    least three years, to give the same user the materials
+--    specified in Subsection 6a, above, for a charge no more
+--    than the cost of performing this distribution.
+--
+--    d) If distribution of the work is made by offering access to copy
+--    from a designated place, offer equivalent access to copy the above
+--    specified materials from the same place.
+--
+--    e) Verify that the user has already received a copy of these
+--    materials or that you have already sent this user a copy.
+--
+--  For an executable, the required form of the "work that uses the
+--Library" must include any data and utility programs needed for
+--reproducing the executable from it.  However, as a special exception,
+--the materials to be distributed need not include anything that is
+--normally distributed (in either source or binary form) with the major
+--components (compiler, kernel, and so on) of the operating system on
+--which the executable runs, unless that component itself accompanies
+--the executable.
+--
+--  It may happen that this requirement contradicts the license
+--restrictions of other proprietary libraries that do not normally
+--accompany the operating system.  Such a contradiction means you cannot
+--use both them and the Library together in an executable that you
+--distribute.
+--
+--  7. You may place library facilities that are a work based on the
+--Library side-by-side in a single library together with other library
+--facilities not covered by this License, and distribute such a combined
+--library, provided that the separate distribution of the work based on
+--the Library and of the other library facilities is otherwise
+--permitted, and provided that you do these two things:
+--
+--    a) Accompany the combined library with a copy of the same work
+--    based on the Library, uncombined with any other library
+--    facilities.  This must be distributed under the terms of the
+--    Sections above.
+--
+--    b) Give prominent notice with the combined library of the fact
+--    that part of it is a work based on the Library, and explaining
+--    where to find the accompanying uncombined form of the same work.
+--
+--  8. You may not copy, modify, sublicense, link with, or distribute
+--the Library except as expressly provided under this License.  Any
+--attempt otherwise to copy, modify, sublicense, link with, or
+--distribute the Library is void, and will automatically terminate your
+--rights under this License.  However, parties who have received copies,
+--or rights, from you under this License will not have their licenses
+--terminated so long as such parties remain in full compliance.
+--
+--  9. You are not required to accept this License, since you have not
+--signed it.  However, nothing else grants you permission to modify or
+--distribute the Library or its derivative works.  These actions are
+--prohibited by law if you do not accept this License.  Therefore, by
+--modifying or distributing the Library (or any work based on the
+--Library), you indicate your acceptance of this License to do so, and
+--all its terms and conditions for copying, distributing or modifying
+--the Library or works based on it.
+--
+--  10. Each time you redistribute the Library (or any work based on the
+--Library), the recipient automatically receives a license from the
+--original licensor to copy, distribute, link with or modify the Library
+--subject to these terms and conditions.  You may not impose any further
+--restrictions on the recipients' exercise of the rights granted herein.
+--You are not responsible for enforcing compliance by third parties with
+--this License.
+--
+--  11. If, as a consequence of a court judgment or allegation of patent
+--infringement or for any other reason (not limited to patent issues),
+--conditions are imposed on you (whether by court order, agreement or
+--otherwise) that contradict the conditions of this License, they do not
+--excuse you from the conditions of this License.  If you cannot
+--distribute so as to satisfy simultaneously your obligations under this
+--License and any other pertinent obligations, then as a consequence you
+--may not distribute the Library at all.  For example, if a patent
+--license would not permit royalty-free redistribution of the Library by
+--all those who receive copies directly or indirectly through you, then
+--the only way you could satisfy both it and this License would be to
+--refrain entirely from distribution of the Library.
+--
+--If any portion of this section is held invalid or unenforceable under any
+--particular circumstance, the balance of the section is intended to apply,
+--and the section as a whole is intended to apply in other circumstances.
+--
+--It is not the purpose of this section to induce you to infringe any
+--patents or other property right claims or to contest validity of any
+--such claims; this section has the sole purpose of protecting the
+--integrity of the free software distribution system which is
+--implemented by public license practices.  Many people have made
+--generous contributions to the wide range of software distributed
+--through that system in reliance on consistent application of that
+--system; it is up to the author/donor to decide if he or she is willing
+--to distribute software through any other system and a licensee cannot
+--impose that choice.
+--
+--This section is intended to make thoroughly clear what is believed to
+--be a consequence of the rest of this License.
+--
+--  12. If the distribution and/or use of the Library is restricted in
+--certain countries either by patents or by copyrighted interfaces, the
+--original copyright holder who places the Library under this License may add
+--an explicit geographical distribution limitation excluding those countries,
+--so that distribution is permitted only in or among countries not thus
+--excluded.  In such case, this License incorporates the limitation as if
+--written in the body of this License.
+--
+--  13. The Free Software Foundation may publish revised and/or new
+--versions of the Lesser General Public License from time to time.
+--Such new versions will be similar in spirit to the present version,
+--but may differ in detail to address new problems or concerns.
+--
+--Each version is given a distinguishing version number.  If the Library
+--specifies a version number of this License which applies to it and
+--"any later version", you have the option of following the terms and
+--conditions either of that version or of any later version published by
+--the Free Software Foundation.  If the Library does not specify a
+--license version number, you may choose any version ever published by
+--the Free Software Foundation.
+--
+--  14. If you wish to incorporate parts of the Library into other free
+--programs whose distribution conditions are incompatible with these,
+--write to the author to ask for permission.  For software which is
+--copyrighted by the Free Software Foundation, write to the Free
+--Software Foundation; we sometimes make exceptions for this.  Our
+--decision will be guided by the two goals of preserving the free status
+--of all derivatives of our free software and of promoting the sharing
+--and reuse of software generally.
+--
+--                            NO WARRANTY
+--
+--  15. BECAUSE THE LIBRARY IS LICENSED FREE OF CHARGE, THERE IS NO
+--WARRANTY FOR THE LIBRARY, TO THE EXTENT PERMITTED BY APPLICABLE LAW.
+--EXCEPT WHEN OTHERWISE STATED IN WRITING THE COPYRIGHT HOLDERS AND/OR
+--OTHER PARTIES PROVIDE THE LIBRARY "AS IS" WITHOUT WARRANTY OF ANY
+--KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE
+--IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+--PURPOSE.  THE ENTIRE RISK AS TO THE QUALITY AND PERFORMANCE OF THE
+--LIBRARY IS WITH YOU.  SHOULD THE LIBRARY PROVE DEFECTIVE, YOU ASSUME
+--THE COST OF ALL NECESSARY SERVICING, REPAIR OR CORRECTION.
+--
+--  16. IN NO EVENT UNLESS REQUIRED BY APPLICABLE LAW OR AGREED TO IN
+--WRITING WILL ANY COPYRIGHT HOLDER, OR ANY OTHER PARTY WHO MAY MODIFY
+--AND/OR REDISTRIBUTE THE LIBRARY AS PERMITTED ABOVE, BE LIABLE TO YOU
+--FOR DAMAGES, INCLUDING ANY GENERAL, SPECIAL, INCIDENTAL OR
+--CONSEQUENTIAL DAMAGES ARISING OUT OF THE USE OR INABILITY TO USE THE
+--LIBRARY (INCLUDING BUT NOT LIMITED TO LOSS OF DATA OR DATA BEING
+--RENDERED INACCURATE OR LOSSES SUSTAINED BY YOU OR THIRD PARTIES OR A
+--FAILURE OF THE LIBRARY TO OPERATE WITH ANY OTHER SOFTWARE), EVEN IF
+--SUCH HOLDER OR OTHER PARTY HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH
+--DAMAGES.
+--
+--                     END OF TERMS AND CONDITIONS
+--
+--           How to Apply These Terms to Your New Libraries
+--
+--  If you develop a new library, and you want it to be of the greatest
+--possible use to the public, we recommend making it free software that
+--everyone can redistribute and change.  You can do so by permitting
+--redistribution under these terms (or, alternatively, under the terms of the
+--ordinary General Public License).
+--
+--  To apply these terms, attach the following notices to the library.  It is
+--safest to attach them to the start of each source file to most effectively
+--convey the exclusion of warranty; and each file should have at least the
+--"copyright" line and a pointer to where the full notice is found.
+--
+--    <one line to give the library's name and a brief idea of what it does.>
+--    Copyright (C) <year>  <name of author>
+--
+--    This library is free software; you can redistribute it and/or
+--    modify it under the terms of the GNU Lesser General Public
+--    License as published by the Free Software Foundation; either
+--    version 2.1 of the License, or (at your option) any later version.
+--
+--    This library is distributed in the hope that it will be useful,
+--    but WITHOUT ANY WARRANTY; without even the implied warranty of
+--    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+--    Lesser General Public License for more details.
+--
+--    You should have received a copy of the GNU Lesser General Public
+--    License along with this library; if not, write to the Free Software
+--    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+--
+--Also add information on how to contact you by electronic and paper mail.
+--
+--You should also get your employer (if you work as a programmer) or your
+--school, if any, to sign a "copyright disclaimer" for the library, if
+--necessary.  Here is a sample; alter the names:
+--
+--  Yoyodyne, Inc., hereby disclaims all copyright interest in the
+--  library `Frob' (a library for tweaking knobs) written by James Random Hacker.
+--
+--  <signature of Ty Coon>, 1 April 1990
+--  Ty Coon, President of Vice
+--
+--That's all there is to it!
+-diff --git a/COPYING.README b/COPYING.README
+-index de5b63215..11af93ca7 100644
+---- a/COPYING.README
+-+++ b/COPYING.README
+-@@ -2,17 +2,5 @@ Eigen is primarily MPL2 licensed. See COPYING.MPL2 and these links:
+-   http://www.mozilla.org/MPL/2.0/
+-   http://www.mozilla.org/MPL/2.0/FAQ.html
+- 
+--Some files contain third-party code under BSD or LGPL licenses, whence the other
+--COPYING.* files here.
+--
+--All the LGPL code is either LGPL 2.1-only, or LGPL 2.1-or-later.
+--For this reason, the COPYING.LGPL file contains the LGPL 2.1 text.
+--
+--If you want to guarantee that the Eigen code that you are #including is licensed
+--under the MPL2 and possibly more permissive licenses (like BSD), #define this
+--preprocessor symbol:
+--  EIGEN_MPL2_ONLY
+--For example, with most compilers, you could add this to your project CXXFLAGS:
+--  -DEIGEN_MPL2_ONLY
+--This will cause a compilation error to be generated if you #include any code that is
+--LGPL licensed.
+-+Some files contain third-party code under BSD or other MPL2-compatible licenses,
+-+whence the other COPYING.* files here.
+-\ No newline at end of file
+-diff --git a/Eigen/src/Core/util/NonMPL2.h b/Eigen/src/Core/util/NonMPL2.h
+-deleted file mode 100644
+-index 1af67cf18..000000000
+---- a/Eigen/src/Core/util/NonMPL2.h
+-+++ /dev/null
+-@@ -1,3 +0,0 @@
+--#ifdef EIGEN_MPL2_ONLY
+--#error Including non-MPL2 code in EIGEN_MPL2_ONLY mode
+--#endif
+-diff --git a/Eigen/src/IterativeLinearSolvers/IncompleteCholesky.h b/Eigen/src/IterativeLinearSolvers/IncompleteCholesky.h
+-index 5e632c4e2..8b6077601 100644
+---- a/Eigen/src/IterativeLinearSolvers/IncompleteCholesky.h
+-+++ b/Eigen/src/IterativeLinearSolvers/IncompleteCholesky.h
+-@@ -24,8 +24,7 @@ namespace Eigen {
+-   * \tparam Scalar the scalar type of the input matrices
+-   * \tparam _UpLo The triangular part that will be used for the computations. It can be Lower
+-     *               or Upper. Default is Lower.
+--  * \tparam _OrderingType The ordering method to use, either AMDOrdering<> or NaturalOrdering<>. Default is AMDOrdering<int>,
+--  *                       unless EIGEN_MPL2_ONLY is defined, in which case the default is NaturalOrdering<int>.
+-+  * \tparam _OrderingType The ordering method to use, either AMDOrdering<> or NaturalOrdering<>. Default is AMDOrdering<int>.
+-   *
+-   * \implsparsesolverconcept
+-   *
+-diff --git a/bench/tensors/eigen_sycl_bench.sh b/bench/tensors/eigen_sycl_bench.sh
+-index 3f67b3d86..4cb8f7be4 100755
+---- a/bench/tensors/eigen_sycl_bench.sh
+-+++ b/bench/tensors/eigen_sycl_bench.sh
+-@@ -10,7 +10,6 @@ benchmark_main.cc \
+- -march=native \
+- -O3 \
+- -DNDEBUG \
+---DEIGEN_MPL2_ONLY \
+- -DEIGEN_USE_SYCL=1 \
+- -DEIGEN_SYCL_LOCAL_MEM=1 \
+- -no-serial-memop \
+-diff --git a/bench/tensors/eigen_sycl_bench_contract.sh b/bench/tensors/eigen_sycl_bench_contract.sh
+-index 73fd6c4a0..3ab0138a1 100644
+---- a/bench/tensors/eigen_sycl_bench_contract.sh
+-+++ b/bench/tensors/eigen_sycl_bench_contract.sh
+-@@ -1,7 +1,7 @@
+- rm -f tensor_contract_sycl_bench
+- : "${COMPUTECPP_PACKAGE_ROOT_DIR:?Need to set COMPUTECPP_PACKAGE_ROOT_DIR}"
+- echo "COMPUTECPP_PACKAGE_ROOT_DIR is set to: "$COMPUTECPP_PACKAGE_ROOT_DIR
+--${COMPUTECPP_PACKAGE_ROOT_DIR}/bin/compute++  tensor_contract_sycl_bench.cc -I ../../ -I ${COMPUTECPP_PACKAGE_ROOT_DIR}/include/ -std=c++11 -O3 -DNDEBUG -DEIGEN_MPL2_ONLY -DEIGEN_USE_SYCL=1 -no-serial-memop -mllvm -inline-threshold=10000 -fsycl-ih-last -sycl-driver -Xclang -cl-mad-enable -lOpenCL -lComputeCpp -lpthread -o tensor_contract_sycl_bench ${@:1}
+-+${COMPUTECPP_PACKAGE_ROOT_DIR}/bin/compute++  tensor_contract_sycl_bench.cc -I ../../ -I ${COMPUTECPP_PACKAGE_ROOT_DIR}/include/ -std=c++11 -O3 -DNDEBUG -DEIGEN_USE_SYCL=1 -no-serial-memop -mllvm -inline-threshold=10000 -fsycl-ih-last -sycl-driver -Xclang -cl-mad-enable -lOpenCL -lComputeCpp -lpthread -o tensor_contract_sycl_bench ${@:1}
+- export LD_LIBRARY_PATH=${COMPUTECPP_PACKAGE_ROOT_DIR}/lib:$LD_LIBRARY_PATH
+- ./tensor_contract_sycl_bench
+- 
+-diff --git a/doc/PreprocessorDirectives.dox b/doc/PreprocessorDirectives.dox
+-index eda0d1961..2b5cb1b92 100644
+---- a/doc/PreprocessorDirectives.dox
+-+++ b/doc/PreprocessorDirectives.dox
+-@@ -92,9 +92,6 @@ run time. However, these assertions do cost time and can thus be turned off.
+-  - \b eigen_assert - macro with one argument that is used inside %Eigen for assertions. By default, it is
+-    basically defined to be \c assert, which aborts the program if the assertion is violated. Redefine this
+-    macro if you want to do something else, like throwing an exception.
+-- - \b EIGEN_MPL2_ONLY - disable non MPL2 compatible features, or in other words disable the features which
+--   are still under the LGPL.
+--
+- 
+- \section TopicPreprocessorDirectivesPerformance Alignment, vectorization and performance tweaking
+- 
+-diff --git a/test/mpl2only.cpp b/test/mpl2only.cpp
+-deleted file mode 100644
+-index 296350d08..000000000
+---- a/test/mpl2only.cpp
+-+++ /dev/null
+-@@ -1,24 +0,0 @@
+--// This file is part of Eigen, a lightweight C++ template library
+--// for linear algebra.
+--//
+--// Copyright (C) 2015 Gael Guennebaud <gael.guennebaud@inria.fr>
+--//
+--// This Source Code Form is subject to the terms of the Mozilla
+--// Public License v. 2.0. If a copy of the MPL was not distributed
+--// with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
+--
+--#ifndef EIGEN_MPL2_ONLY
+--#define EIGEN_MPL2_ONLY
+--#endif
+--#include <Eigen/Dense>
+--#include <Eigen/SparseCore>
+--#include <Eigen/SparseLU>
+--#include <Eigen/SparseQR>
+--#include <Eigen/Sparse>
+--#include <Eigen/IterativeLinearSolvers>
+--#include <Eigen/Eigen>
+--
+--int main()
+--{
+--  return 0;
+--}
+-diff --git a/unsupported/Eigen/IterativeSolvers b/unsupported/Eigen/IterativeSolvers
+-index b53f10937..3ac64e9f8 100644
+---- a/unsupported/Eigen/IterativeSolvers
+-+++ b/unsupported/Eigen/IterativeSolvers
+-@@ -19,7 +19,6 @@
+-   * \defgroup IterativeLinearSolvers_Module IterativeLinearSolvers module
+-   * This module aims to provide various iterative linear and non linear solver algorithms.
+-   * It currently provides:
+--  *  - a constrained conjugate gradient
+-   *  - a Householder GMRES implementation
+-   *  - an IDR(s) implementation
+-   *  - a DGMRES implementation
+-@@ -33,11 +32,6 @@
+- 
+- #include "../../Eigen/src/Core/util/DisableStupidWarnings.h"
+- 
+--#ifndef EIGEN_MPL2_ONLY
+--#include "src/IterativeSolvers/IterationController.h"
+--#include "src/IterativeSolvers/ConstrainedConjGrad.h"
+--#endif
+--
+- #include "src/IterativeSolvers/IncompleteLU.h"
+- #include "src/IterativeSolvers/GMRES.h"
+- #include "src/IterativeSolvers/DGMRES.h"
+-diff --git a/unsupported/Eigen/src/IterativeSolvers/ConstrainedConjGrad.h b/unsupported/Eigen/src/IterativeSolvers/ConstrainedConjGrad.h
+-deleted file mode 100644
+-index e7d70f39d..000000000
+---- a/unsupported/Eigen/src/IterativeSolvers/ConstrainedConjGrad.h
+-+++ /dev/null
+-@@ -1,187 +0,0 @@
+--// This file is part of Eigen, a lightweight C++ template library
+--// for linear algebra.
+--//
+--// Copyright (C) 2008 Gael Guennebaud <gael.guennebaud@inria.fr>
+--
+--/* NOTE The functions of this file have been adapted from the GMM++ library */
+--
+--//========================================================================
+--//
+--// Copyright (C) 2002-2007 Yves Renard
+--//
+--// This file is a part of GETFEM++
+--//
+--// Getfem++ is free software; you can redistribute it and/or modify
+--// it under the terms of the GNU Lesser General Public License as
+--// published by the Free Software Foundation; version 2.1 of the License.
+--//
+--// This program is distributed in the hope that it will be useful,
+--// but WITHOUT ANY WARRANTY; without even the implied warranty of
+--// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+--// GNU Lesser General Public License for more details.
+--// You should have received a copy of the GNU Lesser General Public
+--// License along with this program; if not, write to the Free Software
+--// Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301,
+--// USA.
+--//
+--//========================================================================
+--
+--#include "../../../../Eigen/src/Core/util/NonMPL2.h"
+--
+--#ifndef EIGEN_CONSTRAINEDCG_H
+--#define EIGEN_CONSTRAINEDCG_H
+--
+--#include "../../../../Eigen/Core"
+--
+--namespace Eigen { 
+--
+--namespace internal {
+--
+--/** \ingroup IterativeLinearSolvers_Module
+--  * Compute the pseudo inverse of the non-square matrix C such that
+--  * \f$ CINV = (C * C^T)^{-1} * C \f$ based on a conjugate gradient method.
+--  *
+--  * This function is internally used by constrained_cg.
+--  */
+--template <typename CMatrix, typename CINVMatrix>
+--void pseudo_inverse(const CMatrix &C, CINVMatrix &CINV)
+--{
+--  // optimisable : copie de la ligne, precalcul de C * trans(C).
+--  typedef typename CMatrix::Scalar Scalar;
+--  typedef typename CMatrix::Index Index;
+--  // FIXME use sparse vectors ?
+--  typedef Matrix<Scalar,Dynamic,1> TmpVec;
+--
+--  Index rows = C.rows(), cols = C.cols();
+--
+--  TmpVec d(rows), e(rows), l(cols), p(rows), q(rows), r(rows);
+--  Scalar rho, rho_1, alpha;
+--  d.setZero();
+--
+--  typedef Triplet<double> T;
+--  std::vector<T> tripletList;
+--    
+--  for (Index i = 0; i < rows; ++i)
+--  {
+--    d[i] = 1.0;
+--    rho = 1.0;
+--    e.setZero();
+--    r = d;
+--    p = d;
+--
+--    while (rho >= 1e-38)
+--    { /* conjugate gradient to compute e             */
+--      /* which is the i-th row of inv(C * trans(C))  */
+--      l = C.transpose() * p;
+--      q = C * l;
+--      alpha = rho / p.dot(q);
+--      e +=  alpha * p;
+--      r += -alpha * q;
+--      rho_1 = rho;
+--      rho = r.dot(r);
+--      p = (rho/rho_1) * p + r;
+--    }
+--
+--    l = C.transpose() * e; // l is the i-th row of CINV
+--    // FIXME add a generic "prune/filter" expression for both dense and sparse object to sparse
+--    for (Index j=0; j<l.size(); ++j)
+--      if (l[j]<1e-15)
+--	tripletList.push_back(T(i,j,l(j)));
+--
+--	
+--    d[i] = 0.0;
+--  }
+--  CINV.setFromTriplets(tripletList.begin(), tripletList.end());
+--}
+--
+--
+--
+--/** \ingroup IterativeLinearSolvers_Module
+--  * Constrained conjugate gradient
+--  *
+--  * Computes the minimum of \f$ 1/2((Ax).x) - bx \f$ under the constraint \f$ Cx \le f \f$
+--  */
+--template<typename TMatrix, typename CMatrix,
+--         typename VectorX, typename VectorB, typename VectorF>
+--void constrained_cg(const TMatrix& A, const CMatrix& C, VectorX& x,
+--                       const VectorB& b, const VectorF& f, IterationController &iter)
+--{
+--  using std::sqrt;
+--  typedef typename TMatrix::Scalar Scalar;
+--  typedef typename TMatrix::Index Index;
+--  typedef Matrix<Scalar,Dynamic,1>  TmpVec;
+--
+--  Scalar rho = 1.0, rho_1, lambda, gamma;
+--  Index xSize = x.size();
+--  TmpVec  p(xSize), q(xSize), q2(xSize),
+--          r(xSize), old_z(xSize), z(xSize),
+--          memox(xSize);
+--  std::vector<bool> satured(C.rows());
+--  p.setZero();
+--  iter.setRhsNorm(sqrt(b.dot(b))); // gael vect_sp(PS, b, b)
+--  if (iter.rhsNorm() == 0.0) iter.setRhsNorm(1.0);
+--
+--  SparseMatrix<Scalar,RowMajor> CINV(C.rows(), C.cols());
+--  pseudo_inverse(C, CINV);
+--
+--  while(true)
+--  {
+--    // computation of residual
+--    old_z = z;
+--    memox = x;
+--    r = b;
+--    r += A * -x;
+--    z = r;
+--    bool transition = false;
+--    for (Index i = 0; i < C.rows(); ++i)
+--    {
+--      Scalar al = C.row(i).dot(x) - f.coeff(i);
+--      if (al >= -1.0E-15)
+--      {
+--        if (!satured[i])
+--        {
+--          satured[i] = true;
+--          transition = true;
+--        }
+--        Scalar bb = CINV.row(i).dot(z);
+--        if (bb > 0.0)
+--          // FIXME: we should allow that: z += -bb * C.row(i);
+--          for (typename CMatrix::InnerIterator it(C,i); it; ++it)
+--            z.coeffRef(it.index()) -= bb*it.value();
+--      }
+--      else
+--        satured[i] = false;
+--    }
+--
+--    // descent direction
+--    rho_1 = rho;
+--    rho = r.dot(z);
+--
+--    if (iter.finished(rho)) break;
+--    if (transition || iter.first()) gamma = 0.0;
+--    else gamma = (std::max)(0.0, (rho - old_z.dot(z)) / rho_1);
+--    p = z + gamma*p;
+--
+--    ++iter;
+--    // one dimensionnal optimization
+--    q = A * p;
+--    lambda = rho / q.dot(p);
+--    for (Index i = 0; i < C.rows(); ++i)
+--    {
+--      if (!satured[i])
+--      {
+--        Scalar bb = C.row(i).dot(p) - f[i];
+--        if (bb > 0.0)
+--          lambda = (std::min)(lambda, (f.coeff(i)-C.row(i).dot(x)) / bb);
+--      }
+--    }
+--    x += lambda * p;
+--    memox -= x;
+--  }
+--}
+--
+--} // end namespace internal
+--
+--} // end namespace Eigen
+--
+--#endif // EIGEN_CONSTRAINEDCG_H
+-diff --git a/unsupported/Eigen/src/IterativeSolvers/IterationController.h b/unsupported/Eigen/src/IterativeSolvers/IterationController.h
+-deleted file mode 100644
+-index a116e09e2..000000000
+---- a/unsupported/Eigen/src/IterativeSolvers/IterationController.h
+-+++ /dev/null
+-@@ -1,154 +0,0 @@
+--// This file is part of Eigen, a lightweight C++ template library
+--// for linear algebra.
+--//
+--// Copyright (C) 2008-2009 Gael Guennebaud <gael.guennebaud@inria.fr>
+--
+--/* NOTE The class IterationController has been adapted from the iteration
+-- *      class of the GMM++ and ITL libraries.
+-- */
+--
+--//=======================================================================
+--// Copyright (C) 1997-2001
+--// Authors: Andrew Lumsdaine <lums@osl.iu.edu> 
+--//          Lie-Quan Lee     <llee@osl.iu.edu>
+--//
+--// This file is part of the Iterative Template Library
+--//
+--// You should have received a copy of the License Agreement for the
+--// Iterative Template Library along with the software;  see the
+--// file LICENSE.  
+--//
+--// Permission to modify the code and to distribute modified code is
+--// granted, provided the text of this NOTICE is retained, a notice that
+--// the code was modified is included with the above COPYRIGHT NOTICE and
+--// with the COPYRIGHT NOTICE in the LICENSE file, and that the LICENSE
+--// file is distributed with the modified code.
+--//
+--// LICENSOR MAKES NO REPRESENTATIONS OR WARRANTIES, EXPRESS OR IMPLIED.
+--// By way of example, but not limitation, Licensor MAKES NO
+--// REPRESENTATIONS OR WARRANTIES OF MERCHANTABILITY OR FITNESS FOR ANY
+--// PARTICULAR PURPOSE OR THAT THE USE OF THE LICENSED SOFTWARE COMPONENTS
+--// OR DOCUMENTATION WILL NOT INFRINGE ANY PATENTS, COPYRIGHTS, TRADEMARKS
+--// OR OTHER RIGHTS.
+--//=======================================================================
+--
+--//========================================================================
+--//
+--// Copyright (C) 2002-2007 Yves Renard
+--//
+--// This file is a part of GETFEM++
+--//
+--// Getfem++ is free software; you can redistribute it and/or modify
+--// it under the terms of the GNU Lesser General Public License as
+--// published by the Free Software Foundation; version 2.1 of the License.
+--//
+--// This program is distributed in the hope that it will be useful,
+--// but WITHOUT ANY WARRANTY; without even the implied warranty of
+--// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+--// GNU Lesser General Public License for more details.
+--// You should have received a copy of the GNU Lesser General Public
+--// License along with this program; if not, write to the Free Software
+--// Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301,
+--// USA.
+--//
+--//========================================================================
+--
+--#include "../../../../Eigen/src/Core/util/NonMPL2.h"
+--
+--#ifndef EIGEN_ITERATION_CONTROLLER_H
+--#define EIGEN_ITERATION_CONTROLLER_H
+--
+--namespace Eigen { 
+--
+--/** \ingroup IterativeLinearSolvers_Module
+--  * \class IterationController
+--  *
+--  * \brief Controls the iterations of the iterative solvers
+--  *
+--  * This class has been adapted from the iteration class of GMM++ and ITL libraries.
+--  *
+--  */
+--class IterationController
+--{
+--  protected :
+--    double m_rhsn;        ///< Right hand side norm
+--    size_t m_maxiter;     ///< Max. number of iterations
+--    int m_noise;          ///< if noise > 0 iterations are printed
+--    double m_resmax;      ///< maximum residual
+--    double m_resminreach, m_resadd;
+--    size_t m_nit;         ///< iteration number
+--    double m_res;         ///< last computed residual
+--    bool m_written;
+--    void (*m_callback)(const IterationController&);
+--  public :
+--
+--    void init()
+--    {
+--      m_nit = 0; m_res = 0.0; m_written = false;
+--      m_resminreach = 1E50; m_resadd = 0.0;
+--      m_callback = 0;
+--    }
+--
+--    IterationController(double r = 1.0E-8, int noi = 0, size_t mit = size_t(-1))
+--      : m_rhsn(1.0), m_maxiter(mit), m_noise(noi), m_resmax(r) { init(); }
+--
+--    void operator ++(int) { m_nit++; m_written = false; m_resadd += m_res; }
+--    void operator ++() { (*this)++; }
+--
+--    bool first() { return m_nit == 0; }
+--
+--    /* get/set the "noisyness" (verbosity) of the solvers */
+--    int noiseLevel() const { return m_noise; }
+--    void setNoiseLevel(int n) { m_noise = n; }
+--    void reduceNoiseLevel() { if (m_noise > 0) m_noise--; }
+--
+--    double maxResidual() const { return m_resmax; }
+--    void setMaxResidual(double r) { m_resmax = r; }
+--
+--    double residual() const { return m_res; }
+--
+--    /* change the user-definable callback, called after each iteration */
+--    void setCallback(void (*t)(const IterationController&))
+--    {
+--      m_callback = t;
+--    }
+--
+--    size_t iteration() const { return m_nit; }
+--    void setIteration(size_t i) { m_nit = i; }
+--
+--    size_t maxIterarions() const { return m_maxiter; }
+--    void setMaxIterations(size_t i) { m_maxiter = i; }
+--
+--    double rhsNorm() const { return m_rhsn; }
+--    void setRhsNorm(double r) { m_rhsn = r; }
+--
+--    bool converged() const { return m_res <= m_rhsn * m_resmax; }
+--    bool converged(double nr)
+--    {
+--      using std::abs;
+--      m_res = abs(nr); 
+--      m_resminreach = (std::min)(m_resminreach, m_res);
+--      return converged();
+--    }
+--    template<typename VectorType> bool converged(const VectorType &v)
+--    { return converged(v.squaredNorm()); }
+--
+--    bool finished(double nr)
+--    {
+--      if (m_callback) m_callback(*this);
+--      if (m_noise > 0 && !m_written)
+--      {
+--        converged(nr);
+--        m_written = true;
+--      }
+--      return (m_nit >= m_maxiter || converged(nr));
+--    }
+--    template <typename VectorType>
+--    bool finished(const MatrixBase<VectorType> &v)
+--    { return finished(double(v.squaredNorm())); }
+--
+--};
+--
+--} // end namespace Eigen
+--
+--#endif // EIGEN_ITERATION_CONTROLLER_H
+--- 
+-2.48.1
+-
+diff --git a/meta-oe/recipes-support/libeigen/libeigen_3.4.1.bb b/meta-oe/recipes-support/libeigen/libeigen_5.0.1.bb
+similarity index 65%
+rename from meta-oe/recipes-support/libeigen/libeigen_3.4.1.bb
+rename to meta-oe/recipes-support/libeigen/libeigen_5.0.1.bb
+index 6e66683be9..6239b17da7 100644
+--- a/meta-oe/recipes-support/libeigen/libeigen_3.4.1.bb
++++ b/meta-oe/recipes-support/libeigen/libeigen_5.0.1.bb
+@@ -1,23 +1,22 @@
+ DESCRIPTION = "Eigen is a C++ template library for linear algebra: matrices, vectors, numerical solvers, and related algorithms."
+ HOMEPAGE = "http://eigen.tuxfamily.org/"
+ LICENSE = "Apache-2.0 AND BSD-3-Clause AND GPL-2.0-or-later AND MPL-2.0 AND Minpack"
+-# The GPL code is only used for benchmark tests and does not affect what is installed.
++# The GPL code is only the bench/btl benchmark suite and does not affect what is installed.
+ LICENSE:${PN} = "Apache-2.0 AND BSD-3-Clause AND MPL-2.0 AND Minpack"
+ LICENSE:${PN}-dbg = "Apache-2.0 AND BSD-3-Clause AND MPL-2.0 AND Minpack"
+ LICENSE:${PN}-dev = "Apache-2.0 AND BSD-3-Clause AND MPL-2.0 AND Minpack"
+-LIC_FILES_CHKSUM = "file://COPYING.MPL2;md5=815ca599c9df247a0c7f619bab123dad \
++LIC_FILES_CHKSUM = "file://COPYING.MPL2;md5=48a3fe23ed1353e0995dadfda05ffdb6 \
+                     file://COPYING.APACHE;md5=8de23b8e93c63005353056b2475e9aa5 \
+                     file://COPYING.BSD;md5=2dd0510ee95e59ca28834b875bc96596 \
+-                    file://COPYING.GPL;md5=d32239bcb673463ab874e80d47fae504 \
++                    file://bench/btl/COPYING;md5=02023a9ab7f768bfdefdb98b629bb20d \
+                     file://COPYING.MINPACK;md5=71d91b0f75ce79a75d3108a72bef8116 \
+ "
  
- DEPENDS = "libeigen"
+-SRC_URI = "git://gitlab.com/libeigen/eigen.git;protocol=http;branch=3.4 \
+-    file://0001-Remove-LGPL-Code-and-references.patch \
+-    file://0001-Make-eigen_packet_wrapper-trivial-for-c-11.patch \
+-"
++SRC_URI = "git://gitlab.com/libeigen/eigen.git;protocol=https;branch=5.0;tag=${PV}"
++
++SRCREV = "bc3b39870ecb690a623a3f49149a358b95c5781d"
  
--SRC_URI = "git://github.com/ceres-solver/ceres-solver.git;branch=master;protocol=https"
-+SRC_URI = "git://github.com/ceres-solver/ceres-solver.git;branch=master;protocol=https \
-+           file://0001-Support-Eigen3-5.0.0.patch \
-+           "
- SRCREV = "85331393dc0dff09f6fb9903ab0c4bfa3e134b01"
+-SRCREV = "d71c30c47858effcbd39967097a2d99ee48db464"
 +UPSTREAM_CHECK_GITTAGREGEX = "^(?P<pver>\d+(\.\d+)+)$"
  
  inherit cmake
  
+@@ -26,8 +25,13 @@ PACKAGECONFIG ??= ""
+ PACKAGECONFIG[blas] = "-DEIGEN_BUILD_BLAS=ON,-DEIGEN_BUILD_BLAS=OFF,libgfortran"
+ PACKAGECONFIG[lapack] = "-DEIGEN_BUILD_LAPACK=ON,-DEIGEN_BUILD_LAPACK=OFF,libgfortran"
+ 
++# Empty pre-release/build strings keep the installed Eigen/Version at plain ${PV}
+ EXTRA_OECMAKE += " \
+     -DEIGEN_BUILD_TESTING=OFF \
++    -DEIGEN_BUILD_DOC=OFF \
++    -DEIGEN_BUILD_DEMOS=OFF \
++    -DEIGEN_PRERELEASE_VERSION= \
++    -DEIGEN_BUILD_VERSION= \
+ "
+ 
+ FILES:${PN}-dev += "${datadir}/eigen3/cmake"
