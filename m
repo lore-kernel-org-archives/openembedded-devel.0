@@ -1,65 +1,65 @@
-Received: from mail-dy1-f176.google.com (mail-dy1-f176.google.com [74.125.82.176])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.37929.1795594070372762094
+Received: from mail-dy1-f181.google.com (mail-dy1-f181.google.com [74.125.82.181])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.37918.1795594062163304455
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 25 Nov 2026 00:07:50 -0800
+ Wed, 25 Nov 2026 00:07:42 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=0g66VZvS;
- spf=pass (domain: gmail.com, ip: 74.125.82.176, mailfrom: raj.khem@gmail.com)
-Received: by mail-dy1-f176.google.com with SMTP id 5a478bee46e88-38190551625so10923962eec.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 25 Nov 2026 00:07:50 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=W7SQQyR7;
+ spf=pass (domain: gmail.com, ip: 74.125.82.181, mailfrom: raj.khem@gmail.com)
+Received: by mail-dy1-f181.google.com with SMTP id 5a478bee46e88-33bf40b0c8bso11736085eec.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 25 Nov 2026 00:07:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795594070; x=1796198870; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1795594061; x=1796198861; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=5JWoer/PlOxrXrtE+uW+RP/mljaUtzoNWAW88crQl9M=;
-        b=0g66VZvSRKE1XGzeUE07i2zaV1pp9LT99I/MRx9op/KZ0dS/5HpSLKobPLT3UxzUjY
-         W+n6VIvz6NPyaej1AIg5mvpevwcb84aD8y/qsRL6tcPX2VqoAtK810PXz/0tJTIPknz8
-         LRSPjLr91c+BPGbrBBNDjVS8XNN8hsUg5YNeigSS89YG+Z9HcNTojIuUf60LSmytjfFY
-         8o6GHtnyfQ4YVmX4hCSD0QhJcUtGXuzDv91t9TjVtV6aP90qZPtK7srhGaVydpra1O2k
-         jG9xB1Qt8tmepJvFC7xQM3ZH0paSkExPeYOq8c6zYHj34AmJLxTe7dhXLsYz7y/NiKlk
-         mZsQ==
+        bh=5L3zYOuOTQ2mhiwt2OELoEmW4JX6MVaNbUO7dAAepR0=;
+        b=W7SQQyR7ejcMPsoIZuwhUljW5gXud+pG6D+FH24lo+ZFlPiipZqk5SnInH6GsiXw5r
+         0D3+kjQNDROr5Xn1UxYBGLFW4l6zPivzoaY45fsPCxwOuWez/gMwdzEWMGVO6c8qi/N1
+         3rHuZlbHsz+ols0lMKCwKE91u9ALZSW5vt2oPEepxcrzgFz1QLNZFQxOlJyqEGsWe2tH
+         ETpigmKo5naBXeCjnikYeOS6iv/UUNVouvJjIBPLHX6JhgPRUFv+uONHWSQmALxrHFw1
+         Pbt4L14My2mg9I4uEeKt7eBHSIil72db9IeSyQ+rfOh7WPUQob60uN6VLOcql/Ah0S2b
+         TMuA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795594070; x=1796198870;
+        d=1e100.net; s=20260707; t=1795594061; x=1796198861;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=5JWoer/PlOxrXrtE+uW+RP/mljaUtzoNWAW88crQl9M=;
-        b=lnq/8Ibgca8hFIsAW6EMSGvVk48h/2sVrBQqQoeXFFZTNmL4DQKS2Qa67AlJvla66Y
-         BfJVyvJKUZuiMqXvKmqjr8yb0bMZh6qmjh/cQbFiEu0pGqvmZC0VygUefzW9821kKl18
-         yefz5BVHTV/ZSPnorPzUnmIDWegNDKm+amgp8BgWaAUdru6xcDvniQEKD7ln6eOrWX1H
-         wNZBIf/zj/k00eM0adI+H69LesronxPk0MPCnvPTBix3dB0OBeGoQbxoBzBHRZXcn80f
-         R2xgjD3ndQl7MBXCr1I3rBkOyIA1QiUVcVjvGL4afvBwtf7qnKWsirO+QzDrC2j91qwz
-         TBig==
-X-Gm-Message-State: APuU4Z/L2ftGZY3g85tHwu3ptMxQ4uKcQQQgCJ7Ehb1mF1ZuCsmi1Mzk
-	gnjs5gBc6x8xFWjF4n6rYVKr7vq2+b5PLObv7Zl3RiR2A3J2+DLTvNUXWKxYv28x
-X-Gm-Gg: AZFdTZc3tq59R288UotIYRS0qlgyGSsoKH6A/Ked1B/I+TA1TO1bI/YStPDq3B1mJhi
-	4FqgwZmsDkXsyQ1VWmrpilzn2qe2h0Zi4vF8lyP2Q43jwtD79a7uDWBJ4Fv8mFOj8aOQlDNtqrE
-	ncZONsVji9FufkBo0nLMFVWwJIj5aWcrUTo9WT9YJ1I0TgVBbjQ3Kd08HuLNRS53rDMM2veUzpx
-	87cfohwv2M6jevFADcvLUHRBBSJrXNxNnBueKba25eFbDxL3xcZfNl98UXz8oVlosUV+zEMAmRD
-	9HxGuHkJ8fe9lCwZyJqqJ64wvaSjcGz6jylzVt9Kxv48kO4361OTGTS4KOLzuyOsyU3QuWhYb4z
-	I7UncedLJkrZ0VV4ljr4gp4VWRZfbzqPT/zc+Dnc+aGj4OHuhR9SazP6uJN7rGv3EuZbi5aOHl7
-	TrXyY+ef5e87wyceqMeytkJYRsBQ5tk/D4v6mzjkcaS/MuWNhCJGTeYEggwIAsmdzEleYfxZ6Xk
-	XlQ3uUpwrFsodZyUUcxq0GeObABkdRE0Y0NN1ZPxRu/aNBiCFITJGSYg9PXEcvFON5mOHogTU6Y
-	xJWz0opjbVlel94/pTW8/ES3VLjv61Kg0KGnHiriDY/nwS6PwCyMRXkZ7XmJmgFyHbREz2HMViG
-	KdJNaubUap1gl2Z3vW9lnXLg+quhqcd38pEUpUsbQdzxLm0guMu+Yz45G8G8JBnOLeuKWY9JiXo
-	6UTnlre1C2HOu0MsgNjDfXJFb0VCB4x2pVGEGMhwr29P2Xm4SfBHWtrf90ULbmD/cnxNROydsPR
-	4AYl6SEngG+3pFI3fiMc/GVBX4aTuphhnEF1S6+CHQqrbgi97tASNuz+9uB5mNnK+SldBR1C3tj
-	8z5j
-X-Received: by 2002:a05:693c:8209:b0:383:e7af:c28d with SMTP id 5a478bee46e88-3856f14d5b2mr17842890eec.9.1795594069654;
-        Wed, 25 Nov 2026 00:07:49 -0800 (PST)
+        bh=5L3zYOuOTQ2mhiwt2OELoEmW4JX6MVaNbUO7dAAepR0=;
+        b=gbHBfHR95C0BWHKmhaWDaPEFOoB4wwcuZRYpr5YndCCf6uDeTkMxj05NbijtY/3Hxz
+         btbMOjTWq8i94ntLfQyMlUy5CMRr2imtwLP9utcZodK1qbOs3WFeCBnuzYnwjTN2CXGI
+         jF9FoOn0Z7hyTOBMkc3hfDzaX5L64yNrO7DxwXTF9rfQ2FYldgkjb6ay2tzjs36d6yGO
+         CtTDmW4P+u0bxk3y380TdIfHSTbd+oDl5OD/Jnj5yduC98Yi5kn6KrXYqw03ZO28TN+B
+         KvEszR6qVS/9fyn+fn5X0s8N05mWqxxhasExJYFzTwJgwXo5wpNLC63Egif+TRjGBhs1
+         dY+g==
+X-Gm-Message-State: APuU4Z+Pa5bGC7+WKZzKbKdsdSLVc4yVrzWqBsVGIhMT1JI2Ff+KzNEL
+	NBkMgyo5NsZStwLcH7vEQV5kfCjREa/WXxIbDA5Y5A4hgKoA9sAkbn1C2KWplUwZ
+X-Gm-Gg: AZFdTZcGWH7JbHCod3GNX3JD6ZCizyRvNhc3R4lm7BIK0mQZk5hNA2VgKlfQsY0nWaN
+	FYAVSUnczk/MSCZtgLZBHJjHP8tJuGWih6sdKn1xfmkEsSVOTR5C94uHs4K7Ny86vCggPSg913c
+	jXlaYgxK9OasH9vBwljfO/qJqgXKtv8EwAAeUI8t9nzZ/q8dKUMfQU7/CdRWcbfV/bKx3w3C8aH
+	vM/4Fb1rlUx0JKWprsiTcRiRH7wOiv9yy4yHsRfnbxZpb1NsyrTY/8/RrfukgOhyuE37RgTuecF
+	YdPJhEw0p4a0785TzFRovBpItrmiuD8Fy9Dvb3/VPeisCMcC0rtO1Bn1l9l9APGgf2pBRs0YGiD
+	WAByVmNqWPaI3nijrtZ5LJCGS1+bOd6No+oBATtGeAVngdt785MPxTOO23HIS1V2Rvk29JumYnE
+	O++aPe7PcXY6VWOCjFXbwwKUkwx1vKinyXoqKk1Ka3HNauihNPHooDNgV2P6SItfL00Unix/uKt
+	EiadN3MjJb0WX736MtUX+iHmOK2VzeDcp4FSNJDBA5sqYkFmFWLsy4CwEesiXsNzeq7rvUdYT+a
+	n38KIRhVTun9V3rwh1dvbNvuyPlDNENW+Lm51f3i67bIsqh+zKDDK1SY6ravXtQs1nS86DPVVPr
+	YNqehHTeANXP9NC9IbnYr3YeCckIJkGqporL420NmiJ1n9jni0wnpozroFfzr4gZ9BxRythtk/N
+	I4D9kxfCcpvNLTxR5DiZFlfwCawIynVbNm+FpK/qkc7oTDcYwWw7oEBlQkfaKYPsJJt0Uy+1DCb
+	B2h0Rjcyh+TZf10wp8QAjmPDESHfAaENc/PhSTk0mER/pec/lTImplRSO1SEu9RbvrVCTx2mZvz
+	1CxA
+X-Received: by 2002:a05:693c:880f:20b0:386:a520:1029 with SMTP id 5a478bee46e88-386a5201077mr11444309eec.9.1795594061154;
+        Wed, 25 Nov 2026 00:07:41 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-385646633d0sm90997971eec.3.2026.11.25.00.07.48
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-385646633d0sm90997971eec.3.2026.11.25.00.07.39
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 25 Nov 2026 00:07:49 -0800 (PST)
+        Wed, 25 Nov 2026 00:07:40 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-oe][PATCH 04/55] snapper: upgrade 0.13.1 -> 0.13.2
-Date: Wed, 25 Nov 2026 00:06:20 -0800
-Message-ID: <20261125080732.2419614-10-khem.raj@oss.qualcomm.com>
+Subject: [meta-networking][PATCH 2/5] frr: Backport libyang 5.x/6.x API support
+Date: Wed, 25 Nov 2026 00:06:13 -0800
+Message-ID: <20261125080732.2419614-3-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.1
 In-Reply-To: <20261125080732.2419614-1-khem.raj@oss.qualcomm.com>
 References: <20261125080732.2419614-1-khem.raj@oss.qualcomm.com>
@@ -67,66 +67,1087 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Wed, 25 Nov 2026 08:07:51 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/133007
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/133000
 Content-Type: text/plain; charset="utf-8"
 
-- Add snapper-sync script and service to synchronize the highest
-  snapshot number, and allow disabling all-time unique snapshot numbers
-- snbk: new meta-parse command validates info.xml checksums using
-  libcrypto, so OpenSSL is now a build dependency; libsnapper soversion
-  bumped to 8.2.0
-- Improve error handling when snapperd is disconnected from D-Bus or the
-  client uid cannot be detected; service files now depend on dbus
-- Fix LVM device name parsing with escaped hyphens, CRLF handling in
-  config files and a memory leak on error paths
-- Hardening: validate STOMP content-length before reading frames,
-  validate unsigned JSON config values in the zypp plugin, handle NULL
-  D-Bus connections in pam_snapper
+FRR 10.7.1 does not build against libyang 5.x or 6.x: lyd_new_term_bin(),
+lyd_change_term_bin() and LYD_ANYDATA_VALUETYPE are gone, lyd_new_path2()
+and lyd_new_list() changed parameters, LY_ARRAY_COUNT became LYA_COUNT
+and the internal YANG modules are now loaded from the filesystem.
 
-Add openssl to DEPENDS for the libcrypto check, and point CAT_BIN at the
-target cat, which the new snbk tool would otherwise take from the build
-host. Add an upstream check that skips the yast-snapper tags in the same
-repository.
+Backport the libyang API changes from FRR master (PRs #21459 and
+#23988) as one patch, in preparation for the libyang 6.4.13 upgrade.
+No FRR release carries them yet. Checked with a host build of the
+patched 10.7.1 against libyang 6.4.13; the unpatched tree fails there.
+The backported code still supports libyang >= 2.1.128.
+
+Anchor UPSTREAM_CHECK_GITTAGREGEX so only frr-X.Y[.Z] release tags match.
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- .../snapper/{snapper_0.13.1.bb => snapper_0.13.2.bb}   | 10 +++++++---
- 1 file changed, 7 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-support/snapper/{snapper_0.13.1.bb => snapper_0.13.2.bb} (86%)
+ ...-lib-Support-libyang-5.x-and-6.x-API.patch | 1037 +++++++++++++++++
+ .../recipes-protocols/frr/frr_10.7.1.bb       |    3 +-
+ 2 files changed, 1039 insertions(+), 1 deletion(-)
+ create mode 100644 meta-networking/recipes-protocols/frr/frr/0003-lib-Support-libyang-5.x-and-6.x-API.patch
 
-diff --git a/meta-oe/recipes-support/snapper/snapper_0.13.1.bb b/meta-oe/recipes-support/snapper/snapper_0.13.2.bb
-similarity index 86%
-rename from meta-oe/recipes-support/snapper/snapper_0.13.1.bb
-rename to meta-oe/recipes-support/snapper/snapper_0.13.2.bb
-index aa8547b33d..920a4fb274 100644
---- a/meta-oe/recipes-support/snapper/snapper_0.13.1.bb
-+++ b/meta-oe/recipes-support/snapper/snapper_0.13.2.bb
-@@ -3,13 +3,16 @@ HOMEPAGE = "https://github.com/openSUSE/snapper"
- LICENSE = "GPL-2.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
- 
--DEPENDS = "acl boost btrfs-tools dbus e2fsprogs json-c libxml2 lvm2 ncurses zlib"
-+DEPENDS = "acl boost btrfs-tools dbus e2fsprogs json-c libxml2 lvm2 ncurses openssl zlib"
- 
- # Build separation is slightly broken
- inherit autotools-brokensep pkgconfig gettext manpages
- 
--SRC_URI = "git://github.com/openSUSE/snapper.git;protocol=https;branch=master"
--SRCREV = "8cfc33817b91dbf7194d7fd043dc378026d01db5"
-+SRC_URI = "git://github.com/openSUSE/snapper.git;protocol=https;branch=master;tag=v${PV}"
-+SRCREV = "43475845a712bc2327cec2ed641063df406705de"
+diff --git a/meta-networking/recipes-protocols/frr/frr/0003-lib-Support-libyang-5.x-and-6.x-API.patch b/meta-networking/recipes-protocols/frr/frr/0003-lib-Support-libyang-5.x-and-6.x-API.patch
+new file mode 100644
+index 0000000000..3f798235a4
+--- /dev/null
++++ b/meta-networking/recipes-protocols/frr/frr/0003-lib-Support-libyang-5.x-and-6.x-API.patch
+@@ -0,0 +1,1037 @@
++From 9e738d6f2fa385e308b53acb351e08d6959f4024 Mon Sep 17 00:00:00 2001
++From: Khem Raj <khem.raj@oss.qualcomm.com>
++Date: Sun, 22 Nov 2026 23:36:38 -0800
++Subject: [PATCH] lib: Support libyang 5.x and 6.x API
 +
-+# The repository also carries yast-snapper tags
-+UPSTREAM_CHECK_GITTAGREGEX = "^v(?P<pver>\d+(\.\d+)+)$"
++libyang 5.x and 6.x removed lyd_new_term_bin(), lyd_change_term_bin()
++and LYD_ANYDATA_VALUETYPE, changed the lyd_new_path2() and
++lyd_new_list() parameters, renamed LY_ARRAY_COUNT to LYA_COUNT and no
++longer embeds its internal YANG modules, so FRR 10.7.1 fails to build
++against them. Backport the FRR master changes that handle this:
++
++93efe414c lib: Remove ly_strerrcode(), ly_strvecode() replacements
++612508b1a lib: Remove lyd_new_ext_term(), lyd_change_term_bin() wrappers
++7d090ee1a lib: Remove parameter from wrapper for lyd_new_path2()
++bc48c533c lib: Adjust parameters to wrapper for lyd_new_list()
++849a12bab lib: Use lyd_new_term() in generic getter functions
++e5da38bfc lib: Replace use of lyd_new_term_bin()
++e5018afba lib: Add ly_yang_module_dir() to search directories
++21f1ad831 lib: Ensure LY_ARRAY_COUNT is defined
++c287e27b9 build: Remove libyang 4.x-specific warning
++5ba394a63 lib: yang: Tweak code ordering in header file
++778f1fa9e lib: yang: Adjust conditionals that handle renamed macros
++05b67d075 lib: yang: Fix log message formatting
++
++Upstream-Status: Backport [https://github.com/FRRouting/frr/pull/21459, https://github.com/FRRouting/frr/pull/23988]
++AI-Generated: Uses Claude Code
++Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
++---
++ configure.ac                          |  16 +--
++ lib/if.c                              |  80 ++---------
++ lib/mgmt_be_client.c                  |  22 +--
++ lib/northbound.c                      |   5 +-
++ lib/northbound.h                      |  18 +++
++ lib/northbound_cli.c                  |   4 +-
++ lib/northbound_grpc.cpp               |   6 +-
++ lib/northbound_oper.c                 | 191 +++++++++++++++++---------
++ lib/yang.c                            | 185 ++++++-------------------
++ lib/yang.h                            |  49 +++----
++ mgmtd/mgmt_vty_frontend.c             |   4 +-
++ tests/lib/northbound/test_oper_data.c |   7 +-
++ 12 files changed, 238 insertions(+), 349 deletions(-)
++
++diff --git a/configure.ac b/configure.ac
++index 8778c24f2..85a25e933 100644
++--- a/configure.ac
+++++ b/configure.ac
++@@ -2094,20 +2094,6 @@ PKG_CHECK_MODULES([LIBYANG], [libyang >= 2.1.128], , [
++ AC_MSG_ERROR([m4_normalize([libyang >= 2.1.128 is required, and was not found on your system.
++ Please consult doc/developer/building-libyang.rst for instructions on installing or building libyang.])])])
++ 
++-LIBYANG_MAJOR=$(pkg-config --modversion libyang | cut -f1 -d.)
++-if test "$LIBYANG_MAJOR" -ge 4 && test "$LIBYANG_MAJOR" -lt 5; then
++-  dnl NOTE: binary encoding (LYD_LYB) is no longer supported in v4,
++-  dnl so v3 may be more efficient for certain use cases
++-  AC_MSG_WARN([m4_normalize([
++-    Libyang v4 is supported; however libyang v3 or v5+ is suggested. Libyang
++-    v4 changed its binary encoding (LYD_LYB) format to a very restricted
++-    subset of users which does not include FRR. This mean FRR will always use
++-    JSON or XML even when passing intermediate results internally. This restriction
++-    was reverted in v5.
++-    ])
++-  ])
++-fi
++-
++ ac_cflags_save="$CFLAGS"
++ CFLAGS="$CFLAGS $LIBYANG_CFLAGS"
++ AC_CHECK_MEMBER([struct lyd_node.priv], [], [
++@@ -2121,7 +2107,7 @@ AC_CHECK_LIB([yang],[lyd_find_xpath3],[],[AC_MSG_ERROR([m4_normalize([
++ libyang missing lyd_find_xpath3])])])
++ dnl -- don't add lyd_new_list3 to this list unless bug is fixed upstream
++ dnl -- https://github.com/CESNET/libyang/issues/2149
++-AC_CHECK_FUNCS([ly_strerrcode ly_strvecode lyd_trim_xpath])
+++AC_CHECK_FUNCS([ly_yang_module_dir lyd_trim_xpath])
++ 
++ CFLAGS="$ac_cflags_save"
++ 
++diff --git a/lib/if.c b/lib/if.c
++index 2791481be..04570114b 100644
++--- a/lib/if.c
+++++ b/lib/if.c
++@@ -1762,71 +1762,6 @@ static enum nb_error lib_interface_vrf_get(const struct nb_node *nb_node, const
++ 	return NB_OK;
++ }
++ 
++-/*
++- * XPath: /frr-interface:lib/interface/state/if-index
++- */
++-static enum nb_error lib_interface_state_if_index_get(const struct nb_node *nb_node,
++-						      const void *list_entry,
++-						      struct lyd_node *parent)
++-{
++-	const struct lysc_node *snode = nb_node->snode;
++-	const struct interface *ifp = list_entry;
++-	int32_t value = ifp->ifindex;
++-
++-	if (yang_new_term_bin(parent, snode->module, snode->name, &value, sizeof(value),
++-			      LYD_NEW_PATH_UPDATE, NULL))
++-		return NB_ERR_RESOURCE;
++-	return NB_OK;
++-}
++-
++-/*
++- * XPath: /frr-interface:lib/interface/state/mtu[6]
++- */
++-static enum nb_error lib_interface_state_mtu_get(const struct nb_node *nb_node,
++-						 const void *list_entry, struct lyd_node *parent)
++-{
++-	const struct lysc_node *snode = nb_node->snode;
++-	const struct interface *ifp = list_entry;
++-	uint32_t value = ifp->mtu;
++-
++-	if (yang_new_term_bin(parent, snode->module, snode->name, &value, sizeof(value),
++-			      LYD_NEW_PATH_UPDATE, NULL))
++-		return NB_ERR_RESOURCE;
++-	return NB_OK;
++-}
++-
++-/*
++- * XPath: /frr-interface:lib/interface/state/speed
++- */
++-static enum nb_error lib_interface_state_speed_get(const struct nb_node *nb_node,
++-						   const void *list_entry, struct lyd_node *parent)
++-{
++-	const struct lysc_node *snode = nb_node->snode;
++-	const struct interface *ifp = list_entry;
++-	uint32_t value = ifp->speed;
++-
++-	if (yang_new_term_bin(parent, snode->module, snode->name, &value, sizeof(value),
++-			      LYD_NEW_PATH_UPDATE, NULL))
++-		return NB_ERR_RESOURCE;
++-	return NB_OK;
++-}
++-
++-/*
++- * XPath: /frr-interface:lib/interface/state/metric
++- */
++-static enum nb_error lib_interface_state_metric_get(const struct nb_node *nb_node,
++-						    const void *list_entry, struct lyd_node *parent)
++-{
++-	const struct lysc_node *snode = nb_node->snode;
++-	const struct interface *ifp = list_entry;
++-	uint32_t value = ifp->metric;
++-
++-	if (yang_new_term_bin(parent, snode->module, snode->name, &value, sizeof(value),
++-			      LYD_NEW_PATH_UPDATE, NULL))
++-		return NB_ERR_RESOURCE;
++-	return NB_OK;
++-}
++-
++ /*
++  * XPath: /frr-interface:lib/interface/state/phy-address
++  */
++@@ -1877,31 +1812,36 @@ const struct frr_yang_module_info frr_interface_info = {
++ 		{
++ 			.xpath = "/frr-interface:lib/interface/state/if-index",
++ 			.cbs = {
++-				.get = lib_interface_state_if_index_get,
+++				.get = nb_oper_int32_get,
+++				.get_elem = (void *)(intptr_t)offsetof(struct interface, ifindex),
++ 			}
++ 		},
++ 		{
++ 			.xpath = "/frr-interface:lib/interface/state/mtu",
++ 			.cbs = {
++-				.get = lib_interface_state_mtu_get,
+++				.get = nb_oper_uint32_get,
+++				.get_elem = (void *)(intptr_t)offsetof(struct interface, mtu),
++ 			}
++ 		},
++ 		{
++ 			.xpath = "/frr-interface:lib/interface/state/mtu6",
++ 			.cbs = {
++-				.get = lib_interface_state_mtu_get,
+++				.get = nb_oper_uint32_get,
+++				.get_elem = (void *)(intptr_t)offsetof(struct interface, mtu),
++ 			}
++ 		},
++ 		{
++ 			.xpath = "/frr-interface:lib/interface/state/speed",
++ 			.cbs = {
++-				.get = lib_interface_state_speed_get,
+++				.get = nb_oper_uint32_get,
+++				.get_elem = (void *)(intptr_t)offsetof(struct interface, speed),
++ 			}
++ 		},
++ 		{
++ 			.xpath = "/frr-interface:lib/interface/state/metric",
++ 			.cbs = {
++-				.get = lib_interface_state_metric_get,
+++				.get = nb_oper_uint32_get,
+++				.get_elem = (void *)(intptr_t)offsetof(struct interface, metric),
++ 			}
++ 		},
++ 		{
++diff --git a/lib/mgmt_be_client.c b/lib/mgmt_be_client.c
++index 42b4ce974..2a7654e32 100644
++--- a/lib/mgmt_be_client.c
+++++ b/lib/mgmt_be_client.c
++@@ -851,7 +851,7 @@ static void be_client_handle_rpc(struct mgmt_be_client *client, uint64_t txn_id,
++ 		 * It is especially needed for actions, because their parents
++ 		 * may hold necessary information.
++ 		 */
++-		err = yang_new_path2(NULL, ly_native_ctx, xpath, NULL, 0, 0, 0, NULL, &input);
+++		err = yang_new_path2(NULL, ly_native_ctx, xpath, NULL, 0, 0, NULL, &input);
++ 	}
++ 	if (err) {
++ 		be_client_send_error(client, txn_id, rpc_msg->req_id, false, -EINVAL,
++@@ -859,7 +859,7 @@ static void be_client_handle_rpc(struct mgmt_be_client *client, uint64_t txn_id,
++ 		return;
++ 	}
++ 
++-	err = yang_new_path2(NULL, ly_native_ctx, xpath, NULL, 0, 0, 0, NULL, &output);
+++	err = yang_new_path2(NULL, ly_native_ctx, xpath, NULL, 0, 0, NULL, &output);
++ 	if (err) {
++ 		lyd_free_all(input);
++ 		be_client_send_error(client, txn_id, rpc_msg->req_id, false,
++@@ -1244,15 +1244,16 @@ static enum nb_error clients_client_state_candidate_config_version_get(
++ 	const struct nb_node *nb_node, const void *parent_list_entry, struct lyd_node *parent)
++ {
++ 	const struct lysc_node *snode = nb_node->snode;
++-	uint64_t value;
+++	uint64_t version;
+++	char value[21]; /* UINT64_MAX has 20 digits */
++ 
++ 	if (__be_client->config_txn)
++-		value = __be_client->config_txn->candidate_config->version;
+++		version = __be_client->config_txn->candidate_config->version;
++ 	else
++-		value = __be_client->running_config->version;
+++		version = __be_client->running_config->version;
++ 
++-	if (yang_new_term_bin(parent, snode->module, snode->name, &value, sizeof(value),
++-			      LYD_NEW_PATH_UPDATE, NULL))
+++	snprintfrr(value, sizeof(value), "%" PRIu64, version);
+++	if (lyd_new_term(parent, snode->module, snode->name, value, LYD_NEW_PATH_UPDATE, NULL))
++ 		return NB_ERR_RESOURCE;
++ 
++ 	return NB_OK;
++@@ -1266,10 +1267,11 @@ static enum nb_error clients_client_state_running_config_version_get(const struc
++ 								     struct lyd_node *parent)
++ {
++ 	const struct lysc_node *snode = nb_node->snode;
++-	uint64_t value = __be_client->running_config->version;
+++	uint64_t version = __be_client->running_config->version;
+++	char value[21]; /* UINT64_MAX has 20 digits */
++ 
++-	if (yang_new_term_bin(parent, snode->module, snode->name, &value, sizeof(value),
++-			      LYD_NEW_PATH_UPDATE, NULL))
+++	snprintfrr(value, sizeof(value), "%" PRIu64, version);
+++	if (lyd_new_term(parent, snode->module, snode->name, value, LYD_NEW_PATH_UPDATE, NULL))
++ 		return NB_ERR_RESOURCE;
++ 
++ 	return NB_OK;
++diff --git a/lib/northbound.c b/lib/northbound.c
++index ac004d27c..6bfa8b204 100644
++--- a/lib/northbound.c
+++++ b/lib/northbound.c
++@@ -738,7 +738,7 @@ static LY_ERR dnode_create(struct nb_config *candidate, const char *xpath, const
++ 	struct lyd_node *dnode = NULL;
++ 	LY_ERR err;
++ 
++-	err = yang_new_path2(candidate->dnode, ly_native_ctx, xpath, value, 0, 0, options, NULL,
+++	err = yang_new_path2(candidate->dnode, ly_native_ctx, xpath, value, 0, options, NULL,
++ 			     &dnode);
++ 	if (err) {
++ 		flog_warn(EC_LIB_LIBYANG, "%s: lyd_new_path(%s) failed: %d",
++@@ -907,8 +907,7 @@ static int nb_candidate_edit_tree_add(struct nb_config *candidate,
++ 	 * merged later with candidate.
++ 	 */
++ 	if (parent_xpath) {
++-		err = yang_new_path2(NULL, ly_native_ctx, parent_xpath, NULL, 0, 0, 0, &tree,
++-				     &parent);
+++		err = yang_new_path2(NULL, ly_native_ctx, parent_xpath, NULL, 0, 0, &tree, &parent);
++ 		if (err) {
++ 			yang_print_errors(ly_native_ctx, errmsg, errmsg_len);
++ 			ret = NB_ERR;
++diff --git a/lib/northbound.h b/lib/northbound.h
++index f48cc34e3..f1d10702d 100644
++--- a/lib/northbound.h
+++++ b/lib/northbound.h
++@@ -1610,6 +1610,24 @@ extern void *nb_oper_walk_finish_arg(void *walk);
++ extern void *nb_oper_walk_cb_arg(void *walk);
++ 
++ /* Generic getter functions */
+++extern enum nb_error nb_oper_int8_get(const struct nb_node *nb_node,
+++				      const void *parent_list_entry, struct lyd_node *parent);
+++
+++extern enum nb_error nb_oper_int16_get(const struct nb_node *nb_node,
+++				       const void *parent_list_entry, struct lyd_node *parent);
+++
+++extern enum nb_error nb_oper_int32_get(const struct nb_node *nb_node,
+++				       const void *parent_list_entry, struct lyd_node *parent);
+++
+++extern enum nb_error nb_oper_int64_get(const struct nb_node *nb_node,
+++				       const void *parent_list_entry, struct lyd_node *parent);
+++
+++extern enum nb_error nb_oper_uint8_get(const struct nb_node *nb_node,
+++				       const void *parent_list_entry, struct lyd_node *parent);
+++
+++extern enum nb_error nb_oper_uint16_get(const struct nb_node *nb_node,
+++					const void *parent_list_entry, struct lyd_node *parent);
+++
++ extern enum nb_error nb_oper_uint32_get(const struct nb_node *nb_node,
++ 					const void *parent_list_entry, struct lyd_node *parent);
++ 
++diff --git a/lib/northbound_cli.c b/lib/northbound_cli.c
++index 98ac568f7..b8ff194e0 100644
++--- a/lib/northbound_cli.c
+++++ b/lib/northbound_cli.c
++@@ -298,7 +298,7 @@ int nb_cli_rpc(struct vty *vty, const char *xpath, struct lyd_node **output_p)
++ 	}
++ 
++ 	/* create input tree */
++-	err = yang_new_path2(NULL, ly_native_ctx, xpath, NULL, 0, 0, 0, NULL, &input);
+++	err = yang_new_path2(NULL, ly_native_ctx, xpath, NULL, 0, 0, NULL, &input);
++ 	assert(err == LY_SUCCESS);
++ 
++ 	for (size_t i = 0; i < vty->num_rpc_params; i++) {
++@@ -319,7 +319,7 @@ int nb_cli_rpc(struct vty *vty, const char *xpath, struct lyd_node **output_p)
++ 	assert(err == LY_SUCCESS);
++ 
++ 	/* create output tree root for population in the callback */
++-	err = yang_new_path2(NULL, ly_native_ctx, xpath, NULL, 0, 0, 0, NULL, &output);
+++	err = yang_new_path2(NULL, ly_native_ctx, xpath, NULL, 0, 0, NULL, &output);
++ 	assert(err == LY_SUCCESS);
++ 
++ 	ret = nb_callback_rpc(nb_node, xpath, input, output, errmsg,
++diff --git a/lib/northbound_grpc.cpp b/lib/northbound_grpc.cpp
++index 97d5418a9..25ef9fa9a 100644
++--- a/lib/northbound_grpc.cpp
+++++ b/lib/northbound_grpc.cpp
++@@ -1032,8 +1032,7 @@ grpc::Status HandleUnaryExecute(
++ 				    "Unknown data path");
++ 
++ 	// Create input data tree.
++-	err = yang_new_path2(NULL, ly_native_ctx, xpath, NULL, 0, (LYD_ANYDATA_VALUETYPE)0, 0,
++-			     NULL, &input_tree);
+++	err = yang_new_path2(NULL, ly_native_ctx, xpath, NULL, 0, 0, NULL, &input_tree);
++ 	if (err != LY_SUCCESS) {
++ 		return grpc::Status(grpc::StatusCode::INVALID_ARGUMENT,
++ 				    "Invalid data path");
++@@ -1061,8 +1060,7 @@ grpc::Status HandleUnaryExecute(
++ 	}
++ 
++ 	// Create output data tree.
++-	err = yang_new_path2(NULL, ly_native_ctx, xpath, NULL, 0, (LYD_ANYDATA_VALUETYPE)0, 0,
++-			     NULL, &output_tree);
+++	err = yang_new_path2(NULL, ly_native_ctx, xpath, NULL, 0, 0, NULL, &output_tree);
++ 	if (err != LY_SUCCESS) {
++ 		lyd_free_tree(input_tree);
++ 		return grpc::Status(grpc::StatusCode::INVALID_ARGUMENT,
++diff --git a/lib/northbound_oper.c b/lib/northbound_oper.c
++index 1c9984867..23e0d854d 100644
++--- a/lib/northbound_oper.c
+++++ b/lib/northbound_oper.c
++@@ -441,7 +441,7 @@ static enum nb_error nb_op_xpath_to_trunk(const char *xpath_in, char **xpath_out
++ 
++ 	ly_temp_log_options(&llopts);
++ 	for (;;) {
++-		err = yang_new_path2(NULL, ly_native_ctx, xpath, NULL, 0, 0, LYD_NEW_PATH_UPDATE,
+++		err = yang_new_path2(NULL, ly_native_ctx, xpath, NULL, 0, LYD_NEW_PATH_UPDATE,
++ 				     NULL, trunk);
++ 		if (err == LY_SUCCESS)
++ 			break;
++@@ -1555,10 +1555,9 @@ static enum nb_error _walk(struct nb_op_yield_state *ys, bool is_resume)
++ 					ys->non_specific_predicate[at_clevel] = true;
++ 				else {
++ 					flog_err(EC_LIB_NB_OPERATIONAL_DATA,
++-						  "%s: unable to create node for specific query string: %s: %s",
++-						  __func__,
++-						  ys->query_tokens[at_clevel],
++-						  yang_ly_strerrcode(err));
+++						 "%s: unable to create node for specific query string: %s: %s",
+++						 __func__, ys->query_tokens[at_clevel],
+++						 ly_strerrcode(err));
++ 					ret = NB_ERR;
++ 					goto done;
++ 				}
++@@ -1829,7 +1828,8 @@ static enum nb_error _walk(struct nb_op_yield_state *ys, bool is_resume)
++ 			 */
++ 
++ 			if (!node) {
++-				err = yang_lyd_new_list(ni[-1].inner, sib, &ni->keys, &node);
+++				err = yang_lyd_new_list(ni[-1].inner, sib->module, sib->name,
+++							&ni->keys, &node);
++ 				if (err) {
++ 					ret = NB_ERR_RESOURCE;
++ 					goto done;
++@@ -2226,7 +2226,7 @@ static void *nb_op_root_walk_branch_finished(struct nb_op_yield_state *ys, enum
++ 				if (err) {
++ 					flog_err(EC_LIB_NB_OPERATIONAL_DATA,
++ 						 "%s: unable to merge data tree: %s", __func__,
++-						 yang_ly_strerrcode(err));
+++						 ly_strerrcode(err));
++ 					ret = NB_ERR_RESOURCE;
++ 					break;
++ 				}
++@@ -2346,69 +2346,113 @@ enum nb_error nb_oper_iterate_legacy(const char *xpath,
++ 	return ret;
++ }
++ 
++-static const char *_adjust_ptr(struct lysc_node_leaf *lsnode, const char *valuep, size_t *size)
+++enum nb_error nb_oper_int8_get(const struct nb_node *nb_node, const void *parent_list_entry,
+++			       struct lyd_node *parent)
++ {
++-	switch (lsnode->type->basetype) {
++-	case LY_TYPE_INT8:
++-	case LY_TYPE_UINT8:
++-#if BYTE_ORDER == BIG_ENDIAN
++-		valuep += 7;
++-#endif
++-		*size = 1;
++-		break;
++-	case LY_TYPE_INT16:
++-	case LY_TYPE_UINT16:
++-#if BYTE_ORDER == BIG_ENDIAN
++-		valuep += 6;
++-#endif
++-		*size = 2;
++-		break;
++-	case LY_TYPE_INT32:
++-	case LY_TYPE_UINT32:
++-#if BYTE_ORDER == BIG_ENDIAN
++-		valuep += 4;
++-#endif
++-		*size = 4;
++-		break;
++-	case LY_TYPE_INT64:
++-	case LY_TYPE_UINT64:
++-		*size = 8;
++-		break;
++-	case LY_TYPE_UNKNOWN:
++-	case LY_TYPE_BINARY:
++-	case LY_TYPE_STRING:
++-	case LY_TYPE_BITS:
++-	case LY_TYPE_BOOL:
++-	case LY_TYPE_DEC64:
++-	case LY_TYPE_EMPTY:
++-	case LY_TYPE_ENUM:
++-	case LY_TYPE_IDENT:
++-	case LY_TYPE_INST:
++-	case LY_TYPE_LEAFREF:
++-	case LY_TYPE_UNION:
++-	default:
++-		assert(0);
++-	}
++-	return valuep;
+++	struct lysc_node_leaf *lsnode = (struct lysc_node_leaf *)nb_node->snode;
+++	struct lysc_node *snode = &lsnode->node;
+++	ssize_t offset = (ssize_t)nb_node->cbs.get_elem;
+++	void *valuep = (char *)parent_list_entry + offset;
+++	char value[5]; /* INT8_MIN has a sign and then 3 digits */
+++
+++	if (lsnode->type->basetype != LY_TYPE_INT8)
+++		return NB_ERR_VALIDATION;
+++
+++	snprintfrr(value, sizeof(value), "%" PRId8, *(int8_t *)valuep);
+++	if (lyd_new_term(parent, snode->module, snode->name, value, LYD_NEW_PATH_UPDATE, NULL))
+++		return NB_ERR_RESOURCE;
+++	return NB_OK;
++ }
++ 
++-enum nb_error nb_oper_uint64_get(const struct nb_node *nb_node, const void *parent_list_entry,
++-				 struct lyd_node *parent)
+++enum nb_error nb_oper_int16_get(const struct nb_node *nb_node, const void *parent_list_entry,
+++				struct lyd_node *parent)
+++{
+++	struct lysc_node_leaf *lsnode = (struct lysc_node_leaf *)nb_node->snode;
+++	struct lysc_node *snode = &lsnode->node;
+++	ssize_t offset = (ssize_t)nb_node->cbs.get_elem;
+++	void *valuep = (char *)parent_list_entry + offset;
+++	char value[7]; /* INT16_MIN has a sign and then 5 digits */
+++
+++	if (lsnode->type->basetype != LY_TYPE_INT16)
+++		return NB_ERR_VALIDATION;
+++
+++	snprintfrr(value, sizeof(value), "%" PRId16, *(int16_t *)valuep);
+++	if (lyd_new_term(parent, snode->module, snode->name, value, LYD_NEW_PATH_UPDATE, NULL))
+++		return NB_ERR_RESOURCE;
+++	return NB_OK;
+++}
+++
+++enum nb_error nb_oper_int32_get(const struct nb_node *nb_node, const void *parent_list_entry,
+++				struct lyd_node *parent)
+++{
+++	struct lysc_node_leaf *lsnode = (struct lysc_node_leaf *)nb_node->snode;
+++	struct lysc_node *snode = &lsnode->node;
+++	ssize_t offset = (ssize_t)nb_node->cbs.get_elem;
+++	void *valuep = (char *)parent_list_entry + offset;
+++	char value[12]; /* INT32_MIN has a sign and then 10 digits */
+++
+++	if (lsnode->type->basetype != LY_TYPE_INT32)
+++		return NB_ERR_VALIDATION;
+++
+++	snprintfrr(value, sizeof(value), "%" PRId32, *(int32_t *)valuep);
+++	if (lyd_new_term(parent, snode->module, snode->name, value, LYD_NEW_PATH_UPDATE, NULL))
+++		return NB_ERR_RESOURCE;
+++	return NB_OK;
+++}
+++
+++enum nb_error nb_oper_int64_get(const struct nb_node *nb_node, const void *parent_list_entry,
+++				struct lyd_node *parent)
+++{
+++	struct lysc_node_leaf *lsnode = (struct lysc_node_leaf *)nb_node->snode;
+++	struct lysc_node *snode = &lsnode->node;
+++	ssize_t offset = (ssize_t)nb_node->cbs.get_elem;
+++	void *valuep = (char *)parent_list_entry + offset;
+++	char value[22]; /* INT64_MIN has a sign and then 20 digits */
+++
+++	if (lsnode->type->basetype != LY_TYPE_INT64)
+++		return NB_ERR_VALIDATION;
+++
+++	snprintfrr(value, sizeof(value), "%" PRId64, *(int64_t *)valuep);
+++	if (lyd_new_term(parent, snode->module, snode->name, value, LYD_NEW_PATH_UPDATE, NULL))
+++		return NB_ERR_RESOURCE;
+++	return NB_OK;
+++}
+++
+++enum nb_error nb_oper_uint8_get(const struct nb_node *nb_node, const void *parent_list_entry,
+++				struct lyd_node *parent)
++ {
++ 	struct lysc_node_leaf *lsnode = (struct lysc_node_leaf *)nb_node->snode;
++ 	struct lysc_node *snode = &lsnode->node;
++ 	ssize_t offset = (ssize_t)nb_node->cbs.get_elem;
++-	uint64_t ubigval = *(uint64_t *)((char *)parent_list_entry + offset);
++-	const char *valuep;
++-	size_t size;
+++	void *valuep = (char *)parent_list_entry + offset;
+++	char value[4]; /* UINT8_MAX has 3 digits */
++ 
++-	valuep = _adjust_ptr(lsnode, (const char *)&ubigval, &size);
++-	if (yang_new_term_bin(parent, snode->module, snode->name, valuep, size,
++-			      LYD_NEW_PATH_UPDATE, NULL))
+++	if (lsnode->type->basetype != LY_TYPE_UINT8)
+++		return NB_ERR_VALIDATION;
+++
+++	snprintfrr(value, sizeof(value), "%" PRIu8, *(uint8_t *)valuep);
+++	if (lyd_new_term(parent, snode->module, snode->name, value, LYD_NEW_PATH_UPDATE, NULL))
++ 		return NB_ERR_RESOURCE;
++ 	return NB_OK;
++ }
++ 
+++enum nb_error nb_oper_uint16_get(const struct nb_node *nb_node, const void *parent_list_entry,
+++				 struct lyd_node *parent)
+++{
+++	struct lysc_node_leaf *lsnode = (struct lysc_node_leaf *)nb_node->snode;
+++	struct lysc_node *snode = &lsnode->node;
+++	ssize_t offset = (ssize_t)nb_node->cbs.get_elem;
+++	void *valuep = (char *)parent_list_entry + offset;
+++	char value[6]; /* UINT16_MAX has 5 digits */
+++
+++	if (lsnode->type->basetype != LY_TYPE_UINT16)
+++		return NB_ERR_VALIDATION;
+++
+++	snprintfrr(value, sizeof(value), "%" PRIu16, *(uint16_t *)valuep);
+++	if (lyd_new_term(parent, snode->module, snode->name, value, LYD_NEW_PATH_UPDATE, NULL))
+++		return NB_ERR_RESOURCE;
+++	return NB_OK;
+++}
++ 
++ enum nb_error nb_oper_uint32_get(const struct nb_node *nb_node, const void *parent_list_entry,
++ 				 struct lyd_node *parent)
++@@ -2416,13 +2460,32 @@ enum nb_error nb_oper_uint32_get(const struct nb_node *nb_node, const void *pare
++ 	struct lysc_node_leaf *lsnode = (struct lysc_node_leaf *)nb_node->snode;
++ 	struct lysc_node *snode = &lsnode->node;
++ 	ssize_t offset = (ssize_t)nb_node->cbs.get_elem;
++-	uint64_t ubigval = *(uint64_t *)((char *)parent_list_entry + offset);
++-	const char *valuep;
++-	size_t size;
+++	void *valuep = (char *)parent_list_entry + offset;
+++	char value[11]; /* UINT32_MAX has 10 digits */
+++
+++	if (lsnode->type->basetype != LY_TYPE_UINT32)
+++		return NB_ERR_VALIDATION;
+++
+++	snprintfrr(value, sizeof(value), "%" PRIu32, *(uint32_t *)valuep);
+++	if (lyd_new_term(parent, snode->module, snode->name, value, LYD_NEW_PATH_UPDATE, NULL))
+++		return NB_ERR_RESOURCE;
+++	return NB_OK;
+++}
+++
+++enum nb_error nb_oper_uint64_get(const struct nb_node *nb_node, const void *parent_list_entry,
+++				 struct lyd_node *parent)
+++{
+++	struct lysc_node_leaf *lsnode = (struct lysc_node_leaf *)nb_node->snode;
+++	struct lysc_node *snode = &lsnode->node;
+++	ssize_t offset = (ssize_t)nb_node->cbs.get_elem;
+++	void *valuep = (char *)parent_list_entry + offset;
+++	char value[21]; /* UINT64_MAX has 20 digits */
+++
+++	if (lsnode->type->basetype != LY_TYPE_UINT64)
+++		return NB_ERR_VALIDATION;
++ 
++-	valuep = _adjust_ptr(lsnode, (const char *)&ubigval, &size);
++-	if (yang_new_term_bin(parent, snode->module, snode->name, valuep, size,
++-			      LYD_NEW_PATH_UPDATE, NULL))
+++	snprintfrr(value, sizeof(value), "%" PRIu64, *(uint64_t *)valuep);
+++	if (lyd_new_term(parent, snode->module, snode->name, value, LYD_NEW_PATH_UPDATE, NULL))
++ 		return NB_ERR_RESOURCE;
++ 	return NB_OK;
++ }
++diff --git a/lib/yang.c b/lib/yang.c
++index 0ea252d98..c32e6b881 100644
++--- a/lib/yang.c
+++++ b/lib/yang.c
++@@ -707,7 +707,7 @@ struct lyd_node *yang_state_new(struct lyd_node *tree, const char *path, const c
++ 	struct lyd_node *dnode, *parent;
++ 	LY_ERR err;
++ 
++-	err = yang_new_path2(tree, ly_native_ctx, path, value, 0, 0, LYD_NEW_PATH_UPDATE, &parent,
+++	err = yang_new_path2(tree, ly_native_ctx, path, value, 0, LYD_NEW_PATH_UPDATE, &parent,
++ 			     &dnode);
++ 	assert(err == LY_SUCCESS);
++ 
++@@ -886,9 +886,9 @@ static void ly_zlog_cb(LY_LOG_LEVEL level, const char *msg, const char *data_pat
++ 		zlog(priority, "libyang: %s (%s)", msg, data_path);
++ #if (LY_VERSION_MAJOR >= 3)
++ 	else if (schema_path)
++-		zlog(priority, "libyang %s (%s)\n", msg, schema_path);
+++		zlog(priority, "libyang: %s (%s)", msg, schema_path);
++ 	else if (line)
++-		zlog(priority, "libyang %s (line %" PRIu64 ")\n", msg, line);
+++		zlog(priority, "libyang: %s (line %" PRIu64 ")", msg, line);
++ #endif
++ 	else
++ 		zlog(priority, "libyang: %s", msg);
++@@ -916,7 +916,7 @@ LY_ERR yang_parse_data(const char *xpath, LYD_FORMAT format, bool as_subtree, bo
++ 		 * a common YANG JSON technique (vs XML which starts all
++ 		 * data trees from the root).
++ 		 */
++-		err = yang_new_path2(NULL, ly_native_ctx, xpath, NULL, 0, 0, 0, &parent, &subtree);
+++		err = yang_new_path2(NULL, ly_native_ctx, xpath, NULL, 0, 0, &parent, &subtree);
++ 		if (err != LY_SUCCESS)
++ 			goto done;
++ 		err = lyd_find_path(parent, xpath, false, &subtree);
++@@ -1016,7 +1016,7 @@ LY_ERR yang_parse_restconf_rpc(const char *xpath, LYD_FORMAT format, const char
++ 		return LY_ENOTFOUND;
++ 	}
++ 	/* Get the tree for the RPC/Action */
++-	err = yang_new_path2(NULL, ly_native_ctx, xpath, NULL, 0, 0, 0, NULL, &dnode);
+++	err = yang_new_path2(NULL, ly_native_ctx, xpath, NULL, 0, 0, NULL, &dnode);
++ 	if (err) {
++ 		zlog_err("Failed to create parent node for action: %s", ly_last_errmsg());
++ 		goto done;
++@@ -1070,8 +1070,7 @@ LY_ERR yang_parse_rpc(const char *xpath, LYD_FORMAT format, const char *data, bo
++ 			return LY_EINVAL;
++ 		}
++ 
++-		err = yang_new_path2(NULL, ly_native_ctx, parent_xpath, NULL, 0, 0, 0, NULL,
++-				     &parent);
+++		err = yang_new_path2(NULL, ly_native_ctx, parent_xpath, NULL, 0, 0, NULL, &parent);
++ 		XFREE(MTYPE_TMP, parent_xpath);
++ 		if (err) {
++ 			zlog_err("Failed to create parent node for action: %s",
++@@ -1230,12 +1229,13 @@ void yang_debugging_set(bool enable)
++ struct ly_ctx *yang_ctx_new_setup(bool embedded_modules, bool explicit_compile, bool load_library)
++ {
++ 	struct ly_ctx *ctx = NULL;
++-	const char *yang_models_path = YANG_MODELS_PATH;
+++	char search_dir[PATH_MAX] = {};
++ 	uint options;
++ 	LY_ERR err;
++ 
++-	if (access(yang_models_path, R_OK | X_OK)) {
++-		yang_models_path = NULL;
+++	if (access(YANG_MODELS_PATH, R_OK | X_OK) == 0) {
+++		strlcat(search_dir, YANG_MODELS_PATH, sizeof(search_dir));
+++	} else {
++ 		if (errno == ENOENT)
++ 			zlog_info("yang model directory \"%s\" does not exist",
++ 				  YANG_MODELS_PATH);
++@@ -1245,6 +1245,12 @@ struct ly_ctx *yang_ctx_new_setup(bool embedded_modules, bool explicit_compile,
++ 				     YANG_MODELS_PATH);
++ 	}
++ 
+++#ifdef HAVE_LY_YANG_MODULE_DIR
+++	if (search_dir[0])
+++		strlcat(search_dir, ":", sizeof(search_dir));
+++	strlcat(search_dir, ly_yang_module_dir(), sizeof(search_dir));
+++#endif
+++
++ 	options = LY_CTX_DISABLE_SEARCHDIR_CWD;
++ #if (LY_VERSION_MAJOR >= 4)
++ 	options |= LY_CTX_LYB_HASHES;
++@@ -1253,7 +1259,7 @@ struct ly_ctx *yang_ctx_new_setup(bool embedded_modules, bool explicit_compile,
++ 		options |= LY_CTX_NO_YANGLIBRARY;
++ 	if (explicit_compile)
++ 		options |= LY_CTX_EXPLICIT_COMPILE;
++-	err = ly_ctx_new(yang_models_path, options, &ctx);
+++	err = ly_ctx_new(search_dir, options, &ctx);
++ 	if (err)
++ 		return NULL;
++ 
++@@ -1537,7 +1543,7 @@ int yang_xpath_pop_node(char *xpath)
++  * Safe to remove after libyang v2.1.xxx is required (.144 has a bug so
++  * something > .144) https://github.com/CESNET/libyang/issues/2149
++  */
++-LY_ERR yang_lyd_new_list(struct lyd_node *parent, const struct lysc_node *snode,
+++LY_ERR yang_lyd_new_list(struct lyd_node *parent, const struct lys_module *module, const char *name,
++ 			 const struct yang_list_keys *list_keys, struct lyd_node **node)
++ {
++ #if defined(HAVE_LYD_NEW_LIST3) && 0
++@@ -1548,7 +1554,7 @@ LY_ERR yang_lyd_new_list(struct lyd_node *parent, const struct lysc_node *snode,
++ 	for (int i = 0; i < list_keys->num; i++)
++ 		keys[i] = list_keys->key[i];
++ 
++-	err = lyd_new_list3(parent, snode->module, snode->name, keys, NULL, 0, node);
+++	err = lyd_new_list3(parent, module, name, keys, NULL, 0, node);
++ 	return err;
++ #else
++ 	struct lyd_node *pnode = parent;
++@@ -1557,36 +1563,28 @@ LY_ERR yang_lyd_new_list(struct lyd_node *parent, const struct lysc_node *snode,
++ 	assert(list_keys->num <= 8);
++ 	switch (list_keys->num) {
++ 	case 0:
++-		return lyd_new_list(pnode, snode->module, snode->name, false,
++-				    node);
+++		return lyd_new_list(pnode, module, name, false, node);
++ 	case 1:
++-		return lyd_new_list(pnode, snode->module, snode->name, false,
++-				    node, keys[0]);
+++		return lyd_new_list(pnode, module, name, false, node, keys[0]);
++ 	case 2:
++-		return lyd_new_list(pnode, snode->module, snode->name, false,
++-				    node, keys[0], keys[1]);
+++		return lyd_new_list(pnode, module, name, false, node, keys[0], keys[1]);
++ 	case 3:
++-		return lyd_new_list(pnode, snode->module, snode->name, false,
++-				    node, keys[0], keys[1], keys[2]);
+++		return lyd_new_list(pnode, module, name, false, node, keys[0], keys[1], keys[2]);
++ 	case 4:
++-		return lyd_new_list(pnode, snode->module, snode->name, false,
++-				    node, keys[0], keys[1], keys[2], keys[3]);
+++		return lyd_new_list(pnode, module, name, false, node, keys[0], keys[1], keys[2],
+++				    keys[3]);
++ 	case 5:
++-		return lyd_new_list(pnode, snode->module, snode->name, false,
++-				    node, keys[0], keys[1], keys[2], keys[3],
++-				    keys[4]);
+++		return lyd_new_list(pnode, module, name, false, node, keys[0], keys[1], keys[2],
+++				    keys[3], keys[4]);
++ 	case 6:
++-		return lyd_new_list(pnode, snode->module, snode->name, false,
++-				    node, keys[0], keys[1], keys[2], keys[3],
++-				    keys[4], keys[5]);
+++		return lyd_new_list(pnode, module, name, false, node, keys[0], keys[1], keys[2],
+++				    keys[3], keys[4], keys[5]);
++ 	case 7:
++-		return lyd_new_list(pnode, snode->module, snode->name, false,
++-				    node, keys[0], keys[1], keys[2], keys[3],
++-				    keys[4], keys[5], keys[6]);
+++		return lyd_new_list(pnode, module, name, false, node, keys[0], keys[1], keys[2],
+++				    keys[3], keys[4], keys[5], keys[6]);
++ 	case 8:
++-		return lyd_new_list(pnode, snode->module, snode->name, false,
++-				    node, keys[0], keys[1], keys[2], keys[3],
++-				    keys[4], keys[5], keys[6], keys[7]);
+++		return lyd_new_list(pnode, module, name, false, node, keys[0], keys[1], keys[2],
+++				    keys[3], keys[4], keys[5], keys[6], keys[7]);
++ 	}
++ 	_Static_assert(LIST_MAXKEYS == 8, "max key mismatch in switch unroll");
++ 	/*NOTREACHED*/
++@@ -1604,9 +1602,8 @@ LY_ERR yang_lyd_trim_xpath(struct lyd_node **root, const char *xpath)
++ #ifdef HAVE_LYD_TRIM_XPATH
++ 	err = lyd_trim_xpath(root, xpath, NULL);
++ 	if (err) {
++-		flog_err_sys(EC_LIB_LIBYANG,
++-			     "cannot obtain specific result for xpath \"%s\": %s",
++-			     xpath, yang_ly_strerrcode(err));
+++		flog_err_sys(EC_LIB_LIBYANG, "cannot obtain specific result for xpath \"%s\": %s",
+++			     xpath, ly_strerrcode(err));
++ 		return err;
++ 	}
++ 	return LY_SUCCESS;
++@@ -1621,9 +1618,8 @@ LY_ERR yang_lyd_trim_xpath(struct lyd_node **root, const char *xpath)
++ 	err = yang_lyd_find_xpath3(NULL, *root, xpath, LY_VALUE_JSON, NULL,
++ 				   NULL, &set);
++ 	if (err) {
++-		flog_err_sys(EC_LIB_LIBYANG,
++-			     "cannot obtain specific result for xpath \"%s\": %s",
++-			     xpath, yang_ly_strerrcode(err));
+++		flog_err_sys(EC_LIB_LIBYANG, "cannot obtain specific result for xpath \"%s\": %s",
+++			     xpath, ly_strerrcode(err));
++ 		return err;
++ 	}
++ 	/*
++@@ -1718,10 +1714,7 @@ LY_ERR yang_lyd_parse_data(const struct ly_ctx *ctx, struct lyd_node *parent,
++  * Handle NBC API changes between versions of Libyang
++  */
++ 
++-#undef lyd_new_term_bin
++-#undef lyd_change_term_bin
++ #undef lyd_new_path2
++-#undef lyd_new_ext_term
++ 
++ #if (LY_VERSION_MAJOR >= 4)
++ #define LY_SZ(x) ((x)*8)
++@@ -1729,110 +1722,12 @@ LY_ERR yang_lyd_parse_data(const struct ly_ctx *ctx, struct lyd_node *parent,
++ #define LY_SZ(x) (x)
++ #endif
++ 
++-LY_ERR yang_new_term_bin(struct lyd_node *parent, const struct lys_module *module,
++-			 const char *name, const void *value, uint32_t size, uint32_t options,
++-			 struct lyd_node **node)
++-{
++-	return lyd_new_term_bin(parent, module, name, value, LY_SZ(size), options, node);
++-}
++-
++-LY_ERR yang_change_term_bin(struct lyd_node *term, const void *value, uint32_t size)
++-{
++-	return lyd_change_term_bin(term, value, LY_SZ(size));
++-}
++-
++ LY_ERR yang_new_path2(struct lyd_node *parent, const struct ly_ctx *ctx, const char *path,
++-		      const void *value, uint32_t size, LYD_ANYDATA_VALUETYPE value_type,
++-		      uint32_t options, struct lyd_node **new_parent, struct lyd_node **new_node)
+++		      const void *value, uint32_t value_size_bytes, uint32_t options,
+++		      struct lyd_node **new_parent, struct lyd_node **new_node)
++ {
++-	return lyd_new_path2(parent, ctx, path, value, LY_SZ(size), value_type, options,
+++	return lyd_new_path2(parent, ctx, path, value, LY_SZ(value_size_bytes), 0, options,
++ 			     new_parent, new_node);
++ }
++ 
++-#if (LY_VERSION_MAJOR >= 3) && (LY_VERSION_MAJOR < 5)
++-LY_ERR yang_new_ext_term(const struct lysc_ext_instance *ext, const char *name, const void *value,
++-			 uint32_t size, uint32_t options, struct lyd_node **node)
++-{
++-	return lyd_new_ext_term(ext, name, value, LY_SZ(size), options, node);
++-}
++-#endif
++ #undef LY_SZ
++-
++-/*
++- * Safe to remove after libyang v2.1.128 is required
++- */
++-const char *yang_ly_strerrcode(LY_ERR err)
++-{
++-#ifdef HAVE_LY_STRERRCODE
++-	return ly_strerrcode(err);
++-#else
++-	switch (err) {
++-	case LY_SUCCESS:
++-		return "ok";
++-	case LY_EMEM:
++-		return "out of memory";
++-	case LY_ESYS:
++-		return "system error";
++-	case LY_EINVAL:
++-		return "invalid value given";
++-	case LY_EEXIST:
++-		return "item exists";
++-	case LY_ENOTFOUND:
++-		return "item not found";
++-	case LY_EINT:
++-		return "operation interrupted";
++-	case LY_EVALID:
++-		return "validation failed";
++-	case LY_EDENIED:
++-		return "access denied";
++-	case LY_EINCOMPLETE:
++-		return "incomplete";
++-	case LY_ERECOMPILE:
++-		return "compile error";
++-	case LY_ENOT:
++-		return "not";
++-	case LY_EPLUGIN:
++-	case LY_EOTHER:
++-		return "other";
++-	default:
++-		return "unknown";
++-	}
++-#endif
++-}
++-
++-/*
++- * Safe to remove after libyang v2.1.128 is required
++- */
++-const char *yang_ly_strvecode(LY_VECODE vecode)
++-{
++-#ifdef HAVE_LY_STRVECODE
++-	return ly_strvecode(vecode);
++-#else
++-	switch (vecode) {
++-	case LYVE_SUCCESS:
++-		return "";
++-	case LYVE_SYNTAX:
++-		return "syntax";
++-	case LYVE_SYNTAX_YANG:
++-		return "yang-syntax";
++-	case LYVE_SYNTAX_YIN:
++-		return "yin-syntax";
++-	case LYVE_REFERENCE:
++-		return "reference";
++-	case LYVE_XPATH:
++-		return "xpath";
++-	case LYVE_SEMANTICS:
++-		return "semantics";
++-	case LYVE_SYNTAX_XML:
++-		return "xml-syntax";
++-	case LYVE_SYNTAX_JSON:
++-		return "json-syntax";
++-	case LYVE_DATA:
++-		return "data";
++-	case LYVE_OTHER:
++-		return "other";
++-	default:
++-		return "unknown";
++-	}
++-#endif
++-}
++diff --git a/lib/yang.h b/lib/yang.h
++index 2092c7f39..652df9a64 100644
++--- a/lib/yang.h
+++++ b/lib/yang.h
++@@ -10,6 +10,7 @@
++ #include "memory.h"
++ 
++ #include <libyang/libyang.h>
+++#include <libyang/version.h>
++ #ifdef HAVE_SYSREPO
++ #include <sysrepo.h>
++ #endif
++@@ -20,16 +21,25 @@
++ extern "C" {
++ #endif
++ 
++-#include <libyang/version.h>
++-#if (LY_VERSION_MAJOR >= 4)
+++/* libyang 4.2.0+ */
+++#ifdef LYD_PRINT_SIBLINGS
++ #define LYD_PRINT_WITHSIBLINGS LYD_PRINT_SIBLINGS
++ #endif
++ 
++-#if (LY_VERSION_MAJOR >= 5)
+++/* libyang 4.7.0+ */
+++#ifdef LYD_PARSE_LYB_SKIP_MODULE_CHECK
++ #define LYD_PARSE_LYB_SKIP_CTX_CHECK LYD_PARSE_LYB_SKIP_MODULE_CHECK
++-#define LYD_API_PARENT_TYPE(p)	     (p)
++-#else
+++#endif
+++
+++/* libyang 6.3.0+ */
+++#ifdef LYA_COUNT
+++#define LY_ARRAY_COUNT LYA_COUNT
+++#endif
+++
+++#if (LY_VERSION_MAJOR < 5)
++ #define LYD_API_PARENT_TYPE(p) ((struct lyd_node_inner *)(p))
+++#else
+++#define LYD_API_PARENT_TYPE(p) (p)
++ #endif
++ 
++ struct frr_yang_module_info;
++@@ -936,10 +946,9 @@ extern LY_ERR yang_resolve_snode_xpath(struct ly_ctx *ly_ctx, const char *xpath,
++ /*
++  * Libyang future functions
++  */
++-extern const char *yang_ly_strerrcode(LY_ERR err);
++-extern const char *yang_ly_strvecode(LY_VECODE vecode);
++-extern LY_ERR yang_lyd_new_list(struct lyd_node *parent, const struct lysc_node *snode,
++-				const struct yang_list_keys *keys, struct lyd_node **nodes);
+++extern LY_ERR yang_lyd_new_list(struct lyd_node *parent, const struct lys_module *module,
+++				const char *name, const struct yang_list_keys *keys,
+++				struct lyd_node **nodes);
++ extern LY_ERR yang_lyd_trim_xpath(struct lyd_node **rootp, const char *xpath);
++ extern LY_ERR yang_lyd_parse_data(const struct ly_ctx *ctx,
++ 				  struct lyd_node *parent, struct ly_in *in,
++@@ -952,31 +961,11 @@ extern LY_ERR yang_lyd_parse_data(const struct ly_ctx *ctx,
++  * Handle NBC API changes between versions of Libyang
++  */
++ 
++-/* Use this helper function to deal with change in value_size units */
++-extern LY_ERR yang_new_term_bin(struct lyd_node *parent, const struct lys_module *module,
++-				const char *name, const void *value, uint32_t value_size,
++-				uint32_t options, struct lyd_node **node);
++-#define lyd_new_term_bin(...)                                                                     \
++-	_Pragma("GCC error \"Use yang_new_term_bin() instead of lyd_new_term_bin()\"")
++-
++-LY_ERR yang_change_term_bin(struct lyd_node *term, const void *value, uint32_t value_size_bits);
++-#define lyd_change_term_bin(...)                                                                  \
++-	_Pragma("GCC error \"Use yang_change_term_bin() instead of lyd_new_change_term_bin()\"")
++-
++ extern LY_ERR yang_new_path2(struct lyd_node *parent, const struct ly_ctx *ctx, const char *path,
++-			     const void *value, uint32_t value_size_bits,
++-			     LYD_ANYDATA_VALUETYPE value_type, uint32_t options,
+++			     const void *value, uint32_t value_size_bytes, uint32_t options,
++ 			     struct lyd_node **new_parent, struct lyd_node **new_node);
++ #define lyd_new_path2(...) _Pragma("GCC error \"Use yang_new_path2() instead of lyd_new_path2()\"")
++ 
++-#if (LY_VERSION_MAJOR >= 3) && (LY_VERSION_MAJOR < 5)
++-extern LY_ERR yang_new_ext_term(const struct lysc_ext_instance *ext, const char *name,
++-				const void *value, uint32_t value_size_bits, uint32_t options,
++-				struct lyd_node **node);
++-#define lyd_new_ext_term(...)                                                                     \
++-	_Pragma("GCC error \"Use yang_new_ext_term() instead of lyd_new_ext_term()\"")
++-#endif
++-
++ #ifdef __cplusplus
++ }
++ #endif
++diff --git a/mgmtd/mgmt_vty_frontend.c b/mgmtd/mgmt_vty_frontend.c
++index d6156b7aa..dffb3b472 100644
++--- a/mgmtd/mgmt_vty_frontend.c
+++++ b/mgmtd/mgmt_vty_frontend.c
++@@ -219,9 +219,9 @@ static void vty_out_yang_error(struct vty *vty, LYD_FORMAT format, const struct
++ 	else if (ei->level == LY_LLWRN)
++ 		severity = "warning";
++ 
++-	ecode = yang_ly_strerrcode(err);
+++	ecode = ly_strerrcode(err);
++ 	if (err == LY_EVALID && ei->vecode != LYVE_SUCCESS)
++-		evalid = yang_ly_strvecode(ei->vecode);
+++		evalid = ly_strvecode(ei->vecode);
++ 
++ 	switch (format) {
++ 	case LYD_XML:
++diff --git a/tests/lib/northbound/test_oper_data.c b/tests/lib/northbound/test_oper_data.c
++index c16cecb19..e7756a4c3 100644
++--- a/tests/lib/northbound/test_oper_data.c
+++++ b/tests/lib/northbound/test_oper_data.c
++@@ -249,12 +249,11 @@ static enum nb_error frr_test_module_c2cont_c2value_get(const struct nb_node *nb
++ 							struct lyd_node *parent)
++ {
++ 	const struct lysc_node *snode = nb_node->snode;
++-	uint32_t value = htole32(0xAB010203);
+++	char value[11]; /* UINT32_MAX has 10 digits */
++ 	LY_ERR err;
++ 
++-	/* Note that this api expects 'value' to be in little-endian form */
++-	err = yang_new_term_bin(parent, snode->module, snode->name, &value, sizeof(value),
++-				LYD_NEW_PATH_UPDATE, NULL);
+++	snprintfrr(value, sizeof(value), "%" PRIu32, 0xAB010203);
+++	err = lyd_new_term(parent, snode->module, snode->name, value, LYD_NEW_PATH_UPDATE, NULL);
++ 	assert(err == LY_SUCCESS);
++ 
++ 	return NB_OK;
+diff --git a/meta-networking/recipes-protocols/frr/frr_10.7.1.bb b/meta-networking/recipes-protocols/frr/frr_10.7.1.bb
+index d0ddf2ea7d..a8e2f0e3ae 100644
+--- a/meta-networking/recipes-protocols/frr/frr_10.7.1.bb
++++ b/meta-networking/recipes-protocols/frr/frr_10.7.1.bb
+@@ -14,10 +14,11 @@ SRC_URI = "git://github.com/FRRouting/frr.git;protocol=https;branch=stable/${@oe
+            file://frr.pam \
+            file://0001-lib-Don-t-use-paths-in-bison-output-defines-directiv.patch \
+            file://0002-configure-Only-try-the-OpenBSD-libunwind-location-on.patch \
++           file://0003-lib-Support-libyang-5.x-and-6.x-API.patch \
+            "
+ SRCREV = "f8c0b08dcb0c78f9e42b9b86ae70b049e4e617c1"
  
- EXTRA_OECONF += "--disable-zypp"
+-UPSTREAM_CHECK_GITTAGREGEX = "frr-(?P<pver>\d+(\.\d+)+)$"
++UPSTREAM_CHECK_GITTAGREGEX = "^frr-(?P<pver>\d+(\.\d+)+)$"
  
-@@ -24,6 +27,7 @@ export RM_BIN = "${bindir}/rm"
- export RMDIR_BIN = "${bindir}/rmdir"
- export MKDIR_BIN = "${bindir}/mkdir"
- export TOUCH_BIN = "${bindir}/touch"
-+export CAT_BIN = "${bindir}/cat"
- export CP_BIN = "${bindir}/cp"
- export REALPATH_BIN = "${bindir}/realpath"
- export SHA256SUM_BIN = "${bindir}/sha256sum"
+ CVE_PRODUCT = "frrouting"
+ 
