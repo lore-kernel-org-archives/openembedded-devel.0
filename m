@@ -1,65 +1,65 @@
-Received: from mail-dy1-f172.google.com (mail-dy1-f172.google.com [74.125.82.172])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.37968.1795594145697755926
+Received: from mail-dy1-f181.google.com (mail-dy1-f181.google.com [74.125.82.181])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.37969.1795594147193719431
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 25 Nov 2026 00:09:05 -0800
+ Wed, 25 Nov 2026 00:09:07 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=fG0o/+mG;
- spf=pass (domain: gmail.com, ip: 74.125.82.172, mailfrom: raj.khem@gmail.com)
-Received: by mail-dy1-f172.google.com with SMTP id 5a478bee46e88-385d8a00598so8058626eec.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 25 Nov 2026 00:09:05 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=MgzcLbcS;
+ spf=pass (domain: gmail.com, ip: 74.125.82.181, mailfrom: raj.khem@gmail.com)
+Received: by mail-dy1-f181.google.com with SMTP id 5a478bee46e88-386ab9ab619so6450601eec.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 25 Nov 2026 00:09:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795594145; x=1796198945; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1795594147; x=1796198947; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=jIJh8lOpx0iNOxFXMALLiDwBG7ruog7SQAGtes5zd1A=;
-        b=fG0o/+mGDM9t4vlOobKmeSuukDQfbTJczesApXuHed55ImyW44B7KMpuEQAz/GtWEW
-         NPfuKmtFilmXaZTl9EBNs2kjhPu7v+G97V09ZOgbdtOxIclMk5ByO23JQ1NxjZ/m+JOJ
-         tq5duEldAeWoFg8f1wKQ46eqK4CHQuP9MiYGIJTcPuQXrNUgNTNqyNCTzhHVZyxXMdM2
-         sBoEsGoQNorkxgTYwgPswzLy4McoYIcDmx73XV1YsqN3IUxOrvYD9DbYyeJxNKY/W3ZK
-         wXp6qCqDfpmb09kxmDv18kTZpFYu2+IK4jn1AFa9TinSePLXc6jWQIl5IZFM3TWz+Fpf
-         PPcQ==
+        bh=58kSBFaivuMqLESKM/6xzBssu3PgAFVMZknqpIUbzxY=;
+        b=MgzcLbcSiABQlbQTR1xgUzhUS3R/15Sk10x39CoKm8c5mBcEn/jY+cCK3yE/QSWjzF
+         Uew2nakC5ERGx/Diedlw7VGET4jJRKzNXSnuZQaF8Yr7uib313QeKk3TUpUYy4gEsO2Z
+         vlmHe0koHZDwBKmFnayirm6Ftmen/KysGKuCWd/Hw3L5G8rB29BmzOzMvB324zrIUDWr
+         IxoPzJna/QmGFsjfTdZATLR78HjRUcCsNmqeVV4G3dYotb7mZBL0Z4iAK1Lk/LgBh/4x
+         D6hhA9cLRqIg/26KvHAbdaJc9IggwtkXLtd3ht6DAINFSOnbMGISzEQvXZ2QSkZ68xaR
+         Q5xw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795594145; x=1796198945;
+        d=1e100.net; s=20260707; t=1795594147; x=1796198947;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=jIJh8lOpx0iNOxFXMALLiDwBG7ruog7SQAGtes5zd1A=;
-        b=hJWS1bm2Smp4LzBGHRnd0QWiprZv2mdXcFGrdrvJu9TH3D9gkxortOki7wFFpoz+rd
-         N2Zj4UdOJ18cPEdq1Rv88kZZn2dHieXiXWyvEhS8k6cNs7bys4pCP7LkOcZwX7BIThGx
-         sDbWAYXbSEvfG/a/nJbUyxhbdJJ8+QqIe1eEIlu14dErSQK4OO4vxTn07cBfqeOYTetc
-         a9kVsn1E3iTUGR6RpvbaZapDsh27SRQrU19GTV4v1NgZh9dkXYLfoXTzaW9VUDSJm2VZ
-         4RUFBJmctDVo47jFJZ+VKfL27nZlw6MMCp5Q5+v/eTiCQrMIYOhT/+IP2V8U+zPxOLs5
-         M7Wg==
-X-Gm-Message-State: APuU4Z89rfePwcEdrgBR2sZ8UgooQC2raDgwKE8ZxBNrFncfprxrLKrf
-	/LzeAhzj62fmkFb559E7NaSsRz3Ig7XrNqji2w9l/XYQcqpq1QpmccrMOcmmBeL6
-X-Gm-Gg: AZFdTZcCLX9mNHpXGhbGkmaKQQjJQvD6Ur9D8GJjpYuyiARWhPzLPvnWObdmeEG+n/l
-	V9Ify28iV0YVEl09hS/Hm2M4TyP8eGG5c+ymG5wM+uN6xY1l4DlyYDJStUmEQBMNxEr0q3CwOw4
-	gUe70MyTSo2/p9xt+uoi30sGYZrda9Ad4lmHYpKzTDGY0nLzv14AHd4153r2EGQ8rYzzKJiP6HI
-	HGrmrufCNlgZNa2D1Ad9hF/1Frw2rQ/fUOIcUBRcnc6dsTHwMloE44LYTWJjsOTGibivHjdrrKn
-	x1PZJKKxvSSy3zsvosylJ1lGfLMVHW7Izoh5M+jVqt34jJfX9yBRlwnAI99OEOrv+qoe/oqPTge
-	Ik/sD6g+K+0IdJbSVNmMVdXUT7qg+pTixjhcGCoEkuFSvEdz+czxNNC/FXLEG6VxARDtB1w4hCQ
-	0Pb0ul9hLKA06AdO68TV30ApfutRHj9LjgbUKj5B8OJaP2oPP27+6HaLoDvlz3HQCBFKu+bpr7j
-	2ZHdSzd0mBxBU3TwrpCzH9mRerKgJej3vo9smNFIJ+Dp+dL0vXIUnXjmLBB2MJ6EMkf/vNazXzH
-	XzU8kNG9FOzq3Kn1+nEObva8nD/muk07YftUy+mR5wwnRi1A+x1ogc84Sv4IQ6cWtLG0aer7TiK
-	yO+lc3Rux9qPtGeIru9Opng/ixH8enyqjQbD7vPq11vedRcLqYPl+rAA9P3EnYJWjvQoPrQ5inh
-	yPuvYw8LZF9YIM8C/TJ3ICrmikAtcGG5tuz2TDZGGrjcbIlCis98aczWPpZU8/3NZSifc8JWTZc
-	lY4Bs4uHuYUWpCcek0PWtVsmCpciNBn3TnpP1is8CvhMzGYKTg2gvKgxPgfsjVwxDGJp8l7n6FF
-	MNYsq9FBKI/9Ltl7K8rEAgjhrg==
-X-Received: by 2002:a05:7300:d941:b0:385:4b9:18e9 with SMTP id 5a478bee46e88-3856f94f874mr18436793eec.18.1795594145000;
-        Wed, 25 Nov 2026 00:09:05 -0800 (PST)
+        bh=58kSBFaivuMqLESKM/6xzBssu3PgAFVMZknqpIUbzxY=;
+        b=kkPXZ8NLBmlHsYfX2Ti9LUVIiyMqAiJHkmPVZ7f9g+j8SksioZEWYxDtbFyM9U/kwK
+         A34hieOTvXbbZR0sbH3qs3q4G18fZK4D3YWfsRMCDJ1zzoEexHyeefklqLTqQx6VtsGl
+         iynvE2bTIpBXX9ScFLf8rkOfUYvdnQ1S4+ziDTsIkoGLmVhS35roY26cMWe4ZezKS5kj
+         I6E0VF1bE5D3t3qyyjj+M4j3efN+zJEr5LeIaHXxQYtWFNvLBwnLMIPsjbYdRM4Vk9Fe
+         FV0Mezf+Vfot3LVWlbpg0WEKuYwOu8iEUt/TJkwOrxGnAKAs86T/Acq+u0fCmVg2k9r2
+         DvWQ==
+X-Gm-Message-State: APuU4Z9W5jnp23pNGiTHpto1MrN8c0zLCSm1DXXluFjcIYW9Z3bywtRD
+	rV8gUUDQWb7k+7XgkDOfPw+Jb24VZ8dUFvw+IssGknlMOPIN/yJnpJgyevs3QrXB
+X-Gm-Gg: AZFdTZfuUU+9myBCEGb9LJyRM93wuR7JloUNxTYxgDEgg2pzSB3i+8Y6iL+O8DDl8M0
+	E522aY7Hx5VUZiC+sL0yaIng/9DOrfmPjiFzq2IYAEIpNpAGxylHFEidx1Yt4Fon+laWYJrIEh4
+	gOf8p1d0Fw6P5MDeTEbj3PidCe89ro2n+c+8oJ1oRxT2YKRGlz06ShZGufkikE+XKAB0bmqTsJc
+	FGL64v7opR4LbxQjHZ0cMRPOXhoT32ht8DtyqoC3oRGM96hG+oXpCkzWyrKuEKIawOF1nbcCAPy
+	qYl/81tt9wVgLZhaaq9W50JQ68WZwfzhUVsFRWuGuWupdq/HXtq4Ba+5gZ4cG6OsuoC4EClJ6pn
+	ybkd3+tK8DDThZvQ+FpTCyJudYipZp1uCKwA0kw3h6RcTV/vDDFXajlPkUL8eScob4U7q5/iieR
+	E9JA62kAmWqOpeG20WCod84VY/rzg4zuo23ZsynmNlE7naeW8usV7vnpidvXNjYCuaSL2cl38On
+	CjLpDyBAa7SS1lQqtx/qvAi7ghv6zSKAmF1VAhe1BRkLtOSIGTFhYG/Qbai8qv0Tw6NQ8svO/l0
+	5nVioQNTUrj6tCqwV4VLJWd92eLE/zzL7LF3s9Q21K0IZ7s6qTetefI0e4m9wVT/n+Jv27uF0VX
+	9Az6kfOqbYgkCkXBDmAK9OXw28q2JiRTWu2mHLOfnzCjqKHgVezov0suTfTiqlM3ziyvB4KZHV3
+	nRS2Gs8wLGwj/yR1bEgC5xmTQOgSMq26re8HG37zAw4m+xKxON5vuATnwXRR0UL+DVdxjnAdhFz
+	UZRFHEBLo0jsfrqkaJWCnwWbVFvZL00C4AMNAxTXyvyp0r8X8guo6N56wROAn6rAnbLTvZziLGI
+	fpoX
+X-Received: by 2002:a05:7300:1c17:b0:386:a105:fa66 with SMTP id 5a478bee46e88-386a105fd17mr12281788eec.7.1795594146473;
+        Wed, 25 Nov 2026 00:09:06 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-385646633d0sm90997971eec.3.2026.11.25.00.09.03
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-385646633d0sm90997971eec.3.2026.11.25.00.09.05
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 25 Nov 2026 00:09:04 -0800 (PST)
+        Wed, 25 Nov 2026 00:09:05 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-python][PATCH 11/14] python3-yappi: Fix coroutine call counts with Python 3.15
-Date: Wed, 25 Nov 2026 00:07:22 -0800
-Message-ID: <20261125080732.2419614-72-khem.raj@oss.qualcomm.com>
+Subject: [meta-python][PATCH 12/14] python3-google-auth-oauthlib: Add python3-plistlib to ptest RDEPENDS
+Date: Wed, 25 Nov 2026 00:07:23 -0800
+Message-ID: <20261125080732.2419614-73-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.1
 In-Reply-To: <20261125080732.2419614-1-khem.raj@oss.qualcomm.com>
 References: <20261125080732.2419614-1-khem.raj@oss.qualcomm.com>
@@ -67,80 +67,34 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Wed, 25 Nov 2026 08:09:07 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/133069
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/133070
 Content-Type: text/plain; charset="utf-8"
 
-yappi decides whether a coroutine frame is being resumed with
-IS_SUSPENDED(), which has a Python 3.14-only branch that checks for a
-YIELD_VALUE instruction. With Python 3.15 it falls back to the check
-meant for Python < 3.13, so each resume is counted as a new call and
-six asyncio ptests fail, e.g.:
+Python 3.15's webbrowser.py does "lazy import plistlib". The
+InstalledAppFlow.run_local_server tests patch webbrowser with
+autospec, which reads every attribute of the module and resolves the
+lazy import, so all ten of them fail with:
 
-  tests/test_asyncio.py:SingleThreadTests.test_issue58
-  AssertionError: 2 != 4 : async_sleep 2 0 4.005451 2.002725
+  ModuleNotFoundError: Standard library module 'plistlib' was not found
 
-Use the 3.14 check for 3.14 and later. ptest: 101/101 pass on
-qemux86-64 (glibc, systemd).
+plistlib is packaged separately as python3-plistlib. ptest: 47 pass,
+1 skipped on qemux86-64 (glibc, systemd).
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- ...-coroutines-on-Python-3.15-and-newer.patch | 36 +++++++++++++++++++
- .../python/python3-yappi_1.7.6.bb             |  1 +
- 2 files changed, 37 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-yappi/0003-Detect-suspended-coroutines-on-Python-3.15-and-newer.patch
+ .../python/python3-google-auth-oauthlib_1.5.0.bb                 | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-python/recipes-devtools/python/python3-yappi/0003-Detect-suspended-coroutines-on-Python-3.15-and-newer.patch b/meta-python/recipes-devtools/python/python3-yappi/0003-Detect-suspended-coroutines-on-Python-3.15-and-newer.patch
-new file mode 100644
-index 0000000000..748cadbbe4
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-yappi/0003-Detect-suspended-coroutines-on-Python-3.15-and-newer.patch
-@@ -0,0 +1,36 @@
-+From 99e422d5bcf9edff8427f9ccb5476ffec64c3348 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <khem.raj@oss.qualcomm.com>
-+Date: Tue, 24 Nov 2026 12:39:11 -0800
-+Subject: [PATCH] Detect suspended coroutines on Python 3.15 and newer
-+
-+IS_SUSPENDED() checks the current instruction for YIELD_VALUE only when
-+PY_MINOR_VERSION is 14. On 3.15 it falls back to the gi_frame_state
-+check meant for Python < 3.13, which does not detect the suspension, so
-+every resume of a coroutine counts as a new call and the asyncio tests
-+fail, e.g.:
-+
-+  test_asyncio.py::SingleThreadTests::test_issue58
-+  AssertionError: 2 != 4 : async_sleep 2 0 4.005451 2.002725
-+
-+Use the instruction check for 3.14 and later.
-+
-+Upstream-Status: Pending
-+AI-Generated: Uses Claude Code
-+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
-+---
-+ yappi/_yappi.c | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/yappi/_yappi.c b/yappi/_yappi.c
-+index 8b867ef..ffd9e68 100644
-+--- a/yappi/_yappi.c
-++++ b/yappi/_yappi.c
-+@@ -228,7 +228,7 @@ IS_SUSPENDED(PyFrameObject *frame) {
-+     if (gen == NULL) {
-+         return 0;
-+     }
-+-#if PY_MAJOR_VERSION >= 3 && PY_MINOR_VERSION == 14
-++#if PY_MAJOR_VERSION >= 3 && PY_MINOR_VERSION >= 14
-+     unsigned char curr_op_code = (*frame->f_frame->instr_ptr).op.code;
-+     return curr_op_code == YIELD_VALUE || curr_op_code == INSTRUMENTED_YIELD_VALUE;
-+ #elif PY_MAJOR_VERSION >= 3 && PY_MINOR_VERSION == 13
-diff --git a/meta-python/recipes-devtools/python/python3-yappi_1.7.6.bb b/meta-python/recipes-devtools/python/python3-yappi_1.7.6.bb
-index fefed051ab..be47e4ea40 100644
---- a/meta-python/recipes-devtools/python/python3-yappi_1.7.6.bb
-+++ b/meta-python/recipes-devtools/python/python3-yappi_1.7.6.bb
-@@ -8,6 +8,7 @@ SRC_URI[sha256sum] = "c94281936af77c00c6ac2306a0e7f85a67e354d717120df85fcc5dfb92
- 
- SRC_URI += " \
-            file://0002-Fix-import-of-tests.utils-to-enable-pytest.patch \
-+           file://0003-Detect-suspended-coroutines-on-Python-3.15-and-newer.patch \
-            "
- 
- inherit pypi python_setuptools_build_meta ptest-python-pytest
+diff --git a/meta-python/recipes-devtools/python/python3-google-auth-oauthlib_1.5.0.bb b/meta-python/recipes-devtools/python/python3-google-auth-oauthlib_1.5.0.bb
+index b618c5f033..384387e64b 100644
+--- a/meta-python/recipes-devtools/python/python3-google-auth-oauthlib_1.5.0.bb
++++ b/meta-python/recipes-devtools/python/python3-google-auth-oauthlib_1.5.0.bb
+@@ -17,6 +17,7 @@ RDEPENDS:${PN}-ptest += " \
+         python3-click \
+         python3-cryptography \
+         python3-mock \
++        python3-plistlib \
+         python3-pytest \
+         python3-unittest-automake-output \
+         python3-unixadmin \
