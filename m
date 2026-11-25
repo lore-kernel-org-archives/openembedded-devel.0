@@ -1,76 +1,72 @@
-Received: from aer-iport-6.cisco.com (aer-iport-6.cisco.com [173.38.203.68])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.36179.1795583899216529360
+Received: from aer-iport-8.cisco.com (aer-iport-8.cisco.com [173.38.203.70])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.36134.1795583900563826640
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 24 Nov 2026 21:18:20 -0800
+ Tue, 24 Nov 2026 21:18:21 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=BZ5mIAfF;
- spf=pass (domain: cisco.com, ip: 173.38.203.68, mailfrom: dkelaiya@cisco.com)
+ dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=SDIeffD9;
+ spf=pass (domain: cisco.com, ip: 173.38.203.70, mailfrom: dkelaiya@cisco.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=cisco.com; i=@cisco.com; l=28734; q=dns/txt;
+  d=cisco.com; i=@cisco.com; l=8238; q=dns/txt;
   s=iport01; t=1795583900; x=1796793500;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=lUS8E2udqwVe0PHaSk4NIOqE7T635Vs1gh2Vhh+qB68=;
-  b=BZ5mIAfFLG79lyUyeKSsLoAU+XmnYUv18CTwcZTxui3Y8QImAAPEr6GK
-   NGEyZVigLZNZsUtFRubYnch6sZNHwAiiWkds5c9z2frkQZfEUpCfAc/ls
-   +mbgp1bfp2HQI3ljduUdaVm5fVtpAdF7YFGPzEasxhRINxtvfgdw7gYad
-   IuXmWjokIAEHAnQfn9w22Tns9z1MWIPcQgmhPEjgaSLI/HXo9GqQGvmz+
-   5DDUMnbXyuWbFzesUj/OB62MXsmDt/XgQUyXUZ4aT8O1s7Uo7m48f5EB5
-   OuZnNHQlAmyDaT/89ofE5z599IAQJz+gMlreTQKhbKSZ6K2NmoCy4pjMf
-   g==;
-X-CSE-ConnectionGUID: vtba2UBKS+mMhm7m9tHHOQ==
-X-CSE-MsgGUID: ksKERKKxTwu9IVKANq3AiA==
-X-IPAS-Result: =?us-ascii?q?A0AbAAAhbQZr/9FK/pBaHAEBAQEBAQcBARIBAQQEAQFMg?=
- =?us-ascii?q?TAHAQELAYJWdWBDSQOEVIgbiVkDgROKU4VqjFkUgRADVw8BAQEPRA0EAQGEM?=
- =?us-ascii?q?A9GAk8VjT4CJjQJDgECBAMCAwEBAQEBAQEBAQEBAQoBAQUBAQECAQcFgQ4Th?=
- =?us-ascii?q?k8NkBIBAgEDGgkECwEWAgEtEBwDAQIDAiYCAiALGgkIEAkagmgBgjoDNwMRu?=
- =?us-ascii?q?gN6fzOBAYMpAUNBUNhMDYJaAQsUAYEKLgGFQYMAIAGFBF0YAYR+JxsbgXKBF?=
- =?us-ascii?q?YE7gTl2gQVLAQFNQgEBAQEBF4EsAoN0gmoEgg0VgQyBVH0OgheDFQOGWQKBS?=
- =?us-ascii?q?YUhgzFIgQIcA1ksAVUTDQoLBwWBaAM1EioVbjIdgSM7Fy9YGwYFgRyBHoESg?=
- =?us-ascii?q?QNdgSsoXQEhgQiBdQKCUYIAAgFJQQ4HRVMJJUMSRyQiCBIJARMaLAqBGjU8C?=
- =?us-ascii?q?SY/FQxnCxoFYQgCDQx0ORAwHCQvBRkmPBsKgQwnHR4ZDgIpBhYhCzQYDUgRL?=
- =?us-ascii?q?DcVGQQ9AW4HlBODFAYBAWAtAQcDEQ4BARcJAjsoDA8UGQgFHg0DCwETBQYJA?=
- =?us-ascii?q?gsCBCySVxACOgqPWYIhgTWeHk1xCiiDeYwkjz6FfBozhASBV4s9A4cDklQLm?=
- =?us-ascii?q?H2CWYJ6hWSCU4QKkVQLCw0DTYRqgWg8OYEgcBWDIglKGQ+OKw4Lg2CCNoJdy?=
- =?us-ascii?q?UgmMgIBCAMvAQEHAgcOAwuBaIRhiyEtgU8BAQ?=
-IronPort-Data: A9a23:qITmHaP9/6QBTE3vrR3ylsFynXyQoLVcMsEvi/4bfWQNrUokhDAOm
- jNMXWCAO/uONmv8KIx1Otnn9B8PvpTczdFkT3M5pCpnJ55oRWUpJjg4wmPYZX76whjrFRo/h
- ykmQoCeap1yFjmM/ErF3oHJ9RFUzbuPSqf3FNnKMyVwQR4MYCo6gHqPocZh6mJTqYb/WVzlV
- e/a+ZWFZgb8gWMsawr41orawP9RlKWq0N8nlgRWicBj5Df2i3QTBZQDEqC9R1OQapVUBOOzW
- 9HYx7i/+G7Dlz91Yj9yuu+mGqGiaue60Tmm0hK6aYD76vRxjnBaPpIACRYpQRw/ZwNlMDxG4
- I4lWZSYEW/FN0BX8QgXe0Ew/ypWZcWq9FJbSJSymZT78qHIT5fj6+tyBkhsAKc7waVyJGFLq
- vlJNBAtSSnW0opawJrjIgVtrs0uNozveYgYoHwllWGfBvc9SpeFSKLPjTNa9G5s2oYUQKqYO
- JZfM2I+BPjDS0Un1lM/BJEzmO6pl3DXeDxDo1XTrq0yi4TW5FIpieixaYGPEjCMbcZOvWuih
- UHWw3vkUzAkF/W50GGs81v504cjmgu+Aur+DoaQ8eZnhlCWzGEfBBAaEFe2v/S9okq/QM5Eb
- UsM9ywjqKI/+ECmQp/6RRLQnZKflhcRQZ9UVuY98gzIkvqS6AeCDW9CRTlEADA7iPILqfUR/
- gfht7vU6fZH6dV5lVr1Gm+okA6P
-IronPort-HdrOrdr: A9a23:sCH8GqiFWANCSgNyeuE6I3n103BQXgIji2hC6mlwRA09TyVXra
- +TdZMgpHnJYVcqKRYdcL+7WZVoLUmwyXcx2/hyAV7AZniDhILXFuFfBOLZqlWKcREWtNQtsJ
- uIGJIRNDSfNzRHZL7BkWqFOudl5sWb+6a1guqb5XJsQQZ2L5xE1W5Ce3+m+okcfng8OXL/f6
- DsnvZ6mw==
-X-Talos-CUID: =?us-ascii?q?9a23=3A4NCo32hh7KWRCOcrtc2gjDm4RjJubGHXxS3tCWy?=
- =?us-ascii?q?DSmNMSLjKTA6M2INDqp87?=
-X-Talos-MUID: =?us-ascii?q?9a23=3ADRzFdgxXzltQcP3PpOOCs2Km5X+aqKe1K203srY?=
- =?us-ascii?q?Wh9aZZA1OGB67lW+eQ6Zyfw=3D=3D?=
+  bh=ox72XccmWIEf0iYIBvZlsAWeuabGwmUDn9XuoYgZH/o=;
+  b=SDIeffD9VOEkdjoGi8RMAne/BjnbRMxUdlYzwRYgjLFbjuNP9El4z4Nb
+   lXZzTc9sOtJp7oVj7N2qgDLlvX7lXjsKHoUNgRrvTcc3aEMIpcdtUE+Gc
+   R1lPhO9N+liJ94yVtwObZl7NmCAjxvXFA1Y4RJvj9MRUWfSMW0mcERi25
+   PinENr/HbWbHSwecF/qiRjC7Ga5rcX6RJhRQbKOcwo+q1OUEQA88+62Kp
+   5mRQLJQARoC1LqlnBuYTcBFcFsVi5IbBEMUWWLE/xr+QU6dFQN3Mj1TZQ
+   LDpMQHvRACf9FqN0DC1UHDfA1d1JqkZLUBxwV9Q1XcvODVhICIJjDfVMO
+   Q==;
+X-CSE-ConnectionGUID: tpkEol/zSTyGWGzlb4KlQw==
+X-CSE-MsgGUID: SlrtbXpeQFqvFO3Lyp/dKw==
+X-IPAS-Result: =?us-ascii?q?A0BJAgAsbAZr/9JK/pBaglmCGD91YENJA5ZIA5FQjFmBf?=
+ =?us-ascii?q?g8BAQEPRA0EAQGEP0YCjiICJjQJDgECBAMCAwEBAQEBAQEBAQEBAQoBAQUBA?=
+ =?us-ascii?q?QECAQcFgQ4Thk8NkBIBAgEDJwsBGAEtEBwDAQIvKyMIGYIqWAGCdAMRugSBe?=
+ =?us-ascii?q?TOBAYMpAUNBUNszAQsUAYE4hUKIJV0YAYR+JxsbgXKBFYE7gi+BBYFcAQECA?=
+ =?us-ascii?q?YEkEYZuBIIigQyBVI0TAoFJiFJIgR4DWSwBVRMNCgsHBYFoAzUSKhVuMh2BI?=
+ =?us-ascii?q?zsXgQcbBgWBHIEegRKBA12BKyhdASGBCIF1AoJRggACAUlBDgdFUwklQxJHJ?=
+ =?us-ascii?q?CIIEgkBExosCoEaNTwJJj8VDGcLGgVhCAINDHQ5EDAcJC8FGSY8GwqBDCcdH?=
+ =?us-ascii?q?hkOAikGFiELNBgNSBEsNxUZBD5uB5QTgwsQDm0JCgETEgQCf1VTBRwCMJJnk?=
+ =?us-ascii?q?B+CIaERCiiDeYwklToaM4QEgVelFwuYfYJZhiiCNoJTlVcqUIRqgWg8gVlwF?=
+ =?us-ascii?q?YMiCUoZD44uCwuBFAECgkmFE1HIdyYyAgEIAy8BAQcCBw4DC4FokAABJ4FWA?=
+ =?us-ascii?q?QE?=
+IronPort-Data: A9a23:jwp8PK2GLSezt5KU3/bD5YRwkn2cJEfYwER7XKvMYLTBsI5bpzAHn
+ 2tLUTrSbqmIajGkfdtzb4ux/UgBv5PRzNVhSws43Hw8FHgiRegpqji6wuYcGwvIc6UvmWo+t
+ 512huHodZ5yEzmE4Ef3b9ANlFEkvYmQXL3wFeXYDS54QA5gWU8JhAlq8wIDqtYAbeORXUXX5
+ rsen+WFYAX7gmcuaTpOg06+gEoHUMra6WtwUmMWPZinjHeG/1EJAZQWI72GLneQauF8Au6gS
+ u/f+6qy92Xf8g1FIovNfmHTKxBirhb6ZGBiu1IOM0SQqkEqSh8ajs7XAMEhhXJ/0F1lqTzeJ
+ OJl7vRcQS9xVkHFdX90vxNwS0mSNoUekFPLzOTWXcG7lyX7n3XQL/pGEFk1EIocvfRMPXBhy
+ tMKLDpRTRS6mLfjqF67YrEEasULJcTxeYdasXZ6wHSBXLAtQIvIROPB4towMDUY35wSW6yDO
+ 4xGNXw1NUyojx5nYj/7DLoyn+qsj3juehVTqUmeouw85G27IAlZjuC2boGKKoXiqcN9pUKCu
+ mj252nALAgEGvvE7SudtX6Pmbqa9c/8cMdIfFGizdZtmFCVy2kZBREaWFf+rfSnh0qWX9NEN
+ 1dS/TIjq6U3/kGnQtTxGRqirxa5UgU0UtdKVul/4waXx++MskCSB3MPSXhKb9lOWNIKeAHGH
+ 2Shx7vBbQGDepXMIZ5B3t94dQ+PBBU=
+IronPort-HdrOrdr: A9a23:64tZ/6HY5YIwjz2PpLqEyseALOsnbusQ8zAXPo5KJiC9Ffbo8P
+ xG88576faZslsssTQb6LK90cq7MBfhHOBOgbX5VI3KNGKNhILrFvAG0WKI+VPd8kPFmtK1rZ
+ 0QEJRWOZnXEUVwi9r87U2TFtYtx8TCzYWT7N2uqUuEiWpRGtldB8ATMHfjLnFL
+X-Talos-CUID: =?us-ascii?q?9a23=3AkaFCEWlvCbPyCVhmu9Dx1+WMlArXOWHFz1rXJwi?=
+ =?us-ascii?q?qMlp4Z4K6W1uapIBgqtU7zg=3D=3D?=
+X-Talos-MUID: 9a23:HocJPAgGEi8c4YeCFi6PE8MpD8Ny/66eEE00v4wYle7fET1ofDu+k2Hi
 X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-AV: E=Sophos;i="6.27,232,1787011200"; 
-   d="scan'208";a="60184132"
-Received: from aer-l-core-08.cisco.com ([144.254.74.209])
-  by aer-iport-6.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 25 Nov 2026 05:18:15 +0000
+X-IronPort-AV: E=Sophos;i="6.27,229,1787011200"; 
+   d="scan'208";a="60363781"
+Received: from aer-l-core-09.cisco.com ([144.254.74.210])
+  by aer-iport-8.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 25 Nov 2026 05:18:16 +0000
 Received: from sjc-ads-5675.cisco.com (sjc-ads-5675.cisco.com [10.28.88.189])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by aer-l-core-08.cisco.com (Postfix) with ESMTPS id BCB0B180001A3;
-	Wed, 25 Nov 2026 05:18:14 +0000 (GMT)
+	by aer-l-core-09.cisco.com (Postfix) with ESMTPS id 559FA180001F5;
+	Wed, 25 Nov 2026 05:18:16 +0000 (GMT)
 Received: by sjc-ads-5675.cisco.com (Postfix, from userid 1887444)
-	id 73DE1CBF203; Tue, 24 Nov 2026 21:18:13 -0800 (PST)
+	id 80F16CBF21E; Tue, 24 Nov 2026 21:18:13 -0800 (PST)
 From: "Darsh Kelaiya -X (dkelaiya - E INFOCHIPS PRIVATE LIMITED at Cisco)" <dkelaiya@cisco.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Darsh Kelaiya <dkelaiya@cisco.com>
-Subject: [oe][meta-python][scarthgap][PATCH 3/9] python3-aiohttp: fix CVE-2026-111748
-Date: Tue, 24 Nov 2026 21:18:05 -0800
-Message-Id: <20261125051811.2524271-4-dkelaiya@cisco.com>
+Subject: [oe][meta-python][scarthgap][PATCH 5/9] python3-aiohttp: fix CVE-2026-111065
+Date: Tue, 24 Nov 2026 21:18:07 -0800
+Message-Id: <20261125051811.2524271-6-dkelaiya@cisco.com>
 X-Mailer: git-send-email 2.35.6
 In-Reply-To: <20261125051811.2524271-1-dkelaiya@cisco.com>
 References: <20261125051811.2524271-1-dkelaiya@cisco.com>
@@ -78,729 +74,221 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Outbound-Client-TLS: ANONYMOUS;sjc-ads-5675.cisco.com [10.28.88.189];TLSv1.3;TLS_AES_256_GCM_SHA384;256
 X-Outbound-SMTP-Client: 10.28.88.189, sjc-ads-5675.cisco.com
-X-Outbound-Node: aer-l-core-08.cisco.com
+X-Outbound-Node: aer-l-core-09.cisco.com
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Wed, 25 Nov 2026 05:18:30 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132971
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132972
 Content-Type: text/plain; charset="utf-8"
 
 From: Darsh Kelaiya <dkelaiya@cisco.com>
 
-Backport the protocol-scheme fix [1] to aiohttp 3.9.5, as identified
-by [3]. Derive Request.scheme from the transport rather than the
-untrusted scheme in an absolute-form request target.
+Backport the upstream cookie overflow and response cleanup fix [1]
+to aiohttp 3.9.5, as identified by [2]. Clamp positive Max-Age values
+before float conversion and expire nonpositive values immediately.
 
-Include the authority-validation correction [2] to reject malformed
-targets before URL parsing, independently of yarl normalization.
-Retain the upstream parser and request regressions. Use cached
-transport details and explicitly evaluate URL.port before reading
-raw_host because yarl 1.9.4 defers encoded-URL port validation.
-The recipe regenerates the C parser from the patched Cython source.
+Close a received response if subsequent processing fails so a
+malformed cookie cannot exhaust the connection pool. Include the
+upstream extreme Max-Age and connection-release regression tests.
+Adapt the response annotation, cookie-update test hook and root-path
+keys to 3.9.5. Raise the test error only for nonempty cookies because
+this client invokes update_cookies() even for clean responses.
 
-[1] https://github.com/aio-libs/aiohttp/commit/6d4e7b01f9b951aa084a75d7356e907d4ee80411
-[2] https://github.com/aio-libs/aiohttp/commit/186065caf37d5999e91fd3d4ddfd03b43eb08801
-[3] https://github.com/aio-libs/aiohttp/security/advisories/GHSA-f9xw-jh8m-3mwq
+[1] https://github.com/aio-libs/aiohttp/commit/9dd8eaf4e31f1237ef2c1574a8c82a739fca5805
+[2] https://github.com/aio-libs/aiohttp/security/advisories/GHSA-6cjc-53gc-5rqm
 
 Signed-off-by: Darsh Kelaiya <dkelaiya@cisco.com>
 ---
- .../python3-aiohttp/CVE-2026-111748_p1.patch  | 410 ++++++++++++++++++
- .../python3-aiohttp/CVE-2026-111748_p2.patch  | 259 +++++++++++
- .../python/python3-aiohttp_3.9.5.bb           |   2 +
- 3 files changed, 671 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-111748_p1.patch
- create mode 100644 meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-111748_p2.patch
+ .../python3-aiohttp/CVE-2026-111065.patch     | 171 ++++++++++++++++++
+ .../python/python3-aiohttp_3.9.5.bb           |   1 +
+ 2 files changed, 172 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-111065.patch
 
-diff --git a/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-111748_p1.patch b/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-111748_p1.patch
+diff --git a/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-111065.patch b/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-111065.patch
 new file mode 100644
-index 0000000000..9f1ec42706
+index 0000000000..916afb87ca
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-111748_p1.patch
-@@ -0,0 +1,410 @@
-+From 6d4e7b01f9b951aa084a75d7356e907d4ee80411 Mon Sep 17 00:00:00 2001
-+From: Sam Bull <git@sambull.org>
-+Date: Sun, 27 Sep 2026 18:11:00 +0100
-+Subject: [PATCH] Use protocol scheme for absolute-form requests (#13821)
-+ (#13827) (#13828)
++++ b/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-111065.patch
+@@ -0,0 +1,171 @@
++From 9dd8eaf4e31f1237ef2c1574a8c82a739fca5805 Mon Sep 17 00:00:00 2001
++From: "patchback[bot]" <45432694+patchback[bot]@users.noreply.github.com>
++Date: Wed, 9 Sep 2026 14:43:30 +0100
++Subject: [PATCH] [PR #13677/9e08ba02 backport][3.14] Fix cookie overflow
++ (#13679)
 +
-+CVE: CVE-2026-111748
-+Upstream-Status: Backport [https://github.com/aio-libs/aiohttp/commit/6d4e7b01f9b951aa084a75d7356e907d4ee80411]
++**This is a backport of PR #13677 as merged into master
++(9e08ba02abe573ce9e4cc541d4e3c3646adb43a7).**
++
++---------
++
++Co-authored-by: Sam Bull <git@sambull.org>
++
++CVE: CVE-2026-111065
++Upstream-Status: Backport [https://github.com/aio-libs/aiohttp/commit/9dd8eaf4e31f1237ef2c1574a8c82a739fca5805]
 +
 +Backport Changes:
-+- Omit the enum hunk because HTTP_OPTIONS is already declared.
-+- Cache transport details before URL normalization because
-+  RequestHandler has no ssl_context attribute in aiohttp 3.9.5.
-+- Apply explicit clone(scheme=...) and clone(host=...) overrides to
-+  the cached absolute URL so Request.url stays consistent. Keep
-+  authority-form URLs scheme-less unless clone supplies a scheme.
-+- Evaluate URL.port before accepting raw_host in both parsers:
-+  yarl 1.9.4 defers port validation for encoded URLs.
-+- Adapt the constructor mock to transport.get_extra_info() and add
-+  the upstream absolute-URL clone tests missing from aiohttp 3.9.5.
-+- Keep 3.9.5's existing websocket-key test annotation; the omitted
-+  typing-only update does not change its regression assertions.
++- Use the existing Optional spelling for the response variable.
++- Use update_cookies() and SimpleCookie() in the regression tests,
++  retaining the older "/" expiration key.
++- Raise the test cookie error only for nonempty cookies; this client
++  invokes update_cookies() even when a response has no Set-Cookie.
 +
-+(cherry picked from commit a921cfd0fec28d5a9e5bf8d6f4372b8fa63c49df)
-+(cherry picked from commit 93d91e37e7c6035d09e89646b3de737735ed91b5)
 +Signed-off-by: Darsh Kelaiya <dkelaiya@cisco.com>
 +---
-+ CHANGES/13821.bugfix.rst     |  1 +
-+ aiohttp/_http_parser.pyx     | 31 ++++++++++++++++---
-+ aiohttp/http_parser.py       | 28 ++++++++++++++---
-+ aiohttp/web_request.py       | 20 ++++++++----
-+ tests/test_http_parser.py    | 59 ++++++++++++++++++++++++++++++++++++
-+ tests/test_web_functional.py | 46 ++++++++++++++++++++++++++--
-+ tests/test_web_request.py    | 52 ++++++++++++++++++++++++++-----
-+ 7 files changed, 214 insertions(+), 23 deletions(-)
-+ create mode 100644 CHANGES/13821.bugfix.rst
++ CHANGES/13677.bugfix.rst        |  1 +
++ aiohttp/client.py               |  5 ++++
++ aiohttp/cookiejar.py            | 10 ++++++-
++ tests/test_client_functional.py | 46 +++++++++++++++++++++++++++++++++
++ tests/test_cookiejar.py         | 22 ++++++++++++++++
++ 5 files changed, 83 insertions(+), 1 deletion(-)
++ create mode 100644 CHANGES/13677.bugfix.rst
 +
-+diff --git a/CHANGES/13821.bugfix.rst b/CHANGES/13821.bugfix.rst
++diff --git a/CHANGES/13677.bugfix.rst b/CHANGES/13677.bugfix.rst
 +new file mode 100644
-+index 00000000..f35418d2
++index 0000000..bea67cb
 +--- /dev/null
-++++ b/CHANGES/13821.bugfix.rst
+++++ b/CHANGES/13677.bugfix.rst
 +@@ -0,0 +1 @@
-++Fixed the web server trusting the scheme of an absolute-form request-target -- by :user:`Dreamsorcerer`.
-+diff --git a/aiohttp/_http_parser.pyx b/aiohttp/_http_parser.pyx
-+index 4eb57893..7d97bfe8 100644
-+--- a/aiohttp/_http_parser.pyx
-++++ b/aiohttp/_http_parser.pyx
-+@@ -668,12 +668,21 @@ cdef class HttpRequestParser(HttpParser):
-+             return
-+         self._path = self._buf.decode('utf-8', 'surrogateescape')
+++Fixed a possible ``OverflowError`` on cookies and a connection not being closed properly -- by :user:`Dreamsorcerer`.
++diff --git a/aiohttp/client.py b/aiohttp/client.py
++index 4674b19..2e88917 100644
++--- a/aiohttp/client.py
+++++ b/aiohttp/client.py
++@@ -509,6 +509,7 @@ class ClientSession:
++             await trace.send_request_start(method, url.update_query(params), headers)
++ 
++         timer = tm.timer()
+++        resp: Optional[ClientResponse] = None
 +         try:
-+-            idx3 = len(self._path)
-+             if self._cparser.method == cparser.HTTP_CONNECT:
-+                 # authority-form,
-+                 # https://datatracker.ietf.org/doc/html/rfc7230#section-5.3.3
-+-                self._url = URL.build(authority=self._path, encoded=True)
-+-            elif idx3 > 1 and self._path[0] == '/':
-++                try:
-++                    self._url = URL.build(authority=self._path, encoded=True)
-++                    _ = self._url.port
-++                    host = self._url.raw_host
-++                except ValueError:
-++                    host = None
-++                if host is None:
-++                    raise InvalidURLError(
-++                        self._path.encode(errors="surrogateescape")
-++                        .decode("latin1")
-++                    )
-++            elif self._path[0] == '/':
-+                 # origin-form,
-+                 # https://datatracker.ietf.org/doc/html/rfc7230#section-5.3.1
-+                 idx1 = self._path.find("?")
-+@@ -704,10 +713,24 @@ cdef class HttpRequestParser(HttpParser):
-+                     fragment=fragment,
-+                     encoded=True,
-+                 )
-++            elif self._path == '*' and self._cparser.method == cparser.HTTP_OPTIONS:
-++                # asterisk-form,
-++                self._url = URL(self._path, encoded=True)
-+             else:
-+                 # absolute-form for proxy maybe,
-+                 # https://datatracker.ietf.org/doc/html/rfc7230#section-5.3.2
-+-                self._url = URL(self._path, encoded=True)
-++                try:
-++                    self._url = URL(self._path, encoded=True)
-++                    _ = self._url.port
-++                    host = self._url.raw_host
-++                except ValueError:
-++                    host = None
-++                # https://www.rfc-editor.org/rfc/rfc9110#section-4.2.1-4
-++                if host is None:
-++                    raise InvalidURLError(
-++                        self._path.encode(errors="surrogateescape")
-++                        .decode("latin1")
-++                    )
-+         finally:
-+             PyByteArray_Resize(self._buf, 0)
++             with timer:
++                 while True:
++@@ -727,6 +728,10 @@ class ClientSession:
++                 handle.cancel()
++                 handle = None
 + 
-+diff --git a/aiohttp/http_parser.py b/aiohttp/http_parser.py
-+index 37a0dff4..789c2bdc 100644
-+--- a/aiohttp/http_parser.py
-++++ b/aiohttp/http_parser.py
-+@@ -641,7 +641,19 @@ class HttpRequestParser(HttpParser[RawRequestMessage]):
-+         if method == "CONNECT":
-+             # authority-form,
-+             # https://datatracker.ietf.org/doc/html/rfc7230#section-5.3.3
-+-            url = URL.build(authority=path, encoded=True)
-++            try:
-++                url = URL.build(authority=path, encoded=True)
-++                _ = url.port
-++                host = url.raw_host
-++            except ValueError:
-++                # Duplicated so mypy understands that url must be defined below.
-++                raise InvalidURLError(
-++                    path.encode(errors="surrogateescape").decode("latin1")
-++                )
-++            if host is None:
-++                raise InvalidURLError(
-++                    path.encode(errors="surrogateescape").decode("latin1")
-++                )
-+         elif path.startswith("/"):
-+             # origin-form,
-+             # https://datatracker.ietf.org/doc/html/rfc7230#section-5.3.1
-+@@ -664,9 +676,17 @@ class HttpRequestParser(HttpParser[RawRequestMessage]):
-+         else:
-+             # absolute-form for proxy maybe,
-+             # https://datatracker.ietf.org/doc/html/rfc7230#section-5.3.2
-+-            url = URL(path, encoded=True)
-+-            if url.scheme == "":
-+-                # not absolute-form
-++            try:
-++                url = URL(path, encoded=True)
-++                _ = url.port
-++                host = url.raw_host
-++            except ValueError:
-++                # Duplicated so mypy understands that url must be defined below.
-++                raise InvalidURLError(
-++                    path.encode(errors="surrogateescape").decode("latin1")
-++                )
-++            # https://www.rfc-editor.org/rfc/rfc9110#section-4.2.1-4
-++            if host is None:
-+                 raise InvalidURLError(
-+                     path.encode(errors="surrogateescape").decode("latin1")
-+                 )
-+diff --git a/aiohttp/web_request.py b/aiohttp/web_request.py
-+index f9de5957..06c0bffc 100644
-+--- a/aiohttp/web_request.py
-++++ b/aiohttp/web_request.py
-+@@ -173,14 +173,27 @@ class BaseRequest(MutableMapping[str, Any], HeadersMixin):
-+         self._method = message.method
-+         self._version = message.version
-+         self._cache: Dict[str, Any] = {}
-++        transport = self._protocol.transport
-++        assert transport is not None
-++        self._transport_sslcontext = transport.get_extra_info("sslcontext")
-++        self._transport_peername = transport.get_extra_info("peername")
-+         url = message.url
-+         if url.is_absolute():
-++            if scheme is None and url.scheme:
-++                # Absolute URL is peer-controlled, use the protocol.
-++                scheme = "https" if self._transport_sslcontext else "http"
-++            if scheme is not None:
-++                # Authority-form (CONNECT) has no scheme: leave the target
-++                # unchanged unless clone(scheme=...) overrides it.
-++                url = url.with_scheme(scheme)
-++                self._cache["scheme"] = scheme
-++            if host is not None:
-++                url = url.with_host(host)
-+             # absolute URL is given,
-+             # override auto-calculating url, host, and scheme
-+             # all other properties should be good
-+             self._cache["url"] = url
-+             self._cache["host"] = url.host
-+-            self._cache["scheme"] = url.scheme
-+             self._rel_url = url.relative()
-+         else:
-+             self._rel_url = message.url
-+@@ -192,11 +205,6 @@ class BaseRequest(MutableMapping[str, Any], HeadersMixin):
-+         self._client_max_size = client_max_size
-+         self._loop = loop
-+ 
-+-        transport = self._protocol.transport
-+-        assert transport is not None
-+-        self._transport_sslcontext = transport.get_extra_info("sslcontext")
-+-        self._transport_peername = transport.get_extra_info("peername")
-+-
-+         if scheme is not None:
-+             self._cache["scheme"] = scheme
-+         if host is not None:
-+diff --git a/tests/test_http_parser.py b/tests/test_http_parser.py
-+index b29518ab..ebbb58d8 100644
-+--- a/tests/test_http_parser.py
-++++ b/tests/test_http_parser.py
-+@@ -866,6 +866,65 @@ def test_url_absolute(parser: Any) -> None:
-+     assert msg.url == URL("https://www.google.com/path/to.html")
-+ 
-+ 
-++def test_url_authority_form_only_connect(parser: HttpRequestParser) -> None:
-++    # https://www.rfc-editor.org/info/rfc9112/#section-3.2.3-1
-++    with pytest.raises(http_exceptions.InvalidURLError):
-++        parser.feed_data(b"GET www.google.com:443 HTTP/1.1\r\nHost: a\r\n\r\n")
+++            if resp is not None:
+++                # A failure occurred after the response was received.
+++                resp.close()
 ++
-++
-++@pytest.mark.parametrize(
-++    "target",
-++    (
-++        b"https:///protected",
-++        b"https:////protected",
-++        b"https://:80/protected",
-++        b"https://user@/protected",
-++    ),
-++    ids=("empty-host", "empty-host-extra-slash", "port-only", "userinfo-only"),
-++)
-++def test_url_absolute_form_empty_host_rejected(
-++    parser: HttpRequestParser, target: bytes
++             for trace in traces:
++                 await trace.send_request_exception(
++                     method, url.update_query(params), headers, e
++diff --git a/aiohttp/cookiejar.py b/aiohttp/cookiejar.py
++index 4f694b6..b69e9e2 100644
++--- a/aiohttp/cookiejar.py
+++++ b/aiohttp/cookiejar.py
++@@ -340,7 +340,15 @@ class CookieJar(AbstractCookieJar):
++             if max_age:
++                 try:
++                     delta_seconds = int(max_age)
++-                    max_age_expiration = min(time.time() + delta_seconds, self.MAX_TIME)
+++                    # https://datatracker.ietf.org/doc/html/rfc6265#section-5.2.2
+++                    if delta_seconds <= 0:
+++                        max_age_expiration = 0.0
+++                    else:
+++                        # Cap first to protect against OverflowError on next line.
+++                        delta_seconds = min(delta_seconds, self.MAX_TIME)
+++                        max_age_expiration = min(
+++                            time.time() + delta_seconds, self.MAX_TIME
+++                        )
++                     self._expire_cookie(max_age_expiration, domain, path, name)
++                 except ValueError:
++                     cookie["max-age"] = ""
++diff --git a/tests/test_client_functional.py b/tests/test_client_functional.py
++index 649e766..d695638 100644
++--- a/tests/test_client_functional.py
+++++ b/tests/test_client_functional.py
++@@ -2400,6 +2400,52 @@ async def test_set_cookies_max_age_overflow(aiohttp_client) -> None:
++                 assert int(cookie["max-age"]) == int(overflow)
++ 
++ 
+++async def test_connection_released_when_cookie_processing_fails(
+++    aiohttp_client: AiohttpClient,
 ++) -> None:
-++    # https://www.rfc-editor.org/rfc/rfc9110#section-4.2.2-4
-++    with pytest.raises(http_exceptions.InvalidURLError):
-++        parser.feed_data(b"GET " + target + b" HTTP/1.1\r\nHost: a\r\n\r\n")
+++    class EvilJar(aiohttp.CookieJar):
+++        def update_cookies(
+++            self, cookies: Any, response_url: URL = URL()
+++        ) -> None:
+++            if cookies:
+++                raise RuntimeError("boom")
+++            super().update_cookies(cookies, response_url)
 ++
+++    hold = asyncio.Event()
 ++
-++def test_url_absolute_form_invalid_port_rejected(parser: HttpRequestParser) -> None:
-++    # yarl raises ValueError for an out-of-range port; that must surface as
-++    # a 400, not escape the parser as a bare ValueError.
-++    with pytest.raises(http_exceptions.InvalidURLError):
-++        parser.feed_data(b"GET http://example.com:65536/x HTTP/1.1\r\nHost: a\r\n\r\n")
+++    async def hostile(request: web.Request) -> web.StreamResponse:
+++        ret = web.StreamResponse()
+++        ret.content_length = 2
+++        ret.set_cookie("sid", "x")
+++        await ret.prepare(request)
+++        await ret.write(b"x")
+++        await hold.wait()
+++        assert False
 ++
-++
-++def test_url_connect_invalid_port_rejected(parser: HttpRequestParser) -> None:
-++    with pytest.raises(http_exceptions.InvalidURLError):
-++        parser.feed_data(b"CONNECT example.com:65536 HTTP/1.1\r\nHost: a\r\n\r\n")
-++
-++
-++def test_url_connect_empty_host_rejected(parser: HttpRequestParser) -> None:
-++    with pytest.raises(http_exceptions.InvalidURLError):
-++        parser.feed_data(b"CONNECT :80 HTTP/1.1\r\nHost: a\r\n\r\n")
-++
-++
-++def test_url_origin_form_bare_slash(parser: HttpRequestParser) -> None:
-++    messages, upgrade, tail = parser.feed_data(b"GET / HTTP/1.1\r\nHost: a\r\n\r\n")
-++    assert messages[0][0].url == URL("/")
-++
-++
-++def test_url_asterisk_form_options(parser: HttpRequestParser) -> None:
-++    # https://www.rfc-editor.org/rfc/rfc9112#section-3.2.4
-++    messages, upgrade, tail = parser.feed_data(b"OPTIONS * HTTP/1.1\r\nHost: a\r\n\r\n")
-++    assert messages[0][0].url == URL("*")
-++
-++
-++def test_url_asterisk_form_only_options(parser: HttpRequestParser) -> None:
-++    # asterisk-form is only valid for OPTIONS; for other methods "*" is
-++    # neither origin-form nor a valid absolute-form target.
-++    with pytest.raises(http_exceptions.InvalidURLError):
-++        parser.feed_data(b"GET * HTTP/1.1\r\nHost: a\r\n\r\n")
-++
-++
-+ def test_headers_old_websocket_key1(parser: Any) -> None:
-+     text = b"GET /test HTTP/1.1\r\n" b"SEC-WEBSOCKET-KEY1: line\r\n\r\n"
-+ 
-+diff --git a/tests/test_web_functional.py b/tests/test_web_functional.py
-+index a0e3a8ea..262257b8 100644
-+--- a/tests/test_web_functional.py
-++++ b/tests/test_web_functional.py
-+@@ -1863,8 +1863,50 @@ async def test_unread_compressed_body_drain_is_bounded(
-+     assert max(drain_reads) < decompressed_size
-+ 
-+ 
-+-async def test_app_max_client_size(aiohttp_client) -> None:
-+-    async def handler(request):
-++async def test_absolute_form_target_does_not_spoof_scheme(
-++    aiohttp_server: AiohttpServer,
-++) -> None:
-++    """A plaintext absolute-form target with https must not look secure."""
-++
-++    async def handler(request: web.Request) -> web.Response:
-++        return web.json_response(
-++            {
-++                "scheme": request.scheme,
-++                "secure": request.secure,
-++                "url": str(request.url),
-++                "host": request.host,
-++            }
-++        )
+++    async def clean(request: web.Request) -> web.Response:
+++        return web.Response()
 ++
 ++    app = web.Application()
-++    app.router.add_get("/probe", handler)
-++    server = await aiohttp_server(app)
+++    app.router.add_get("/hostile", hostile)
+++    app.router.add_get("/clean", clean)
+++    connector = aiohttp.TCPConnector(limit=1)
+++    client = await aiohttp_client(app, connector=connector, cookie_jar=EvilJar())
 ++
-++    reader, writer = await asyncio.open_connection(server.host, server.port)
 ++    try:
-++        writer.write(
-++            b"GET https://trusted.example/probe HTTP/1.1\r\n"
-++            b"Host: trusted.example\r\n"
-++            b"Connection: close\r\n\r\n"
-++        )
-++        await writer.drain()
-++        raw = await asyncio.wait_for(reader.read(), 5)
+++        for _ in range(2):
+++            with pytest.raises(RuntimeError, match="boom") as excinfo:
+++                await client.get("/hostile")
+++            assert not connector._acquired
+++            del excinfo
+++
+++        # The single connector slot is free again: an unaffected request
+++        # succeeds instead of waiting forever for a connection.
+++        async with client.get("/clean") as resp:
+++            assert resp.status == 200
 ++    finally:
-++        writer.close()
-++        with suppress(ConnectionResetError, BrokenPipeError):
-++            await writer.wait_closed()
-++
-++    assert raw.startswith(b"HTTP/1.1 200 ")
-++    assert json.loads(raw.split(b"\r\n\r\n", 1)[1]) == {
-++        "scheme": "http",
-++        "secure": False,
-++        "url": "http://trusted.example/probe",
-++        "host": "trusted.example",
-++    }
+++        hold.set()
 ++
 ++
-++async def test_app_max_client_size(aiohttp_client: AiohttpClient) -> None:
-++    async def handler(request: web.Request) -> NoReturn:
-+         await request.post()
-+         return web.Response(body=b"ok")
-+ 
-+diff --git a/tests/test_web_request.py b/tests/test_web_request.py
-+index c1d61f89..79ddcdeb 100644
-+--- a/tests/test_web_request.py
-++++ b/tests/test_web_request.py
-+@@ -9,13 +9,15 @@ import pytest
-+ from multidict import CIMultiDict, CIMultiDictProxy, MultiDict
-+ from yarl import URL
-+ 
-+-from aiohttp import HttpVersion
-++from aiohttp import HttpVersion, web
-++from aiohttp.abc import AbstractStreamWriter
-+ from aiohttp.base_protocol import BaseProtocol
-+ from aiohttp.http_exceptions import BadHttpMessage, LineTooLong
-+ from aiohttp.http_parser import RawRequestMessage
-+ from aiohttp.streams import StreamReader
-+ from aiohttp.test_utils import make_mocked_request
-+-from aiohttp.web import BaseRequest, HTTPRequestEntityTooLarge
-++from aiohttp.web import HTTPRequestEntityTooLarge
-++from aiohttp.web_protocol import RequestHandler
-+ from aiohttp.web_request import ETag
-+ 
-+ 
-+@@ -24,6 +26,19 @@ def protocol():
-+     return mock.Mock(_reading_paused=False)
-+ 
-+ 
-++def make_base_request(
-++    message: RawRequestMessage, protocol: RequestHandler
-++) -> web.BaseRequest:
-++    return web.BaseRequest(
-++        message,
-++        mock.create_autospec(StreamReader, spec_set=True, instance=True),
-++        protocol,
-++        mock.create_autospec(AbstractStreamWriter, spec_set=True, instance=True),
-++        mock.create_autospec(asyncio.Task, spec_set=True, instance=True),
-++        mock.create_autospec(asyncio.AbstractEventLoop, spec_set=True, instance=True),
-++    )
++ async def test_request_conn_error() -> None:
++     client = aiohttp.ClientSession()
++     with pytest.raises(aiohttp.ClientConnectionError):
++diff --git a/tests/test_cookiejar.py b/tests/test_cookiejar.py
++index df59759..3c9933b 100644
++--- a/tests/test_cookiejar.py
+++++ b/tests/test_cookiejar.py
++@@ -1176,3 +1176,25 @@ async def test_save_load_json_secure_cookies(tmp_path: Path) -> None:
++     assert cookie["secure"] is True
++     assert cookie["httponly"] is True
++     assert cookie["domain"] == "example.com"
 ++
 ++
-+ def test_base_ctor() -> None:
-+     message = RawRequestMessage(
-+         "GET",
-+@@ -38,9 +53,10 @@ def test_base_ctor() -> None:
-+         URL("/path/to?a=1&b=2"),
-+     )
-+ 
-+-    req = BaseRequest(
-+-        message, mock.Mock(), mock.Mock(), mock.Mock(), mock.Mock(), mock.Mock()
-+-    )
-++    protocol = mock.create_autospec(RequestHandler, spec_set=True, instance=True)
-++    protocol.transport = mock.Mock()
-++    protocol.transport.get_extra_info.return_value = None
-++    req = make_base_request(message, protocol)
-+ 
-+     assert "GET" == req.method
-+     assert HttpVersion(1, 1) == req.version
-+@@ -165,12 +181,34 @@ def test_non_ascii_raw_path() -> None:
-+ 
-+ def test_absolute_url() -> None:
-+     req = make_mocked_request("GET", "https://example.com/path/to?a=1")
-+-    assert req.url == URL("https://example.com/path/to?a=1")
-+-    assert req.scheme == "https"
-++    assert req.url == URL("http://example.com/path/to?a=1")
-++    # The scheme of an absolute-form target is peer-controlled and must not
-++    # override the transport-derived scheme.
-++    assert req.scheme == "http"
-++    assert not req.secure
-+     assert req.host == "example.com"
-+     assert req.rel_url == URL.build(path="/path/to", query={"a": "1"})
-+ 
-+ 
-++def test_clone_absolute_scheme() -> None:
-++    req = make_mocked_request("GET", "https://example.com/path/to?a=1")
-++    assert req.scheme == "http"
-++    req2 = req.clone(scheme="https")
-++    assert req2.scheme == "https"
-++    assert req2.url.scheme == "https"
-++    req3 = req2.clone(scheme="http")
-++    assert req3.scheme == "http"
-++    assert req3.url.scheme == "http"
+++async def test_update_cookies_max_age_beyond_float_range_is_clamped() -> None:
+++    """A hostile Max-Age larger than float max must clamp, not raise OverflowError."""
+++    url = URL("https://example.com/")
+++    jar = CookieJar()
+++
+++    jar.update_cookies(SimpleCookie(f"sid=x; Max-Age={'9' * 309}"), url)
+++
+++    assert "sid" in jar.filter_cookies(url)
+++    assert jar._expirations[("example.com", "/", "sid")] == CookieJar.MAX_TIME
 ++
 ++
-++def test_clone_absolute_host() -> None:
-++    req = make_mocked_request("GET", "https://example.com/path/to?a=1")
-++    assert req.host == "example.com"
-++    req2 = req.clone(host="foo.test")
-++    assert req2.host == "foo.test"
-++    assert req2.url.host == "foo.test"
+++async def test_update_cookies_negative_max_age_beyond_float_range_expires() -> None:
+++    """A negative Max-Age below float min must expire the cookie, not raise."""
+++    url = URL("https://example.com/")
+++    jar = CookieJar()
 ++
+++    jar.update_cookies(SimpleCookie(f"sid=x; Max-Age=-{'9' * 309}"), url)
 ++
-+ def test_content_length() -> None:
-+     req = make_mocked_request("Get", "/", CIMultiDict([("CONTENT-LENGTH", "123")]))
-+ 
-diff --git a/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-111748_p2.patch b/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-111748_p2.patch
-new file mode 100644
-index 0000000000..58bca9f8f2
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-111748_p2.patch
-@@ -0,0 +1,259 @@
-+From 186065caf37d5999e91fd3d4ddfd03b43eb08801 Mon Sep 17 00:00:00 2001
-+From: Andrew Svetlov <andrew.svetlov@gmail.com>
-+Date: Tue, 29 Sep 2026 11:25:53 +0200
-+Subject: [PATCH] Reject absolute-form targets without an authority before
-+ parsing (#13858) (#13860)
-+
-+<!-- Thank you for your contribution! -->
-+
-+Follow-up to #13855 for aio-libs/yarl#1937. With that change, yarl's
-+default WHATWG mode reads a host from `http:host/p`, `http:/host/p` and
-+`http:///host/p`, as browsers do. The Python and Cython request parsers
-+passed an absolute-form request target to `URL()` and rejected it only
-+if yarl found no host. They now first check that the target has `//`
-+followed by a non-empty authority, so `GET http:///protected` and `GET
-+http:/protected` stay rejected as RFC 9110 requires, whatever yarl
-+version is installed.
-+
-+The client tests used `http:///example.com` and `http:///path` as URLs
-+without a host. They now use `http://` where an invalid URL is needed,
-+and `http:///example.com` is dropped from the invalid URL test data.
-+With yarl#1937 it is `http://example.com/`, and as a redirect it leads
-+to `example.com`, as in browsers.
-+
-+No with the released yarl, where such targets were already rejected.
-+With yarl#1937, the server keeps rejecting absolute-form targets without
-+an authority instead of reading a host from them.
-+
-+No, it is one string check shared by both parsers.
-+
-+Follow-up to #13855; needed by aio-libs/yarl#1937.
-+
-+- [x] I think the code is well written
-+- [x] Unit tests for the changes exist
-+- [ ] Documentation reflects the changes: N/A, no documented behavior
-+changes
-+- [ ] If you provide code modification, please add yourself to
-+`CONTRIBUTORS.txt`: N/A, already listed
-+- [x] Add a new news fragment into the `CHANGES/` folder
-+
-+Drafted with Claude Code (Claude Opus 5.5); reviewed by @asvetlov.
-+
-+<details>
-+<summary>Agent run details (optional, for reviewers)</summary>
-+
-+Tests with the Cython extensions built (llhttp generated, `make
-+cythonize`, `build_ext --inplace`): `pytest tests -n auto`, 5246 passed,
-+22 skipped, 17 xfailed, both with yarl master (f761c37) and with the
-+yarl#1937 branch (8d0f111). Pure-Python run of `test_http_parser.py`,
-+`test_client_functional.py` and `test_client_session.py` with the
-+yarl#1937 branch: 884 passed.
-+Lint: black, isort, codespell passed. The local pre-commit flake8 hook
-+fails to load `flake8-requirements` (`pkg_resources` missing), so flake8
-+(E, F, W) was run directly and passed. yesqa was skipped for the same
-+reason, because it wrongly strips `# noqa: I900`.
-+</details>
-+
-+(cherry picked from commit ce960dd17e34f143762c14c32b9e14435ea7ce11)
-+
-+<!-- Thank you for your contribution! -->
-+
-+## What do these changes do?
-+
-+<!-- Please give a short brief about these changes. -->
-+
-+## Are there changes in behavior for the user?
-+
-+<!-- Outline any notable behaviour for the end users. -->
-+
-+## Is it a substantial burden for the maintainers to support this?
-+
-+<!--
-+Stop right there! Pause. Just for a minute... Can you think of anything
-+obvious that would complicate the ongoing development of this project?
-+
-+Try to consider if you'd be able to maintain it throughout the next
-+5 years. Does it seem viable? Tell us your thoughts! We'd very much
-+love to hear what the consequences of merging this patch might be...
-+
-+This will help us assess if your change is something we'd want to
-+entertain early in the review process. Thank you in advance!
-+-->
-+
-+## Related issue number
-+
-+<!-- Will this resolve any open issues? -->
-+<!-- Remember to prefix with 'Fixes' if it closes an issue (e.g. 'Fixes
-+#123'). -->
-+
-+## Checklist
-+
-+- [ ] I think the code is well written
-+- [ ] Unit tests for the changes exist
-+- [ ] Documentation reflects the changes
-+- [ ] If you provide code modification, please add yourself to
-+`CONTRIBUTORS.txt`
-+  * The format is &lt;Name&gt; &lt;Surname&gt;.
-+  * Please keep alphabetical order, the file is sorted by names.
-+- [ ] Add a new news fragment into the `CHANGES/` folder
-+  * name it `<issue_or_pr_num>.<type>.rst` (e.g. `588.bugfix.rst`)
-+  * if you don't have an issue number, change it to the pull request
-+    number after creating the PR
-+    * `.bugfix`: A bug fix for something the maintainers deemed an
-+      improper undesired behavior that got corrected to match
-+      pre-agreed expectations.
-+    * `.feature`: A new behavior, public APIs. That sort of stuff.
-+    * `.deprecation`: A declaration of future API removals and breaking
-+      changes in behavior.
-+    * `.breaking`: When something public is removed in a breaking way.
-+      Could be deprecated in an earlier release.
-+    * `.doc`: Notable updates to the documentation structure or build
-+      process.
-+    * `.packaging`: Notes for downstreams about unobvious side effects
-+      and tooling. Changes in the test invocation considerations and
-+      runtime assumptions.
-+    * `.contrib`: Stuff that affects the contributor experience. e.g.
-+      Running tests, building the docs, setting up the development
-+      environment.
-+    * `.misc`: Changes that are hard to assign to any of the above
-+      categories.
-+  * Make sure to use full sentences with correct case and punctuation,
-+    for example:
-+    ```rst
-+    Fixed issue with non-ascii contents in doctest text files
-+    -- by :user:`contributor-gh-handle`.
-+    ```
-+
-+    Use the past tense or the present tense a non-imperative mood,
-+    referring to what's changed compared to the last released version
-+    of this project.
-+
-+CVE: CVE-2026-111748
-+Upstream-Status: Backport [https://github.com/aio-libs/aiohttp/commit/186065caf37d5999e91fd3d4ddfd03b43eb08801]
-+
-+Backport Changes:
-+- Omit THREAT_MODEL.md because that file is absent in aiohttp 3.9.5.
-+- Omit updates to the newer invalid-URL/redirect fixture groups and
-+  response-payload tests, which do not exist in this version.
-+- Preserve p1's explicit URL.port check inside the authority guard;
-+  yarl 1.9.4 defers port validation for encoded URLs.
-+
-+Signed-off-by: Darsh Kelaiya <dkelaiya@cisco.com>
-+---
-+ CHANGES/13858.bugfix.rst  |  7 +++++++
-+ aiohttp/_http_parser.pyx  | 16 +++++++++-------
-+ aiohttp/http_parser.py    | 16 ++++++++++++++++
-+ tests/test_http_parser.py | 17 ++++++++++++++++-
-+ 4 files changed, 48 insertions(+), 8 deletions(-)
-+ create mode 100644 CHANGES/13858.bugfix.rst
-+
-+diff --git a/CHANGES/13858.bugfix.rst b/CHANGES/13858.bugfix.rst
-+new file mode 100644
-+index 00000000..9bd2d110
-+--- /dev/null
-++++ b/CHANGES/13858.bugfix.rst
-+@@ -0,0 +1,7 @@
-++Rejected absolute-form request targets without ``//`` or with an empty
-++host, such as ``http:/example.com/`` or ``http:///example.com/``, before
-++parsing them with yarl, which reads a host from them in its WHATWG mode;
-++RFC 9110 requires a host for ``http`` and ``https``. The invalid URL test
-++data no longer uses ``http:///example.com``, which such a yarl version
-++parses as ``http://example.com/``, as browsers do
-++-- by :user:`asvetlov`.
-+diff --git a/aiohttp/_http_parser.pyx b/aiohttp/_http_parser.pyx
-+index 7d97bfe8..a5309a4c 100644
-+--- a/aiohttp/_http_parser.pyx
-++++ b/aiohttp/_http_parser.pyx
-+@@ -31,7 +31,7 @@ from .http_exceptions import (
-+     PayloadEncodingError,
-+     TransferEncodingError,
-+ )
-+-from .http_parser import DeflateBuffer as _DeflateBuffer
-++from .http_parser import DeflateBuffer as _DeflateBuffer, _has_authority
-+ from .http_writer import (
-+     HttpVersion as _HttpVersion,
-+     HttpVersion10 as _HttpVersion10,
-+@@ -719,12 +719,14 @@ cdef class HttpRequestParser(HttpParser):
-+             else:
-+                 # absolute-form for proxy maybe,
-+                 # https://datatracker.ietf.org/doc/html/rfc7230#section-5.3.2
-+-                try:
-+-                    self._url = URL(self._path, encoded=True)
-+-                    _ = self._url.port
-+-                    host = self._url.raw_host
-+-                except ValueError:
-+-                    host = None
-++                host = None
-++                if _has_authority(self._path):
-++                    try:
-++                        self._url = URL(self._path, encoded=True)
-++                        _ = self._url.port
-++                        host = self._url.raw_host
-++                    except ValueError:
-++                        pass
-+                 # https://www.rfc-editor.org/rfc/rfc9110#section-4.2.1-4
-+                 if host is None:
-+                     raise InvalidURLError(
-+diff --git a/aiohttp/http_parser.py b/aiohttp/http_parser.py
-+index 789c2bdc..9b637938 100644
-+--- a/aiohttp/http_parser.py
-++++ b/aiohttp/http_parser.py
-+@@ -87,6 +87,18 @@ VERSRE: Final[Pattern[str]] = re.compile(r"HTTP/(\d)\.(\d)", re.ASCII)
-+ DIGITS: Final[Pattern[str]] = re.compile(r"\d+", re.ASCII)
-+ HEXDIGITS: Final[Pattern[bytes]] = re.compile(rb"[0-9a-fA-F]+")
-+ 
-++
-++def _has_authority(target: str) -> bool:
-++    """Tell if an absolute-form request target has "//" and a non-empty authority.
-++
-++    RFC 9110 section 4.2 requires a host for http and https. yarl's default
-++    WHATWG mode reads a host from "http:host/p" or "http:///host/p", so the
-++    target is checked before it is parsed.
-++    """
-++    rest = target.partition(":")[2]
-++    return rest[:2] == "//" and rest[2:3] not in ("", "/", "?", "#")
-++
-++
-+ # RFC 9110 singleton headers — duplicates are rejected in strict mode.
-+ # In lax mode (response parser default), the check is skipped entirely
-+ # since real-world servers (e.g. Google APIs, Werkzeug) commonly send
-+@@ -676,6 +688,10 @@ class HttpRequestParser(HttpParser[RawRequestMessage]):
-+         else:
-+             # absolute-form for proxy maybe,
-+             # https://datatracker.ietf.org/doc/html/rfc7230#section-5.3.2
-++            if not _has_authority(path):
-++                raise InvalidURLError(
-++                    path.encode(errors="surrogateescape").decode("latin1")
-++                )
-+             try:
-+                 url = URL(path, encoded=True)
-+                 _ = url.port
-+diff --git a/tests/test_http_parser.py b/tests/test_http_parser.py
-+index ebbb58d8..1b8c2da9 100644
-+--- a/tests/test_http_parser.py
-++++ b/tests/test_http_parser.py
-+@@ -879,8 +879,23 @@ def test_url_authority_form_only_connect(parser: HttpRequestParser) -> None:
-+         b"https:////protected",
-+         b"https://:80/protected",
-+         b"https://user@/protected",
-++        b"https://",
-++        b"https://?q",
-++        b"http:protected/x",
-++        b"http:/protected/x",
-++        b"http:\\\\protected/x",
-++    ),
-++    ids=(
-++        "empty-host",
-++        "empty-host-extra-slash",
-++        "port-only",
-++        "userinfo-only",
-++        "no-authority",
-++        "empty-host-query",
-++        "no-slashes",
-++        "one-slash",
-++        "backslashes",
-+     ),
-+-    ids=("empty-host", "empty-host-extra-slash", "port-only", "userinfo-only"),
-+ )
-+ def test_url_absolute_form_empty_host_rejected(
-+     parser: HttpRequestParser, target: bytes
+++    assert "sid" not in jar.filter_cookies(url)
+++    assert len(jar) == 0
 diff --git a/meta-python/recipes-devtools/python/python3-aiohttp_3.9.5.bb b/meta-python/recipes-devtools/python/python3-aiohttp_3.9.5.bb
-index 90475a5aff..db40e59a6b 100644
+index 59e9f74e89..8d7fe9f8dd 100644
 --- a/meta-python/recipes-devtools/python/python3-aiohttp_3.9.5.bb
 +++ b/meta-python/recipes-devtools/python/python3-aiohttp_3.9.5.bb
-@@ -38,6 +38,8 @@ SRC_URI += "file://CVE-2024-52304.patch \
-            file://CVE-2026-54273_p2.patch \
-            file://CVE-2026-111750.patch \
-            file://CVE-2026-111749.patch \
-+           file://CVE-2026-111748_p1.patch \
-+           file://CVE-2026-111748_p2.patch \
+@@ -42,6 +42,7 @@ SRC_URI += "file://CVE-2024-52304.patch \
+            file://CVE-2026-111748_p2.patch \
+            file://CVE-2026-111066_p1.patch \
+            file://CVE-2026-111066_p2.patch \
++           file://CVE-2026-111065.patch \
             "
  
  CVE_STATUS[CVE-2026-34515] = "not-applicable-platform: Vulnerability only affects applications running on Windows"
