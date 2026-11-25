@@ -1,70 +1,69 @@
-Received: from aer-iport-4.cisco.com (aer-iport-4.cisco.com [173.38.203.54])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.36732.1795587333543104124
+Received: from aer-iport-3.cisco.com (aer-iport-3.cisco.com [173.38.203.53])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.36731.1795587333534595485
  for <openembedded-devel@lists.openembedded.org>;
  Tue, 24 Nov 2026 22:15:34 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=bEG9xX1f;
- spf=pass (domain: cisco.com, ip: 173.38.203.54, mailfrom: hthakar@cisco.com)
+ dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=b9j0lHng;
+ spf=pass (domain: cisco.com, ip: 173.38.203.53, mailfrom: hthakar@cisco.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=cisco.com; i=@cisco.com; l=8235; q=dns/txt;
+  d=cisco.com; i=@cisco.com; l=3483; q=dns/txt;
   s=iport01; t=1795587333; x=1796796933;
   h=from:to:subject:date:message-id:in-reply-to:references:
    mime-version:content-transfer-encoding;
-  bh=gnA56RlP10eJs1R5J5fnAV7HhpuyCu/fEu4q0TI2d00=;
-  b=bEG9xX1fK+T0REYB5uikz6/1cITI6fvIxxqVDnFBjvrdqkPwt42B2tMR
-   LmJ8TKWQ7g3TmDhLGrIRMTJUVkriJDWSLH35miMZbubXYHi6RSHNDIh40
-   L4b8jJj5QLHCNuqEOxV5mA4ChR8L49U8k93oU7hopxUVqa58hK5h1m0IS
-   H0eDAToP0uMbS/SFvpQ76pVtmNKsFdWsLMASrUA1zAf77SZq4uw9uU52z
-   95hRU5mBB1vueyEM9J+pVy+81Z+TeVb44DucMQ/gqa6Of6pNszeh/m7Al
-   hY34UkN9Fysb1nBs7kPFaHDxPGVVGh/aX2OV3OZ0d56KBJDSf6Y9rC6zR
-   Q==;
-X-CSE-ConnectionGUID: Q71YZ3e+SEyV9PPU1xAQ5g==
-X-CSE-MsgGUID: 1OucEvh6R5GlWsrfcl5IqA==
-X-IPAS-Result: =?us-ascii?q?A0BJAgBQewZr/8tK/pBaglmCV3VgQ0kDlCeBNWwDnimBf?=
- =?us-ascii?q?g8BAQEPRA0EAQGFBQKOIgImNAkOAQIEAwIDAQEBAQEBAQEBAQEBCgEBBQEBA?=
- =?us-ascii?q?QIBBwWBDhOGTw2QEgECAQMnCwEYAT0cAwECLysjCBmDAgGCdAMRuWKBeTOBA?=
- =?us-ascii?q?YMpAT8CQ1DbMwELFAGBOIVCiCVdGAGEficbG4FygRWDaoEFgVwCiCYEgiKBD?=
- =?us-ascii?q?IFUjRMCgUmIUkiBHgNZLAFVEw0KCwcFgWgDNRIqFW4yHYEjOxeBBxsGBYEcg?=
- =?us-ascii?q?R6BEoEDXYErKF4hgQiBdQKCUYIAAgFJQQ4HRVMJJUMSRyQiCBIJARMaLAqBG?=
- =?us-ascii?q?jU8CSY/FQxnCxoFYQgCDQx0ORAwHCQvBRkmPBsKgQwnHR4ZDgIpBhYhCzQYD?=
- =?us-ascii?q?UgRLDcVGQQ+bgeUE4MUBz0+EwErgWsZKKV1oREKKIN5jCSVOhozqnILmH2OC?=
- =?us-ascii?q?pZRhGqBaDyBWXAVgyIJShkPV41YCguDYM5bJjICCQMvAQEHAgcOAwuBaJF+A?=
- =?us-ascii?q?QE?=
-IronPort-Data: A9a23:ht0RLK/ViUzZoJd1vfktDrUD1H+TJUtcMsCJ2f8bNWPcYEJGY0x3z
- zdMUTjXb67eMzT0et52ao2z9E4Dvp+Ay4RnQFZkqilEQiMRo6IpJzg2wmQcns+2BpeeJK6yx
- 5xGMrEsFOhtEDmB4E/rYuK8xZVF/fngbqLmD+LZMTxGSwZhSSMw4TpugOdRbrRA2bBVOCvT/
- 4mtyyHjEAX9gWAtazhJs/vrRC5H5ZwehhtJ5jTSWtgT1LPuvyF9JI4SI6i3M0z5TuF8dsamR
- /zOxa2O5WjQ+REgELuNyt4XpWVTH9Y+lSDX4pZnc/DKbipq/0Te4Y5nXBYoUnq7vh3S9zxHJ
- HqhgrTrIeshFvWkdO3wyHC0GQkmVUFN0OevzXRSLaV/wmWeG0YAzcmCA2kPYtQpyL16Qlpj5
- MJJEAgwNwCqvr+5lefTpulE3qzPLeHiMZlavjRryivUSK58B5vCWK7No9Rf2V/chOgXQaqYP
- ZdFL2UzKk6YOHWjOX9PYH46tOe0hnD8eidwo1OOrq1x6G/WpOB0+Oa3YYOEJ4zULSlTth+/u
- 2nr4WSnOEw1MOOE0zSO9i+Nn8aayEsXX6pXTtVU7MVCh0WewGEWAhAaWVa35PW0lEO6c9ZeM
- FAPvC02oK4/8UamQtXwU1u/unHsg/IHc9NdCag+rQqK0KeRu1zfDWkfRTkHY9sj3CMreQEXO
- payt4uBLVRSXHe9EBpxKp/8QeuOBBUo
-IronPort-HdrOrdr: A9a23:YCMGo6O/tbDTQsBcTu2jsMiBIKoaSvp037BN7TEUdfU7SKKlfq
- yV8cjzkCWE6wr5O0tQ/OxoRpPgfZq0z/cciuMs1PWZLWvbUQCTQ72Kg7GP/9SZIU3D398Y87
- t8eK5jD9C1J117gcHmpDScKb8bsb66GGTCv5am85+rJjsaDZ1d0w==
-X-Talos-CUID: 9a23:wMHn+mO0jVYSAe5DYXY+xXxPF4MeX2zjnU/oHhaoIF80R+jA
-X-Talos-MUID: =?us-ascii?q?9a23=3AnXVEww0K+IAzKInp0iGL5Fxi1TUjuoOzA20Tkcs?=
- =?us-ascii?q?85uaACjdqNTyZ0RWua9py?=
+  bh=DUPC6EpyUIlFWyoQiQXQwDYagIqoZHf9unnU5V1fYeE=;
+  b=b9j0lHngkXXlerUKjVQdk0MdIl74OfGOUKc+861XUq/As5FfHVnU4nNW
+   tVfjAlwrR05xn6q6mQJccQB85jKjLLAPKtnEDK0wMGnjEE7tYKP+nTcLJ
+   1GcoOJ//ZdwEQQYR10qbtrXG71ixGQzO8ZoaWxkzZKqEFa/5RlZtI2jmP
+   UBxG0jP7DPGUs4+UgTUig2hwPGdrNYFAiWq/99G2fcC13maT1RL1BgwVT
+   yKPupLhM3BynEIKCGU6i1P24dZ5QtZsQ1qCOpq15GayzSjfojdqUy31TS
+   X+ioOIol6jARhTXhjgqRAOF5JA5OdzwWAZqAZZU8AqnMnV7aDXuBHSFqR
+   g==;
+X-CSE-ConnectionGUID: uumOIq89RqmkWe7wQqFk1Q==
+X-CSE-MsgGUID: EafKCbqrQfC4RGpmqp+xLw==
+X-IPAS-Result: =?us-ascii?q?A0BIAgBQewZr/9FK/pBaHgEBCxIMggULgld1YENJA5Qng?=
+ =?us-ascii?q?TVsA54pgX4PAQEBD0QNBAEBhQUCjiICJjQJDgECBAMCAwEBAQEBAQEBAQEBA?=
+ =?us-ascii?q?QoBAQUBAQECAQcFgQ4Thk8NkBIBAgEDJwsBGAE9HAMBAi8rIwgZgwIBgnQDE?=
+ =?us-ascii?q?bligXkzgQGDKQE/AkNQ2zMBCxQBgTiFQoglXRgBhH4nGxuBcoEVg2qBBYFcA?=
+ =?us-ascii?q?oFIhl4EgiKBDIFUjRMCgUmIUkiBHgNZLAFVEw0KCwcFgWgDNRIqFW4yHYEjO?=
+ =?us-ascii?q?xeBBxsGBYEcgR6BEoEDXYErKF4hgQiBdQKCUYIAAgFJQQ4HRVMJJUMSRyQiC?=
+ =?us-ascii?q?BIJARMaLAqBGjU8CSY/FQxnCxoFYQgCDQx0ORAwHCQvBRkmPBsKgQwnHR4ZD?=
+ =?us-ascii?q?gIpBhYhCzQYDUgRLDcVGQQ+bgeUE4MZAj1RASuBRSZBBS0IpTuhEQoog3mMJ?=
+ =?us-ascii?q?JU6GjOEBIFXkkOSVAuYfY4KlhQ9hGqBaDyBWXAVgyIJShkPji8KC4NghUHJG?=
+ =?us-ascii?q?iYyAgkDLwEBBwIHDgMLgWiRfgEB?=
+IronPort-Data: A9a23:3/3VoKp/6hE1UVA0DrE6FiBt+L9eBmJMZBIvgKrLsJaIsI4StFCzt
+ garIBmEa6mPZmb9eYh2OY2290NVv5Tcy9JnGVFr/Hg2QXwV8OPIVI+TRqvS04x+DSFioGZPt
+ Zh2hgzodZhsJpPkjk7zdOWn9T8sj/zgqoPUUIbsIjp2SRJvVBAvgBdin/9RqoNziLBVOSvV0
+ T/Ji5OZYgDNNwJcaDpOtfva8k435ZwehRtB1rAATaET1LPhvyF94KI3fcmZM3b+S49IKe+2L
+ 86r5K255G7Q4yA2AdqjlLvhGmVSKlIFFVHT4pb+c/HKbilq/kTe4I5iXBYvQRs/ZwGyojxE4
+ I4lWapc5useFvakdOw1C3G0GszlVEFM0OevzXOX6aR/w6BaGpfh660GMa04AWEX0vtqBEZv7
+ KxJEikIbS+O2P2P2Zy4E9A506zPLOGzVG8eknht13TdSP0hW52GG/WM7t5D1zB2jcdLdRrcT
+ 5NFNXw1MUiGPEEJYA9GYH49tL/Aan3XcyFYoVGcv4I84nPYy0p6172F3N/9JITUH5QNxBrwS
+ mTu0m33IToQLcamxxHZyF20g/bX3jPfR9dHfFG/3rsw6LGJ/UQUEBAQWF6xrPW1h0L7V99BJ
+ kg8/is1sbN081SmSNT4VRC0rHOI+BkGVLJt//YS4QyXj66R6AGDCy1cHnhKaccts4k9QjlCO
+ kK1ou4FzAdH6NW9IU9xPJ/Nxd9uEUD59VM/WBI=
+IronPort-HdrOrdr: A9a23:GCtp166AyriunBGVkgPXwOTXdLJyesId70hD6qkXc20wTiX2ra
+ 6TdZgguCMczQxhO03I+urwXZVoP0m8yXcd2+B4Vt2ftUvdyQmVxepZgrcKrQeNJ8SHzI5g/J
+ YlVbRiA9vtClU/p8P77A6kV+sE+rC8gceVbSO09QYVcemsAJsQiTtENg==
+X-Talos-CUID: 9a23:F4ywuW6hCRoOCr1xydss6VMRPeE8Iizn1XLTHELnFl9wZr7McArF
+X-Talos-MUID: 9a23:VtujwQt2dmJnlEU1bs2nqThsF+xi+r6XBmtRq7oevtCcdjxUJGLI
 X-IronPort-Anti-Spam-Filtered: true
 X-IronPort-AV: E=Sophos;i="6.27,232,1787011200"; 
-   d="scan'208";a="62919586"
-Received: from aer-l-core-02.cisco.com ([144.254.74.203])
-  by aer-iport-4.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 25 Nov 2026 06:15:31 +0000
+   d="scan'208";a="60629024"
+Received: from aer-l-core-08.cisco.com ([144.254.74.209])
+  by aer-iport-3.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 25 Nov 2026 06:15:31 +0000
 Received: from sjc-ads-5245.cisco.com (sjc-ads-5245.cisco.com [10.28.23.9])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by aer-l-core-02.cisco.com (Postfix) with ESMTPS id 3E1D3180005F5
+	by aer-l-core-08.cisco.com (Postfix) with ESMTPS id 4107E180001B9
 	for <openembedded-devel@lists.openembedded.org>; Wed, 25 Nov 2026 06:15:31 +0000 (GMT)
 Received: by sjc-ads-5245.cisco.com (Postfix, from userid 1887505)
-	id E8968CBF202; Tue, 24 Nov 2026 22:15:29 -0800 (PST)
+	id EBF8BCBF203; Tue, 24 Nov 2026 22:15:29 -0800 (PST)
 From: "Hetvi Thakar -X (hthakar - E INFOCHIPS PRIVATE LIMITED at Cisco)" <hthakar@cisco.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-webserver][wrynose][PATCH 03/10] nginx: fix CVE-2026-123640
-Date: Tue, 24 Nov 2026 22:15:22 -0800
-Message-Id: <20261125061529.2721522-3-hthakar@cisco.com>
+Subject: [meta-webserver][wrynose][PATCH 04/10] nginx: fix CVE-2026-120967
+Date: Tue, 24 Nov 2026 22:15:23 -0800
+Message-Id: <20261125061529.2721522-4-hthakar@cisco.com>
 X-Mailer: git-send-email 2.35.6
 In-Reply-To: <20261125061529.2721522-1-hthakar@cisco.com>
 References: <20261125061529.2721522-1-hthakar@cisco.com>
@@ -72,250 +71,98 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Outbound-Client-TLS: ANONYMOUS;sjc-ads-5245.cisco.com [10.28.23.9];TLSv1.3;TLS_AES_256_GCM_SHA384;256
 X-Outbound-SMTP-Client: 10.28.23.9, sjc-ads-5245.cisco.com
-X-Outbound-Node: aer-l-core-02.cisco.com
+X-Outbound-Node: aer-l-core-08.cisco.com
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Wed, 25 Nov 2026 06:15:39 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132988
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132989
 Content-Type: text/plain; charset="utf-8"
 
 From: Hetvi Thakar <hthakar@cisco.com>
 
 This patch applies the upstream nginx stable backport for
-CVE-2026-123640. The upstream fix commit is referenced in [1],
+CVE-2026-120967. The upstream fix commit is referenced in [1],
 and the public CVE advisory is referenced in [2].
-The individual backported commit links are recorded in the
-embedded patch headers.
 
-[1] https://github.com/nginx/nginx/commit/63d74d545295faa3d147ef704d740da4805f13f4
-[2] https://ubuntu.com/security/CVE-2026-123640
+[1] https://github.com/nginx/nginx/commit/77f90f1c0cbf79145e5667b7e171f8766ccb6765
+[2] https://ubuntu.com/security/CVE-2026-120967
 
 Signed-off-by: Hetvi Thakar <hthakar@cisco.com>
 ---
- .../nginx/files/CVE-2026-123640_p1.patch      | 121 ++++++++++++++++++
- .../nginx/files/CVE-2026-123640_p2.patch      |  61 +++++++++
- .../recipes-httpd/nginx/nginx_1.28.3.bb       |   2 +
- .../recipes-httpd/nginx/nginx_1.29.7.bb       |   2 +
- 4 files changed, 186 insertions(+)
- create mode 100644 meta-webserver/recipes-httpd/nginx/files/CVE-2026-123640_p1.patch
- create mode 100644 meta-webserver/recipes-httpd/nginx/files/CVE-2026-123640_p2.patch
+ .../nginx/files/CVE-2026-120967.patch         | 42 +++++++++++++++++++
+ .../recipes-httpd/nginx/nginx_1.28.3.bb       |  1 +
+ .../recipes-httpd/nginx/nginx_1.29.7.bb       |  1 +
+ 3 files changed, 44 insertions(+)
+ create mode 100644 meta-webserver/recipes-httpd/nginx/files/CVE-2026-120967.patch
 
-diff --git a/meta-webserver/recipes-httpd/nginx/files/CVE-2026-123640_p1.patch b/meta-webserver/recipes-httpd/nginx/files/CVE-2026-123640_p1.patch
+diff --git a/meta-webserver/recipes-httpd/nginx/files/CVE-2026-120967.patch b/meta-webserver/recipes-httpd/nginx/files/CVE-2026-120967.patch
 new file mode 100644
-index 0000000000..4c93e66f60
+index 0000000000..805db495bf
 --- /dev/null
-+++ b/meta-webserver/recipes-httpd/nginx/files/CVE-2026-123640_p1.patch
-@@ -0,0 +1,121 @@
-+From 63d74d545295faa3d147ef704d740da4805f13f4 Mon Sep 17 00:00:00 2001
-+From: Aleksei Bavshin <a.bavshin@nginx.com>
-+Date: Mon, 21 Sep 2026 09:57:19 -0700
-+Subject: [PATCH] Stream ssl_preread: forbid trailing data in extensions
++++ b/meta-webserver/recipes-httpd/nginx/files/CVE-2026-120967.patch
+@@ -0,0 +1,42 @@
++From 77f90f1c0cbf79145e5667b7e171f8766ccb6765 Mon Sep 17 00:00:00 2001
++From: Vadim Zhestikov <v.zhestikov@f5.com>
++Date: Wed, 14 Oct 2026 10:48:06 -0700
++Subject: [PATCH] Stream: client SSL certificates were not checked with SNI
 +
-+As required explicitly in RFC 9846 Section 4.3 and implicitly in all the
-+previous versions of TLS extensions specification.
++If the SSL handshake completed in the first call of
++ngx_stream_ssl_handler(), the client certificate was verified using the
++configuration of the default server, rather than the virtual server
++selected by SNI during the handshake.
 +
-+Reported by Vivek Parikh, BreachX Zero Day Labs using Typhon AI Mil v2.
++The problem appeared in d21675228 (1.25.5).  It is similar to the one
++fixed in 620c9a4c4.
 +
-+CVE: CVE-2026-123640
-+Upstream-Status: Backport [https://github.com/nginx/nginx/commit/63d74d545295faa3d147ef704d740da4805f13f4]
++The fix is to re-read the server configuration before verifying the
++client certificate.
++
++Reported by CERT.PL.
++
++CVE: CVE-2026-120967
++Upstream-Status: Backport [https://github.com/nginx/nginx/commit/77f90f1c0cbf79145e5667b7e171f8766ccb6765]
 +
 +Signed-off-by: Hetvi Thakar <hthakar@cisco.com>
 +---
-+ src/stream/ngx_stream_ssl_preread_module.c | 40 +++++++++++++++++++---
-+ 1 file changed, 35 insertions(+), 5 deletions(-)
++ src/stream/ngx_stream_ssl_module.c | 2 ++
++ 1 file changed, 2 insertions(+)
 +
-+diff --git a/src/stream/ngx_stream_ssl_preread_module.c b/src/stream/ngx_stream_ssl_preread_module.c
-+index 3fc83ff..8f2d333 100644
-+--- a/src/stream/ngx_stream_ssl_preread_module.c
-++++ b/src/stream/ngx_stream_ssl_preread_module.c
-+@@ -224,6 +224,7 @@ ngx_stream_ssl_preread_parse_record(ngx_stream_ssl_preread_ctx_t *ctx,
-+         sw_cs,              /* cipher_suites */
-+         sw_cm_len,          /* compression_methods length */
-+         sw_cm,              /* compression_methods */
-++        sw_ext_len,         /* extensions length */
-+         sw_ext,             /* extension */
-+         sw_ext_header,      /* extension_type, extension_data length */
-+         sw_sni_len,         /* SNI length */
-+@@ -330,11 +331,20 @@ ngx_stream_ssl_preread_parse_record(ngx_stream_ssl_preread_ctx_t *ctx,
-+                 return NGX_OK;
-+             }
-+ 
-+-            state = sw_ext;
-++            state = sw_ext_len;
-+             dst = p;
-+             size = 2;
-+             break;
-+ 
-++        case sw_ext_len:
-++            if (left != (size_t) (p[0] << 8) + p[1]) {
-++                ngx_log_debug0(NGX_LOG_DEBUG_STREAM, ctx->log, 0,
-++                               "ssl preread: extensions length error");
-++                return NGX_DECLINED;
-++            }
-++
-++            /* fall through */
-++
-+         case sw_ext:
-+             if (left == 0) {
-+                 return NGX_OK;
-+@@ -346,6 +356,8 @@ ngx_stream_ssl_preread_parse_record(ngx_stream_ssl_preread_ctx_t *ctx,
-+             break;
-+ 
-+         case sw_ext_header:
-++            ext = (p[2] << 8) + p[3];
-++
-+             if (p[0] == 0 && p[1] == 0 && ctx->host.data == NULL) {
-+                 /* SNI extension */
-+                 state = sw_sni_len;
-+@@ -372,11 +384,17 @@ ngx_stream_ssl_preread_parse_record(ngx_stream_ssl_preread_ctx_t *ctx,
-+ 
-+             state = sw_ext;
-+             dst = NULL;
-+-            size = (p[2] << 8) + p[3];
-++            size = ext;
-+             break;
-+ 
-+         case sw_sni_len:
-+-            ext = (p[0] << 8) + p[1];
-++            if (ext < 5 || ext != 2 + (size_t) (p[0] << 8) + p[1]) {
-++                ngx_log_debug0(NGX_LOG_DEBUG_STREAM, ctx->log, 0,
-++                               "ssl preread: SNI format error");
-++                return NGX_DECLINED;
-++            }
-++            ext -= 2;
-++
-+             state = sw_sni_host_head;
-+             dst = p;
-+             size = 3;
-+@@ -416,7 +434,12 @@ ngx_stream_ssl_preread_parse_record(ngx_stream_ssl_preread_ctx_t *ctx,
-+             break;
-+ 
-+         case sw_alpn_len:
-+-            ext = (p[0] << 8) + p[1];
-++            if (ext < 4 || ext != 2 + (size_t) (p[0] << 8) + p[1]) {
-++                ngx_log_debug0(NGX_LOG_DEBUG_STREAM, ctx->log, 0,
-++                               "ssl preread: ALPN format error");
-++                return NGX_DECLINED;
-++            }
-++            ext -= 2;
-+ 
-+             ctx->alpn.data = ngx_pnalloc(ctx->pool, ext);
-+             if (ctx->alpn.data == NULL) {
-+@@ -469,6 +492,14 @@ ngx_stream_ssl_preread_parse_record(ngx_stream_ssl_preread_ctx_t *ctx,
-+             break;
-+ 
-+         case sw_supver_len:
-++            size = p[0];
-++
-++            if (ext < 3 || ext != 1 + size) {
-++                ngx_log_debug0(NGX_LOG_DEBUG_STREAM, ctx->log, 0,
-++                               "ssl preread: supported_versions format error");
-++                return NGX_DECLINED;
-++            }
-++
-+             ngx_log_debug0(NGX_LOG_DEBUG_STREAM, ctx->log, 0,
-+                            "ssl preread: supported_versions");
-+ 
-+@@ -478,7 +509,6 @@ ngx_stream_ssl_preread_parse_record(ngx_stream_ssl_preread_ctx_t *ctx,
-+ 
-+             state = sw_ext;
-+             dst = NULL;
-+-            size = p[0];
-+             break;
++diff --git a/src/stream/ngx_stream_ssl_module.c b/src/stream/ngx_stream_ssl_module.c
++index 85a74ce..2d6ada9 100644
++--- a/src/stream/ngx_stream_ssl_module.c
+++++ b/src/stream/ngx_stream_ssl_module.c
++@@ -432,6 +432,8 @@ ngx_stream_ssl_handler(ngx_stream_session_t *s)
 +         }
++     }
 + 
-+-- 
-+2.35.6
-+
-diff --git a/meta-webserver/recipes-httpd/nginx/files/CVE-2026-123640_p2.patch b/meta-webserver/recipes-httpd/nginx/files/CVE-2026-123640_p2.patch
-new file mode 100644
-index 0000000000..f906117236
---- /dev/null
-+++ b/meta-webserver/recipes-httpd/nginx/files/CVE-2026-123640_p2.patch
-@@ -0,0 +1,61 @@
-+From 1e668b7e856198f89a2eec0b94b54b826eb5c4f7 Mon Sep 17 00:00:00 2001
-+From: Aleksei Bavshin <a.bavshin@nginx.com>
-+Date: Tue, 29 Sep 2026 09:19:30 -0700
-+Subject: [PATCH] Stream ssl_preread: forbid duplicate SNI and ALPN
-+
-+As stated in the TLS Extensions specification (RFC 3546) and all
-+subsequent TLS specification updates,
-+
-+: There MUST NOT be more than one extension of the same type.
-+
-+Such a ClientHello is now treated as malformed, as with other parsing
-+errors.
-+
-+CVE: CVE-2026-123640
-+Upstream-Status: Backport [https://github.com/nginx/nginx/commit/1e668b7e856198f89a2eec0b94b54b826eb5c4f7]
-+
-+Signed-off-by: Hetvi Thakar <hthakar@cisco.com>
-+---
-+ src/stream/ngx_stream_ssl_preread_module.c | 18 ++++++++++++++++--
-+ 1 file changed, 16 insertions(+), 2 deletions(-)
-+
-+diff --git a/src/stream/ngx_stream_ssl_preread_module.c b/src/stream/ngx_stream_ssl_preread_module.c
-+index 8f2d333..7aa8669 100644
-+--- a/src/stream/ngx_stream_ssl_preread_module.c
-++++ b/src/stream/ngx_stream_ssl_preread_module.c
-+@@ -358,16 +358,30 @@ ngx_stream_ssl_preread_parse_record(ngx_stream_ssl_preread_ctx_t *ctx,
-+         case sw_ext_header:
-+             ext = (p[2] << 8) + p[3];
+++    sscf = ngx_stream_get_module_srv_conf(s, ngx_stream_ssl_module);
+++
++     if (sscf->verify) {
++         rc = SSL_get_verify_result(c->ssl->connection);
 + 
-+-            if (p[0] == 0 && p[1] == 0 && ctx->host.data == NULL) {
-++            if (p[0] == 0 && p[1] == 0) {
-+                 /* SNI extension */
-++
-++                if (ctx->host.data != NULL) {
-++                    ngx_log_debug0(NGX_LOG_DEBUG_STREAM, ctx->log, 0,
-++                                   "ssl preread: duplicate SNI");
-++                    return NGX_DECLINED;
-++                }
-++
-+                 state = sw_sni_len;
-+                 dst = p;
-+                 size = 2;
-+                 break;
-+             }
-+ 
-+-            if (p[0] == 0 && p[1] == 16 && ctx->alpn.data == NULL) {
-++            if (p[0] == 0 && p[1] == 16) {
-+                 /* ALPN extension */
-++
-++                if (ctx->alpn.data != NULL) {
-++                    ngx_log_debug0(NGX_LOG_DEBUG_STREAM, ctx->log, 0,
-++                                   "ssl preread: duplicate ALPN");
-++                    return NGX_DECLINED;
-++                }
-++
-+                 state = sw_alpn_len;
-+                 dst = p;
-+                 size = 2;
 +-- 
 +2.35.6
 +
 diff --git a/meta-webserver/recipes-httpd/nginx/nginx_1.28.3.bb b/meta-webserver/recipes-httpd/nginx/nginx_1.28.3.bb
-index d7a4ac0820..717e651e13 100644
+index 717e651e13..d6a30764ab 100644
 --- a/meta-webserver/recipes-httpd/nginx/nginx_1.28.3.bb
 +++ b/meta-webserver/recipes-httpd/nginx/nginx_1.28.3.bb
-@@ -20,6 +20,8 @@ SRC_URI:append = " \
-     file://CVE-2026-15176.patch \
-     file://CVE-2026-97205.patch \
+@@ -22,6 +22,7 @@ SRC_URI:append = " \
      file://CVE-2026-123633.patch \
-+    file://CVE-2026-123640_p1.patch \
-+    file://CVE-2026-123640_p2.patch \
+     file://CVE-2026-123640_p1.patch \
+     file://CVE-2026-123640_p2.patch \
++    file://CVE-2026-120967.patch \
  "
  
  LIC_FILES_CHKSUM = "file://LICENSE;md5=3dc49537b08b14c8b66ad247bb4c4593"
 diff --git a/meta-webserver/recipes-httpd/nginx/nginx_1.29.7.bb b/meta-webserver/recipes-httpd/nginx/nginx_1.29.7.bb
-index 59a395f670..d0766e4d20 100644
+index d0766e4d20..d38199ba49 100644
 --- a/meta-webserver/recipes-httpd/nginx/nginx_1.29.7.bb
 +++ b/meta-webserver/recipes-httpd/nginx/nginx_1.29.7.bb
-@@ -20,6 +20,8 @@ SRC_URI:append = " \
-     file://CVE-2026-15176.patch \
-     file://CVE-2026-97205.patch \
+@@ -22,6 +22,7 @@ SRC_URI:append = " \
      file://CVE-2026-123633.patch \
-+    file://CVE-2026-123640_p1.patch \
-+    file://CVE-2026-123640_p2.patch \
+     file://CVE-2026-123640_p1.patch \
+     file://CVE-2026-123640_p2.patch \
++    file://CVE-2026-120967.patch \
  "
  
  # 1.28.x branch is the current stable branch, the recommended default
