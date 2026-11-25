@@ -1,71 +1,72 @@
-Received: from aer-iport-6.cisco.com (aer-iport-6.cisco.com [173.38.203.68])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.36180.1795583900532832989
+Received: from aer-iport-1.cisco.com (aer-iport-1.cisco.com [173.38.203.51])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.36181.1795583900815576708
  for <openembedded-devel@lists.openembedded.org>;
  Tue, 24 Nov 2026 21:18:21 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=g1ADrroc;
- spf=pass (domain: cisco.com, ip: 173.38.203.68, mailfrom: dkelaiya@cisco.com)
+ dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=Wc1OPS73;
+ spf=pass (domain: cisco.com, ip: 173.38.203.51, mailfrom: dkelaiya@cisco.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=cisco.com; i=@cisco.com; l=16765; q=dns/txt;
-  s=iport01; t=1795583900; x=1796793500;
+  d=cisco.com; i=@cisco.com; l=16930; q=dns/txt;
+  s=iport01; t=1795583901; x=1796793501;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=SQnHceLsFUqtBQahbaKT5FK92HCkbk/k9eg+gdGPX6o=;
-  b=g1ADrrocNkis10avDfmc4KYemNjAauOqQ9TrUVt0LA/+Kc1Wnb0/M80V
-   9d2XUAFlPgOAZL+qzcOK/HkM2yW9Jdh4kLm6AcIBAslUxy6KNN82rpHMv
-   C2z/D/3myrGLNfDTnd0Td53LfGnWNyUKjXmf+1wzCe2U0C/71q1rixTdi
-   2O4Pwv803hmJg5pOoHFBowangrzr6ukwcAvDU5AcUYjCxvkEvPRCtxBEI
-   qq5aV7xRjkjjNlLEMkf+zQdQvd50kQQMCVucFVluBFsj7k4t5T7fR4WWt
-   yb8DwH4pwLWbLYNeDwFbG9K4WbOtZ3T68qgn3kkglWJLLtUcNAGVfATPj
-   g==;
-X-CSE-ConnectionGUID: 3EL6qaQxTByaPhofg50X+g==
-X-CSE-MsgGUID: i7t9+rD1Q8m3WIQL6TDnuQ==
-X-IPAS-Result: =?us-ascii?q?A0BJAgAhbQZr/9BK/pBaglmCGD91YENJA5ZIA5FQjFmBf?=
- =?us-ascii?q?g8BAQEPRA0EAQGEP0YCjiICJjQJDgECBAMCAwEBAQEBAQEBAQEBAQoBAQUBA?=
- =?us-ascii?q?QECAQcFgQ4Thk8NkBIBAgEDJwsBGAEtEBwDAQIvKyMIGYIqWAGCdAMRugOBe?=
- =?us-ascii?q?TOBAYMpAYFU2zMBCxQBgTiFQoglXRgBhH4nGxuBcoEVgTuCL4EFgVwCgUiGX?=
- =?us-ascii?q?gSCDRWBDIEHTYY3A4ZZAoFJiFJIgR4DWSwBVRMNCgsHBYFoAzUSKhVuMh2BI?=
- =?us-ascii?q?zsXgQcbBgWBHIEegRKBA12BKyhdASGBCIF1AoJRggACAUlBDgdFUwklQxJHJ?=
- =?us-ascii?q?CIIEgkBExosCoEaNTwJJj8VDGcLGgVhCAINDHQ5EDAcJC8FGSY8GwqBDCcdH?=
- =?us-ascii?q?hkOAikGFiELNBgNSBEsNxUZBD5uB5QTgxsBDQhEBwIYEwEqAQSBAQwjIxFEB?=
- =?us-ascii?q?hYykkUZCQGSP4E1n1wKKIN5jCSVOhozhASUGpJUC5h9glmLMZVpGFCEaoFoP?=
- =?us-ascii?q?IFZcBWDIglKGQ9YjWGDa85bJjICCQMvAQEHAgcOAwuBaJAABIEaYAEB?=
-IronPort-Data: A9a23:kQJ7IKzMReVg/7eKKeV6t+dgxyrEfRIJ4+MujC+fZmUNrF6WrkVTy
- zEcWGyEaarZZ2f8fd4kbdmy/UJT7JfVztRkTwtuq1hgHilAwSbn6Xt1DatR0we6dJCroJdPt
- p1GAjX4BJlqCCKa/lH9aOWJQUBUjcmgXqD7BPPPJhd/TAplTDZJoR94kobVuKYw6TSCK13L4
- 4yaT/H3Ygf/hWctaD9MsspvlTs21BjMkGJA1rABTagjUG/2zxE9EJ8ZLKetGHr0KqE8NvK6X
- evK0Iai9Wrf+Ro3Yvv9+losWhRXKlJ6FVHmZkt+A8BOsDAbzsAB+vpT2M4nVKtio27hc+adZ
- zl6ncfYpQ8BZsUgkQmGOvVSO3kW0aZuoNcrLZUj2CCe5xWuTpfi/xlhJBobGdMB899nPUtf/
- MQYLz4CM0izxO3jldpXSsE07igiBMDmJsYb/3pn1zycValgSpHYSKKM7thdtNsyrpkSQbCEO
- pZfNmYpNkyQC/FMEg9/5JYWkOSlgnD+YjRwo1OOrq1x6G/WpOB0+Oa1aYqJI4fVLSlTtkfHu
- jOF5UigO0Efb+O+8B7bzl6qm9aayEsXX6pXTtVU7MVCh0WewGEWAhAaWVa35PW0lEO6c9ZeM
- FAPvC02oK4/8UamQtXwU1u/unHsg/IHc9NdCag+rQqK0KeRu1nfDWkfRTkHY9sj3CMreQEXO
- payt4uBLVRSXHe9EhpxKp/8QeuOBBUo
-IronPort-HdrOrdr: A9a23:3BPNVK/drRdb4bkb+Tluk+D6I+orL9Y04lQ7vn2ZhyY7TiX+rb
- HIoB11737JYVoqNU3I3OrwWpVoIkmskaKdn7NwAV7KZmCP0wGVxcNZnO7fKlbbdREWmNQw6U
- 4ZSdkcNPTASX5nkM39/A60V/wkwNWB7eSUoN229QYKcemvAJsQlzuQzW2gYzRLeDU=
-X-Talos-CUID: =?us-ascii?q?9a23=3Aqy1SiGjlI5Bv5MgWtx+48/0PgjJuKVD5km7ZGl+?=
- =?us-ascii?q?EI3dgcL2SR1DNoJMnnJ87?=
-X-Talos-MUID: 9a23:uzKAoQZTw2MOc+BTtmDw1XJ4GJ5Rs6H1N2E0tcs6l8+ZDHkl
+  bh=oT5pHQk9Emw5jieJxzmDN59cAy466KnCPrtFVOiLi2Y=;
+  b=Wc1OPS73ZLs5cZWbd+WCTGla85K7r4UsKz9Hr6tlfnYF8DLo/GHR3AD5
+   r1WFtkAIcPVW8LQhJt+Fim0LhEW3RFAhqvLQN+FS64kFhyVMUwl7/kL1S
+   H9QPIHqSJ/FhidZN4MALnvECdJzAUsmu7+5XrpH5HpL1+8wFIJMln5EsR
+   LnhzsABHdVyBRAAHyZRhhc9NB5vfOXpq1Yqa2ieej6Lt/4sR6qbHg/bqS
+   RGYwEMI0N7SvGkht5fB7Gw5NYn4OVS460xu+2djjiwkWGte7dKVxcTqX6
+   559vxH+PZi+7a89rOLRWQfZ2eZoCpkyFtSub1SEzN16lGIp9lbmSWuRFx
+   Q==;
+X-CSE-ConnectionGUID: aR6ipp5oRQazU/CzhYjRug==
+X-CSE-MsgGUID: OpsE337aSlqaEJMikN6h6g==
+X-IPAS-Result: =?us-ascii?q?A0BNAgCpbAZr/8xK/pBaglmCV3VgQ0kDlkgDgx2bDIF+D?=
+ =?us-ascii?q?wEBAQ9EDQQBAYQ/RgKOIgImNAkOAQIEAwIDAQEBAQEBAQEBAQEBCgEBBQEBA?=
+ =?us-ascii?q?QIBBwWBDhOGTw2QEgECAQMnCwEZLRAcAgEBAi8kByMIGYMCAYJxAwMRRrk9g?=
+ =?us-ascii?q?XkzgQGDKoFU2zMBCxQBgTiBc4NPiCVdGAFEhDoIHxsbgXKBFYE7gi+BBYFcA?=
+ =?us-ascii?q?oFIhl4Egg0VgQyBVIECgiCJcQKBSYhSSIEeA1ksAVUTDQoLBwWBaAM1EioVb?=
+ =?us-ascii?q?jIdgSM7F4EHGwYFgRyBHoESgQNdgSsoXQEhgQiBdQKCUYIAAgFJQQ4HRVMJJ?=
+ =?us-ascii?q?UMSRyQiCBIJARMaLAqBGjU8CSY/FQxnCxoFYQgCDQx0ORAwHCQvBRkmPBsKg?=
+ =?us-ascii?q?QwnHR4ZDgIpBhYhCzQYDUgRLDcVGQQ+bgeUE4MbASw0LQEqAQR7IYEHAQQGA?=
+ =?us-ascii?q?QcBDQIckn2QHYIhoREKKIN5jCSVOhozhVulFwuYfYs3glOCYQaGHYxJHBhQh?=
+ =?us-ascii?q?GqBaDyBWXAVO4JnCUoZD2GNWINrhWTIdyYyAgkDLwEBBwIHDgMLgWiQACyBU?=
+ =?us-ascii?q?gEB?=
+IronPort-Data: A9a23:XDcBXqCoPJAFsRVW/37iw5YqxClBgxIJ4kV8jS/XYbTApGh0g2NVz
+ 2tKXj3TPq2IYTDwe41wa4qzoB9TsZ7dnddlOVdlrnsFo1CmBibm6XV1Cm+qYkt+++WaFBoPA
+ /02M4eGcYZsCC+G+39BC5C5xVFkz6aEW7HgP+DNPyF1VGdMRTwo4f5Zs7ZRbrVA357jXGthh
+ fuo+5eBYQb/gGYuWo4pw/vrRC1H7ayaVAww5jTSVdgT1HfCmn8cCo4oJK3ZBxPQXolOE+emc
+ P3Ixbe/83mx109F5gSNy+uTnuUiG9Y+DCDW4pZkc/HKbitq+kTe5p0G2M80Mi+7vdkmc+dZk
+ 72hvbToIesg0zaldO41C3G0GAkmVUFKFSOuzXWX6aSuI0P6n3TEys8wDVkuYIoiw+9lPCZl5
+ /wpKgoQYUXW7w626OrTpuhEj8k5ac2uN4QFtzQ4lnfSDO0tRtbIRKCiCd1whWtswJoTQbCBO
+ 4xDMWYHgBfoO3WjPn8bC586lea5j1H0ciZTrxSeoq9fD237klYgjeO2aIa9ltqiYt1Osx3D+
+ Wv9+33wLzM/Nd+5lzrb/Sf57gPItWahMG4IL5W/7vNsjViZy2AfBRFTWValrP2Rjk+lR8kZL
+ FQZ/Ccrp6U++EGnCN7nUHWFTGWstxMGHt4VGOog5UTVkezf4h2SAS4PSTsphMEaifLajAcCj
+ jeh9+4FzxQ22FFJYRpxLoupkA4=
+IronPort-HdrOrdr: A9a23:rAQl6K3nHeBE0e2TsSzkggqjBJAkLtp133Aq2lEZdPWaSKOlfq
+ eV7ZMmPHDP6Qr5NEtMpTnEAtjjfZq+z+8Q3WBuB9eftWDd0QPCRr2Kr7GSpgEIcBeRygcy78
+ tdmtBFeb7NJGk/q9rm6w+lFNtl6tyG/Ke0wdr69R5WPGdXg2UK1XYANu5deXcGPTV7OQ==
+X-Talos-CUID: =?us-ascii?q?9a23=3A8RWs82idTEeAZ/vtxc72PwIvHDJue0eDzW/Ifki?=
+ =?us-ascii?q?CMG97dfq+W1+h+pl5nJ87?=
+X-Talos-MUID: 9a23:HsXD9AsZukdZ0R0dG82noyl5GZwzvK2VDFkEvLcjusqiaywuNGLI
 X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-AV: E=Sophos;i="6.27,232,1787011200"; 
-   d="scan'208";a="60184137"
-Received: from aer-l-core-07.cisco.com ([144.254.74.208])
-  by aer-iport-6.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 25 Nov 2026 05:18:16 +0000
+X-IronPort-AV: E=Sophos;i="6.27,230,1787011200"; 
+   d="scan'208";a="62953304"
+Received: from aer-l-core-03.cisco.com ([144.254.74.204])
+  by aer-iport-1.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 25 Nov 2026 05:18:16 +0000
 Received: from sjc-ads-5675.cisco.com (sjc-ads-5675.cisco.com [10.28.88.189])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by aer-l-core-07.cisco.com (Postfix) with ESMTPS id 48DD918000214;
+	by aer-l-core-03.cisco.com (Postfix) with ESMTPS id 62BF81800020F;
 	Wed, 25 Nov 2026 05:18:16 +0000 (GMT)
 Received: by sjc-ads-5675.cisco.com (Postfix, from userid 1887444)
-	id 8899ACBF234; Tue, 24 Nov 2026 21:18:13 -0800 (PST)
+	id 8E4D5CBEF8A; Tue, 24 Nov 2026 21:18:13 -0800 (PST)
 From: "Darsh Kelaiya -X (dkelaiya - E INFOCHIPS PRIVATE LIMITED at Cisco)" <dkelaiya@cisco.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Darsh Kelaiya <dkelaiya@cisco.com>
-Subject: [oe][meta-python][scarthgap][PATCH 6/9] python3-aiohttp: fix CVE-2026-111064
-Date: Tue, 24 Nov 2026 21:18:08 -0800
-Message-Id: <20261125051811.2524271-7-dkelaiya@cisco.com>
+Subject: [oe][meta-python][scarthgap][PATCH 7/9] python3-aiohttp: fix CVE-2026-111063
+Date: Tue, 24 Nov 2026 21:18:09 -0800
+Message-Id: <20261125051811.2524271-8-dkelaiya@cisco.com>
 X-Mailer: git-send-email 2.35.6
 In-Reply-To: <20261125051811.2524271-1-dkelaiya@cisco.com>
 References: <20261125051811.2524271-1-dkelaiya@cisco.com>
@@ -73,444 +74,439 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Outbound-Client-TLS: ANONYMOUS;sjc-ads-5675.cisco.com [10.28.88.189];TLSv1.3;TLS_AES_256_GCM_SHA384;256
 X-Outbound-SMTP-Client: 10.28.88.189, sjc-ads-5675.cisco.com
-X-Outbound-Node: aer-l-core-07.cisco.com
+X-Outbound-Node: aer-l-core-03.cisco.com
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Wed, 25 Nov 2026 05:18:30 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132973
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132974
 Content-Type: text/plain; charset="utf-8"
 
 From: Darsh Kelaiya <dkelaiya@cisco.com>
 
-Backport the idle-connection timeout fix [1] to aiohttp 3.9.5,
-as identified by [2]. Start the keepalive deadline when the connection
-is established and use the existing timeout to bound the wait for
-the first request headers.
+Backport the Secure shared-cookie fix [1] to aiohttp 3.9.5, as
+identified by [3]. Check Secure before the shared-cookie branch
+adds the cookie to the outgoing set.
 
-[1] https://github.com/aio-libs/aiohttp/commit/be846822b4b3a5a54b6163e794b42dc06fba54a3
-[2] https://github.com/aio-libs/aiohttp/security/advisories/GHSA-5wr8-gcqf-gqf3
+Include the trusted-origin correction [2] so per-request cookies
+honor the session jar's treat_as_secure_origin policy. Keep the
+existing constructor defaults for the temporary cookie jar.
+
+[1] https://github.com/aio-libs/aiohttp/commit/999c356d61e966faffa97b06ab0d0455226d36c5
+[2] https://github.com/aio-libs/aiohttp/commit/95081f8a353be2873643ab6dd74904ca413e45e0
+[3] https://github.com/aio-libs/aiohttp/security/advisories/GHSA-494j-54xm-rwp3
 
 Signed-off-by: Darsh Kelaiya <dkelaiya@cisco.com>
 ---
- .../python3-aiohttp/CVE-2026-111064.patch     | 398 ++++++++++++++++++
- .../python/python3-aiohttp_3.9.5.bb           |   1 +
- 2 files changed, 399 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-111064.patch
+ .../python3-aiohttp/CVE-2026-111063_p1.patch  | 122 +++++++++
+ .../python3-aiohttp/CVE-2026-111063_p2.patch  | 257 ++++++++++++++++++
+ .../python/python3-aiohttp_3.9.5.bb           |   2 +
+ 3 files changed, 381 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-111063_p1.patch
+ create mode 100644 meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-111063_p2.patch
 
-diff --git a/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-111064.patch b/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-111064.patch
+diff --git a/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-111063_p1.patch b/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-111063_p1.patch
 new file mode 100644
-index 0000000..7caf9c3
+index 0000000000..417103af7a
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-111064.patch
-@@ -0,0 +1,398 @@
-+From be846822b4b3a5a54b6163e794b42dc06fba54a3 Mon Sep 17 00:00:00 2001
-+From: Sam Bull <git@sambull.org>
-+Date: Tue, 29 Sep 2026 00:08:22 +0100
-+Subject: [PATCH] Close idle connections (#13681) (#13838)
++++ b/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-111063_p1.patch
+@@ -0,0 +1,122 @@
++From 999c356d61e966faffa97b06ab0d0455226d36c5 Mon Sep 17 00:00:00 2001
++From: "patchback[bot]" <45432694+patchback[bot]@users.noreply.github.com>
++Date: Sun, 27 Sep 2026 21:27:34 +0100
++Subject: [PATCH] [PR #13830/e11d2836 backport][3.14] Fix secure shared cookie
++ (#13832)
 +
-+CVE: CVE-2026-111064
-+Upstream-Status: Backport [https://github.com/aio-libs/aiohttp/commit/be846822b4b3a5a54b6163e794b42dc06fba54a3]
++**This is a backport of PR #13830 as merged into master
++(e11d2836203a21bec59095498e578d37801027e7).**
++
++Co-authored-by: Sam Bull <git@sambull.org>
++
++CVE: CVE-2026-111063
++Upstream-Status: Backport [https://github.com/aio-libs/aiohttp/commit/999c356d61e966faffa97b06ab0d0455226d36c5]
 +
 +Backport Changes:
-+- Use 3.9.5's _keepalive_time and task creation, preserve None as
-+  disabled, and reuse the existing 75-second default.
-+- Replace the old periodic timer check using the stored start time.
-+  An early callback rearms at the deadline. A finished waiter stays
-+  open.
-+- Document that the initial deadline covers only request headers.
-+  Omit the 3.14.4 version marker and already-correct default update.
-+- Cover timer setup, rearming, and waiter states with mocked loops
-+  and transports. Use the 3.9.5 raw-server fixture to check idle,
-+  partial-header and post-request expiry on loopback. Synchronize the
-+  slow handler with the initial deadline and check its response.
-+  Adapt the WebSocket fixture signature and omit unrelated typing.
++- Guard the existing shared-cookie branch in filter_cookies();
++  aiohttp 3.9.5 does not have a morsel cache.
++- Omit the upstream cache regression because aiohttp 3.9.5 has no
++  morsel cache. This also drops its ordinary HTTPS delivery check.
 +
-+(cherry picked from commit e07684ef9056183bbefba1ae3f717a23f243631e)
 +Signed-off-by: Darsh Kelaiya <dkelaiya@cisco.com>
 +---
-+ CHANGES/13681.bugfix.rst               |    1 
-+ aiohttp/web_protocol.py                |   38 +++++-----
-+ docs/web_reference.rst                 |    5 +
-+ tests/test_web_protocol.py             |   76 +++++++++++++++++++++
-+ tests/test_web_server.py               |  118 ++++++++++++++++++++++++++++++++
-+ tests/test_web_websocket_functional.py |   30 ++++++++
-+ 6 files changed, 250 insertions(+), 18 deletions(-)
-+ create mode 100644 CHANGES/13681.bugfix.rst
++ CHANGES/13830.bugfix.rst        |  1 +
++ aiohttp/cookiejar.py            |  2 ++
++ docs/client_reference.rst       |  3 ++-
++ docs/spelling_wordlist.txt      |  1 +
++ tests/test_client_functional.py |  9 +++++++--
++ tests/test_cookiejar.py         | 10 ++++++++++
++ 6 files changed, 23 insertions(+), 3 deletions(-)
++ create mode 100644 CHANGES/13830.bugfix.rst
 +
-+diff --git a/CHANGES/13681.bugfix.rst b/CHANGES/13681.bugfix.rst
++diff --git a/CHANGES/13830.bugfix.rst b/CHANGES/13830.bugfix.rst
 +new file mode 100644
-+index 0000000000000000000000000000000000000000..e39b73a91fa2833b1492054e31b18fea9e265029
++index 0000000..2a39769
 +--- /dev/null
-++++ b/CHANGES/13681.bugfix.rst
+++++ b/CHANGES/13830.bugfix.rst
 +@@ -0,0 +1 @@
-++Fixed idle connections not being closed if no request was received -- by :user:`Dreamsorcerer`.
-+diff --git a/aiohttp/web_protocol.py b/aiohttp/web_protocol.py
-+index 39a1b68502fb48b8d0640c8fd4ebd6e7308512d6..314c5c79274aee2fffaf17afb91ae0349ac8a798 100644
-+--- a/aiohttp/web_protocol.py
-++++ b/aiohttp/web_protocol.py
-+@@ -109,8 +109,7 @@ class RequestHandler(BaseProtocol):
-+     status line, bad headers or incomplete payload. If any error occurs,
-+     connection gets closed.
+++Fixed ``CookieJar.filter_cookies()`` sending shared cookies (cookies without a ``Domain`` attribute) marked ``Secure`` over unencrypted connections -- by :user:`Dreamsorcerer`.
++diff --git a/aiohttp/cookiejar.py b/aiohttp/cookiejar.py
++index cb5593c..59ace3a 100644
++--- a/aiohttp/cookiejar.py
+++++ b/aiohttp/cookiejar.py
++@@ -398,6 +398,8 @@ class CookieJar(AbstractCookieJar):
 + 
-+-    keepalive_timeout -- number of seconds before closing
-+-                         keep-alive connection
-++    keepalive_timeout -- number of seconds before closing an idle connection.
++             # Send shared cookies
++             if not domain:
+++                if is_not_secure and cookie["secure"]:
+++                    continue
++                 filtered[name] = cookie.value
++                 continue
 + 
-+     tcp_keepalive -- TCP keep-alive is on, default is on
++diff --git a/docs/client_reference.rst b/docs/client_reference.rst
++index 49a2dfe..38b0833 100644
++--- a/docs/client_reference.rst
+++++ b/docs/client_reference.rst
++@@ -1924,7 +1924,8 @@ Utilities
++       :param ~yarl.URL response_url: URL of response, ``None`` for *shared
++          cookies*.  Regular cookies are coupled with server's URL and
++          are sent only to this server, shared ones are sent in every
++-         client request.
+++         client request (except that shared cookies marked ``Secure``
+++         are only sent over encrypted connections).
 + 
-+@@ -138,8 +137,6 @@ class RequestHandler(BaseProtocol):
++    .. method:: filter_cookies(request_url)
 + 
-+     """
++diff --git a/docs/spelling_wordlist.txt b/docs/spelling_wordlist.txt
++index 3fb6d35..e0703d9 100644
++--- a/docs/spelling_wordlist.txt
+++++ b/docs/spelling_wordlist.txt
++@@ -331,6 +331,7 @@ UI
++ un
++ unawaited
++ unclosed
+++unencrypted
++ unhandled
++ unicode
++ unittest
++diff --git a/tests/test_client_functional.py b/tests/test_client_functional.py
++index d695638..e18348d 100644
++--- a/tests/test_client_functional.py
+++++ b/tests/test_client_functional.py
++@@ -2290,12 +2290,17 @@ async def test_morsel_with_attributes(aiohttp_client) -> None:
++     c = http.cookies.Morsel()
++     c.set("test3", "456", "456")
++     c["httponly"] = True
++-    c["secure"] = True
++     c["max-age"] = 1000
 + 
-+-    KEEPALIVE_RESCHEDULE_DELAY = 1
-+-
-+     __slots__ = (
-+         "max_field_size",
-+         "max_headers",
-+@@ -206,7 +203,7 @@ class RequestHandler(BaseProtocol):
-+         super().__init__(loop)
-+ 
-+         self._request_count = 0
-+-        self._keepalive = False
-++        self._keepalive = True
-+         self._current_request: Optional[BaseRequest] = None
-+         self._manager: Optional[Server] = manager
-+         self._request_handler: Optional[_RequestHandler] = manager.request_handler
-+@@ -310,7 +307,15 @@ class RequestHandler(BaseProtocol):
-+         if self._tcp_keepalive:
-+             tcp_keepalive(real_transport)
-+ 
-+-        self._task_handler = self._loop.create_task(self.start())
-++        loop = self._loop
-++        # Need to enable keepalive timeout at start of connection, as there's no other
-++        # protection against a dead connection that doesn't send a request at all.
-++        if self._keepalive_timeout is not None and self._keepalive_timeout > 0:
-++            self._keepalive_time = loop.time()
-++            close_time = self._keepalive_time + self._keepalive_timeout
-++            self._keepalive_handle = loop.call_at(close_time, self._process_keepalive)
+++    # A Secure shared cookie must be withheld entirely: the test server
+++    # is plain http, so it must not reach the handler at all.
+++    c2: http.cookies.Morsel[str] = http.cookies.Morsel()
+++    c2.set("test4", "789", "789")
+++    c2["secure"] = True
 ++
-++        self._task_handler = loop.create_task(self.start())
-+         assert self._manager is not None
-+         self._manager.connection_made(self, real_transport)
++     app = web.Application()
++     app.router.add_get("/", handler)
++-    client = await aiohttp_client(app, cookies={"test2": c})
+++    client = await aiohttp_client(app, cookies={"test2": c, "test4": c2})
 + 
-+@@ -483,23 +488,20 @@ class RequestHandler(BaseProtocol):
-+         self.logger.exception(*args, **kw)
-+ 
-+     def _process_keepalive(self) -> None:
-++        self._keepalive_handle = None
-+         if self._force_close or not self._keepalive:
-+             return
-+ 
-+-        next = self._keepalive_time + self._keepalive_timeout
-++        loop = self._loop
-++        close_time = self._keepalive_time + self._keepalive_timeout
-++        if loop.time() < close_time:
-++            # Keep alive close check fired too early, reschedule
-++            self._keepalive_handle = loop.call_at(close_time, self._process_keepalive)
-++            return
-+ 
-+         # handler in idle state
-+-        if self._waiter:
-+-            if self._loop.time() > next:
-+-                self.force_close()
-+-                return
-+-
-+-        # not all request handlers are done,
-+-        # reschedule itself to next second
-+-        self._keepalive_handle = self._loop.call_later(
-+-            self.KEEPALIVE_RESCHEDULE_DELAY,
-+-            self._process_keepalive,
-+-        )
-++        if self._waiter and not self._waiter.done():
-++            self.force_close()
-+ 
-+     async def _handle_request(
-+         self,
-+diff --git a/docs/web_reference.rst b/docs/web_reference.rst
-+index cc6201b42c09e36c993bd387af028bdd632cdaea..1f934021d7a44a0a66f7ed1e890e5cdc25ed00bf 100644
-+--- a/docs/web_reference.rst
-++++ b/docs/web_reference.rst
-+@@ -2988,6 +2988,11 @@ Utilities
-+    :param float keepalive_timeout: a delay before a TCP connection is
-+                                    closed after a HTTP request. The delay
-+                                    allows for reuse of a TCP connection.
-++                                   The same delay bounds how long a newly
-++                                   accepted connection may take to deliver
-++                                   its first complete request headers;
-++                                   connections that stay idle or send
-++                                   incomplete headers are closed.
-+ 
-+       .. versionadded:: 3.8
-+ 
-+diff --git a/tests/test_web_protocol.py b/tests/test_web_protocol.py
-+index dcda53965fb85711a2c9a6b573e554e73f2fcbd9..084b72edba0301dc17fc951f114b3751afae0934 100644
-+--- a/tests/test_web_protocol.py
-++++ b/tests/test_web_protocol.py
-+@@ -1,4 +1,5 @@
-+ import asyncio
-++from typing import Optional, Tuple
-+ from unittest import mock
-+ 
-+ import pytest
-+@@ -17,6 +18,81 @@ def dummy_manager() -> Server:
-+     )  # type: ignore[no-any-return]
++     async with client.get("/") as resp:
++         assert 200 == resp.status
++diff --git a/tests/test_cookiejar.py b/tests/test_cookiejar.py
++index d9cb5b2..8f852eb 100644
++--- a/tests/test_cookiejar.py
+++++ b/tests/test_cookiejar.py
++@@ -1018,6 +1018,16 @@ async def test_save_load_json_roundtrip(
++     assert saved_cookies == loaded_cookies
 + 
 + 
-++def _connect_with_keepalive(
-++    dummy_manager: Server, timeout: Optional[float]
-++) -> Tuple[RequestHandler, mock.Mock, mock.Mock]:
-++    loop = mock.Mock(spec=asyncio.AbstractEventLoop)
-++    loop.time.return_value = 10.0
-++    transport = mock.Mock(spec=asyncio.Transport)
-++    transport.get_extra_info.return_value = None
-++    handler = RequestHandler(
-++        dummy_manager,
-++        loop=loop,
-++        keepalive_timeout=timeout,  # type: ignore[arg-type]
-++        tcp_keepalive=False,
-++    )
+++async def test_treat_as_secure_origin_sends_secure_shared_cookie() -> None:
+++    endpoint = URL("http://127.0.0.1/")
 ++
-++    with mock.patch.object(RequestHandler, "start", new=mock.Mock()):
-++        handler.connection_made(transport)
+++    jar = CookieJar(unsafe=True, treat_as_secure_origin=[endpoint])
+++    jar.update_cookies(SimpleCookie("shared-secure-cookie=first; Secure;"))
 ++
-++    return handler, loop, transport
+++    filtered_cookies = jar.filter_cookies(request_url=endpoint)
+++    assert "shared-secure-cookie" in filtered_cookies
 ++
 ++
-++@pytest.mark.parametrize("timeout", [2.0, 0.0, None])
-++def test_connection_made_schedules_initial_keepalive(
-++    dummy_manager: Server, timeout: Optional[float]
++ async def test_save_load_json_preserves_host_only_scope(tmp_path: Path) -> None:
++     """Verify save/load keeps host-only cookies off subdomains."""
++     file_path = tmp_path / "host_only.json"
+diff --git a/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-111063_p2.patch b/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-111063_p2.patch
+new file mode 100644
+index 0000000000..0d8e90eea0
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-111063_p2.patch
+@@ -0,0 +1,257 @@
++From 95081f8a353be2873643ab6dd74904ca413e45e0 Mon Sep 17 00:00:00 2001
++From: Sam Bull <git@sambull.org>
++Date: Mon, 28 Sep 2026 00:38:13 +0100
++Subject: [PATCH] Fix treat_as_secure_origin on request cookies (#13833)
++ (#13836)
++
++(cherry picked from commit 6bc84990f2a6429667f741d97f5da22884b8a8d3)
++
++CVE: CVE-2026-111063
++Upstream-Status: Backport [https://github.com/aio-libs/aiohttp/commit/95081f8a353be2873643ab6dd74904ca413e45e0]
++
++Backport Changes:
++- Keep Union annotations and drop the unused List import. Pass only
++  trusted origins to the temporary jar. The 3.9.5 API has no public
++  unsafe or quote_cookie properties.
++- Place the property beside existing methods and documentation;
++  the newer public cookie-inspection sections do not exist.
++- Import the existing AiohttpServer test fixture type.
++
++Signed-off-by: Darsh Kelaiya <dkelaiya@cisco.com>
++---
++ CHANGES/13833.bugfix.rst        |  1 +
++ aiohttp/abc.py                  |  5 ++++
++ aiohttp/client.py               |  6 +++-
++ aiohttp/cookiejar.py            | 27 ++++++++++-------
++ docs/client_reference.rst       | 13 +++++++--
++ tests/test_client_functional.py | 51 ++++++++++++++++++++++++++++++++-
++ tests/test_cookiejar.py         |  3 +-
++ 7 files changed, 91 insertions(+), 15 deletions(-)
++ create mode 100644 CHANGES/13833.bugfix.rst
++
++diff --git a/CHANGES/13833.bugfix.rst b/CHANGES/13833.bugfix.rst
++new file mode 100644
++index 0000000..2d0f96c
++--- /dev/null
+++++ b/CHANGES/13833.bugfix.rst
++@@ -0,0 +1 @@
+++Fixed per-request cookies (the ``cookies`` argument of a request method) marked ``Secure`` not being sent to origins listed in ``CookieJar``'s ``treat_as_secure_origin`` -- by :user:`Dreamsorcerer`.
++diff --git a/aiohttp/abc.py b/aiohttp/abc.py
++index ee83899..7dfbf5c 100644
++--- a/aiohttp/abc.py
+++++ b/aiohttp/abc.py
++@@ -146,6 +146,11 @@ class AbstractCookieJar(Sized, IterableBase):
++     def __init__(self, *, loop: Optional[asyncio.AbstractEventLoop] = None) -> None:
++         self._loop = get_running_loop(loop)
++ 
+++    @property
+++    def treat_as_secure_origin(self) -> frozenset[URL]:
+++        """Return origins considered secure even over cleartext connections."""
+++        return frozenset()
+++
++     @abstractmethod
++     def clear(self, predicate: Optional[ClearCookiePredicate] = None) -> None:
++         """Clear all cookies if no predicate is passed."""
++diff --git a/aiohttp/client.py b/aiohttp/client.py
++index 2e88917..103858a 100644
++--- a/aiohttp/client.py
+++++ b/aiohttp/client.py
++@@ -540,7 +540,11 @@ class ClientSession:
++                     all_cookies = self._cookie_jar.filter_cookies(url)
++ 
++                     if cookies is not None:
++-                        tmp_cookie_jar = CookieJar()
+++                        tmp_cookie_jar = CookieJar(
+++                            treat_as_secure_origin=frozenset(
+++                                self._cookie_jar.treat_as_secure_origin
+++                            ),
+++                        )
++                         tmp_cookie_jar.update_cookies(cookies)
++                         req_cookies = tmp_cookie_jar.filter_cookies(url)
++                         if req_cookies:
++diff --git a/aiohttp/cookiejar.py b/aiohttp/cookiejar.py
++index 59ace3a..60131c9 100644
++--- a/aiohttp/cookiejar.py
+++++ b/aiohttp/cookiejar.py
++@@ -16,7 +16,6 @@ from typing import (  # noqa
++     Dict,
++     Iterable,
++     Iterator,
++-    List,
++     Mapping,
++     Optional,
++     Set,
++@@ -117,7 +116,7 @@ class CookieJar(AbstractCookieJar):
++         *,
++         unsafe: bool = False,
++         quote_cookie: bool = True,
++-        treat_as_secure_origin: Union[StrOrURL, List[StrOrURL], None] = None,
+++        treat_as_secure_origin: Union[StrOrURL, Iterable[StrOrURL], None] = None,
++         loop: Optional[asyncio.AbstractEventLoop] = None,
++     ) -> None:
++         super().__init__(loop=loop)
++@@ -129,20 +128,28 @@ class CookieJar(AbstractCookieJar):
++         self._unsafe = unsafe
++         self._quote_cookie = quote_cookie
++         if treat_as_secure_origin is None:
++-            treat_as_secure_origin = []
+++            self._treat_as_secure_origin: frozenset[URL] = frozenset()
++         elif isinstance(treat_as_secure_origin, URL):
++-            treat_as_secure_origin = [treat_as_secure_origin.origin()]
+++            self._treat_as_secure_origin = frozenset({treat_as_secure_origin.origin()})
++         elif isinstance(treat_as_secure_origin, str):
++-            treat_as_secure_origin = [URL(treat_as_secure_origin).origin()]
+++            self._treat_as_secure_origin = frozenset(
+++                {URL(treat_as_secure_origin).origin()}
+++            )
++         else:
++-            treat_as_secure_origin = [
++-                URL(url).origin() if isinstance(url, str) else url.origin()
++-                for url in treat_as_secure_origin
++-            ]
++-        self._treat_as_secure_origin = treat_as_secure_origin
+++            self._treat_as_secure_origin = frozenset(
+++                {
+++                    URL(url).origin() if isinstance(url, str) else url.origin()
+++                    for url in treat_as_secure_origin
+++                }
+++            )
++         self._next_expiration: float = ceil(time.time())
++         self._expirations: Dict[Tuple[str, str, str], float] = {}
++ 
+++    @property
+++    def treat_as_secure_origin(self) -> frozenset[URL]:
+++        """Return origins considered secure even over cleartext connections."""
+++        return self._treat_as_secure_origin
+++
++     def save(self, file_path: PathLike) -> None:
++         """Save cookies to a file using JSON format.
++ 
++diff --git a/docs/client_reference.rst b/docs/client_reference.rst
++index 38b0833..5bb290e 100644
++--- a/docs/client_reference.rst
+++++ b/docs/client_reference.rst
++@@ -1901,7 +1901,7 @@ Utilities
++       .. versionadded:: 3.7
++ 
++    :param treat_as_secure_origin: (optional) Mark origins as secure
++-                                  for cookies marked as Secured. Possible types are
+++                                  for cookies marked as Secured.
++ 
++                                   Possible types are:
++ 
++@@ -1925,7 +1925,8 @@ Utilities
++          cookies*.  Regular cookies are coupled with server's URL and
++          are sent only to this server, shared ones are sent in every
++          client request (except that shared cookies marked ``Secure``
++-         are only sent over encrypted connections).
+++         are only sent over encrypted connections or to origins listed
+++         in *treat_as_secure_origin*).
++ 
++    .. method:: filter_cookies(request_url)
++ 
++@@ -1969,6 +1970,14 @@ Utilities
++ 
++       .. versionadded:: 4.0
++ 
+++   .. attribute:: treat_as_secure_origin
+++
+++      A :class:`frozenset` of :class:`~yarl.URL` origins that are
+++      treated as secure even when the connection is not encrypted, as
+++      configured by the *treat_as_secure_origin* parameter.
+++
+++      .. versionadded:: 3.14.4
+++
++ 
++ .. class:: DummyCookieJar(*, loop=None)
++ 
++diff --git a/tests/test_client_functional.py b/tests/test_client_functional.py
++index e18348d..d321d82 100644
++--- a/tests/test_client_functional.py
+++++ b/tests/test_client_functional.py
++@@ -30,7 +30,7 @@ from aiohttp.abc import AbstractResolver
++ from aiohttp.client_exceptions import TooManyRedirects
++ from aiohttp.compression_utils import DEFAULT_MAX_DECOMPRESS_SIZE, HAS_BROTLI
++ from aiohttp.http_exceptions import DecompressSizeError
++-from aiohttp.pytest_plugin import AiohttpClient, TestClient
+++from aiohttp.pytest_plugin import AiohttpClient, AiohttpServer, TestClient
++ from aiohttp.test_utils import unused_port
++ 
++ 
++@@ -2306,6 +2306,55 @@ async def test_morsel_with_attributes(aiohttp_client) -> None:
++         assert 200 == resp.status
++ 
++ 
+++async def test_request_secure_cookie_treat_as_secure_origin(
+++    aiohttp_server: AiohttpServer, aiohttp_client: AiohttpClient
 ++) -> None:
-++    handler, loop, _ = _connect_with_keepalive(dummy_manager, timeout)
+++    """Per-request Secure cookies must honor the session jar's trusted origins."""
 ++
-++    if timeout:
-++        loop.call_at.assert_called_once_with(12.0, handler._process_keepalive)
-++        assert handler._keepalive_handle is loop.call_at.return_value
-++    else:
-++        loop.call_at.assert_not_called()
-++        assert handler._keepalive_handle is None
-++
-++
-++def test_initial_keepalive_rearms_if_called_early(dummy_manager: Server) -> None:
-++    handler, loop, transport = _connect_with_keepalive(dummy_manager, 2.0)
-++    handler._waiter = mock.Mock(spec=asyncio.Future)
-++    handler._waiter.done.return_value = False
-++    callback = loop.call_at.call_args.args[1]
-++    loop.call_at.reset_mock()
-++    loop.time.return_value = 11.0
-++    loop.call_at.return_value = mock.sentinel.rearmed
-++
-++    callback()
-++
-++    loop.call_at.assert_called_once_with(12.0, callback)
-++    assert handler._keepalive_handle is mock.sentinel.rearmed
-++    transport.close.assert_not_called()
-++
-++
-++@pytest.mark.parametrize(
-++    "waiter_done", [False, True, None], ids=["pending", "resolved", "dispatched"]
-++)
-++def test_initial_keepalive_deadline(
-++    dummy_manager: Server, waiter_done: Optional[bool]
-++) -> None:
-++    handler, loop, transport = _connect_with_keepalive(dummy_manager, 2.0)
-++    if waiter_done is not None:
-++        waiter = mock.Mock(spec=asyncio.Future)
-++        waiter.done.return_value = waiter_done
-++        handler._waiter = waiter
-++    callback = loop.call_at.call_args.args[1]
-++    loop.call_at.reset_mock()
-++    loop.time.return_value = 12.0
-++
-++    callback()
-++
-++    assert handler._keepalive_handle is None
-++    loop.call_at.assert_not_called()
-++    if waiter_done is False:
-++        transport.close.assert_called_once_with()
-++    else:
-++        transport.close.assert_not_called()
-++
-++
-+ def test_pause_msg_queue_reading_without_transport(
-+     loop: asyncio.AbstractEventLoop,
-+     dummy_manager: Server,
-+diff --git a/tests/test_web_server.py b/tests/test_web_server.py
-+index d0fd95acdb4b17fcf8dc1a390e2a48d6ae68441c..6442224d86efe24be82c75969afe384329378c2b 100644
-+--- a/tests/test_web_server.py
-++++ b/tests/test_web_server.py
-+@@ -253,3 +253,121 @@ async def test_no_handler_cancellation(aiohttp_unused_port) -> None:
-+         assert done_event.is_set()
-+     finally:
-+         await asyncio.gather(runner.shutdown(), site.stop())
-++
-++
-++async def test_initial_keepalive_is_armed_on_loopback(
-++    aiohttp_raw_server, aiohttp_client
-++) -> None:
-++    keepalive_timeout = 30.0
-++    connection_made = web.Server.connection_made
-++    opened = []
-++    handled = []
-++
-++    def observe_connection(
-++        server: web.Server,
-++        protocol: web.RequestHandler,
-++        transport: asyncio.Transport,
-++    ) -> None:
-++        connection_made(server, protocol, transport)
-++        opened.append((protocol, protocol._keepalive_handle, protocol._keepalive_time))
-++
-++    async def handler(request: web.BaseRequest) -> web.Response:
-++        handled.append(request.protocol)
-++        return web.Response(text="ok")
-++
-++    server = await aiohttp_raw_server(handler, keepalive_timeout=keepalive_timeout)
-++    cli = await aiohttp_client(server, timeout=client.ClientTimeout(total=10))
-++    with mock.patch.object(web.Server, "connection_made", observe_connection):
-++        async with cli.get("/") as response:
-++            assert response.status == 200
-++            assert await response.text() == "ok"
-++
-++    [(protocol, timer, connection_time)] = opened
-++    assert handled == [protocol]
-++    assert isinstance(timer, asyncio.TimerHandle)
-++    assert not timer.cancelled()
-++    assert timer.when() == connection_time + keepalive_timeout
-++
-++
-++@pytest.mark.parametrize(
-++    "send_headers", [False, True], ids=["idle", "partial-headers"]
-++)
-++async def test_initial_keepalive_closes_on_loopback(
-++    aiohttp_raw_server, send_headers: bool
-++) -> None:
-++    handler = mock.AsyncMock()
-++    server = await aiohttp_raw_server(handler, keepalive_timeout=1.0)
-++    reader, writer = await asyncio.open_connection(server.host, server.port)
-++
-++    try:
-++        if send_headers:
-++            writer.write(b"GET / HTTP/1.1\r\nHost: localhost\r\n")
-++            await writer.drain()
-++
-++        assert await asyncio.wait_for(reader.read(1), timeout=5) == b""
-++        handler.assert_not_awaited()
-++    finally:
-++        writer.close()
-++        await writer.wait_closed()
-++
-++
-++async def test_keepalive_expires_on_loopback_after_complete_request(
-++    aiohttp_raw_server, monkeypatch: pytest.MonkeyPatch
-++) -> None:
-++    expired = False
-++    process_keepalive = web.RequestHandler._process_keepalive
-++
-++    def observe_expiry(protocol: web.RequestHandler) -> None:
-++        nonlocal expired
-++        was_open = not protocol._force_close
-++        process_keepalive(protocol)
-++        if was_open and protocol._force_close:
-++            expired = True
-++
-++    monkeypatch.setattr(web.RequestHandler, "_process_keepalive", observe_expiry)
-++
-++    async def handler(request: web.BaseRequest) -> web.Response:
-++        return web.Response(body=b"ok")
-++
-++    server = await aiohttp_raw_server(handler, keepalive_timeout=0.5)
-++    reader, writer = await asyncio.open_connection(server.host, server.port)
-++    try:
-++        writer.write(b"GET / HTTP/1.1\r\nHost: example.com\r\n\r\n")
-++        await writer.drain()
-++        headers = await asyncio.wait_for(reader.readuntil(b"\r\n\r\n"), timeout=5)
-++        assert headers.startswith(b"HTTP/1.1 200 ")
-++        assert b"connection: close" not in headers.lower()
-++        assert await asyncio.wait_for(reader.readexactly(2), timeout=5) == b"ok"
-++
-++        # Keep the client open so EOF comes from the server's keepalive timer.
-++        assert await asyncio.wait_for(reader.read(1), timeout=5) == b""
-++        assert expired
-++    finally:
-++        writer.close()
-++        await writer.wait_closed()
-++
-++
-++async def test_handler_slower_than_first_request_deadline(
-++    aiohttp_raw_server, aiohttp_client, monkeypatch: pytest.MonkeyPatch
-++) -> None:
-++    """The initial deadline can expire while a complete request is handled."""
-++    deadline_processed = asyncio.Event()
-++    process_keepalive = web.RequestHandler._process_keepalive
-++
-++    def observe_deadline(protocol: web.RequestHandler) -> None:
-++        process_keepalive(protocol)
-++        if protocol._current_request is not None and protocol._keepalive_handle is None:
-++            deadline_processed.set()
-++
-++    monkeypatch.setattr(web.RequestHandler, "_process_keepalive", observe_deadline)
-++
-++    async def handler(request: web.BaseRequest) -> web.Response:
-++        await asyncio.wait_for(deadline_processed.wait(), timeout=5)
-++        assert not request.protocol._force_close
-++        return web.Response(text="ok")
-++
-++    server = await aiohttp_raw_server(handler, keepalive_timeout=0.5)
-++    cli = await aiohttp_client(server, timeout=client.ClientTimeout(total=10))
-++    async with cli.get("/") as response:
-++        assert response.status == 200
-++        assert await response.text() == "ok"
-+diff --git a/tests/test_web_websocket_functional.py b/tests/test_web_websocket_functional.py
-+index b471b131c1ef704d46712476b11a16693c862559..686845ce9964f1aa04f810181a4852153950c0f0 100644
-+--- a/tests/test_web_websocket_functional.py
-++++ b/tests/test_web_websocket_functional.py
-+@@ -776,6 +776,36 @@ async def test_websocket_disable_keepalive(loop, aiohttp_client) -> None:
-+     assert data == "OK"
-+ 
-+ 
-++async def test_websocket_disable_keepalive_no_armed_handle(
-++    aiohttp_server, aiohttp_client
-++) -> None:
-++    """keep_alive(False) when no keepalive timer was armed (keepalive_timeout=0)."""
-++
-++    async def handler(request: web.Request) -> web.StreamResponse:
-++        ws = web.WebSocketResponse()
-++        assert ws.can_prepare(request)
-++        # A zero timeout arms no deadline at connection_made().
-++        assert request.protocol._keepalive_handle is None
-++        await ws.prepare(request)
-++        assert not request.protocol._keepalive
-++        assert request.protocol._keepalive_handle is None
-++
-++        await ws.send_str("OK")
-++        await ws.close()
-++        return ws
+++    async def handler(request: web.Request) -> web.Response:
+++        assert request.cookies.get("auth") == "token"
+++        return web.Response()
 ++
 ++    app = web.Application()
-++    app.router.add_route("GET", "/", handler)
-++    server = await aiohttp_server(app, keepalive_timeout=0)
-++    client = await aiohttp_client(server)
+++    app.router.add_get("/", handler)
+++    server = await aiohttp_server(app)
 ++
-++    ws = await client.ws_connect("/")
-++    data = await ws.receive_str()
-++    assert data == "OK"
+++    jar = aiohttp.CookieJar(unsafe=True, treat_as_secure_origin=[server.make_url("/")])
+++    client = await aiohttp_client(server, cookie_jar=jar)  # type: ignore[var-annotated]
 ++
-++    await ws.receive()  # Handle close
+++    c: http.cookies.Morsel[str] = http.cookies.Morsel()
+++    c.set("auth", "token", "token")
+++    c["secure"] = True
+++
+++    async with client.get("/", cookies={"auth": c}) as resp:
+++        assert resp.status == 200
 ++
 ++
-+ async def test_bug3380(loop, aiohttp_client) -> None:
-+     async def handle_null(request):
-+         return aiohttp.web.json_response({"err": None})
+++async def test_request_secure_cookie_not_sent_over_http(
+++    aiohttp_client: AiohttpClient,
+++) -> None:
+++    """A per-request Secure cookie is only sent to the jar's trusted origins."""
+++
+++    async def handler(request: web.Request) -> web.Response:
+++        assert request.cookies.keys() == {"plain"}
+++        return web.Response()
+++
+++    app = web.Application()
+++    app.router.add_get("/", handler)
+++    # The trusted origin never matches the test server, so the Secure
+++    # cookie must still be withheld from this plain-http request.
+++    jar = aiohttp.CookieJar(treat_as_secure_origin=[URL("http://example.com")])
+++    client = await aiohttp_client(app, cookie_jar=jar)
+++
+++    c: http.cookies.Morsel[str] = http.cookies.Morsel()
+++    c.set("auth", "token", "token")
+++    c["secure"] = True
+++
+++    cookies: dict[str, str | http.cookies.Morsel[str]] = {"auth": c, "plain": "ok"}
+++    async with client.get("/", cookies=cookies) as resp:
+++        assert resp.status == 200
+++
+++
++ async def test_set_cookies(aiohttp_client) -> None:
++     async def handler(request):
++         ret = web.Response()
++diff --git a/tests/test_cookiejar.py b/tests/test_cookiejar.py
++index 8f852eb..f248de5 100644
++--- a/tests/test_cookiejar.py
+++++ b/tests/test_cookiejar.py
++@@ -732,6 +732,7 @@ class TestCookieJarSafe(TestCookieJarBase):
++ async def test_dummy_cookie_jar() -> None:
++     cookie = SimpleCookie("foo=bar; Domain=example.com;")
++     dummy_jar = DummyCookieJar()
+++    assert dummy_jar.treat_as_secure_origin == frozenset()
++     assert len(dummy_jar) == 0
++     dummy_jar.update_cookies(cookie)
++     assert len(dummy_jar) == 0
++@@ -847,7 +848,7 @@ async def test_pickle_format(cookies_to_send) -> None:
++ )
++ async def test_treat_as_secure_origin_init(url) -> None:
++     jar = CookieJar(unsafe=True, treat_as_secure_origin=url)
++-    assert jar._treat_as_secure_origin == [URL("http://127.0.0.1")]
+++    assert jar.treat_as_secure_origin == frozenset({URL("http://127.0.0.1")})
++ 
++ 
++ async def test_treat_as_secure_origin() -> None:
 diff --git a/meta-python/recipes-devtools/python/python3-aiohttp_3.9.5.bb b/meta-python/recipes-devtools/python/python3-aiohttp_3.9.5.bb
-index 8d7fe9f..16ec0a6 100644
+index 16ec0a603b..f86a594669 100644
 --- a/meta-python/recipes-devtools/python/python3-aiohttp_3.9.5.bb
 +++ b/meta-python/recipes-devtools/python/python3-aiohttp_3.9.5.bb
-@@ -43,6 +43,7 @@ SRC_URI += "file://CVE-2024-52304.patch \
-            file://CVE-2026-111066_p1.patch \
+@@ -44,6 +44,8 @@ SRC_URI += "file://CVE-2024-52304.patch \
             file://CVE-2026-111066_p2.patch \
             file://CVE-2026-111065.patch \
-+           file://CVE-2026-111064.patch \
+            file://CVE-2026-111064.patch \
++           file://CVE-2026-111063_p1.patch \
++           file://CVE-2026-111063_p2.patch \
             "
  
  CVE_STATUS[CVE-2026-34515] = "not-applicable-platform: Vulnerability only affects applications running on Windows"
 -- 
 2.35.6
+
