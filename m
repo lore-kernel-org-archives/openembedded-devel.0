@@ -1,65 +1,65 @@
-Received: from mail-dy1-f170.google.com (mail-dy1-f170.google.com [74.125.82.170])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.37958.1795594132498743397
+Received: from mail-dy1-f177.google.com (mail-dy1-f177.google.com [74.125.82.177])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.37959.1795594134005161156
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 25 Nov 2026 00:08:52 -0800
+ Wed, 25 Nov 2026 00:08:54 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=OFbFIOaD;
- spf=pass (domain: gmail.com, ip: 74.125.82.170, mailfrom: raj.khem@gmail.com)
-Received: by mail-dy1-f170.google.com with SMTP id 5a478bee46e88-386c71feeeaso1724899eec.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 25 Nov 2026 00:08:52 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=e8X+9/CT;
+ spf=pass (domain: gmail.com, ip: 74.125.82.177, mailfrom: raj.khem@gmail.com)
+Received: by mail-dy1-f177.google.com with SMTP id 5a478bee46e88-386b8f2f671so2583542eec.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 25 Nov 2026 00:08:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795594132; x=1796198932; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1795594133; x=1796198933; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=Z+JX6/nauHhX55zu2xnvQSUS8Jjfpn1QBe6lnnZEifM=;
-        b=OFbFIOaD8VrlQ4fC01PL85lmHy8f/wv1pMa8vxtDZTOdR+Li8cM3Df0IQYO2M2Jpsx
-         RFJoJSMz+Fnm0zqxFsy+EenRR24/JUjERJOmbQbkJOk/ChOChL9E5CiEps8K5KtgFprI
-         2Q8G9WCp6WeurfVKg+Nh0B5/VKw8/duBjKlmPwK+Mxkht14YUdPUToSL+nV4F94PpSMU
-         zCCHj/CDWI++AqJ/1ZWHUlIY4bDx1/xrhDRDCdibG5nyznJVe0P23FPYnE4IfhHfL6E1
-         oYTknS20yLIBt425TelnWVatbXhsqpbhLlW+4ZTXswZI4FMSODIRO7kkQZIwzFatE3AD
-         AR+w==
+        bh=vY/z+cFeaJr/vSsE4c2gOFw0YWCK1Qmi3u73ELWhlUE=;
+        b=e8X+9/CTOyinzhJmSBYCIyWPjiLEvCOQoU5/q7Kcau+t+xzdUGL+hnvr+9aT3EX2VR
+         DTPfXV8TSfwsFLHLWdSyX9Bh3MpU+ABKqi/U0z+ngLGAy9GIp9z+YrlCZbLoQvk5IUqZ
+         +0r+9rNyq9emY2J746yw9dnE+34mp/olwgHu+IVPTgPpUKRFubLMLIf5nJpaOuH+wSL/
+         8E4EjaWeo8BJXuOpWAQQx/IzSOtym5Z7+vPfPeFHj6Uy9XdjOAqz9omSay2FdhVBCoWM
+         9EDMJcRDb5rB3l1gfPXMpLJ47YTalkF2OxbkMVweAkHMdRFS8M/Qdc8AXrPLAJaQp5oh
+         o56w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795594132; x=1796198932;
+        d=1e100.net; s=20260707; t=1795594133; x=1796198933;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=Z+JX6/nauHhX55zu2xnvQSUS8Jjfpn1QBe6lnnZEifM=;
-        b=UyaQUAxS7ZA7dEIwcy2DPv+9nUA52ijny695r0yIBf89jlmj+CVBsS52gr/6FHL3EV
-         94uWBUKnMbUq71xkYbfsRJocusYBHqvSgAo3nwyd5ppz+94FslVVQnPgfCP6G9rIuHQT
-         BWx+yb+z4+xfUBYXlPou2+SBclKeOzII+A+C4l61KUNrR5yKY/dyy4e2dYamyGXsV0UV
-         qYHH2YbcP1vH50BW5sINGBU0PfSeiTp0AE0IWn3mRF0eqlUmrT7LKKVsguiXp5GYioME
-         36DHhs6po+NreZu7VYeUXBk3a74R2i2+7A6EgcXL0ZdHYFhL6SKluTHAHQmTtmNIOZfV
-         fLyA==
-X-Gm-Message-State: APuU4Z8Yn7176PK7OvXJPH3PVMz83NFQ3M6Hn2cFpnsFa95zPV0PvZYw
-	TbbSdkAyE/L1WNhUd9IS5iYfG+mpRrZ88UXpgOJSB3E1MzmP3I42wWHf4/HMQrs5
-X-Gm-Gg: AZFdTZdZ5qU+ld+8NIEpDiOjnjoibVfQMJS/MSVQJPE2m1dsC1X0HZ4qwF3f9xTnm12
-	UYl7Ui7xhICB8vwfBB2KEWvTCF4EIP8L2ejjBIaM80wdHDuq2ijVNiEKvlsZ0S6y3LstVPAuF9b
-	CD7kfegwEauOu5jw67g2moLTFbr5rWcFcE+o9i6/zBMVLV8aqrBdu3iHReROO7lTT4pnt2hHHun
-	a9JPgFvJo+3mbJvtGT3d7P37dcvIJbGv8gasiFC8XSHGeh6nTvKRMkLAYjuuIsc2Czz53jTlsbN
-	NZ94da6lvDjDWYysolMim0l1tOdGf/v6+Z6gkiATH+rqT4QO5XiH6pcYiqx5h7pwXUpFriadziF
-	6Hf2KrSPt6bOfNgZnMXD+8+1zAdDbBFXZbunmRgmQnurRFI7REwJV5nyDMUs4gYQxYKETnEx7hM
-	LtR+yJVwGcRwuwvIz2iZ2NPEjnRHeIIkkBjlEDPxcRhOYIwfE+UoxfbHnVt15l8Qw1DJUxZm0cv
-	w4ckJVZIugnOmsfbrOdLORJUiy2flQmUe1VACY7mFOAGod6mZASwBI4Mum5YC6TtH6x/H4sC1c6
-	CZEWuOZlLSH0q/TuAus1+KE5wS3BdR/Df4wstbwyEi3tHNHFo7UEAlvqKtPd2qeILR6KsEcUoJv
-	bFrro/RDVHmdDFp+JjIIf5iKjoksiAP1sg2huCNV4YbwEjIuQUQka598+DrEcksEpffUz00EOQR
-	V+lWXZt0t6qSKFpOpVKllt4RhPr+JvPjYOxfZhQOwVR8Wa0PIxZWtqCd0oVt2y+5vd0SczSTpuV
-	tQhj7gkNJivJJU8bL8BGwL4ISuonYhh53+xiPpp9wfBMKRSKYmwaqP75fkQhlwsVlRrIgWnR+qR
-	V57F
-X-Received: by 2002:a05:7301:160c:b0:382:c1cf:163b with SMTP id 5a478bee46e88-38571419d38mr17066261eec.32.1795594131872;
-        Wed, 25 Nov 2026 00:08:51 -0800 (PST)
+        bh=vY/z+cFeaJr/vSsE4c2gOFw0YWCK1Qmi3u73ELWhlUE=;
+        b=oKfI7rfvrS75l/6BwHWjATXQ6Q6oWvxuweiRLdICI7UlxCtoKoFPhyfC7o5dCTPI17
+         +phAJgeKMprPadMfdFn3zZLrAeyhR9dRtIRcWh8F2uPLkadOP+R9uk7p8HXSmUwQYukT
+         X3K27biMz56LNIF73viTg84SZ+KvlgHOBzAdrTMFYFUzRcANuQkVsFNMibVHK+yd9Sty
+         S9bxCqZSVs9F7u9mmbJ8lZfuuovyjR0ln5oUGB7iFXgFj+VBtNJGT9j0S85+zWeWRdfB
+         DgS9ltGS6qpVcL7BvktjhksdFH6RruxZHOPVGHLW96X548IKiyU74StMzFf54VCdBWNl
+         7SHw==
+X-Gm-Message-State: APuU4Z98t3ObDHL6/4i0J6UwcBRz1Bi+y3vsedQ3JjKNiUPhgGH/YwoQ
+	aSCRfzjPKMDAUmSCNqV7iRPW+yRt2I6RWUokj10vKICgdjp+Z6HXAjvLNv7Srate
+X-Gm-Gg: AZFdTZe8Mh7b5OnhvVuem6K8dHiWf/Xnu6bvYM3CbQJJud4nsidYB7hQJsDu9f1FEZj
+	XAEfV05NQgjlYjYBg2pbZtqKkctPphUSNjZbXnYWVxOARJOkp3WGPQaLvAgVbMlYab2W4q3+Ppd
+	xvx0JQFiFObsDkC8A7B8yqbnlkx5Vh6RokBr8i0u2ld20yJ67O3ZsbRw/zQqoHKuzZC3fafsVG+
+	X7FboWkdd6gWKVXpAUifmHPRbrh7J2zKKsoelCL5X3OM+BxD/8cQj3oobKLyILu+P7OGAgL4nDP
+	DeRTJlmQDw1Z9DLzD5bGBeh7cWubLtGBLbsKpv8XlLoOZE45mjh5qSZPUaE6hv9bD/DNCtz0iSP
+	42lxoSJltTPFpJ2axdTigd8uxb+HqpYIm2dakXi3pbcbLslHFj+cZGQkchdqv1vZOgBumG70wnX
+	7Tadi0U9WWZMrSrXiomK90+BkvghNHQLT0q1dgIkTm4gZbl0YGwGCT0gC3E4G7GAZ1aNZ15q+eo
+	7Ud4oouoAQJCTeu4ECj6eW5lkxvpJL5EpUjENcAIb2BJhR8yG/jStb/ZyWXyDP50Peuz8MdC5gg
+	TNmxUUD/yJblIVgtZ1wCC9MncYaMvtp6zRAMxEXEGRWTiY561OUZ9riQ/Fg4tc8K88DjHqetprP
+	64J2vZWHx8uHkH4f6Ex9m0meTQiVrpjQpwtopA/aioPLKZHNtuQB+DNWNCZATGKbuQrNdLHBZbT
+	qAtqW5ZYWhT39yejrml5a/iexrqrsqte8SKJIaNYDYcDsnPhOg/MRTRBji7K0j1Sn/WPUWHDkiM
+	1YYdFFCXItjnqUunwmbmkLsg/cL3Gndb57Lj/RRIgSCC+Q3Yovs2DJ/WWH/Go9upab1ANeu9N/C
+	3EcR3JTr9PNb3JDv7NNYAWIDuA==
+X-Received: by 2002:a05:7300:430a:b0:382:7375:1306 with SMTP id 5a478bee46e88-3856fc603eemr24061652eec.14.1795594133190;
+        Wed, 25 Nov 2026 00:08:53 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-385646633d0sm90997971eec.3.2026.11.25.00.08.50
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-385646633d0sm90997971eec.3.2026.11.25.00.08.52
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 25 Nov 2026 00:08:51 -0800 (PST)
+        Wed, 25 Nov 2026 00:08:52 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-python][PATCH 01/14] python3-rstr: upgrade 3.2.2 -> 4.0.0
-Date: Wed, 25 Nov 2026 00:07:12 -0800
-Message-ID: <20261125080732.2419614-62-khem.raj@oss.qualcomm.com>
+Subject: [meta-python][PATCH 02/14] python3-tibs: Add recipe
+Date: Wed, 25 Nov 2026 00:07:13 -0800
+Message-ID: <20261125080732.2419614-63-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.1
 In-Reply-To: <20261125080732.2419614-1-khem.raj@oss.qualcomm.com>
 References: <20261125080732.2419614-1-khem.raj@oss.qualcomm.com>
@@ -67,36 +67,215 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Wed, 25 Nov 2026 08:08:56 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/133059
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/133060
 Content-Type: text/plain; charset="utf-8"
 
-- Xeger and Rstr are now distinct classes; Xeger no longer inherits from
-  the base class
-- Default to the SystemRandom() CSPRNG
-- Expose star_plus_limit on Xeger and fix errors with repeats larger
-  than it; explicit repeats like a{1000} are no longer limited by it
-- Require Python 3.11 or newer; support up to Python 3.16
+tibs is a Rust-backed Python library for immutable and mutable binary
+sequences by the bitstring author. bitstring 5 uses it as its core and
+requires tibs >= 2.0.2, < 3.0.
+
+The extension is built with maturin. The crates include was generated
+from the sdist's Cargo.lock with the same logic as
+'bitbake -c update_crates python3-tibs'. Native and nativesdk variants
+are provided like for bitstring.
+
+zstd-sys links the system libzstd found with pkg-config, so depend on
+zstd and inherit pkgconfig.
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- .../python/{python3-rstr_3.2.2.bb => python3-rstr_4.0.0.bb}     | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-rstr_3.2.2.bb => python3-rstr_4.0.0.bb} (80%)
+ .../python/python3-tibs-crates.inc            | 160 ++++++++++++++++++
+ .../python/python3-tibs_2.0.2.bb              |  16 ++
+ 2 files changed, 176 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-tibs-crates.inc
+ create mode 100644 meta-python/recipes-devtools/python/python3-tibs_2.0.2.bb
 
-diff --git a/meta-python/recipes-devtools/python/python3-rstr_3.2.2.bb b/meta-python/recipes-devtools/python/python3-rstr_4.0.0.bb
-similarity index 80%
-rename from meta-python/recipes-devtools/python/python3-rstr_3.2.2.bb
-rename to meta-python/recipes-devtools/python/python3-rstr_4.0.0.bb
-index 01c27127a8..f9803ab15b 100644
---- a/meta-python/recipes-devtools/python/python3-rstr_3.2.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-rstr_4.0.0.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/leapfrogonline/rstr"
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=5c15c04f1cdbd42c6152066f0b02102a"
- 
--SRC_URI[sha256sum] = "c4a564d4dfb4472d931d145c43d1cf1ad78c24592142e7755b8866179eeac012"
-+SRC_URI[sha256sum] = "1a1e7f304b0291edbc12955a9cb4093bfe1c7c1d48e0797e752bb3bf2a24574a"
- 
- inherit pypi python_setuptools_build_meta
- 
+diff --git a/meta-python/recipes-devtools/python/python3-tibs-crates.inc b/meta-python/recipes-devtools/python/python3-tibs-crates.inc
+new file mode 100644
+index 0000000000..8be7492794
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-tibs-crates.inc
+@@ -0,0 +1,160 @@
++# Autogenerated with 'bitbake -c update_crates python3-tibs'
++
++# from Cargo.lock
++SRC_URI += " \
++    crate://crates.io/anyhow/1.0.102 \
++    crate://crates.io/bitflags/2.11.0 \
++    crate://crates.io/bitvec/1.1.1 \
++    crate://crates.io/block-buffer/0.12.0 \
++    crate://crates.io/cc/1.2.60 \
++    crate://crates.io/cfg-if/1.0.4 \
++    crate://crates.io/chacha20/0.10.0 \
++    crate://crates.io/const-oid/0.10.2 \
++    crate://crates.io/cpufeatures/0.3.0 \
++    crate://crates.io/crunchy/0.2.4 \
++    crate://crates.io/crypto-common/0.2.2 \
++    crate://crates.io/digest/0.11.3 \
++    crate://crates.io/equivalent/1.0.2 \
++    crate://crates.io/find-msvc-tools/0.1.9 \
++    crate://crates.io/foldhash/0.1.5 \
++    crate://crates.io/funty/2.0.0 \
++    crate://crates.io/getrandom/0.3.4 \
++    crate://crates.io/getrandom/0.4.1 \
++    crate://crates.io/half/2.7.1 \
++    crate://crates.io/hashbrown/0.15.5 \
++    crate://crates.io/hashbrown/0.16.1 \
++    crate://crates.io/heck/0.5.0 \
++    crate://crates.io/hybrid-array/0.4.12 \
++    crate://crates.io/id-arena/2.3.0 \
++    crate://crates.io/indexmap/2.13.0 \
++    crate://crates.io/itoa/1.0.17 \
++    crate://crates.io/jobserver/0.1.34 \
++    crate://crates.io/leb128fmt/0.1.0 \
++    crate://crates.io/libc/0.2.182 \
++    crate://crates.io/log/0.4.29 \
++    crate://crates.io/memchr/2.8.1 \
++    crate://crates.io/once_cell/1.21.3 \
++    crate://crates.io/pkg-config/0.3.33 \
++    crate://crates.io/portable-atomic/1.13.1 \
++    crate://crates.io/prettyplease/0.2.37 \
++    crate://crates.io/proc-macro2/1.0.106 \
++    crate://crates.io/pyo3/0.29.0 \
++    crate://crates.io/pyo3-build-config/0.29.0 \
++    crate://crates.io/pyo3-ffi/0.29.0 \
++    crate://crates.io/pyo3-macros/0.29.0 \
++    crate://crates.io/pyo3-macros-backend/0.29.0 \
++    crate://crates.io/quote/1.0.44 \
++    crate://crates.io/r-efi/5.3.0 \
++    crate://crates.io/radium/0.7.0 \
++    crate://crates.io/rand/0.10.0 \
++    crate://crates.io/rand_core/0.10.0 \
++    crate://crates.io/semver/1.0.27 \
++    crate://crates.io/serde/1.0.228 \
++    crate://crates.io/serde_core/1.0.228 \
++    crate://crates.io/serde_derive/1.0.228 \
++    crate://crates.io/serde_json/1.0.149 \
++    crate://crates.io/sha2/0.11.0 \
++    crate://crates.io/shlex/1.3.0 \
++    crate://crates.io/syn/2.0.117 \
++    crate://crates.io/tap/1.0.1 \
++    crate://crates.io/target-lexicon/0.13.5 \
++    crate://crates.io/typenum/1.20.1 \
++    crate://crates.io/unicode-ident/1.0.24 \
++    crate://crates.io/unicode-xid/0.2.6 \
++    crate://crates.io/wasip2/1.0.2+wasi-0.2.9 \
++    crate://crates.io/wasip3/0.4.0+wasi-0.3.0-rc-2026-01-06 \
++    crate://crates.io/wasm-encoder/0.244.0 \
++    crate://crates.io/wasm-metadata/0.244.0 \
++    crate://crates.io/wasmparser/0.244.0 \
++    crate://crates.io/wit-bindgen/0.51.0 \
++    crate://crates.io/wit-bindgen-core/0.51.0 \
++    crate://crates.io/wit-bindgen-rust/0.51.0 \
++    crate://crates.io/wit-bindgen-rust-macro/0.51.0 \
++    crate://crates.io/wit-component/0.244.0 \
++    crate://crates.io/wit-parser/0.244.0 \
++    crate://crates.io/wyz/0.5.1 \
++    crate://crates.io/zerocopy/0.8.40 \
++    crate://crates.io/zerocopy-derive/0.8.40 \
++    crate://crates.io/zmij/1.0.21 \
++    crate://crates.io/zstd/0.13.3 \
++    crate://crates.io/zstd-safe/7.2.4 \
++    crate://crates.io/zstd-sys/2.0.16+zstd.1.5.7 \
++"
++
++SRC_URI[anyhow-1.0.102.sha256sum] = "7f202df86484c868dbad7eaa557ef785d5c66295e41b460ef922eca0723b842c"
++SRC_URI[bitflags-2.11.0.sha256sum] = "843867be96c8daad0d758b57df9392b6d8d271134fce549de6ce169ff98a92af"
++SRC_URI[bitvec-1.1.1.sha256sum] = "ddcec3d12c579d40898fe0a9a358a803c23e9c52ca3c425707f81c9436211837"
++SRC_URI[block-buffer-0.12.0.sha256sum] = "cdd35008169921d80bc60d3d0ab416eecb028c4cd653352907921d95084790be"
++SRC_URI[cc-1.2.60.sha256sum] = "43c5703da9466b66a946814e1adf53ea2c90f10063b86290cc9eb67ce3478a20"
++SRC_URI[cfg-if-1.0.4.sha256sum] = "9330f8b2ff13f34540b44e946ef35111825727b38d33286ef986142615121801"
++SRC_URI[chacha20-0.10.0.sha256sum] = "6f8d983286843e49675a4b7a2d174efe136dc93a18d69130dd18198a6c167601"
++SRC_URI[const-oid-0.10.2.sha256sum] = "a6ef517f0926dd24a1582492c791b6a4818a4d94e789a334894aa15b0d12f55c"
++SRC_URI[cpufeatures-0.3.0.sha256sum] = "8b2a41393f66f16b0823bb79094d54ac5fbd34ab292ddafb9a0456ac9f87d201"
++SRC_URI[crunchy-0.2.4.sha256sum] = "460fbee9c2c2f33933d720630a6a0bac33ba7053db5344fac858d4b8952d77d5"
++SRC_URI[crypto-common-0.2.2.sha256sum] = "ce6e4c961d6cd6c9a86db418387425e8bdeaf05b3c8bc1411e6dca4c252f1453"
++SRC_URI[digest-0.11.3.sha256sum] = "f1dd6dbb5841937940781866fa1281a1ff7bd3bf827091440879f9994983d5c2"
++SRC_URI[equivalent-1.0.2.sha256sum] = "877a4ace8713b0bcf2a4e7eec82529c029f1d0619886d18145fea96c3ffe5c0f"
++SRC_URI[find-msvc-tools-0.1.9.sha256sum] = "5baebc0774151f905a1a2cc41989300b1e6fbb29aff0ceffa1064fdd3088d582"
++SRC_URI[foldhash-0.1.5.sha256sum] = "d9c4f5dac5e15c24eb999c26181a6ca40b39fe946cbe4c263c7209467bc83af2"
++SRC_URI[funty-2.0.0.sha256sum] = "e6d5a32815ae3f33302d95fdcb2ce17862f8c65363dcfd29360480ba1001fc9c"
++SRC_URI[getrandom-0.3.4.sha256sum] = "899def5c37c4fd7b2664648c28120ecec138e4d395b459e5ca34f9cce2dd77fd"
++SRC_URI[getrandom-0.4.1.sha256sum] = "139ef39800118c7683f2fd3c98c1b23c09ae076556b435f8e9064ae108aaeeec"
++SRC_URI[half-2.7.1.sha256sum] = "6ea2d84b969582b4b1864a92dc5d27cd2b77b622a8d79306834f1be5ba20d84b"
++SRC_URI[hashbrown-0.15.5.sha256sum] = "9229cfe53dfd69f0609a49f65461bd93001ea1ef889cd5529dd176593f5338a1"
++SRC_URI[hashbrown-0.16.1.sha256sum] = "841d1cc9bed7f9236f321df977030373f4a4163ae1a7dbfe1a51a2c1a51d9100"
++SRC_URI[heck-0.5.0.sha256sum] = "2304e00983f87ffb38b55b444b5e3b60a884b5d30c0fca7d82fe33449bbe55ea"
++SRC_URI[hybrid-array-0.4.12.sha256sum] = "9155a582abd142abc056962c29e3ce5ff2ad5469f4246b537ed42c5deba857da"
++SRC_URI[id-arena-2.3.0.sha256sum] = "3d3067d79b975e8844ca9eb072e16b31c3c1c36928edf9c6789548c524d0d954"
++SRC_URI[indexmap-2.13.0.sha256sum] = "7714e70437a7dc3ac8eb7e6f8df75fd8eb422675fc7678aff7364301092b1017"
++SRC_URI[itoa-1.0.17.sha256sum] = "92ecc6618181def0457392ccd0ee51198e065e016d1d527a7ac1b6dc7c1f09d2"
++SRC_URI[jobserver-0.1.34.sha256sum] = "9afb3de4395d6b3e67a780b6de64b51c978ecf11cb9a462c66be7d4ca9039d33"
++SRC_URI[leb128fmt-0.1.0.sha256sum] = "09edd9e8b54e49e587e4f6295a7d29c3ea94d469cb40ab8ca70b288248a81db2"
++SRC_URI[libc-0.2.182.sha256sum] = "6800badb6cb2082ffd7b6a67e6125bb39f18782f793520caee8cb8846be06112"
++SRC_URI[log-0.4.29.sha256sum] = "5e5032e24019045c762d3c0f28f5b6b8bbf38563a65908389bf7978758920897"
++SRC_URI[memchr-2.8.1.sha256sum] = "6b947ae49db0d222b1dbc6b113ce7248a3fc3a6ca21b696717bfc000ba4484d8"
++SRC_URI[once_cell-1.21.3.sha256sum] = "42f5e15c9953c5e4ccceeb2e7382a716482c34515315f7b03532b8b4e8393d2d"
++SRC_URI[pkg-config-0.3.33.sha256sum] = "19f132c84eca552bf34cab8ec81f1c1dcc229b811638f9d283dceabe58c5569e"
++SRC_URI[portable-atomic-1.13.1.sha256sum] = "c33a9471896f1c69cecef8d20cbe2f7accd12527ce60845ff44c153bb2a21b49"
++SRC_URI[prettyplease-0.2.37.sha256sum] = "479ca8adacdd7ce8f1fb39ce9ecccbfe93a3f1344b3d0d97f20bc0196208f62b"
++SRC_URI[proc-macro2-1.0.106.sha256sum] = "8fd00f0bb2e90d81d1044c2b32617f68fcb9fa3bb7640c23e9c748e53fb30934"
++SRC_URI[pyo3-0.29.0.sha256sum] = "cd274650b21d4bfc26a0a47587962c1edb425f69287324355cd040c3ea66071c"
++SRC_URI[pyo3-build-config-0.29.0.sha256sum] = "c5e2a7d2f0d013342f295c048ad19237add5154a55b1c5a254c0ec93d4109078"
++SRC_URI[pyo3-ffi-0.29.0.sha256sum] = "ca85c467da1bbc8d866eea5deff9cf29ea5f7785054a17da36e65bda9c05845b"
++SRC_URI[pyo3-macros-0.29.0.sha256sum] = "9ac53762fd065daa3194dd09337a38bd793a188100fd1a9304c4ab312d901771"
++SRC_URI[pyo3-macros-backend-0.29.0.sha256sum] = "4ca3a1557399783172dc5bf39cfca835157732532cba56b71d2292161e53b362"
++SRC_URI[quote-1.0.44.sha256sum] = "21b2ebcf727b7760c461f091f9f0f539b77b8e87f2fd88131e7f1b433b3cece4"
++SRC_URI[r-efi-5.3.0.sha256sum] = "69cdb34c158ceb288df11e18b4bd39de994f6657d83847bdffdbd7f346754b0f"
++SRC_URI[radium-0.7.0.sha256sum] = "dc33ff2d4973d518d823d61aa239014831e521c75da58e3df4840d3f47749d09"
++SRC_URI[rand-0.10.0.sha256sum] = "bc266eb313df6c5c09c1c7b1fbe2510961e5bcd3add930c1e31f7ed9da0feff8"
++SRC_URI[rand_core-0.10.0.sha256sum] = "0c8d0fd677905edcbeedbf2edb6494d676f0e98d54d5cf9bda0b061cb8fb8aba"
++SRC_URI[semver-1.0.27.sha256sum] = "d767eb0aabc880b29956c35734170f26ed551a859dbd361d140cdbeca61ab1e2"
++SRC_URI[serde-1.0.228.sha256sum] = "9a8e94ea7f378bd32cbbd37198a4a91436180c5bb472411e48b5ec2e2124ae9e"
++SRC_URI[serde_core-1.0.228.sha256sum] = "41d385c7d4ca58e59fc732af25c3983b67ac852c1a25000afe1175de458b67ad"
++SRC_URI[serde_derive-1.0.228.sha256sum] = "d540f220d3187173da220f885ab66608367b6574e925011a9353e4badda91d79"
++SRC_URI[serde_json-1.0.149.sha256sum] = "83fc039473c5595ace860d8c4fafa220ff474b3fc6bfdb4293327f1a37e94d86"
++SRC_URI[sha2-0.11.0.sha256sum] = "446ba717509524cb3f22f17ecc096f10f4822d76ab5c0b9822c5f9c284e825f4"
++SRC_URI[shlex-1.3.0.sha256sum] = "0fda2ff0d084019ba4d7c6f371c95d8fd75ce3524c3cb8fb653a3023f6323e64"
++SRC_URI[syn-2.0.117.sha256sum] = "e665b8803e7b1d2a727f4023456bbbbe74da67099c585258af0ad9c5013b9b99"
++SRC_URI[tap-1.0.1.sha256sum] = "55937e1799185b12863d447f42597ed69d9928686b8d88a1df17376a097d8369"
++SRC_URI[target-lexicon-0.13.5.sha256sum] = "adb6935a6f5c20170eeceb1a3835a49e12e19d792f6dd344ccc76a985ca5a6ca"
++SRC_URI[typenum-1.20.1.sha256sum] = "b6f5e870be6c3b371b77fe0ee0bafb859fa4964b4404c27de1d380043c4dda20"
++SRC_URI[unicode-ident-1.0.24.sha256sum] = "e6e4313cd5fcd3dad5cafa179702e2b244f760991f45397d14d4ebf38247da75"
++SRC_URI[unicode-xid-0.2.6.sha256sum] = "ebc1c04c71510c7f702b52b7c350734c9ff1295c464a03335b00bb84fc54f853"
++SRC_URI[wasip2-1.0.2+wasi-0.2.9.sha256sum] = "9517f9239f02c069db75e65f174b3da828fe5f5b945c4dd26bd25d89c03ebcf5"
++SRC_URI[wasip3-0.4.0+wasi-0.3.0-rc-2026-01-06.sha256sum] = "5428f8bf88ea5ddc08faddef2ac4a67e390b88186c703ce6dbd955e1c145aca5"
++SRC_URI[wasm-encoder-0.244.0.sha256sum] = "990065f2fe63003fe337b932cfb5e3b80e0b4d0f5ff650e6985b1048f62c8319"
++SRC_URI[wasm-metadata-0.244.0.sha256sum] = "bb0e353e6a2fbdc176932bbaab493762eb1255a7900fe0fea1a2f96c296cc909"
++SRC_URI[wasmparser-0.244.0.sha256sum] = "47b807c72e1bac69382b3a6fb3dbe8ea4c0ed87ff5629b8685ae6b9a611028fe"
++SRC_URI[wit-bindgen-0.51.0.sha256sum] = "d7249219f66ced02969388cf2bb044a09756a083d0fab1e566056b04d9fbcaa5"
++SRC_URI[wit-bindgen-core-0.51.0.sha256sum] = "ea61de684c3ea68cb082b7a88508a8b27fcc8b797d738bfc99a82facf1d752dc"
++SRC_URI[wit-bindgen-rust-0.51.0.sha256sum] = "b7c566e0f4b284dd6561c786d9cb0142da491f46a9fbed79ea69cdad5db17f21"
++SRC_URI[wit-bindgen-rust-macro-0.51.0.sha256sum] = "0c0f9bfd77e6a48eccf51359e3ae77140a7f50b1e2ebfe62422d8afdaffab17a"
++SRC_URI[wit-component-0.244.0.sha256sum] = "9d66ea20e9553b30172b5e831994e35fbde2d165325bec84fc43dbf6f4eb9cb2"
++SRC_URI[wit-parser-0.244.0.sha256sum] = "ecc8ac4bc1dc3381b7f59c34f00b67e18f910c2c0f50015669dde7def656a736"
++SRC_URI[wyz-0.5.1.sha256sum] = "05f360fc0b24296329c78fda852a1e9ae82de9cf7b27dae4b7f62f118f77b9ed"
++SRC_URI[zerocopy-0.8.40.sha256sum] = "a789c6e490b576db9f7e6b6d661bcc9799f7c0ac8352f56ea20193b2681532e5"
++SRC_URI[zerocopy-derive-0.8.40.sha256sum] = "f65c489a7071a749c849713807783f70672b28094011623e200cb86dcb835953"
++SRC_URI[zmij-1.0.21.sha256sum] = "b8848ee67ecc8aedbaf3e4122217aff892639231befc6a1b58d29fff4c2cabaa"
++SRC_URI[zstd-0.13.3.sha256sum] = "e91ee311a569c327171651566e07972200e76fcfe2242a4fa446149a3881c08a"
++SRC_URI[zstd-safe-7.2.4.sha256sum] = "8f49c4d5f0abb602a93fb8736af2a4f4dd9512e36f7f570d66e65ff867ed3b9d"
++SRC_URI[zstd-sys-2.0.16+zstd.1.5.7.sha256sum] = "91e19ebc2adc8f83e43039e79776e3fda8ca919132d68a1fed6a5faca2683748"
+diff --git a/meta-python/recipes-devtools/python/python3-tibs_2.0.2.bb b/meta-python/recipes-devtools/python/python3-tibs_2.0.2.bb
+new file mode 100644
+index 0000000000..fd63dd4762
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-tibs_2.0.2.bb
+@@ -0,0 +1,16 @@
++SUMMARY = "A sleek Python library for binary data"
++DESCRIPTION = "tibs provides immutable (Tibs) and mutable (Mutibs) binary \
++sequences with a Rust core. It is the engine used by bitstring."
++HOMEPAGE = "https://github.com/scott-griffiths/tibs"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=e8e9baae83130ec8cef3f37faee22781"
++
++SRC_URI[sha256sum] = "63a7b87e262c558ccc16be67d34fe60620e39b49bf644ac65e71c4553173ac8f"
++
++require ${BPN}-crates.inc
++
++DEPENDS += "zstd"
++
++inherit pypi python_maturin cargo-update-recipe-crates pkgconfig
++
++BBCLASSEXTEND = "native nativesdk"
