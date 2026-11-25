@@ -1,65 +1,65 @@
-Received: from mail-dy1-f172.google.com (mail-dy1-f172.google.com [74.125.82.172])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.37943.1795594093733817002
+Received: from mail-dy1-f175.google.com (mail-dy1-f175.google.com [74.125.82.175])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.37945.1795594094856095734
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 25 Nov 2026 00:08:13 -0800
+ Wed, 25 Nov 2026 00:08:14 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=WnKkBdgc;
- spf=pass (domain: gmail.com, ip: 74.125.82.172, mailfrom: raj.khem@gmail.com)
-Received: by mail-dy1-f172.google.com with SMTP id 5a478bee46e88-38699cf08dfso6372482eec.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 25 Nov 2026 00:08:13 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=DILZUbM4;
+ spf=pass (domain: gmail.com, ip: 74.125.82.175, mailfrom: raj.khem@gmail.com)
+Received: by mail-dy1-f175.google.com with SMTP id 5a478bee46e88-3282db206d3so5126380eec.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 25 Nov 2026 00:08:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795594093; x=1796198893; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1795594094; x=1796198894; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=mXHqXUfj2edYryW4BliYv1ai7Z1C0qP/ReUQSuy5wI8=;
-        b=WnKkBdgcGwq9al3XdrHr3SX/D/gbsFcXAsFSfr4QLFh7m3NSAcwJUu4bZBqV6njYig
-         wIo/+Zh5v7iiavsn3Y6cixWh6dyukmEGfcplKRrjUERy7XaQ5B+9k7cVlqWkNiMJ9LVl
-         iqbLhfxYxxxDsFyL/RSaU7IwZSqJIUeALuZ6JJQOPkvK2wruTm7LNNoLteoMLL3a5nuX
-         ywBzSZGk6aAIzAPNASzhwIvrr5PavsuHNQxeHkEwUiRtd0ZoDN6dHfnXYBJd6dl5tysZ
-         2NZA+9M5uWy0uKUqskMmvyCra2JVhGc7Xvy6Mh1gDe0PEl7CZYRLPS9hUvNOnMacSgng
-         gHYg==
+        bh=xnTpmB8V52mGt8G/W4HPJNXpIMK1HtzSHOxikOummow=;
+        b=DILZUbM44hunyJ8brAN/ze7UQUIeC0NLoBA0r1hAE7qVa3GDlWXdaWdqhrbqHtTp9h
+         Lk2WcHnqI2dH+QMncxtiTu43T1OrEV9SH6vn/TGyfIMPK+DNw5piOTpcxn7CX1ULE/Uk
+         Cs3O6QFHCU1xEogf6/XYQVQY/xJjlqiD8kHcAt0NvsIZoS20VerKWzqDU/b/X3tY9+Jh
+         8vR0IUMo8LEwMxssp1/lisyh34hbdFvYQvNwlTeGR1LIcqLIN6VFNBzNeHRR8fPMubIB
+         WonKM1C5ZRfG531GcvqkgQyoA0Jrl/tBFDBeKNdXLKnsO94TkWb3OHhRUruFAKwfYDw1
+         3Aow==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795594093; x=1796198893;
+        d=1e100.net; s=20260707; t=1795594094; x=1796198894;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=mXHqXUfj2edYryW4BliYv1ai7Z1C0qP/ReUQSuy5wI8=;
-        b=y5cmgwPjbqwvyGh5CtWlNLivBpvRMZ9Zz5B1f87KUHr0mVkK7KFtTSYIlDBcOMpASN
-         SxSL8dgCp+sRxmEKO2dtbR5G7ycvjNmREnQmBmkojWh7L7lP3IrZtkSizd1+jWws9yRi
-         cRrbxrvHdS5DyEQcnO/J2IxmqaQ83hXty4070EYxyau4DJS4kfRqwC6GbIi4tVv5FWK0
-         sOSWB+dNQxleR/8Tf/gMa3TbjE39hcYpxii55uPof42kHVx6+vDS5ckR/nwLqjq0d2dJ
-         2QuHmVF53NpB4kn5deVXca9YvSXmZnNnAKtsffha3BunBLRblq8pw9DuQtXV7nQhD4mX
-         bF7w==
-X-Gm-Message-State: APuU4Z89Ryc+YrRbmrojOalYsvax7VMhEG+8kW2OVoTW85MeWAfifQHM
-	vGMXP904FX+K+h68WtSWsiTef/ktlYwrYyCoLSuRHabG4/wLjkYEfQjKA05MnGUi
-X-Gm-Gg: AZFdTZfnUG/zq5FkUsOuBN7XrgoKtsB91v6MWla9IgGimoev1MinXkz3k9ZKTWOleBG
-	yho79puZrIvsy8XsTq4f63BVQ07lDVGiYRdgn4/XFAoSNN0xw2nVmclpGZe3xHiMVpsmYC/z8Xg
-	mlSt4hXdpxWxxGukgwedbRBfwbYjIIoIgm1fJmtyqavg+hDvb7VqfQRCi77zWpZ6schFpNeO8FJ
-	xC4ycCBwFYSgJgnHliKABIDRTFAJuNYSPFJcsSTNhM52ron5qAGBhDKVy38hgvwmM/ERsvWd6z3
-	VCVpJfL0c+9NUo0WF1d6GwIPQLbTpeRUK97DcLRhCzeapNiRqjyaBATbGBajmXviqqyf81SAZZV
-	e70ZS4gzs3cLfqdY+ayc4TrhI3e3G4LRk8yygZhXoSUXmAUNB9vDlJhfrRxEaY6o0BYFzN5oRnq
-	WuYJn3qOTINalWnGEzMR4zb70gfZJRb3ozZlq02G/myil+zV8Cg/DLx1mGxdKLMzJL3w44mLMfi
-	JtG5ynx108r7EOmIMhtGV26iAWifFPyE0G7Xf0XpC8wmti7cBCY1rGDQnPIFGCTGvRIg+J8/na7
-	LyGmDPAluvTpURsBL+2W/Ga9p5cf8C0gJE7vCJuyiF/7TNnZjI64k+ws3Y5HOcDduZn8XcNE+R/
-	gTLbD3Mq7PKy2qFN0zkYFQpHhGiEdqfu0diOrMgLmO+9Y7cw9plo9H7K6ZrOdt/si9KQX9kmP65
-	cKYSnbqI3tHafl1VanZAcPjCLj0WnTkm43I32OWosKlyoaKIgomAe89+jM/6HwpvpXZD71ruP4t
-	rIKCPfxlx/H+LzmvlQiBpeu6B8Ez5rGzl+I0LHzSDzh9guWASrV2IdyKY/27mdrGcmpy1Q5e+lW
-	NFe/
-X-Received: by 2002:a05:7301:714:b0:36a:7b3c:4e0a with SMTP id 5a478bee46e88-3856fd5e4a4mr17989017eec.24.1795594092999;
-        Wed, 25 Nov 2026 00:08:12 -0800 (PST)
+        bh=xnTpmB8V52mGt8G/W4HPJNXpIMK1HtzSHOxikOummow=;
+        b=rtpDlpjVBQ0YdwrkNZUPFcY5Q5VLyPmFcZcQgbcobTc4VveLNBx/d3fqlPGZ9SEZwF
+         isInsMiurCh03Agm4QJcpmH5BY/t1Kudhero13UjyB81yNW1oZ0rS6SjRoybOHx+0Vig
+         gXXCzHf0VJuloBxde4xRp5gERlg6RL6em7LqV7FYUr2tLOUp6rW+rQfl8ATafJCMi+3a
+         H4k+QUhEhQpHfORymlqCHqfHQ6Ea6eNKdEpvdP1l/FsBx9V/Vo23dJFB0e5KwUeMBUqM
+         pXOT8Aw9YkkVthreZ3axhjBBuLPQtKumwIo9UcjyM3pb6P8NAMgpt45JHZ4S3+z6+Wkx
+         SDyQ==
+X-Gm-Message-State: APuU4Z+iTiXGHL+7qO1A5bCMszXdkTblDqsg0CO/SbqyN6JngCreB4bU
+	sGXaPhaPGKfQGJqJR46YqrdyCL6XDKDLJhcsASiLfxbCdbkOsnZrwAUf45kVomzN
+X-Gm-Gg: AZFdTZeJh5fqtAHUnVSFINE+IlLGoZni4VG2uA+uZdzuoNJ74MBcjhKYLwnc85IZmsd
+	q1f2Ep4WuSuZjEE4M6ND01AroFO8Sms7bwqJkoOhRiYI7MHax3N39S8mLyNymJhXM6KKt407eOT
+	gCRj4RH2xhVhdVOdheUpysHFVhTJP4HW6jfHBaVel1X0tcAR22DQ8Rl60wCQXCK0NlWvwpSwrZ1
+	CVumTyhnrV/479RNcJhX3cDAyW6lKP2Yq+3AULwT513KlTcC9tfd9iOB2qScx5rnzgdBtTfoDlt
+	g0ahTi9WW6AXNDjoA92fRtsdePcuD3RECmNVfmUxCcocxUF7VthkQswkRkQSvlunCSyKQ6Rayls
+	vD/XNsKErZNqdBtSc2yNpxlmB1crhy65ebtPn+w+JFTaqmCsHxcoY6NpCY9nLp3F4+9KEqUs6L6
+	YpIoJvzbHP4F7lP2jhe2qXGwG+sACZ1V1gCSOJSkmGt/ZHXfeeJxR7AHXW4CGkApQSBNp+KrMc3
+	83JC27NxzQlhjLUneMw0APv/qkehbn7muXrW2eSm0t3n+IpZKrSUkl/SVHaww0e0aOkX1W5GOqv
+	DTiCsQUCRfKKosfuoFgn2vQAHLBUhSwZisgTR5GyZbEYVvD4LxHYH9yCI/wpG/bjWCMbt10E+L9
+	p25vv9P55PsG+gPKFkJljFh4IoBncMhxWZ8nJpOz1obHRhDWsSpPeL1uWakVUIOQgKdtngeFEFg
+	awbfo8pBnU3CdAglKXCjpndDjOnJM0d/n467vSdWa8H5Ku4bB52iVFgr8Y5+H7+KfvdAUHmM1pK
+	qvAsT4xh7bXh/aY9NljbJ4ZnVc5mNj/l/knAFzc6B55TV79rfvKoTfRggQQMUHAfN92HxpncP0S
+	7sEG
+X-Received: by 2002:a05:7301:1a84:b0:386:abfb:4a2 with SMTP id 5a478bee46e88-386abfb1a83mr10133981eec.11.1795594094019;
+        Wed, 25 Nov 2026 00:08:14 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-385646633d0sm90997971eec.3.2026.11.25.00.08.12
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-385646633d0sm90997971eec.3.2026.11.25.00.08.13
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 25 Nov 2026 00:08:12 -0800 (PST)
+        Wed, 25 Nov 2026 00:08:13 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-oe][PATCH 24/55] nvme-cli: upgrade 2.16 -> 3.2
-Date: Wed, 25 Nov 2026 00:06:40 -0800
-Message-ID: <20261125080732.2419614-30-khem.raj@oss.qualcomm.com>
+Subject: [meta-oe][PATCH 25/55] postgresql: upgrade 18.6 -> 19.0
+Date: Wed, 25 Nov 2026 00:06:41 -0800
+Message-ID: <20261125080732.2419614-31-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.1
 In-Reply-To: <20261125080732.2419614-1-khem.raj@oss.qualcomm.com>
 References: <20261125080732.2419614-1-khem.raj@oss.qualcomm.com>
@@ -67,143 +67,181 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Wed, 25 Nov 2026 08:08:24 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/133027
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/133028
 Content-Type: text/plain; charset="utf-8"
 
-- libnvme is now part of nvme-cli as libnvme3 (libnvme3.so.1,
-  libnvme3.pc, headers in include/libnvme3) with NVMe 2.4 renames
-  in its API; the separate libnvme 1.x library is no longer used
-- nvme-fabrics.conf(.d) INI configuration replaces config.json and
-  discovery.conf (converted on first use); key commands moved to
-  "nvme keys", DH-HMAC-CHAP is now KX-HMAC-CHAP
-- new nvme-discoverd and nvme-keysd daemons, nvme top, ownership
-  registry/exclusion list, privsep and sandbox (tech previews)
-- strict command line parsing: long options need two dashes and the
-  full name, numbers are parsed strictly, --help goes to stdout
-- gen-hostnqn must run as root; Meson >= 1.0 is required
+- new major release: REPACK (CONCURRENTLY), plan advice extensions,
+  logical replication of sequences and without a restart, WAIT FOR
+  read-your-writes on standbys, parallel autovacuum of indexes
+- removed RADIUS authentication and the MULE_INTERNAL encoding;
+  standard_conforming_strings is always on; JIT is off by default
+- C11 is required instead of C99
+- the on-disk format changed: existing clusters need pg_upgrade or a
+  dump and restore
 
-Drop the libnvme dependency; the libnvme recipe stays for libblockdev,
-sedutil and NetworkManager, which use the 1.x API. Package the bundled
-library as libnvme3 with its own license. Pin the autodetected
-dependencies with PACKAGECONFIGs: keyutils and openssl on (as in the
-libnvme recipe), libarchive, libdbus, libkmod, liburing and
-nvme-discoverd (needs systemd) off; with nvme-discoverd off the legacy
-nvmf-autoconnect units, udev rules and dracut config are installed as
-before. Disable python bindings, nvme-keysd, tests and examples.
-Package the new NetworkManager dispatcher script. Drop the
--Wno-error=incompatible-pointer-types workaround, the virtium plugin
-now uses time_t. Add UPSTREAM_CHECK_GITTAGREGEX.
-
-License-Update: ccan/licenses/ replaced by a LICENSES/ directory
-(CC0-1.0, MIT, LGPL-2.1-or-later, LicenseRef-Gary-S-Brown-CRC32 for
-the shared crc32 code); LICENSE adds GPL-2.0-or-later,
-LGPL-2.1-or-later (bundled libnvme and shared code) and the CRC32
-notice.
+Refresh 0003-configure.ac-bypass-autoconf-2.69-version-check.patch
+(copyright year context) and drop the line offsets from the other
+patches. The configure options are unchanged and none of the removed
+features had a PACKAGECONFIG. Add UPSTREAM_CHECK_URI/REGEX so the
+check looks at the source index instead of the v${PV} directory.
+pg-cron 1.6.8 (which declares PostgreSQL 19 support) and pgpool2 4.7.3
+were compile-tested on the host against PostgreSQL 19.0.
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- meta-oe/recipes-bsp/nvme-cli/nvme-cli_2.16.bb | 34 ------------
- meta-oe/recipes-bsp/nvme-cli/nvme-cli_3.2.bb  | 52 +++++++++++++++++++
- 2 files changed, 52 insertions(+), 34 deletions(-)
- delete mode 100644 meta-oe/recipes-bsp/nvme-cli/nvme-cli_2.16.bb
- create mode 100644 meta-oe/recipes-bsp/nvme-cli/nvme-cli_3.2.bb
+ .../postgresql/files/0001-Add-support-for-RISC-V.patch      | 2 +-
+ .../postgresql/files/0002-Improve-reproducibility.patch     | 2 +-
+ ...03-configure.ac-bypass-autoconf-2.69-version-check.patch | 6 +++---
+ .../files/0004-config_info.c-not-expose-build-info.patch    | 6 +++---
+ .../0005-postgresql-fix-ptest-failure-of-sysviews.patch     | 4 ++--
+ .../recipes-dbs/postgresql/files/not-check-libperl.patch    | 4 ++--
+ meta-oe/recipes-dbs/postgresql/postgresql.inc               | 2 ++
+ .../postgresql/{postgresql_18.6.bb => postgresql_19.0.bb}   | 2 +-
+ 8 files changed, 15 insertions(+), 13 deletions(-)
+ rename meta-oe/recipes-dbs/postgresql/{postgresql_18.6.bb => postgresql_19.0.bb} (87%)
 
-diff --git a/meta-oe/recipes-bsp/nvme-cli/nvme-cli_2.16.bb b/meta-oe/recipes-bsp/nvme-cli/nvme-cli_2.16.bb
-deleted file mode 100644
-index 397537417e..0000000000
---- a/meta-oe/recipes-bsp/nvme-cli/nvme-cli_2.16.bb
-+++ /dev/null
-@@ -1,34 +0,0 @@
--SUMMARY = "NVMe management command line interface"
--HOMEPAGE = "https://github.com/linux-nvme/nvme-cli"
--SECTION = "console/utils"
--LICENSE = "CC0-1.0 AND GPL-2.0-only AND MIT"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=8264535c0c4e9c6c335635c4026a8022 \
--                    file://ccan/licenses/CC0;md5=c17af43b05840255a6fedc5eda9d56cc \
--                    file://ccan/licenses/BSD-MIT;md5=838c366f69b72c5df05c96dff79b35f2"
--DEPENDS = "json-c libnvme"
--SRCREV = "faf7326a2997dea91687fd3daa17fc405910a4c1"
--
--SRC_URI = "git://github.com/linux-nvme/nvme-cli.git;branch=master;protocol=https;tag=v${PV}"
--
--inherit bash-completion meson pkgconfig systemd
--
--EXTRA_OEMESON += "-Dsystemddir=${systemd_unitdir}/system"
--
--pkg_postinst_ontarget:${PN}-user () {
--    ${sbindir}/nvme gen-hostnqn > ${sysconfdir}/nvme/hostnqn
--    ${bindir}/uuidgen > ${sysconfdir}/nvme/hostid
--}
--
--PACKAGES =+ "${PN}-dracut ${PN}-zsh-completion ${PN}-user"
--
--FILES:${PN} += "${systemd_system_unitdir}"
--FILES:${PN}-dracut = "${nonarch_libdir}/dracut/dracut.conf.d"
--FILES:${PN}-zsh-completion = "${datadir}/zsh/site-functions"
--ALLOW_EMPTY:${PN}-user = "1"
--
--RDEPENDS:${PN}-user = "util-linux-uuidgen"
--
--# This one is reproducible only on 32bit MACHINEs
--# http://errors.yoctoproject.org/Errors/Details/766964/
--# git/plugins/virtium/virtium-nvme.c:205:63: error: passing argument 1 of 'localtime' from incompatible pointer type [-Wincompatible-pointer-types]
--CFLAGS += "-Wno-error=incompatible-pointer-types"
-diff --git a/meta-oe/recipes-bsp/nvme-cli/nvme-cli_3.2.bb b/meta-oe/recipes-bsp/nvme-cli/nvme-cli_3.2.bb
-new file mode 100644
-index 0000000000..95365e17e7
---- /dev/null
-+++ b/meta-oe/recipes-bsp/nvme-cli/nvme-cli_3.2.bb
-@@ -0,0 +1,52 @@
-+SUMMARY = "NVMe management command line interface"
-+HOMEPAGE = "https://github.com/linux-nvme/nvme-cli"
-+SECTION = "console/utils"
-+LICENSE = "GPL-2.0-only AND GPL-2.0-or-later AND LGPL-2.1-or-later AND CC0-1.0 AND MIT AND LicenseRef-Gary-S-Brown-CRC32"
-+LICENSE:libnvme3 = "LGPL-2.1-or-later AND CC0-1.0 AND MIT AND LicenseRef-Gary-S-Brown-CRC32"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=8264535c0c4e9c6c335635c4026a8022 \
-+                    file://LICENSES/LGPL-2.1-or-later.txt;md5=310c7c93cf5181c6b0cc8229a1f3c6f6 \
-+                    file://LICENSES/CC0-1.0.txt;md5=65d3616852dbf7b1a6d4b53b00626032 \
-+                    file://LICENSES/MIT.txt;md5=3912d958d00bac4a6b550f75d7c806bb \
-+                    file://LICENSES/LicenseRef-Gary-S-Brown-CRC32.txt;md5=c923b33bfa4944fc9c3d644b16424ff6"
-+NO_GENERIC_LICENSE[Gary-S-Brown-CRC32] = "LICENSES/LicenseRef-Gary-S-Brown-CRC32.txt"
-+
-+DEPENDS = "json-c"
-+SRCREV = "ce55132af26607e1904a0f449f94eeae028cfee5"
-+
-+SRC_URI = "git://github.com/linux-nvme/nvme-cli.git;branch=master;protocol=https;tag=v${PV}"
-+
-+UPSTREAM_CHECK_GITTAGREGEX = "^v(?P<pver>\d+(\.\d+)+)$"
-+
-+inherit bash-completion meson pkgconfig systemd
-+
-+PACKAGECONFIG ??= "keyutils openssl"
-+PACKAGECONFIG[discoverd] = "-Dnvme-discoverd=enabled,-Dnvme-discoverd=disabled,systemd"
-+PACKAGECONFIG[keyutils] = "-Dkeyutils=enabled,-Dkeyutils=disabled,keyutils"
-+PACKAGECONFIG[libarchive] = "-Dlibarchive=enabled,-Dlibarchive=disabled,libarchive"
-+PACKAGECONFIG[libdbus] = "-Dlibdbus=enabled,-Dlibdbus=disabled,dbus"
-+PACKAGECONFIG[libkmod] = "-Dlibkmod=enabled,-Dlibkmod=disabled,kmod"
-+PACKAGECONFIG[liburing] = "-Dliburing=enabled,-Dliburing=disabled,liburing"
-+PACKAGECONFIG[openssl] = "-Dopenssl=enabled,-Dopenssl=disabled,openssl"
-+
-+EXTRA_OEMESON += "-Dsystemddir=${systemd_unitdir}/system \
-+                  -Djson-c=enabled \
-+                  -Dpython=disabled \
-+                  -Dnvme-keysd=disabled \
-+                  -Dtests=false \
-+                  -Dexamples=false \
-+"
-+
-+pkg_postinst_ontarget:${PN}-user () {
-+    ${sbindir}/nvme gen-hostnqn > ${sysconfdir}/nvme/hostnqn
-+    ${bindir}/uuidgen > ${sysconfdir}/nvme/hostid
-+}
-+
-+PACKAGES =+ "libnvme3 ${PN}-dracut ${PN}-zsh-completion ${PN}-user"
-+
-+FILES:libnvme3 = "${libdir}/libnvme3${SOLIBS}"
-+FILES:${PN} += "${systemd_system_unitdir} ${nonarch_libdir}/NetworkManager"
-+FILES:${PN}-dracut = "${nonarch_libdir}/dracut/dracut.conf.d"
-+FILES:${PN}-zsh-completion = "${datadir}/zsh/site-functions"
-+ALLOW_EMPTY:${PN}-user = "1"
-+
-+RDEPENDS:${PN}-user = "util-linux-uuidgen"
+diff --git a/meta-oe/recipes-dbs/postgresql/files/0001-Add-support-for-RISC-V.patch b/meta-oe/recipes-dbs/postgresql/files/0001-Add-support-for-RISC-V.patch
+index 8ab8f0970b..e1ebbd3fd9 100644
+--- a/meta-oe/recipes-dbs/postgresql/files/0001-Add-support-for-RISC-V.patch
++++ b/meta-oe/recipes-dbs/postgresql/files/0001-Add-support-for-RISC-V.patch
+@@ -13,7 +13,7 @@ Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+  1 file changed, 3 insertions(+), 2 deletions(-)
+ 
+ diff --git a/src/include/storage/s_lock.h b/src/include/storage/s_lock.h
+-index 2f73f9f..04b0f8a 100644
++index c9e5251..f893cef 100644
+ --- a/src/include/storage/s_lock.h
+ +++ b/src/include/storage/s_lock.h
+ @@ -243,11 +243,12 @@ spin_delay(void)
+diff --git a/meta-oe/recipes-dbs/postgresql/files/0002-Improve-reproducibility.patch b/meta-oe/recipes-dbs/postgresql/files/0002-Improve-reproducibility.patch
+index 1fa3594b26..c1b0db3ce2 100644
+--- a/meta-oe/recipes-dbs/postgresql/files/0002-Improve-reproducibility.patch
++++ b/meta-oe/recipes-dbs/postgresql/files/0002-Improve-reproducibility.patch
+@@ -24,7 +24,7 @@ Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+  1 file changed, 3 deletions(-)
+ 
+ diff --git a/src/common/Makefile b/src/common/Makefile
+-index 2c720ca..c3d889c 100644
++index cd48a55..49e3c32 100644
+ --- a/src/common/Makefile
+ +++ b/src/common/Makefile
+ @@ -31,9 +31,6 @@ include $(top_builddir)/src/Makefile.global
+diff --git a/meta-oe/recipes-dbs/postgresql/files/0003-configure.ac-bypass-autoconf-2.69-version-check.patch b/meta-oe/recipes-dbs/postgresql/files/0003-configure.ac-bypass-autoconf-2.69-version-check.patch
+index a874db39ff..4e69f6cf9c 100644
+--- a/meta-oe/recipes-dbs/postgresql/files/0003-configure.ac-bypass-autoconf-2.69-version-check.patch
++++ b/meta-oe/recipes-dbs/postgresql/files/0003-configure.ac-bypass-autoconf-2.69-version-check.patch
+@@ -14,17 +14,17 @@ Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+  1 file changed, 4 deletions(-)
+ 
+ diff --git a/configure.ac b/configure.ac
+-index 3081ad7..3a0fc92 100644
++index 85150e2..db975ae 100644
+ --- a/configure.ac
+ +++ b/configure.ac
+ @@ -19,10 +19,6 @@ m4_pattern_forbid(^PGAC_)dnl to catch undefined macros
+  
+- AC_INIT([PostgreSQL], [18.6], [pgsql-bugs@lists.postgresql.org], [], [https://www.postgresql.org/])
++ AC_INIT([PostgreSQL], [19.0], [pgsql-bugs@lists.postgresql.org], [], [https://www.postgresql.org/])
+  
+ -m4_if(m4_defn([m4_PACKAGE_VERSION]), [2.69], [], [m4_fatal([Autoconf version 2.69 is required.
+ -Untested combinations of 'autoconf' and PostgreSQL versions are not
+ -recommended.  You can remove the check from 'configure.ac' but it is then
+ -your responsibility whether the result works or not.])])
+- AC_COPYRIGHT([Copyright (c) 1996-2025, PostgreSQL Global Development Group])
++ AC_COPYRIGHT([Copyright (c) 1996-2026, PostgreSQL Global Development Group])
+  AC_CONFIG_SRCDIR([src/backend/access/common/heaptuple.c])
+  AC_CONFIG_AUX_DIR(config)
+diff --git a/meta-oe/recipes-dbs/postgresql/files/0004-config_info.c-not-expose-build-info.patch b/meta-oe/recipes-dbs/postgresql/files/0004-config_info.c-not-expose-build-info.patch
+index 25a9bff52c..1e85374375 100644
+--- a/meta-oe/recipes-dbs/postgresql/files/0004-config_info.c-not-expose-build-info.patch
++++ b/meta-oe/recipes-dbs/postgresql/files/0004-config_info.c-not-expose-build-info.patch
+@@ -15,10 +15,10 @@ Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+  2 files changed, 2 insertions(+), 70 deletions(-)
+ 
+ diff --git a/configure.ac b/configure.ac
+-index 3a0fc92..88b8f1c 100644
++index db975ae..6afd525 100644
+ --- a/configure.ac
+ +++ b/configure.ac
+-@@ -23,7 +23,7 @@ AC_COPYRIGHT([Copyright (c) 1996-2025, PostgreSQL Global Development Group])
++@@ -23,7 +23,7 @@ AC_COPYRIGHT([Copyright (c) 1996-2026, PostgreSQL Global Development Group])
+  AC_CONFIG_SRCDIR([src/backend/access/common/heaptuple.c])
+  AC_CONFIG_AUX_DIR(config)
+  AC_PREFIX_DEFAULT(/usr/local/pgsql)
+@@ -28,7 +28,7 @@ index 3a0fc92..88b8f1c 100644
+  [PG_MAJORVERSION=`expr "$PACKAGE_VERSION" : '\([0-9][0-9]*\)'`]
+  [PG_MINORVERSION=`expr "$PACKAGE_VERSION" : '.*\.\([0-9][0-9]*\)'`]
+ diff --git a/src/common/config_info.c b/src/common/config_info.c
+-index 113a8a6..b8f21c8 100644
++index 572ae3a..34a4cae 100644
+ --- a/src/common/config_info.c
+ +++ b/src/common/config_info.c
+ @@ -38,7 +38,7 @@ get_configdata(const char *my_exec_path, size_t *configdata_len)
+diff --git a/meta-oe/recipes-dbs/postgresql/files/0005-postgresql-fix-ptest-failure-of-sysviews.patch b/meta-oe/recipes-dbs/postgresql/files/0005-postgresql-fix-ptest-failure-of-sysviews.patch
+index 4e9b1a27c2..1c9760055d 100644
+--- a/meta-oe/recipes-dbs/postgresql/files/0005-postgresql-fix-ptest-failure-of-sysviews.patch
++++ b/meta-oe/recipes-dbs/postgresql/files/0005-postgresql-fix-ptest-failure-of-sysviews.patch
+@@ -22,7 +22,7 @@ Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+  2 files changed, 2 insertions(+), 2 deletions(-)
+ 
+ diff --git a/src/test/regress/expected/sysviews.out b/src/test/regress/expected/sysviews.out
+-index 83228cf..c378012 100644
++index 132b56a..318c39b 100644
+ --- a/src/test/regress/expected/sysviews.out
+ +++ b/src/test/regress/expected/sysviews.out
+ @@ -66,7 +66,7 @@ and c1.path[c2.level] = c2.path[c2.level];
+@@ -35,7 +35,7 @@ index 83228cf..c378012 100644
+  ----
+   t
+ diff --git a/src/test/regress/sql/sysviews.sql b/src/test/regress/sql/sysviews.sql
+-index 66179f0..0f15661 100644
++index 507e400..bebb838 100644
+ --- a/src/test/regress/sql/sysviews.sql
+ +++ b/src/test/regress/sql/sysviews.sql
+ @@ -43,7 +43,7 @@ where c2.name = 'CacheMemoryContext'
+diff --git a/meta-oe/recipes-dbs/postgresql/files/not-check-libperl.patch b/meta-oe/recipes-dbs/postgresql/files/not-check-libperl.patch
+index 0a1406bc8d..4ef5d7df45 100644
+--- a/meta-oe/recipes-dbs/postgresql/files/not-check-libperl.patch
++++ b/meta-oe/recipes-dbs/postgresql/files/not-check-libperl.patch
+@@ -21,10 +21,10 @@ Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+  1 file changed, 1 insertion(+), 1 deletion(-)
+ 
+ diff --git a/configure.ac b/configure.ac
+-index 527437e..3081ad7 100644
++index 3ea316b..85150e2 100644
+ --- a/configure.ac
+ +++ b/configure.ac
+-@@ -2354,7 +2354,7 @@ Use --without-tcl to disable building PL/Tcl.])
++@@ -2432,7 +2432,7 @@ Use --without-tcl to disable building PL/Tcl.])
+  fi
+  
+  # check for <perl.h>
+diff --git a/meta-oe/recipes-dbs/postgresql/postgresql.inc b/meta-oe/recipes-dbs/postgresql/postgresql.inc
+index 2deb35b065..21dbad30f3 100644
+--- a/meta-oe/recipes-dbs/postgresql/postgresql.inc
++++ b/meta-oe/recipes-dbs/postgresql/postgresql.inc
+@@ -32,6 +32,8 @@ SRC_URI = "https://ftp.postgresql.org/pub/source/v${PV}/${BP}.tar.bz2 \
+     file://run-ptest \
+     file://pg_config \
+ "
++UPSTREAM_CHECK_URI = "https://ftp.postgresql.org/pub/source/"
++UPSTREAM_CHECK_REGEX = "v(?P<pver>\d+(\.\d+)+)/"
+ 
+ LEAD_SONAME = "libpq.so"
+ 
+diff --git a/meta-oe/recipes-dbs/postgresql/postgresql_18.6.bb b/meta-oe/recipes-dbs/postgresql/postgresql_19.0.bb
+similarity index 87%
+rename from meta-oe/recipes-dbs/postgresql/postgresql_18.6.bb
+rename to meta-oe/recipes-dbs/postgresql/postgresql_19.0.bb
+index 278d42ce3d..40631d8421 100644
+--- a/meta-oe/recipes-dbs/postgresql/postgresql_18.6.bb
++++ b/meta-oe/recipes-dbs/postgresql/postgresql_19.0.bb
+@@ -12,6 +12,6 @@ SRC_URI += "\
+    file://0001-tcl.m4-Recognize-tclsh9.patch \
+    "
+ 
+-SRC_URI[sha256sum] = "555610c24d53e4316da5b7d3fc25c279d96856d5e0e23ee308c328c5fa881d9f"
++SRC_URI[sha256sum] = "a89fd70efbad6a08c7dbed8d4872e3af30170d9e5ca9dc7906523be95b4e692d"
+ 
+ CVE_STATUS[CVE-2017-8806] = "not-applicable-config: Doesn't apply to our configuration of postgresql so we can safely ignore it."
