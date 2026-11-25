@@ -1,460 +1,206 @@
-Received: from mail-dy1-f176.google.com (mail-dy1-f176.google.com [74.125.82.176])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.37948.1795594099883352445
+Received: from mail-dy1-f179.google.com (mail-dy1-f179.google.com [74.125.82.179])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.37938.1795594100933248898
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 25 Nov 2026 00:08:19 -0800
+ Wed, 25 Nov 2026 00:08:20 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=Eb8vG2YT;
- spf=pass (domain: gmail.com, ip: 74.125.82.176, mailfrom: raj.khem@gmail.com)
-Received: by mail-dy1-f176.google.com with SMTP id 5a478bee46e88-38190551625so10924640eec.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 25 Nov 2026 00:08:19 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=GIeQ5n2d;
+ spf=pass (domain: gmail.com, ip: 74.125.82.179, mailfrom: raj.khem@gmail.com)
+Received: by mail-dy1-f179.google.com with SMTP id 5a478bee46e88-38190551625so10924661eec.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 25 Nov 2026 00:08:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795594099; x=1796198899; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1795594100; x=1796198900; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=syy2hF49+XpusiacvsrruCFY5B6Tt2pdLY7EYpO4ojM=;
-        b=Eb8vG2YTO3MrGQ+MYiDUEI7fDuDsNyMTmMsayseRtLrJjDpPIQA4yB7FUswu1AsdRY
-         EjP6NsmYN32cavPLvUzEfbN3ZebSubg3nUyEHl7tISfCpE9/iZ+96PZi+gjP/Va15r4r
-         YBgdPbIY80yWiJOtBvbOBPsSqNaSqXIRU34zTt0iZrzQJS4pEx+XZj4cK8KqYk2lQHf9
-         VV9ccjyGGfc6EsvB3z2Ox1ONwEpE88E/F2nmi+Egu0dCZkPZpniT/v4gFWYwBnUHaw0Z
-         WsYiv28Oxlzj5pD4UkxXILA9k4LjnyJRxSoeGvA2XEwf/e2pYxtXhocYfhGnYDzizu5q
-         r+4w==
+        bh=2FBj0qscUA/37QWKcvPuQBhShVmnJjw2jNRc4s5J7oI=;
+        b=GIeQ5n2dof9GBgxBsAYxokJucJrbTbtzjG933hTgfAlSi4lPT6/XJM2KzOcrJ4KUUd
+         VRS7zvSE0IvL6b2zkAz0YDc/cjRb8HZv3SxdUM9nwdoFZdV48UiifhDFNwBflikYDPcL
+         5u/xTi6OjqMhekSOs7yJm2kecSrMwLkz1Uve4bHudFjy4E9HkGoRU+qS4qyFYf4AVC5w
+         2zlgqFRBQNp8EMAt2WXTBn6+Vr3NMtFWA4TDGgv9WekNh4AOHPR2VtMHlAgm+/nSIA+3
+         qUffU+FM450d8vDTzwjWm2lOdEEfK03VUnkX5SU8WCuK8a2YvhNNDRuLCHw+mt4l7N7Z
+         plzQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795594099; x=1796198899;
+        d=1e100.net; s=20260707; t=1795594100; x=1796198900;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=syy2hF49+XpusiacvsrruCFY5B6Tt2pdLY7EYpO4ojM=;
-        b=P4xHQp+n6Hjp7HP6nCr0LziFA3MVG6GqOO4YtifAKMrZeolUteVN4+LyqRedyspUUV
-         j6kjwZsopdnTvNB9pqnTwsJ1NJkADdFZ5H9PbQSH1Mo5sDBCOb4fDSCGub9zGG21RHxW
-         O3nSyZNQhRZlYNDf4OEgJ5uyXdywFiKvyimyF9UKcZrxLEz1y8FnFXqGsQm9B/n4iIXv
-         JcSV3spiSicLHUi6kSsFwr4dG/pdfT4Vwx4pgoPI1HJoqM5d5TfD3/3bmI6tn+X9Jfr3
-         d2KaLuKDZ1NcWEMXn1wajZJf6GmC1SKPutvMbLYCfSZCABkGPJk+1NbWVOL7K2lu5iqQ
-         bkzg==
-X-Gm-Message-State: APuU4Z81q94pOIolggtgCujRnsgQ7pKBUcnXB1LbeAq1RvsCI0IS/INN
-	WlDTAwxoakl7V9ccGROa3TY+PEdFBgyx5xJuC/TCgR0/Kw4Nje53N/WkMc0jGeiT
-X-Gm-Gg: AZFdTZcnMJb3ZMqDiwEchSWenaArw55X+b2Bq1G5JJOjhGUYvNH4byRYWoOOLcRkEHR
-	gTJRhHMJ/1vrGiTDjOo37TmcbcCvnMkO2WyQinQIkKxlv0bI4rI9G5QucGRrB+8352QFwtonpzS
-	E757SGs0V7WJm9PPNafyx8BuqnM+0uwelzljom8yXP2o7OQk4iR+j42uYdYp1lrfkMaepFgwiwl
-	QW2PbLEcl13SIbsBIAnT/K1X5Ncv6wWBvqtukmUk+/4wi/PE6dFRUgcPNJwFq7QkaKrEi4PT8Id
-	MAOLv/vZP1Pmd9IqY1RNdqKj8tBF2CwowAYBY07f0V+aXoW3D6grVna3d8i2Kw7Omc+zIKvxyq7
-	tHkN7QqKToe2ivw2cWgPDKoah88z4dI0vEDGWyB1quluYGlcrdVkyZ/N9B4rEl8jGycQTybfY6J
-	VL2Q9nTQIXU9Hg+QBZ9ej6YWcAbxgYm9dtN+teVRHpMWE0Kt1FCyRck4A8PyzlS3MFflwg+9cNf
-	Hsv3QqE+VFeeQaJCJFEg5aKJf7MKeOcrQ9wxogUG9bCbsd66NpznEXAJADRU3aOE0DSaNOlmhlN
-	E6pv81ZikOe2pdhxIkJDVobPfA4VKlzyCZdk8FyFbsiwovetclUIaL0e+yTZ49JN4XMXHmY/ppR
-	XqhbWSYzAG5S5eyIP2m8hHHSdvr3SYGNXpGE//d1Ccd086xk+eVxrktu19lvS4OTavVIbKeZQQT
-	bexyRRBwJtgywZAiceXC44R5rLtfwrHZjfBV5yYLtFgHPO3SIKFWxlkVKVWv78Cmqj8yPfUSAZS
-	GnUY58aQVjpfalv1jqD3b9yH9gm2VmW9hGk3JprPf4OpshtAcS5RodXKPxluE4jhpTlmQef4uUf
-	vZ1m
-X-Received: by 2002:a05:7301:6192:10b0:386:a7f2:88e2 with SMTP id 5a478bee46e88-386a7f28967mr10615504eec.23.1795594099064;
-        Wed, 25 Nov 2026 00:08:19 -0800 (PST)
+        bh=2FBj0qscUA/37QWKcvPuQBhShVmnJjw2jNRc4s5J7oI=;
+        b=1yfzL/C6sOLTJAbUd/DlDiM9WDuUn6nVWdFr9zygSJ8kMr5h5vpBFjXgEzAuhF7WPE
+         W9T25xak9/i1tJ/AzZox/sskNu2PixUTEUxsDPpiY+n1rHJhTMBeFpssUKpxfODriY0g
+         b4wK0LyCfCq0jW77mWb6+0zgiDwkOvZ5Vwv0JR0wgynG5yb8kBswuFb6bdrixMyne/Jq
+         J7NYjGhMD7IFSpbrZDoh+zQrT66mRdNCsdTVOjSubR90CNHQaOicjY5DT6dD31s7dSmD
+         E3fWHo63rOpDS8Jf2Vw884mr6vRlEdtDhWw5Td0+vRgenIRmCLrebzOfhhMRsXYSgeb8
+         qpmQ==
+X-Gm-Message-State: APuU4Z8DCvq/DNoocSXb4hDPTeY6vqzxeZmLuKKu8sPrGnFErkwJYbIt
+	TTObyyjFfqJHIwcCNIYQ6fgTTxlXYbJ+uEq6DeIyBSIlXOA74b84hu2BKsAh4TeU
+X-Gm-Gg: AZFdTZf5E8p5PIRl0tUtX8/rBQOxXED2qRu5sYFIZZ7J+3OfgNx1KqqHGv3O4abmWKZ
+	Rjbm54/ESiWKcC5DMerBHmGK1lDyxVmQj7pMKs0AZI9XiSjZxPOllVz+StTYUru97ZHKYkyfq64
+	ysEbHoa66cIj++WniiPtt9z2mX/ve237dwFXGEx5OZFv5R4hBBWj7V0bUWbZcoyLwKFu8kkhodt
+	73Rph42fLvzCwDYqhEqZMPq4FjgHuQZVTMACCMrA0/0RWVRYDFPpcR0CoY8/EUIcjimBXZ6EK5O
+	9UmUKjvZTHL2hREl4KSUh8pTaK7x2bfcMrkgyq68yNvtwMk+JGGoMBb4vf8XD7emjwpqJaZsQcu
+	g2ftuUF3hX1+Gi/yrI/eHB/aYy7bshqJkIzZ5FJf0xPLVoJQVW3IPDBo8Qu0Bw2ssCEQpjIPWvo
+	SQMxVJGbc3WDJ+iqwtObFXVVoCe321jUt2tuB9mv9ouIA9X16HJh+tlQg0urh5NnAe2IPppjF7m
+	Mxs+xcazQVO9M0byoAcFuFSkJSKoCI7Vbhb0+gt1ROCw79AgtCI61kVybSyTxuAuF5NFdPPz5OP
+	+3TCHeBD8gqj6Xu6ce2xHFxOWLsKwjyj5o7IJVztvSDFgAuWSmP6CKwvG/e3OdML+r7xtp8he87
+	AzTWn/0TjlyR9Ig7Tydc5yAwDuqu/lQQkmFM9RhC9Af4DOSmhUq0JikWINIIRwuNPcO6m66nUVG
+	PzA2JEjL7slE9Y+KMLnuId6aldCALpUfrvPwq0gsymcvOTID9xoFXeDVXH+sWnS2BKRU/LC01l2
+	HOxC5xu1x38ucOU8F+mqQOWqvQ98iEWAB4W3tAZSdZST36T292HnpkkaP8jT+LS3JBX8Qd05wjR
+	S3dF
+X-Received: by 2002:a05:693c:8642:20b0:386:9e22:ca4c with SMTP id 5a478bee46e88-3869e22cc7emr15585867eec.35.1795594100193;
+        Wed, 25 Nov 2026 00:08:20 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-385646633d0sm90997971eec.3.2026.11.25.00.08.17
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-385646633d0sm90997971eec.3.2026.11.25.00.08.19
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 25 Nov 2026 00:08:18 -0800 (PST)
+        Wed, 25 Nov 2026 00:08:19 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-oe][PATCH 29/55] android-tools: Fix build with protobuf >= 36
-Date: Wed, 25 Nov 2026 00:06:45 -0800
-Message-ID: <20261125080732.2419614-35-khem.raj@oss.qualcomm.com>
+Subject: [meta-oe][PATCH 30/55] ceres-solver: Support Eigen 5
+Date: Wed, 25 Nov 2026 00:06:46 -0800
+Message-ID: <20261125080732.2419614-36-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.1
 In-Reply-To: <20261125080732.2419614-1-khem.raj@oss.qualcomm.com>
 References: <20261125080732.2419614-1-khem.raj@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Wed, 25 Nov 2026 08:08:23 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/133032
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Wed, 25 Nov 2026 08:08:24 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/133033
 Content-Type: text/plain; charset="utf-8"
 
-protobuf 36's descriptor.h includes absl/log/log.h, whose LOG and VLOG
-macros replace the libbase ones that adb uses, so adb's D() trace macro
-expands to Abseil logging and fails with "use of undeclared identifier
-'STATELESS'" (e.g. in daemon/jdwp_service.cpp).
+Eigen 5.0 uses strict version matching in Eigen3ConfigVersion.cmake,
+so find_package(Eigen3 3.3) rejects 5.0.x and configure fails. Its
+runtime thin/full SVD options are also deprecated in favour of
+compile-time options.
 
-Backport the fix from nmeum/android-tools, which includes descriptor.h
-first from sysdeps.h so libbase's macros win, adapted to the Debian
-35.0.2 source layout.
+Backport the upstream fix, which searches for the version range
+3.3...5 first and falls back to the old lookup for Eigen 3.x configs,
+and uses compile-time SVD options with Eigen >= 5. The CMake hunk is
+adjusted for 2.2.0, whose minimum is Eigen 3.3 instead of 3.3.4.
 
-This older source includes sysdeps.h late in more files, and the Debian
-makefiles also build adbd, so more sources need the same treatment:
-include sysdeps.h (or the protobuf header) before libbase's logging
-headers, otherwise adb and adbd fail to link with absl VLogSite
-undefined and other files log through Abseil. Also rename usb_ffs.cpp's
-strings descriptor, which clashes with the global namespace strings
-declared by Abseil's cord.h.
-
-Add an upstream version check against the Debian pool.
+Add UPSTREAM_CHECK_GITTAGREGEX matching release tags only.
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- ...-logging-macros-after-protobuf-inclu.patch |  67 +++++
- ...bbase-logging-macros-in-more-sources.patch | 257 ++++++++++++++++++
- .../android-tools/android-tools_35.0.2.bb     |   5 +
- 3 files changed, 329 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/android-tools/android-tools/0017-adb-keep-libbase-logging-macros-after-protobuf-inclu.patch
- create mode 100644 meta-oe/recipes-devtools/android-tools/android-tools/0018-adb-keep-libbase-logging-macros-in-more-sources.patch
+ .../0001-Support-Eigen3-5.0.0.patch           | 91 +++++++++++++++++++
+ .../ceres-solver/ceres-solver_2.2.0.bb        |  5 +-
+ 2 files changed, 95 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-support/ceres-solver/ceres-solver/0001-Support-Eigen3-5.0.0.patch
 
-diff --git a/meta-oe/recipes-devtools/android-tools/android-tools/0017-adb-keep-libbase-logging-macros-after-protobuf-inclu.patch b/meta-oe/recipes-devtools/android-tools/android-tools/0017-adb-keep-libbase-logging-macros-after-protobuf-inclu.patch
+diff --git a/meta-oe/recipes-support/ceres-solver/ceres-solver/0001-Support-Eigen3-5.0.0.patch b/meta-oe/recipes-support/ceres-solver/ceres-solver/0001-Support-Eigen3-5.0.0.patch
 new file mode 100644
-index 0000000000..e76a9d345e
+index 0000000000..2873e4d995
 --- /dev/null
-+++ b/meta-oe/recipes-devtools/android-tools/android-tools/0017-adb-keep-libbase-logging-macros-after-protobuf-inclu.patch
-@@ -0,0 +1,67 @@
-+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
-+From: Felix Yan <felixonmars@archlinux.org>
-+Date: Thu, 27 Aug 2026 16:00:00 +0800
-+Subject: [PATCH] adb: keep libbase logging macros after protobuf includes
++++ b/meta-oe/recipes-support/ceres-solver/ceres-solver/0001-Support-Eigen3-5.0.0.patch
+@@ -0,0 +1,91 @@
++From f9b7b6651b108136a16df44d91fb31735645f5a7 Mon Sep 17 00:00:00 2001
++From: Sergiu Deitsch <sergiu.deitsch@gmail.com>
++Date: Sun, 28 Sep 2025 08:35:06 +0200
++Subject: [PATCH] Support Eigen3 5.0.0
 +
-+Protobuf 36's descriptor.h includes absl/log/log.h, which defines the
-+short LOG and VLOG macros. Several adb sources include generated protobuf
-+headers after adb's libbase logging/trace headers; those protobuf headers
-+then replace adb's macros and make adb_trace.h's LOG(DEBUG) expand as
-+Abseil logging, where DEBUG is not a valid severity.
++Change-Id: I5cf476a6d8c090861f4ea4a254a35d39e36a6d68
 +
-+sysdeps.h is the first include for most adb translation units. Include
-+descriptor.h first from it, so Abseil's short logging macros are seen
-+before android-base/logging.h and adb_trace.h install adb's macros.
-+Include sysdeps.h first from adb_install.cpp too.
++Adjusted for 2.2.0, which still requires Eigen 3.3 instead of 3.3.4.
 +
-+This keeps adb's logging behavior intact and avoids per-include macro
-+save/restore blocks.
-+
-+Adapted to the Debian android-platform-tools 35.0.2 source layout. This
-+version's sysdeps.h has no protobuf-first include yet, and has no
-+mdns_tracker.cpp. Includes the adb_install.cpp change from the follow-up
-+commit
-+https://github.com/nmeum/android-tools/commit/9a1844a13b5519a879de88f1dcb1c06fcad15780
-+
-+Upstream-Status: Backport [https://github.com/nmeum/android-tools/commit/69a8c54dcd8c49d5b5eb22fa5c3c992d80e0bb2b]
-+AI-Generated: Uses Claude Code
++Upstream-Status: Backport [https://github.com/ceres-solver/ceres-solver/commit/f9b7b6651b108136a16df44d91fb31735645f5a7]
 +Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 +---
-+ packages/modules/adb/client/adb_install.cpp | 2 +-
-+ packages/modules/adb/sysdeps.h              | 7 +++++++
-+ 2 files changed, 8 insertions(+), 1 deletion(-)
++ CMakeLists.txt                     | 27 ++++++++++++++++++++++++++-
++ internal/ceres/covariance_impl.cc  |  5 +++++
++ internal/ceres/invert_psd_matrix.h |  4 ++++
++ 3 files changed, 35 insertions(+), 1 deletion(-)
 +
-+--- a/packages/modules/adb/client/adb_install.cpp
-++++ b/packages/modules/adb/client/adb_install.cpp
-+@@ -14,6 +14,7 @@
-+  * limitations under the License.
-+  */
++diff --git a/CMakeLists.txt b/CMakeLists.txt
++index 8e49c19..a186e99 100644
++--- a/CMakeLists.txt
+++++ b/CMakeLists.txt
++@@ -180,9 +180,34 @@ endif (IOS)
 + 
-++#include "sysdeps.h"
-+ #include "adb_install.h"
++ unset(CERES_COMPILE_OPTIONS)
 + 
-+ #include <fcntl.h>
-+@@ -39,7 +40,6 @@
-+ #include "commandline.h"
-+ #include "fastdeploy.h"
-+ #include "incremental.h"
-+-#include "sysdeps.h"
-+ 
-+ using namespace std::literals;
-+ 
-+--- a/packages/modules/adb/sysdeps.h
-++++ b/packages/modules/adb/sysdeps.h
-+@@ -24,6 +24,13 @@
-+ #  undef _WIN32
-+ #endif
-+ 
-++// Include protobuf headers first, because they expose Abseil's LOG/VLOG macros
-++// that android-base/logging.h and adb_trace.h redefine later. Not all modules
-++// that include sysdeps.h use protobufs, so only include them if they exist.
-++#if __has_include("google/protobuf/descriptor.h")
-++#include "google/protobuf/descriptor.h"
-++#endif
+++# We call find_package multiple time with different versioning scheme to support
+++# both Eigen3 3.x and 5.x. If the first invocation fails and Eigen3_DIR was set
+++# to a possible location, e.g., during cross-compilation, failure to locate the
+++# package will unset the variable. To avoid losing the path hint, we save it and
+++# reuse it in the second find_package call.
+++set (_Ceres_Eigen3_DIR)
 ++
-+ #include <errno.h>
-+ 
-+ #include <optional>
-diff --git a/meta-oe/recipes-devtools/android-tools/android-tools/0018-adb-keep-libbase-logging-macros-in-more-sources.patch b/meta-oe/recipes-devtools/android-tools/android-tools/0018-adb-keep-libbase-logging-macros-in-more-sources.patch
-new file mode 100644
-index 0000000000..fc00ead361
---- /dev/null
-+++ b/meta-oe/recipes-devtools/android-tools/android-tools/0018-adb-keep-libbase-logging-macros-in-more-sources.patch
-@@ -0,0 +1,257 @@
-+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <khem.raj@oss.qualcomm.com>
-+Date: Mon, 23 Nov 2026 12:00:00 -0800
-+Subject: [PATCH] adb: keep libbase logging macros in more sources
-+
-+With protobuf >= 36, a protobuf header included after
-+android-base/logging.h or adb_trace.h replaces the LOG/VLOG macros with
-+Abseil's. The previous patch includes descriptor.h from sysdeps.h, so
-+include sysdeps.h before libbase's logging headers in the adb, adbd and
-+libadb sources that include them first, and include pairing.pb.h first
-+in pairing_connection.cpp, which does not use sysdeps.h. Otherwise VLOG
-+expands to Abseil's and adb/adbd fail to link with undefined
-+absl::log_internal::VLogSite symbols, and other files silently log
-+through Abseil instead of libbase.
-+
-+sysdeps.h redefines open/close/read as macros, so where a file includes
-+<fstream> or <sstream>, keep the standard headers before sysdeps.h.
-+
-+Abseil's cord.h declares a global namespace strings, which clashes with
-+the static strings descriptor in usb_ffs.cpp, so rename it to
-+usb_strings.
-+
-+Upstream-Status: Pending
-+AI-Generated: Uses Claude Code
-+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
-+---
-+ packages/modules/adb/adb_io.cpp                                |    2 +-
-+ packages/modules/adb/adb_listeners.cpp                         |    2 +-
-+ packages/modules/adb/adb_utils.cpp                             |    2 +-
-+ packages/modules/adb/client/adb_wifi.cpp                       |    7 ++++---
-+ packages/modules/adb/client/incremental_server.cpp             |    3 ++-
-+ packages/modules/adb/client/incremental_utils.cpp              |    2 +-
-+ packages/modules/adb/client/pairing/pairing_client.cpp         |    3 ++-
-+ packages/modules/adb/daemon/adb_wifi.cpp                       |    2 +-
-+ packages/modules/adb/daemon/usb_ffs.cpp                        |    6 +++---
-+ packages/modules/adb/pairing_connection/pairing_connection.cpp |    4 ++--
-+ packages/modules/adb/transport_fd.cpp                          |    3 ++-
-+ 11 files changed, 20 insertions(+), 16 deletions(-)
-+
-+--- a/packages/modules/adb/adb_io.cpp
-++++ b/packages/modules/adb/adb_io.cpp
-+@@ -16,6 +16,7 @@
-+ 
-+ #define TRACE_TAG RWX
-+ 
-++#include "sysdeps.h"
-+ #include "adb_io.h"
-+ 
-+ #include <unistd.h>
-+@@ -32,7 +33,6 @@
-+ #include "adb.h"
-+ #include "adb_trace.h"
-+ #include "adb_utils.h"
-+-#include "sysdeps.h"
-+ 
-+ bool SendProtocolString(borrowed_fd fd, std::string_view s) {
-+     unsigned int length = s.size();
-+--- a/packages/modules/adb/adb_listeners.cpp
-++++ b/packages/modules/adb/adb_listeners.cpp
-+@@ -14,6 +14,7 @@
-+  * limitations under the License.
-+  */
-+ 
-++#include "sysdeps.h"
-+ #include "adb_listeners.h"
-+ 
-+ #include <stdio.h>
-+@@ -29,7 +30,6 @@
-+ #include <cutils/sockets.h>
-+ 
-+ #include "socket_spec.h"
-+-#include "sysdeps.h"
-+ #include "transport.h"
-+ 
-+ // A listener is an entity which binds to a local port and, upon receiving a connection on that
-+--- a/packages/modules/adb/adb_utils.cpp
-++++ b/packages/modules/adb/adb_utils.cpp
-+@@ -16,6 +16,7 @@
-+ 
-+ #define TRACE_TAG ADB
-+ 
-++#include "sysdeps.h"
-+ #include "adb_utils.h"
-+ #include "adb_unique_fd.h"
-+ 
-+@@ -35,7 +36,6 @@
-+ 
-+ #include "adb.h"
-+ #include "adb_trace.h"
-+-#include "sysdeps.h"
-+ 
-+ #ifdef _WIN32
-+ #  ifndef WIN32_LEAN_AND_MEAN
-+--- a/packages/modules/adb/client/adb_wifi.cpp
-++++ b/packages/modules/adb/client/adb_wifi.cpp
-+@@ -14,13 +14,15 @@
-+  * limitations under the License.
-+  */
-+ 
-+-#include "adb_wifi.h"
-+-
-+ #include <fstream>
-+ #include <random>
-+ #include <thread>
-+ #include <type_traits>
-+ 
-++#include "sysdeps.h"
+++if (Eigen3_DIR)
+++  set (_Ceres_Eigen3_DIR "${Eigen3_DIR}")
+++endif (Eigen3_DIR)
 ++
-++#include "adb_wifi.h"
++ # Eigen.
++ # Eigen delivers Eigen3Config.cmake since v3.3.3
++-find_package(Eigen3 3.3 REQUIRED)
+++find_package(Eigen3 3.3...5 NO_MODULE)
 ++
-+ #include <adb/crypto/key.h>
-+ #include <adb/crypto/x509_generator.h>
-+ #include <android-base/file.h>
-+@@ -32,7 +34,6 @@
-+ #include "adb_mdns.h"
-+ #include "adb_utils.h"
-+ #include "client/adb_client.h"
-+-#include "sysdeps.h"
-+ 
-+ using adbwifi::pairing::PairingClient;
-+ using namespace adb::crypto;
-+--- a/packages/modules/adb/client/incremental_server.cpp
-++++ b/packages/modules/adb/client/incremental_server.cpp
-+@@ -34,6 +34,8 @@
-+ #include <type_traits>
-+ #include <unordered_set>
-+ 
-++#include "sysdeps.h"
+++if (NOT Eigen3_FOUND)
+++  if (_Ceres_Eigen3_DIR)
+++    set (Eigen3_DIR "${_Ceres_Eigen3_DIR}")
+++  endif (_Ceres_Eigen3_DIR)
+++  # Eigen3's CMake package config prior to 5.0.0 does not support version ranges
+++  # with different major version components. To ensure backward compatibility,
+++  # we locate the package using the previous version scheme as a fallback
+++  # mechanism.
+++  find_package(Eigen3 3.3 REQUIRED)
+++endif (NOT Eigen3_FOUND)
 ++
-+ #include "adb.h"
-+ #include "adb_client.h"
-+ #include "adb_io.h"
-+@@ -41,7 +43,6 @@
-+ #include "adb_unique_fd.h"
-+ #include "adb_utils.h"
-+ #include "incremental_utils.h"
-+-#include "sysdeps.h"
-+ 
-+ namespace incremental {
-+ 
-+--- a/packages/modules/adb/client/incremental_utils.cpp
-++++ b/packages/modules/adb/client/incremental_utils.cpp
-+@@ -16,6 +16,7 @@
-+ 
-+ #define TRACE_TAG INCREMENTAL
-+ 
-++#include "sysdeps.h"
-+ #include "incremental_utils.h"
-+ 
-+ #include <android-base/endian.h>
-+@@ -32,7 +33,6 @@
-+ 
-+ #include "adb_io.h"
-+ #include "adb_trace.h"
-+-#include "sysdeps.h"
-+ 
-+ using namespace std::literals;
-+ 
-+--- a/packages/modules/adb/client/pairing/pairing_client.cpp
-++++ b/packages/modules/adb/client/pairing/pairing_client.cpp
-+@@ -23,13 +23,14 @@
-+ #include <thread>
-+ #include <vector>
-+ 
-++#include "sysdeps.h"
+++unset (_Ceres_Eigen3_DIR)
 ++
-+ #include <android-base/logging.h>
-+ #include <android-base/parsenetaddress.h>
-+ #include <android-base/stringprintf.h>
-+ #include <android-base/thread_annotations.h>
-+ #include <android-base/unique_fd.h>
-+ #include <cutils/sockets.h>
-+-#include "sysdeps.h"
++ if (Eigen3_FOUND)
++   message("-- Found Eigen version ${Eigen3_VERSION}: ${Eigen3_DIR}")
++   if (CMAKE_SYSTEM_PROCESSOR MATCHES "^(aarch64.*|AARCH64.*)" AND
++diff --git a/internal/ceres/covariance_impl.cc b/internal/ceres/covariance_impl.cc
++index 6e8362d..deb0ce1 100644
++--- a/internal/ceres/covariance_impl.cc
+++++ b/internal/ceres/covariance_impl.cc
++@@ -723,8 +723,13 @@ bool CovarianceImpl::ComputeCovarianceValuesUsingDenseSVD() {
++   }
++   event_logger.AddEvent("ConvertToDenseMatrix");
 + 
-+ namespace adbwifi {
-+ namespace pairing {
-+--- a/packages/modules/adb/daemon/adb_wifi.cpp
-++++ b/packages/modules/adb/daemon/adb_wifi.cpp
-+@@ -14,6 +14,7 @@
-+  * limitations under the License.
-+  */
+++#if EIGEN_VERSION_AT_LEAST(5, 0, 0)
+++  Eigen::BDCSVD<Matrix, Eigen::ComputeThinU | Eigen::ComputeThinV> svd(
+++      dense_jacobian);
+++#else   // !EIGEN_VERSION_AT_LEAST(5, 0, 0)
++   Eigen::BDCSVD<Matrix> svd(dense_jacobian,
++                             Eigen::ComputeThinU | Eigen::ComputeThinV);
+++#endif  // EIGEN_VERSION_AT_LEAST(5, 0, 0)
 + 
-++#include "sysdeps.h"
-+ #include "adb_wifi.h"
++   event_logger.AddEvent("SingularValueDecomposition");
 + 
-+ #include <unistd.h>
-+@@ -24,7 +25,6 @@
++diff --git a/internal/ceres/invert_psd_matrix.h b/internal/ceres/invert_psd_matrix.h
++index bc74900..34a4698 100644
++--- a/internal/ceres/invert_psd_matrix.h
+++++ b/internal/ceres/invert_psd_matrix.h
++@@ -68,7 +68,11 @@ typename EigenTypes<kSize, kSize>::Matrix InvertPSDMatrix(
 + 
-+ #include "adb.h"
-+ #include "daemon/mdns.h"
-+-#include "sysdeps.h"
-+ #include "transport.h"
++   // For a thin SVD the number of columns of the matrix need to be dynamic.
++   using SVDMType = typename EigenTypes<kSize, Eigen::Dynamic>::Matrix;
+++#if EIGEN_VERSION_AT_LEAST(5, 0, 0)
+++  Eigen::JacobiSVD<SVDMType, Eigen::ComputeThinU | Eigen::ComputeThinV> svd(m);
+++#else   // !EIGEN_VERSION_AT_LEAST(5, 0, 0)
++   Eigen::JacobiSVD<SVDMType> svd(m, Eigen::ComputeThinU | Eigen::ComputeThinV);
+++#endif  // EIGEN_VERSION_AT_LEAST(5, 0, 0)
++   return svd.solve(MType::Identity(size, size));
++ }
 + 
-+ using namespace android::base;
-+--- a/packages/modules/adb/daemon/usb_ffs.cpp
-++++ b/packages/modules/adb/daemon/usb_ffs.cpp
-+@@ -235,10 +235,10 @@
-+         __le16 code;
-+         const char str1[sizeof(STR_INTERFACE_)];
-+     } __attribute__((packed)) lang0;
-+-} __attribute__((packed)) strings = {
-++} __attribute__((packed)) usb_strings = {
-+     .header = {
-+         .magic = cpu_to_le32(FUNCTIONFS_STRINGS_MAGIC),
-+-        .length = cpu_to_le32(sizeof(strings)),
-++        .length = cpu_to_le32(sizeof(usb_strings)),
-+         .str_count = cpu_to_le32(1),
-+         .lang_count = cpu_to_le32(1),
-+     },
-+@@ -294,7 +294,7 @@
-+             }
-+         }
-+ 
-+-        if (adb_write(control.get(), &strings, sizeof(strings)) < 0) {
-++        if (adb_write(control.get(), &usb_strings, sizeof(usb_strings)) < 0) {
-+             PLOG(ERROR) << "failed to write USB strings";
-+             return false;
-+         }
-+--- a/packages/modules/adb/pairing_connection/pairing_connection.cpp
-++++ b/packages/modules/adb/pairing_connection/pairing_connection.cpp
-+@@ -14,6 +14,8 @@
-+  * limitations under the License.
-+  */
-+ 
-++#include "pairing.pb.h"
-++
-+ #include "adb/pairing/pairing_connection.h"
-+ 
-+ #include <stddef.h>
-+@@ -32,8 +34,6 @@
-+ #include <android-base/macros.h>
-+ #include <android-base/unique_fd.h>
-+ 
-+-#include "pairing.pb.h"
-+-
-+ using namespace adb;
-+ using android::base::unique_fd;
-+ using TlsError = tls::TlsConnection::TlsError;
-+--- a/packages/modules/adb/transport_fd.cpp
-++++ b/packages/modules/adb/transport_fd.cpp
-+@@ -14,6 +14,8 @@
-+  * limitations under the License.
-+  */
-+ 
-++#include "sysdeps.h"
-++
-+ #include <stdint.h>
-+ 
-+ #include <deque>
-+@@ -28,7 +30,6 @@
-+ 
-+ #include "adb_unique_fd.h"
-+ #include "adb_utils.h"
-+-#include "sysdeps.h"
-+ #include "transport.h"
-+ #include "types.h"
-+ 
-diff --git a/meta-oe/recipes-devtools/android-tools/android-tools_35.0.2.bb b/meta-oe/recipes-devtools/android-tools/android-tools_35.0.2.bb
-index 38b522084d..c2c5ae4c86 100644
---- a/meta-oe/recipes-devtools/android-tools/android-tools_35.0.2.bb
-+++ b/meta-oe/recipes-devtools/android-tools/android-tools_35.0.2.bb
-@@ -61,6 +61,8 @@ SRC_URI = "https://deb.debian.org/debian/pool/main/a/android-platform-tools/andr
-            file://0014-daemon-auth-vendor-a-portable-b64_pton-for-non-glib.patch \
-            file://0015-adbd-make-fs-config-opt-in-on-non-android-builds.patch \
-            file://0016-libziparchive-include-cstdint-in-zip_writer.h.patch \
-+           file://0017-adb-keep-libbase-logging-macros-after-protobuf-inclu.patch \
-+           file://0018-adb-keep-libbase-logging-macros-in-more-sources.patch \
-            "
+diff --git a/meta-oe/recipes-support/ceres-solver/ceres-solver_2.2.0.bb b/meta-oe/recipes-support/ceres-solver/ceres-solver_2.2.0.bb
+index 5368bdeeb4..5c6eaf4395 100644
+--- a/meta-oe/recipes-support/ceres-solver/ceres-solver_2.2.0.bb
++++ b/meta-oe/recipes-support/ceres-solver/ceres-solver_2.2.0.bb
+@@ -5,8 +5,11 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=3585a26c9cd9ec0cb36a7d65542878ca"
  
- SRC_URI[orig.md5sum] = "352376965cdef7bd7505d8fefdd43d50"
-@@ -68,6 +70,9 @@ SRC_URI[orig.sha256sum] = "ec1d317608db3328bfbddf7152c8d7f185c7c87b2175081416344
- SRC_URI[debian.md5sum] = "1de890bd272da9e8cd35bc9579802f1f"
- SRC_URI[debian.sha256sum] = "f03a89b82ea8dfbe3cb77d5326eedf0d15984f5896885e8c5df64cf421819579"
+ DEPENDS = "libeigen"
  
-+UPSTREAM_CHECK_URI = "https://deb.debian.org/debian/pool/main/a/android-platform-tools/"
-+UPSTREAM_CHECK_REGEX = "android-platform-tools_(?P<pver>\d+(\.\d+)+)\.orig\.tar"
-+
- S = "${UNPACKDIR}/android-platform-tools-${PV}"
- B = "${UNPACKDIR}/${BPN}"
+-SRC_URI = "git://github.com/ceres-solver/ceres-solver.git;branch=master;protocol=https"
++SRC_URI = "git://github.com/ceres-solver/ceres-solver.git;branch=master;protocol=https \
++           file://0001-Support-Eigen3-5.0.0.patch \
++           "
+ SRCREV = "85331393dc0dff09f6fb9903ab0c4bfa3e134b01"
++UPSTREAM_CHECK_GITTAGREGEX = "^(?P<pver>\d+(\.\d+)+)$"
+ 
+ inherit cmake
  
