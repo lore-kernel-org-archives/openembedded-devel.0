@@ -1,116 +1,128 @@
-Received: from mail-dl1-f48.google.com (mail-dl1-f48.google.com [74.125.82.48])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.37938.1795594085730930811
+Received: from mail-dy1-f170.google.com (mail-dy1-f170.google.com [74.125.82.170])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.37947.1795594098223590539
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 25 Nov 2026 00:08:05 -0800
+ Wed, 25 Nov 2026 00:08:18 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=M+P4YJEy;
- spf=pass (domain: gmail.com, ip: 74.125.82.48, mailfrom: raj.khem@gmail.com)
-Received: by mail-dl1-f48.google.com with SMTP id a92af1059eb24-15ea896ddc8so9153257c88.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 25 Nov 2026 00:08:05 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=W2NQ1awe;
+ spf=pass (domain: gmail.com, ip: 74.125.82.170, mailfrom: raj.khem@gmail.com)
+Received: by mail-dy1-f170.google.com with SMTP id 5a478bee46e88-3869f03af6aso4706574eec.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 25 Nov 2026 00:08:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795594085; x=1796198885; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1795594098; x=1796198898; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=LYEr6/O0N1hwUb6/gkjncbkZs9xyQxWWHiNeqoofr00=;
-        b=M+P4YJEyo8Bg7AwEVJazjgpPv+9nx6ReA5PTNO78Fo2+Iwt0CGUsugaV5nYDH7xuMG
-         DO0itj5JRTame5X7K0SKw2TLvTqEkXdJJdma3jJQDyO9f0HFapevOLyZid+dYMG1sdWX
-         Qd+agUFIatVoBu4VixzDqGMO937KJKsY9lB2r6U1FcyXUWTxAXYasTxcqjroBy5litkQ
-         1fgnC0Glh1BQ7RDuMSqVlF7XMT6YnWZLbEnroB8BDc7M4SISjef/IBIa9vNtyuvtK3Lj
-         mm4Pm4QL4KHEsoQ5bqp+HLoVilq4/IoJKcJTcMLnsZ45MlpfIUwW995w+fGiVdwdMO5E
-         kEPA==
+        bh=8wyvXj4szAOE0tQfRZ5Z1ATHoeU5TGPLc76X2Wi+2Tk=;
+        b=W2NQ1aweKnlpKF/gOSo6Y4ucv6vgN71hJDSXFMpzp5W+/XMzkIzgN5Kk6eBvBRzZ6I
+         pNa0UJJWYRh5bHDwLbMla3bjGshUSz4WOcOWm9Zp3Myjiwt5/oW9Saanp4CxRKvtfVai
+         6Gan113e9it1k9LB0maYnJ9fIoA91XvhNPQZBigjPwLFYxkDnBdhgMWTm4yjMMzzPgeJ
+         488LB9NVjHNOTnDgZEdkDjJESoryeojlez0oKPu+j7nuOGVTl0TO7PE0SiiA6VrOlEA/
+         oLss5c/5g0crAKiGFapAbof8Mb5Gkt5JNRfp/cH2RqAcC7QGzRyH+HafMY0Ztt+34C8x
+         AgJw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795594085; x=1796198885;
+        d=1e100.net; s=20260707; t=1795594098; x=1796198898;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=LYEr6/O0N1hwUb6/gkjncbkZs9xyQxWWHiNeqoofr00=;
-        b=B62xl8pDHkJUOQRi1SNGt+dlWPisfkCS1HPc1L9//yhm9I1vt1679rATpAR2Bm36UA
-         P+tNcVZCgluKsjgaZCxU2qE43y4OV8D2Rn4LRbiDdv9W6aJUZ37IklPyVj2VBEipz20t
-         aBNkidWmzyXYpX2HjxUAJwOfBKRVLr8t5ywtx4gpXkpRW6smnYVVlpVyGlNbXlH84Noc
-         vRXnyqDLl2RtORk4p5gfdFbKAAWkvr2pn2h9egi2AqRdR9Dp67Do7lp+YU9TUCyq3irS
-         MUYVZE4WZfjXonkCZvqCgWn5nmzHyexK/YR0sPvn5qneBe2cJ6cEVqhiR9DM3+8AdrzL
-         dPbA==
-X-Gm-Message-State: APuU4Z8hNkMsGc73UGUGywzNYH0Myc9rSPBbPTp60imt1Ztjl+rPQfSZ
-	lBcvctn/2q26x7b8jUwNyduzP2Ns23IGDrCaEgzIjJjxRSRuUtMl5ZTu1xPmpua4
-X-Gm-Gg: AZFdTZfx1xxRvCQQM0ZXReXaHB4Obgr8rfDhX6E51sp+X6oE63VrNfD0O4YQhgM0Vm8
-	HPXDP1P+g/El/eoQNCMCS6SAyQjvOWQFFhwrczDfyBrHX7QSnwcMaA45RkkDD8vZdklkHw0vl+f
-	X9MlMwVS0p9bcy6X1YKWdx8wHCXadVu3WxQWaYwCCUZ9pSQvbAMC8dMW/hIz5ojlJuYJkb/L2TY
-	xNGTcZlqSBFMKzGSBx63lwS7dE2gOkRGqFT746gfiL4TWTkzhkIQezNXIOf3vyqflR04w5v47Ul
-	y3P+4VgggC86piyJm6rRFpsUfqpbrgPy6qqth/ydVvd68mhUVgQ/qd58HxZmIQeqGh5d1FEM4eu
-	WvZddwHZ9r+ZfuUWTVG8cFm3WJHgOAdrS8RHUR3Qd2G/eYfqzvrOs7P6bdF7B9ZguON/pF+J1of
-	wuPLQZe38jM0QKracMgpFZMxh42AJpgYpHrCzJXA2buUme+2GawR20sav2I/JhDrsfGp65sfeOc
-	Jr1oXC2LcU4DAf22CcwhJCKwix7Nz11YMst+ZVMbga7saOIQ/WYcff+/8TI3no917Om79wnnuu3
-	h6Q3XrY3nni343tWFqpbZLeKY3DCPp3N4OQqBr7UU8q90xTx7aUQAwpRhzezfe2tEhbZB/zzjFJ
-	QHR1lA15ihZ83q+8bjCNvS47EgKR98xcPPQ4SDed2mjZULYDyyLEUaSoo93Cqx3hRD23P3WqEa4
-	2sIPZSdUoekGtdow7li/kA+UQ+vYqeciQELla0Kdj9h1rM47WDCJwtfqcZKspQgJsQk7kdH/IXM
-	vWEDIkffJZcmyUpbOxIdWoS9gjjNEydUYPN/9dvOC7iKc4An2w0mvD6qOY4M6ajZwxa1X/CCWVO
-	/lMq
-X-Received: by 2002:a05:7301:4d18:b0:37d:bd4e:c378 with SMTP id 5a478bee46e88-3857181d8ddmr17242687eec.41.1795594084975;
-        Wed, 25 Nov 2026 00:08:04 -0800 (PST)
+        bh=8wyvXj4szAOE0tQfRZ5Z1ATHoeU5TGPLc76X2Wi+2Tk=;
+        b=z5qv3nlIn4JCBc+DDmxslKphU8xB5uKjVVUBrTrDeBb5W3GIg47ob888SHUTNi+6YD
+         RD0oTTUWyQb3OQlGlV6TGUvLOy8kqfhCzuRpZcDEy5c9+5W9eligux81NywBoz7K/LAB
+         iV/W9Alph8CkWo4ys+xFlSIkLvp01SRAb8Npif41uGTUJo8s29fusTJw5wt34p5w5R7k
+         W9XI0Y1ZDEytilGdvLQs1Hlp35EqsVX4DP1+XK1DYQrvIHxpurHLuhyXM0m583G1OT6M
+         o/fZ8glTJc0zwk2LL+IooVEXWyeVMn8C7PmRbLt51YSuwZX7yzgMXz8tkHs2iTqUFYHg
+         d/1w==
+X-Gm-Message-State: APuU4Z9MMX29jNSaKXsxfd0mq5gvHwLtj5u7qul5EuruMBH0klUG3fuK
+	oaSRbR1Dr2zZ8yQVKbD1tasObQNLeBlJVBqgZfmyz4aupMfJnzvYDKATGG3E2t5U
+X-Gm-Gg: AZFdTZeyS4tuUEJS7ht5LbpyjxLW+r1IvlWiVBC5PXW2Ys6BFJyeq146WmW8iGDR6+x
+	tcB/0bVng0yeb+6A+OvdyIUQormdy5PSrkOd96LpWCPGF3CBVcfwZ/SBcArPf1PJXgv3ESxiq6b
+	MZsy1beK7BEivoYbDWAqnluDicBuEZOhcsT6H1NO0c4K/b8a+ehmzj2Ib1JrRTaWSstmsbYmsgq
+	MUJ3uTMG+EeYVl8Y/dYu/m4JaB5hgVj58Jpz2pMFYdE/9fc0iIrZ4u46q82ibktypvZy7S10O3/
+	KV3dx+jQP5BZyVv1DN21XwUuzU4S7ydtYjAVv5zjgk7VJXdfNMB5ETJ0zUSOO0N7MTbItMxIIY6
+	+XiSj38Yo4RlEfritWltoaZta5IZHzU4k+ycBypJnricYO4LIStg4ut8TXhykMb5wvrCMy6BoKu
+	MBd0hOBR7V9EWAig5jl/Dm41cPACfkMaQVOV2/KWupXUYVqVTPpyYeGOHchYu8o84dRlvza+At2
+	19bhVdgvXrOKmiShQJmRCEdVZ/w/Ur7FIylzisAa037JaBV4kTJrI2PJiNVfSiPaaTy8of0ieqT
+	crXQuF9fzgwU/jVVj/THYnG7aAPOdYs1VCZiIx3Lzn3Hif85GGhlwj665eR8UKqwz7pPJsDrmDc
+	x86qdd1PKRjrT1Nd8UWgqwBuSMbwT0vcZPKHPFOhb4gLmG2MCMZhPfWE0yKtJvdfneDEQSETU+D
+	eghOFqVPM+/VSGGowUMpxuNAzIXW6H4m/LOYPXMk21Lgnr/HGVqkd0UaPQEHZRY2/vImkMsyr7z
+	oVuWHWkDW3Mk+oiLfNKE0BD+9Rd9CRsdd5eMdYJQR+DXeV6zM1S6UloGJZ0f3IHrXpWZoN9ZFsN
+	Dk9+
+X-Received: by 2002:a05:7301:5098:b0:381:5fe2:a079 with SMTP id 5a478bee46e88-3856c6b010amr17596965eec.1.1795594097596;
+        Wed, 25 Nov 2026 00:08:17 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-385646633d0sm90997971eec.3.2026.11.25.00.08.04
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-385646633d0sm90997971eec.3.2026.11.25.00.08.16
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 25 Nov 2026 00:08:04 -0800 (PST)
+        Wed, 25 Nov 2026 00:08:17 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-oe][PATCH 18/55] cbindgen: upgrade 0.29.2 -> 0.29.4
-Date: Wed, 25 Nov 2026 00:06:34 -0800
-Message-ID: <20261125080732.2419614-24-khem.raj@oss.qualcomm.com>
+Subject: [meta-oe][PATCH 28/55] protobuf: upgrade 6.33.6 -> 7.36.2
+Date: Wed, 25 Nov 2026 00:06:44 -0800
+Message-ID: <20261125080732.2419614-34-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.1
 In-Reply-To: <20261125080732.2419614-1-khem.raj@oss.qualcomm.com>
 References: <20261125080732.2419614-1-khem.raj@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Wed, 25 Nov 2026 08:08:13 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/133021
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Wed, 25 Nov 2026 08:08:23 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/133031
 Content-Type: text/plain; charset="utf-8"
 
-- Support constant enums and arrays
-- In C23 mode, define sized enums as enums instead of typedefs
-- Expose the line_endings option to the builder and allow pub access to
-  ReprType fields
-- Fix doc attribute parsing with block comments and also check CMSE ABIs
+The C++ library major version moves from 6 to 7 at protoc v34; this
+recipe now builds protoc tag v36.2 (36.x branch).
+- C++ API break in v34: FieldDescriptor::label(), is_optional() and
+  has_optional_keyword() removed, generator headers made private,
+  [[nodiscard]] added to many accessors, arena-enabled constructors of
+  RepeatedField/RepeatedPtrField/Map made private
+- Recursion limits added for JSON Any/WKT parsing and nested messages;
+  integer overflow check in RepeatedPtrField::MergeFrom
+- New protobuf_BUILD_LIBPROTOBUF option; tests are no longer built by
+  default
+- C++ and Python (python3-protobuf 7.36.2) are back on the same release
 
-Inherit cargo-update-recipe-crates so the crate list can be regenerated
-(unchanged for this release), and list the git source first so the
-upstream check reads cbindgen tags instead of the first crate. Add the
-upstream check.
+Both local patches still apply without fuzz. PV stays in the
+<cpp-major>.<protoc> form so PROTOC_VERSION/PROTOC_BRANCH derive v36.2
+and 36.x. protobuf-c needs the label() fix from the previous commit.
+
+Anchor UPSTREAM_CHECK_GITTAGREGEX to release tags only.
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- .../cbindgen/{cbindgen_0.29.2.bb => cbindgen_0.29.4.bb}  | 9 ++++++---
- 1 file changed, 6 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-devtools/cbindgen/{cbindgen_0.29.2.bb => cbindgen_0.29.4.bb} (76%)
+ .../protobuf/{protobuf_6.33.6.bb => protobuf_7.36.2.bb}   | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+ rename meta-oe/recipes-devtools/protobuf/{protobuf_6.33.6.bb => protobuf_7.36.2.bb} (95%)
 
-diff --git a/meta-oe/recipes-devtools/cbindgen/cbindgen_0.29.2.bb b/meta-oe/recipes-devtools/cbindgen/cbindgen_0.29.4.bb
-similarity index 76%
-rename from meta-oe/recipes-devtools/cbindgen/cbindgen_0.29.2.bb
-rename to meta-oe/recipes-devtools/cbindgen/cbindgen_0.29.4.bb
-index 6b5fac9d47..b5a9df4a82 100644
---- a/meta-oe/recipes-devtools/cbindgen/cbindgen_0.29.2.bb
-+++ b/meta-oe/recipes-devtools/cbindgen/cbindgen_0.29.4.bb
-@@ -3,12 +3,15 @@ HOMEPAGE = "https://github.com/mozilla/cbindgen"
- LICENSE = "MPL-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=9741c346eef56131163e13b9db1241b3"
+diff --git a/meta-oe/recipes-devtools/protobuf/protobuf_6.33.6.bb b/meta-oe/recipes-devtools/protobuf/protobuf_7.36.2.bb
+similarity index 95%
+rename from meta-oe/recipes-devtools/protobuf/protobuf_6.33.6.bb
+rename to meta-oe/recipes-devtools/protobuf/protobuf_7.36.2.bb
+index 36642d3947..b83597965b 100644
+--- a/meta-oe/recipes-devtools/protobuf/protobuf_6.33.6.bb
++++ b/meta-oe/recipes-devtools/protobuf/protobuf_7.36.2.bb
+@@ -16,7 +16,7 @@ PROTOC_BRANCH = "${@d.getVar('PV').split('.', 2)[1]}.x"
+ DEPENDS = "zlib abseil-cpp jsoncpp"
+ DEPENDS:append:class-target = " protobuf-native"
  
--require cbindgen-crates.inc
- SRC_URI += "git://github.com/mozilla/cbindgen.git;protocol=https;branch=main;tag=v${PV}"
- SRC_URI += "file://0001-Use-libc-SYS_futex_time64-on-riscv32.patch;patchdir=${UNPACKDIR}/cargo_home/bitbake/getrandom-0.3.3/"
+-SRCREV = "6e1998413a5bca7c058b85999667893f167434bc"
++SRCREV = "2c74169b34066ceb8ddb6b882fcb3fb32d737a55"
  
--SRCREV = "76f41c090c0587d940a0ef81a41c8b995f074926"
-+SRCREV = "b826cb8911488fe8a209d2b693492c0c673e8cca"
-+
-+UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
-+
-+require cbindgen-crates.inc
+ SRC_URI = "git://github.com/protocolbuffers/protobuf.git;branch=${PROTOC_BRANCH};protocol=https;tag=${PROTOC_VERSION} \
+            file://run-ptest \
+@@ -25,11 +25,11 @@ SRC_URI = "git://github.com/protocolbuffers/protobuf.git;branch=${PROTOC_BRANCH}
+            "
  
--inherit cargo pkgconfig
-+inherit cargo cargo-update-recipe-crates pkgconfig
+ # Upstream dropped the language-major prefix after v6.31.1: releases are now
+-# tagged vNN.N (v33.6 == this recipe's 6.33.6, cf. PROTOC_VERSION above). Match
++# tagged vNN.N (v36.2 == this recipe's 7.36.2, cf. PROTOC_VERSION above). Match
+ # those two-component tags so the real latest release is reported; the leading
+-# "6." in PV means the comparison stays off-by-a-major, so this reads as UPDATE
++# C++ major in PV means the comparison stays off-by-a-major, so this reads as UPDATE
+ # rather than MATCH even when current.
+-UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+\.\d+)$"
++UPSTREAM_CHECK_GITTAGREGEX = "^v(?P<pver>\d+\.\d+)$"
  
- BBCLASSEXTEND += "native"
+ CVE_PRODUCT = "google:protobuf protobuf:protobuf google-protobuf protobuf-cpp"
+ 
