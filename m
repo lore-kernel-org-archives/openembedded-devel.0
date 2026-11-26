@@ -1,211 +1,94 @@
-Received: from mail-wm1-f43.google.com (mail-wm1-f43.google.com [209.85.128.43])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.3899.1795719400340480148
+Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com [209.85.128.47])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.4143.1795720563618047307
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 26 Nov 2026 10:56:40 -0800
+ Thu, 26 Nov 2026 11:16:04 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@snap.com header.s=google header.b=dfwGPyyp;
- spf=pass (domain: snapchat.com, ip: 209.85.128.43, mailfrom: ecordonnier@snapchat.com)
-Received: by mail-wm1-f43.google.com with SMTP id 5b1f17b1804b1-4a35ac4475dso53335455e9.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 26 Nov 2026 10:56:40 -0800 (PST)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=FZcIeiEj;
+ spf=pass (domain: konsulko.com, ip: 209.85.128.47, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-wm1-f47.google.com with SMTP id 5b1f17b1804b1-4bb6ba3b244so75486525e9.3
+        for <openembedded-devel@lists.openembedded.org>; Thu, 26 Nov 2026 11:16:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=snap.com; s=google; t=1795719398; x=1796324198; darn=lists.openembedded.org;
+        d=konsulko.com; s=google; t=1795720562; x=1796325362; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=lr/N73uWz4iyC6T4ovfpDP+GXqslrE/KaBfEdNvyHH8=;
-        b=dfwGPyyp0w5RQag0vXC+TvrH0ANnayzDaXh6QVclRhFE5m6f7U9dtHIWkBgEgcIlXn
-         /cpceTbO9J77u3rkvWldE5lsdQgUNzsrZVgcrmZqWcHE14fO1evC4yuCG/H7lNU7Okxc
-         HkZylL5s+6x++bMI7Lk3Qr0jaZTjHrpWLtJdw=
+        bh=TjJcVFjl4VfSgwS0qmxioFTNj1Fqe+tFH+cvMWzEeVo=;
+        b=FZcIeiEj/9ju0PVBNbsEf8yaThuiDxUNXxW9ASpmEi6QoXcw2XSDFIcfM/4kEO5gcx
+         16pfWz5veKO3jJZh8mXF4WMFBkbewOMxlBKwQTBRGgiiZkWCGdBm9lcSfzVHyUkUE/GH
+         gEi7qDjqa25hxZMbRmHT5FoXKTlFzFEPElJUU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795719398; x=1796324198;
+        d=1e100.net; s=20260707; t=1795720562; x=1796325362;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=lr/N73uWz4iyC6T4ovfpDP+GXqslrE/KaBfEdNvyHH8=;
-        b=ZBMH4W9qSFzInP7q+nwQ2bP2rBl4jFkZFNZb3MKu+L2WkRpaTJeedUWsdulS+PZV1L
-         h0aEeFWmoCac/xmS0zbBTtDCsjYzD2A+51y4p79+att58YDX8ebMenituROSWIdgBxpB
-         6CraVAhf3LmNOGBW4huMxYJ8uKTvY9jX1zJ46TsUd6piQDM7ueehp853HwZyD5RGMsGx
-         izfG6PbtCysdhCbYeUUVIoa5yzSww/NwE9Q6eAwLahdYcINgnXSMZkZayHPLxR04SUcs
-         1ev3Vrw+VJhouk2ORKILg6ylI5JD9gGQckNbRhSpXRZS5pPkxamXCxxBGMHa378zbpv8
-         vtlQ==
-X-Gm-Message-State: APuU4Z9PVjpbWTFdKL7vSqD4Gygcc8k7S5zy9ajaBMJJjtu3Gy1r1nrU
-	VvScnTuQ6zyvAgbOi9BVv+eC5IiygrnU1ypMlusyDA9YckKUTVtmKoLkZSyyMrs242X10yj91er
-	gCUL0S/E=
-X-Gm-Gg: AZFdTZeI+yjHjp3YVd820OfxXPG97N+ifAADPjmH46CT32eNYKiIh1SDSYhZ3f4WipH
-	F2IZSwXokbjcfbW5dsQGJS+0iY2XxngdNY8rVzey8ceXCNPs9n6v3jCooYafF1tbgjFkv+Ex3V8
-	HDP5H4rdpzWt9O8nM64AroZGJANPWb+iRrPJfVA79t3eivBnPQZhTPo55xzSO+mquk0WyZP0Sp/
-	TbN1heDcTgHSbFo97cI1qBnDBAWyGaknUNoEn+R330O0CS2D2+29UG/izQA3yhvyTbniYMO28WF
-	C0HOURca1/hEMvgWC9P+nBdeMjc7LNCeudBKXWZ7WEby5rAMFzScVnwzez9JLdnJ15k2TMNPXP1
-	TijAcxsuSqL+0MJJmgqE/g5Id1Szxsj8dkyjOl1PLf91v6v9gqnuSC/H9i4NTDCptsjFJJ7xAS9
-	SMaqsWJTFNGvZSnmAZ93Ig5joBT7mcsMlN51gTs3Z8w9K+3rB1u4tQfSeWghCj2MHbHsP/BHfzx
-	SX8kzQRu+/7sG/ApwbBwBwX19YYnSQSRgiqg7L/p8kaVwjogb3lOK2QkZqgwj9fLOJsIkymHuSN
-	jXJZRjXdnibamsiMPvxd1AE+/AGY9rbps8CJj1nzCht3UR1bYK9836OAO4DU4lkJSDiTmp4CTvq
-	xVbxAOAyyurRcpS7rokivTYH4GSG2aCCaWeAh7iKIFcNpZ2d+nDi9cjEnXbZ5ZpUb2ydKFAA3lP
-	4=
-X-Received: by 2002:a05:600c:4504:b0:4a1:9078:911 with SMTP id 5b1f17b1804b1-4bb888284d7mr461938725e9.31.1795719398367;
-        Thu, 26 Nov 2026 10:56:38 -0800 (PST)
-Return-Path: <ecordonnier@snapchat.com>
-Received: from localhost.localdomain (80-108-196-96.cable.dynamic.surfer.at. [80.108.196.96])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4bb8849247asm637593405e9.7.2026.11.26.10.56.37
+        bh=TjJcVFjl4VfSgwS0qmxioFTNj1Fqe+tFH+cvMWzEeVo=;
+        b=ES0rtHsp7ONpsJSNmWhkkZI3VclNgllQ6SQV+xZ1bQXeT2JorLaxbhpaEWl+XtBENz
+         kGvcXzp1LLNmNl4Wum16bYSnk8VnS/wXayyphVzMiy2qQt1k2dbZ39vkqCBfggunp8f+
+         a3vWiA5ia/h0CgpeKHIqLo6L3fHJ8dCiioJPKH3eKG3ZoxY1mgDxpP9cH5VO1D+yKrZt
+         dFZj9C74ToASnvgCjOYX615+p/mlEDojN1kjrDuuoEBU9u4ePakoBRLGugcRn3S7OB3F
+         Nd4/+UPBOHMtmCKn3SFv+DIRCwGSzzUSpFXhtFS/FR0mlVZuCiou/APXLKfpr2YUfkvP
+         P+Pw==
+X-Gm-Message-State: APuU4Z8CFX1DDmN9ShOKGZYKYahWRKZ/D7QDcZ12qGxmQWSY20gmwku2
+	QkIaoRlVLdSGiy1x1cjb9YL5NDF7hUnx0DKybMJu+rSl/eCNbmq5DgD4iohT14wJ3PTVzIwguez
+	qpu6Y
+X-Gm-Gg: AZFdTZdRfG/QXNXcQXxUxc7s9dc0twByBfkuKDFwYCAcQkB0xmnyWWbiTfwCwtzcGKG
+	57v74k2/H5QRxrPXWkU57y9hfYkQu7gzrqtry8SI5bBdXofTnGA4gFppZtB271yq+l88HUvtuND
+	CNywtp97z5Zko5EI4u2QwE1GSOGPoLrALFMfkl1saZ0I3yviC8s2ucNbNsMay5A9uuqVkR/rXO/
+	YNVRAYNATu9iTvgXeMIrL2F+ZYmcnLuenVr2CnuCT+r5ia+8fXRzyJmxNC0Iiv1fFrdb/vLlcS/
+	joLAOYbCbyNPezdQG3EL7a+42gXs21gwB38PiRLwaHWju2wRuKvE+lPUFz48oJoW2QMXuIH3r9w
+	qSO6u/41J1XOTrUVDNTfT0BdejuJzB6QFqTj/sxhocPex7W3TAiiAeCXM60BKnh7HgLK4/ZuZHw
+	scEH3vWK/qdoTWTwgCaZN/Hi+QYQQMOQ0XFF9bRRapcKe0fQFgIbaK03eIcauUiT2HsKs3+U7Je
+	k4eWxDfauyN1x7PDAKCJZIAUT7pnady+mFZBbNW9vLI0yTgcSJzEdP3BBJR3bmZw/h/ASBiohke
+	vsEYeowYN0g6BEAme48kGpy2jJjxogWj8ga89eUXRV9deDhiLZoZ94xJlHScqgfRQdAWus9Tlyb
+	SdpaNVwc5L6fJ10xJLjbBpYT6sgmC9RR3rm8lasqmA0YlgdnNNgOVYQ==
+X-Received: by 2002:a05:600c:4514:b0:4bb:6823:3d3c with SMTP id 5b1f17b1804b1-4bb888169d0mr475961805e9.20.1795720561660;
+        Thu, 26 Nov 2026 11:16:01 -0800 (PST)
+Return-Path: <leon.anavi@konsulko.com>
+Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4bb8538b3a7sm697871515e9.3.2026.11.26.11.16.00
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 26 Nov 2026 10:56:38 -0800 (PST)
-From: ecordonnier@snap.com
+        Thu, 26 Nov 2026 11:16:01 -0800 (PST)
+From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Heinrich Fink <hfink@snap.com>,
-	Etienne Cordonnier <ecordonnier@snap.com>
-Subject: [meta-oe][PATCH] libperfetto-c: Add recipe
-Date: Thu, 26 Nov 2026 19:56:27 +0100
-Message-ID: <20261126185627.1255223-1-ecordonnier@snap.com>
-X-Mailer: git-send-email 2.43.0
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 1/2] python3-semver: Upgrade 3.1.2 -> 3.1.3
+Date: Thu, 26 Nov 2026 21:15:54 +0200
+Message-ID: <20261126191555.7597-1-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.47.3
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Thu, 26 Nov 2026 18:56:46 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/133090
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Thu, 26 Nov 2026 19:16:06 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/133091
 Content-Type: text/plain; charset="utf-8"
 
-From: Heinrich Fink <hfink@snap.com>
+Upgrade to release 3.1.3:
 
-Upstream only provides the C++ SDK as a static library or amalgamated
-source, and strongly discourages building it as a shared library [0].
-libperfetto does so anyway. The C SDK is designed as a shared library
-[1], so system components may prefer it.
+- Security fix GHSA-3qgw-g8j9-rcg4
+- Fix empty-input validation in the prefixed version example
+- Fix hash contract: equal Versions must hash equal
 
-Based on the v59.1 release. The ABI may still break with future
-upgrades until officially frozen, so the major SDK version determines
-the SO version (libperfetto_c.so.59).
-
-The amalgamated perfetto_c.cc and perfetto_c.h are not part of the
-perfetto git tree and are only shipped as a GitHub release asset, so
-fetch that tarball and build it with an added meson.build.
-
-Tested by building the recipe with poky master and capturing a trace in
-qemux86-64 with tracebox and the upstream C SDK track event example.
-
-[0] https://github.com/google/perfetto/blob/1e9c61e9844affd7dccd3d42d9ea9f3a3d10cf6d/docs/design-docs/api-and-abi.md#L491-L501
-[1] https://github.com/google/perfetto/blob/1e9c61e9844affd7dccd3d42d9ea9f3a3d10cf6d/examples/shared_lib/example_shlib_track_event.c
-
-Signed-off-by: Heinrich Fink <hfink@snap.com>
-AI-Generated: Uses Claude Code (commit message, file move)
-Signed-off-by: Etienne Cordonnier <ecordonnier@snap.com>
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../perfetto/libperfetto-c/libperfetto_c.map  |  8 +++
- .../perfetto/libperfetto-c/meson.build        | 62 +++++++++++++++++++
- .../perfetto/libperfetto-c_59.1.bb            | 22 +++++++
- 3 files changed, 92 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/perfetto/libperfetto-c/libperfetto_c.map
- create mode 100644 meta-oe/recipes-devtools/perfetto/libperfetto-c/meson.build
- create mode 100644 meta-oe/recipes-devtools/perfetto/libperfetto-c_59.1.bb
+ .../python/{python3-semver_3.1.2.bb => python3-semver_3.1.3.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-semver_3.1.2.bb => python3-semver_3.1.3.bb} (82%)
 
-diff --git a/meta-oe/recipes-devtools/perfetto/libperfetto-c/libperfetto_c.map b/meta-oe/recipes-devtools/perfetto/libperfetto-c/libperfetto_c.map
-new file mode 100644
-index 0000000000..62771847df
---- /dev/null
-+++ b/meta-oe/recipes-devtools/perfetto/libperfetto-c/libperfetto_c.map
-@@ -0,0 +1,8 @@
-+{
-+  global:
-+    perfetto_*;
-+    Perfetto*;
-+
-+  local:
-+    *;
-+};
-diff --git a/meta-oe/recipes-devtools/perfetto/libperfetto-c/meson.build b/meta-oe/recipes-devtools/perfetto/libperfetto-c/meson.build
-new file mode 100644
-index 0000000000..6e367ed1a1
---- /dev/null
-+++ b/meta-oe/recipes-devtools/perfetto/libperfetto-c/meson.build
-@@ -0,0 +1,62 @@
-+project(
-+  'libperfetto-c',
-+  ['cpp'],
-+  version : files('VERSION'),
-+  license : 'Apache-2.0',
-+  default_options : [
-+    'cpp_std=c++17',
-+    'warning_level=1',
-+  ],
-+)
-+
-+mapfile = join_paths(meson.current_source_dir(), 'libperfetto_c.map')
-+
-+thread_dep = dependency('threads')
-+
-+cpp = meson.get_compiler('cpp')
-+
-+perfetto_c_cpp_args = []
-+perfetto_c_cpp_args += cpp.get_supported_arguments([
-+  '-ffunction-sections',
-+  '-fdata-sections',
-+  '-fno-exceptions',
-+  '-fno-rtti',
-+])
-+
-+perfetto_c_link_args = []
-+perfetto_c_link_args += cpp.get_supported_link_arguments([
-+  '-static-libstdc++',
-+  '-Wl,--exclude-libs,ALL',
-+  '-Wl,--gc-sections',
-+  '-Wl,--icf=all',
-+])
-+
-+perfetto_c = shared_library(
-+  'perfetto_c',
-+  'perfetto_c.cc',
-+  dependencies : [thread_dep],
-+  install : true,
-+  version : meson.project_version(),
-+  gnu_symbol_visibility : 'inlineshidden',
-+  cpp_args : [
-+    perfetto_c_cpp_args,
-+    '-DPERFETTO_SDK_SHLIB_IMPLEMENTATION',
-+  ],
-+  link_args: [
-+    perfetto_c_link_args,
-+    '-Wl,--version-script=' + mapfile,
-+  ],
-+  link_depends : mapfile,
-+)
-+
-+install_headers('perfetto_c.h')
-+
-+pkg = import('pkgconfig')
-+pkg.generate(
-+  perfetto_c,
-+  name : 'libperfetto_c',
-+  filebase : 'libperfetto_c',
-+  description : 'Perfetto C SDK shared library',
-+  version : meson.project_version(),
-+  extra_cflags : ['-DPERFETTO_SDK_SHLIB'],
-+)
-diff --git a/meta-oe/recipes-devtools/perfetto/libperfetto-c_59.1.bb b/meta-oe/recipes-devtools/perfetto/libperfetto-c_59.1.bb
-new file mode 100644
-index 0000000000..b4ba9be850
---- /dev/null
-+++ b/meta-oe/recipes-devtools/perfetto/libperfetto-c_59.1.bb
-@@ -0,0 +1,22 @@
-+SUMMARY = "Perfetto C SDK shared library"
-+DESCRIPTION = "Shared library built from the amalgamated Perfetto C SDK sources"
-+HOMEPAGE = "https://perfetto.dev"
-+LICENSE = "Apache-2.0"
-+
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=0b17e8eda713c18363c16102cacd41f3"
-+
-+SRC_URI = "\
-+    https://github.com/google/perfetto/releases/download/v${PV}/perfetto-c-sdk-src.zip;downloadfilename=${BPN}-${PV}.zip;subdir=${BP} \
-+    file://meson.build;subdir=${BP} \
-+    file://libperfetto_c.map;subdir=${BP} \
-+"
-+
-+SRC_URI[sha256sum] = "28d497a5b01c7517b2084c4b4768a1fdbbac587242775af50f5219936056361f"
-+
-+S = "${UNPACKDIR}/${BP}"
-+
-+inherit meson
-+
-+do_configure:prepend() {
-+    echo "${PV}" > ${S}/VERSION
-+}
+diff --git a/meta-python/recipes-devtools/python/python3-semver_3.1.2.bb b/meta-python/recipes-devtools/python/python3-semver_3.1.3.bb
+similarity index 82%
+rename from meta-python/recipes-devtools/python/python3-semver_3.1.2.bb
+rename to meta-python/recipes-devtools/python/python3-semver_3.1.3.bb
+index 2d2f9f2bd7..8268095a4d 100644
+--- a/meta-python/recipes-devtools/python/python3-semver_3.1.2.bb
++++ b/meta-python/recipes-devtools/python/python3-semver_3.1.3.bb
+@@ -4,7 +4,7 @@ BUGTRACKER = "https://github.com/python-semver/python-semver"
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=3ce011bad2c5218ddd4973952a6db93a"
+ 
+-SRC_URI[sha256sum] = "bea193552413194252d33ff26ce0962b76669bd1c6fb17e8e203ac37f072feaf"
++SRC_URI[sha256sum] = "87c113ec65f76e40fa471cce41041382cecf8516240d97e0d8b29d866a0557d1"
+ 
+ inherit pypi python_setuptools_build_meta ptest-python-pytest
+ 
 -- 
-2.43.0
+2.47.3
 
