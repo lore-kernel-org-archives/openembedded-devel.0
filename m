@@ -1,196 +1,268 @@
-Received: from mail-dy1-f176.google.com (mail-dy1-f176.google.com [74.125.82.176])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.4399.1795650952411244411
+Received: from mail-dy1-f179.google.com (mail-dy1-f179.google.com [74.125.82.179])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.8044.1795669141472190948
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 25 Nov 2026 15:55:52 -0800
+ Wed, 25 Nov 2026 20:59:01 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=C8+yrJcV;
- spf=pass (domain: gmail.com, ip: 74.125.82.176, mailfrom: raj.khem@gmail.com)
-Received: by mail-dy1-f176.google.com with SMTP id 5a478bee46e88-386bd881d39so5744394eec.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 25 Nov 2026 15:55:52 -0800 (PST)
+ dkim=pass header.i=@mvista.com header.s=google header.b=cB7+QsM2;
+ spf=pass (domain: mvista.com, ip: 74.125.82.179, mailfrom: hprajapati@mvista.com)
+Received: by mail-dy1-f179.google.com with SMTP id 5a478bee46e88-386cf1041cdso2758069eec.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 25 Nov 2026 20:59:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795650952; x=1796255752; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=IbhIvPud0ot6zuAA9k1Sp+TuKEvUTok//KYRbh89slI=;
-        b=C8+yrJcVTSrC8ZZZOjYi18bk3tI3+mLx+KJ/mQ31fX1V9JQcrBw4pTDKxD3mQBn+2d
-         ZZRmgc6awtTx2POODLKe1jyDTIPmQZiqfHuKVEiPWBzCBvfT0h1rlwE2dm4T3S/mJFrv
-         MMH5OK1OzekR0lO4+B88ITXbaGyeOoISlh74iYD9ZzKwrAUYjpunCuz3pzQ6PQCkolEa
-         kxC0azpdPvL4wobZVNE1vOZ3kaTgKSMw2qyV190HTmkJtnr1wSC7rDvg/ONpXN3CC12C
-         j9eQtU0OhHBloT4R7W2TODI0yh9Byf/iO5lNLL67xvGCt4mp4ieQ5dmZL6I89tMEkKYU
-         elBQ==
+        d=mvista.com; s=google; t=1795669141; x=1796273941; darn=lists.openembedded.org;
+        h=content-transfer-encoding:content-type:mime-version:message-id:date
+         :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=wzX1gGp+lshn0nzfsP0lpggHj9GO+CTZtLf+QVYKX4s=;
+        b=cB7+QsM29fMQ288UQ+ocsfoWrSAoPXP7lYNih10U5h9JJas65rF62WjRFHKbWAgcta
+         iDZ+WPsJDaHWWcgZqEuO475JNio8enc4KAwr9Ir68V1ViUATt9WJSOckZXVqMyZ4OGai
+         dokUHzQuB5pNR3YjiQZWf1h632CfWZQWoD/DU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795650952; x=1796255752;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=IbhIvPud0ot6zuAA9k1Sp+TuKEvUTok//KYRbh89slI=;
-        b=FypyAcf0rG+tdiUbRPRpaBR6aS2iw7sZhZA2V3W0zy6Zgrs2L1wUxzkBvAIAOygWc0
-         drTQO6Bcg/NNOrO4ODx1418gxGUmV/IQFvvUtZ1MUZuHaFyVwOUH1eKnkXxFRd4ao7+Z
-         doXvLkvhGt/51ovH/ZrhVdRFITeGqbbgSXAJLqVjVmqUmYbnQq8IRX+01byBv7B6XlER
-         WBnHZOrBKsXog7BiLh3yeHb/XYF0Za8jg/mzB8d0mPvtDiHKRc5ALNrQX/CbXKcV6C0h
-         ClDdpF5zqmzuTvVmpiEl/8KlTASn/DmitQmJfXnPaE6FjmH56coznUt+NaK0J8LHJCU+
-         fiMQ==
-X-Gm-Message-State: APuU4Z/8n2DqVZ84d6zrfJVmdu2xSnF1jiRry+0QWsZK9yGca2ysipPX
-	2ifDvbZcUdv7xBz+49xJA3z9dkDBRtZtmdY6+O4al/hJ3p7wNeTkemPO4enbq0h8
-X-Gm-Gg: AZFdTZdVepqNny3cZJV7Ll8PTqH/bGpsiDRB6N14VIJmExXPCrfa213Y7H0HzEqJo0t
-	zaLS2vuC7JdVdc0ZGTRje00TO0TcbRbi54xOpFCz2o4DktrdjgOUxg603Hg6Stsf3W3+9OYbDhz
-	ubz0YqeBW2Nm/uiu92At53Vy/dLepje1mGq/M+otm8GcgvS7aAZe3aZAZBnUlXlTuY/35pxzT7E
-	Qb7kjeyJ9JCAL24ZdePILfMPBF90WaYtaioDfESOh3F937Sc08NhCHisb04dvVJtWpbjSzXXap0
-	3sDz7Mzevf29uSm7GEIgRUUAdZ/7jlamAD5JrlG4T0WzGfemk6PuLd8SshoerTfRKcMT9082ftl
-	MM2Peji1NgtBsTmB9mpPeO0F76svGTH5mmfv6wdCzaAp3gJFj3daobEwDUhnsOCLcSSNcou01W5
-	i8K/h4ql/4Ufs8QTHKPeqRH43fPQj7RNmA/P2JaihgCnhf5DOC7NuG0AmB8ZVGLoZPhqmDqolPg
-	/DDoGEn2jzSEeQLyVcuBV3KHxS2HjFgPHq33xW1eoDOS7/+Hlt1ZzN5AddI9M3jKFY7ZlSBaVQU
-	aLZyf5I/lA8oD03MKDXI/g2NihjYkQ3ZltXRrkPjXozXznrxYIMFdrkfl9YZB5iuKG6nGVmDeVy
-	KSdT/jOxRnYwOmqCaCcei6N26cxuHEwC5/fReTUmYbzHAz48dR16OhdpPfNt9Phu2qiuj+ro6Vp
-	Ik47FeK2TeCHijMfSu6bYNOuiddMeo6s9L0kOkf3yyiiP9sKWp7td6iW5kVTXKufceO6GclNhOE
-	JEhKp7FdcCfEHo2hYPALX6Gc6oTNV+7z0Uo85Emk8szW7Qsan/IYMBKnXGU4oMkzLXluPMdkoHU
-	YKbi
-X-Received: by 2002:a05:7300:c00f:10b0:36c:a321:9fbc with SMTP id 5a478bee46e88-3856c9a6858mr22603038eec.1.1795650951457;
-        Wed, 25 Nov 2026 15:55:51 -0800 (PST)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-38567abb870sm47837183eec.25.2026.11.25.15.55.50
+        d=1e100.net; s=20260707; t=1795669141; x=1796273941;
+        h=content-transfer-encoding:content-type:mime-version:message-id:date
+         :subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=wzX1gGp+lshn0nzfsP0lpggHj9GO+CTZtLf+QVYKX4s=;
+        b=I2lXnNd/YMg84ZmDbVlzh535N5kwHM0Bt9b0+L5BexOpm+Ab96LTc8aZwykNUgy4w9
+         w6NUJBSpS51K4eZnt2yxzNZr+4ErGlb3astyWNT5iycN5HADl/AOhNSBtPYETG8zafrG
+         Wjql47+ZLjDg8Asjmvdgw2pm179GGQ6cd+s2UaWMMcMh3z6bu6/nJ6Xok9CZkTxnby9y
+         j/UKF0GjKGpeAwyJZ7xuMOlKhX43XfVeWG6ESiNN/SK9otWVkYtyfLzwxSOiZOYUFeYc
+         m1+NYSyq6vrnlao98et+gObIdO/3JTiGRJvIuGXjnO3XTXn5uuFwHT+QKVIHKiqiNRBf
+         A0Dg==
+X-Gm-Message-State: APuU4Z9jDcut9Lw97ALudCirESiduj1C5KxF09HpQjjJ2BLPe/3JFDiW
+	UJ1/WuViNVR8Zw7eEGRrRyF/EFT9Nadtyx7njKJczm5CBk6yfCSqHJUELuLraEYysjW8hkM2MrZ
+	hI+gs7Zk=
+X-Gm-Gg: AZFdTZdLHsbqAY21P5i4Y2SVuuDPSeebydIZs7RUeoY/wX5qO52qXGDDNPCmwDhSuRp
+	AE24TdAmGOqnOLE3AiLaM2WJzhznf17YiGF/zMPUwTuaguzFyEwtu76x4qCk8q8Scf/e+4sPXPb
+	xVttSjagvcanOUg0sIs/IW+pexiiBRRfQf3tACbsthfBkRnpiEFGjT/z97Ie5xhTGSbyUV40Kxc
+	EbIrFdK1tLSOmWYFnCPP1Z1CFsMfgvWM92SDVby9RZ1VwEWaIU7Ilo6SUSE9+Jr8Hbuxwuzoooi
+	ca8QXe7B+ef+VwBHVQ37u5KaADtrrxY/0leL8MgMr//imcrrAo8Qs9/kqjMI4dGqrKzYYyQ1U/C
+	t1Lgg2GFrlTwJ5sqlUZ3CRikzaGuEKDCVHqAHtHxvGDaFwzf0ZuoXPbinNNYD1ghjfVf//D+Zpx
+	tm/iZGyWJ7lVU74govuPdXzGap+QR+ZMoe91nXFzMt/sM1bsh9HlJlIRp2YLfPBQ8WamxeeTNfp
+	RGiG3KqO3DuETHY7b3k/ZBujqoDHn2eQ+46HGvvP6n32H0v5XA6mVwG79fZiSH7/LQnE5ES81sV
+	Et0cwm7tGp8X6BMXeuCLHShws+REDYdvQey3MYLg
+X-Received: by 2002:a05:693c:37c8:b0:386:a0d1:1b41 with SMTP id 5a478bee46e88-386a0d136aemr21684515eec.34.1795669140565;
+        Wed, 25 Nov 2026 20:59:00 -0800 (PST)
+Return-Path: <hprajapati@mvista.com>
+Received: from MVIN00013.mvista.com ([43.249.234.255])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-385672ce402sm55197905eec.16.2026.11.25.20.58.58
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 25 Nov 2026 15:55:50 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
-X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
+        Wed, 25 Nov 2026 20:59:00 -0800 (PST)
+From: Hitendra Prajapati <hprajapati@mvista.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-oe][PATCH v2] libgpiod: Fix intermittent gpiocli monitor ptest failures
-Date: Wed, 25 Nov 2026 15:55:48 -0800
-Message-ID: <20261125235548.323036-1-khem.raj@oss.qualcomm.com>
-X-Mailer: git-send-email 2.56.1
+Cc: Hitendra Prajapati <hprajapati@mvista.com>
+Subject: [meta-python][scarthgap][PATCH 1/2] python3-pillow: Fix CVE-2026-54059 CVE-2026-54060 CVE-2026-55379
+Date: Thu, 26 Nov 2026 10:28:47 +0530
+Message-ID: <20261126045850.28407-1-hprajapati@mvista.com>
+X-Mailer: git-send-email 2.50.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Wed, 25 Nov 2026 23:56:00 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/133084
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Thu, 26 Nov 2026 04:59:02 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/133085
 Content-Type: text/plain; charset="utf-8"
 
-test_monitor_all_lines_on_request and test_monitor_multiple_lines_by_name
-toggle one line twice, with another line in between, before reading any
-event. gpio-sim delivers both changes of the first line as one interrupt
-when they happen before it is handled, so the rising edge is lost:
+This patch applies the upstream fix as referenced in [2], [3]
+and [4], using the commit shown in [1].
 
-  ASSERT: '41610700648 falling "foo" 41610665414 rising  4' did not
-  match '[0-9]+ rising\s+"foo"'
+[1] https://github.com/python-pillow/Pillow/commit/0a263e6264aa5399988d9acd3bbfbca2ca3ec77d
+[2] https://nvd.nist.gov/vuln/detail/cve-2026-54059
+[3] https://nvd.nist.gov/vuln/detail/CVE-2026-54060
+[4] https://nvd.nist.gov/vuln/detail/cve-2026-55379
 
-  ASSERT: '45056166795 falling "foo" 45056147828 rising  "xyz"' did not
-  match '[0-9]+ rising\s+"foo"'
-
-Wait for each event before triggering the next one. In a qemux86-64
-guest this took the tests from 12 and 13 of 20 runs failing to none,
-and ptest-runner libgpiod passed 12 of 12 runs on the rebuilt image.
-
-The fix is the v2 patch sent upstream, which squashes the two tests'
-fixes into one commit as the maintainer asked.
-
-AI-Generated: Uses Claude Code
-Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
 ---
-v2: Use v2 of upstream submitted patch
- ...s-wait-for-each-event-in-the-gpiocli.patch | 82 +++++++++++++++++++
- .../libgpiod/libgpiod_2.3.2.bb                |  1 +
- 2 files changed, 83 insertions(+)
- create mode 100644 meta-oe/recipes-support/libgpiod/libgpiod-2.x/0001-dbus-client-tests-wait-for-each-event-in-the-gpiocli.patch
+ ...-54059-CVE-2026-54060-CVE-2026-55379.patch | 169 ++++++++++++++++++
+ .../python/python3-pillow_10.3.0.bb           |   1 +
+ 2 files changed, 170 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-pillow/CVE-2026-54059-CVE-2026-54060-CVE-2026-55379.patch
 
-diff --git a/meta-oe/recipes-support/libgpiod/libgpiod-2.x/0001-dbus-client-tests-wait-for-each-event-in-the-gpiocli.patch b/meta-oe/recipes-support/libgpiod/libgpiod-2.x/0001-dbus-client-tests-wait-for-each-event-in-the-gpiocli.patch
+diff --git a/meta-python/recipes-devtools/python/python3-pillow/CVE-2026-54059-CVE-2026-54060-CVE-2026-55379.patch b/meta-python/recipes-devtools/python/python3-pillow/CVE-2026-54059-CVE-2026-54060-CVE-2026-55379.patch
 new file mode 100644
-index 0000000000..394a73baf5
+index 0000000000..d1575afac4
 --- /dev/null
-+++ b/meta-oe/recipes-support/libgpiod/libgpiod-2.x/0001-dbus-client-tests-wait-for-each-event-in-the-gpiocli.patch
-@@ -0,0 +1,82 @@
-+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <khem.raj@oss.qualcomm.com>
-+Date: Wed, 25 Nov 2026 15:37:49 -0800
-+Subject: [PATCH] dbus: client: tests: wait for each event in the gpiocli
-+ monitor tests
++++ b/meta-python/recipes-devtools/python/python3-pillow/CVE-2026-54059-CVE-2026-54060-CVE-2026-55379.patch
+@@ -0,0 +1,169 @@
++From 7d525ae2ccf9109079f6f640ad88c8cb117853d9 Mon Sep 17 00:00:00 2001
++From: Andrew Murray <3112309+radarhere@users.noreply.github.com>
++Date: Tue, 23 Jun 2026 11:41:22 +1000
++Subject: [PATCH] Add decompression bomb checks to FontFile classes (#9711)
 +
-+test_monitor_all_lines_on_request and test_monitor_multiple_lines_by_name
-+pull one line up, a second line up and the first line down again in
-+quick succession and only then read the monitor output. gpio-sim raises
-+the line interrupts through irq_sim, so two changes of the same line
-+that happen before the interrupt is handled are delivered as one
-+interrupt, and as edge detection is set to both edges the kernel derives
-+the edge type from the line value read in the handler. The rising edge
-+on the first line is then lost and only a falling edge is reported,
-+timestamped after the rising edge on the second line:
++Backport Changes:
++- scarthgap 10.3.0 handles standard and jumbo PCF metrics in separate loops,
++  so the decompression-bomb check is added at both call sites in
++  src/PIL/PcfFontFile.py file, upstream’s shared append helper needs only
++  one check.
 +
-+  ASSERT: '41610700648 falling "foo" 41610665414 rising  4' did not
-+  match '[0-9]+ rising\s+"foo"'
++Ref: https://security-tracker.debian.org/tracker/CVE-2026-54059
 +
-+  ASSERT: '45056166795 falling "foo" 45056147828 rising  "xyz"' did not
-+  match '[0-9]+ rising\s+"foo"'
++(cherry picked from commit 0a263e6264aa5399988d9acd3bbfbca2ca3ec77d)
 +
-+The tests fail intermittently, in 12 and 13 of 20 runs respectively, in a
-+qemux86-64 guest.
-+
-+Wait for each event before triggering the next one, like the gpiomon
-+tests in gpio-tools-test.bash do. In test_monitor_multiple_lines_by_name,
-+matching the next line of output instead of searching all of it also
-+makes the test verify that the change of line bar, which is not
-+monitored, is ignored.
-+
-+Fixes: a5ab76da1e0a ("dbus: add the D-Bus daemon, command-line client and tests")
-+Upstream-Status: Submitted [https://lore.kernel.org/linux-gpio/20261125234308.4052324-1-raj.khem@gmail.com/]
-+AI-Generated: Uses Claude Code
-+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
++CVE: CVE-2026-54059 CVE-2026-54060 CVE-2026-55379
++Upstream-Status: Backport [https://github.com/python-pillow/Pillow/commit/0a263e6264aa5399988d9acd3bbfbca2ca3ec77d]
++Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
 +---
-+ dbus/client/gpiocli-test.bash | 20 ++++++++++----------
-+ 1 file changed, 10 insertions(+), 10 deletions(-)
++ Tests/test_font_bdf.py | 10 +++++++++-
++ Tests/test_font_pcf.py | 21 ++++++++++++++++++++-
++ Tests/test_fontfile.py |  7 +++++++
++ src/PIL/BdfFontFile.py |  1 +
++ src/PIL/FontFile.py    |  3 ++-
++ src/PIL/PcfFontFile.py |  2 ++
++ 6 files changed, 41 insertions(+), 3 deletions(-)
 +
-+diff --git a/dbus/client/gpiocli-test.bash b/dbus/client/gpiocli-test.bash
-+index 5160f57..ebddcbf 100755
-+--- a/dbus/client/gpiocli-test.bash
-++++ b/dbus/client/gpiocli-test.bash
-+@@ -1376,14 +1376,14 @@ test_monitor_multiple_lines_by_name() {
-+ 	dut_run gpiocli monitor foo xyz
-+
-+ 	gpiosim_set_pull sim0 1 pull-up
-++	dut_regex_match "[0-9]+ rising\\s+\"foo\""
++diff --git a/Tests/test_font_bdf.py b/Tests/test_font_bdf.py
++index 136070f9e..14e01f301 100644
++--- a/Tests/test_font_bdf.py
+++++ b/Tests/test_font_bdf.py
++@@ -2,7 +2,7 @@ from __future__ import annotations
++ 
++ import pytest
++ 
++-from PIL import BdfFontFile, FontFile
+++from PIL import BdfFontFile, FontFile, Image
++ 
++ filename = "Tests/images/courB08.bdf"
++ 
++@@ -15,6 +15,14 @@ def test_sanity() -> None:
++     assert len([_f for _f in font.glyph if _f]) == 190
++ 
++ 
+++def test_decompression_bomb() -> None:
+++    with open(filename, "rb") as fp:
+++        data = fp.read()
+++    b = io.BytesIO(data.replace(b"BBX 1 1", b"BBX 13378 13378"))
+++    with pytest.raises(Image.DecompressionBombError):
+++        BdfFontFile.BdfFontFile(b)
 ++
-+ 	gpiosim_set_pull sim0 5 pull-up # This should be ignored
-+ 	gpiosim_set_pull sim0 11 pull-up
-+-	gpiosim_set_pull sim0 1 pull-down
-++	dut_regex_match "[0-9]+ rising\\s+\"xyz\""
-+
-+-	dut_read
-+-	output_regex_match "[0-9]+ rising\\s+\"foo\""
-+-	output_regex_match "[0-9]+ rising\\s+\"xyz\""
-+-	output_regex_match "[0-9]+ falling\\s+\"foo\""
-++	gpiosim_set_pull sim0 1 pull-down
-++	dut_regex_match "[0-9]+ falling\\s+\"foo\""
-+
-+ 	gpiodbus_release_request "$request"
-+ }
-+@@ -1421,13 +1421,13 @@ test_monitor_all_lines_on_request() {
-+ 	dut_run gpiocli monitor -r "$request"
-+
-+ 	gpiosim_set_pull sim0 1 pull-up
-++	dut_regex_match "[0-9]+ rising\\s+\"foo\""
 ++
-+ 	gpiosim_set_pull sim0 4 pull-up
-+-	gpiosim_set_pull sim0 1 pull-down
-++	dut_regex_match "[0-9]+ rising\\s+4"
++ def test_invalid_file() -> None:
++     with open("Tests/images/flower.jpg", "rb") as fp:
++         with pytest.raises(SyntaxError):
++diff --git a/Tests/test_font_pcf.py b/Tests/test_font_pcf.py
++index 997809e46..3aba19a35 100644
++--- a/Tests/test_font_pcf.py
+++++ b/Tests/test_font_pcf.py
++@@ -1,11 +1,12 @@
++ from __future__ import annotations
++ 
++ import os
+++from io import BytesIO
++ from pathlib import Path
++ 
++ import pytest
++ 
++-from PIL import FontFile, Image, ImageDraw, ImageFont, PcfFontFile
+++from PIL import FontFile, Image, ImageDraw, ImageFont, PcfFontFile, _binary
++ 
++ from .helper import (
++     assert_image_equal_tofile,
++@@ -107,3 +108,21 @@ def test_high_characters(request: pytest.FixtureRequest, tmp_path: Path) -> None
++     _test_high_characters(request, tmp_path, message)
++     # accept bytes instances.
++     _test_high_characters(request, tmp_path, message.encode("latin1"))
+++
+++
+++def test_decompression_bomb() -> None:
+++    with open(fontname, "rb") as fp:
+++        data = fp.read()
+++    b = BytesIO(
+++        data[:900]
+++        + _binary.o32le(0)  # jumbo format
+++        + _binary.o32le(1)  # number of metrics
+++        + _binary.o16le(0)  # left
+++        + _binary.o16le(65535)  # right
+++        + _binary.o16le(0)  # width
+++        + _binary.o16le(0)  # ascent
+++        + _binary.o16le(65535)  # descent
+++        + _binary.o16le(0)  # attributes
+++    )
+++    with pytest.raises(Image.DecompressionBombError):
+++        PcfFontFile.PcfFontFile(b)
++diff --git a/Tests/test_fontfile.py b/Tests/test_fontfile.py
++index 206499a04..0908a9953 100644
++--- a/Tests/test_fontfile.py
+++++ b/Tests/test_fontfile.py
++@@ -7,6 +7,13 @@ import pytest
++ from PIL import FontFile
++ 
++ 
+++def test_decompression_bomb() -> None:
+++    font = FontFile.FontFile()
+++    font.glyph[0] = ((0, 0), (0, 0, 0, 0), (0, 0, 10000, 10000), Image.new("L", (0, 0)))
+++    with pytest.raises(Image.DecompressionBombError):
+++        font.compile()
+++
+++
++ def test_save(tmp_path: Path) -> None:
++     tempname = str(tmp_path / "temp.pil")
++ 
++diff --git a/src/PIL/BdfFontFile.py b/src/PIL/BdfFontFile.py
++index e3eda4fe9..ff71e236e 100644
++--- a/src/PIL/BdfFontFile.py
+++++ b/src/PIL/BdfFontFile.py
++@@ -80,6 +80,7 @@ def bdf_char(
++     # and x and y displacement (BBxoff0, BByoff0)
++     # of the lower left corner from the origin of the character.
++     width, height, x_disp, y_disp = (int(p) for p in props["BBX"].split())
+++    Image._decompression_bomb_check((width, height))
++ 
++     # The word DWIDTH
++     # followed by the width in x and y of the character in device pixels.
++diff --git a/src/PIL/FontFile.py b/src/PIL/FontFile.py
++index 1e0c1c166..abd092e91 100644
++--- a/src/PIL/FontFile.py
+++++ b/src/PIL/FontFile.py
++@@ -74,7 +74,7 @@ class FontFile:
++             if glyph:
++                 d, dst, src, im = glyph
++                 h = max(h, src[3] - src[1])
++-                w = w + (src[2] - src[0])
+++                w += src[2] - src[0]
++                 if w > WIDTH:
++                     lines += 1
++                     w = src[2] - src[0]
++@@ -89,6 +89,7 @@ class FontFile:
++         self.ysize = h
++ 
++         # paste glyphs into bitmap
+++        Image._decompression_bomb_check((xsize, ysize))
++         self.bitmap = Image.new("1", (xsize, ysize))
++         self.metrics: list[
++             tuple[tuple[int, int], tuple[int, int, int, int], tuple[int, int, int, int]]
++diff --git a/src/PIL/PcfFontFile.py b/src/PIL/PcfFontFile.py
++index 0d1968b14..48c5c3ab1 100644
++--- a/src/PIL/PcfFontFile.py
+++++ b/src/PIL/PcfFontFile.py
++@@ -166,6 +166,7 @@ class PcfFontFile(FontFile.FontFile):
++                 descent = i8(fp.read(1)) - 128
++                 xsize = right - left
++                 ysize = ascent + descent
+++                Image._decompression_bomb_check((xsize, ysize))
++                 append((xsize, ysize, left, right, width, ascent, descent, 0))
++ 
++         else:
++@@ -179,6 +180,7 @@ class PcfFontFile(FontFile.FontFile):
++                 attributes = i16(fp.read(2))
++                 xsize = right - left
++                 ysize = ascent + descent
+++                Image._decompression_bomb_check((xsize, ysize))
++                 append((xsize, ysize, left, right, width, ascent, descent, attributes))
++ 
++         return metrics
++-- 
++2.50.1
 +
-+-	dut_read
-+-	output_regex_match "[0-9]+ rising\\s+\"foo\""
-+-	output_regex_match "[0-9]+ rising\\s+4"
-+-	output_regex_match "[0-9]+ falling\\s+\"foo\""
-++	gpiosim_set_pull sim0 1 pull-down
-++	dut_regex_match "[0-9]+ falling\\s+\"foo\""
-+
-+ 	gpiodbus_release_request "$request"
-+ }
-diff --git a/meta-oe/recipes-support/libgpiod/libgpiod_2.3.2.bb b/meta-oe/recipes-support/libgpiod/libgpiod_2.3.2.bb
-index eb1c454f8c..244e6ff7dc 100644
---- a/meta-oe/recipes-support/libgpiod/libgpiod_2.3.2.bb
-+++ b/meta-oe/recipes-support/libgpiod/libgpiod_2.3.2.bb
-@@ -25,6 +25,7 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/${BPN}-2.x:"
+diff --git a/meta-python/recipes-devtools/python/python3-pillow_10.3.0.bb b/meta-python/recipes-devtools/python/python3-pillow_10.3.0.bb
+index 240fec967f..55df58ef4b 100644
+--- a/meta-python/recipes-devtools/python/python3-pillow_10.3.0.bb
++++ b/meta-python/recipes-devtools/python/python3-pillow_10.3.0.bb
+@@ -14,6 +14,7 @@ SRC_URI = "git://github.com/python-pillow/Pillow.git;branch=main;protocol=https
+            file://CVE-2026-59198.patch \
+            file://CVE-2026-59204.patch \
+            file://CVE-2026-112393.patch \
++           file://CVE-2026-54059-CVE-2026-54060-CVE-2026-55379.patch \
+            "
+ SRCREV = "5c89d88eee199ba53f64581ea39b6a1bc52feb1a"
+ 
+-- 
+2.50.1
 
- SRC_URI += " \
-     file://gpio-manager.init \
-+    file://0001-dbus-client-tests-wait-for-each-event-in-the-gpiocli.patch \
- "
-
- SRC_URI[sha256sum] = "dc48fb87cd72019745acb201599caf559556b5d913844df0ed011067d19e9a6b"
