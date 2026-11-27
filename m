@@ -1,65 +1,65 @@
 Received: from mail-dl1-f48.google.com (mail-dl1-f48.google.com [74.125.82.48])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.10358.1795753061979564546
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.10361.1795753066224154449
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 26 Nov 2026 20:17:42 -0800
+ Thu, 26 Nov 2026 20:17:46 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=QdcwflLc;
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=Gx0H581T;
  spf=pass (domain: gmail.com, ip: 74.125.82.48, mailfrom: raj.khem@gmail.com)
-Received: by mail-dl1-f48.google.com with SMTP id a92af1059eb24-1aefd1bf74aso4168037c88.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 26 Nov 2026 20:17:41 -0800 (PST)
+Received: by mail-dl1-f48.google.com with SMTP id a92af1059eb24-1b3acec6677so11675348c88.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 26 Nov 2026 20:17:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795753061; x=1796357861; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1795753066; x=1796357866; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=sO/xfKjtyjpIi+TOnlMQZXAKgSiCTNzd81RWJdZxETw=;
-        b=QdcwflLc827ZU6GZ8iN6foSIXXhZk8twv1sq2+FYgzwHctQKRUuGeowxgnoFqbbG/Q
-         zc+cnb86xZ3e6ELVGgHqPlu7hfe23KHRdAEQGpsFqHNqbR/LLswloeJF02cWdTAwwjKq
-         9eB5Sli9bc37rEzhm2flA0DFhPrP2OB8KpomVuNMAqW3hdzQtUfKK595r226qrWO821i
-         PFKt0F+90jwlNtY85DfVXW2+Tc7AtevMtsb30sT/eyfAx11JiPrVbDWItDhOWgiaKVrm
-         5GSvp7k2/WmLQ1Eh6dF2RnpEZAnX/+2ic6xG0LWxft6Z2J5e/f7QSJoR4lVxZQb+IeIt
-         Hxhw==
+        bh=OMGzQmvSy/vFPXVLBRB0KTbCyBcOTgLe4PHGF5nhGTg=;
+        b=Gx0H581TrAIzjd8N64pssvCSOv+nLkPhNhCaw91pXOQQ9bP1gltb4KFOeehCGlFYYZ
+         mFQ5sTJTYNxa64Xwk1J/xt/59rifGaMlBiCSlBPaXhEYLglOXsTccFQOMBzrQ0+KVFYh
+         qeTRDhr5JM8NMq8YR5oSzfX82VDfuM7q8aJdCUN93vISBTA3ufALa9ninlEPG+bI/Lx7
+         92JvqejRn1hsC00744OzJC2fCcuvX3szK0JhqXk9MoITPUdHt7w1qYTEl6aAjI+7+eYy
+         E7zsYlIGPcmQ9t4q792/S/569K6gQqktJ/XLWg3tr5daZtIAP+bI3SWdr4G4an0EbQSE
+         qsIQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795753061; x=1796357861;
+        d=1e100.net; s=20260707; t=1795753066; x=1796357866;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=sO/xfKjtyjpIi+TOnlMQZXAKgSiCTNzd81RWJdZxETw=;
-        b=1rZqdQUmcSL+9bLARtWlTlqfgv+mAGvJCkvmpp79D37BuC3yqOPcv9OyE3w23/pT0b
-         2Cra0PQnbIS6RpN5HVsWf54hsnVuot/zrLDzLDGqAB5Fkla8JySEWRc39xd+OGpkpg+0
-         y9jqheCTfgD6PtVCEz1P9C4z/OLjE12q8GVPtpNbKdRUI/+HVNQKY0446AwxH+/jFNfy
-         7Jt8F4VAcJNVtQ1jzbRw3KM4VPZgx4OTNERPkU/Mz50gC2SsUtEO5e4R2DBxq4TP/V+r
-         3xFqinnopsh2E+1K+gPeOkSbp7dZyRoB0xzBeiRboFP9O3yqipYmOuxrPim2zTwuMj7t
-         c8Vg==
-X-Gm-Message-State: APuU4Z8WAW9cxrr/dRDBl1r1Dds3qCpKoivw9hDrSGuL91D8k5B+VnM7
-	dDRTVBv/MCkP40kaeqCePaqa+muFOP01bgnaJVMlzdcEsWt2ErwN8/325/mPzSz6
-X-Gm-Gg: AZFdTZdX+l/niuaMOv49UmCWB5KLpmLeeIO4Ioh63+KPhEzZ01S/wbilKoestg5DFJc
-	4F6btYerz2yAt3BMev3c+AKoEIVvw8C6P3qApgGmYDI/+op6L1nW5QAo7v3gftebBAKyArX7e6E
-	f0/O7cGPGn2pZBIwA0dKtzWH++uz6OdWAY64UcCEc4L80Anj3mickSLNr4Dm3/G//bPiLhY7hVG
-	qQUfWkmXaAD9zi/zd4hXSFNsc/3exOKbzzbmfb2oqOXhQnY2y2nwvYQMWXDYU84JX7xbZZAXXHb
-	J9TPJrBWd4NDtQWcLa2XnE5AfG+PFEgzwnWJBnn0D4E8OVaiQZSDnWlvwHX1UQ0sgabK/44AWtp
-	QJnrVStCXhDH72QL5st8ntl9AOszA4+91OcAieHi+3KJ2lP/pCzIr31Gm/6/YY1vPHoRi1lvhZ2
-	4pg46yyipuoj8i/dTKu5jAFO5METpMQJeW1p9B7CHsstIglgndC0527+MwBac9p2o35GoMuw947
-	cY0LFzIh0dxRDz40mbdD5NLE0z+A8TJl3vSnSIo/mzm3evCfvNF8H5k+EwivCitiyFSRhBirrYs
-	qWCBEsPNXRgs5uRlKVZPZS4CT+AIyBTTt6Qpuw4lhhdy7jfkosRqBRTomF+lHXKneT6Y3F7yUDp
-	SZUx8unJJMk5Yl+g2nnbv64T0TyJsDqfDO85IysrzVplhXNWEyRG3hq2qKoCjwMJALTCp/0ZlDa
-	p5X01HixH7CDeMUTaDBa65QpyC7o+N2LJ9OtHtF4dZds25qSIibvEZxzeQr1VYAMdCuX4hJ1KTB
-	Qukb8ogHH2shecz/qGaXgBdyj+106zQRIMuMrWASepBGndBkx2GFDYwSExOLWKtj3yYino5zhcq
-	rMMw
-X-Received: by 2002:a05:701b:4550:10b0:1b5:337a:6456 with SMTP id a92af1059eb24-1b55247eff6mr21469760c88.5.1795753061243;
-        Thu, 26 Nov 2026 20:17:41 -0800 (PST)
+        bh=OMGzQmvSy/vFPXVLBRB0KTbCyBcOTgLe4PHGF5nhGTg=;
+        b=iyCeC+4Ori0+sX5Xltvawyf8lCMGwR4sU6pR44g7LHuNy2Ya82OH/k14TJuT7fN49I
+         juFc4iSFWIxnNEDrYbMVMLtzzyoiXQUcdK6S8/3smH1DGj8fX5QxWPRYG8LvhZ5D9QqX
+         ZFz281/s6BjvRhcQ9OOBaanDOhT7jusXqW1K7o9MCErb/Jy9d4Kjn75NFfGyK22N++tt
+         qs/Mtz56PYcm/tZiCsA87/GyHg7o0vitmgQ/UmdYGAVeipN3AUJ4A4YrpkBG91TJSPPN
+         RaL+Wfz7napq/AFXs/MvNsZKdKGMYUG/LGNaALQ2wCAadaMd0jXfGcHA3/3ZKDcScqoa
+         dFQQ==
+X-Gm-Message-State: APuU4Z93AwKXPFGGh7fHtfSbO9XVBV6JuyTC6ZrR5arufSKyavHUAMjM
+	+xaa8vdt+ovcYi04x/UldSQtMhKpNWbRffOAzp8OdxaFCNmaQrHXIiD/fDL144ja
+X-Gm-Gg: AZFdTZeqYVSY6MUa5zVtsGWEo/wLw7KPo2K+c8YvjrcNePVk0JnNhMN46XBrhkAWhUA
+	ORqTJ9sPyY7jnTTmPTAmS+O5z5c53r/m7Ot9s4mEHSfLfZSxrbJOcTOabXDDp20mHUuT0GMUjen
+	tAd5teN2zKKf+hd2DYBLA0b/vZMHDvhVIA9k+wY9LEI/XxqFV+vzzxG08aVKUCkY0Zjc1zr8LH+
+	iln72ZP3Qhm8VvPspmLozreNG8B/zPzlny5NdL2CaxZJNuYt6wfGVayalrFHPl009yM7EZAhV3T
+	7uu2Oc6FYeVjfTtVdwJGq5yACevCVX1uWcuaA7UqqfZjuQpkgtx04vEHmBAiXGzOsN387F55o1r
+	vQz/XTWI5rEnxPGZ1fEqgA1ihIu74xI5u2E6tfviCWAlclkP1myx+ZgjKAJsyBUeTt0q8paGUTd
+	4pEqCyh939/McLpZ9atn3b7lNNY1LBhLcjp/Sev3rwkoijrk4PofTuWhS999S8U4f2WcLx2NBBX
+	oBUOYvBzd0V6ZFpbCwOa4kVPWgqioEzRVy6i0EbnS778yKpac4jjFnQV22TwJjbxBb/619EHrL6
+	nCrRPi1qsjS3uDWp6lfgLnabu5Hp+lsELTdI9SIyUXHJ2Rs5MxXJKdu/Yqe3FAZSgZoJEclc2UY
+	W6yg54CjkF9wjBNloli012VCwMnNDJBuj1Xg9rlIDtK5G5VMYUaEPk23HWM3tseWQQ8CrgdKwlI
+	rceacTigHJb1xJDarexvsRhVG8MD1yOmXDjv3Iedai1/Z18uUWp1ClXRqPkpREhW9pU7OOCXkae
+	3bjIQ2uB24hTcM2m7UoadYqZ3mBJGYsADDd0NsPy4d55I1d7OKpAd7iZa55o0YebBT0nlLKc9h1
+	wu33
+X-Received: by 2002:a05:7022:f509:b0:1b2:41af:c21c with SMTP id a92af1059eb24-1b55694689amr20678709c88.39.1795753065538;
+        Thu, 26 Nov 2026 20:17:45 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1b556840494sm53880225c88.12.2026.11.26.20.17.40
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1b556840494sm53880225c88.12.2026.11.26.20.17.44
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 26 Nov 2026 20:17:40 -0800 (PST)
+        Thu, 26 Nov 2026 20:17:44 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-networking][PATCH 21/35] tsocks: Fix upstream version check
-Date: Thu, 26 Nov 2026 20:17:01 -0800
-Message-ID: <20261127041715.1776485-22-khem.raj@oss.qualcomm.com>
+Subject: [meta-networking][PATCH 25/35] esmtp: Fix upstream version check
+Date: Thu, 26 Nov 2026 20:17:05 -0800
+Message-ID: <20261127041715.1776485-26-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.1
 In-Reply-To: <20261127041715.1776485-1-khem.raj@oss.qualcomm.com>
 References: <20261127041715.1776485-1-khem.raj@oss.qualcomm.com>
@@ -67,30 +67,29 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Fri, 27 Nov 2026 04:17:49 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/133273
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/133277
 Content-Type: text/plain; charset="utf-8"
 
 The downloads.sourceforge.net directory is not a listing, so nothing was
-found. Check the SourceForge files page, whose latest-download link names
-the newest tarball (the folders use names like "1.8 beta 5").
+found. Check the esmtp folder on SourceForge for version directories.
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- meta-networking/recipes-protocols/tsocks/tsocks_1.8beta5.bb | 3 +++
+ meta-networking/recipes-support/esmtp/esmtp_1.2.bb | 3 +++
  1 file changed, 3 insertions(+)
 
-diff --git a/meta-networking/recipes-protocols/tsocks/tsocks_1.8beta5.bb b/meta-networking/recipes-protocols/tsocks/tsocks_1.8beta5.bb
-index af0823829d..f8b0632a07 100644
---- a/meta-networking/recipes-protocols/tsocks/tsocks_1.8beta5.bb
-+++ b/meta-networking/recipes-protocols/tsocks/tsocks_1.8beta5.bb
-@@ -16,6 +16,9 @@ SRC_URI = "http://downloads.sourceforge.net/tsocks/tsocks-${PV}.tar.gz \
- SRC_URI[md5sum] = "51caefd77e5d440d0bbd6443db4fc0f8"
- SRC_URI[sha256sum] = "849d7ef5af80d03e76cc05ed9fb8fa2bcc2b724b51ebfd1b6be11c7863f5b347"
+diff --git a/meta-networking/recipes-support/esmtp/esmtp_1.2.bb b/meta-networking/recipes-support/esmtp/esmtp_1.2.bb
+index e60e1edd1f..07f2947ddb 100644
+--- a/meta-networking/recipes-support/esmtp/esmtp_1.2.bb
++++ b/meta-networking/recipes-support/esmtp/esmtp_1.2.bb
+@@ -40,6 +40,9 @@ ALTERNATIVE_LINK_NAME[sendmail.1] = "${mandir}/man1/sendmail.1"
+ SRC_URI[md5sum] = "79a9c1f9023d53f35bb82bf446150a72"
+ SRC_URI[sha256sum] = "a0d26931bf731f97514da266d079d8bc7d73c65b3499ed080576ab606b21c0ce"
  
-+UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/tsocks/files/"
-+UPSTREAM_CHECK_REGEX = "tsocks-(?P<pver>\d+(\.\d+)+(beta\d+)?)\.tar\.gz"
++UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/esmtp/files/esmtp/"
++UPSTREAM_CHECK_REGEX = "/esmtp/(?P<pver>\d+(\.\d+)+)/"
 +
- inherit autotools-brokensep
- 
- LIBS:append:libc-musl = " -lssp_nonshared"
+ do_install:append() {
+     # only one file /usr/lib/sendmail in ${D}${libdir}
+     rm -rf ${D}${libdir}
