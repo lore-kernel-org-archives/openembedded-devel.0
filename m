@@ -1,65 +1,65 @@
-Received: from mail-dl1-f50.google.com (mail-dl1-f50.google.com [74.125.82.50])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.11786.1795762942251807688
+Received: from mail-dl1-f51.google.com (mail-dl1-f51.google.com [74.125.82.51])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.11791.1795762948961766916
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 26 Nov 2026 23:02:22 -0800
+ Thu, 26 Nov 2026 23:02:29 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=wL3dgbzA;
- spf=pass (domain: gmail.com, ip: 74.125.82.50, mailfrom: raj.khem@gmail.com)
-Received: by mail-dl1-f50.google.com with SMTP id a92af1059eb24-14394530ec6so1574264c88.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 26 Nov 2026 23:02:22 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=uGd6dHtn;
+ spf=pass (domain: gmail.com, ip: 74.125.82.51, mailfrom: raj.khem@gmail.com)
+Received: by mail-dl1-f51.google.com with SMTP id a92af1059eb24-1b546061d58so18010283c88.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 26 Nov 2026 23:02:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795762942; x=1796367742; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1795762948; x=1796367748; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=9pOtuCCaCewTovbDfksa8MD1jNhc+DU231uJHLRka7M=;
-        b=wL3dgbzAx6/yqW/pwNC/6T52IGQnup72/ohVrysWFOwGT+3SJryAUdzFTEeOvvVXBv
-         ObJjjNDhRi5p4jQJ125ByY8tqY+f3au/K+s4mlL9cNGWLOWdIErcWCepZeHpUbQP0txQ
-         YNNnSX9R9HoIXobetK21lW2eBlYRpumOztOx3rqlT/gSK0gxLtIkOvhp9/p2Ub5btDLf
-         TTPeQ2xB8wKNNvdLQzucGGgav9ndcFGw27i/bE3fq0T9rEmxVk8TWaIAXH6wkpinMBgq
-         SJSLX2uyKfxwTBxaXeern67wo7gInZjW6GXvbo91YwQdXr4+3ASFHIzALVQLlxJfcrJc
-         hl6g==
+        bh=6BahZRwhxPF27xB1xTvkqPslHFZVhHmg+eEqLH4CNT4=;
+        b=uGd6dHtnkaMGaq2XESqqHTYMrtS4Y5Y3t5GphMIx4Ypw+A2yIFzFPzGJH6IETpAOL0
+         +naLmRnrCEBRX5XbAY8XGjPVWtVgfz/2TiRBBRT4lKZadftByF0jh4lQ6NHgCLmw2dZJ
+         7JRFMUjT/0Mv5d+E4uFdrtJtIW4EfdJZ9fRL35XMDgbkSl3PWHvUDNqyIS0Arlhl4Awt
+         tHn6Rmiupa6GwySu5ceB9qV1GXbAbzbEISPCu1JbiKCYonn9DRlF8Q7TbW0XZN+yUMuk
+         DuTKbVAXyU9p8KJN3M9K6LQvsrzUbjXXgUBR5KZ2KD3m88iS2YvQmHXK/MjT5BL3oimB
+         kcuw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795762942; x=1796367742;
+        d=1e100.net; s=20260707; t=1795762948; x=1796367748;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=9pOtuCCaCewTovbDfksa8MD1jNhc+DU231uJHLRka7M=;
-        b=ltmyDa14QM1FzORkqXJZ+t26zyv9Tm/61ihbyNLjWh6e7COCEL4iSJplmShjZh6RNn
-         T9AwhHndeyynP/rG/7pLvsvc444TLQMa21EtPFBuVfPj11yBnshkL6PtIa5YRZlJT+Yc
-         p5dWVUD0nAlmiY7odIXrazZqfkrZarjLobKsFKLzZYYWEpXomBprLGeg27Gwz20OXnbT
-         EqvI9eWAyyL+BTmiNnfl2/OtuJ2vhx2uJwOsN7gBluKmDTIWhT6K2Ul7j4DEysEdfvhy
-         XmsUzmMNJQ7oboIav+fA3J2uec7gTlLmWXiuxIm0A/0NwUdCd5O08Cz2qodna4bMqTWH
-         hF8A==
-X-Gm-Message-State: APuU4Z+2lPL0KKA3eFg6V1LxzpSXw3WN6IbyZ54mUOdnw5tZLUE21a8Q
-	2gI1ujHfk2i4pReY7X9qq6bISi6bM5HMeO0eeidMlFq2QjG/c7cltmf98NVJodsj
-X-Gm-Gg: AZFdTZdbIxQqA99kP7kLtWhZt9zF64qmos3KboNvzqXeQ19qeI45Fb8Sn1AbAlnFx9l
-	F1SHUvEniErmyu0Kez65mvS6i7pfWslbLG5jR6rUk0O8h1W1vv9yEKMAvlDx9jpykWixyYcZCkG
-	GVpXGGZR/wMkoWS5Kv1q1SAizwQQ2IAEa+0CVUKZ+LMKkuvvutmwwBl7lH578ccKMa5xpHD3fMK
-	ga6W0eyA8bNtzPJbpEkmRjuKIKb9Zlc3f2Ijedgd8nZ0VvQCppU3ho3bpJQ5II96tlxgQYP+ugM
-	U1PJkP88c/1l7LdUsS6EGaGZFZEtVhjVqiXQqtmUoEzya380gX7gj3dgsfQohg8qJljVZvbVuHi
-	BenQHf9JiU2l2bCe1/FqqfpXOlpFhrexavlxZLf/CuKbR5XvzliqhBwAU+NHmM/xB7W+5tSulkv
-	EnpFBkSUHIDBk/JPC0OVVdfJ8rI4/xAjAAilNjgiEc7PFjwqb9whuLKQEUecBakOqQc1DiuV37u
-	/VLeTz+8arPJwb23waWll/67NtFIbfA7rHo30d4V2VkJvmoTAPj43Z12vj1VJPkDWSupaFEcCWq
-	0XieNYVqlhFglpZYqrPUp86/+QVOZ+ThGzY/MYGzKqg4JyAkR6xscikZKjIANz95S4f/iYq3Kqj
-	GiD2zgljANpMWqfuc+a2dpjjvKLAV5wK+YTj+fWTuL6uPkIokDtSU9E4DyXW69Z3EGwpCaTlIZj
-	gwg14XiI+6nF56h1QVNBZroYwuyvY+TKpqAIXIIzD0QJSrMfWiCfgWSVyHwE0f4+0DTwTrRo8vL
-	okpZunwX7nLeOV/iU66BH4PTv8LAyGffoFklQmfePtHYRdJngBiby6pWMF3DuAJUWWIJlesPFCB
-	Hzsp
-X-Received: by 2002:a05:7022:ea8a:b0:1b5:3819:f8a with SMTP id a92af1059eb24-1b5569050demr22944898c88.38.1795762941491;
-        Thu, 26 Nov 2026 23:02:21 -0800 (PST)
+        bh=6BahZRwhxPF27xB1xTvkqPslHFZVhHmg+eEqLH4CNT4=;
+        b=PKgwehlB2IdxudtxzALKNdYqoorDzxhjVqgAIIevuo4sBey8Yng3ZGklI3BItIZ/Dp
+         qrcY8hseaS+/sWHfOil1+KfkgSq4aG3NJF2y+QDT3airGhAB4u0EMQmsXkn7PO3d7K91
+         P5ROBRVkSTZo+SZIhAfEh8yn0hu8rXESUlUFF5zdyVLgnL9t0zfIaHHig1y9a+qNTmjy
+         wF8lAe2zQ43zNAPwj7bQoJxmzCvZ5YbHLFoH6//D8XPjq+bS0P/0nWVnUuMB1/PJ0otF
+         0mowFChA6Ahpe9XydCbY82rq9zZ7pgm82mcfsD61Kein/xlKxE5egyqw1OXys+qwgyaF
+         GZMA==
+X-Gm-Message-State: APuU4Z8YWRYH9WwY4K1HZVY6XicGQSEO0gqDnhwJxzaXj9ndtoPzTR2S
+	khcVgjBIKRqrrB9jLB9ecHvA5OmQzFtNTA+ziWKW2Jlrz6uOvZhFRaThlX+fM4PD
+X-Gm-Gg: AZFdTZdfCltL02li1BbMR1xTnmUF1TM2jLnu5MGLAl5p9tsxFGi3aCsyeky2ojq8w/Z
+	XMVDoYPqLtyzQ4zKHrL2l6AsUZHiD8jVJprmt4+BfwLFzTdr9qshUSHrv8Cm0fU8ApdL3MNO1Oo
+	MQCMQ4HRuNFqT9IpaocuTU0vp2Snbhdr+1Y5DNe95xKuwP7Dh3oGkjarGto5GHZr6T6M8ZO8oWe
+	WqHEcFO3FQtYTBq9o7U8cFW39srMmvGBI+T1gK41Cph/WXUhfWQLLhOQyuNBfYBd/YtojpPo0Uy
+	WnoZ23adnETDwx+NnnHbhz/Elka2JPLU14kAUJd41yneKcBAC+ZiuLcH078+2UO012x7T8ankVq
+	vZZwI7OPbuFyqqQCx+xF2KyX+vweHhqBSgqDGAhiLj0UAj1jLAXmQAUhXArA/4jHD4S/yG/flT/
+	2xbdLMOFUr5LEsp2gQOas9zLIDNU9FPkktBdbEaBy8XY29jjRdukCjlgi2309Twsci7DNc98EME
+	nTo9xYCWrcH4yoklLLFu2lFLu3Y3Wj1H+rMoh4o/HLrlbHXlBtBHYya0dQUvekO30o3cO9j3czs
+	Pv6RR6RjnC5CWCF81yQWwHV4d0wagQWoOmqcx/klaDEP0OLfwP1Hwy9XnGeQ7gov44/MxFalZ+H
+	qb0zIKTqBYkW2lNVwPeeJA4sRa7ZIo9DpsyA0771ymjxLtACzpOcyn1a2EOyWma4w+uo268Gr5K
+	zq1gszYLdYGefng0bXduRdWXjrJJsfUZpXr3m4cAoUsOM2f3AMEGrz5qjYTODh25PI0JNHkpRhH
+	09Vk5rjX/GPai9MvqlKqGQEubJL3vMXCb46zg+C0SzwqqG6POBhjHb6eDUbQHGDE5GhPrfKUHYs
+	Yha1
+X-Received: by 2002:a05:7022:4181:b0:1b0:4272:4282 with SMTP id a92af1059eb24-1b5568ba440mr36222611c88.17.1795762948169;
+        Thu, 26 Nov 2026 23:02:28 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1b5566c3052sm53911395c88.1.2026.11.26.23.02.20
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1b5566c3052sm53911395c88.1.2026.11.26.23.02.27
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 26 Nov 2026 23:02:21 -0800 (PST)
+        Thu, 26 Nov 2026 23:02:27 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-gnome][PATCH 06/21] libpeas-1: Restrict upstream check to the 1.x series
-Date: Thu, 26 Nov 2026 23:01:54 -0800
-Message-ID: <20261127070211.2329979-7-khem.raj@oss.qualcomm.com>
+Subject: [meta-gnome][PATCH 12/21] gdm: upgrade 51.1.1 -> 51.2
+Date: Thu, 26 Nov 2026 23:02:00 -0800
+Message-ID: <20261127070211.2329979-13-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.1
 In-Reply-To: <20261127070211.2329979-1-khem.raj@oss.qualcomm.com>
 References: <20261127070211.2329979-1-khem.raj@oss.qualcomm.com>
@@ -67,29 +67,38 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Fri, 27 Nov 2026 07:02:30 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/133333
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/133339
 Content-Type: text/plain; charset="utf-8"
 
-The check reported 2.2.1, which is packaged as libpeas. Match stable
-1.x tarballs only.
+- Fixed authentication bypass (CVE-2026-132858)
+- Fixed reauthentication privilege escalation (CVE-2026-133445)
+- Fixed remote display creation during direct login
+- Fixed D-Bus startup races and reconnect handling
+- Fixed PAM rules not skipping both keyring modules when pam_gdm fails
+- Search XDG_DATA_DIRS for GNOME session files
+
+Recipe: checksum update only.
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- meta-gnome/recipes-gnome/libpeas/libpeas-1_1.38.1.bb | 3 +++
- 1 file changed, 3 insertions(+)
+ meta-gnome/recipes-gnome/gdm/{gdm_51.1.1.bb => gdm_51.2.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-gnome/recipes-gnome/gdm/{gdm_51.1.1.bb => gdm_51.2.bb} (96%)
 
-diff --git a/meta-gnome/recipes-gnome/libpeas/libpeas-1_1.38.1.bb b/meta-gnome/recipes-gnome/libpeas/libpeas-1_1.38.1.bb
-index 3a76ed91cb..25ca4732a6 100644
---- a/meta-gnome/recipes-gnome/libpeas/libpeas-1_1.38.1.bb
-+++ b/meta-gnome/recipes-gnome/libpeas/libpeas-1_1.38.1.bb
-@@ -18,6 +18,9 @@ SRC_URI += "file://0001-Remove-builddir-and-srcdir-paths-from-test-binaries.patc
- SRC_URI[archive.sha256sum] = "e82fd328adcac1aba34b64136bdfcbbacf2b3258a8bc4e5f480a72502a611ae9"
- S = "${UNPACKDIR}/libpeas-${PV}"
+diff --git a/meta-gnome/recipes-gnome/gdm/gdm_51.1.1.bb b/meta-gnome/recipes-gnome/gdm/gdm_51.2.bb
+similarity index 96%
+rename from meta-gnome/recipes-gnome/gdm/gdm_51.1.1.bb
+rename to meta-gnome/recipes-gnome/gdm/gdm_51.2.bb
+index 4f83fb90f4..51997ce359 100644
+--- a/meta-gnome/recipes-gnome/gdm/gdm_51.1.1.bb
++++ b/meta-gnome/recipes-gnome/gdm/gdm_51.2.bb
+@@ -21,7 +21,7 @@ GIR_MESON_OPTION = ""
  
-+# 2.x is packaged as libpeas
-+UPSTREAM_CHECK_REGEX = "libpeas-(?P<pver>1\.\d*[02468](\.\d+)+)\.tar"
-+
- PACKAGECONFIG[python3] = "-Dpython3=true,-Dpython3=false,python3-pygobject"
+ inherit gnomebase gsettings pkgconfig gobject-introspection gettext systemd useradd itstool gnome-help features_check
  
- PACKAGES =+ "${PN}-demo ${PN}-python3"
+-SRC_URI[archive.sha256sum] = "390ae9e7540f71db28a3dc64319a8f687f4d88bd4d5f1ff816b7a9f2249ab4aa"
++SRC_URI[archive.sha256sum] = "b9e5f940ba8a4a2a488f84f756c1be5b79c520931e054e82db4fe91d37feb03d"
+ 
+ PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'x11', d)}"
+ PACKAGECONFIG[plymouth] = "-Dplymouth=enabled,-Dplymouth=disabled,plymouth"
