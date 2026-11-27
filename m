@@ -1,65 +1,65 @@
-Received: from mail-dl1-f44.google.com (mail-dl1-f44.google.com [74.125.82.44])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.11796.1795762952958841169
+Received: from mail-dl1-f53.google.com (mail-dl1-f53.google.com [74.125.82.53])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.11794.1795762950972518358
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 26 Nov 2026 23:02:33 -0800
+ Thu, 26 Nov 2026 23:02:31 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=KDJ7MGDU;
- spf=pass (domain: gmail.com, ip: 74.125.82.44, mailfrom: raj.khem@gmail.com)
-Received: by mail-dl1-f44.google.com with SMTP id a92af1059eb24-1b546061d58so18010421c88.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 26 Nov 2026 23:02:32 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=DWDyZi1h;
+ spf=pass (domain: gmail.com, ip: 74.125.82.53, mailfrom: raj.khem@gmail.com)
+Received: by mail-dl1-f53.google.com with SMTP id a92af1059eb24-14394530ec6so1574443c88.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 26 Nov 2026 23:02:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795762952; x=1796367752; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1795762950; x=1796367750; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=nMsYXvpv3fUTy9ZDrMt3rzMs84zjpP53aifiVbHPTIE=;
-        b=KDJ7MGDUuZKezNL6XYWSmaPiGCz+d1/1xPFYu/amqj57fjGKLTkc5H1dJFoetSXZ0I
-         Wj+rUuZJvIi4/rzYiBZL/cOBXHr+r8kDY1VID5zPe/MiDFKUdx0Wf8tI6iv8Sp+o5RDa
-         q0cUGnKHsX7GREAjc8s5wTSTCRrBXFgIuCnRKA6XbIazP6ZddypNKKEKQJM8zvNQT3LV
-         aTPbt74N9cn1M8YIlTvToKmnI/sbrooPYJ6PujQf3EydQ48TmlRCT0vG5qfGzG2Ve0gO
-         jEgaTIR+zbnfE5VG66ejtyG/SxxC1abJyrBOlf+1MeNwdKEq0TWU3Nfne7WipHYoAR76
-         6g/Q==
+        bh=5qiJ7uFkfORfCwTMe+cqup3W4yZeUS2tbw+t2T12dUI=;
+        b=DWDyZi1hgQfiFsu/pXDtFjyxWeuvYV0TVgkqp8K7a1uHOVlJUzStjBKutcSrDip5Qf
+         xn8H0k2tYpGqnkdIaKhtXEnjkvuT6kx6ExDoLv7GeNnCtCaHJK7gMwG+Nm8+Boci/F28
+         V5ANx8ntq1Uxjq0XvhmVACg/OCibEsrzJeKb2AoVpa8RzWVwNOdd52DHQIkmuEe5CxPi
+         mOOktTd+MmC9Jhd2Q11OytiVb+mW8VFO3MJJcWin2wwPavItR60XcxDC6RdlfS+dw2uh
+         FEwcfdMNBwqTIMAz+JUpJhyX+LuRBiDscOIbriN1L/FspijH4Yn5CfKwrohnp6ASQnlc
+         TaiQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795762952; x=1796367752;
+        d=1e100.net; s=20260707; t=1795762950; x=1796367750;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=nMsYXvpv3fUTy9ZDrMt3rzMs84zjpP53aifiVbHPTIE=;
-        b=ZPJj4coC+L0XOIArTESrYgqVHN7wuCKYUyLRYt8REas4v2l6yK6B5ezex7JnajL7fu
-         CHOWRsZTiAsGqFpZmyL8uLU53p5k0R6/F6TgPShdBjsZw4TuHNvsaYASaERq+EKEiamB
-         JG6x5GLc7kD6K+hJW0DYp4GfBKWy1QBbFhDJouLAJGkeNxgmbZxVCVUuyAF+Adc7G/1h
-         qlYeRA3HBnPNpu62aCgEx9vdEHqCp2qmWoh1qo3AnRziupS0GqsW1n4SDJph6YX0ieB7
-         ZSZr1pio4AhoCnD4xZUuyP0NWP5jtmusmXx2CrMGiHSoGVvQd6Q8l3e7q21ijqREOugg
-         Iw5g==
-X-Gm-Message-State: APuU4Z+Z53rpcJ4kSMjH6QywIw7jbz0cotrBnk8tJ9ARUdyNqAA9YGsJ
-	ZtARLVUY8uDwhUKWCW7+oBAQZ4z/4fR+BSK4K43RwQMre5BRO7xfZLQWDj2WYDhB
-X-Gm-Gg: AZFdTZdwQckAML24pTHklAY/mxuA8M5KEeGyK9f0u3o5vBG1cQ6NTvkMzCswiN0/qtv
-	IFtUVW1v/FYJXu4xJpBT3emiRtAG/5rIekH7nX94Acsd1lo+AoRtYyiNY2/vR5T745BscufSm6/
-	PZ+3bEVAJbBFCbe22kWpzBywR31b1YG+xj7VtyWEZfdyyxZsY1XpPDBs9wsJAOSY8S4DJYYxBGK
-	o8VotJIV2XdJ4bIRVFLslmNQ5FHF5HFWA3JbWCxpT+Tu1kNtHdeasenkETbCXwZhK8vStNTBYRm
-	N2Gfztfb7WSSfXGEkCAjvuDmRsG9vFyivUOSFthkVTqva2139oFUucPus/Z8pkG3dYs81bkqeYm
-	SvtCbOx8qCjl/5+9Ycl0MGYrbAN4OOlKXQV/5xJMWOtujpWV8ZNe79UTFNreG0pBdfI8VoVWuue
-	p7Yi6NtpDOyKrtXu96FuobYCPxQQsXQqhJU34I0bblCb5s4Do5g5NyuCCbSp98kdgDFaw9FB2S+
-	/75AJu/IhzjDuHbgG0N+aasrtNgC7UwQKXwx7R+ccGHpXjyfBKHkQ6cSdcp2Ef++CCQiZnOIr2q
-	dn7Ac1lQ/KkA9KVVQLOR7RDEGNjxY2H+JQ0MD444a/UOtyYlEuOC+on/PmOYmGEOVCDU0ZAQ2GC
-	IGtpgfNI89PvBpfBKHuv2jOrNsEZljZGIhkPl0igDLxi2UilJItjLKpaGKjKTP/WrBHaoeiWD6K
-	aLXR0esrv1ZpbGUI1JbX0B3iqW3QTnyk5BWF2ZcsOIi15WH9E8NzeweWHCwo6fZJF5jdw4IcimH
-	ImrnHMz/dnIR95eKDwUs+zezXTxuuEvlpaWa5TMgQd1HTJ78Wc0hfH567DsdNXk4ns/WdlcDAl7
-	KtGC
-X-Received: by 2002:a05:7022:92a:b0:143:26eb:18e9 with SMTP id a92af1059eb24-1b5568eb4dfmr32809403c88.28.1795762952278;
-        Thu, 26 Nov 2026 23:02:32 -0800 (PST)
+        bh=5qiJ7uFkfORfCwTMe+cqup3W4yZeUS2tbw+t2T12dUI=;
+        b=Szv7AcsXh8nudAzi6QbpkvP4LQlF+zJNjmo0TFbYyTT0v95Qjod+sYieTeMyYcR8dS
+         LdKqJNm1xicQnTt7HzJOwCRbJTd+sEMk7QR5lejLlBxadQIjD2XvnuK9gRKYGUWAA1i+
+         9yrQZplQbdriAuMydNdKz5+qTVc4/yBOyabveZk0NdlKFuA+FspiBXPJAxUgXDtucSDD
+         8YiInazYAaDBSRRP0rXTVxU2dtRaceYr2g3JyBg51WmlEG6O5NcpB7/YX982M7iNOlDv
+         TcTz1NRsLjK/AaCjYm+JNvndKY8W+N+y/AJ0U7RfwwhqempxCdEji0aXiwAa/3VSe5ti
+         2vMQ==
+X-Gm-Message-State: APuU4Z9VGRDrd3P6QRiKlSN9hkwK2qmdgCgm6iETGer7ROTj9qMvxFW5
+	N4LfBTYFSXVLyDbebyNY8QarxmAnMS5ndU7GXmvfr4SowE1SFTjaDeVVfoShPbah
+X-Gm-Gg: AZFdTZdHSzC7sWKVJ3nFEamPsoolu3hQjJe/jPUbbAYAtNdMs7vL2zVbeSrIGpTW3rC
+	Id7JuDDOADJLagSaDQIMb4R3P65MgCgQLw8vwoTaFImSynLDRQk7oVAAbAc223LHtrQG9cAHXS2
+	Q6uy0LV3qWp4ULMd4OmYi3GfPE9Bgs5cmi/Z5xweK17UcGsExHF+Pz8h8g5wxH1P2LmMrduKjHv
+	emCxd73vq/YfdX8uPBaQjUWL/wqf6EJZXCI0aAB46H54aNgj8kGt8tDWsZabdnV05Fqkl6lRCtH
+	1R/TbL9V5jrxlIl7VZAwdmUJNQ51MsDWzu64Spti1Gtckzxfsv+WK6zKdUCoO01tE/3B9QRzlua
+	3qhlHMaM62r4XAhR1R0oCTwSiLNtsGqjyCPyoLpE4bA+0xvawxmCf4fn4xub363rxj5VHuAcg4k
+	jBtztPoZCcWuLg5ML0CTQTkzbVoBt9AXXlIaFOQ944vehVK7PJViVR0+CEXv00kj5b4AyH6Bsue
+	Rs2oKdd/1BhEDqT3xQFYBT/SICT6vUlo8QoY5IDdelPQ3+XW4IfFiyaOfxackSM4XPS4YLKIm4I
+	s+cY5HuGYGXR42NKoPg0URHTZxjx2gLqY/qBMUF/kDaJCpSKtWFUVHTs6NxiQvl05d4RaO0v7gz
+	r/I3ReBlnidBncOYlbaRXf6QOwDWcY7luGMie5vqCkJSF9WHaSlcmz+wZs6X6+wM04r/pqvG/Le
+	nxqRvUiX/zCC9Uz/sD/8+1eR+XGURm1xUT8pSKBEMTUbOe6SvhJhJplINDk4WNCmiT7FoZNh+ht
+	WCNvaq/fwQWIprRA5soPhBSabOfjvPCVxtUAlmTuKEa4hl5KzTQChmLTw+WGPIYRqYlotBp4yF9
+	Nl2l
+X-Received: by 2002:a05:7022:6988:b0:156:6676:d0e2 with SMTP id a92af1059eb24-1b55689f5dbmr30467632c88.10.1795762950261;
+        Thu, 26 Nov 2026 23:02:30 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1b5566c3052sm53911395c88.1.2026.11.26.23.02.31
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1b5566c3052sm53911395c88.1.2026.11.26.23.02.29
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 26 Nov 2026 23:02:31 -0800 (PST)
+        Thu, 26 Nov 2026 23:02:29 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-gnome][PATCH 16/21] nautilus: upgrade 51.1 -> 51.2
-Date: Thu, 26 Nov 2026 23:02:04 -0800
-Message-ID: <20261127070211.2329979-17-khem.raj@oss.qualcomm.com>
+Subject: [meta-gnome][PATCH 14/21] gnome-control-center: upgrade 51.1 -> 51.2.1
+Date: Thu, 26 Nov 2026 23:02:02 -0800
+Message-ID: <20261127070211.2329979-15-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.1
 In-Reply-To: <20261127070211.2329979-1-khem.raj@oss.qualcomm.com>
 References: <20261127070211.2329979-1-khem.raj@oss.qualcomm.com>
@@ -67,34 +67,35 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Fri, 27 Nov 2026 07:02:41 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/133343
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/133341
 Content-Type: text/plain; charset="utf-8"
 
-Bug fixes, among them a stack buffer overflow when dropping text, a
-use-after-free when opening a regular file location, crashes in the
-file chooser portal, and use of the file-chooser portal directly. Also
-treats webp and jpeg xl as pictures for search.
+Fixes for the Apps (parental controls), Global Shortcuts, Mobile
+Networks, Notifications, Power and Thunderbolt panels, plus translation
+updates. 51.2.1 only removes an accidentally added translatable string.
+
+Recipe: the sysroot meson option patch still applies unchanged.
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- .../nautilus/{nautilus_51.1.bb => nautilus_51.2.bb}             | 2 +-
+ ...me-control-center_51.1.bb => gnome-control-center_51.2.1.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-gnome/recipes-gnome/nautilus/{nautilus_51.1.bb => nautilus_51.2.bb} (94%)
+ rename meta-gnome/recipes-gnome/gnome-control-center/{gnome-control-center_51.1.bb => gnome-control-center_51.2.1.bb} (96%)
 
-diff --git a/meta-gnome/recipes-gnome/nautilus/nautilus_51.1.bb b/meta-gnome/recipes-gnome/nautilus/nautilus_51.2.bb
-similarity index 94%
-rename from meta-gnome/recipes-gnome/nautilus/nautilus_51.1.bb
-rename to meta-gnome/recipes-gnome/nautilus/nautilus_51.2.bb
-index 14b0b0668c..047dd7847a 100644
---- a/meta-gnome/recipes-gnome/nautilus/nautilus_51.1.bb
-+++ b/meta-gnome/recipes-gnome/nautilus/nautilus_51.2.bb
-@@ -24,7 +24,7 @@ DEPENDS = " \
+diff --git a/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_51.1.bb b/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_51.2.1.bb
+similarity index 96%
+rename from meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_51.1.bb
+rename to meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_51.2.1.bb
+index d9f6423693..116c3b3893 100644
+--- a/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_51.1.bb
++++ b/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_51.2.1.bb
+@@ -40,7 +40,7 @@ inherit gtk-icon-cache pkgconfig gnomebase gsettings gettext gi-docgen upstream-
+ REQUIRED_DISTRO_FEATURES += "opengl polkit pulseaudio systemd"
  
- inherit gnomebase gsettings gobject-introspection gi-docgen gettext features_check mime-xdg gtk-icon-cache
+ SRC_URI = "https://download.gnome.org/sources/gnome-control-center/${@oe.utils.trim_version('${PV}', 1)}/gnome-control-center-${PV}.tar.xz"
+-SRC_URI[sha256sum] = "1054976c2f1977f770ba134b872f547c89db7005e4422f09a96d521379c083cb"
++SRC_URI[sha256sum] = "6dab67eab50ec842ae55c797b180b853b8a8d3f0292cf4325a081fbb5b75ffc1"
  
--SRC_URI[archive.sha256sum] = "a703bc152d18d161d9dab957e2390a36e6246bb5c24de7b15c9624fcfa2f2816"
-+SRC_URI[archive.sha256sum] = "11e3784441cd59a4696b47ed458dddaacf5b1b616f71686d6738fdbaa4809db1"
+ SRC_URI += "file://0001-Add-meson-option-to-pass-sysroot.patch"
  
- REQUIRED_DISTRO_FEATURES = "opengl gobject-introspection-data"
- ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
