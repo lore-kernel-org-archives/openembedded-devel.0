@@ -1,65 +1,65 @@
-Received: from mail-dy1-f177.google.com (mail-dy1-f177.google.com [74.125.82.177])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.8069.1795739696781281298
+Received: from mail-dy1-f180.google.com (mail-dy1-f180.google.com [74.125.82.180])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.8070.1795739698675754262
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 26 Nov 2026 16:34:56 -0800
+ Thu, 26 Nov 2026 16:34:58 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=NqRs+nTg;
- spf=pass (domain: gmail.com, ip: 74.125.82.177, mailfrom: raj.khem@gmail.com)
-Received: by mail-dy1-f177.google.com with SMTP id 5a478bee46e88-385d8a00598so10996884eec.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 26 Nov 2026 16:34:56 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=nUHKwfGA;
+ spf=pass (domain: gmail.com, ip: 74.125.82.180, mailfrom: raj.khem@gmail.com)
+Received: by mail-dy1-f180.google.com with SMTP id 5a478bee46e88-386ab9ab619so10130823eec.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 26 Nov 2026 16:34:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795739696; x=1796344496; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1795739698; x=1796344498; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=IoVxG1Joq4OQ4JXLOaRODIlAtPDNnh6r5eDGui+/p8o=;
-        b=NqRs+nTg+RVTs7OAFTvMC3nqwtCIlo4ScloFPGmoZfJ36aBgi+/+mqU9CmXgF6eU3E
-         S0bzUOEaHWz/NPvekkjjwicpFvRr5af/rcDT01WUmescJ0nd2hvTAV+7MByJfKA8+kmh
-         hkpMS+i1z1/Xr9MLedxJy8+DscCnXTGEgg/516ih+5M8m7/trQjbZ5BjL5k0V2iY7plj
-         P34m6hYTfEr5c+HGNNsOO50mtPcDtB31bqboiW+YwSKJodcwirw1P+8/Zugdg08Rcazn
-         ZlrBtvhGcjXEGWpir+MEvmg3SNRhO3EHvWZp2rnPfxfVdc8gWmXq7ULsd4ZIgmzD5bB3
-         Jv1w==
+        bh=Ef245jQnwlvfUtxA7kUM/DhdabnwGjcQVVdmZsCTWdI=;
+        b=nUHKwfGAhD92W80KWpgqndPQ/gtoqlXRBHnhpe7rtDEbT8KwUssXPlL07L8radOJab
+         44O3FCymA2mACTns5GDFpjHwCOOYzPUkmG//Q9hJILFwiLXYtg0qpwuYRGUh/rZcUFGh
+         3QtuqOeNRtu7+t4h/VjiWzgcG9HvvpjPhdFOWUfq3P3zn3y61IV2VxmNYexwRBwVrZge
+         U5UN8zQXNoGgVNuqe5BjZkAgxvK//QUeywxNWWSr4Fkn8pvwg6z35hYYdQO1E0JewsTb
+         3GAHAvoZj6PEAK730Ivi3ZRSOE+Q50YlGfeqkN9UFO94V9NMtWIGY3okmR0A4X39+SS7
+         0rwQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795739696; x=1796344496;
+        d=1e100.net; s=20260707; t=1795739698; x=1796344498;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=IoVxG1Joq4OQ4JXLOaRODIlAtPDNnh6r5eDGui+/p8o=;
-        b=RdbDmg4rKo/+/478u0OQYwJfOEqGqU4VAvjixUOoJm+nS5KFfIrExRLK4dLEMEU3G0
-         Kom1Pb6+yltUYV+g4YpA84Xw/3PeHe3JjECmCwdzhv3ws8oU0RVfkZtgb9cbGDVCJ6Us
-         2/Jjd59cPoYpm+NaZTaSVMB+P2sb7z2+P0LN0SNPJg4KsX4h2d5SpXm29ohrPCbZZKqy
-         c0YFhrFBnniYhw5SQj07OLYFaWVSTiNUxSB+pb+SVz4gIU4VSQA4iYeHTRIydj5Atec6
-         yGIZ+ZTkSQkF1ADMzNc1aCwS1X7JaTKwzIXbAdswtrjJ0VrYlaKr92z5ENpjKNR0Afhz
-         N2Bw==
-X-Gm-Message-State: APuU4Z+vQ2c5LWjF7zlDg65fvAcxhzd7/3mpU/kmH3NHIU850HFjLQWU
-	q/5cdp5vlBJNj6/BdGnNeUXscEZKhiXbSaDVdCOsyuEglePoUrUwJR6uV9Zgj9x5
-X-Gm-Gg: AZFdTZcTpvSoYDFVqO5xiZ3vrefW7PnezLC4RrWDRs6+ntj6w6/u7hEAIIqSN5gnLBP
-	tqjjSplFYn/kybSsJvWaVfnNupUMjZUVN76AeZ82toa5t9Cn5nlemi5qGMQ7dSnP3lt+VOXuUad
-	eZQqaJvGxt+xMCJL/HVP552zGsXMP+ezt40aAVwSUQARurInNEXd8uZNOormQh2snMDAFgQIOXR
-	T3m2w+ZPS3Lv6STXcwl14W5T751DoYCZ5+vaX8ZrAKNMGU6bbOlneQ+xqMHMTQD6ANLNxzB8jnD
-	HApble7eyewoHjjGqw3yUV6ooTcX8QIJPwU9eyeQGhl4iq84wtTjmnH+Z14aQPIVnz+pCafvQuN
-	7n2z5dvrhB4AT8gq9fUYj/Knf6vz9GWHN7KTsLRBIWgPIhjAu40eBpAJlTtG2E9IVanhnQ2ZQNe
-	CeRqkW88wnu5RN9Tdpec0sukl7PG6I0ReEZ4Y/Zya5i+7AATFX/1gx5kSlLHNIR+Jf03FP5rsc9
-	iPbDojzOfdivq3CdMmonXJhZzy8XuOOdsCDl2YjzZCWjOmhR7iJ1lLG15Vx8mdlIM4mU9vSCWZ+
-	zjl7VFGwoQ3TRWH0KR13nhbj0yqjsAiQ9w8PG2xw2XXOrfugkJhP2SCHjsfS+xabd7hoUN5Q3nu
-	56vjHiXZ7HQ6+HjKs5nDZ8t2bWi21xlU7a50f5H7Pj3eMoL5JD/gXLsMS2QIONSLXsToK2tNH0n
-	9q/2Sbt9q1t3Zh27lY0f12vJJ6L6yErYmRs5xrYIKK4BYbZN9bab3o0OWWO4TvOej2fuBL8C13i
-	MBqHfrAH9nUOQsfw3jn7WNF3auPkI1ga0mtwCI5Q+xFAH2w7E4qBLEkXwfhG6ieGvzEaitLEoJu
-	CcMYpFH6ziC4znPo8dUM8aDw3g==
-X-Received: by 2002:a05:7300:c01b:10b0:386:c3c2:a37b with SMTP id 5a478bee46e88-386c3c2a444mr10577457eec.4.1795739696114;
-        Thu, 26 Nov 2026 16:34:56 -0800 (PST)
+        bh=Ef245jQnwlvfUtxA7kUM/DhdabnwGjcQVVdmZsCTWdI=;
+        b=1zlTtfHbWoSvKwL27a5NesfwrYKQMk6fTaaLnUvHFK+2qmYJZQj8K8CSrkxYmuErso
+         JRlRpbocNxKrVOpEnXXsxYsJNHHSk0WnRixdnJAlSdbDv0aDuo1lUbiUepZj5rlDG9Ux
+         LrdRDeXf3661153Cba/+SeIqszgAbSmFkhsECXLy6QjivGdLnactR1wrWGYekSTJi7iU
+         uvKTyy+3TyHpB36kkPTl9eIbAumOl2FKo+kWalxVHdSd5qTiSEPhY7GUFKG7CLxiOJKb
+         Y3IOiDLwOIJaEkmR2Ieb+3BqBNjLGyXYfstMMFZf1Jh2eBOAhcKnSwBekusUbbG4R6ia
+         /XhQ==
+X-Gm-Message-State: APuU4Z9tZs8XgFYpLuVQ1DDzrC4RkkQqSlCkdzZ+U82q3S+ZdVikeUFs
+	tDrYoCRZTI/lWksn6W9hKfInbPEkTmO7ms81BVTZmwhw0kLW9axt/x+Nv/lzp7ps
+X-Gm-Gg: AZFdTZfts9iHpOQNfgA9JWGMx+GefgmS1bnHCB9NPRzvMvasXO313eblEV1t1Tu0DGZ
+	r15YO4ETB+Z3XkJQh+afQa8D+iOzNR8d2c2331doHCTbEwTxQi6ZNes453K9bacJoXLX6JTq/Zl
+	4ftS/q9RsVJrlS3JO5T4QK3JjFQKqmJjuRPHUi/jvOqO360B8D1+2cQZIazvNCxJeE4t7Y56v82
+	SS3T4Yu6WCIlMDqqGOTKBc4kLg6RrNqibWpLPGYHTu3jncQdi6yzrbL4rUTTg3Q9B910OoH3gAB
+	uv3BCE6GmloZKlNV9ZTZ9ikg5B/m0ETWyzEqn5ZtpvBp0zsp0KrTmgWdXWi3zGR1ApBInkL8hiH
+	BmASSeUK8BQjs67+vJHax2VEpEocaBU2Oo3l1/+KoV418XGmbSS5heaAHFdPpo5b9GsSjbFFcFK
+	XHuMEC90xeDEfYiGDMLgdY2TVP2RiDgM8h4xrQ/K7JUmBptkliJU1KFWXCDNLIaqAl8gq7xLOAD
+	p2sE7YzZY9fegXKGT7TFiXnsqZlxJEY2slv8WY5ETMua52XvUBhhr6zjE2moqDdVY9y7iKwZp2E
+	NVhHpcfMazpyMGNCpXFk90plb1IIAbFh4Nl3I+6irXoA+BXu3OJhGP06Vb0n3hro8Ye+yV5AlT+
+	KJtT9sVJ88fApjp2f7Ybf6BIPTeC29BAsJ+wr2VHQK/0eJuwDdZYiUURxdH1xkeclF7i5gnAeUs
+	tthPxR16e8md+g7vAxE5bNXFIZgCuf/KLOWhtHF6HS8CE9INerjrk/B63z2lBITLylB2IuJ2TBz
+	PDVonmmXKfK7rgAAO3I6VUD334901iEH0KI+0P3Zjz5YFW3yMP0Qv9vJRf4zPYgb92wjkHvcvE5
+	1ao8
+X-Received: by 2002:a05:693c:6010:b0:385:849b:7899 with SMTP id 5a478bee46e88-385849b7adamr26650298eec.4.1795739697979;
+        Thu, 26 Nov 2026 16:34:57 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-385672ce402sm63029314eec.16.2026.11.26.16.34.55
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-385672ce402sm63029314eec.16.2026.11.26.16.34.57
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 26 Nov 2026 16:34:55 -0800 (PST)
+        Thu, 26 Nov 2026 16:34:57 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-oe][PATCH 25/69] glibmm: Restrict upstream check to the 2.66 series
-Date: Thu, 26 Nov 2026 16:33:41 -0800
-Message-ID: <20261127003425.2166632-26-khem.raj@oss.qualcomm.com>
+Subject: [meta-oe][PATCH 27/69] gtkmm3: Restrict upstream check to the 3.24 series
+Date: Thu, 26 Nov 2026 16:33:43 -0800
+Message-ID: <20261127003425.2166632-28-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.1
 In-Reply-To: <20261127003425.2166632-1-khem.raj@oss.qualcomm.com>
 References: <20261127003425.2166632-1-khem.raj@oss.qualcomm.com>
@@ -67,30 +67,30 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Fri, 27 Nov 2026 00:35:02 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/133125
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/133127
 Content-Type: text/plain; charset="utf-8"
 
-The directory scan reported 2.90.0 from the glibmm-2.68 API series,
-which is packaged separately as glibmm-2.68. Check only the release
-directory of the current series.
+The directory scan reported 4.25.0 from the gtkmm 4 series, which is
+packaged separately as gtkmm4. Check only the release directory of
+the current series.
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- meta-oe/recipes-core/glib-2.0/glibmm_2.66.10.bb | 3 +++
+ meta-oe/recipes-gnome/gtk+/gtkmm3_3.24.11.bb | 3 +++
  1 file changed, 3 insertions(+)
 
-diff --git a/meta-oe/recipes-core/glib-2.0/glibmm_2.66.10.bb b/meta-oe/recipes-core/glib-2.0/glibmm_2.66.10.bb
-index a9be4e6c55..3d8d1e90eb 100644
---- a/meta-oe/recipes-core/glib-2.0/glibmm_2.66.10.bb
-+++ b/meta-oe/recipes-core/glib-2.0/glibmm_2.66.10.bb
-@@ -14,6 +14,9 @@ SHRT_VER = "${@d.getVar('PV').split('.')[0]}.${@d.getVar('PV').split('.')[1]}"
+diff --git a/meta-oe/recipes-gnome/gtk+/gtkmm3_3.24.11.bb b/meta-oe/recipes-gnome/gtk+/gtkmm3_3.24.11.bb
+index 7710ac9a8a..e57bbe07ec 100644
+--- a/meta-oe/recipes-gnome/gtk+/gtkmm3_3.24.11.bb
++++ b/meta-oe/recipes-gnome/gtk+/gtkmm3_3.24.11.bb
+@@ -16,6 +16,9 @@ ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
  
- SRC_URI[archive.sha256sum] = "2b61780203aed98e701d3ea57c8f353e7c8ada9706a79be782f6c5153dd035c0"
+ SRC_URI[archive.sha256sum] = "19e383c82d5dd89db275e00b82864e90414d4c3fb3d100b2f996bcc2338a4cc7"
  
-+# 2.68+ (glibmm-2.68 API) is packaged as glibmm-2.68
++# 4.x is packaged as gtkmm4
 +UPSTREAM_CHECK_URI = "${GNOME_MIRROR}/${GNOMEBN}/${@gnome_verdir("${PV}")}/"
 +
- FILES:${PN} = "${libdir}/lib*.so.*"
- FILES:${PN}-dev += "${datadir}/glibmm-* ${libdir}/glibmm-2.4/include/ ${libdir}/glibmm-2.4/proc/ ${libdir}/giomm-2.4/include/"
+ EXTRA_OEMESON = "-Dbuild-demos=false"
  
+ FILES:${PN}-dev += "${libdir}/*/include ${libdir}/*/proc/m4"
