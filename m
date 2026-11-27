@@ -1,65 +1,65 @@
-Received: from mail-pl1-f180.google.com (mail-pl1-f180.google.com [209.85.214.180])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.8234.1795739778781036887
+Received: from mail-pl1-f170.google.com (mail-pl1-f170.google.com [209.85.214.170])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.8110.1795739780161813161
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 26 Nov 2026 16:36:18 -0800
+ Thu, 26 Nov 2026 16:36:20 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=0zO3JR/U;
- spf=pass (domain: gmail.com, ip: 209.85.214.180, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f180.google.com with SMTP id d9443c01a7336-2f066274caeso35446645ad.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 26 Nov 2026 16:36:18 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=oYzPUzAn;
+ spf=pass (domain: gmail.com, ip: 209.85.214.170, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f170.google.com with SMTP id d9443c01a7336-2f052ae3c86so40812305ad.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 26 Nov 2026 16:36:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795739778; x=1796344578; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1795739779; x=1796344579; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=ogS6TY+if6UebRqhpLWb7AjbwZsGZMAGIr8dZOBi8SM=;
-        b=0zO3JR/UnipeoMX3u9st+mOtpTxbri8DG+2LvXmFZ+5NqYeSG4kjb4BPnzYwvUwMqB
-         PMteZ/PiQwC74WGdx5v2Fko2xc0FHo5O7lRLRiHUnMLo+ytujqPAVW+8fPK128RXwjWD
-         Ufv1Gf/ehK8Du9bTYRfbfLq3XoKqR15ZMTF1jQdQb6mMW5sxe57UFHfLuxIectymYQRP
-         UI6cLL+QY5VZ73Wh4mdJFDWRVyn8mdxuAY4IWchrWUZZFY0wvjqMintlNQImJjUZ5+8v
-         jwtshhnovdbzBla01WKluFD/1OHxPiLwuD85fcuXAoZxU1F/2iJYMmjqL4mfJqH/Qf67
-         A+8g==
+        bh=O9TfNlGZNNipUJ9GLCDmCjWcSpEhYytnDEXj1bSnQE8=;
+        b=oYzPUzAnMg5PCq0bbMSHF4b6uviqx1H+W8TR7PRmqFxZMEWb42y5uGvo8GvTxI+esP
+         l+P/xrLTIv41YVon5VkwUkQpJ9HEJfi4v/3Nc3jywpsWpELPuHaurpns0fe3ZUYK831U
+         4vTssUu3CTAblx3HR3PecRqXqjd+6Dt0kw5WlbD6PPNA0BzmJhjFfQQw3xHZi2tZORNt
+         ODKfWKNZ6jSAjvEmoBj2x/pEK2xVkzdJooasHidw2lQbD23ArOWUkYVVCXi0O/GfjjnJ
+         brFEHljR+N0ySU+yhG4nu3Hw6r1c7/nYSfswZRGGAPnFyt2T+s/eOp885VQOjNpAgdN1
+         GlvA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795739778; x=1796344578;
+        d=1e100.net; s=20260707; t=1795739779; x=1796344579;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=ogS6TY+if6UebRqhpLWb7AjbwZsGZMAGIr8dZOBi8SM=;
-        b=cowmGLNKsXlK0rAfjVZs8iJ/nreWIsOys3aP5VCJHhuc7KvEc9ITndLjR5Hccn16B4
-         WXKx7ONYV/q7XUUsl0L4VWlp6s9hBobX7U+qAkJctuiMMxTU67DCFIaE92oaRnAxqkXh
-         GKeEFqwpSfihh41O2wFGMVQVh1IN1XxSB1Wqkzx/7Fw+dD4qErmvv+iAg22NhmLb6lJ1
-         E85bon4kP51HXdh7Lk9ziq8KEPNo6h4HNNpquGpo2+R71xomwux1zRfTYitxWLWQv4uG
-         kqx5gaCfGGFSE26Bsm7SRt/DjmfKhwIXfoNcmTzC1PgzsiJFxSxowbp2Hvl1Yi80N4wZ
-         /SxQ==
-X-Gm-Message-State: APuU4Z+s7UnXv43bu48QOlQ9DSR5XEZ/i0f++sLcyLZQTz1oAOvWMu8Y
-	3NbnGyaatn6UxhSGfE9jLErLvo5SxReqTKxKv1rOSHq66DuOFG7v1mG4FZJHk4WT
-X-Gm-Gg: AZFdTZeSZsUaizPNBMRLmjAHVgSodmsr95rkrmnCvSmOOpywvcuyKroiZ0ofdw+JsdY
-	4s/KtxVrwDXAYb5qcqNMMhdErobehCDMTbhxfImkXu3UWTulu8H2mC91zm8Za0qMxdGnxIcAeHB
-	NLuaUbIR5ooeZOGtn2GYQ8aUfkoapAsEOaWq4HfC33KnwMP1c0Xqbba3SHOfhXz22v6W1TKRCsy
-	7UEGPi/S80fZcl2ITBpeMkig8hRYFc3mL8icTsTnGP7kC65OD5sNGbctgtwBw/LOXeKsbM/Akfw
-	NW+g/T8lhF2nobu1Xg6Cymo49H9JMvfQ6Y6YJJrnMMAUHxBVAgQN1mIz6qZlm2uOiiCM1Wk6IDg
-	lb7FCr/etvvDkozdVr2jr/MSxml7oozZMqSCtm+v7nUL8iNxJeW6zBJ56x4Bx2N7H+n7blWTaZA
-	H3qC5Lc+nOJu82f7RdfqbhfJlaQN8Dq2ZGpwfFTSgRJETXRf1qXfit/GaVcCvMEJDzJuJY2Qma0
-	CfaM8tMsTIulM1qOv8BznChDGHk2aRR5kGSM3znMdRu6uEAJeWdiZnQag0JdVwQjmvEOYdYk7lh
-	u6IDKl685yXYk/ZhnS5vOl6JQOuLoc8scEsXnWrImsh/q74Go4rZpG4HrFNYbp/L9z5caPkpJiU
-	V0v9teZdckatQWb1pVUTEyLBSBaxfJeero2ZAd6m6k+7KzHlxyLWXacy8x/hCfZhc5VXiMqWlAn
-	0Q2GkGOPFOn12Sf4bDffBreiGJu5D5UcYJNqo4YgE3IpYr8Ufcsw0So9bYOg1h4Y/JQf/1uXaHg
-	eH/r2m1rNdEX5Fggn4aRmxqJUmQJGdrH45f8yTFmv6Vzhv/odsKqXEr1ynaxvZ6/EGRPfDQXmOP
-	TGxY
-X-Received: by 2002:a17:902:f645:b0:2ef:dc42:10a9 with SMTP id d9443c01a7336-2f03ef3d32dmr238138905ad.7.1795739778137;
-        Thu, 26 Nov 2026 16:36:18 -0800 (PST)
+        bh=O9TfNlGZNNipUJ9GLCDmCjWcSpEhYytnDEXj1bSnQE8=;
+        b=a82bXXPfCumCx1r7Q6zvZbG7krPLQvy4QtXWviq1yBks7wm00brcTyhOGAOuePZKWR
+         rTFkQDzmyP0zJ9FvohGBWvKqp/T1ieQ47buL7i/05jwzuqnSZC9smsPYCnx3zix73htx
+         rs7t3MWJA8Y4j36Bt7URVheMhh2xEV9d5gWexqMCTnDfpvoHCvXmjGfUY6kcBvBol3+7
+         QUawVob2tBUrPo3ErU9yWlf3ScRJqsCTxpCaux5g+O1Etlf3wr9tM6PliaS2bG0e077m
+         z/zSosQlXE6jkMNcWEZvrVeYNWcd+Lo1B9goKEBT5KUdXFKHTIE19fDeSRJe4BPh3Lak
+         zqhw==
+X-Gm-Message-State: APuU4Z85Y67W57tjBsScFrTXkDlHVYH3G6h8Qye9KTznzoHPIYha2YG8
+	SugP+WHrf7B9z6VHL2PCopRGaCBU5hoTykAeNPron/prt4BKPL6ROK5BZTDOZg==
+X-Gm-Gg: AZFdTZeQBdRqj6hl15uetD9qZxPyE3j20zpYqCecCrl+JfF3OOOErQH5qJ2Kcq5SJ4V
+	RxHKJK3ClXG78NfvySErZQPzbaYPaesRBMr2AptNHCI01VgSkj50QoYaSJWF7DJbKhj8+cbuq7K
+	N83oqOSeFY0O6Dirfm9CREiWOmg6AOUSmA/cK5rsPg0oOkEuHU/2EVwwoYjhsSmKPNMAkroeXPp
+	oRG1Sozfvjw4VJl3MeBeaJa5ZheSwKh5Qwc3KkMAF6KoCO/WWUzP+oz/zkTGOcyZNTRcczrUvop
+	mjWAL8q1e42N3Ks72Y0GKWPMk8Z3S40S3XE6wB3zZVdfyn3tarFQ/FFvomt07v6VhLIZ18NX2WW
+	MRTzHZ/1Xnt8LhX95Yani+kBnIqG0as5SzflV3xdUikuGXPb6UttNvQFNwJlWBx2WUNe1NRQhSH
+	rC3GglgBm1CeoteJoINv/m9YibmIrMH2MYbFKxwToqT3mqg//OR0nYk0WjwwBsXtuLzNAAu4LyN
+	gDWA1rZJr8txSYZfeWabVSM0bRxOQ6NFXD8xQmUDEMlAmINJVMx03fISvFryk7pyJcikt3r78Ce
+	PwGui+3FnRLvEMuNVzhAcAyOAEoI2JDihlrCNwdpFQkJQ9JokWfnKU9I/EaFBYb8e4BAe0irRlO
+	MALgAz6wUTEC8e5aPkEC1PGm2IJNmt/MjOYoz6CauxDpsvLslGh/jpWhrCz9qBeuBnEjFnwimuE
+	EJogvvdYDahLDJP7p/HTVtXsQ5CFGcqTIKZ4p35HGNuiU09eZQWB0ROWrE0b0mLFRrxxPYSEemC
+	lHdaEoa074REVDA1q+WfSkNzA1iPOHpFgQTikRHN6gUVBYXFX7l+zHEABggIS0wInqexd6SQwT1
+	X9SR
+X-Received: by 2002:a17:902:dac1:b0:2f1:6bb:55e0 with SMTP id d9443c01a7336-2f106bb7a79mr13791265ad.47.1795739779422;
+        Thu, 26 Nov 2026 16:36:19 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2f0fe9e36f9sm10410875ad.55.2026.11.26.16.36.17
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2f0fe9e36f9sm10410875ad.55.2026.11.26.16.36.18
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 26 Nov 2026 16:36:17 -0800 (PST)
+        Thu, 26 Nov 2026 16:36:19 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-oe][PATCH 12/39] fluentbit: upgrade 5.2.0 -> 5.2.1
-Date: Thu, 26 Nov 2026 16:35:16 -0800
-Message-ID: <20261127003543.2167775-13-khem.raj@oss.qualcomm.com>
+Subject: [meta-oe][PATCH 13/39] fwts: upgrade 26.09.00 -> 26.11.00
+Date: Thu, 26 Nov 2026 16:35:17 -0800
+Message-ID: <20261127003543.2167775-14-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.1
 In-Reply-To: <20261127003543.2167775-1-khem.raj@oss.qualcomm.com>
 References: <20261127003543.2167775-1-khem.raj@oss.qualcomm.com>
@@ -67,50 +67,39 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Fri, 27 Nov 2026 00:36:27 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/133182
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/133183
 Content-Type: text/plain; charset="utf-8"
 
-Bug-fix and hardening release:
-- in_tail, out_file, in_blob, out_s3 and others: harden file operations
-  against symlink traversal.
-- in_forward: validate complete compressed payloads.
-- aws: mitigate accidental downgrade to plaintext payloads.
-- out_kafka: fix unbounded data races.
-- parser: add a static CRI parser backend (about 9 MB/s faster than the
-  regex one); in_mqtt completes the QoS 2 handshake.
+- ACPICA updated to version 20260930.
+- libfwtsacpica installs a region handler for PCC operation regions.
+- tpmevlog: replay and compare supported PCR banks, support saved event
+  logs and PCR snapshots, bounds-check variable event fields.
+- iort: allow defined Named Component node flags; brs-i fadt: fix
+  architecture check.
+- Many additions to the klog database.
 
-All patches still apply unchanged. Anchor UPSTREAM_CHECK_GITTAGREGEX so
-only release tags match.
+All patches still apply unchanged; only SRCREV changes.
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- .../fluentbit/{fluentbit_5.2.0.bb => fluentbit_5.2.1.bb}      | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-extended/fluentbit/{fluentbit_5.2.0.bb => fluentbit_5.2.1.bb} (98%)
+ .../recipes-test/fwts/{fwts_26.09.00.bb => fwts_26.11.00.bb}    | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-test/fwts/{fwts_26.09.00.bb => fwts_26.11.00.bb} (97%)
 
-diff --git a/meta-oe/recipes-extended/fluentbit/fluentbit_5.2.0.bb b/meta-oe/recipes-extended/fluentbit/fluentbit_5.2.1.bb
-similarity index 98%
-rename from meta-oe/recipes-extended/fluentbit/fluentbit_5.2.0.bb
-rename to meta-oe/recipes-extended/fluentbit/fluentbit_5.2.1.bb
-index 3b3ca5e25f..fecf42fda7 100644
---- a/meta-oe/recipes-extended/fluentbit/fluentbit_5.2.0.bb
-+++ b/meta-oe/recipes-extended/fluentbit/fluentbit_5.2.1.bb
-@@ -17,7 +17,7 @@ DEPENDS = "\
- "
- DEPENDS:append:libc-musl = " fts"
+diff --git a/meta-oe/recipes-test/fwts/fwts_26.09.00.bb b/meta-oe/recipes-test/fwts/fwts_26.11.00.bb
+similarity index 97%
+rename from meta-oe/recipes-test/fwts/fwts_26.09.00.bb
+rename to meta-oe/recipes-test/fwts/fwts_26.11.00.bb
+index 0f9cee8fa4..e1e18cf349 100644
+--- a/meta-oe/recipes-test/fwts/fwts_26.09.00.bb
++++ b/meta-oe/recipes-test/fwts/fwts_26.11.00.bb
+@@ -11,7 +11,7 @@ SRC_URI = "git://github.com/fwts/fwts.git;protocol=https;branch=master;tag=V${PV
+            file://0005-Undefine-PAGE_SIZE.patch \
+            file://0006-use-intptr_t-to-fix-pointer-to-int-cast-issues.patch \
+            "
+-SRCREV = "f06eeafe26509961bfdffa60feb855623d79224e"
++SRCREV = "0bd8cc696caf7552f43a3c77c720beb5e6006e85"
  
--SRCREV = "e0149076aeff009d35fd495e55379cb78f1eb53f"
-+SRCREV = "d83ce705c6abae6526dfdeecbc736aa199eda339"
- SRC_URI = "\
-     git://github.com/fluent/fluent-bit.git;branch=master;protocol=https;tag=v${PV} \
-     file://0001-lib-Do-not-use-private-makefile-targets-in-CMakelist.patch \
-@@ -30,7 +30,7 @@ SRC_URI:append:libc-musl = "\
- "
- 
- # prefix tag with "v" to avoid upgrade to random tags like "20220215"
--UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>(\d+(\.\d+)+))"
-+UPSTREAM_CHECK_GITTAGREGEX = "^v(?P<pver>\d+(\.\d+)+)$"
- 
- 
- PACKAGECONFIG ??= "\
+ # fwts.ubuntu.com no longer serves releases, use the upstream git tags.
+ UPSTREAM_CHECK_URI = "https://github.com/fwts/fwts/tags"
