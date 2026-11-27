@@ -1,65 +1,65 @@
-Received: from mail-dl1-f49.google.com (mail-dl1-f49.google.com [74.125.82.49])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.10346.1795753041117422915
+Received: from mail-dl1-f41.google.com (mail-dl1-f41.google.com [74.125.82.41])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.10352.1795753046389112886
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 26 Nov 2026 20:17:21 -0800
+ Thu, 26 Nov 2026 20:17:26 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=02FLraEF;
- spf=pass (domain: gmail.com, ip: 74.125.82.49, mailfrom: raj.khem@gmail.com)
-Received: by mail-dl1-f49.google.com with SMTP id a92af1059eb24-1b3a05f8b5bso10382032c88.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 26 Nov 2026 20:17:21 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=EXjx9HaR;
+ spf=pass (domain: gmail.com, ip: 74.125.82.41, mailfrom: raj.khem@gmail.com)
+Received: by mail-dl1-f41.google.com with SMTP id a92af1059eb24-1ae58d17cd9so8650095c88.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 26 Nov 2026 20:17:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795753040; x=1796357840; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1795753046; x=1796357846; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=kEjprVea6hFOybpEdpuWeP1vfJ7jcfAmLqj/fm4Xlrw=;
-        b=02FLraEF/qOw+A5rTUHn8Ni6boNxi5J2mvxr+lQMqFxaDeCcif81CwqS/+E/smfqnb
-         woftyg7aIAIt2aKmd7w1I/PxWVoLGLbOriVppgYELYju38nOowsmuP7ccDxfPjTHkWLL
-         jgVQg6MMwaiA5N52bUSgSP5vyJzE3dPX8FwoKawOoc5rUg76T37a87kKm6McL3LJZ9TU
-         tf8I/Bt5bmHmcsrClKhFgs3PEEw+pr0RRyNqqtbyEmb2Nqid9W/+mWRfzKErE/ihQlgy
-         eme7TMXEUuskn0980VxrxaomWN6fycfPX66xe6VhItgo/AX6ul5KCjLgd46YC7bu058u
-         ha+Q==
+        bh=o/Vqs6qwlXMCS5D2/ETD6yPKNbSgDxOB+CXdndlByzE=;
+        b=EXjx9HaRw4qvAvvDgarQL83yH7I5BIY9w+4EU7cRjR/j/PJxWi5JK4VLKI/k53Ry+/
+         j624UYMMlWXTm/TKV4OBYLvnNjwG+8aMY5w2xTG+3TEAfhBOEGO1Rer6hULQRC93hY3N
+         gG5tGWb6dJjFkNesOyG+Li92shMVA9GSM0vnEwTAIbP4hfjdSMMzImcW40+fItmqxMRD
+         wzu4sghEXtaWBOETCoIjVpkW5UYOPhKI9IxA0T6qysLWllgddeuvEdtmIzjEVFQFJF0s
+         424ksJ72PsFJ6P6+F1Aj+4VJ6FAL10GBclgKvERcoxjipdDgtQCw2AtsMQGKKiajDT8o
+         jbVg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795753040; x=1796357840;
+        d=1e100.net; s=20260707; t=1795753046; x=1796357846;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=kEjprVea6hFOybpEdpuWeP1vfJ7jcfAmLqj/fm4Xlrw=;
-        b=N9mhxcMKdOUB88pjGWCd5oZx/RvuDwAnSQva4pZck7J4lf8o5xjB9ubdlZcd4whmBG
-         YIC9ppgdhGVI1aaRynU7zc8e2hxKzCNF8d5v0qxKLUrtpxm4ekemYn6Ue9QU6wXXRA48
-         DhDf8XTnD6DG47aES74sxMOxvzZjhewARfYGiz5lmE6DdcHkk9OM5wlLX3Gn5vaDODjH
-         4G5HZ4/Tc/wHXkOwOGxvLOSmcYOjZ4kNpcWwvTtGeCvQKCqwQGD3SSYiF8S1oxeLsLOn
-         UWAo4kNOmvS0DOblqvNzMmjsiOvmhwXkdCV5lJt/rhXgpYEaghm5d9kysErd1jWEcUZv
-         gSpQ==
-X-Gm-Message-State: APuU4Z+ACiBCF1F8q6n3Jhk81/kI1B+iL0XYCPsoI2tz2QYbdC+X7+xi
-	9lwLZWTStyoF445Zn+ZYZ4JKpDJ5hX/I95RSj046v6hMZI8IS9sLFUavYDT0oeqv
-X-Gm-Gg: AZFdTZcojICFHE1LpZIYCN73KqWEOQZWQGQilUEQVM1KrTvHjcLMmwrjpn4wPyXYF3Y
-	bgxXtA+RTrppJeXK07tBLwi9OD6LPHmSzsWNQ/lD+tG2MiQBUX3Ma1OsXA3fiiBv0+dTO/EgJC0
-	27EmYGMBuoSSTOalle3CtABZ/c6NbGIe8nOWPVp314a5xem4N2PfcgkEX9btKntPPPJuA8vd1gs
-	sEkH2gfAeu1odjz2gVXyXNo3TCfSiBH6GO+sFZEO1+pDfR9qi0jXxPFj/tQT8WcZ3t8iwjIDXK+
-	1Hr83vl+AYPAFPNMELaO/uyFXEbPCvIGAVvuv2kGcQJ0R9AJKlBUlF+32myXQJ2lSNi0cfjuzUG
-	tl3iGRzGHiHRQoFaHNctKlvQq/Yan0QxdKsIhJQ0fvG7hfb7AYAxqzHDW9JrRW9YZQh+2UvLSpg
-	j+fyKRpdX23+V+Wza4ivCWwoyR+kx8q3zcJJfI6+FQGccpS0a+XVFGBJ7UAcRs5J+fgUwBP0fxj
-	MMGBMFbKxNb8p7HlpYmE7HnOio/kB6iIi9sOMTMutJJ9u8babdsgHLv5kIDX3RXoLLMg1cE+3LN
-	uaFkh9kOITz4+HuhJ4M2h8IvX6o+sJx2YOAq9rZcW10ruqaM3nyeSE3e1cSR3W9oAArcr91FTpB
-	d4lcr/2NjzlXwpOoq7U6BpAQFWI0xab4RiBpJ3vmcbBoEYe0QmA41zVcHdBPUh+qfce4Fb591WH
-	+6rnyiwoWoCwnE6BK+hjQKA/eq60BHmtszpfifg6esDu4zgJAPk8sJ1OqTPK1HvucCynIw559Fr
-	ToXwBo+eVKO4c3uA6BnAE9ChtaBxPJqNgFllo8LZpmKbonyJo87+cnCezwjU6XzwAPKFXSBqRSz
-	8Lvo
-X-Received: by 2002:a05:7023:b12:b0:141:5281:8a41 with SMTP id a92af1059eb24-1b55687fbc9mr25346221c88.9.1795753040455;
-        Thu, 26 Nov 2026 20:17:20 -0800 (PST)
+        bh=o/Vqs6qwlXMCS5D2/ETD6yPKNbSgDxOB+CXdndlByzE=;
+        b=wXfByACfe0Z0S+OLahn1FSFP59eC6j/zQUvbilM1hb55VXjT1X4jku/vcUdlahN7rV
+         mdhECIA7+6bviHh/2IuwT+3XMBGxDKoX4sqU8ddNFjCSZtLRBwOvKJXjx6LxLBets4KA
+         pOqRVI1Lbp2m8qVQA+dBbX5ecLij7cmil3IaoJopI2uCEP+qKq9FuqFcMs8CljBmtgt+
+         weZw7xy1061vOwHDPfmFy8wan/lg6x4ele8TviHW5cQOqXEMGrk4VVl5YwCWA93s3Zxu
+         1N9Cqyttd0q4c9Ud9ialm6rD7ZSRBjIO85e0iO0/TiQnilqs5DHj1k5qe/kaGuqDsf+3
+         evIw==
+X-Gm-Message-State: APuU4Z9WWWy2OcFMftHZmT5vfQCkGWt1Dq0I0ADiwFltZ/OOxw41Hy3Q
+	OG1WkLgo92b2LWL9XU6wpesFbGp9m49n8BEdHzf8TpY8FXDH77SM0FZed0cf9C4p
+X-Gm-Gg: AZFdTZcgXMgD+qpCRnk+dcJ3k26kjH/5gAOQrtSERU8Iq6NK+Od74i+RNCoqVyWlAIi
+	krUqMwN/Y4rsNm+6IZzA6IHRlNmk9w/0orIgwWqmd0RKFFavHD+WDBSNsjm5DhbAIme230BvKsh
+	anyUhWNVLZ+eGIJ+ZiTwx4nNXNhMQYprvv/jdNetf3BC/n/5G8cVCEX2Hh95M80qoI8gTbojzF7
+	j0iNmxZDsgN9T7KgTfb070kPrcUEavQ61PO4Y6KSBskSd//TbbdC6M91o2nYxn5W43irVtfJy9c
+	apUbG3hLse/PAJjB8v0xhqLOTjyPijn6X95lnXUsd+E/G1GeAkg1/sK90MzRghNjCWm4fFyCy0d
+	TFt7iQyzVVox1jnu0NS9XvkxhQmkqpsgZlrlN5dgWlzr0G5bx4MvOhMRnr6gIOZzPY2wPZe8SSs
+	wFp92CKrLgn2bKCRrEpfv3e9F1QscPHGrm0wZC0GVASa6dYxi1PBY7efChBamcAJ/w8AOOKXSQU
+	Vj223dq6XqDhiVDfvXhC9UP55D2r5bDIiJhnn5OrlBy3eeIxNd+YomhtYF4HNHEfweL1AqkNwzQ
+	wLa+9qsHwoFkvTjVf8uT70G7nZNVjTf6GaXEje+cuiyzvMwPjLbCLgUGPgWy2V+7ggoM7zOc5Ox
+	TYh37qW6eqYMoqcbNr1D/lNhvMXqYUT0W6CkvuMZZzpaRjfSJdndjPRRgRn8HqbRve8a4WibsPe
+	Wlyy5X75JZQ14ruhnHVCH85gZWinouUuYpfAET6HCwxt7EqcNeycTrBnM2Axpo4RPO3i7tWsvUL
+	lLBWbzOXSvGMsGbUYSOaOYVzH5ZegvEKsis8X9fpzjJVkUe9muCByN2vHFp9ShrJA06F0kWlK66
+	M+jDTAA2R13cE717Z3YHi+xw7A==
+X-Received: by 2002:a05:701b:221b:b0:1a9:f3d2:6262 with SMTP id a92af1059eb24-1b5568de77fmr21247516c88.36.1795753045736;
+        Thu, 26 Nov 2026 20:17:25 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1b556840494sm53880225c88.12.2026.11.26.20.17.19
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1b556840494sm53880225c88.12.2026.11.26.20.17.24
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 26 Nov 2026 20:17:19 -0800 (PST)
+        Thu, 26 Nov 2026 20:17:25 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-networking][PATCH 02/35] cannelloni: Fix upstream version check
-Date: Thu, 26 Nov 2026 20:16:42 -0800
-Message-ID: <20261127041715.1776485-3-khem.raj@oss.qualcomm.com>
+Subject: [meta-networking][PATCH 07/35] ot-br-posix: Fix upstream version check
+Date: Thu, 26 Nov 2026 20:16:47 -0800
+Message-ID: <20261127041715.1776485-8-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.1
 In-Reply-To: <20261127041715.1776485-1-khem.raj@oss.qualcomm.com>
 References: <20261127041715.1776485-1-khem.raj@oss.qualcomm.com>
@@ -67,28 +67,28 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Fri, 27 Nov 2026 04:17:27 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/133254
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/133259
 Content-Type: text/plain; charset="utf-8"
 
-The default tag regex picked the date tag 20170601 as the newest version.
-Only match vX.Y.Z release tags.
+The default tag regex picked the thread-reference-20250612 date tag.
+Upstream now publishes monthly vYYYY.MM.N releases; match those tags.
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- .../recipes-connectivity/cannelloni/cannelloni_2.0.0.bb         | 2 ++
+ .../recipes-connectivity/openthread/ot-br-posix_git.bb          | 2 ++
  1 file changed, 2 insertions(+)
 
-diff --git a/meta-networking/recipes-connectivity/cannelloni/cannelloni_2.0.0.bb b/meta-networking/recipes-connectivity/cannelloni/cannelloni_2.0.0.bb
-index 6129c9bd0c..f1eaaf80db 100644
---- a/meta-networking/recipes-connectivity/cannelloni/cannelloni_2.0.0.bb
-+++ b/meta-networking/recipes-connectivity/cannelloni/cannelloni_2.0.0.bb
-@@ -5,6 +5,8 @@ LICENSE = "GPL-2.0-only"
- SRC_URI = "git://github.com/mguentner/cannelloni.git;protocol=https;branch=master"
- SRCREV = "9f649ef21710999c6f674bc3d914ab2e88363bac"
+diff --git a/meta-networking/recipes-connectivity/openthread/ot-br-posix_git.bb b/meta-networking/recipes-connectivity/openthread/ot-br-posix_git.bb
+index 5006b253fe..556dd4e4f4 100644
+--- a/meta-networking/recipes-connectivity/openthread/ot-br-posix_git.bb
++++ b/meta-networking/recipes-connectivity/openthread/ot-br-posix_git.bb
+@@ -20,6 +20,8 @@ SRC_URI = "gitsm://github.com/openthread/ot-br-posix.git;protocol=https;branch=m
+            file://0001-posix-backtrace-Reference-sCrashCallback-on-non-gli.patch;patchdir=third_party/openthread/repo \
+            "
  
 +UPSTREAM_CHECK_GITTAGREGEX = "^v(?P<pver>\d+(\.\d+)+)$"
 +
- LIC_FILES_CHKSUM = "file://gpl-2.0.txt;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+ SYSTEMD_SERVICE:${PN} = "otbr-agent.service"
  
- inherit cmake
+ inherit pkgconfig cmake systemd
