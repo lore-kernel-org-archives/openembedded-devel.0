@@ -1,65 +1,65 @@
-Received: from mail-dy1-f170.google.com (mail-dy1-f170.google.com [74.125.82.170])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.8088.1795739731782831394
+Received: from mail-dl1-f50.google.com (mail-dl1-f50.google.com [74.125.82.50])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.8219.1795739727581461212
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 26 Nov 2026 16:35:31 -0800
+ Thu, 26 Nov 2026 16:35:27 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=eM92nwlJ;
- spf=pass (domain: gmail.com, ip: 74.125.82.170, mailfrom: raj.khem@gmail.com)
-Received: by mail-dy1-f170.google.com with SMTP id 5a478bee46e88-386c4d2e2ccso5373425eec.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 26 Nov 2026 16:35:31 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=m99DfvKw;
+ spf=pass (domain: gmail.com, ip: 74.125.82.50, mailfrom: raj.khem@gmail.com)
+Received: by mail-dl1-f50.google.com with SMTP id a92af1059eb24-1b3acec6677so11441570c88.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 26 Nov 2026 16:35:27 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795739731; x=1796344531; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1795739727; x=1796344527; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=ZCjWBZAAzPKA92lbKbX5YR/qcEvq9+JKsz7GdW5HvNE=;
-        b=eM92nwlJ1PGxp33QcLgtZFMCCXZ99r5/24lkxeYJYZRBKzTVzp7EhixSMs+qcXKQvk
-         C2jFJUpihuOG5nxpRYdTSwnxyvf+FoaNcbE5WuLiszd9+9n92TGTcPwFfVGMtsyRD51z
-         lA+nPkHKvPvrb0lMD0P8sptyE4wkFR/aoqqJKc11TknwARbfatkaAiVM1otuDreAlCGX
-         lsJg0sFVZpdqQ+zeH6o+QhQJzyUn/k47vCe2KeVOgk2C3myKVyWEYnluD4xZV3R47EdI
-         FDTCdJ0IgppGGr+pUv2ZhULogNUcdo1XjUC6nGwrkeq7QKrlcCa1XVVuE69+YVGSHmCn
-         E/lA==
+        bh=Ju2tkuZCsp3FhvRMbbCq94QuAe5RSZnAcZzl/JvUQK4=;
+        b=m99DfvKwYoLlL5ahBOlfxNkhisoKR0n2nLm5RB92VvBBhKTE4gpOcNoFN3Fj5Mqo8e
+         cgSYJmM4rMFUW0aoxhRqx9siDBzQF4sLYd6KSqASzjARe/EOnMDAhfsK3DsYKTeFWMFk
+         kt2JMBk5Wd1HFLLdLQsUWA3oFmx9+Z5yxe0Ee5TbadTyP/b5xFP+aqmXpIyuD9EhAmuD
+         GyxlG+XOH3L033eyz4IU8Glr05KEGab8/Qilidg8Hi1WsXY28QlpFc1KguhaAYTGvdQq
+         Ngt4dQOLOKu/q8IvKgRYt8m1o8RIEihyhCGMcFmLfPH3oLpYCypjfZpY64f9mlTmhCK+
+         Kf/Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795739731; x=1796344531;
+        d=1e100.net; s=20260707; t=1795739727; x=1796344527;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=ZCjWBZAAzPKA92lbKbX5YR/qcEvq9+JKsz7GdW5HvNE=;
-        b=VNmgIIgrmMcilOAa8C3MPynHHLodVET8EmgGdY3XllY4oE6reYF7Iauh13fmRC3oS2
-         wFeo19qXmSleVpB3k7In17cQuJDRxiVJlyyiHHYYHP5Is2Kn6xJkKDhd4XkfK+tO2Jo4
-         N050Q15UM8L832pMrlkCTL1dWynybVLgXjaV5q/UjKKy+RHGAEQqXVCuugE35aAh/SA6
-         2G1MDtvLEsNUFa2+7mVb5pBYdQog19BX3VVcgvVsc0qFNVCJq9TTW60JyS7Iqu5Aw4HC
-         zDagqnYpeJl0mQEGDjnWNJibmT080C+IbdC3XGm2p282XydxxF0Rd3/IT1ERyrhi3QGE
-         Y/cA==
-X-Gm-Message-State: APuU4Z+ryZRlWGVCQNuQAyd/iuGTbEa350EgajV35Y8UWwvuoJ4nkGjr
-	CI3eQL64IA1OtjG0P8s9uFc2YL9OSVSbct4byeaMKqE1oLnPnGXg1PcekBGc1rLz
-X-Gm-Gg: AZFdTZecc+T2QcwKwLoK2Vophxhc/yjXTb+on+dyMwrV1yBfYgpRNkI+NfnKm/+5YBs
-	Sbot+7hKPOq379D6e6FS//JG47Syc6Jvi37LrRMEQY095UbCTarJbhK4qLlOUAXTz3Ocz+rhl91
-	05sk3eYhRbmG/Iifi3lSGJkofqQb3xw9PRkWmW2+FpbEMqxTUhC8U2jTtdP1jrnFmdI+K2GbISh
-	f9dZEVv4g2CWJwSRPts6uYBn0cErfdffeQOvm0W264fBw2lohK434j3wszmjgE2EsU7gyoX6/gk
-	r5H0CXT/z+CsGO+2ztb0CCY7EBxIMNelKl3tFcbR7KrvVBolDT/deeA5Df8vzRoqhjaAdcgf7o/
-	R6yx0eTvJm/gmYpl2K7Cy5PwJ++rXtusbFEzPxGj+UX4Wxa4VwSTxZIDyVJqWz8S+TYj+qkK2hq
-	Hk0GNO3VqN8cI6SLQa7VKqvGm1ctPmWf4nnpbog6Ssxsw1GL2IwpQ8/Buz8ymblstIZithsqW+Y
-	d9szGikJDPu1maF73567FgomrHfx65RjmaBYDvz2EKGS0yUXldslUBUnOd5NAbddg8ElqwOWc+y
-	yOaZKGKLQvYPNF5qPHqqIwK144XgnjWOZwp5ONkvpKP6DWSSR3bWrgqZ+uUWVNGza/7p0OxQIqg
-	ew4DTPQOn70CZjG4LILMxBNsVT0OEUNOr4aNtGFLSPtNbHYyr88agSrO0kAN+3lnXW0WViJVkIf
-	0jE/SI2PVCu5fjaXkFOIaaqGOMybkcjyGH6aplbMEZslTYuqNR5uKvy6Wy88RGecBvBySRdkK5M
-	Jagxs9A9WujCZvNWkpYOVmHgBjEVxyDNPHrHCQv95QWYkL2ds+iEfjhtEZ/EKfUIihppUzK+Vb6
-	/PqhNMkicFVEfVDIBuW5BF/w+Q==
-X-Received: by 2002:a05:7301:6e9a:b0:383:71a:2b14 with SMTP id 5a478bee46e88-3856f14bb69mr21239544eec.10.1795739731128;
-        Thu, 26 Nov 2026 16:35:31 -0800 (PST)
+        bh=Ju2tkuZCsp3FhvRMbbCq94QuAe5RSZnAcZzl/JvUQK4=;
+        b=WmFLZcgZLSrAbs4fzL9meUpnbdX/WVWajna6FwD2oU4D3UEO9WgCAiZ7V6EH/4kmLq
+         IFgi63N+MKX/qFxkKSDQERrGhwB4YkPZ1nI6atctI1EoCYn9l6VRSVVZBZeIEKmf9bFN
+         d2FvcZfzOKfJnMgu8G+SaCZXVaxuyjSAjnIulJAMDBp+OtgpnT9sI5oiQT8IKZ/lLYko
+         MviAPLes/+WATYBzmWkQUcqPNbfZ6Z2bUo2sBTAZAv0x/E+fPHEQ+XE+85qlhIROCPni
+         NXdggp03QBWShov/Cp5ADcZ82TzNW2VGbTh/CAYHdaU7DsbYXYccDn3er/Y+x/0r+81t
+         QG9A==
+X-Gm-Message-State: APuU4Z+r3KCoXuDFAf3s+X+lx9P1pAf5qdfHao8djOjRK25zJKvvgfgp
+	nQyOwHSs+kzQZ3S5HVAFLRN47BDpIwy+3r9q/7PstgdyuduYcEzpRlOU6OsSGAem
+X-Gm-Gg: AZFdTZfhRwHOa+KFn1tmJaqMzDpo4jmRx4cCcPNVBEuvO43ziwFNdkbjpZazayZE8CO
+	o06Vx4RtRqrfeoNlqtSA8gMq9yHnvu13lF5eowU0Gt/lGnSZ96uVk8R10wsc0spj1De5HLuob8W
+	t2q1DsvXS/DFhbyAFYZwVZ3V8OAtkm1EXlarIy6noUlOJr33lZ0O89ZcpLwFPmQa9ZI7htqQ10v
+	iVznAMfXHtg0troqt6prYM5MTnJFc0Am5Plug5LQerrBSIjwa+9231sZJTqcjKHhsmFHuils4Re
+	Ih8YqSgoYrdIKLY0SDMT0orKYmIHXV64wNHfYxPQ7hdZixeBU5RaGfklGOaWcCEHwnIueJ1ma3U
+	ZcIMqwcW/9D3o5USioLcoV32qZBtT6upkid7ij3vzEo9XLx88WJPgOhROGpmg358OUj2S8yWNdE
+	7k+242fMPXymwFpqVJlBxLcy4yZdNlUZhj47DmxfOB0qAWuTwuq7hzFh1HI6VP0x393DnLIXJZ+
+	pH6Kity60hj6HVxe4KSLKgYF9ENNGasgUqCq2S+FJ8nrxeqi67XZIX5ys0L/GkpOVQD1i4MawrZ
+	BbVF4EpgQyrZk9egikXJ6BqmGErUjHt/9eoQ+ix5butZP61FCnqcuVQTZYJqISgq+V0YjWsUEwE
+	EkO8joZROeWUK0vhnONElsZZ00Sb7fw5m/Aj3NU7rCSTFCKy6aCEwf38KHpU6+OfjXABnqPB52W
+	0ao4vnfhZ9fn2BeXDIKNYD0Hl//JyL3BF2PQUU+yHUSHGwuKPxG6iQ4MMjc5KY2YSoLbV6ZL0Aw
+	wWkmMkLz7rsjK/KF0BmpmkkOvz5dtM7qz36bMIK7vA9tYg5It4jz+xFI+bkFV57FJXQCw40vOY9
+	YRVI
+X-Received: by 2002:a05:693c:8843:b0:386:b526:251e with SMTP id 5a478bee46e88-386b52637c1mr12079495eec.10.1795739726819;
+        Thu, 26 Nov 2026 16:35:26 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-385672ce402sm63029314eec.16.2026.11.26.16.35.30
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-385672ce402sm63029314eec.16.2026.11.26.16.35.25
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 26 Nov 2026 16:35:30 -0800 (PST)
+        Thu, 26 Nov 2026 16:35:26 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-oe][PATCH 58/69] hddtemp: Fix upstream version check
-Date: Thu, 26 Nov 2026 16:34:14 -0800
-Message-ID: <20261127003425.2166632-59-khem.raj@oss.qualcomm.com>
+Subject: [meta-oe][PATCH 54/69] portaudio-v19: Fix upstream version check
+Date: Thu, 26 Nov 2026 16:34:10 -0800
+Message-ID: <20261127003425.2166632-55-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.1
 In-Reply-To: <20261127003425.2166632-1-khem.raj@oss.qualcomm.com>
 References: <20261127003425.2166632-1-khem.raj@oss.qualcomm.com>
@@ -67,29 +67,28 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Fri, 27 Nov 2026 00:35:35 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/133158
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/133154
 Content-Type: text/plain; charset="utf-8"
 
-The default regex only captured the beta number and reported 15. Match
-the whole <version>-betaN part of the tarball names so it compares
-against PV.
+The default tag regex matched old snapshot tags such as
+pa_stable_v190600_20161030 and reported 190600.20161030. Only consider
+v<version> release tags.
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- meta-oe/recipes-support/hddtemp/hddtemp_0.3-beta15.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ meta-oe/recipes-support/portaudio/portaudio-v19_19.7.0.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-oe/recipes-support/hddtemp/hddtemp_0.3-beta15.bb b/meta-oe/recipes-support/hddtemp/hddtemp_0.3-beta15.bb
-index 5930a8c95c..732fb294cd 100644
---- a/meta-oe/recipes-support/hddtemp/hddtemp_0.3-beta15.bb
-+++ b/meta-oe/recipes-support/hddtemp/hddtemp_0.3-beta15.bb
-@@ -17,6 +17,8 @@ SRC_URI = "${SAVANNAH_NONGNU_MIRROR}/hddtemp/hddtemp-0.3-beta15.tar.bz2 \
+diff --git a/meta-oe/recipes-support/portaudio/portaudio-v19_19.7.0.bb b/meta-oe/recipes-support/portaudio/portaudio-v19_19.7.0.bb
+index 7376f7ca77..1a03a6d8e1 100644
+--- a/meta-oe/recipes-support/portaudio/portaudio-v19_19.7.0.bb
++++ b/meta-oe/recipes-support/portaudio/portaudio-v19_19.7.0.bb
+@@ -6,6 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=26107732c2ab637c5710446fcfaf02df"
+ SRC_URI = "git://github.com/PortAudio/portaudio.git;branch=master;protocol=https \
+         file://0001-allow-build-with-cmake-4.patch"
+ SRCREV = "929e2e8f7af281c5eb4fa07758930d542ec43d97"
++UPSTREAM_CHECK_GITTAGREGEX = "^v(?P<pver>\d+(\.\d+)+)$"
  
- SRC_URI[sha256sum] = "618541584054093d53be8a2d9e81c97174f30f00af91cb8700a97e442d79ef5b"
+ inherit cmake pkgconfig
  
-+UPSTREAM_CHECK_REGEX = "hddtemp-(?P<pver>\d+(\.\d+)+-beta\d+)\.tar"
-+
- LIC_FILES_CHKSUM = "file://GPL-2;md5=eb723b61539feef013de476e68b5c50a"
- 
- inherit autotools gettext update-rc.d
