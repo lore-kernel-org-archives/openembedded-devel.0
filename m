@@ -1,65 +1,65 @@
-Received: from mail-dl1-f45.google.com (mail-dl1-f45.google.com [74.125.82.45])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.11821.1795763015808840673
+Received: from mail-dl1-f44.google.com (mail-dl1-f44.google.com [74.125.82.44])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.11823.1795763014841366066
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 26 Nov 2026 23:03:35 -0800
+ Thu, 26 Nov 2026 23:03:34 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=yTX3vLB4;
- spf=pass (domain: gmail.com, ip: 74.125.82.45, mailfrom: raj.khem@gmail.com)
-Received: by mail-dl1-f45.google.com with SMTP id a92af1059eb24-18818daa3e7so4278044c88.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 26 Nov 2026 23:03:35 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=b40bJXk1;
+ spf=pass (domain: gmail.com, ip: 74.125.82.44, mailfrom: raj.khem@gmail.com)
+Received: by mail-dl1-f44.google.com with SMTP id a92af1059eb24-1b3ada81853so9015845c88.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 26 Nov 2026 23:03:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795763015; x=1796367815; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1795763014; x=1796367814; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=5rHBerLqpW676mlP7dMmGO1ysQM4KURFEC1+96298E0=;
-        b=yTX3vLB4I+nQeAJf8fjR7nIPp+xH7oPWnk51uB0C1pRWoZ1S7mDobOyXvmnSJZNfAK
-         2nMdlx/xuPkstpp9JU4mAbVqJGi9wou02cDpU6PNQ//yUOzyCjUo/wOQBGCKfhx7AG2D
-         ARyBnH0eMNaO62n2a2DsEQ5/XHEvsB0XIUfc6pv2i8BazR1aKzGWZHG/wpoXFnBDn3mM
-         gtDKqsjHa0A+9P4+VACBvZK0OP3hWJEUGpJ7UEY8quYpcFAob7+er6aD1IadtY9FOtJn
-         VPtRhkiPOv1pR2wOpf+Dd6ugPgoi6SlQY+uaHIZNJS6D/xI0aP9WtZ+VTohh/IMrPRqX
-         4VJw==
+        bh=uRw08ctZa1u/t+0J3BK+BVpFtLTR3p0pqXqIy899rgA=;
+        b=b40bJXk1jxu7uS3LiujJy2feEfXX0w4eDqx9c8IwHu1rtMNDP1YvXWr7GvNxWNmewI
+         a4ZqJYLtKQv8HWmJqApT66CGd6eyhQE9rhBolHicuKrQdS3ua/hivHo8SCo/vXg7c6WR
+         r1aNCpD0vSXLFam0LTdZTCKJ7Tue41w2CdH57Y4DMOz2yVCZkKoaGiq8QGc2ntkAcUr4
+         2OR4RaBJXhVQgJNAId03shem94cOSIPZXy1hI0PHogPtvqxhb/t+AatILv5VxzDfg9c6
+         HXnu9J5bbk3If4UQ764GJoTkhli+k5Y99fIJdJGGCUXAGNMaippWZIlVLELuKlVOvzBt
+         mePg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795763015; x=1796367815;
+        d=1e100.net; s=20260707; t=1795763014; x=1796367814;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=5rHBerLqpW676mlP7dMmGO1ysQM4KURFEC1+96298E0=;
-        b=h8lOGsw8AI+65N5kovkYoV1WhsaCL+8nj2zJ3VjMVxWCqMyaDFeHTYEAgbYEz2Khvc
-         ulYH0emz/SvmwA5izVEgZAQwCS1eihhbwnr1PwAFS8kTyp0sk4O/a/Khhce8TrnVrRFr
-         VUBs0qXyax/4wd9xZA49DX8HSYO3Rqn7g6uw7iBLF/gbokCUQ2q6Ehi3bjPzIwPfZBoz
-         CN1xPU3Uo7WfXyuXGydIwcqvuPzBU45BHQd7XLHeknRWy49BrWQ+2Fm6vF2bvMptEKGc
-         fhzHYX/9/qgnLYNTaWmupU7c/TYYDGqEPcLrEJvzTfsk2CzY9SFlr/RzQAB5ZeA4leiP
-         UpFw==
-X-Gm-Message-State: APuU4Z/o5aWmbUHoRFff7EL19FOGqcQrogXkLgECvxfkukhXN90ckXVo
-	NjfXt06G82RgpyA4eUBZJ+r3rGF1+Iy+nohMsdB+kuLKAObUfJeTMm2ShaA82T8Z
-X-Gm-Gg: AZFdTZeBWrfCCnDhxaMszkXX8G6VhDd+pYzDLZU+tM1yKyX1CT7zdDPEER1YA09zbpi
-	xPENWGr9ExQyn07mtkgVRxSJH56+XhfjXS1dg0/Idf3KXcKuvQkL4O9+niFTN8bxTjrXT99Mstj
-	KNNsQPRdmcfC8UOjC5eCWx2u8f2XoNIAH+mcIJWygdwFpPGLcFNSyCXQnsiSAW2MmeNtiHEbO0H
-	fFwKbcy314mDBpoEptS5/m+LPFiNGI1nR05x0HMDq1cAVYbBc2Hky3XgnuwgJXIXTxrNZGk/EeU
-	HJk2S+3AFrTzraytgFSl4itBk2Wvw7qhDgL8YKxiffkoCehQj+K4VMlVtyirEUWPnTrSM0SRDnN
-	1BTXKTvnouP6PjEV6lyI6pSXKvlshF3oZxuV3gmPk5bqfA50JCozma2YNE3HKY1HiAWI29J8bCn
-	Q13Lgry0i/m9wowlTxj0tGiMmaz7A3nDMDdQAiiQiEAuTHKPRWbbFWzELpcEBrPnbdd8tCXKVqJ
-	3Efu+0zFOszHZMa2gae10rKvLWMsFyntrBtpuLCmvpTPmn+qffgB1q71/DtfixZfh/kDNy/Qru1
-	E/zvgIeeP2U2J5at8AikQx+eMXK2pBQ2vpDAq/gToJJBftzvwMxhxLgwOtZyx4yCe8MvfA3SFvG
-	LhUdPoU85wzfto0wKBHyJZKikZChRaMg4zgCUTYU4nbSUU8nZjN6z8BTIFPet77IZ4X7EcwG1Qb
-	tVq1IfBpHz8EkUXi3ITJ3VYR1tpkto6enqKNs/ImTDmAt6TwSRNwIqOW6pJp8V8QnuUt5VavvAu
-	eACuQpJ7VWz/bBSLvhpZgx54SYdtplXCDhKXEUVqFyzuwEOFdTHHSJ3mNRcemki9q8zfhfbVJZ1
-	SveB
-X-Received: by 2002:a05:701a:ca09:b0:1b3:b322:a42c with SMTP id a92af1059eb24-1b5568f8e64mr24871878c88.13.1795763015206;
-        Thu, 26 Nov 2026 23:03:35 -0800 (PST)
+        bh=uRw08ctZa1u/t+0J3BK+BVpFtLTR3p0pqXqIy899rgA=;
+        b=jxnzl481sgArPNh2YiBUeBE0T7Kpy9MHC1NVRJqoexmi+KrV60IK7GypWOZZylaSGm
+         n1cAyon7RArGeNW0ngQ9YZfDjYrU/ATD+0r/pQEzZHG+v0DEJGTh8iWvbrrvd0tUPwBa
+         uWSrAps4kPafmthLMTw/xROPBjbM4bUc+D3u8gHesbMZe5ocf95gUt9hmOPjw+1dWGdG
+         K2UbW1KphdshlVJIoPuKOUJo6gtUE7899WIWI0YN8Ekz2leENpg+Ec4Y1AT4Zvv/lZd6
+         2QtlXvJVjQJEINaSAjdw5rCrjmfcKne8ikpCtIU00Uu1G3R2MjZECMi2UXcYHz1fTjRN
+         1Gmw==
+X-Gm-Message-State: APuU4Z/7jnIWt5ovN+J5fKGgJgbAmIzkxDnxfxLzl1Lqm3GxwRgnKABR
+	e9PgSWSGpXKDCzjKHYS07kXNygpuC2gAKeTvtD+A7KvxkS6AH+59Ds8VA2laXijC
+X-Gm-Gg: AZFdTZfkOLhOajw3PgSpeN5x8LEH/N3cBOWCctCS2OTl384NY4vTot2gjoX8EQaYEm+
+	eST1s6aNNHj6tqGag7hQAu+LCkyVtptFPw9WNzx80KepxN5BsN+vTOmhAnQn7ivIxrNPsUmM5/D
+	Ovdh336Ekvl3oJIFVRDEirldPSh6dV+cSbG4E9+rs2P4PDphdIqUpBoGsQr0+oJe2se9P+UUPnn
+	IU3BrlSJcJ4srlZCIyxDRI3pWV2geE5k+c2fCWq9ARmRemXoqwbUlwL32ALPFp0r8jrghWIksiG
+	TFTelgDopMBMKl58jPxC7oMfcFuM62fxg2PWyLSQKzgFTDGG7ZMV3NGa90FtV8p0iPkPVCC7Ijd
+	uXpWS5TdvQd4+LJwM217NCVlyb9a5EAHxD5P2aZLmCLu3NjrQlkoH+HzFN9cfm26QvUzFiTIqVc
+	ipvY09CL1p4fT+idtpYfZxzA91md7qorDj6+2RIxKsbuVdc9TCokFvNOTYc+1qzlaFjoL8QW72W
+	69ApH6CZc3cBVVj/9DrtuHdYptXj7z0RoyzK3BRy6kbSpUWttQmnlsFJU12CAz1lyQokJO5Pomu
+	i3h1FaUO0reZZJscEIIzwar9BXqfEp4Bun2XpQz/qnrenHPxl/9OnFD/UEQfLja03MO9RfBt8/B
+	9DNfzUjA9QQ2wtWz88Haey/1ppHBEs8+Apm6dYZmYwdZ8VX4fVt23a+VTIcvRSF5LuBymd2MVes
+	9Nu/RlLGPgHxszhKigrAFh+05CSWvXkcOBb3HX88OyrNlMwdAEBZjpLancXzO5uAUddMYl9j5MA
+	vn2md9woWg9rS8ht7uCmkOwIdBk4Z7nC091DWmqHv9GX+E7lIJYE23VtfVaKQ7j6UXa4i2Vr4aB
+	s91y
+X-Received: by 2002:a05:7022:7f18:b0:1b3:9b4d:85f3 with SMTP id a92af1059eb24-1b5568a28a5mr27473490c88.19.1795763014160;
+        Thu, 26 Nov 2026 23:03:34 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1b556847fdasm61327766c88.13.2026.11.26.23.03.34
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1b556847fdasm61327766c88.13.2026.11.26.23.03.33
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 26 Nov 2026 23:03:34 -0800 (PST)
+        Thu, 26 Nov 2026 23:03:33 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-initramfs][PATCH 3/3] rsinit: Pin SRCREV and drop the v from PV
-Date: Thu, 26 Nov 2026 23:03:29 -0800
-Message-ID: <20261127070329.2393585-4-khem.raj@oss.qualcomm.com>
+Subject: [meta-initramfs][PATCH 2/3] kexec-tools-klibc: Fix upstream version check
+Date: Thu, 26 Nov 2026 23:03:28 -0800
+Message-ID: <20261127070329.2393585-3-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.1
 In-Reply-To: <20261127070329.2393585-1-khem.raj@oss.qualcomm.com>
 References: <20261127070329.2393585-1-khem.raj@oss.qualcomm.com>
@@ -67,44 +67,28 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Fri, 27 Nov 2026 07:03:43 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/133363
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/133362
 Content-Type: text/plain; charset="utf-8"
 
-SRCREV = "${PV}" is a floating tag, so the fetcher has to resolve it over
-the network on every parse, and devtool check-upgrade-status aborts the
-whole run on it:
-
-  Recipe uses a floating tag/branch 'v0.1.0' for repo
-  'github.com/pengutronix/rsinit.git' without a fixed SRCREV
-
-Rename the recipe to rsinit_0.1.0.bb, fetch tag=v${PV} with the tag's
-commit as SRCREV, and add an UPSTREAM_CHECK_GITTAGREGEX for the v-prefixed
-tags.
+The default tag regex picked up the v20080324 date tag. Match only
+vX.Y.Z release tags.
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- .../rsinit/{rsinit_v0.1.0.bb => rsinit_0.1.0.bb}            | 6 ++++--
- 1 file changed, 4 insertions(+), 2 deletions(-)
- rename meta-initramfs/recipes-core/rsinit/{rsinit_v0.1.0.bb => rsinit_0.1.0.bb} (89%)
+ meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc_git.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-initramfs/recipes-core/rsinit/rsinit_v0.1.0.bb b/meta-initramfs/recipes-core/rsinit/rsinit_0.1.0.bb
-similarity index 89%
-rename from meta-initramfs/recipes-core/rsinit/rsinit_v0.1.0.bb
-rename to meta-initramfs/recipes-core/rsinit/rsinit_0.1.0.bb
-index e2c5e71d54..e4e1d81f14 100644
---- a/meta-initramfs/recipes-core/rsinit/rsinit_v0.1.0.bb
-+++ b/meta-initramfs/recipes-core/rsinit/rsinit_0.1.0.bb
-@@ -6,8 +6,10 @@ LICENSE = "GPL-2.0-only AND CC0-1.0"
- LIC_FILES_CHKSUM = "file://LICENSES/GPL-2.0-only.txt;md5=570a9b3749dd0463a1778803b12a6dce \
-                     file://LICENSES/CC0-1.0.txt;md5=65d3616852dbf7b1a6d4b53b00626032"
+diff --git a/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc_git.bb b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc_git.bb
+index a6ef7a4d66..a532b10c47 100644
+--- a/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc_git.bb
++++ b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc_git.bb
+@@ -14,6 +14,8 @@ inherit klibc autotools siteinfo
+ SRC_URI = "git://git.kernel.org/pub/scm/utils/kernel/kexec/kexec-tools.git;branch=master"
+ SRCREV = "15d78e5799eea7ec5ea9c5897ae95aaa0ce8970c"
  
--SRC_URI = "git://github.com/pengutronix/rsinit.git;protocol=https;branch=main"
--SRCREV = "${PV}"
-+SRC_URI = "git://github.com/pengutronix/rsinit.git;protocol=https;branch=main;tag=v${PV}"
-+SRCREV = "91732bdc0364e0bd0bc3a77dbedfa3a1dd330a1a"
-+
 +UPSTREAM_CHECK_GITTAGREGEX = "^v(?P<pver>\d+(\.\d+)+)$"
- 
- inherit cargo cargo-update-recipe-crates
- 
++
+ BUILD_PATCHES = "file://0001-force-static-build.patch \
+                  file://0002-Adjust-the-order-of-headers-to-fix-build-for-musl.patch \
+                  "
