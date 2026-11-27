@@ -1,95 +1,109 @@
-Received: from mail-dl1-f52.google.com (mail-dl1-f52.google.com [74.125.82.52])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.11779.1795762889082522990
+Received: from mail-dl1-f49.google.com (mail-dl1-f49.google.com [74.125.82.49])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.11769.1795762890516660380
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 26 Nov 2026 23:01:29 -0800
+ Thu, 26 Nov 2026 23:01:30 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=zIocuLWW;
- spf=pass (domain: gmail.com, ip: 74.125.82.52, mailfrom: raj.khem@gmail.com)
-Received: by mail-dl1-f52.google.com with SMTP id a92af1059eb24-15ea896ddc8so12742665c88.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 26 Nov 2026 23:01:29 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=pRUKAzsg;
+ spf=pass (domain: gmail.com, ip: 74.125.82.49, mailfrom: raj.khem@gmail.com)
+Received: by mail-dl1-f49.google.com with SMTP id a92af1059eb24-15dd124bbe7so11424757c88.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 26 Nov 2026 23:01:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795762888; x=1796367688; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1795762890; x=1796367690; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=5TaM1hn9HLkJaeHNJCiM98ul/LcBpLlIT2XDDQJN1Cg=;
-        b=zIocuLWWaejPdoWeCQhyp2Q3fPYqb8bZKt+Mbiq2ukRyQwwGhn29bwcxcQvkeUxVod
-         0q531633m00Vixa7QY3uCEh1T9Wr+ZWXGdxvrWEubaKGV56JtUz445CLrrdb59uWKAtm
-         c40/FkHGQGUM9chfoGuoE7XU37FcAo0g5oNsvAs3/F1Fx66ehZo9aHkhLC2rhB32J7TE
-         a17tzyZwIAjFfwN6zfeXnjW0DV5HI+5S/Gq8ZK6l8rZjY6VfTrgTDIdob8qhYRgsHlr9
-         xH3ouPCYCHUZT1E3LrBSJHuUbqpViP+STr8twiLDpCM123tOFeVpFdsC0yxNJUD7P8gz
-         uTTA==
+        bh=AI9GenLjTae+i23az1rj5B4ks2QvMeCYO4mniwNE3NU=;
+        b=pRUKAzsghRGDugCGX283Ip1yamOwLSz+7lv7exFFq9fcJjcMsZI/IRmIb3YsGsvOKR
+         q1h+ILjQeIHFJiHM8ejGQ+OOycyWS79b8Vtcu6p+PpevoHrrNVFILjz6IyuF5xVCJiRx
+         QlVWwsnTICQFwcW/TN/QPPDReC8v8j6j7O/yaDxGndkZJR/na184q7IEDbL/JFZQ3UqD
+         EKrtKO/gyDP0Gpo/z2t8Zza4cFeVkyBzTYzK93Y1obpHbyDcoEKr4OxY8vMQ7EVKXy3B
+         nMXt7I9j6OW9njL2n+jOjuveQmFnQok7hbb1LJGm72eQvg4PVmhQL1eAgE0lmC608z7S
+         VoNw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795762888; x=1796367688;
+        d=1e100.net; s=20260707; t=1795762890; x=1796367690;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=5TaM1hn9HLkJaeHNJCiM98ul/LcBpLlIT2XDDQJN1Cg=;
-        b=J/qUqxKY0DZM32SdDREgS9ZbvZTCG2CTXlLXPZjhu6ut/4AFLkOCk6g/pa5VGLE0Ic
-         hgLHNX/aBavaMumNAMv+NkjgsXnQbgyT75enmA4fmAcWs6GbBOcYtJxjp1GgW6IN4IgU
-         CNRAAggMhYT6sBoi9Om/x5dc/lhCuQ8siQV0NgYgZxLilb8LCI+Ao0PZlKsSK9ih4t+X
-         mI2DzDY6pa3/lY+D7DdHFagPSizX1AIL/fewMkOW5chXfSryHKsz8P5kWE/JFC3eNy+K
-         H3+StvoG7+fXD0+A8JHGT2nVFLExNsKHh1gTIoBE67EhH4tn9jjmu8u/Ba2V8Ezgo3JB
-         rqHA==
-X-Gm-Message-State: APuU4Z+lHA6WYHpe1XZqQsqFhupRMrrXH++SPvM7vS+vW/RZimXXURTv
-	lJFrMm+yNI4mLsS4DWxp8Zb355k/EyK8H/WHELE4G3wS0gglrrLQDeMH/yagECrf
-X-Gm-Gg: AZFdTZfdv/NzxN5eY/fOU8zFIytBCMgDoLSA8BvNDn26LFNsUmp2wxxYJtz3jcNLBXp
-	8eWVELwDK5x/SNnbu4ge5HdBuWgpSi+lqcgsvyXOo682i52PptRQ8bjvy3o8d6sCtWXxUlQHo3E
-	fZQJGvlRLIAQEOAPQaL7F8qqKLs8NVv+5x3wU9msLrHrW5LrW7U25cnqJZGD111Sw4qjKBLsAdT
-	ava9OR0oGegVTLm+vh9NHLRBPOxRjzWYVtLGOc/KTStZGSPZeskK9tuLlbeXifU6xHpXMTpqIim
-	ZaAn4r5V/gssun6F/LoogeCzY6B14JtROH0heiVqBMeuh8Txm+VZCRXRGSI5VvK5wPrZYmiGZIl
-	/wzoYlbq7KEYuDPlQvqmd9aXj0kcXOEzS4AJQ8MN49HlFpKX7ujLvefqzYxujxSIGiVQZmKAczz
-	2t8TTofwz/hD+ii9fY0kvjbgQOwwA//R7OjyQsv/Rd7XtCba6U6qSSFqeR6dHHgBQdM6YqcYybB
-	k+vQD8BVeJidVRP5nrvk0USDyCuEu6AAyFZPtun3Wg9rLFBZLKnVj6l/LZa6bC79amy182FfXom
-	FpOIrt2kGD1TR6+jRA3vjUagiv1ncS7hJqDXMjN4OHCwYFC2OiQBoNHRBN8CpEtlPtxy7l8UwpQ
-	/nJeQIULCz2e3X+7G4wnnL6C+kckbzY1qDbVLDIYjyWzUn+L+v5vsgNXMMsu9yg+VUXNVzbI7P3
-	Qc4KLMDvUlYrge3InaX3l+XIvpfBV76svl+V9L2vX3YoXo/ZxRCK7DCD/1e0DePVkr2N65e4XT4
-	kn0E2vZ72AopQXMQM5SlRsi6A/zqsogSQW03y25d2jm/dYqoGGIY5bQsqxkyXcrfTVhETnHxshB
-	/WbKUQ==
-X-Received: by 2002:a05:7022:4181:b0:1b2:42db:8a1d with SMTP id a92af1059eb24-1b5568c8f3dmr28764279c88.29.1795762888378;
-        Thu, 26 Nov 2026 23:01:28 -0800 (PST)
+        bh=AI9GenLjTae+i23az1rj5B4ks2QvMeCYO4mniwNE3NU=;
+        b=PfnmDcZ4BGJiXt3yQhErWjMww8adt5gQdVhMpmLV0glo82nce3bYFhVhlTLGz6NUlX
+         7ft7t9RT21Vxcr9AkXCfDqjABS1KhqQ/K8QKZg2iGnPIdEcaLsgzv9Ur9+lfiP48rtyI
+         lAEHSyOHDpISN100ibpfmvaZxmnarto/Xakzh5dqOL/fbp2BMPGvKQ/hi0di0snReWVQ
+         OBubV4IVoNU00zs2WKBbOBvmcLHFzV7LU5nETol7Ub0CD+edi/LTwT2MiK7Y3HU6pub9
+         smytDgOMEFzcsa4bbCOaf7wevNDdv1HhVh6umTYDtgUSiAJWZe4hOoKgd98WyiIviOR4
+         IAmw==
+X-Gm-Message-State: APuU4Z/N0XKw0PkYk88iKmqEdpikJlGmZ5KCKB05XXfMf/12sjxagkZy
+	NODF1xmmsF1BaxL5wBjRww7nFmqPx3rjKrZ/XtQHZgKw4lzC3NUTFSW4zIfz7sWx
+X-Gm-Gg: AZFdTZfHpA6YgTUeVSzG4LDNXrUJ6b4vq/heNUJHEpSZvokY+xeoxKAwCAJv2wyNMZG
+	HuktzqvyB6b1lWxkAmDh1KdFSpBt4x25XZga7P8hQkPA6dM31EptaM+118Bpwra483Ev9pXh5NV
+	mci3jk6cc7+0CHHfS10cn46HEM9lcsy1QUiwO/Ks1Ue+m0OhlUZnIUrK+nml0BvHHc1S2v7H3FW
+	Y8rp20pZLaaa7BOYX/d4jYRZjExw8CjzrtlRgTveBZtDi1CaJB6Huv/y5oMyDYscCJ2aHf8Dd/F
+	uI7m/K4QiQwwdA1fTNEd8yVuUMPEbrOzp0IuNRISsWzhCYZ9NwMIaf9J7+/3sZ7dYSvD0JXfm9L
+	mUpG9rmf1TMnmrjlIrWLlyirHgvU0+WIQBcx25aGnfhJG5tvoddMdwBhln6vddLhZVyirrZIFC8
+	+bBB1Dd8gCLHBcvcKZay+JYiWBMl6Rcjc/cA33/UpRog03Ez4nLMDtA4sUXOWIWluh26k26n0Kp
+	kSiGUnaTH2/NQdugtWNu9Tw7iHKPxQH3cJ0RUBchlMD1BHatJ6RRGPttBB5A5xQ7unPGxHafPqY
+	7vNp5GIKK1Z8oNa0aPpQAjw0LaPmipPBa+Xvnx9MFf8vYYRmHZzXAUI5HtCWG8wXluYhU4paqX1
+	NoOblmcnvaaf3RLcRm6Hg/T5vWe0+px9aedxIdIYQpJA0s0Ju+dT1n98Kgrr36YyN2LDS+z/+nL
+	5Lq3BUZgk7AZWbAbNtuyrkbzpYJ6833c5WsLGRljzCaHibiscRGgKo3DVY9NmfjYGLcBBK5o5pH
+	FxRgv1lH8wUUvIO9liPmSAjfaenq9xyJZYwFgu78KbXS+dkRZ9Nml8u+E9HNz91Jbj+A+pEtLoE
+	ypuJbr5DF8pHkQkR7AOT7zpxNQ==
+X-Received: by 2002:a05:7022:e80e:b0:1b5:3b6e:e1ed with SMTP id a92af1059eb24-1b55690bcf3mr27485051c88.32.1795762889811;
+        Thu, 26 Nov 2026 23:01:29 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1b556847fdasm61309643c88.13.2026.11.26.23.01.27
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1b556847fdasm61309643c88.13.2026.11.26.23.01.28
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 26 Nov 2026 23:01:27 -0800 (PST)
+        Thu, 26 Nov 2026 23:01:28 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-multimedia][PATCH 12/14] webrtc-audio-processing-1: Restrict upstream check to the 1.x series
-Date: Thu, 26 Nov 2026 23:01:10 -0800
-Message-ID: <20261127070112.2273685-13-khem.raj@oss.qualcomm.com>
+Subject: [meta-multimedia][PATCH 13/14] librav1e: Fix the upstream check
+Date: Thu, 26 Nov 2026 23:01:11 -0800
+Message-ID: <20261127070112.2273685-14-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.1
 In-Reply-To: <20261127070112.2273685-1-khem.raj@oss.qualcomm.com>
 References: <20261127070112.2273685-1-khem.raj@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Fri, 27 Nov 2026 07:01:38 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/133317
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Fri, 27 Nov 2026 07:01:39 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/133318
 Content-Type: text/plain; charset="utf-8"
 
-The check reported 2.1, which is packaged as
-webrtc-audio-processing-2. Match 1.x tarballs only.
+get_recipe_upstream_version() only looks at the first SRC_URI entry, which
+was a crate from librav1e-crates.inc, so the check reported a crate
+version (0.27.1). Set the git SRC_URI before requiring the crates file and
+match the p<date> tags the recipe follows.
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- .../webrtc-audio-processing/webrtc-audio-processing-1_1.3.bb   | 3 +++
- 1 file changed, 3 insertions(+)
+ .../recipes-multimedia/rav1e/librav1e_p20250902.bb       | 9 ++++++---
+ 1 file changed, 6 insertions(+), 3 deletions(-)
 
-diff --git a/meta-multimedia/recipes-multimedia/webrtc-audio-processing/webrtc-audio-processing-1_1.3.bb b/meta-multimedia/recipes-multimedia/webrtc-audio-processing/webrtc-audio-processing-1_1.3.bb
-index 08104cbc62..c2aa5d3c9e 100644
---- a/meta-multimedia/recipes-multimedia/webrtc-audio-processing/webrtc-audio-processing-1_1.3.bb
-+++ b/meta-multimedia/recipes-multimedia/webrtc-audio-processing/webrtc-audio-processing-1_1.3.bb
-@@ -17,6 +17,9 @@ SRC_URI = " \
- SRC_URI[sha256sum] = "2365e93e778d7b61b5d6e02d21c47d97222e9c7deff9e1d0838ad6ec2e86f1b9"
- S = "${UNPACKDIR}/webrtc-audio-processing-${PV}"
+diff --git a/meta-multimedia/recipes-multimedia/rav1e/librav1e_p20250902.bb b/meta-multimedia/recipes-multimedia/rav1e/librav1e_p20250902.bb
+index 13f417008b..00dbc7418e 100644
+--- a/meta-multimedia/recipes-multimedia/rav1e/librav1e_p20250902.bb
++++ b/meta-multimedia/recipes-multimedia/rav1e/librav1e_p20250902.bb
+@@ -5,6 +5,12 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=6a960f542b01a3e538903e87236b3668"
  
-+# 2.x is packaged as webrtc-audio-processing-2
-+UPSTREAM_CHECK_REGEX = "webrtc-audio-processing-(?P<pver>1(\.\d+)+)\.tar"
+ inherit cargo_c pkgconfig cargo-update-recipe-crates
+ 
++SRC_URI = "git://github.com/xiph/rav1e.git;protocol=https;nobranch=1;tag=${PV}"
++SRCREV = "a2f01b3e233f531c28a20b4c29fb5c9e5d29fa6d"
 +
- LDFLAGS:append:libc-musl = " -lexecinfo"
++# Follow the p<date> prerelease tags, not the v* releases
++UPSTREAM_CHECK_GITTAGREGEX = "^(?P<pver>p\d{8})$"
++
+ require ${PN}-crates.inc
  
- inherit meson pkgconfig
+ CARGO_BUILD_FLAGS += "--no-default-features --features binaries,asm,threading,signal_support"
+@@ -12,8 +18,5 @@ CARGO_BUILD_FLAGS += "--no-default-features --features binaries,asm,threading,si
+ DEPENDS:append:x86 = " nasm-native"
+ DEPENDS:append:x86-64 = " nasm-native"
+ 
+-SRC_URI += "git://github.com/xiph/rav1e.git;protocol=https;nobranch=1;tag=${PV}"
+-SRCREV = "a2f01b3e233f531c28a20b4c29fb5c9e5d29fa6d"
+-
+ # TODO we need to pass -fdebug-prefix-map to the nasm calls
+ INHIBIT_PACKAGE_DEBUG_SPLIT:x86-64 = "1"
