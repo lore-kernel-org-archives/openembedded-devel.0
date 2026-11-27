@@ -1,89 +1,97 @@
-Received: from mail-pl1-f177.google.com (mail-pl1-f177.google.com [209.85.214.177])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.11826.1795763025963617383
+Received: from mail-pl1-f171.google.com (mail-pl1-f171.google.com [209.85.214.171])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.11827.1795763026635855371
  for <openembedded-devel@lists.openembedded.org>;
  Thu, 26 Nov 2026 23:03:46 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=yFi0UBZ5;
- spf=pass (domain: gmail.com, ip: 209.85.214.177, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f177.google.com with SMTP id d9443c01a7336-2f0213202fdso40523235ad.3
-        for <openembedded-devel@lists.openembedded.org>; Thu, 26 Nov 2026 23:03:45 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=e6F9eQuh;
+ spf=pass (domain: gmail.com, ip: 209.85.214.171, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f171.google.com with SMTP id d9443c01a7336-2f048476ab9so54205595ad.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 26 Nov 2026 23:03:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795763025; x=1796367825; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=gwZLoXR0LKw/f65axSaaf/shOOXta+45fWr2giXxStY=;
-        b=yFi0UBZ5QkOUD5HGYJKtvPvRiLO0B5w1LWTg4QxkuuG2kb7h6krfHPzoUMxs7WeVbg
-         4jJKsYM/3pjwLZ3aGLkxCM5kdTSSZOfFwhVS0di/BOpVHM5BQuHn5/zU//V/pKnjAMch
-         0bOEXMjUMqytzDpMavUrXBYQgPtBkPscsSDk0QDGclIVhYWyiV2B7krQf5qBFy7Lq89h
-         iEeEPWJgfELPhlLQurwIMdfCbvsV2yNYTYdiHTBQrNXmy/Us7zFa5iLdD7ssocKAN1kK
-         kzpBRgcWqjxHsLYzjjzVS1bagNC6owY8WBFS0ca3fhXovL06JKL/Vmgp0j/KpHSzBdke
-         yXCQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795763025; x=1796367825;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=gmail.com; s=20260707; t=1795763026; x=1796367826; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=gwZLoXR0LKw/f65axSaaf/shOOXta+45fWr2giXxStY=;
-        b=JzetTNW4/Q+Oa4I1OrEp40HzwBBLmxgO1jMijtAV4HhqKw56Fq6t8xK1fmXpqFBrdT
-         +77xxPNrMKSXEUGYCPiHLbI8ss39nJFadKNMXGuqTdugtQPt9Q0vSIZ0gsrsdyNEKLLj
-         b1oM6qdqcSyd0JKeSfBxisgrMepJE+L7UJ+wsHlYyByRsDK4FDqvSJU/cGzG9OUHx0Pn
-         l0gr22C/CQK5Ei0N45QNH/LoLPGfIv/pDCqa+8gbG/lRH28XautXwLyPscuYsxY5t4cL
-         8G5WEX+JvDavuZ9YQj/z8GOtLGhragA0mfgnulTxjkfrCCIw/voDyfVq8fCX/oM4xSoy
-         pYNg==
-X-Gm-Message-State: APuU4Z9lxeoBnjbvkv6E8z7yV5CO7x90GRptfWLnnzbQg9HL5oMqoivH
-	euBQn5ZjfX4080kL4dM3R7rJx6vxI+ey9A1e5/7j2YEZ+XAGV7thTQ+gi4+az79S
-X-Gm-Gg: AZFdTZcgWAdmL6C3M0/UU3tR4XFqEJkIV3jLX903eX19l5RE0k+9Z36YG4juus9DOhQ
-	i/Jdgead0i74N+VbI9JmNYVROmRkKhw9EmeJxuuYpz97jpnlN38T34otjweLLppuOvjwoxG0LrJ
-	t5/4upYGIs1stQWm+fQX0Jy8hGHH7WkD4FQf7e/1lXq1jX7u0j6CbqFvAOa8IcbaJUoaWRlykmH
-	Y/XjoMN1ZNcKPj5SGzRy3WOhfeT6jbrbVJNQ/uuCsb+0hKywwYmhFaO3OoszD7Zh2EF92UhOMVh
-	0zLeW15MIoEXi7FoF6ciRy0yYSuD/5uUz+zZuFXrZEjh6bQE82BcDseAuHwueNf3MrAULPlTXIJ
-	bZfoI0BpGGL5/mTeI+GpqMP+u52KgU5Oxp0w4FB8rmA5o49sF26MItGj5574uCrDI6tH3m+GIxL
-	wUKyYBl9TzE3NBxM/STs1NE9VRuEIblyL6sIndLJcnOLRomRRS+dJtNUYFfkGadfQNP6OzZIvG/
-	pDvSN2QbfG/cmo8BthdS+w59pjRq75SFY5rrG9rr/2lLeDMOxmjNF2RTWPtTwx79Vnfs5prVsa5
-	+3PBdAnsvxqT3o9zIz9cHSG7QzPc9a4vHK9/yOqWHsskqUxUIMo5h1a5PjeFJYpjHXJFdF481So
-	GRw9ZF+rvh3i47FeimfcEwkOOCthS/AWiyScgg56ysSow9f5imQvJhWDvzcXVL3W3dE4Pej33Ec
-	GWRHhKwSEZytIW4APXGvvQpZ7ef/kdKmZwxQ/PEpI+6EiuCWnfMVNeqU3p5mnjKWcj7izqI3PkX
-	CihgzUrITo2nonrIBFHFgNLJ71wakr54wnAv9MgnpGyuscqUZNnhOK/YwbdouS7YhLG5mVGkeyK
-	l5Qe
-X-Received: by 2002:a17:902:ecc1:b0:2f0:f6a2:213c with SMTP id d9443c01a7336-2f0f6a223afmr39195525ad.8.1795763024949;
-        Thu, 26 Nov 2026 23:03:44 -0800 (PST)
+        bh=E8qKzQvXgEo+bbs+uOt4zzXvbZ8NY0jxQABybFpuxB0=;
+        b=e6F9eQuhSkFEQBS2vcfoWLRDiwTCYsSApp+SZFN9W5B7LTuVDA+g+9+rjQ9A96PZJg
+         +nJAwXQQ4TRX4oDyOuRglmTJ1T32PiY6grhiH+X8vWOdKg1EWsUNEs+lQ8qPyLRJbSnq
+         Wf1q1yvyV1sEhOKjDyKVxF6zVDqlNPyeUJloH81Ni7eWZ1Wkg7ZZ3BeHVm+DU9Cer6SX
+         W8E3rwqgMTBsaNF5F39bg60xCOoFLu1cdg+E6Ii3j85+HUr4E4ZfzOYEuunnU9/Sd4ii
+         3z0ySn1Gvzh/hzlcZfvajK4/9+rkMtovKDr4MFFvyC3InyQHL9RwvCfrs3iDDqMvGVCr
+         8yaw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1795763026; x=1796367826;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=E8qKzQvXgEo+bbs+uOt4zzXvbZ8NY0jxQABybFpuxB0=;
+        b=PRltBKqlZLd+Xtjs8epH1ugEk1HqYFDK/oojx4E20emc1Q0GMH3UmN2urnSxyGPZUa
+         3eCMPPIbijOUwTSGf7JeXh+zlpzbRjF6aqO9kWOl9vFdUp0Db9Gktbu5y7Z8stY+p7ZQ
+         V2lOvdQ19uzcPsF8Bq+4JpFAExaiDxAtX70KFZMmQ9qIz4MoosvoArtU2qlnu5jO2oxq
+         qAV5cDYO38D9IPujea7TwxFmUzY4a4WaQHFgUnU7PUConng1Hhz1zHq+PmxjYP5teM3+
+         /5jwnoalnSrGHxb44vIBLNqXrIMwo3YerRwKXa8aCzHdQWT/FWG95nQ3MXAvZe4tkffa
+         F1dg==
+X-Gm-Message-State: APuU4Z/7IGF/WMOwwul1QmoEf71g2lOrSjDCn8o6p4CH54MOPLVFpEVI
+	/pPTVUpt3M0LhY4+3fUnfopieBj9EAvFzI1wCtwyATHXt0Xep1MtjQn0TH/XAIRn
+X-Gm-Gg: AZFdTZeDaGtB0S5M5vKXh6hsPY22O/sXU1Yhi/H+YEENBlA3JuY1nYIxYM4lBuu42vX
+	XMjMGIdbP59quZCPt9RJ78LoSKSTSJiZRQFhOl+VyJeOTjPfrWSj6Nz98ZiW9iht5G1rs3aIbfA
+	zygAeTRTt3/QMGvmyuxMNXqCcVXPMaDCDlEB2qbpKGoghvIZmtLNiWzTD9oy5z6RSxy5LtCJHM7
+	pTWb1arjcngHWVVGvGmu/4C0XcTTmPcHbDiGbEV3fzAkHjaRHOguwc0SR5MI2OukiNy3yo7vsft
+	WZw+0LxJSAUOa5+rGCLPTrVnSLj9GWNHvbAed+ypBh/QVy1xc6a9Ka3XzuEDHBEv7lY2WOIEgog
+	UmUHqfkrWXbV8GmsvdMgDMJ2BTv7hX6rE7luv36Y3DddTanc/txsxQeNy/I0hXvWDvrMSn7Qprz
+	fh3JpJ7vIxOfz8m9qnWse4Zoq2RvR3S8TzmBIADpXc9gavwC0B87A3Y7F4q61Z5qcFkWNrcCcLT
+	zwZFBT1+2Hn+nj3KlVAl33i8902iDP/hwWHR9oX8HFrIfSjdJnI2Lb5zbZwMhXE/bhGm3Nglmu+
+	ScUZ/2VSALTWQ73nqh91ZK1phvX2t/EgETODx62CdTbrzGMZLDWunr1wSD8udcw0N1jciG6bE/r
+	BTIVBDw+ZScE0VotWfd9qSr5zRUckf2M5tYb2U9ma2er19+HFkqbaMCanooNNzQUH2EQOMgFtH1
+	VccyPbyCwMvf+EnHul6+8492ttnG4FTbh4WeA+/JTuM9hvGqWwBynu5O0qCUQymL3LwNEOCGYZZ
+	3MTUyHGs8pcWEoRtST/OPQMtTRNK6FiydoSBdEL9J4yAshzQ7NyKlTbWWJqe6zeuoODXy5wBgLn
+	reGJ
+X-Received: by 2002:a17:903:1a68:b0:2ed:21fb:e764 with SMTP id d9443c01a7336-2f03f0fdad2mr252017135ad.16.1795763025931;
+        Thu, 26 Nov 2026 23:03:45 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2f03f1482c3sm112292155ad.73.2026.11.26.23.03.44
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2f03f1482c3sm112292155ad.73.2026.11.26.23.03.45
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 26 Nov 2026 23:03:44 -0800 (PST)
+        Thu, 26 Nov 2026 23:03:45 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-webserver][PATCH 0/4] Upstream checks, mod-dnssd source and swagger-ui upgrade
-Date: Thu, 26 Nov 2026 23:03:38 -0800
-Message-ID: <20261127070342.2403582-1-khem.raj@oss.qualcomm.com>
+Subject: [meta-webserver][PATCH 1/4] webmin: Fix upstream version check
+Date: Thu, 26 Nov 2026 23:03:39 -0800
+Message-ID: <20261127070342.2403582-2-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.1
+In-Reply-To: <20261127070342.2403582-1-khem.raj@oss.qualcomm.com>
+References: <20261127070342.2403582-1-khem.raj@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Fri, 27 Nov 2026 07:03:53 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/133364
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/133365
 Content-Type: text/plain; charset="utf-8"
 
-Upstream version check fixes, fetch mod-dnssd from the 0.6 release
-tarball and upgrade swagger-ui.
+www.webmin.com/download.html no longer links the release tarballs, so
+the check finds nothing. SRC_URI fetches from SourceForge; check the
+webmin release directories there instead.
 
-Khem Raj (4):
-  webmin: Fix upstream version check
-  fcgiwrap: Fix upstream version check
-  mod-dnssd: Fetch the 0.6 release tarball
-  swagger-ui: upgrade 5.35.1 -> 5.36.0
+AI-Generated: Uses Claude Code
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+---
+ meta-webserver/recipes-webadmin/webmin/webmin_2.670.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
- ...gger-ui_5.35.1.bb => swagger-ui_5.36.0.bb} |  3 +-
- ...-properly-quote-CFLAGS-LIBS-for-apxs.patch | 30 ++++++++++++++++
- ...mod_dnssd.c-Use-ap_unixd_setup_child.patch | 36 +++++++++++++++++++
- .../recipes-httpd/apache-mod/mod-dnssd_0.6.bb | 10 ++++--
- .../recipes-support/fcgiwrap/fcgiwrap_git.bb  |  2 ++
- .../recipes-webadmin/webmin/webmin_2.670.bb   |  4 +--
- 6 files changed, 80 insertions(+), 5 deletions(-)
- rename meta-webserver/recipes-devtools/swagger-ui/{swagger-ui_5.35.1.bb => swagger-ui_5.36.0.bb} (90%)
- create mode 100644 meta-webserver/recipes-httpd/apache-mod/mod-dnssd/0001-build-system-properly-quote-CFLAGS-LIBS-for-apxs.patch
- create mode 100644 meta-webserver/recipes-httpd/apache-mod/mod-dnssd/0002-mod_dnssd.c-Use-ap_unixd_setup_child.patch
-
+diff --git a/meta-webserver/recipes-webadmin/webmin/webmin_2.670.bb b/meta-webserver/recipes-webadmin/webmin/webmin_2.670.bb
+index 79b20bfe74..c6647c310f 100644
+--- a/meta-webserver/recipes-webadmin/webmin/webmin_2.670.bb
++++ b/meta-webserver/recipes-webadmin/webmin/webmin_2.670.bb
+@@ -19,8 +19,8 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/webadmin/webmin-${PV}.tar.gz \
+            file://webmin.service \
+             "
+ SRC_URI[sha256sum] = "617af07a890bea18a83dca5c9d7168de1ad4d5f3076d8a1df3475f123748dc21"
+-UPSTREAM_CHECK_URI = "http://www.webmin.com/download.html"
+-UPSTREAM_CHECK_REGEX = "webmin-(?P<pver>\d+(\.\d+)+).tar.gz"
++UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/webadmin/files/webmin/"
++UPSTREAM_CHECK_REGEX = "webmin/(?P<pver>\d+(\.\d+)+)/"
+ 
+ inherit perlnative update-rc.d systemd
+ 
