@@ -1,65 +1,65 @@
-Received: from mail-dy1-f180.google.com (mail-dy1-f180.google.com [74.125.82.180])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.8090.1795739734377272946
+Received: from mail-dy1-f182.google.com (mail-dy1-f182.google.com [74.125.82.182])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.8085.1795739726465565554
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 26 Nov 2026 16:35:34 -0800
+ Thu, 26 Nov 2026 16:35:26 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=0QAKo71G;
- spf=pass (domain: gmail.com, ip: 74.125.82.180, mailfrom: raj.khem@gmail.com)
-Received: by mail-dy1-f180.google.com with SMTP id 5a478bee46e88-386cf1041cdso4191955eec.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 26 Nov 2026 16:35:34 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=PoGQtEND;
+ spf=pass (domain: gmail.com, ip: 74.125.82.182, mailfrom: raj.khem@gmail.com)
+Received: by mail-dy1-f182.google.com with SMTP id 5a478bee46e88-385d8a00598so10997345eec.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 26 Nov 2026 16:35:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795739734; x=1796344534; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1795739726; x=1796344526; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=3KgeF+e63D0Pj3rPGtZkR9DhtPIGD1r5YyhHtuYxfwM=;
-        b=0QAKo71GU0ns34uC0igucmW3vZXxkrhm6PS9fcPHUUQGJo8jqKNLGwif/9ChU3VKWb
-         1S88E5G9PyRTwqXMdbdYXqtuD5Q/kVwLDbZ6GdW3iorr/D4b6P7sHGUGS6+hvoZFNip9
-         NrYjAtrvDdut4KSDbncTZ/RBAgwFoafmccMSuJGnkVQR8ao6Te3zuRgLahvGLeE2hop1
-         5AXX0MWldi/QCRI8jNBpBXJ6oI6h7npwq2zfKxWSTsKaZdc05SqnsLmByhiTQPSefnPZ
-         P1WQW1E36Q29aKYztC8+Um9xgYnkuKVCLb0TyFO7IIM4R95q0h1sAusmADOPjOipzgw0
-         cHIA==
+        bh=OjyNtU8KLGa4aDBTjDXR1QPSiBC7KG2z7v0TQSBLhcw=;
+        b=PoGQtEND6c0+vaCxNnYNX0T9YD1YMubVTNO1kqZvYuayzcnv+NpXNRTTNiUgdUB7m7
+         2eU8b/AAxIrYhQeKF/11p1o55Q9+AH7O7eDsnHekU0GaKgTY8wKYRpNxvFoQEkhgk/9H
+         42qYpiBGrOHimu9crwtulprSDpuXS/CW5qfOVGDUB+Own4wuoja4k2Sxf1ndIRIAQA3G
+         GQT8R9ACv5w6BnXdLM95MflGUNTBH5DzQFa8O2dkVq4YCcp/Q/yjhYi1zPZ4AxZqDuA9
+         lnuT1X6ewTwfmUOZC1Sh5FeUlFXpSaYiEacaDs8c92PAjxIT3JcTYiMLKTqwY9sRgs7S
+         BJxg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795739734; x=1796344534;
+        d=1e100.net; s=20260707; t=1795739726; x=1796344526;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=3KgeF+e63D0Pj3rPGtZkR9DhtPIGD1r5YyhHtuYxfwM=;
-        b=WplDVNr6iOnrkDaOdv0oGAUIqYMS4hEW4r4j/DBuKkKN2M3TxWprf+X2caivfDnm0S
-         0shwoV8ASNFde/L+xcc5SaJya7kX4QqqL6/fUK3lgMKl2M5L2QeV16wlckd+5Oq5fT2o
-         sqFxyJwFfGoh5Er8tVMTVSuhejuBFGixwro47PWbZf7Fw2i/IHA/1xBGi+HPenfyCDhD
-         dmBB8fSRceMQLMOvAW+UeN1qrZPeNGSx6C9j7sn8SJjY9Q9ZOF3agmLQsPYlmo5G0eMM
-         gb/pjnsVVCqso1w5brbeeRMHvSYBRujqVWohLEbkrLbUbDYQ/YmgBWzvaG7JHAqd0zpY
-         igoA==
-X-Gm-Message-State: APuU4Z/uSclxmdP/2EDsAgbz8KFk8Kg9zFfK/dIR4erjeiZocwRpHJeL
-	uwSf0OBzQUxRVmm3VmYQbcGfDsbhFacApkD1nqLONf9Zpf9lZCGmpnWxLK/1LAta
-X-Gm-Gg: AZFdTZfIgNSDGNyWJoxjPpov6Y7VOMsJtwZfGqlHldpo+ZMdYEZNqNHOcx97LloIOam
-	gDnL0IBtxaeVc352FRoacSoCYw6Xc3ZgX8nshYsX9rxFTAmrdDvswsO9U6oOB6zlxXAcKdOO8G7
-	G0XyzHdQ+z7xYN5wf9qDrag2peDglwkhABjgpPU+ISoo8wwlDvvCmxfA7RhWKT5Ceze1jy7olEe
-	gPuvbVVCFU5S/y7EuLAP8eEmTYSaGFlkzzWoLIuJddQpjAsotV3GG2hLgZ45rHWG06iUEmafc7d
-	eUHLASX4JhumTIVo9WRb0vVnca5BzkVORS8jMWveGFi2fG5YULljK70HlNkF836cTDWICiq6gGp
-	BjuVKcWNI70baQN3m9yictaCQ4sOazqcDDfTslc6jSwBNIu710Yx4SLvQEBrcmeE981s6f63wVV
-	Juqw9nVwcO4tiL0oWIHjMJTHkO8533Wy6mZMQnxPq+zvBOl+o/FTsjNtGvDzU3uju4sax6t8g+x
-	P4t63ilaA7fFkFvWIompsQmLz4XYvlxq0QK+aO3ahpZziaSIp3vq/a6htaCvSJhxYNB0os2jxaR
-	wWn+LNL/71avKTZCMTMZrL0ZxyyyhuNTS4lbteD1FEREd+O0LbWs5h7RIdsDOrMt3uIGzvE30/l
-	dlz0v/868VZGpGTh0Jtv9m6x0Tj6M7NYnVjfhoIOWormEIPKeiEi+fpJtTuB5hAWFml+WcUoA4M
-	Vb0Ic/PgeMnlb/sCmgvaNFn9QS/J27/538n+F+cspgtQ2lh0a0SOSm2KYlP02GVZK3yViCQquWx
-	Lin6XWLUnU3hTkjAm0WMwrqkv43vn44WQTU7EeD+lh6dVX1txSVB0sr560lMYmNDjlqdXWAPeuw
-	lECR
-X-Received: by 2002:a05:7301:dd83:b0:386:5adb:ac29 with SMTP id 5a478bee46e88-3865adbb03fmr19103521eec.7.1795739733753;
-        Thu, 26 Nov 2026 16:35:33 -0800 (PST)
+        bh=OjyNtU8KLGa4aDBTjDXR1QPSiBC7KG2z7v0TQSBLhcw=;
+        b=KpVc/z+XxV47NjZtBZI80jnysDgeyIcrYiLMehzVwg/Hd7vVPj7HytB82RmyvfsA8K
+         wSCU3WqhIAmFpPMYcyvjJfENb6cCTfdAI2onJK4bkLMmkiigOwFRfdN52ZPxyQxXCk+b
+         DleHzKYoNGfHJ7HxQxmcsdoSI51dRAq8jvpYCASOFjxh9Qc0IHqK2scriJIzRlS6XTYz
+         nkiUXWDAIGQZy34GO6kL7vDbdgJmJRbyF0Ss/nJyu0QbQI8PFH03bjAzNd+Zt3m1pgPa
+         RR9ILl23AVboZYv783JgB67WSeU1HolfEZdq333NgE5nDWWU7jhShP8VgRspv6WjKUAg
+         +eog==
+X-Gm-Message-State: APuU4Z/Pp2crI3Agab6Qr9X74p7VBeUZ69mM/mZ7IrubhBDNWUq7xJ7I
+	jKJHy7iTbGgg6LxX6bpRWUfqXTm3X91/VVG8cpmXUoZnMrrlyEt9s4WsbdD+3I9N
+X-Gm-Gg: AZFdTZf3pbvPxvHbSDKpGZ/EgkhGqra5hFHdkOS+O9hp//2i/GcotfjM92VaQonQ+JQ
+	zbtpFlyeQkjzfaHYxh/Y/4xREjoibiT/Pll/9YBYrn6Exsk1xJIICtcU+gYrCkNd8qAcoqZCVNN
+	PAG2AmzzdwRXAX0QNbRJ31baJaNlMhfX0+gASufxQbbUlbXgz1j0rsEm0SfGcdaJvgQGZW+AlG2
+	Lnvf+BUiCFJidepx2xdroe15xJHXtpgRtF9JTTJTbUdUjTLDgWfyQrhyDEsy0b+VIQxPg+uGDsL
+	MBxVOcvOrgkp4eM2wuMHgQpkUB0cxV/pHpAQdL/P3E/ohwAJt1/zWLomJwoaXrvOLcA2i1QZRgr
+	zRuku3TjIDcYEwEjNw/sbzvMXmBv/rTaqm6JVnxlKugT4WPhUsJcfwTktGMRPxP4fGEYR3temKM
+	4xQ7y5Kdj0+UEG40Wr0fFkI6/9rwaHOM401q9quwf30mMBjZwhlCUFbTjB8SGH2qB+vkBRnJvFO
+	tyZyFjYmynv5Br9V58jZ4bsckihHxgio2iTZfj/AxSMRGfK2e4/Z33rSyxANHgkbRfuHIf4ISJp
+	Pc9DAaOJThpc/H1CZliwizSlUIi9n6aVAM56/1al+w1L3nfdA/9lbV3gUlJ0EoLLDDdP560VxUD
+	os0/ueLNp/h6IiyguPTCgczzR9poCuc14OATcB0V2OF/FkNHDhq+m/T0eZeDlJxR5n2jsGl2kUp
+	JRbbv1I9aHBWwPR+zAJDdY0gO4oufylzW6c5lL+Tb5Imv7SQI9YJN6vV46SmyA/cTbwuQwdkTDb
+	TbPjQuBoQrBv+mSd5TnxmL2MH/JC4uQoQRKsmF/0nwLvYg5pyEbmxhaNuvk905f3MXJ6APktOF7
+	syDk
+X-Received: by 2002:a05:7301:f02:b0:378:7434:a526 with SMTP id 5a478bee46e88-3856f8519d9mr22440459eec.14.1795739725801;
+        Thu, 26 Nov 2026 16:35:25 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-385672ce402sm63029314eec.16.2026.11.26.16.35.32
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-385672ce402sm63029314eec.16.2026.11.26.16.35.24
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 26 Nov 2026 16:35:33 -0800 (PST)
+        Thu, 26 Nov 2026 16:35:25 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-oe][PATCH 60/69] libiodbc: Fix upstream version check
-Date: Thu, 26 Nov 2026 16:34:16 -0800
-Message-ID: <20261127003425.2166632-61-khem.raj@oss.qualcomm.com>
+Subject: [meta-oe][PATCH 53/69] libutempter: Fix upstream version check
+Date: Thu, 26 Nov 2026 16:34:09 -0800
+Message-ID: <20261127003425.2166632-54-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.1
 In-Reply-To: <20261127003425.2166632-1-khem.raj@oss.qualcomm.com>
 References: <20261127003425.2166632-1-khem.raj@oss.qualcomm.com>
@@ -67,28 +67,28 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Fri, 27 Nov 2026 00:35:35 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/133160
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/133153
 Content-Type: text/plain; charset="utf-8"
 
-The unanchored regex matched numbers anywhere in the GitHub releases
-page markup and reported 11.28. Match only release tag links.
+Upstream tags are <version>-altN like PV, but the default regex dropped
+the -altN part, so 1.2.3 compared older than PV 1.2.3-alt1. Capture the
+whole tag.
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- meta-oe/recipes-support/libiodbc/libiodbc_3.52.16.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-oe/recipes-support/libutempter/libutempter_1.2.3-alt1.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-oe/recipes-support/libiodbc/libiodbc_3.52.16.bb b/meta-oe/recipes-support/libiodbc/libiodbc_3.52.16.bb
-index 0e861971e6..dc868dbcc6 100644
---- a/meta-oe/recipes-support/libiodbc/libiodbc_3.52.16.bb
-+++ b/meta-oe/recipes-support/libiodbc/libiodbc_3.52.16.bb
-@@ -16,7 +16,7 @@ SRC_URI = "https://github.com/openlink/iODBC/releases/download/v${PV}/${BP}.tar.
- SRC_URI[sha256sum] = "3898b32d07961360f6f2cf36db36036b719a230e476469258a80f32243e845fa"
+diff --git a/meta-oe/recipes-support/libutempter/libutempter_1.2.3-alt1.bb b/meta-oe/recipes-support/libutempter/libutempter_1.2.3-alt1.bb
+index 6d9746c9ad..e2569db630 100644
+--- a/meta-oe/recipes-support/libutempter/libutempter_1.2.3-alt1.bb
++++ b/meta-oe/recipes-support/libutempter/libutempter_1.2.3-alt1.bb
+@@ -13,6 +13,7 @@ SRC_URI = "git://git.altlinux.org/people/ldv/packages/libutempter.git;branch=mas
+            file://0001-Fix-macro-error.patch \
+            file://0002-Proper-macro-path-generation.patch \
+            "
++UPSTREAM_CHECK_GITTAGREGEX = "^(?P<pver>\d+(\.\d+)+-alt\d+)$"
  
- UPSTREAM_CHECK_URI = "https://github.com/openlink/iODBC/releases"
--UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
-+UPSTREAM_CHECK_REGEX = "releases/tag/v(?P<pver>\d+(\.\d+)+)$"
- 
- inherit autotools
+ S = "${UNPACKDIR}/${BP}/${BPN}"
  
