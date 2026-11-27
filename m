@@ -1,65 +1,65 @@
-Received: from mail-dl1-f52.google.com (mail-dl1-f52.google.com [74.125.82.52])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.11796.1795762947997257911
+Received: from mail-dl1-f48.google.com (mail-dl1-f48.google.com [74.125.82.48])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.11785.1795762940124478397
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 26 Nov 2026 23:02:28 -0800
+ Thu, 26 Nov 2026 23:02:20 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=XNzxUd6q;
- spf=pass (domain: gmail.com, ip: 74.125.82.52, mailfrom: raj.khem@gmail.com)
-Received: by mail-dl1-f52.google.com with SMTP id a92af1059eb24-15dd124bbe7so11426037c88.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 26 Nov 2026 23:02:27 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=WwZe8nXk;
+ spf=pass (domain: gmail.com, ip: 74.125.82.48, mailfrom: raj.khem@gmail.com)
+Received: by mail-dl1-f48.google.com with SMTP id a92af1059eb24-1a2af4c8d00so8173886c88.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 26 Nov 2026 23:02:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795762947; x=1796367747; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1795762939; x=1796367739; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=Mg18JnDwnggmmVFot7Ume5S5QXDhqiproZxeBNO0VKw=;
-        b=XNzxUd6qWpuuTMH25QrhgyCgSxZvDyBC7iOawryY1FuzSz2SslatHU3IBgIVNBe1sq
-         8qPuxWK+QoPVGkms5q7xQ03a5r9XNyf+Ved/4OimWlmiTFnY656avLdsaata+d3pwRz2
-         609XUhuLmVm7bYsEEeyF9rtpekfbX58RWbzdumoY1bIMk1+ZfDwQQwv1/SVLKBV6VUis
-         EmzwLd9Mre3pvcKvS/AQffsnCkTDqAz5aVm9AmlntGHE9XIIyRhgZCNYGILh/AhWk+5C
-         RTsw96L3PuuBcRmrBhLJm0T4jEoht5huNfOENW3VMd0WBxgrYXIzyAhe924xlDirVH1w
-         JGMQ==
+        bh=0WbMCPyTw8Jh/EoI5DnKMhj3B3k+zeYC3zgwQ807No4=;
+        b=WwZe8nXkX1AxF3LKhSLXYPcXvPogM0ziDD+RO4n2BukAWQaz45Zmm1NWRTtDJYlUUq
+         ptzXShpuCfGYll1xmCdfPnZ4m3C0GKGe1m0i76SFXhVWcCdSum01SlyDR4iZ+qWFfmvf
+         YagEokC03ZPCZ0xCyfxSQP0u/8LB79NusVrj1WwjSMnUc1RVnnjy0HjtjHAfePSpQBRB
+         694OUv5FCB21waVZSabgzoeKsk2gH//7F8e+qFXJOsN2n7g/rWqFouYpbJt/brY7GXqS
+         pD8f7Pq6Ju+CD8aqwtiduWMp9Z4ZmRuRlDQrFgYbPUZbOH+1n78rV9OQPDvGWwAlqcVL
+         bR/w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795762947; x=1796367747;
+        d=1e100.net; s=20260707; t=1795762939; x=1796367739;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=Mg18JnDwnggmmVFot7Ume5S5QXDhqiproZxeBNO0VKw=;
-        b=BVANd/cKP63b6UtgJ6VF3fx7BnfXO2/T+Mlr/06E/w5xi2WM/VLlG1TomhwFWIwW7F
-         0d7woKBRA/JY/FFADDOfj2YV/JYUe1NH9NwMl0TSMtJCh6HcAIXbJgghDXC0T13Lc7mS
-         ax/jEQ8HktUfMC6qX0iCO84ZeZrXuHAU/2ktAsbzMicGISAGO01t0xL4zDikSSyj2e5w
-         YUnnu/qBFkyAddZn/CGUKHgnNeCx/RseSFEIQKsOlHC0+72ioRY/8i9ykCS1jedXPxi+
-         n1PV3d8XT7E/o6BsDENCtmsI4b/xBiLR43xOzJ2wNP34lpEYTl6iV00wJOL1VFgo+Ny6
-         6klQ==
-X-Gm-Message-State: APuU4Z/U/pYCUpmVaMtNCGZSHGvbX3oql2CweDp6tRLuDpPVDPQ4pWkT
-	BxY+y8nOEaloOmxvvbnuHr36elPtbxfX+4JhrfgNUGeOnuTSr3E2zXiQooD/THSY
-X-Gm-Gg: AZFdTZcSuRQMYm0WXUxLYcIAKVuFpT2tcult4bFwI1K9ocDkpRkLQjKd9QxLyoyezTW
-	bBBqaUl/4VHF7MnFCJEawLHKPa5JGhKAEpoa0s7bvculGBUe65y7YbvvsSgtyajs+upbTWXM14P
-	HkT8kLNOUQu4LwLussWy0Ygw3yebbiCHZ7hGtmoyPxMh+KNspRaHY5y8rPSBpNJycOVevVb/Ca4
-	Ww3Tg9im4RZvNQUxqENrm0eMGipQ0S0+Q9pJm0pBWV+qEMJgweGfrCBgFM3cfCfPJbUYRy6KAZA
-	uMv+2sZRJfOjm18qUUICm5ql6vnqisxZU3iQO17jCgLP7EOViY1LDINWwhuN77nPIfLBhHvyneT
-	gv5pIkb1ELDQDrIMXpL/ltYhakoeTGYkK6pL3/e0EXmIpOyw0OYBcBI0rxc3ABGhECLPf460yV7
-	ZDfGhXuNFtJeV5MAZtomo3U2olb0SMU9pTupN2RhpMaWIQcDM4Ae2ceAVkDS6X9nUbok29Twb5E
-	OBt/eQhYbN9VS6Shyt60dM/wVsC3naOhorWcM9CAfhm8sPisGPrp8dLNsx+XRcUYC+NybcVZgHQ
-	DYVoUh3+giyc4Di/+hF7nNmWVND8YOMQhaMNuqdQL/Ebvv96R79KynELENEZdHaqxU5YV7IApdm
-	A6MCSCxHTPOGAIEAx0yFxpsD65vtG1qtgMLTkQEPuJe5McNfFM8zIW/ymtTiPXt9tv83lf+WV4S
-	eGqQwotICZG+Yyu/I5khxddpSSS6Q8AKZpHMmhnZAs8zWJTiBLHbMAyU7kHoeGMV1m4EBEBMpGG
-	O47TDsduUQterVSK/B79WD9SogJge53eVaWuD89DCxxZUdwTIJLxDk99soRu82GVcLgE0+mNW5z
-	ZH2d
-X-Received: by 2002:a05:7022:4099:b0:1b2:3e9b:3dcd with SMTP id a92af1059eb24-1b5568b2e59mr22210857c88.10.1795762947052;
-        Thu, 26 Nov 2026 23:02:27 -0800 (PST)
+        bh=0WbMCPyTw8Jh/EoI5DnKMhj3B3k+zeYC3zgwQ807No4=;
+        b=v5+/62hbOupVcgKTTNTTzfWq2+Vx8wM9m/vhdsQCnBjS5sKGtpX7BpC3UKKl1h5i9T
+         T0HLOQS1bJYsyfSIrfET1DiA/qCFWmznFYStKv1amFiWfTadTutkD6fFhm13CIMFKY3w
+         9ooQLuyzt8WgNyFOaiqaU4DZEfX86A7f9XKLCmRrONpXe0h7WSTRwhZT9eyf+GHTAWJv
+         NNK9udbk4wnI/KsyitQtKy8RjSgW86Hf8Kh41paix6KRXi6FDC+svfNK4KlRsseQXF95
+         NOJdFBd7JyfAPZYoYBAktVCdFKIcvLWq1qD1uQVZRT7KVES4GnV7tl1b4AlY7EcdxEYl
+         zD+w==
+X-Gm-Message-State: APuU4Z+/90ER3G79kIIHmgy62Xjo4Sf+mDR9Rmi56svowHFeZ+mumkdA
+	RNJFPXbxPj/oeDNn5PCosh3z3aiSbItXBTV++ypI4b8Se3ctN5SvmeqgJz8Bsm54
+X-Gm-Gg: AZFdTZcrM2RN6oO9gJ9WbB+1RnMDHZsy/ptux/Px6tsK4Vrbkn6l6TWLOyWFW1miTWD
+	FrZlfBRgU3LyK7LIKixO33COTFosV6qwheKF6KsQsunY5H+nPmy797UfP4fg99JF0LMdd2bBxK6
+	b4lKEmG19prllA5CE3q6Y27kwMmhMyUbKanSBcg8WPzYA0e7vYEyCPLdZBUFRBY/AtSPCpCTIYv
+	6T+Wpe28B0BCBXDiZE3QYUi14Nv/AKeBzfIm6iEc702CisiOUdjc4eFiO12bim05uS8ZuRSIXRj
+	urF1B/7+Cro2vTWb22tdQtkHwKB3NaGu8asAXjkHMxFSX/x3Cl1sbjhZm0IjcBIYVlx2/IVXVUW
+	9ZgHgx9mFAoExiCVBKqBUCCaAUQSLTeVCZux1b135UhLKPLr6ze0+mIWeuREjNNemxuCVggA5+F
+	P8cn0vD0sJaRJYRxSvBo8dRESqQHAN+LxsRCzvDEC6qEdCHrr4I2SGeF6FJqxUJ1w4FnRJJRd6U
+	Z1oiAHLmzZeBTDUQ0WbDzmS8x0o6f8bW6HsJHOi/g6Egv/mI0Onfjn0Uh7/v+4KDombJubLNAlE
+	gFUKBfo+am6ViHpZrOf58VrmElsk+rnYRspnKyOkk54Pkbj5QznjWK6CR9gof5pqHDxvBAYbPj+
+	EmytIogUJ0luVV85CDkuN2MZYXU/2UtfvkwEQQIpTj1FYeRkDDOM8NJqBwW6nuBBkBzmFn3aDVf
+	zDEyrEIzsN1AyorBQWDpd3n/mh3nbHCWjsTxNMgf6japxMoYGhKfTLbLRJWQeiXld5BCs5O50p1
+	Any6AUGItgmsFfx2AtYlGOhFxy3WNJt4WKpF+NTjhYgRhTC+lPhv7TwviD5+eTa/aD189CRkGQX
+	bH/8iA==
+X-Received: by 2002:a05:7023:a41:b0:184:5f2e:aa52 with SMTP id a92af1059eb24-1b556894f1fmr24296547c88.16.1795762939452;
+        Thu, 26 Nov 2026 23:02:19 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1b5566c3052sm53911395c88.1.2026.11.26.23.02.26
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1b5566c3052sm53911395c88.1.2026.11.26.23.02.18
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 26 Nov 2026 23:02:26 -0800 (PST)
+        Thu, 26 Nov 2026 23:02:18 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-gnome][PATCH 11/21] file-roller: upgrade 44.7 -> 44.8
-Date: Thu, 26 Nov 2026 23:01:59 -0800
-Message-ID: <20261127070211.2329979-12-khem.raj@oss.qualcomm.com>
+Subject: [meta-gnome][PATCH 04/21] gtksourceview4: Restrict upstream check to the 4.x series
+Date: Thu, 26 Nov 2026 23:01:52 -0800
+Message-ID: <20261127070211.2329979-5-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.1
 In-Reply-To: <20261127070211.2329979-1-khem.raj@oss.qualcomm.com>
 References: <20261127070211.2329979-1-khem.raj@oss.qualcomm.com>
@@ -67,32 +67,29 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Fri, 27 Nov 2026 07:02:30 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/133338
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/133331
 Content-Type: text/plain; charset="utf-8"
 
-Bug fixes: set a minimum size for windows, and fix an error when
-extracting TAR archives with 7zip. Plus translation updates.
+The check reported 5.22.0, which is packaged as gtksourceview5. Match
+stable 4.x tarballs only.
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- .../file-roller/{file-roller_44.7.bb => file-roller_44.8.bb}    | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-gnome/recipes-gnome/file-roller/{file-roller_44.7.bb => file-roller_44.8.bb} (92%)
+ meta-gnome/recipes-gnome/gtksourceview/gtksourceview4_4.8.4.bb | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/meta-gnome/recipes-gnome/file-roller/file-roller_44.7.bb b/meta-gnome/recipes-gnome/file-roller/file-roller_44.8.bb
-similarity index 92%
-rename from meta-gnome/recipes-gnome/file-roller/file-roller_44.7.bb
-rename to meta-gnome/recipes-gnome/file-roller/file-roller_44.8.bb
-index c1ffe242cd..c51db427a1 100644
---- a/meta-gnome/recipes-gnome/file-roller/file-roller_44.7.bb
-+++ b/meta-gnome/recipes-gnome/file-roller/file-roller_44.8.bb
-@@ -16,7 +16,7 @@ DEPENDS = " \
+diff --git a/meta-gnome/recipes-gnome/gtksourceview/gtksourceview4_4.8.4.bb b/meta-gnome/recipes-gnome/gtksourceview/gtksourceview4_4.8.4.bb
+index a045fbd1a7..7010533512 100644
+--- a/meta-gnome/recipes-gnome/gtksourceview/gtksourceview4_4.8.4.bb
++++ b/meta-gnome/recipes-gnome/gtksourceview/gtksourceview4_4.8.4.bb
+@@ -17,6 +17,9 @@ SRC_URI += "file://0001-remove-pointless-check.patch"
+ SRC_URI[archive.sha256sum] = "7ec9d18fb283d1f84a3a3eff3b7a72b09a10c9c006597b3fbabbb5958420a87d"
+ S = "${UNPACKDIR}/gtksourceview-${PV}"
  
- inherit gnomebase gsettings itstool gobject-introspection gnome-help gettext upstream-version-is-even mime-xdg gtk-icon-cache features_check
++# 5.x is packaged as gtksourceview5
++UPSTREAM_CHECK_REGEX = "gtksourceview-(?P<pver>4\.\d*[02468](\.\d+)+)\.tar"
++
+ GIR_MESON_OPTION = 'gir'
+ GTKDOC_MESON_OPTION = "gtk_doc"
  
--SRC_URI[archive.sha256sum] = "67cada96a2409c859f378e82fbe868b0e9c00a69e6b7b885d542c64ea2a1297d"
-+SRC_URI[archive.sha256sum] = "40a560efe9fff957376fd92358580839acc79e2065addbf8491f7a14438c5755"
- 
- UPSTREAM_CHECK_URI = "https://gitlab.gnome.org/GNOME/file-roller/-/tags"
- UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
