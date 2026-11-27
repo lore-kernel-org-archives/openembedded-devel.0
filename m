@@ -1,65 +1,65 @@
-Received: from mail-dy1-f175.google.com (mail-dy1-f175.google.com [74.125.82.175])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.8060.1795739686565789108
+Received: from mail-dy1-f180.google.com (mail-dy1-f180.google.com [74.125.82.180])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.8193.1795739681854476064
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 26 Nov 2026 16:34:46 -0800
+ Thu, 26 Nov 2026 16:34:41 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=cSWAJ/rX;
- spf=pass (domain: gmail.com, ip: 74.125.82.175, mailfrom: raj.khem@gmail.com)
-Received: by mail-dy1-f175.google.com with SMTP id 5a478bee46e88-3282db206d3so4102922eec.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 26 Nov 2026 16:34:46 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=Cl+7LElw;
+ spf=pass (domain: gmail.com, ip: 74.125.82.180, mailfrom: raj.khem@gmail.com)
+Received: by mail-dy1-f180.google.com with SMTP id 5a478bee46e88-38190551625so14471991eec.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 26 Nov 2026 16:34:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795739686; x=1796344486; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1795739681; x=1796344481; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=Szj/jMg/Zw3mL1yoXtXAvOx7Uy3OOdHEk1K6EeYml8w=;
-        b=cSWAJ/rXrgqgwRFjkbX0a2BSsilAUwIpdolGFhEWvZflXNcvfgetNzcfZ7k7Coucx6
-         uCRf7FV3Kb3yw42s/iyLJ+17bWW51wT4Dl+RKT0NqZls2WMdPg9ozQI04IocrN29/+If
-         dtHVHb69lUcilaDO9C44U/1PwSaCGWa0cyd8a7HV9N7Y36+ngoW/iXdymHIPARVWDwXG
-         zbiJBar299s54dv1Rc6xFe0RU+mtswIERSWA8TJCpRG4Zt4vTfIUHK6zsvZobOvxF4nb
-         px5/7KtMoVWKymtlESz8vbRloNeJsS2b7G9u7adM8j/+334skfVUiiETArWM+1fqaQ70
-         XECA==
+        bh=GMjZDi351qwcvAN0mOJq2UpRppLLY/OiDG5pzlhz/xI=;
+        b=Cl+7LElwFzcUbwrYXCH55+kXaBnfm+l6d8E+ge3uJ74uIYCX003ElGlWJQJTp6EEur
+         nJwHT6Yl1CevCLBz+2LvU5i6IFg7yb4a0JPZHIqX73HEOBSbclWd1wtu/rBEdvpks0F0
+         IWrRQ92gVwuORdV4Y/QTxDrHnrfTUhjf5x9hUU9pSxL23dZrq2Js2jdwjzvZetc6bfkZ
+         0B9dqxycxhVx5W5H3vBuzUg90EOZQcZ+q89O0QEistIbqn8PSZ4Tidt87TagiRk2Y+cp
+         kMV8q59VugX61N+FzZUiM4vhDK5ALVY49p25hlipRH9cEvQorZPXkmH/hz5fH8DyDrIX
+         LMCw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795739686; x=1796344486;
+        d=1e100.net; s=20260707; t=1795739681; x=1796344481;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=Szj/jMg/Zw3mL1yoXtXAvOx7Uy3OOdHEk1K6EeYml8w=;
-        b=yFTpWADLfikXLP22Ad4u/LMJFO/MYyzaQoVAFM4qEsC0I+KozgjTE6bUtaoRncX52J
-         e2hOA4O8SUI7+1klycIN31tVH0I8ta4FVC/pDbJzY+3oLiFVuatvQe0mQ99AshenVuQg
-         TYUkPMph4BOq/24r8QVq7P4Mp0EM3sqICBbsuoPnmbAtD8e907221lnhfcSSbzkjkL5f
-         YZLHohk9F60/jb0248qqZ5m5WrppgdzgnjmI03RWOIzpLcqNtOXrltmDBuXtUjhAQD8h
-         42WC6S8nR43tLg/wT7r1RELqP8UzQLXl0GVZgPTTOkq3lq3HitwonumN5dve6iZHGcg4
-         KgTQ==
-X-Gm-Message-State: APuU4Z/pG50LbEDRh7fGp8BNJhzWNfWgi6y0/QloGjAGoLiHuNFDWoAm
-	suNV7vLFeP99opoFj645usSmSrLpfIyyg4kRxBMXlWvg/D957ZUB2i3IP4V1Sy7F
-X-Gm-Gg: AZFdTZcKiOMeI4UbODDllLt6e66dJ1884A2kr80zcgMQMzX+NlLEExvJU3ZhKqdc03e
-	583rRsBMIXoZfBr3+5qfOz9A+/Jva2xhehLxXncMYSrV0lr8vtZn8ahXZCk1desqQydO6vOPFey
-	ftyNGNppUkDI42AvJ7G2KfllD4vPb9szawlFYGGRf9KT7ek0rIn5U+raQ6DCvErqzo0Qr93GVBL
-	H700v/cAARM+d6gqGInuaozzEN9Dopb152MzOf9nf3jM8K1iM0ljAUrPbzijIns4+GLyQOG3nqr
-	Txt2JgJtx1PZ2YaT5ciCBtMCdt5ny3p3qttODQzXbYjRx45R0wFZ5IBSNl7i2Ym5l8qp5ADHNuP
-	6CIGVqyMfKNTgcWep2ZgwYLygEeubzww3mQvLn3N4GYNqcSAj/kVluGdw+6olJA2zQdrtUPqxWr
-	7BUC9spzbErQL6n7OUFHpBW4mqG+1/ueJfjyjof7WbB+pPWDE12bz0AALpXzhPzZ73il9GThyRQ
-	zHf91EPU152sQ+J458JZRN5tk92UihvIJUn0/V/Y98URBDlqrrm2I4fVUQ/jP8LPT7MnoMMXmSu
-	h8B/f3cfh0KZWGo6V7pWzZrt/G/5xQAzT3uiUgxcxX6pyY4GHMp7NpKQvAiFLpmpU1Pk/hPiLyL
-	KVOdqqyFOeoPbZTigcmMGYVijIPcyHADM5jkZCkb6bol601qg+fgwFA0hpS731CsL1Ruuc8R26y
-	3h44sxhQWvtyYprToprAIClsocdv+/N40MYPZHsOYxw05YVXxCZ4Pwx4pIft2JtjmYfVeTNRYHo
-	m4DwDoFIrrmPpsuOEkKxIAjxJurP+avpziOPF9tKRCf+FgZuJGtEh+8rfe8JXHGI0gjJiWNC62t
-	J8vn
-X-Received: by 2002:a05:7300:ce11:b0:384:fe97:8ccc with SMTP id 5a478bee46e88-3856fb58443mr25210050eec.29.1795739685957;
-        Thu, 26 Nov 2026 16:34:45 -0800 (PST)
+        bh=GMjZDi351qwcvAN0mOJq2UpRppLLY/OiDG5pzlhz/xI=;
+        b=qSxCv1DS5zE2Kw4cPHhBv1+DlfqI1SG2PxH/ui/lsGzDjkUMKBJy7sh7mkbtfWwYNk
+         w0PHuL9ai+911TWtQt4p7yhZck2H2YJwZyUUHuWcEtVtaqprl12IEpE/D3h868f/xDlz
+         6Of2If/E5iBZm/76k5zzCHslGhtWipg4RDLHLiUm8k1qMtpZ3M14Al+LUZrZQPQOjzIs
+         ZwW52BZQvEmC0S5q8PEFHJvgTki2lbpslvnNrsOQ3cdMqHtyR6zhJPHM2ejtRAOnbMFF
+         lIXs4tBlwwjj1rIJ1pTHUUu1gpwNc2DE0GZyCyfWN2l3pt+j0UweCRhXPjQcAMKcpc6U
+         8EuQ==
+X-Gm-Message-State: APuU4Z//3aQHmQX7u+rh1GahDBarhvWDhb4ewCSVzX8b6BDYRAG/WKfY
+	5S7T1dDKNrhWALqyxKLEsMj15jDx0XbFKHQm5/Aod/oLPzCQHBozFsJn3Q8BYTzS
+X-Gm-Gg: AZFdTZdGZQsBgCnAAt2QTGfXuzJHxI1x4T1wWvaXVLwWoa+8weFcOzHmKReyiopVGAr
+	o4dHweb7ErhqDFYwrPeE2n9wzFh4h0Frl+t/hyXeSwRLpzEmDDBMjKUHGD0PQSdr4WZJLD/qj41
+	QRQryC/4CB+Cinp0lPXEoaYtRyqr2WpAvWsM8Zkk3NFGfp9EnGPFqJoj07hOCiin38ujd++hlVa
+	oQfaG9ZzvlbdFcj80paX5DDGeM7Gwl8JJoVEaNoFr5MeL3mzPJH2y/elGSUUlUjmUrpYYQSudmT
+	fpCbg3MS2GxTDn+0DhNo9SnU9QTagmKuoEq2pwdtPgkmVP0avdHZIVbcpZgHIjqtVeu+2eFmMvO
+	UckD2glZt8pj60FSlAQJq/wn64nTgVUwVyG9Kd9dolpU1djWHl4ZyMNoCEta3mCgBkB9/hZAPmh
+	F7teL2z0rdnmnsqF/OjXTYA12xk/NH4jA9qxqgzld7yFWWL94oXOT9JOnlXyiknE3NTUWK0dzAg
+	rRpPK3jhB7ao3CATTRO8ktVIlYScZzQ0W7SgrkX2Qxteo2q2KcXOcRIVuW8pAkVNoI0sAEqI9UD
+	ZugdZLAmeZ4i83ARjtFPELM+/zLTJ+EEhdiodWDI3+VJuhW7zomwbLRbBuokdusOi17k/vmZa2g
+	tiHSdPcZl/w+MRl8DWZvBXrdffZf5Gcxt2t+Bz8hGBbyCMMYw0S8wwtc5qS+HcgJ8WUqpUbLnjB
+	X+zhB7OzEF/xOdBky65fM5E57MENflzrBoUtMXafBXGQV0wNv9PnZICDh+7YBIPgECpfT7/61IC
+	6ayzo6Sj+EV0vfLOo5u/302Y4g8s+QQoiWifjxYzTsbZJi58PnZf9jD48OIpVb+ieAke9Q9xMWQ
+	aW83
+X-Received: by 2002:a05:693c:8850:b0:386:b351:d5eb with SMTP id 5a478bee46e88-386b351dcddmr12256214eec.7.1795739681097;
+        Thu, 26 Nov 2026 16:34:41 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-385672ce402sm63029314eec.16.2026.11.26.16.34.45
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-385672ce402sm63029314eec.16.2026.11.26.16.34.40
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 26 Nov 2026 16:34:45 -0800 (PST)
+        Thu, 26 Nov 2026 16:34:40 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-oe][PATCH 15/69] e2fsprogs-ext4sparse-native: Fix upstream version check
-Date: Thu, 26 Nov 2026 16:33:31 -0800
-Message-ID: <20261127003425.2166632-16-khem.raj@oss.qualcomm.com>
+Subject: [meta-oe][PATCH 10/69] leptonica: Fix upstream version check
+Date: Thu, 26 Nov 2026 16:33:26 -0800
+Message-ID: <20261127003425.2166632-11-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.1
 In-Reply-To: <20261127003425.2166632-1-khem.raj@oss.qualcomm.com>
 References: <20261127003425.2166632-1-khem.raj@oss.qualcomm.com>
@@ -67,27 +67,29 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Fri, 27 Nov 2026 00:34:51 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/133115
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/133110
 Content-Type: text/plain; charset="utf-8"
 
-The default tag regex picked a date-like number (20011130) from old
-tags. Only match vX.Y.Z release tags.
+The unanchored regex matched any number on the GitHub releases page
+and reported 11.28 from page markup. Match only the release tag links,
+which also skips pre-release tags like 1.87.0-pre1.
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- .../e2fsprogs-ext4sparse/e2fsprogs-ext4sparse-native_1.47.4.bb   | 1 +
- 1 file changed, 1 insertion(+)
+ meta-oe/recipes-graphics/leptonica/leptonica_1.87.0.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-devtools/e2fsprogs-ext4sparse/e2fsprogs-ext4sparse-native_1.47.4.bb b/meta-oe/recipes-devtools/e2fsprogs-ext4sparse/e2fsprogs-ext4sparse-native_1.47.4.bb
-index 04f9aaaf2b..feb1e6669a 100644
---- a/meta-oe/recipes-devtools/e2fsprogs-ext4sparse/e2fsprogs-ext4sparse-native_1.47.4.bb
-+++ b/meta-oe/recipes-devtools/e2fsprogs-ext4sparse/e2fsprogs-ext4sparse-native_1.47.4.bb
-@@ -8,6 +8,7 @@ DEPENDS = "e2fsprogs-native android-tools-native"
+diff --git a/meta-oe/recipes-graphics/leptonica/leptonica_1.87.0.bb b/meta-oe/recipes-graphics/leptonica/leptonica_1.87.0.bb
+index 1e6edfd138..481a556390 100644
+--- a/meta-oe/recipes-graphics/leptonica/leptonica_1.87.0.bb
++++ b/meta-oe/recipes-graphics/leptonica/leptonica_1.87.0.bb
+@@ -4,7 +4,7 @@ LICENSE = "BSD-2-Clause"
+ LIC_FILES_CHKSUM = "file://leptonica-license.txt;md5=809b282cea2df68975fbe0ffe02b560f"
  
- SRC_URI = "git://git.kernel.org/pub/scm/fs/ext2/e2fsprogs.git;branch=master;protocol=https"
- SRCREV = "ece89fac4603e400155b7bbf6326284f8511bca9"
-+UPSTREAM_CHECK_GITTAGREGEX = "^v(?P<pver>\d+(\.\d+)+)$"
+ UPSTREAM_CHECK_URI = "https://github.com/DanBloomberg/leptonica/releases"
+-UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
++UPSTREAM_CHECK_REGEX = "releases/tag/(?P<pver>\d+(\.\d+)+)$"
  
- inherit native
- 
+ SRC_URI = "http://www.leptonica.org/source/leptonica-${PV}.tar.gz"
+ SRC_URI[sha256sum] = "c73363397f96eb1295602bf44d708a994ad42046c791bf03ea0505d829bdb6a7"
