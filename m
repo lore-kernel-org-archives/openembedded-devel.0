@@ -1,65 +1,65 @@
-Received: from mail-dl1-f54.google.com (mail-dl1-f54.google.com [74.125.82.54])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.11784.1795762939235299245
+Received: from mail-dl1-f50.google.com (mail-dl1-f50.google.com [74.125.82.50])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.11783.1795762938040820227
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 26 Nov 2026 23:02:19 -0800
+ Thu, 26 Nov 2026 23:02:18 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=mjCHFAut;
- spf=pass (domain: gmail.com, ip: 74.125.82.54, mailfrom: raj.khem@gmail.com)
-Received: by mail-dl1-f54.google.com with SMTP id a92af1059eb24-170135e43c7so12064833c88.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 26 Nov 2026 23:02:19 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=ZG0cpwEd;
+ spf=pass (domain: gmail.com, ip: 74.125.82.50, mailfrom: raj.khem@gmail.com)
+Received: by mail-dl1-f50.google.com with SMTP id a92af1059eb24-1b546061d58so18009983c88.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 26 Nov 2026 23:02:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795762939; x=1796367739; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1795762937; x=1796367737; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=qsCk6vJfC2k3mnOv1yHmYGakUBsT20xpZ7XjNOqFwG0=;
-        b=mjCHFAutYp2MC1vsUY5amgkIIkwxn2AN+qNWKoMC0OnMSLrOf7SQy10grDXKQXNaRm
-         5LKWLDF6Y/B/Nz+Emu1zIc+iir388wy7FNQAEbvlcgC1o0APjvs9U//f5AGcm+wMB5Ny
-         Xk724dBB2rRqKGEvevAP4t+IhNlH+II4CKu3Vd0cobNRVakELr/kJED1gO7SiHVbX35x
-         9CcvC5UA0joN6nHzZjjZSxxcz2HyH2a5o03Mukv9MJMr/arcx4a5ZLGDgYrRGrZZwWhB
-         mn7ESR93Pip9I8zGD0XVaj87S62LgcnbqVMZlddJ0O9XtcW8KDIT/6MjFKx+tV6gYvk3
-         vLvw==
+        bh=+s42FCEjQ1bDfE8yAPLCFCDtc3hgXio6YTpefhGsbwo=;
+        b=ZG0cpwEdH4ulgrdNMNrgZgJ1e/mLXlbirjI59Jd5hiikWY8pVUGycbJFn2zluLErWU
+         UWlLTYfEpUUEe+sSBcS6PgCJrccEFRx4CJQ/WQVMire4xmemdeHhpiLEb77eVPz4HI1t
+         Vv1HeTfjAivVOFphb1E4bf+ZrEw7y1O0Y+EPvqCOIFn1diNDb7zP6tUzdR99aZRD4Nb6
+         y9vFmanvnmUELI92jscgjIiwA5PImYeAB1ags8MX8RifnwsDjNSqkytkZ9s8vWHS0L8P
+         O1Po71ArHz+MYGYsG94RgOpYouJb61Q8H1D5UIlqscdoaxWx+BpaCKd7w3R+fJnV7nJX
+         dbQA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795762939; x=1796367739;
+        d=1e100.net; s=20260707; t=1795762937; x=1796367737;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=qsCk6vJfC2k3mnOv1yHmYGakUBsT20xpZ7XjNOqFwG0=;
-        b=qJmwfE7kf3k9abG7VNnVssxj0FMIIOWmmZvDhk+czPedTzGiVnQAmIN3okj9w2FMft
-         BPkgATY9iUz8z//UHYts/lfAq6CbTYmdASklsDKMUGAatqjHOfi8TvG49pOfSdBgNARx
-         F3C8eEDxiCwyYbcj6ahS61YVoiT3Rg2Y7ZFPAfE7vbf7Dtv7YwVY0DZ68sDrlsLPHAVC
-         aGGO/xbZgVf6QVZ/4eaL/8jG1Ug/G0GV90Z8jVq7Fk2B2VDl0of6dN2k48fe+pTJIi8+
-         IuN34FuA8EUP4k/935+jJB5XRiKPMzmlwD0zZog9B9rz1PPMXV7Lb9YJfvcWCXTsRosU
-         2i+A==
-X-Gm-Message-State: APuU4Z/xw9F75Yqq8IcB4U3vllIiqUcCFSrkw6EmuwZes/NK99e4RclY
-	aUa1Gtxx2h5b5+Z+8dKCeynhwdaAOC65mHEuFTkQzXyxO47HqqImAcEKRYou4DxT
-X-Gm-Gg: AZFdTZegDmHLNXaUl7CK4yOWXyjq34FzMNbtv7VLVqCTzSALN3Ul2+Z9a7kwzqVJEyE
-	pAGKQu26Vjto7oUk/JLmlA2NziGUpa2Yf1WIzanqawQo1joXZ4VNnevvLEXgxcgE0W+2G0k4aQ/
-	U8WOBnO5oIiKqXetVo2ku5uwbfHFDGnxU/P80D+13v4EDyS1PPj0XySdPoWoCKeNXtOHmi0usrp
-	7NtTJ1+EqIyFiC4DDjrqULlIySYasG8cRpMhyNbvdmQuwHBDY69k/e1Cl0MSOlvZNisYFbKM815
-	Ykt7GQhc7zDZe0pMM3yvYoXuB+k4HgcIN+AP2ALKW6qivLm70YXG2hZmg7V3OrLrx6fTU38Jbwh
-	SV0U2mstc7Jqa39Km2b2NAQPuFDwiRKNE0ibN2WGIRSQM7wSS5TtgOmuojb4BiTR9Uc7X5fI+S/
-	t/UHgAFwLnMeSYFCmrudwZBDuvN/dxrTZZHp+Mzrb0gOldSttV4NO5ntudCXymooyY32j6nxXQw
-	iVuSPvhhCPI5Xhsncus1eAJyN3Lc+Ez22UE1V5netp6D3wozgS2QCH0DBe1gfr41TDXWIiLhwfM
-	vDQFYxJiWUANCIf8tz/D9UyW2qFHwMJuTD47J/Yp0CetymiW4ek38kJCuUzp+NUvFMtnwWQ5+Sd
-	84tsJq5NERV9nq71COdnrGCWYE5Ir8soGbA3heE56Oidst54vXZhoArMlxw+qf47CXnVoQO5WCM
-	dAycKzQq1PDyp3QZxudBnK+4w4Vq3pfm0Mchgr62wAb/EPq8YV4Ji1Cc0Kvb1uJ2rBjcBxTkT3s
-	YhvWdJkndrA0Ij0IDu7k+FQKmr2cEWA21+s1LUOaYFJj5ChqrWaBYM5vNcb83Dvw0ALB9SvUutz
-	wwk+
-X-Received: by 2002:a05:701a:ccc8:20b0:196:e254:db24 with SMTP id a92af1059eb24-1b5568d32bdmr23684125c88.21.1795762938379;
-        Thu, 26 Nov 2026 23:02:18 -0800 (PST)
+        bh=+s42FCEjQ1bDfE8yAPLCFCDtc3hgXio6YTpefhGsbwo=;
+        b=DSTi9eDhP+s24hrXUCnLCdo4X13chzUAdvuabZnoNj4K7vqqBalLhKu6M5nY8uqUzu
+         EFZtKuEa+6SRmQhkbm55RjQV/navjB3arBPtWWmyl6NtseIieGxITuIAu3w+htCm5C2R
+         8+STMXB17ecnG4VQXlU3LNjCvn0yLFxEoG26qXt77RSUvIVjY9O/d5E7rxOjJmwrP6bd
+         7KUYSpmc+EFYJgQt9MMwejCsD+VMtXp39dzuuliSSqN8fBzmju0twcEYJSuJDcHPUzSL
+         wyofbCymm6E6NyIFJGQCMTBuw0Apys1yjHmo9VP2V1sMMwZsRlzfRMz5S121AvUegyPt
+         YA1g==
+X-Gm-Message-State: APuU4Z8dprkWDuPfdGkq/QfMqLGeVxiq3FsI15cJ6dJvCjfei0xv0GcA
+	jrpcvKEIVAdDApZuVvj5uL1X/+7manFn0bWwQBdagChFQc+eNDFOVYaUPMAJiTd/
+X-Gm-Gg: AZFdTZe8OBNAsmt+BxyHn+zy05ntjKP2JbclcWZRHFbX0bUZvaczSmHlxHLgAaaWtLi
+	gFUBESGVJsnsVaiLa4uV2IIUoT8rNKhLnFuuKUQaY9VOZP3CBvf228pb9RxTXok4ifsdhLaC1L3
+	VOqiXzLCLbEy4ENw3pUAjvB9Ct9Smy1nvPn5iB4gqJvbn3JLSikWu4vyeYw+Up74aTO13hLR+Mp
+	k/SDXiiIbWoBv9ApOT/MpU7tFrpO1gtO85SkbUrsizgzIONRJq/gTKOaB3Y3G9Xhrx3fhswtD04
+	NerrFk4OLq8+HQsbNz9E80yCvw7+fu8LXeq+N8Q69Yv+feV2UsPUO4MHv1PNrDmLgnwxdCDOJpO
+	6MpVZ4TWVq0VJsQUbUHjs/+6yPDIiXKQ/ZId279WOR/zL4JJTzMhMHsWOP1t2KnV8WoSIR7/UhD
+	oF72Fn8QUHOubargH1pm4eoUY99vp7LAwYOHhvO8zT81ptEhkS7VxiMNPYA2KioFWoJ3GdZjez2
+	cPy9/vAFr6izPXvHiBIo66wKLgDQu7Hto2SpNikv4nXR4QuebS2QlcSmTUbxKvM7OWf9Jdex/HM
+	9qoPFWd3GoYw0D42iL4pQBn0UhmR3hOs1v6rAiJmpDSiK+K/GN0jRMjqwcDr2EwDhtEeI6Sq/C+
+	U+iyTKQk5Qn9JOYFHANtQM3xS5kHbLwF2c5LmjfR7/Cit9D0LtYUbEenC4vk6M+6eViNJGES1Ig
+	De1uOlyUg6OkME1Y/T7zUTkSzvVUmWkuYkkN3LZ5Y3wQFeYkyARU3H4vyrajYaI6BRb2otqhReL
+	ZazHPHAW8uI7M8M/4N2YjQNIhJ5KQFM4K3TxnvSfGl8kVoRgcLVjf2UNbhRmxoZnIzYHcREsG38
+	N3MS
+X-Received: by 2002:a05:7023:a8b:b0:1b3:af3a:e784 with SMTP id a92af1059eb24-1b5568fe775mr26544421c88.32.1795762937372;
+        Thu, 26 Nov 2026 23:02:17 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1b5566c3052sm53911395c88.1.2026.11.26.23.02.17
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1b5566c3052sm53911395c88.1.2026.11.26.23.02.16
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 26 Nov 2026 23:02:17 -0800 (PST)
+        Thu, 26 Nov 2026 23:02:16 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-gnome][PATCH 03/21] gnome-terminal: Fix upstream version check
-Date: Thu, 26 Nov 2026 23:01:51 -0800
-Message-ID: <20261127070211.2329979-4-khem.raj@oss.qualcomm.com>
+Subject: [meta-gnome][PATCH 02/21] gnome-calendar: Fix upstream version check
+Date: Thu, 26 Nov 2026 23:01:50 -0800
+Message-ID: <20261127070211.2329979-3-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.1
 In-Reply-To: <20261127070211.2329979-1-khem.raj@oss.qualcomm.com>
 References: <20261127070211.2329979-1-khem.raj@oss.qualcomm.com>
@@ -67,28 +67,39 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Fri, 27 Nov 2026 07:02:19 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/133330
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/133329
 Content-Type: text/plain; charset="utf-8"
 
-The default tag regex picked up 3.97.0, an odd-numbered development
-tag. Match only tags with an even minor version.
+upstream-version-is-even expects X.Y.Z versions with an even minor,
+which never matches the GNOME 40+ style 51.0 releases, so the check
+found nothing. Drop it and match MAJOR.MINOR tarballs, skipping
+alpha/beta/rc.
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- .../recipes-gnome/gnome-terminal/gnome-terminal_3.60.0.bb       | 2 ++
- 1 file changed, 2 insertions(+)
+ .../recipes-gnome/gnome-calendar/gnome-calendar_51.0.bb       | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/meta-gnome/recipes-gnome/gnome-terminal/gnome-terminal_3.60.0.bb b/meta-gnome/recipes-gnome/gnome-terminal/gnome-terminal_3.60.0.bb
-index 33cafe6184..ddab751acf 100644
---- a/meta-gnome/recipes-gnome/gnome-terminal/gnome-terminal_3.60.0.bb
-+++ b/meta-gnome/recipes-gnome/gnome-terminal/gnome-terminal_3.60.0.bb
-@@ -25,6 +25,8 @@ SRC_URI = " \
+diff --git a/meta-gnome/recipes-gnome/gnome-calendar/gnome-calendar_51.0.bb b/meta-gnome/recipes-gnome/gnome-calendar/gnome-calendar_51.0.bb
+index 9bebe7a377..5abfbfeb3d 100644
+--- a/meta-gnome/recipes-gnome/gnome-calendar/gnome-calendar_51.0.bb
++++ b/meta-gnome/recipes-gnome/gnome-calendar/gnome-calendar_51.0.bb
+@@ -18,7 +18,7 @@ DEPENDS = " \
  "
- SRCREV = "5d1d01d8bad69d33b0048f7791ebb6b0c7fb9f21"
  
-+UPSTREAM_CHECK_GITTAGREGEX = "^(?P<pver>\d+\.\d*[02468](\.\d+)+)$"
+ GTKIC_VERSION = '4'
+-inherit gnomebase gsettings gtk-icon-cache gettext features_check upstream-version-is-even mime-xdg
++inherit gnomebase gsettings gtk-icon-cache gettext features_check mime-xdg
+ 
+ REQUIRED_DISTRO_FEATURES = "opengl"
+ ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
+@@ -29,6 +29,8 @@ export GI_TYPELIB_PATH = "${STAGING_LIBDIR}/girepository-1.0/"
+ 
+ SRC_URI[archive.sha256sum] = "77c290450c40834392cdea2c40451561e98f43d5dae93cd9e915051a6708dc30"
+ 
++UPSTREAM_CHECK_REGEX = "gnome-calendar-(?P<pver>\d+\.\d+)\.tar"
 +
- PACKAGECONFIG ?= ""
- PACKAGECONFIG[nautilus] = "-Dnautilus_extension=true,-Dnautilus_extension=false,nautilus,nautilus"
- PACKAGECONFIG[search_provider] = "-Dsearch_provider=true,-Dsearch_provider=false,gnome-shell"
+ FILES:${PN} += " \
+     ${datadir}/gnome-shell \
+     ${datadir}/metainfo \
