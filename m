@@ -1,118 +1,112 @@
-Received: from mail-pl1-f177.google.com (mail-pl1-f177.google.com [209.85.214.177])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.8101.1795739765223768403
+Received: from mail-pl1-f169.google.com (mail-pl1-f169.google.com [209.85.214.169])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.8102.1795739766854974629
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 26 Nov 2026 16:36:05 -0800
+ Thu, 26 Nov 2026 16:36:06 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=IcpOBgog;
- spf=pass (domain: gmail.com, ip: 209.85.214.177, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f177.google.com with SMTP id d9443c01a7336-2e9ae391a05so51926915ad.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 26 Nov 2026 16:36:05 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=CKrqKk9G;
+ spf=pass (domain: gmail.com, ip: 209.85.214.169, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f169.google.com with SMTP id d9443c01a7336-2f06ff94acfso33647475ad.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 26 Nov 2026 16:36:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795739764; x=1796344564; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1795739766; x=1796344566; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=gTiCoWhFmnHOiThS1G35/TX2Fyj3xpzgw2UvHjYuoAc=;
-        b=IcpOBgogycQB+O4V8ptvXbJq8u0roDWdSFVWrWdgh3p6Q6XGWdCUfUz2oH4GcbvYHb
-         eqgOEQMAHJWTib4uQMSOUTu9EOg/H5YWByTHtJfXsj6/vas+HRsZ6no+wk8LF5mWfxeh
-         i5xIRcesy+IGI3XPNLXO4Y/uV83gZgK4c/mtyUpvnr3iNvyk42gaMlVIaSZt2srTDj0+
-         ivWGbF4Ezl1BfPbwp4RxKRxxkqey+Awp/TtFguGf5Z+AnNJWAVOxaka6F4vQ6+vLHZjt
-         nhEo9E1xSODsGdh//5PBjD9iuclj0MKYcP+GYHg84iJS8qk81+HdC4sfOaSvL/6zLV5H
-         vFwg==
+        bh=mPDLng8VDCnI0GrOEsrly6K+35ZzeNmcdzJjX4zHBZg=;
+        b=CKrqKk9GZsM2mFVZnVYhBHJwzkbgIWvZRYQd8PYEndojICGG4EumFz3FMCRVJy6ri9
+         eXnrPESkfg6RE1s5AQxXuZ2QG6bRe40VFgH+p6zk7JHzcXHkHNURcbwI/NmIUSVxiQL2
+         f8sKYrGXTMq+E6uWRoVOl9mfu/EMs5vStsUhk1YfwawB/VRdBTDhlhC/ryuhXPLmh/2K
+         fvem3NXrPv4jE9MFu9/QpbdIPErNYocJkwSbd3J+mBgXCPYv1TwlkvjjJkAgwQn1QCtA
+         aDn1XAZCxLxVusMfO1sHq3/ls+TLbsoFSH+b4tyFL/fU4e4zQMDMnsiZQ6PN8n0nw/gD
+         qD4A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795739764; x=1796344564;
+        d=1e100.net; s=20260707; t=1795739766; x=1796344566;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=gTiCoWhFmnHOiThS1G35/TX2Fyj3xpzgw2UvHjYuoAc=;
-        b=T0RAzt8mdoENDnPqDweVHIlASy49Z0VW/Y9+jQh2Sewod/f6bQlo4v/RAvfs9OJ2ph
-         +Hq7EVRlwRDt928RrKqAG4Fr0feDPwdfNT+HpdOrXdM+5nFHZ7CTO6YusAy1R5JiY9R5
-         0TL3VwsnZbiUXq1azJ1tz5hPNQanHurC/fOIFlvW071VDqka/IoIPt8uw6eNhLzjGtu8
-         z+xEC1xucKTrw/pFMDso9SQvGDMYnYn4+T3PPlh2uJSDRdX7wq76gf4flmENelYoNbw2
-         1jXrJpBhekx3fe0dh6xdDJkItqjoXtH9X65ITr8z6WlU5Qa7j2yDIKdOj6BUGvnYZIK4
-         i8jA==
-X-Gm-Message-State: APuU4Z9QcfemW9BnNcaIk8gGcypEpMKxUQnzWnlXkD6PL9NPZWO8JHu8
-	eWEgx1/cZW8C+SH0QDYO5jFU5ggRvBZ/WnvYc42tna5FFfjc1NgN15NmhEpMcw==
-X-Gm-Gg: AZFdTZdqJc4HLclXBx5WmYP4vDDivqM/J6izKo3QaSDFVowBkvZdQsl81tezksE+NT8
-	PeMMhVb2pEQFz8PAKaPsnsd3H+7yAv2bWbiBEB/ZL+1BoDmK+Kw/jxqgaKCxCQPBCxY3tz2RRG2
-	XS9MoTM+ETcJFxYHCV7qwShyA514DIkknhWiKva6l+7ZT1IVFzoR8w/3i/LAVTmzSyL6CeZ+4DK
-	9Qi3jtAky8kJeDEgNWMuFqQU1FiMSUycpIjnvwL9CR9RG1guvp3u83kgLgRNznxd5kQdrwbJU5q
-	GwT1QGiU3NuE3u5V5eU4z/G4ny6c32D7t0NV3u6R0RZAqP7Zs1CfVkM3H1FvIV2Pnsw/CSBqIJP
-	ExeGL3L1VKsJmKxcIyv7VGireSzS8w9dqc/XKiF0HC2Hy/Xn9qgqFtW+axrKzXCx0zUHAqnbv3d
-	PDJqa2gy+flyr+8jn/qg69AsBPB31tEbsflBvU+YATj6ANJ8EzfItnQIHeQTubSOUzWa/Q/XpoA
-	JcZosGbRhCGCPOFCX+QI93I/COxq9vosuWSOQlOJYVJpg/ISrzjzusx2YjmjmXNL6JSLJ9b64k3
-	kqAHQr/Z8hybZaTVdEUK9oOF+GkcecFHXUyX4bcmjH9SeLixg+8Eguy7xIn7BTtO2p2ZDm6Gxnd
-	XG15+Y5H8fmuXrKVUgdUFpyAFdMZFBWqgahCzSa6oii+QQ8HoZrZBDc/NRxoSvUC9JfoDQCcWwW
-	SdfdQrU2U9VbQ27v376Lc/3CcKmmAwlxow/x6OhPhKW0wnhb6RWc3L8LA1oKGVWv+SQycsc+K+C
-	1kNP+4iVxDPucCxqviw5zduNg1mGOTahn8ykOQ9b5uito/mU53QBRigqz44BuJbzM6kaoPKj/qC
-	DEsw
-X-Received: by 2002:a17:903:1545:b0:2e9:5598:d182 with SMTP id d9443c01a7336-2f031eab286mr177984755ad.15.1795739764510;
-        Thu, 26 Nov 2026 16:36:04 -0800 (PST)
+        bh=mPDLng8VDCnI0GrOEsrly6K+35ZzeNmcdzJjX4zHBZg=;
+        b=SAzYbdt9VYS7Xe/BSWcQLliavS1qTKDXQatiXZ0neg2nM8+Ng3bZIoUbAUD3pdzQoi
+         WwDuse8pKZO2Q5Z0G+njjG6QE5io2SKP9aBrK7xaZ5pyXz9iax9PRIrQOKzQWVEC4n4u
+         iGeXf0OsVdKWd5f5RedbI6BgNS9kTwMnXhfPdlgu+MqWjdY8r3iGCDJBR2qxPKKFW2cB
+         l3i6iv28InX+rHD6QyuWJKaIqsNqNHbeAWx7Pr0e68UNxwO++q9egrNBUaDbpXyRFBbQ
+         QXZP4pcWMeYRDkuOh5GMf+AaI7ZcOr3ZY8Y+1kQ8eGgjz1CgpFLAvxPBf/hSW6NTylZn
+         apkA==
+X-Gm-Message-State: APuU4Z/JV7LCVIoqwrtG4Ulwm+MxUEw4NlnDBYCc0zBuLK2E2dy0mG/7
+	dSt6n3DwsoWdR87e1lLGz2YqAz15Jn6SJioOUqjQHv9idwBOfSCxbISMIv5FBA==
+X-Gm-Gg: AZFdTZcb7l6kwsVbQslvfqhYMTCeWEl3DqhtshMMLTn+Hwt8VJCTNR+TJSWPoA4iSmb
+	fj+3nHmZe5Y6sm2hrC/ZcX4dhxiZD8FxyGK/PE+gIzsNlMHW0ySQrkk02doIkPnlbvryG0UJsgd
+	gi0fv6Nx7OEMWlnROKMQXdBlmjtbqDEjpI972s8CSewTvkIb/XMVvmmcp+lcXDfHgPIt1764nJr
+	N7aV+Cn8y3UVuNKaqOSwkTqwtM4xJOynP4XTbl1EH3JMRA2F3A8H9rCmWsarOTFTC/dfI6MLzXh
+	rIsInVczk615mj66wIwXZLsZzIXpzmLkpuOOj4q7HAeaVg9WX2UL1OBecVe11HSKf7nHKwwwyQv
+	ZpDj6nE3ggFlOBpE/OkUWwFkvduxCO0Zg0msowuEvudk8jh7cAKnDvSjLi+IvAgIALTJg+wTMLS
+	g0IPrfwFgobWxxAFrJ5SfjaFr9jTwOahfeDNspg26PWZAQNsNT//u8kb9+1l2UABUw+hPOLLU/b
+	eJZVlFHj7N/umx55OaFDub43YN0nozjZrJdj6Vb3zKY6yfzSfbpBCvk9EeDzJT7uDrkx43cKmw3
+	SAN6r3lVK42DJKr4OGp/7DKRiC1c9B8R8f6WymB1FZsjNYbTJGtNBMM/XgYO9iEH6boysKn8sxH
+	5UF3Q0DcUkM2iKkI7KyWFu7MTpagD6/bodFDmeST/2/mgWZwHcCW7gzFGc95Mjdfgy94KzkePgJ
+	zwzIjRtlv577wCG0wL11q8oeURQFvqqLGtcIHkwbMe6qJfp2ojXhFiJMTCiN2MX8ph2w1zGdWjs
+	j+/Is2jzkv0BEuwHwy1u51x0wa2XcdhFku4AMtr0+RFuyk4qbuIdc4yupc5wYPVvFk5TmbF258p
+	Mqdb
+X-Received: by 2002:a17:902:f70f:b0:2df:90d4:7758 with SMTP id d9443c01a7336-2f03f118282mr186735575ad.23.1795739766079;
+        Thu, 26 Nov 2026 16:36:06 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2f0fe9e36f9sm10410875ad.55.2026.11.26.16.36.03
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2f0fe9e36f9sm10410875ad.55.2026.11.26.16.36.04
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 26 Nov 2026 16:36:04 -0800 (PST)
+        Thu, 26 Nov 2026 16:36:05 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-oe][PATCH 01/39] libnewt: Fetch from gitlab.com/newt-ui/newt
-Date: Thu, 26 Nov 2026 16:35:05 -0800
-Message-ID: <20261127003543.2167775-2-khem.raj@oss.qualcomm.com>
+Subject: [meta-oe][PATCH 02/39] mailcap: Fetch from github.com/InfrastructureServices/mailcap
+Date: Thu, 26 Nov 2026 16:35:06 -0800
+Message-ID: <20261127003543.2167775-3-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.1
 In-Reply-To: <20261127003543.2167775-1-khem.raj@oss.qualcomm.com>
 References: <20261127003543.2167775-1-khem.raj@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Fri, 27 Nov 2026 00:36:06 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/133171
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Fri, 27 Nov 2026 00:36:16 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/133172
 Content-Type: text/plain; charset="utf-8"
 
-releases.pagure.org is gone. Upstream moved to GitLab, which has release
-tarballs only under opaque package IDs, so fetch the 0.52.25 tag with git
-and check upstream versions from the git tags.
+releases.pagure.org is gone and upstream moved to GitHub, which has no
+release tarballs. Fetch the r2-1-54 tag with git; its tree matches the
+old release tarball (a GitHub tag archive would fail the src-uri-bad QA
+check).
 
-The git tree, unlike the release tarball, has no prebuilt .mo files, so
-autogen.sh runs msgfmt; add gettext-native to DEPENDS.
+The tags use dashes (r2-1-54), which the git tag check cannot map to PV,
+and the listings with dotted versions (Fedora) are behind a bot wall, so
+mark the upstream version as unknown.
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- meta-oe/recipes-extended/newt/libnewt_0.52.25.bb | 10 +++++-----
- 1 file changed, 5 insertions(+), 5 deletions(-)
+ meta-oe/recipes-support/mailcap/mailcap_2.1.54.bb | 8 +++++---
+ 1 file changed, 5 insertions(+), 3 deletions(-)
 
-diff --git a/meta-oe/recipes-extended/newt/libnewt_0.52.25.bb b/meta-oe/recipes-extended/newt/libnewt_0.52.25.bb
-index 18a45a3342..e82ce8fe84 100644
---- a/meta-oe/recipes-extended/newt/libnewt_0.52.25.bb
-+++ b/meta-oe/recipes-extended/newt/libnewt_0.52.25.bb
-@@ -8,23 +8,23 @@ shared library needed by programs built with newt, as well as a \
- /usr/bin/dialog replacement called whiptail.  Newt is based on the \
- slang library."
+diff --git a/meta-oe/recipes-support/mailcap/mailcap_2.1.54.bb b/meta-oe/recipes-support/mailcap/mailcap_2.1.54.bb
+index 4b47b3a9d4..0e2cdef478 100644
+--- a/meta-oe/recipes-support/mailcap/mailcap_2.1.54.bb
++++ b/meta-oe/recipes-support/mailcap/mailcap_2.1.54.bb
+@@ -1,5 +1,5 @@
+ SUMMARY = "Helper application and MIME type associations for file types"
+-HOMEPAGE = "https://pagure.io/mailcap"
++HOMEPAGE = "https://github.com/InfrastructureServices/mailcap"
+ DESCRIPTION = "The mailcap file is used by the metamail program. Metamail reads the \
+ mailcap file to determine how it should display non-text or multimedia \
+ material. Basically, mailcap associates a particular type of file \
+@@ -16,9 +16,11 @@ SECTION = "System Environment/Base"
+ LICENSE = "MIT AND LicenseRef-PD"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=8dce08227d135cfda1f19d4c0c6689de"
  
--HOMEPAGE = "https://releases.pagure.org/newt/"
-+HOMEPAGE = "https://gitlab.com/newt-ui/newt"
- SECTION = "libs"
+-SRC_URI = "https://releases.pagure.org/${BPN}/${BP}.tar.xz"
++SRC_URI = "git://github.com/InfrastructureServices/mailcap.git;protocol=https;branch=master;tag=r${@d.getVar('PV').replace('.', '-')}"
++SRCREV = "9699055a1b4dfb90f7594ee2e8dda705fa56d3b8"
  
- LICENSE = "LGPL-2.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=5f30f0716dfdd0d91eb439ebec522ec2"
+-SRC_URI[sha256sum] = "9a4032202fc0d2b0858f41b167389a9cfe52ac24ec282e6479b90765319de113"
++# Release tags are r2-1-54, which the git tag check cannot map to PV
++UPSTREAM_VERSION_UNKNOWN = "1"
  
- # slang needs to be >= 2.2
--DEPENDS = "slang popt python3"
-+DEPENDS = "slang popt python3 gettext-native"
- 
--SRC_URI = "https://releases.pagure.org/newt/newt-${PV}.tar.gz \
-+SRC_URI = "git://gitlab.com/newt-ui/newt.git;protocol=https;branch=master;tag=${PV} \
-            file://cross_ar.patch \
-            file://Makefile.in-Add-tinfo-library-to-the-linking-librari.patch \
-            "
- 
--SRC_URI[sha256sum] = "ef0ca9ee27850d1a5c863bb7ff9aa08096c9ed312ece9087b30f3a426828de82"
-+SRCREV = "9b9e7e8936f51f83a7259c5f0a9b4ff909cbd39a"
- 
--S = "${UNPACKDIR}/newt-${PV}"
-+UPSTREAM_CHECK_GITTAGREGEX = "^(?P<pver>\d+(\.\d+)+)$"
- 
- inherit autotools-brokensep python3native python3-dir python3targetconfig
+ inherit update-alternatives
  
