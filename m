@@ -1,118 +1,94 @@
-Received: from mail-dl1-f50.google.com (mail-dl1-f50.google.com [74.125.82.50])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.10263.1795753007816206696
+Received: from mail-dl1-f49.google.com (mail-dl1-f49.google.com [74.125.82.49])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.10346.1795753041117422915
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 26 Nov 2026 20:16:47 -0800
+ Thu, 26 Nov 2026 20:17:21 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=a4C2crfs;
- spf=pass (domain: gmail.com, ip: 74.125.82.50, mailfrom: raj.khem@gmail.com)
-Received: by mail-dl1-f50.google.com with SMTP id a92af1059eb24-1a2af4c8d00so7953825c88.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 26 Nov 2026 20:16:47 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=02FLraEF;
+ spf=pass (domain: gmail.com, ip: 74.125.82.49, mailfrom: raj.khem@gmail.com)
+Received: by mail-dl1-f49.google.com with SMTP id a92af1059eb24-1b3a05f8b5bso10382032c88.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 26 Nov 2026 20:17:21 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795753007; x=1796357807; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1795753040; x=1796357840; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=xXBsWoBdmCubuoipMcDYP4yf5vJzGUPf8MORI7KSTEg=;
-        b=a4C2crfsCm6pbWk9iM16+lqg29QCbtMOS+nBwiU4QydFhFojHDLQdOHAf/Ko/E+hhC
-         heIquma8/2me02A+cv3DVla/1YiOl6TbQ8NGoRR9qAODolViHweOCuwm5SGVGRjGuIAb
-         0Eueutc4GtHWuytAsiikds+LkltoaBFqzNh4YmCC4H/qin8VyG1/e7SWiEgZz1b0Qszu
-         2At01zl8XIav2Gx5nMs3Ai+Dg5+a+rmJraG6hpGX1akGaQjZK2stnODzkjq7gN50UX1L
-         vuYicqwsPFN8MteElqvUSSomuiwJKJTixFosmYzWjThpkoxGc07KDthHyW04G7pWcYJj
-         EEtQ==
+        bh=kEjprVea6hFOybpEdpuWeP1vfJ7jcfAmLqj/fm4Xlrw=;
+        b=02FLraEF/qOw+A5rTUHn8Ni6boNxi5J2mvxr+lQMqFxaDeCcif81CwqS/+E/smfqnb
+         woftyg7aIAIt2aKmd7w1I/PxWVoLGLbOriVppgYELYju38nOowsmuP7ccDxfPjTHkWLL
+         jgVQg6MMwaiA5N52bUSgSP5vyJzE3dPX8FwoKawOoc5rUg76T37a87kKm6McL3LJZ9TU
+         tf8I/Bt5bmHmcsrClKhFgs3PEEw+pr0RRyNqqtbyEmb2Nqid9W/+mWRfzKErE/ihQlgy
+         eme7TMXEUuskn0980VxrxaomWN6fycfPX66xe6VhItgo/AX6ul5KCjLgd46YC7bu058u
+         ha+Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795753007; x=1796357807;
+        d=1e100.net; s=20260707; t=1795753040; x=1796357840;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=xXBsWoBdmCubuoipMcDYP4yf5vJzGUPf8MORI7KSTEg=;
-        b=ZBskHxJ11uDdVJ4dxzmyU4/KPr7PaAmY6trLfsll1MEHb7g9aPblRsrPbCVH9qOoan
-         CpzgmexlnUB6n78N4TBGcGEl5PjLmAodjdYbtzMECKxZmMBySFnxc7imjQD5CJV9NW/O
-         O9fCEI1uGZDNAUOQDI35qonPGEUc2AYE3pTEc4ox0ExLwdnmC0UxqCCVgv2QnEpX5TA3
-         SrSLuvfxEK0RB+ZHcsyXIzMZAjE25a8jdxZaq6C0p9cxccGk0Sh43sGkVNJplYB9GEN7
-         FLauqFuxLdu9RD6++bO4vRQ6caEKHg4EoJyAkgSEOlxxCwxH4z18FuAnjEjL3OHdCBpH
-         u7lA==
-X-Gm-Message-State: APuU4Z/dPn7iCH/UI1Kmu0Q13tAJinW7RuMAjGPRL2aaykpEaeJ5uvEO
-	mkJKLtoMJj4dNaRwCQY7VRgiSv3Bhax7eD6Jv/arILxCrdTRNggOrxtf7+YcGOFS
-X-Gm-Gg: AZFdTZcQDU0DAvR8fyRGLmv+aWC7zZjNc/+m4lsmsClXpT1ihaOqHpmZ9ik3KcHNjJk
-	TdHA0GE3FHLZq+WXBw5gNiCtWAf5zEWuoKx0+/FveMjIhJpwo8xZltoa/kcq8AjkdPLqExn8ls+
-	+T8FvQusyHuVCZsQOR7rKWuJfwEBS0K1O+lYuoyQZjvdv/r8vzKsJd1IapFnCqwmlrDn2kQ/xtO
-	Dt/xxEsXbUXVzR6eKiT5S8i2Gl6sl1IKO/3p/IA3ZyPtSEjlwqIXa0lhEqBUWGqfDqEXbD87F1N
-	NorUDPf+FmmOaRWt5jOw7IiMlPapHQa65BQX6/q6js6DCw0TNte+t01Uy4KQNH6NvH9HzAbvkwN
-	crajNr3k0lsIMO+sMvQuhmcHa0goGnpFsmESdGJ3EFzhZnUoHiS+rqM44dN8pD5Zkg1IcDGKfDz
-	2EJ653coYbHj4tetYbpu06o1wVvABYBmePL4k3wRie9NDceOQha4XzJWB3Eb6u4jTzaiwSuoazU
-	X1PkejYIApxZwRM0vcvFWn2PuzUb3vj8IdsWFxLVq+bNW/DQ/Bwqleo0YyxNvKI8LKoUcSiY6+4
-	Ic7EKNeCSa8bEWY4oQGh/Ozohd5raAZ2nKrwBFNZGKjcJ/dNsBkmp59fZNIIZ5wzgKtacmePfWn
-	EI4yXGlZrr7n9gN9FnsqjgmaajStbkNcGMA6DIgV+fPLFkmY73VD0dQb5ajQmeSQAojupUYlnou
-	CdaKVpP0nyB9iuTfb3N4E42fu4SknXhXGqfyAlk5IcoUIgTOZK/tuKFMtVcEyMX6vuqGPrVPaFV
-	YCoRLyoyiGfSCKATx6zd1/odRtcTW4WHpBZKkA0p9cUcEJfL9x3Znk2JmHe2Vg91p8ZfQ5s4mq4
-	AqD6
-X-Received: by 2002:a05:7022:2207:b0:166:b307:5855 with SMTP id a92af1059eb24-1b556688160mr33012228c88.0.1795753007187;
-        Thu, 26 Nov 2026 20:16:47 -0800 (PST)
+        bh=kEjprVea6hFOybpEdpuWeP1vfJ7jcfAmLqj/fm4Xlrw=;
+        b=N9mhxcMKdOUB88pjGWCd5oZx/RvuDwAnSQva4pZck7J4lf8o5xjB9ubdlZcd4whmBG
+         YIC9ppgdhGVI1aaRynU7zc8e2hxKzCNF8d5v0qxKLUrtpxm4ekemYn6Ue9QU6wXXRA48
+         DhDf8XTnD6DG47aES74sxMOxvzZjhewARfYGiz5lmE6DdcHkk9OM5wlLX3Gn5vaDODjH
+         4G5HZ4/Tc/wHXkOwOGxvLOSmcYOjZ4kNpcWwvTtGeCvQKCqwQGD3SSYiF8S1oxeLsLOn
+         UWAo4kNOmvS0DOblqvNzMmjsiOvmhwXkdCV5lJt/rhXgpYEaghm5d9kysErd1jWEcUZv
+         gSpQ==
+X-Gm-Message-State: APuU4Z+ACiBCF1F8q6n3Jhk81/kI1B+iL0XYCPsoI2tz2QYbdC+X7+xi
+	9lwLZWTStyoF445Zn+ZYZ4JKpDJ5hX/I95RSj046v6hMZI8IS9sLFUavYDT0oeqv
+X-Gm-Gg: AZFdTZcojICFHE1LpZIYCN73KqWEOQZWQGQilUEQVM1KrTvHjcLMmwrjpn4wPyXYF3Y
+	bgxXtA+RTrppJeXK07tBLwi9OD6LPHmSzsWNQ/lD+tG2MiQBUX3Ma1OsXA3fiiBv0+dTO/EgJC0
+	27EmYGMBuoSSTOalle3CtABZ/c6NbGIe8nOWPVp314a5xem4N2PfcgkEX9btKntPPPJuA8vd1gs
+	sEkH2gfAeu1odjz2gVXyXNo3TCfSiBH6GO+sFZEO1+pDfR9qi0jXxPFj/tQT8WcZ3t8iwjIDXK+
+	1Hr83vl+AYPAFPNMELaO/uyFXEbPCvIGAVvuv2kGcQJ0R9AJKlBUlF+32myXQJ2lSNi0cfjuzUG
+	tl3iGRzGHiHRQoFaHNctKlvQq/Yan0QxdKsIhJQ0fvG7hfb7AYAxqzHDW9JrRW9YZQh+2UvLSpg
+	j+fyKRpdX23+V+Wza4ivCWwoyR+kx8q3zcJJfI6+FQGccpS0a+XVFGBJ7UAcRs5J+fgUwBP0fxj
+	MMGBMFbKxNb8p7HlpYmE7HnOio/kB6iIi9sOMTMutJJ9u8babdsgHLv5kIDX3RXoLLMg1cE+3LN
+	uaFkh9kOITz4+HuhJ4M2h8IvX6o+sJx2YOAq9rZcW10ruqaM3nyeSE3e1cSR3W9oAArcr91FTpB
+	d4lcr/2NjzlXwpOoq7U6BpAQFWI0xab4RiBpJ3vmcbBoEYe0QmA41zVcHdBPUh+qfce4Fb591WH
+	+6rnyiwoWoCwnE6BK+hjQKA/eq60BHmtszpfifg6esDu4zgJAPk8sJ1OqTPK1HvucCynIw559Fr
+	ToXwBo+eVKO4c3uA6BnAE9ChtaBxPJqNgFllo8LZpmKbonyJo87+cnCezwjU6XzwAPKFXSBqRSz
+	8Lvo
+X-Received: by 2002:a05:7023:b12:b0:141:5281:8a41 with SMTP id a92af1059eb24-1b55687fbc9mr25346221c88.9.1795753040455;
+        Thu, 26 Nov 2026 20:17:20 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1b5566c1142sm52062757c88.2.2026.11.26.20.16.46
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1b556840494sm53880225c88.12.2026.11.26.20.17.19
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 26 Nov 2026 20:16:46 -0800 (PST)
+        Thu, 26 Nov 2026 20:17:19 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-python][PATCH 28/32] python3-virtualenv: upgrade 21.15.6 -> 21.15.13
-Date: Thu, 26 Nov 2026 20:16:10 -0800
-Message-ID: <20261127041614.1775064-29-khem.raj@oss.qualcomm.com>
+Subject: [meta-networking][PATCH 02/35] cannelloni: Fix upstream version check
+Date: Thu, 26 Nov 2026 20:16:42 -0800
+Message-ID: <20261127041715.1776485-3-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.1
-In-Reply-To: <20261127041614.1775064-1-khem.raj@oss.qualcomm.com>
-References: <20261127041614.1775064-1-khem.raj@oss.qualcomm.com>
+In-Reply-To: <20261127041715.1776485-1-khem.raj@oss.qualcomm.com>
+References: <20261127041715.1776485-1-khem.raj@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Fri, 27 Nov 2026 04:16:57 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/133247
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Fri, 27 Nov 2026 04:17:27 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/133254
 Content-Type: text/plain; charset="utf-8"
 
-- Honor VIRTUALENV_NO_DOWNLOAD and no_download over download = true;
-  keep version specifiers with commas as one value in
-  VIRTUALENV_PYTHON; accept multi-line activators; fix bash/zsh
-  activation with a pydoc alias defined.
-- Stop the bash, csh and PowerShell activators from adding an empty
-  PATH entry when PATH is empty.
-- Harden permissions: owner-only app-data cache parents, read-only
-  seed images in app-data, isolated custom-index seed wheels, and
-  interpreter search path checks for copied POSIX environments.
-- Run the pip seeder with the embedded pip matching the target Python.
-- Wheels now carry a PEP 770 SBOM written at build time by python-sbom.
-
-The build now requires python-sbom[hatch] with the python-sbom hatch
-build hook, so add python3-python-sbom-native to DEPENDS.
+The default tag regex picked the date tag 20170601 as the newest version.
+Only match vX.Y.Z release tags.
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- ...n3-virtualenv_21.15.6.bb => python3-virtualenv_21.15.13.bb} | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-virtualenv_21.15.6.bb => python3-virtualenv_21.15.13.bb} (83%)
+ .../recipes-connectivity/cannelloni/cannelloni_2.0.0.bb         | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-python/recipes-devtools/python/python3-virtualenv_21.15.6.bb b/meta-python/recipes-devtools/python/python3-virtualenv_21.15.13.bb
-similarity index 83%
-rename from meta-python/recipes-devtools/python/python3-virtualenv_21.15.6.bb
-rename to meta-python/recipes-devtools/python/python3-virtualenv_21.15.13.bb
-index 4f11ed9333..8414f67235 100644
---- a/meta-python/recipes-devtools/python/python3-virtualenv_21.15.6.bb
-+++ b/meta-python/recipes-devtools/python/python3-virtualenv_21.15.13.bb
-@@ -4,7 +4,7 @@ HOMEPAGE = "https://github.com/pypa/virtualenv"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=36ef9437b761b314fa717c786c5ca460"
+diff --git a/meta-networking/recipes-connectivity/cannelloni/cannelloni_2.0.0.bb b/meta-networking/recipes-connectivity/cannelloni/cannelloni_2.0.0.bb
+index 6129c9bd0c..f1eaaf80db 100644
+--- a/meta-networking/recipes-connectivity/cannelloni/cannelloni_2.0.0.bb
++++ b/meta-networking/recipes-connectivity/cannelloni/cannelloni_2.0.0.bb
+@@ -5,6 +5,8 @@ LICENSE = "GPL-2.0-only"
+ SRC_URI = "git://github.com/mguentner/cannelloni.git;protocol=https;branch=master"
+ SRCREV = "9f649ef21710999c6f674bc3d914ab2e88363bac"
  
--SRC_URI[sha256sum] = "c8b65c7d206ca6ef18de9352c160b3f04f66fff9f6b0ec8fd31f14688eba52c4"
-+SRC_URI[sha256sum] = "f3ad23551343034e613f9c4d8279f282958a19729f5fc2bcb758afcf95fe3a01"
++UPSTREAM_CHECK_GITTAGREGEX = "^v(?P<pver>\d+(\.\d+)+)$"
++
+ LIC_FILES_CHKSUM = "file://gpl-2.0.txt;md5=b234ee4d69f5fce4486a80fdaf4a4263"
  
- BBCLASSEXTEND = "native nativesdk"
- inherit pypi python_hatchling
-@@ -12,6 +12,7 @@ inherit pypi python_hatchling
- DEPENDS += "\
-     python3-hatch-fancy-pypi-readme-native \
-     python3-hatch-vcs-native \
-+    python3-python-sbom-native \
- "
- 
- RDEPENDS:${PN} += " \
+ inherit cmake
