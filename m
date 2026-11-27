@@ -1,95 +1,127 @@
-Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com [209.85.128.51])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.17898.1795793634216071671
+Received: from mail-wr1-f48.google.com (mail-wr1-f48.google.com [209.85.221.48])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.17899.1795793635112448184
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 27 Nov 2026 07:33:54 -0800
+ Fri, 27 Nov 2026 07:33:55 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=Xl98NouP;
- spf=pass (domain: konsulko.com, ip: 209.85.128.51, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-wm1-f51.google.com with SMTP id 5b1f17b1804b1-4ac95761c85so64676925e9.2
-        for <openembedded-devel@lists.openembedded.org>; Fri, 27 Nov 2026 07:33:53 -0800 (PST)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=CVV7twbj;
+ spf=pass (domain: konsulko.com, ip: 209.85.221.48, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-wr1-f48.google.com with SMTP id ffacd0b85a97d-48e3b22e971so4354460f8f.0
+        for <openembedded-devel@lists.openembedded.org>; Fri, 27 Nov 2026 07:33:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1795793632; x=1796398432; darn=lists.openembedded.org;
+        d=konsulko.com; s=google; t=1795793633; x=1796398433; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=p2iVxNSqFn5Nw2q3hk3ImxjxevN+L0DTu+VRgc0HF/4=;
-        b=Xl98NouPdTf9db2gXhnF2oojCGh1jbiBR7q+6nx9T8WbPqboJbEG2N68Np2QKWu5L4
-         3u+tXaepvU1RYlmoKWsR9j6sJ+rQiOOI6p3GRx/K/gf2OcgFNw/5c1tlqLshyR/cDVK9
-         zbuRw+xkBQSp732rNwe/4KoTeXiqCP0nJNDPI=
+        bh=rnb2lr+4YnLZwVBlmGqIfmTSbjYFu8Njfiod1rFfqeo=;
+        b=CVV7twbj/QfWmA52to7mLHh/tO2Yj2gz9mCom+6+n7FpFAbrzY+2aIJVpfqufKXa60
+         75BWnVq69ogljc7W3dKVSy1R4pwC/Fc+S8HiVFjSu1TbWD0ofE1s5jne76m9HZsB31Gm
+         IGPXBZPzI+SYwujSRq5EF0nU9zDf647CMyV3Y=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795793632; x=1796398432;
+        d=1e100.net; s=20260707; t=1795793633; x=1796398433;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=p2iVxNSqFn5Nw2q3hk3ImxjxevN+L0DTu+VRgc0HF/4=;
-        b=wt7kEdRcLSMOJd6IrLkWyYnW4PgALhY1c12Ft2csIGG6dtYh7aU3nIxKoM4X2Wevxp
-         qS8FiaRG713NQ3HhKAgEWYCHypJ8f1F6oznCzJVXXYGcr7gSNfvKP7AhSxZ218pwmrND
-         5u1prEzcxYuJ0jMJuRHFiHSkQdTrGbYv0o9soVj6mj5BR5GAHtNx+hmUvM2rTAa0e0iy
-         9a2gmXpSJZg5qY/K4+Q1/Pi/0JzUNcwmsvBWkGLhabW9evFspehBayYvhYyYruD8RsIS
-         ppg2kOziGOc+w1IZOiNT/cOeEXOerLaWPwu+9EgRToClY9MrovAh0MVhNui45K9+pGv4
-         xb5w==
-X-Gm-Message-State: APuU4Z9BDWT606P02zJ7Q7JSjbOe0ohemFTBpd+17Gqnkmlur4x1Bp81
-	wYSh+xwi/iFSdX5ELFCOgtopXjxw+Y3BhWuy4Z1120VWolxyqKgNs8dKaeWNT/q9LY+DjSWmBOH
-	nWbCV
-X-Gm-Gg: AZFdTZdRF1WCHE8Ulhig2sUGKuj4UoHLTaXzGGxM86NJ7G+7wSieHbU6wCChGl++XGW
-	PZnz7kAV0AOeTlfygj/S/wsqlKXUeX3HTEuizAIttwmpeZuvHriqeORJU2rgMpnA2WNhpMhIC7q
-	qMbocnNcd5u9/zc5xa9fs2ISBT4hsb1os1s4/yef1k7PfUKv/Ps/O2mm65t53f9OIBye/8pCr00
-	19WM2Zn456IQZrm2kIWIxB2F/31pj0lSTtxx8qvwljAPdFLEIRiOzdHtbJc3151dn0BtedrHqUx
-	507COF0eXhS3JFRD+q73ZQSxqP2bjSCOjSqOAA3jn8wb+9/8lVy+BNK42XFnWLoTnq5Z4BYXRQg
-	WGZuVXtNCr853cqhG1pidjAUeE8+7V/kl8OfeNZt1Am66QS9PQJIuN8dTEy6aqUlcApOiCLGYAl
-	pWOwC/0qBFkBg7TQGuikC82RLMTyQnbmC0MOJ98oSwAdFidj+aRcch8wu85q0NA1kLyPJleOdnk
-	9P9Dvvpx1WNmob79fTp9hZDIW7UwxhUCFxSUBLwwsevMN7LrGbAaWbYrfvlWH+eqnfUfbpFSwl3
-	y496MUQHJaWd34zezuWZU9YDkfoPPDgTD3SqyGmfHLYphps7BoX7cSNjDGN9yRQi1fVqKCuKkwr
-	kCbsJ5WBdVQupTU0fyqAePWdxFdfvcosP+MPuz6/Z+UiUkfoHHVQqQw==
-X-Received: by 2002:a05:600c:5303:b0:4a2:1a:a11d with SMTP id 5b1f17b1804b1-4bb88785d24mr489548255e9.0.1795793632378;
-        Fri, 27 Nov 2026 07:33:52 -0800 (PST)
+        bh=rnb2lr+4YnLZwVBlmGqIfmTSbjYFu8Njfiod1rFfqeo=;
+        b=Qyn2rgmqyjvqagz5sO5Dc+sauJKzh4QRghCHjuNu3jNoQ7Fu4+kUp28Demswso5djM
+         ipQq4ZM8P6Q0Mciwtzenf0QCj+sHodagWG5OMYaWz29Tq7g2C4Vlx0ZfayfolYUiTaqt
+         uaeErHcjnmj+HkbF69yYSSptbV6dWSv3yVNZLQJ5kkRLRxZXfh+VFmEA5U5jjHy6hjjc
+         xQYk/VjuzvQ3k1qlRKFoQmAyVLZF7zIE9KWWdSmxYasTFbQ0iKt3o0L3AfRMKIdw3et1
+         RVeWfGvPcyOJtE9EoVbOnQ6i2opNTeyMv5FC3WWCEnB8INEAe2gLVNSC7TucORNDXEFg
+         Fpyg==
+X-Gm-Message-State: APuU4Z+YBe7xfP86u+RyoxIIuWnauaMRBvuja8FirwnNJofyfh36ukNv
+	VQnWmjXzD6XlVP/Dc68wQccD5Uc4WXwJs7ud9WmBTxfMsmOXz0QlNYLiiVTyNX2hI2TzJ8s1Ilv
+	XMrEP
+X-Gm-Gg: AZFdTZcvZ0yj4MC496eyYdfUe4WQpaoxxv2rW4rl6u63Uv0v/vpz1zoiY322VLZAjbC
+	QZZmWJYLlPNCU97uWReN6QPPkYMzsN8tA00cwDMLYkvZE7YEbdKr6iWy4g6vS1Xpzl2wtHWpO52
+	0chMMwgD1g1JP6Gh2hWsPTtFY/Z8D3J10anhsf3hhURn+2VhGuWbjhrmFcqqFiKjJq9z9asdtG4
+	kpTrzBCkHcT0cMRheYSLe+2ZvOK1vN2xwVAW5p5kG15k+vxEBi6Vdz4r8SujabQSb4FArVdiQlg
+	/KigaSBl7aRrU6ffrFMuDiU4I08xknNBU3TYgPXK0//BPXgOTwEx55p++BzLdC3dZ7cMQPdddF4
+	vtMGHMniOqgQSU9ztK+exjKUhpOJ8oX7h97/ooUIa1z3ej1LziTDrXHAjMFmmsCpCb7yzeb78Nj
+	mgvgn4IKKQBr3d1cGrx5x2gB9PbxVf6vSS0CtffAu6e3yIRAflrl1JVyFLh89YGKWRh2c3Rdv0n
+	gEPPCOEZfD4HWPPsMBzneTEefb9XwOlsXm6uoQ6+WAVvhsa4C95KQWc3BgU24NEF039uEOWf9gf
+	1jtSy2iJ/VppvkaaDZio8N6yBW6W0bj17TylEIkE/B1OomQiiOnUJqqXMlhV8KSoEZVf8Bk23KF
+	f/kQi0JkCDLCs4yAMG5OiOPK4Ri85sUkMJxJuCLASy9URiTjGJYH83g==
+X-Received: by 2002:a05:6000:4b1e:b0:495:5c83:51b9 with SMTP id ffacd0b85a97d-4abb4b84368mr47403760f8f.50.1795793633176;
+        Fri, 27 Nov 2026 07:33:53 -0800 (PST)
 Return-Path: <leon.anavi@konsulko.com>
 Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4b3415763f7sm24174207f8f.9.2026.11.27.07.33.51
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4b3415763f7sm24174207f8f.9.2026.11.27.07.33.52
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
         Fri, 27 Nov 2026 07:33:52 -0800 (PST)
 From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 2/6] python3-httpx: Upgrade 0.28.1 -> 0.29.0
-Date: Fri, 27 Nov 2026 17:33:44 +0200
-Message-ID: <20261127153348.2880928-2-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 3/6] python3-pypdf: Upgrade 7.1.1 -> 7.2.0
+Date: Fri, 27 Nov 2026 17:33:45 +0200
+Message-ID: <20261127153348.2880928-3-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20261127153348.2880928-1-leon.anavi@konsulko.com>
 References: <20261127153348.2880928-1-leon.anavi@konsulko.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Fri, 27 Nov 2026 15:33:56 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/133377
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Fri, 27 Nov 2026 15:33:57 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/133378
 Content-Type: text/plain; charset="utf-8"
 
-Upgrade to release 0.29.0:
+Upgrade to release 7.2.0:
 
-- Minimum supported Python version is now 3.10
-- Expose FunctionAuth from the public API
+Security (SEC):
+
+- Limit memory for embedded files dictionary API
+- Limit size of indexed color space lookup tables
+- Avoid cmap data splitting before size validation
+
+Deprecations (DEP):
+
+- Deprecate encryption_key of ContentStream.write_to_stream
+- Deprecate parse_filename_page_ranges
+
+Performance Improvements (PI):
+
+- Check inline image names against a set when listing page images
+- Count duplicate form field names and radio states without
+  rescanning
+- Avoid copying the visited set for each nested outline item
+- Fix cache evaluation for XMP data retrieval
+- Stop copying the page text for every text fragment
+- Look up PageObject.page_number in constant time
+- Use a set for the AcroForm field check in merge()
+
+Bug Fixes (BUG):
+
+- Preserve merged content streams during encryption
+- Escape the font name in generated text field appearances
+- Keep the generation number of objects in incremental updates
+- Keep the writer's state when used as a context manager
+- Remove every part of a combined ObjectDeletionFlag
+- Remove objects which only unreferenced objects use
+
+Robustness (ROB):
+
+- Fall back for unsupported RC4 key lengths
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../python/{python3-httpx_0.28.1.bb => python3-httpx_0.29.0.bb} | 2 +-
+ .../python/{python3-pypdf_7.1.1.bb => python3-pypdf_7.2.0.bb}   | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-httpx_0.28.1.bb => python3-httpx_0.29.0.bb} (91%)
+ rename meta-python/recipes-devtools/python/{python3-pypdf_7.1.1.bb => python3-pypdf_7.2.0.bb} (89%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-httpx_0.28.1.bb b/meta-python/recipes-devtools/python/python3-httpx_0.29.0.bb
-similarity index 91%
-rename from meta-python/recipes-devtools/python/python3-httpx_0.28.1.bb
-rename to meta-python/recipes-devtools/python/python3-httpx_0.29.0.bb
-index 5bbf7475b6..5b10493add 100644
---- a/meta-python/recipes-devtools/python/python3-httpx_0.28.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-httpx_0.29.0.bb
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.md;md5=c624803bdf6fc1c4ce39f5ae11d7bd05"
+diff --git a/meta-python/recipes-devtools/python/python3-pypdf_7.1.1.bb b/meta-python/recipes-devtools/python/python3-pypdf_7.2.0.bb
+similarity index 89%
+rename from meta-python/recipes-devtools/python/python3-pypdf_7.1.1.bb
+rename to meta-python/recipes-devtools/python/python3-pypdf_7.2.0.bb
+index 95be8b6eeb..9033491db7 100644
+--- a/meta-python/recipes-devtools/python/python3-pypdf_7.1.1.bb
++++ b/meta-python/recipes-devtools/python/python3-pypdf_7.2.0.bb
+@@ -6,7 +6,7 @@ HOMEPAGE = "https://github.com/py-pdf/pypdf"
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=15692a75ec5daafc92ff9e5505a17cc5"
  
- inherit pypi python_hatchling
+-SRC_URI[sha256sum] = "2eff4e2fc5fb22a6d6711e6f1166cdc9ab5765d90cd0d77dfea3f4aa91a27b1d"
++SRC_URI[sha256sum] = "b2c637b6f0be3def1f762fd8be20118736bafdffc75badab80db003d7a9ed110"
  
--SRC_URI[sha256sum] = "75e98c5f16b0f35b567856f597f06ff2270a374470a5c2392242528e3e3e42fc"
-+SRC_URI[sha256sum] = "700928ee6c1f4213795e67c47eba8f8553639069fea89199f71d654e38edc593"
- 
- CVE_PRODUCT = "encode:httpx"
+ inherit pypi python_flit_core
  
 -- 
 2.47.3
