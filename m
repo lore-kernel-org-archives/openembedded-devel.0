@@ -1,65 +1,65 @@
-Received: from mail-dl1-f49.google.com (mail-dl1-f49.google.com [74.125.82.49])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.10276.1795753052318161305
+Received: from mail-dl1-f43.google.com (mail-dl1-f43.google.com [74.125.82.43])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.10353.1795753053454532782
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 26 Nov 2026 20:17:32 -0800
+ Thu, 26 Nov 2026 20:17:33 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=irP7IR5A;
- spf=pass (domain: gmail.com, ip: 74.125.82.49, mailfrom: raj.khem@gmail.com)
-Received: by mail-dl1-f49.google.com with SMTP id a92af1059eb24-1b50a4bd2f3so6588994c88.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 26 Nov 2026 20:17:32 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=mYYvyUd9;
+ spf=pass (domain: gmail.com, ip: 74.125.82.43, mailfrom: raj.khem@gmail.com)
+Received: by mail-dl1-f43.google.com with SMTP id a92af1059eb24-1a2761c69fbso10731400c88.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 26 Nov 2026 20:17:33 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795753052; x=1796357852; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1795753053; x=1796357853; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=h7dSgKB7DH8SMebazeSqLT0ERFdibbOObqNUpS2HahM=;
-        b=irP7IR5Ae6dPmFqa9dYwB5pBwHuE7Genz1QZ5JRrXOS5EB8X6O6iXuaAq6pfqnUW1s
-         4QIZ346n2UiWnRRNJkBd5kl5yGFlzI2xfeEwDgw8RkiZ3/LCniMOYUAzCp9elsMfBclZ
-         F1DLFz3ROzNnRXhS3uBZ/xnG8AU1i/TMlLbvSoXzKJy1P2nQx046YONk9DIzSXaHDNn4
-         UD35Ns/kZxBBGv3CAsElaSmqNdX671cJQDbSMN6CabvhSyzLkqTxS2+4tWDIkN5+AmQy
-         FHg5Am/74YS+HOqiWncyf7oSpjoxnlAUGgpZwJVSJtNgnJXATJ1QnrOOPJUOSNex+eG/
-         FBaw==
+        bh=L7hk9doRA5Ky44Nlq7UXQtUnK7s9dfm6SrRRvvtYNNA=;
+        b=mYYvyUd9muAcONNa0iNVLne9fNY1dozDNmN7PaDatoejTCO5OJvXuE2DEvU8jEcpc7
+         12I+p2p/oIvZo8tAAYFOKvjEF4qA+I//Ku3Jhy+rRyNcVlMjB+zNLCrc/X6czS6AXGBn
+         SX+x73dXhKGfjHruhFRfd4PfiY21fjSCZGu3tGtWNtazu0hLF9FCxdWH2Hxuniu70Dcq
+         VHIblMauQSqWqAQc32rmVtPT48Alvz5oh+ENUGX29B3GYEyxemy2lUx8HR9VBwmxpW4C
+         lnW7VVu9zu4QwRUOC6pC7GSINCY/pWdvzImcqa1XVcU4hBX36PlT/Kq+HlSPWBgldgUT
+         uM5w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795753052; x=1796357852;
+        d=1e100.net; s=20260707; t=1795753053; x=1796357853;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=h7dSgKB7DH8SMebazeSqLT0ERFdibbOObqNUpS2HahM=;
-        b=f+24RlcaIPTHOiDgJmI++Q0jIEUTKNk7mIyHA28oYvqKumUfy1nB+TpXU9MTuyqkva
-         aFVrmmFnom9S0jE3kJxbOOMC09bnTqdbJtkG9R1nqwhSmzDfntxea/A5FspyD3FN/bMX
-         Ax7qjweeB5XtQl7nYWiWRA5depbxZvuyEWNoL9WLDNFhKUWkydxAAeQ6vDQTp7aQMG1X
-         MQPeP95EAi09Y4akHxIUCjo2HEi//mLOA7s0FSajrpmMap49T7S+0acZTlgS7my8I/vP
-         NYZbJXw8Nt0+aDwwkEHE+M+DKob3Bk6AXe3dkg8aFSoX0FGOL+Rp/83dv2tackiW8E1/
-         ZAJg==
-X-Gm-Message-State: APuU4Z8uyUZpqM/hgDZr1Lch7ZuAyXcbtzMk2bawYpCyZwdFsFfVewQw
-	yBpI73pT9hZs+VmRUdJKsDDcFVZjWJZd9phvmQ94gM05oX+plU1vmDdEkax195Y3
-X-Gm-Gg: AZFdTZcTVFoRZSlQT1Xnb9qn0lPy0Ir6aGTODHd+c2oDkNPM6dmDD0/u/kyZsEXevNa
-	4EFTnrwqXeCplXQVXhRvrgMISa0zdW3WmVT6k7o4x3JOJBCdxyFOor3nMlplvqY2qmoofawASi/
-	C9lj0it9O7AZbQ5KuLmnHj9HfNon9lb3IGAHCxR5ZBDLAv4wABaC5FdJEftS09gHDXIs/vWH/nq
-	iSHvuEoUjEpqBPD+OXggHOnKinGk/OXQVk00whstfVUG079D3GdEKKks8b3PljKhkjdNpLAUFwH
-	4sUrwV12YgniRF52xpkfG8c9I5ibxHrvZpfHJny14nFC/mc468MvGTDCYbGZCSkflAEByPKPjaF
-	W8qiK57UJX1cNfcWOm3e8K/BsMTuV9Ar3pLphd6qZK0F0GM9HxhXU0KjdYxZTb+hyR+OlUySYY8
-	T+GBE0xZUqsj4j3tvCMp+Tl4COz8CD4GCO3XgMr9MR3mjVCX2q2/dHW4kiTAqo4+tugshdONy84
-	3aV9h8gssb4FQK+t2NtNfxQaB4ceWo3TCuOLoIGMnwPyzWCZJgKuriYV0m50WTVdzjJJmUjhlop
-	ie82LIev0/5fhMSgP+lVeQ0LpjlUV7Gd0Wd2pt//74d/4zNP8Ihf/J5wQfO8/E0lVp+NFKfp5KC
-	3t/N5bn+5g7jLMD9SYRSRH7vZ3seKcdS9G4u/9n24L++MI3lwy9VKuoPA9smkHV64umbzXcgfdM
-	vImUwwEqsSabi3xaVA6xaYdCMzzKV0w1Ln3jvJC375ryv3GDrJ7WkqJlx01v3fl3WPSf4Dqdxk8
-	AUaSM6hgZO9PrVXDWfmbQzOdcipm7Bo8XeCMrSwhkdLAosNP/wxRXO/LmN0DDrBpcvAGCV1VzHw
-	pHnZ
-X-Received: by 2002:a05:701b:4308:b0:1b5:1a6e:1bec with SMTP id a92af1059eb24-1b5568779e3mr22793072c88.10.1795753051653;
-        Thu, 26 Nov 2026 20:17:31 -0800 (PST)
+        bh=L7hk9doRA5Ky44Nlq7UXQtUnK7s9dfm6SrRRvvtYNNA=;
+        b=pn3iRSwsTx6OXdiq7qpWuY7B9/LKHRw6nxuBZnW6BQ6mDZpr3Q3loMkJEgFZjKVFso
+         Xl1AWO1ulM9vQwGqdf8/RxWI1yVCmST0tEeWTN1HGfPHJVlUlBADmNa7daYTfSDONBmE
+         7bZaKIwLKqonLO7xUE0ahmCilBkuyrtXX5v6KH7be/uJNfmiryQFFYIdZfxrMgbcjw90
+         AXJgGBaKLxtm1X+68KZfv6Hw5ehjFsZ+ThdQ6J4ektCfYu68ywxaqhR9Uxs2xvu3aEh3
+         dMgHfQDr+LpEi9eLjE1/vUPzzL8rJ2iFXGMDpdtzb64FmyQYTmi6pe2rgPC9dMsTfrek
+         LYXA==
+X-Gm-Message-State: APuU4Z8Ec1pRBKIlqP/LKaX3CBbwwCGWEBUFy3/fP53Uq0fiPO3s6UdU
+	5BFhVMrJxtz7vosPuYj/Gfl0yDhOiKZakO1TYX0HjrD02ONfovcR0mQ8Da8tcr21
+X-Gm-Gg: AZFdTZdXaePq+GyrcD7hYe1YHAawVsHJNl4Ic+VugWBYFAwT3vgMiTTt0XM2/kTSn0j
+	7U13nqmVr2rFjqtpc/lK+Jvyr4RfjlF1Oh1Mj7/14lPr8Rv8CCg8uqRG2/du4IS3c5lXTA46DJN
+	B9INCY2h4D4f4lKWr92nJ6qTDhH/cxKoROu7oubRUlZurYFjF7OoF2t2F76f6qUckK4RjrWp1LD
+	8y+mzmegdMY26CavTErU9CsMwLL5cdoqy1Qo9rmCupItXYdzoxuTJo9nRKT19C12V/7na960KC0
+	W/K3GyDLJFezV6kIu6X8pMHoUlwYscH971UsHlEPW7g7rT5i/PKqyH28I2T8rYUHjPfbabzY9Co
+	/6dktsgm0H59raLs3GQK9NgbV8MbYUDAN0SLDe849r4HaRPM+BI2GsRHplLUMphnL6NmVDNGZQG
+	4u1dgdFlJh9S/PqE2mn5q2yFDtR68oFr77gG+98MHdB15TVXutxXowArT6IdY0WF13KJheHKjbp
+	Ip+fbBWHeZJCf3nqln9yN2+v9GUJsz9qA5GW7q6PJOWjiAdyTe7XWxzn3eQsVtuUpbsN4TWa6RV
+	MxOJ3xg0o3pY9gNUEwYqA6JhnEyBG7zIo0dDmjAzvXwGLcN5jqUZ+asMXTNco7JixP5ZIOlvQJF
+	ohn3iEk2L/i7d3DxZ3QTmrOATQr9USIgvuXPdsvzQW+vJwPfQXWPJvNjALAsm7K/TCKZdlPzdJB
+	YxA0xxMop5G3D26hjI5ZTjcpunAoFFKTGoEr01GHaRKPrT8FljS+TTtr/I1Psu5diOaxComftEr
+	t7BHTWe9fdpxGKYd0VEa5ULbLl7kYHlMZgNFiptKwVyODkub86pS9dQErdGPqQha0QM5uRXGhWB
+	/y/0
+X-Received: by 2002:a05:701a:ccdd:20b0:1b5:5699:6703 with SMTP id a92af1059eb24-1b5569968c8mr24630391c88.17.1795753052680;
+        Thu, 26 Nov 2026 20:17:32 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1b556840494sm53880225c88.12.2026.11.26.20.17.30
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1b556840494sm53880225c88.12.2026.11.26.20.17.31
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 26 Nov 2026 20:17:30 -0800 (PST)
+        Thu, 26 Nov 2026 20:17:32 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-networking][PATCH 12/35] vpnc: Fix upstream version check
-Date: Thu, 26 Nov 2026 20:16:52 -0800
-Message-ID: <20261127041715.1776485-13-khem.raj@oss.qualcomm.com>
+Subject: [meta-networking][PATCH 13/35] ippool: Fix upstream version check
+Date: Thu, 26 Nov 2026 20:16:53 -0800
+Message-ID: <20261127041715.1776485-14-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.1
 In-Reply-To: <20261127041715.1776485-1-khem.raj@oss.qualcomm.com>
 References: <20261127041715.1776485-1-khem.raj@oss.qualcomm.com>
@@ -67,28 +67,29 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Fri, 27 Nov 2026 04:17:38 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/133264
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/133265
 Content-Type: text/plain; charset="utf-8"
 
-The default tag regex cut 0.5.3 out of the 0.5.3r550-2jnpr1 tag, which
-compares lower than PV. Match the whole Juniper tag form instead.
+The SRC_URI directory is not a listing, so nothing was found. Check the
+ippool folder of the openl2tp SourceForge project for version directories.
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- meta-networking/recipes-connectivity/vpnc/vpnc_0.5.3.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ meta-networking/recipes-daemons/ippool/ippool_1.3.bb | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/meta-networking/recipes-connectivity/vpnc/vpnc_0.5.3.bb b/meta-networking/recipes-connectivity/vpnc/vpnc_0.5.3.bb
-index 5d9d2634a0..cf1da9d842 100644
---- a/meta-networking/recipes-connectivity/vpnc/vpnc_0.5.3.bb
-+++ b/meta-networking/recipes-connectivity/vpnc/vpnc_0.5.3.bb
-@@ -22,6 +22,8 @@ SRC_URI = "git://github.com/ndpgroup/vpnc;branch=master;protocol=https \
-            file://0009-reduce-lifetime-value.patch \
-            "
+diff --git a/meta-networking/recipes-daemons/ippool/ippool_1.3.bb b/meta-networking/recipes-daemons/ippool/ippool_1.3.bb
+index ede4491309..827ed6311e 100644
+--- a/meta-networking/recipes-daemons/ippool/ippool_1.3.bb
++++ b/meta-networking/recipes-daemons/ippool/ippool_1.3.bb
+@@ -37,6 +37,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=4c59283b82fc2b166455e0fc23c71c6f"
+ SRC_URI[md5sum] = "e2401e65db26a3764585b97212888fae"
+ SRC_URI[sha256sum] = "d3eab7d6cad5da8ccc9d1e31d5303e27a39622c07bdb8fa3618eea314412075b"
  
-+UPSTREAM_CHECK_GITTAGREGEX = "^(?P<pver>\d+(\.\d+)+r\d+-\d+jnpr\d+)$"
++UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/openl2tp/files/ippool/"
++UPSTREAM_CHECK_REGEX = "/ippool/(?P<pver>\d+(\.\d+)+)/"
 +
- PACKAGECONFIG ?= "gnutls"
+ inherit systemd
  
- PACKAGECONFIG[gnutls] = ",,gnutls"
+ DEPENDS = "readline ppp ncurses gzip-native rpcsvc-proto-native libtirpc"
