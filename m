@@ -1,95 +1,93 @@
-Received: from mail-dl1-f49.google.com (mail-dl1-f49.google.com [74.125.82.49])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.10357.1795753060002614779
+Received: from mail-dl1-f43.google.com (mail-dl1-f43.google.com [74.125.82.43])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.10364.1795753072439437826
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 26 Nov 2026 20:17:40 -0800
+ Thu, 26 Nov 2026 20:17:52 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=tLxx8lOx;
- spf=pass (domain: gmail.com, ip: 74.125.82.49, mailfrom: raj.khem@gmail.com)
-Received: by mail-dl1-f49.google.com with SMTP id a92af1059eb24-1b563e5cbc3so650984c88.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 26 Nov 2026 20:17:39 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=sj/NzM3P;
+ spf=pass (domain: gmail.com, ip: 74.125.82.43, mailfrom: raj.khem@gmail.com)
+Received: by mail-dl1-f43.google.com with SMTP id a92af1059eb24-1aefd1bf74aso4168102c88.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 26 Nov 2026 20:17:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795753059; x=1796357859; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1795753072; x=1796357872; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=gNTFfvrGNw3/Ei7gs0uelfZa6hpDUMBtzPnBvumYs5E=;
-        b=tLxx8lOxPpUH4I7PQG6Uxr906YjW4uJ4QRFx9DstHbh3UQEiQWbCB3qr6S3EzU7/yl
-         Ytx0q2gNZaMw083b6Dyb6Db0LmtRmyBR9EZqb+iCfpaX9WTwOuVOjchREGeE3GkGxPmB
-         k2nr6hKHExviyxQ+tGTwcjS+umO7BW3S0wMMOLf2TvYlI/C/pkg2llNjtr3/zOxpJh1q
-         SjWUfFQzYT1qd4TFvZPxuYnpYBx7BMJFjaZSTUNm4MXJL6JXOOQsTwWDoJsHtNFJm3UG
-         gHhnFUJ3sfisinhAGd7qusxcah7wmKlj5ZqH1OvYxAdTM0FpCinqir9yfY89Msa0rSVa
-         Ylzw==
+        bh=LOaYJXol/ZQ6i4zTBQa3Fey9yWEf06Nru1KMJ4JFdOk=;
+        b=sj/NzM3PtT/XOyozPL/nIr2581yBz+kfANx0jGhs9UTdNJlHSBT1QuF9i+Al5yH2g8
+         IQER+8hHHrwuwbUZaO0gYD+KoAHceYCLmswwZHnneUxv4ji8vlvQWw07oMU/evjKnSgl
+         KGph7tZ3oEQp5wutLy1NERx27sv43N3CXw5eDh8AEq1mC4AbVZx6cq/uSP+i00mLaIOa
+         31Qj0uPDiMF0rBrccFrjMa/ClFiqf64hZl0t7p8SoimCWchp85OtKMnoNxvLtox+Gxkp
+         SwoTm/2Ea225eqLphB52jDk2/9djmgufw5ea5aqFGlPbYIznEqwhf9+zH9TeVcSC5msZ
+         20dw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795753059; x=1796357859;
+        d=1e100.net; s=20260707; t=1795753072; x=1796357872;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=gNTFfvrGNw3/Ei7gs0uelfZa6hpDUMBtzPnBvumYs5E=;
-        b=napRUevm8+7nDePXIecHnGfITHxqU6fBLSOijvAhCW6YScP+Z0WvJaDfp7q8piMUOh
-         Y+7oq2ebCJpNKn+CUT7IIEz/jWiePX3J+1eedvUlTSFt6sg8uax6ZpW2scctGGqRXDGB
-         fj+qluoE51/DlSe8EtESXQ50urAFIJHMtbEh17FToiGSbY3oLib6IprvgU3R3BcfTOs5
-         JWq6xMyercOsYdGhJw4lOfUVgniaQiz75yaVjGDmy4/Ref3oJALbwJpAoVpPUaXoLrsW
-         FFznpgY7saWH8gC1YIS2Khcl2GHR9ZR+zj9sD3+R7pSBrJoa+l0meMG8XPImjrSWRcHU
-         184g==
-X-Gm-Message-State: APuU4Z/xDQ2eXDjqanyBsK7TLLb4K5JYd5SYMnpm3wK66CymQOPgVK+M
-	ocbbH9WFJP98Spy+PLfwdWG7g4Y8O4CWHoygSSIng2r6VnJj6umI8geZ2b6tdPyR
-X-Gm-Gg: AZFdTZd/2GgCTFBfLT5dDGWXvI/9wfUnIBso2CFyFPfSu5KIVdr209ox395tA+BZQSF
-	AN21k1gpUgVfIDjZRGtuJVerI/yjHe8KzGkh0Sbl/czg1OiKKrl8A01X+TBIBU94RI/xOVHjQUe
-	aVPuGayxqLB59rZ+myBQtHD/Nq2nxKuEGm2SkXHlE3zZi6UJvsEd1b43M1oIROlJy4PZbJ7IlTl
-	G4UMPx7r4UX+sm3nt7tGzPJ8Ltp2k1atVqDQGL1pRxK3DWd5B71yjSae/usadUDJt0huSYP1uif
-	eDBBIy9oLIUrA6A5INVghm8LNBLvUyszt9G8Vdh5guEQYnbf7mDB99RpnyCM3J776+p2bXigCmY
-	MWCAOI+2JDjQQ/4NpaxbUhTvIa/0PNbjmXPAk0GWKoNbZDK0HsJRTpV+Y2PnPbMRQA+NwLfrbWH
-	1tkzXbidCV3FycyF5gY4Cr+j/CYdVDSCQqq5/qYZjsZcO4VHtjln0HVr7zN4eMVojMC9Ug+vsTR
-	Lu0NEvliq+LBxJbNIbNGzOK6WLAUZF61DZrkhKscC2JMnElmEqwa7JklNL6gDReoCDiXWOqSiHq
-	10NBS4oa7zQTz+VQt1Y73zb5kNfJsmCyz2pcgbA/qtUBl1ov46cqKFxXReHNWad2c9ghnFuSBB9
-	UI+21BeB4BNp1+A8pjjVlV9bJn+9mFUQiP+ImVVIKoyrhLS0lXLfiEBNH9md/etgFcqOkAc8P23
-	hy3184S7ziAcVCewMeYZ4LCJrKQMJ6p15PdQnCOelkvK3hviMBJnr1khzRe/32V56XcwPDoUbBp
-	62Q4fKmUfvaxD8nv5utI0xndOBEgLKQVmVGm+yspvS+rDehNBSRycsFvRezr999EfXnsKe+Xfzn
-	JiVp
-X-Received: by 2002:a05:7022:ea4f:b0:1b5:31ed:e23b with SMTP id a92af1059eb24-1b5568aac99mr19329674c88.6.1795753059217;
-        Thu, 26 Nov 2026 20:17:39 -0800 (PST)
+        bh=LOaYJXol/ZQ6i4zTBQa3Fey9yWEf06Nru1KMJ4JFdOk=;
+        b=c6kC09gJtZAjEGgFFnQRLlG0vwIVsJ8DQzukJVLylLnKCYa+tNFxo8s5YZ9XV49C3M
+         23zGUPd2wMFGyIPJnwBBAxzo8na+7yhPkfU4FcIZWVXzsQbeS7FUmpeI5OG/H73hIpDM
+         +lhRiZjm5ZK1uH6HoSRNSThtKD1N/C0Mw3iWQEM5sHrhdT86bzQNkAscmhlTXwA2XfHE
+         XlZ3wg9Rpw5HyEyIG3Z7c73VUWBLI4331dLmTOtBHCz5Sd6j32H/IBivx3PqGaxhcctL
+         SBk9JCEexhv32ogjsF2KM2oiiIHXpVH7lfctLQFoI5lt1oPVXTlaVrYVNu1Jq1XumxZe
+         iokA==
+X-Gm-Message-State: APuU4Z8f3BuG/sFqqlbi9Wb+1UUV3scumnj87oD1yH2ehK1rZZyjBRF8
+	4AV4CfI+KSk5OURUlq16Jz4OQgE/amh90Q7V5Vt5/bsyR3ZL0gMjryYh0Lq9NhgT
+X-Gm-Gg: AZFdTZdn/6wYGAFBhEUcteTCrZ0kJ4dUDNcEHBemNvZWVo3ocOqmkf4WAguzBT8sdp9
+	nLRsE0x/oI35zQ28iFBNmUc/EW3OZP6ZIzUzIH/y0B2/w3znKupQA4uG4QkQLwm+YU/I39o9i4D
+	JFOzws6O5S66Ue8iguxIxvZEIB0IJgs+TKRIWXCxxRl5wqpQxemgjAIibJ8Y1ftJGqz2k3aL6MS
+	8jErX7Xe1C77sZurW0JARCjkamDIJap0/oTU4s/nlA+n7AL1q80PsrnZG3ap8WfnmqqaIQN14lB
+	ZJCIZTNWn7laExZ4JVknCwHDXzzcxK7ZRR4VpaR/PQPsRAwKgh7O+fptxBOiQ7RPDye+MBQxvDL
+	jkUzvoH6BqnRF+TFGLYTkzrYollSqS3yqyLJg9/+8sWI4UuvQLNW4dyqpOrp17hWDP7DeumDQdK
+	HiMIDJ8SSWNf4J1IRPpDpkOK0DQUjDHvtGOdzqng0ISLMP9nJ5Jm9de0sdCzUDmj1tVaiKwT69W
+	Kle2UPKnuPQA+L8RpkTy5yEIN/ahU7ESly64P5j03Z0xpHkgv87ydrZ00pZ1YFdFQzgjHavMW5A
+	e2OoAzj3nBJoitafg2f+9t0WaNHM3608O/6b/npidj8MwnnvmDDwY9lrPNFIvU9Z0SoPSbG7b2w
+	CO9FspXAWx4dblOz4jnMfscKCJdjm1Xlj5IVxMNASFp19xWPG59KJAcBfxBAM7AOnMKBV7Mm1PV
+	VXTfmAxwBnbaktcT+G90OWHWLBYL3P+WMbxHFcyipxUc/V+MM10TgIzHea692gCEskStz+2aETS
+	9gKVkcCaxs/JF5aMsRkM9SplI9XjU4ubAJFz8vAjjKMNxRLhpruR9P4a3sxc+KQWM8Jc4srfuhB
+	42G+
+X-Received: by 2002:a05:701a:ca09:b0:1b3:b322:a42c with SMTP id a92af1059eb24-1b5568f8e64mr24390357c88.13.1795753071788;
+        Thu, 26 Nov 2026 20:17:51 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1b556840494sm53880225c88.12.2026.11.26.20.17.38
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1b556840494sm53880225c88.12.2026.11.26.20.17.50
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 26 Nov 2026 20:17:38 -0800 (PST)
+        Thu, 26 Nov 2026 20:17:51 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-networking][PATCH 19/35] openl2tp: Fix upstream version check
-Date: Thu, 26 Nov 2026 20:16:59 -0800
-Message-ID: <20261127041715.1776485-20-khem.raj@oss.qualcomm.com>
+Subject: [meta-networking][PATCH 30/35] ntimed: Fix upstream version check
+Date: Thu, 26 Nov 2026 20:17:10 -0800
+Message-ID: <20261127041715.1776485-31-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.1
 In-Reply-To: <20261127041715.1776485-1-khem.raj@oss.qualcomm.com>
 References: <20261127041715.1776485-1-khem.raj@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Fri, 27 Nov 2026 04:17:49 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/133271
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Fri, 27 Nov 2026 04:17:59 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/133282
 Content-Type: text/plain; charset="utf-8"
 
-The downloads.sourceforge.net directory is not a listing, so nothing was
-found. Check the openl2tp folder on SourceForge for version directories.
+Upstream has no tags, so the tag-based check found nothing. The recipe
+tracks master; check for new commits instead.
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- meta-networking/recipes-protocols/openl2tp/openl2tp_1.8.bb | 3 +++
- 1 file changed, 3 insertions(+)
+ meta-networking/recipes-support/ntimed/ntimed_git.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-networking/recipes-protocols/openl2tp/openl2tp_1.8.bb b/meta-networking/recipes-protocols/openl2tp/openl2tp_1.8.bb
-index 0d3953d35c..84e321f98d 100644
---- a/meta-networking/recipes-protocols/openl2tp/openl2tp_1.8.bb
-+++ b/meta-networking/recipes-protocols/openl2tp/openl2tp_1.8.bb
-@@ -41,6 +41,9 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${PV}/${BP}.tar.gz \
- SRC_URI[md5sum] = "e3d08dedfb9e6a9a1e24f6766f6dadd0"
- SRC_URI[sha256sum] = "1c97704d4b963a87fbc0e741668d4530933991515ae9ab0dffd11b5444f4860f"
+diff --git a/meta-networking/recipes-support/ntimed/ntimed_git.bb b/meta-networking/recipes-support/ntimed/ntimed_git.bb
+index 36fba5f57b..bcec693598 100644
+--- a/meta-networking/recipes-support/ntimed/ntimed_git.bb
++++ b/meta-networking/recipes-support/ntimed/ntimed_git.bb
+@@ -14,6 +14,7 @@ SRC_URI = "git://github.com/bsdphk/Ntimed;branch=master;protocol=https \
+ PV = "0.0+git"
+ SRCREV = "db0abbb4c80f2ecef6bc5d9639bca5bea28532a2"
  
-+UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/openl2tp/files/openl2tp/"
-+UPSTREAM_CHECK_REGEX = "/openl2tp/(?P<pver>\d+(\.\d+)+)/"
-+
- inherit pkgconfig systemd ptest
++UPSTREAM_CHECK_COMMITS = "1"
  
- SYSTEMD_SERVICE:${PN} = "openl2tpd.service"
+ # use adjtimex on musl
+ CFLAGS:append:libc-musl = " -Dntp_adjtime=adjtimex"
