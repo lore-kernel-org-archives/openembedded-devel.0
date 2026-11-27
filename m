@@ -1,65 +1,65 @@
-Received: from mail-pl1-f170.google.com (mail-pl1-f170.google.com [209.85.214.170])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.8239.1795739798213156318
+Received: from mail-pl1-f179.google.com (mail-pl1-f179.google.com [209.85.214.179])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.8123.1795739795579031059
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 26 Nov 2026 16:36:38 -0800
+ Thu, 26 Nov 2026 16:36:35 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=uSxmry4s;
- spf=pass (domain: gmail.com, ip: 209.85.214.170, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f170.google.com with SMTP id d9443c01a7336-2f03eeda984so41670115ad.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 26 Nov 2026 16:36:38 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=LyZQHgTW;
+ spf=pass (domain: gmail.com, ip: 209.85.214.179, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f179.google.com with SMTP id d9443c01a7336-2e9ae391a05so51928855ad.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 26 Nov 2026 16:36:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795739797; x=1796344597; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1795739795; x=1796344595; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=CgKsTdfYGcq8KRLvAHxl03TUFbl3WJXUuv3iCXaITPg=;
-        b=uSxmry4samvew7orKkzQyNZjkWiv6LhiSzCA2BF0A3f5+LiljNebqWn1+BqaRM5kWz
-         chotqlrrphpz5PbWg330MbWz9W1/RrgyVqRyNUIXFw33vpMdaeR6Kbn/88CZsAnzPdWJ
-         H2jRJbgQkSIme/sEmG4BKVQ6TDZvVYuZzu7GLw8DntMTY31l8y9aBvjMwTmSmd6CHC/X
-         59zkD0Dbuk3iByH7j2vgcOIb3fbCAX8WG210dNeJQjLSha+XYQ9DdT7kCGG3rg/IsJVu
-         /wQEulfwtU8joNky4oD7PM25kebiqEOlPS9YLDndUofOxcMuJFBeSY1KV0VqXS3CoVYd
-         XnOg==
+        bh=Ykg4NpjrIjk4o0uQ7evxCZxrA0SmG1ZBg0lU1LFJsnw=;
+        b=LyZQHgTWRdpNPhYjNu/DEP9SA7mcx32QrU4wJgsY/nm7mZNfuc20vnfVSEzhFzuatk
+         Oynvgee8qGk8fQXqj1QYGwbcnZiytl2TEj1O4WXWwpbfZ94Scgy8HD+pW9RkJmwZK0PQ
+         87d+zZpGgYGOMi7ffj/4sKZn1Nydbm6A9hGLnvtuQEEYVjWuatUTeXPp1DcFtMmd7t5A
+         L6MankymlKA2rCYC6ZzW5HObWtiTbO4Lzg740x7L1DAbUjoFakYvffef9rHZ7lcBh5Cj
+         6q6D4mbhjiQL9I/W+mEgDZLa31Pd21WkRa1srhGl4PkKjbVEVr6Yao+R54glXWT8ByOI
+         KgOA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795739797; x=1796344597;
+        d=1e100.net; s=20260707; t=1795739795; x=1796344595;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=CgKsTdfYGcq8KRLvAHxl03TUFbl3WJXUuv3iCXaITPg=;
-        b=qeAD88m/rnq7w5/+Qn4+PpxYOsY3QjWKRFy4lFv9GiBXIgZqh/tCEsOyFmz/aqX8Y4
-         DA7T8/w7GaKXyZ0cz7w4QFrE3l7IGQMibsVHY1P3ZRlyPwlJhsThSmr8YDpGT8vjl/0N
-         lu/NaYS4p6i1g7bRB7/Y1vyR+Q718GjU0ilbqhI7MRRK7Ph3GzSvw360onkR1NCd0pp3
-         o70eosqSd8OThrFYIQfSnnfZdUt0oml40wudNLMqWRYvh5YYscA/qvo9R6j7RERQFnxt
-         IIw0RrB7ev3Ez0K04wV+ZR2iiXWUGIt7XcOFLlJowVbtsswekSp+5OyoMGz5zKpHz3g/
-         HUxQ==
-X-Gm-Message-State: APuU4Z8VJBy59oggf/Rqg33+dJmkK5qQu9C8Upc7H1gzxbhHI67wxpIj
-	y+MjlDahyg9qqsdsfJ4BPqWdfV9IkKN5rfDJD1JV9d1Rml8h6MVfsBmvHBck6A==
-X-Gm-Gg: AZFdTZdHIaDepoydfdJE6buu2rtFvSMnf373TOuX3IifvSfhgVfi9KjJA8CfJHW3yNk
-	HhB1jY5D77bOzY+c3FkVd3HcEXK3qzGeGzeOg4ymYjk4o1X7EBfmXnhKauGy4Fse2H9dZNjGUuy
-	1Ll1XE2UlJOGiGKbMUTXlrF99tzCMksQtP3UNMAI7kQ8BaHYyiWtjugjalmFzMcj95FPgQ1pocU
-	xT0rJxqJSExaCy7rFOf3FO4X/ZACvd8OJtDGWgfDdgKr01mF4PyLRNhN4QG46DzdbYhVd/4Aj0M
-	VjhQiumfZwQhQG1hzlQ6R0HFlCPfK+DbhjJiYnSLejY12NHlj02iYIFpd2nqX8Xu0a9z2NUNyQ5
-	jhAbPm3vhk8QfhPoDIpKVT+hUHeugaNO6vjm/iOdh9GG/S6Q8xuiSzT8r6rEe1YWiME7mslp1L4
-	HyXwpIRP9kaafGT9rk8I8Cw3k2YMw2kEABBCbNmZ0Z6UDpenTXGdpYz8qHRV34j41sVQo2TP9wA
-	X7yB5MxwGVFRWAfPq+MqRu4Qduz523AR4sGJQ0UvTDV0WYuH1zkN7/jtk+HVRIySrhtqblVyuFU
-	4AvJsIjAGdNS2w2NFpR1hj+2MTPWBjzBD6sIHx0h2EGW/CwGpf26G/vo7uTzfqZKjNbL/7MgfOs
-	Bdqy2RaP7hYdI0WN8BUMiqpxsfVm3chYDQPrcKEy/EK4vpGllbS5Fq/M7RxysKRuQPf12eZQjEn
-	j9S82xsaYufC0ibq6lmFbX4B+vmF4/fRp0bMXa+DUck79pr74FrvP/5xt8xn4ljuZFrnwnk8w7n
-	0xQQpcr1lf/4NSjpRQh9b8WPNIgdhbdfx/WUDjdbAku+856rTj5V3zw/pypg5MesWEFbbYhylUl
-	A6UU
-X-Received: by 2002:a17:902:ef4e:b0:2f0:4ebf:84e5 with SMTP id d9443c01a7336-2f04ebf8708mr227648935ad.45.1795739797492;
-        Thu, 26 Nov 2026 16:36:37 -0800 (PST)
+        bh=Ykg4NpjrIjk4o0uQ7evxCZxrA0SmG1ZBg0lU1LFJsnw=;
+        b=tL7joUQft+7Q7SNCTM5sxa4LljGzRqEvReWo6w2MbGuKyp6h6gF3wmpfNVCIj+viYc
+         OqXHxBY6MPuDhtcK1QJlwdq+lQcg5xTFIR9vuHv4UuwGKvMJZIjdwBtzkJHKin7TBGcT
+         d15Di0yPYJkJbLPkRRpucelhvjTLIRCAQa02T+9jOGRCceXuWZKllzNrEkuGgZNJyIgh
+         yTg5hW2XkP/Bt52tGTImffbOsXqdvgGxbZHG3XALxFYLbDTfZGKCT3IQYn5r73N8XMZR
+         hElGaXEyPKwSSt7CJhV+v4PfycXoHJqtPKvc4QtRkbE5n8Ltq7O9fia8DFGHaEZkXjHF
+         oI0A==
+X-Gm-Message-State: APuU4Z+ukOruOSSschqfGPh3v9gcZ1TyAcSD6Z8PvJFKNv/c9VKFDhl0
+	WxHlS4yrPCY5QH1J8R0qFTKjf+vwr8XAeJjCaJZTXEIEBsDHgEa6OVrwM78GEb2u
+X-Gm-Gg: AZFdTZfiVHxF4vXqQO/8Qulq7FoP3i5RP3RRyFu0Bz9dUkv+sknYVjHV5Jfunx2Ix2Q
+	ooXNs+V3VGYZKOLVGqDK0ex8lDQmF2rmIRhW+BXSwFBAM9ZbSzxuN+lHzsH4OeGrmQPtTbA87jC
+	RQBY99SsYl5JSZIBenbuZaz6kBLcY5d0zy/A1/pWQ/iIAx+T+lHAxwygKeoPddgdvHKR/0y7jxv
+	VLKEBo0TsAxIics/M5Gf+CUTHqBubw+L2OVIG/kFy4JEYe+W1Xayl9W16+FQCaQN1g5NDX9YWG4
+	DwJGHpOx0LXhx0qCcb6crwhc9lyh4dOFMXtBnx7PfTSoF9sh1uLHRu0wndFAmyaGH51YHBj1ZN2
+	+ydgbeB2RPGevq6yrWSJLLFtKrGQ28HAIb1gkV7jlD64+MqzzEWVJHxE8Tw3rNUJ6+pIDHvYx3W
+	1n+NdB9v87dj+TNlVISM27jUycZe1DCD3G/K44O4tCecgMCEnTOJ/lTgrWlNhlLGq8GMljmjk+d
+	a39RwEa6XYS9gGKBob54daUC/n1vGOluxkPhFsBUOoSemBRKFBffjlJNmdwMV++jQbdH6arWjTb
+	PHQOjnbPB+b/Si3eqrkv33i9tW0GKcAjquNLvkEyKnNZHGdjhZh5IatngkbgLtGoZP+1cmIYfS4
+	KUXj2wgoruzIVGBfOoeRToz6rxpZrYPTlAQ/AvdfIhoAzK4sp2SIzFeww1Gdoved6qOFgtiL03P
+	wDPkXkce9JKdDJSZHp4BAvaWTOr2F7TeNIwGMry5+aBEVxFF/uWEVqYN24iIFbA9M3FPgQ679RB
+	zxgKlE9OYA0CX1mX1pnV6UqG9DMUNmj9UybeUVPj0Px8+YK9m65KtGzYOX1U+uq9stQu5d4XTd1
+	epua
+X-Received: by 2002:a17:903:32ca:b0:2e5:41d6:178c with SMTP id d9443c01a7336-2f03f20f8d0mr165896445ad.33.1795739794866;
+        Thu, 26 Nov 2026 16:36:34 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2f0fe9e36f9sm10410875ad.55.2026.11.26.16.36.36
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2f0fe9e36f9sm10410875ad.55.2026.11.26.16.36.33
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 26 Nov 2026 16:36:36 -0800 (PST)
+        Thu, 26 Nov 2026 16:36:34 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-oe][PATCH 27/39] python3-drgn: upgrade 0.2.0 -> 0.3.0
-Date: Thu, 26 Nov 2026 16:35:31 -0800
-Message-ID: <20261127003543.2167775-28-khem.raj@oss.qualcomm.com>
+Subject: [meta-oe][PATCH 25/39] proj: upgrade 9.8.1 -> 9.9.0
+Date: Thu, 26 Nov 2026 16:35:29 -0800
+Message-ID: <20261127003543.2167775-26-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.1
 In-Reply-To: <20261127003543.2167775-1-khem.raj@oss.qualcomm.com>
 References: <20261127003543.2167775-1-khem.raj@oss.qualcomm.com>
@@ -67,41 +67,41 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Fri, 27 Nov 2026 00:36:38 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/133197
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/133195
 Content-Type: text/plain; charset="utf-8"
 
-- Main focus is hardening against malformed or malicious debugging
-  information and core dumps: many memory safety bugs, undefined
-  behavior, unbounded recursion and missing error checks were fixed.
-- Much faster QEMU guest debugging, reading guest memory directly from
-  the QEMU process when the QMP connection is a Unix domain socket.
-- Support for Linux 7.2 and 7.3 changes (irq, path_lookup(),
-  cfs_rq_for_each_entity(), fsrefs.py) and a new irq_get_nr_irqs()
-  helper.
-- Add LoongArch64 architecture support.
+- Database updated to EPSG v13.102; this resumes tracking EPSG after
+  the revert to v12.029 done in 9.8.1.
+- New operations: Transverse Mercator Zoned Grid System (EPSG:32600 and
+  EPSG:32700), seismic bin grid methods, IVEA projection, TIN GeoPackage
+  support in tinshift, faster Aitoff inverse.
+- New API: proj_create_linear_3D_affine_parametric_conversion() and
+  proj_crs_is_dynamic(); cs2cs warns about dynamic CRS without epoch.
+- CMake: minimum version raised to 3.22.1, data dir is now
+  ${CMAKE_INSTALL_DATADIR}/proj.
 
-Only SRCREV changes; the build system and dependencies are unchanged.
+The upstream check regex already matches the release tarballs.
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- .../drgn/{python3-drgn_0.2.0.bb => python3-drgn_0.3.0.bb}       | 2 +-
+ .../recipes-navigation/proj/{proj_9.8.1.bb => proj_9.9.0.bb}    | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-kernel/drgn/{python3-drgn_0.2.0.bb => python3-drgn_0.3.0.bb} (97%)
+ rename meta-oe/recipes-navigation/proj/{proj_9.8.1.bb => proj_9.9.0.bb} (90%)
 
-diff --git a/meta-oe/recipes-kernel/drgn/python3-drgn_0.2.0.bb b/meta-oe/recipes-kernel/drgn/python3-drgn_0.3.0.bb
-similarity index 97%
-rename from meta-oe/recipes-kernel/drgn/python3-drgn_0.2.0.bb
-rename to meta-oe/recipes-kernel/drgn/python3-drgn_0.3.0.bb
-index 0790917118..66afc09e71 100644
---- a/meta-oe/recipes-kernel/drgn/python3-drgn_0.2.0.bb
-+++ b/meta-oe/recipes-kernel/drgn/python3-drgn_0.3.0.bb
-@@ -6,7 +6,7 @@ LICENSE = " LGPL-2.1-or-later"
- LIC_FILES_CHKSUM = "file://COPYING;md5=7c83d30e99508d6b790eacdd3abab846"
+diff --git a/meta-oe/recipes-navigation/proj/proj_9.8.1.bb b/meta-oe/recipes-navigation/proj/proj_9.9.0.bb
+similarity index 90%
+rename from meta-oe/recipes-navigation/proj/proj_9.8.1.bb
+rename to meta-oe/recipes-navigation/proj/proj_9.9.0.bb
+index 0ed8db5c39..2204e214eb 100644
+--- a/meta-oe/recipes-navigation/proj/proj_9.8.1.bb
++++ b/meta-oe/recipes-navigation/proj/proj_9.9.0.bb
+@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=f27445198ba1500f508fce2b183ce0ff"
+ DEPENDS = "sqlite3 sqlite3-native"
  
- SRC_URI = "git://github.com/osandov/drgn.git;protocol=https;branch=main;tag=v${PV}"
--SRCREV = "818b5a7e8a4db82a1e0326667e7afaec5bf5fd19"
-+SRCREV = "1bc2cc580e75bb09d95550ac7179432ef7f8810b"
- UPSTREAM_CHECK_GITTAGREGEX = "^v(?P<pver>\d+(\.\d+)+)$"
+ SRC_URI = "https://download.osgeo.org/${BPN}/${BP}.tar.gz"
+-SRC_URI[sha256sum] = "af5b731c145c1d13c4e3b4eeb7d167e94e845e440f71e3496b4ed8dae0291960"
++SRC_URI[sha256sum] = "791a0610547eeabb17006cfd49cdbd2034f3240f47ed5e88a1031811f4e2bcf3"
  
+ UPSTREAM_CHECK_REGEX = "proj-(?P<pver>\d+(\.\d+)+)\.tar\.gz"
  
