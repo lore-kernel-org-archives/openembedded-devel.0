@@ -1,65 +1,65 @@
-Received: from mail-dl1-f53.google.com (mail-dl1-f53.google.com [74.125.82.53])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.10284.1795753064890414283
+Received: from mail-dl1-f42.google.com (mail-dl1-f42.google.com [74.125.82.42])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.10280.1795753058884651059
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 26 Nov 2026 20:17:44 -0800
+ Thu, 26 Nov 2026 20:17:38 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=Iw7XeSId;
- spf=pass (domain: gmail.com, ip: 74.125.82.53, mailfrom: raj.khem@gmail.com)
-Received: by mail-dl1-f53.google.com with SMTP id a92af1059eb24-1b244fb7fffso8341605c88.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 26 Nov 2026 20:17:44 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=LrU7aotQ;
+ spf=pass (domain: gmail.com, ip: 74.125.82.42, mailfrom: raj.khem@gmail.com)
+Received: by mail-dl1-f42.google.com with SMTP id a92af1059eb24-14394530ec6so1416939c88.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 26 Nov 2026 20:17:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795753064; x=1796357864; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1795753058; x=1796357858; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=hSOiWWE7X6tOfaglQSOYPeM+4A9PfYT8Qli8WWXjveE=;
-        b=Iw7XeSIdY/uU1Fny0HjzlKaS5ixQG/rQB8JmDCzfMq8JRdF4WCHaPy4gD1FwJt/vn9
-         8PuLJn/GR6lhg2i/N1xQsBOuzNFdVBH3q/e7TYs5dPPpojCQnHOYC1pagLIp7xUlKxE/
-         lUMI9Zy/tGtk0tocg9R5sKJ2eyQIjr5xIpwBxmn1bcnM5n/oM/JHmpoKxvCTPnqnaDgL
-         tKao5mcv7L6sAvDS5oxExjYhv2AZ9vfy7PGCC6EWNA59npo0eXPguF/+pnGYzHhR/5qz
-         Xz3Fcei4h2kCsA/ghpd73d0itkGP6YzmtXa4g9XyKnytzm0g9Y9kBgq+fgjGyHEf53kD
-         NJwA==
+        bh=NwWjtLbNvFuNd/zfQ8o9usylbfTBWqoCn65bRpMA4RQ=;
+        b=LrU7aotQmym3waNVo3HnXUZpmBYY8dtEAoz8Z+sRDihNoJHTgKoeT3L5vCF73/CkJZ
+         o3EmsnOHU31blFhwAEpRb3zhF4uYHEO+ZzdK9i3xU0mK30mDnHusH5fZV8HabAnAllJP
+         MGeqtiueD12nU/cqmFAMrGQTmYejFCL5+6vdteLn/W+4W3LP8dXdA+clSoi9/oMRFhte
+         dpHP5d5ZbFyeeY94Qki4arEGYk4KEULGM0Y27SPekVQY+NvkSwi0iP2hrnikvMRr1epK
+         aMkmmmc3O7VJCuY5QRuebRtZizb7FUG2eugsgLIfHOLwnkZM7LpWGWhFB+dAuEnIz6dP
+         7fFg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795753064; x=1796357864;
+        d=1e100.net; s=20260707; t=1795753058; x=1796357858;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=hSOiWWE7X6tOfaglQSOYPeM+4A9PfYT8Qli8WWXjveE=;
-        b=QnGnPrgLdnrEv5InCo5mKrueU/TN3sUHNayXQeDR+aRLuddG/N6ovBWfaMzyRd0Qkt
-         j+vgikiqhEBjUSBQ7Z0sxy9hhJH2NNgOOKYM/l6zTJ69qPCb6xyR/dctIQjUy/qUROCL
-         WxOWtUOSGAjqxkkFmMh62xG+Lps4dQ7fLCuJoEQAH6CCx7j616T7vIfKJTRFLSvsBR2W
-         BvcB/IRp/sz2CbyVSLQsNUoW8dDL4NhD7yC6i0rR64AqSNh89/PvY+gLa7aWwzI9jjYl
-         naQyql6hgRXcmHepVtFAujVOArn5snKvZ5x3D0ej3FyiaC9qf9/E4zEOLTFcyv87QVo3
-         3tMw==
-X-Gm-Message-State: APuU4Z9WHikgij9uVfgimuAjGZbFXf5H5cmPkXoL0sWPJHqihGP4+sKE
-	1V0qi7m63j/BoloQfQ0T0OGqWMosyQozPv7i3XL/8hXwapEd13I/KnGErY7UwxNI
-X-Gm-Gg: AZFdTZdIsSUzuek3AaQRnBSoj3gm9gDSx8drAIsdiNf5GGX8eKidtAe7oo8c00xcmfQ
-	ippalKja9QE6nZw7I48goU0MjhrZJYmC4go0FM5vEJ5QRazNejhqhmzKTduUEtsdJO+YiEUd3Vl
-	De+q4GEOGG6+Uinfxq1mbJp0A0eo9omUXm6++ki3gLCMghjPwZ5Vn/RyePRNk9LH/0IzuRDDDWj
-	KslnXdZCUEi5Pq46ZlnORgU4/b0J0+ouny7L0BD8WM8gpuBoNQS55GolKuhZvvH1Xoiom9Ivhi0
-	9ZGzErDr/q78+ajsZyxVDgHpDgPO4dv0hgB30hO8hbVnLralJb1r4cImlzdUO2Us5WTP5CYJ5hI
-	slgLloZ9W8XZfw8MlC0pOfN41LpiLKVikgPQD8YVqv0CUM1DYahMd4WS2KxIpL6ga1iZVBc8hix
-	caKmOEU3gW2JhJydkRr8ZcoGbv3iPvf8eZinIvYI1Iel4ostqm9qHuX5YBsBwiwvzDiFKT/2qjE
-	KfzATlOdWkvC/1tjHrUNkOicx6xlmJd2QEzTbm1pY//UZovHQ6FBQ+QfmWq+CcZ6mwGKvEPzDi8
-	e9IVQ0aXofQzL9gY/7sj4jau3S1EU3hWp2OTrIxNuvnD9s3V8+czeoXcnjGeU2Awp3azBmBXK6I
-	PWo4x3R/XXSafHmGjqkmH6GVjy2iQPbnUvbUnbLMUUOA8JVDqiYbtwcn+hvnJFp0/UOKZeUbQPE
-	WciIIFuiGx6Gd0jmhygoNJKu4f9BxsMJrbgwnYbMOLxPPQzG8VANPPX11tsVowPFsvHHqAaKiSG
-	/ujAoxtbujNsFU6/OXTr9Xb2WWOJki7/4mYQ2Mau3eyFgWghH2PWi6qaNhnQfdn/amCX+6sU31v
-	Wl22
-X-Received: by 2002:a05:7022:e0b:b0:1a3:8d5f:6f93 with SMTP id a92af1059eb24-1b556882ac7mr34379818c88.17.1795753064246;
-        Thu, 26 Nov 2026 20:17:44 -0800 (PST)
+        bh=NwWjtLbNvFuNd/zfQ8o9usylbfTBWqoCn65bRpMA4RQ=;
+        b=cA4WjanCHUNKNo9Gvpgk8gTUFl/dm3mrkapkCp3GOAraMu1oH7wIW2fkfhn6L+4Ibk
+         2szkzLrJUjlvlWXQmVEOV+fO5iFTmfE5PVkPzB5nFmZDegsqAwnbNyl5eZknT1Gt3SNm
+         61q2k+T6QRHa5DwvIe1LhqYB8/91mYujsf80Q6Uhlbh7ecLQh+tm3f64xwdQAVl8hGQg
+         yCK2p9WYCujSMMpcH8qIRjx0aYLX9qfXtBT+ItvVX5RV1A/VfpX3tAGayWcgAlkdpTLh
+         zWCIITMp2vwz0oDhi/2mG2LJZvXYV4oHw9E8zjDtAQroYQwI6o44WxzlDR5dQ0BBOO8e
+         07Vg==
+X-Gm-Message-State: APuU4Z/f8wVAx3hS/KRBpSWgmWH+4frRmAHpjJ9pE1X6u017IWVKZcxx
+	ooFg+DglZEkU9qt6zIwdLDL5qlnD5cdN4kseqI4B9C75cIgflsiolqYu66GcIEhb
+X-Gm-Gg: AZFdTZclTChdT+9ZouDdXHApHWZjVr+Nlp8RBw0ZAsUTuddkZBec82oFSt3jDTfQkXB
+	X5AIFmsg5R4km6iQNz/Z1xdcuRTq0Xux4S5UasHztERUIhEQExDKm+YDLhl7741TQsViZrYwy/o
+	oGbUOA36OQ/h8tG44AXxaMB3TQjlQW4thhVUMtiR4s6ZcnRb3aV9KqXWZciLmnLKtC/yTnxtYE1
+	FxKY5qgPXaZ1nepzT67JWKx58+qyPVqPsgaK2LY393nRIYggRPJZWpu2ZFZyhdyVYOw6drNXcRB
+	OdcaEeHqpY0J1/KCTYsyzDhJ9NxpTTkHTnW3vg7l2aOZ8zyJG+tYQPg+M2xCo9l6qrWceYBs57T
+	U7CAaQ/CHaERjIuR71tbIUaqdM16grh2VmuAyzj5W/q4fe9Dj85A395Dw6FG+jWpopF/EQxg8Av
+	TMDRF+8Ay0FQG5NEq7rHOcKMUmFEo1D+ATvW+OYX247ZWfLLMkcloZ0rFto2QjftN6hDVGYMtij
+	XDNaTPvZYzqIhfMD9Ptc9OrOkJn44iQl1xT2nEACnTyrZXYefFn5twAZyRV4mFraNToz1++pgxm
+	5aT5UCRqR7jVa60KZy25tWLPSUxHbv+acDCUlq/1UGntEu+SWztCnalDWG8Fw5VTeaqAKVx8ZKn
+	+XgG5esHd4iVwd47r7oL3jYbWDTHZRIvO2F5ho4JsDlQVTTRUBws837qvNYXHXp6bTyh5Xfh+wl
+	ZXWW/UrWhtHNDRHMTXZUgMmY3dq8/0NVbzIYBaOgYUIs+zsmw0wLsqsNB+BAZiMOMouqCrrGmNP
+	f9ukNyd0oxTVE4esRMjKFPGyZy6vDX3gCAkq1siGhb0R1RXo+wVNQDVH6KtRlsWmG0sqKM2VN3O
+	fjb0
+X-Received: by 2002:a05:7022:7f14:b0:1b5:39fb:c6ba with SMTP id a92af1059eb24-1b5568fe968mr21307462c88.35.1795753057974;
+        Thu, 26 Nov 2026 20:17:37 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1b556840494sm53880225c88.12.2026.11.26.20.17.43
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1b556840494sm53880225c88.12.2026.11.26.20.17.37
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 26 Nov 2026 20:17:43 -0800 (PST)
+        Thu, 26 Nov 2026 20:17:37 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-networking][PATCH 24/35] celt051: Restrict upstream check to the 0.5.1 series
-Date: Thu, 26 Nov 2026 20:17:04 -0800
-Message-ID: <20261127041715.1776485-25-khem.raj@oss.qualcomm.com>
+Subject: [meta-networking][PATCH 18/35] openflow: Fix upstream version check
+Date: Thu, 26 Nov 2026 20:16:58 -0800
+Message-ID: <20261127041715.1776485-19-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.1
 In-Reply-To: <20261127041715.1776485-1-khem.raj@oss.qualcomm.com>
 References: <20261127041715.1776485-1-khem.raj@oss.qualcomm.com>
@@ -67,28 +67,29 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Fri, 27 Nov 2026 04:17:49 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/133276
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/133270
 Content-Type: text/plain; charset="utf-8"
 
-The check reported 0.11.3 from the main CELT tags, but celt051 is the
-0.5.1 compat branch used by spice. Only match compat-v0.5.1.x tags.
+Upstream has no tags, so the tag-based check found nothing. The recipe
+tracks master; check for new commits instead.
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- meta-networking/recipes-support/celt051/celt051_git.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ meta-networking/recipes-protocols/openflow/openflow_git.bb | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/meta-networking/recipes-support/celt051/celt051_git.bb b/meta-networking/recipes-support/celt051/celt051_git.bb
-index a9a664c196..349764774f 100644
---- a/meta-networking/recipes-support/celt051/celt051_git.bb
-+++ b/meta-networking/recipes-support/celt051/celt051_git.bb
-@@ -21,6 +21,8 @@ SRC_URI = "git://gitlab.xiph.org/xiph/celt.git;branch=compat-v0.5.1;protocol=htt
-            file://0001-tests-Include-entcode.c-into-test-sources-to-provide.patch \
-            "
- 
-+# Only the 0.5.1 compat series is packaged as celt051
-+UPSTREAM_CHECK_GITTAGREGEX = "^compat-v(?P<pver>0\.5\.1(\.\d+)*)$"
- 
- inherit pkgconfig autotools-brokensep
- 
+diff --git a/meta-networking/recipes-protocols/openflow/openflow_git.bb b/meta-networking/recipes-protocols/openflow/openflow_git.bb
+index d506dd4d01..5e09720f2e 100644
+--- a/meta-networking/recipes-protocols/openflow/openflow_git.bb
++++ b/meta-networking/recipes-protocols/openflow/openflow_git.bb
+@@ -23,6 +23,9 @@ SRC_URI = "git://github.com/mininet/openflow;protocol=https;branch=master \
+            file://0001-Makefile.am-Specify-export-dynamic-directly-to-linke.patch \
+            file://0001-Link-in-libexecinfo-if-it-has-backtrace-API.patch \
+ "
++
++UPSTREAM_CHECK_COMMITS = "1"
++
+ CVE_STATUS[CVE-2015-1611] = "not-applicable-config: Not referred to our implementation of openflow"
+ CVE_STATUS[CVE-2015-1612] = "not-applicable-config: Not referred to our implementation of openflow"
+ CVE_STATUS[CVE-2018-1078] = "cpe-incorrect: This CVE is not for this product but cve-check assumes it is \
