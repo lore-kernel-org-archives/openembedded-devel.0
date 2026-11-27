@@ -1,73 +1,70 @@
-Received: from mail-dy1-f182.google.com (mail-dy1-f182.google.com [74.125.82.182])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.10380.1795753120866600617
+Received: from mail-pl1-f174.google.com (mail-pl1-f174.google.com [209.85.214.174])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.11752.1795762842940892834
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 26 Nov 2026 20:18:40 -0800
+ Thu, 26 Nov 2026 23:00:43 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=VAPJxDkR;
- spf=pass (domain: gmail.com, ip: 74.125.82.182, mailfrom: raj.khem@gmail.com)
-Received: by mail-dy1-f182.google.com with SMTP id 5a478bee46e88-38431138772so9928494eec.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 26 Nov 2026 20:18:40 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=edVMdspu;
+ spf=pass (domain: gmail.com, ip: 209.85.214.174, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f174.google.com with SMTP id d9443c01a7336-2f045b921caso44585765ad.3
+        for <openembedded-devel@lists.openembedded.org>; Thu, 26 Nov 2026 23:00:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795753120; x=1796357920; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+        d=gmail.com; s=20260707; t=1795762842; x=1796367642; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=PTkGrovYpZUFRLTaSC5nymBP63TyLoXQ4i0p0ybC8Ek=;
+        b=edVMdspuyCBaDdI4+OJsIQE2qz1EUh4qZQYa8CI8yR0r9js8j4xAIaLcVFdAozOK4a
+         8qyzR8kjjATiwrOF3JDGSMfis8KZN53b9bxibrh2VdD46m8muxLjDxB4plLloBNIvRoy
+         p3f22x/mGG9Lw4ft8u90k3alTP44uPcbDt8k9T9eldzuKAbVr4Bc6rAu9aXrK364r0IV
+         w6HQDNyHK/DaasXIFCX7FZSekWaVz6WJp6WlVzS8lCMx0bOa445QhcvdKmhnjZj8HrMp
+         y4YJMmkg6ZV8vrSprmOSAVEI6PJW5K4j3AiuwbactOO/PbFhU+/2kDKGEHpdRODVnpj8
+         7Abw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1795762842; x=1796367642;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
         bh=PTkGrovYpZUFRLTaSC5nymBP63TyLoXQ4i0p0ybC8Ek=;
-        b=VAPJxDkRO9BKJnpgLk6sL/sMENN+E0SroPtCOy4a/mQYJMKW0VYUclVJnQA9D/gjvz
-         EW7+UAX3LEjsRT9U9YpOx8txNpn1LR+sqU2ySWJV9R5ZLsoZNDbRxOa5SUpZ9I/KUTm2
-         diLXEY4JrXAkrNMaAXIw8CbZ7ImnaZ9VPAkJZ/zKim65aoes88Yos/tJ5apVkwGVcBs1
-         D2T1vJyyX0S5/oR4BXQaV06kwVWy3LI40uesbZIikK06KN9s2EHV/YHLiBmbFuJY+1MN
-         GXKeqxCeCTWjgonTp1HaRzyZe93QblGqU8+3fy22PAdLGAXwRUFa45Jx4Y9gjJ997xxX
-         FKGg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795753120; x=1796357920;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=PTkGrovYpZUFRLTaSC5nymBP63TyLoXQ4i0p0ybC8Ek=;
-        b=2FsVCcrAjym6i4oLucupjGSBbxNOt/hyw754FyAfVeOI0+5GwFK3MLiUNxV07LrHvp
-         aJfoNZrlXcgla7jALTTr1AYuhXVGhvfnmwLGNWocnsi5zevGpvetHaW7LNDi7bgaHoiR
-         SkFfteDZYBBgZ2y+1iE5FalRhqTvmKVNqHB5y4Wlx5Uf/EWAUUT7mRfGIdrAkcqb1JtA
-         BF48atgo3yebW1u1mrS+xtpdXmZYNQLevHkm2nz003BdWlI/UZ/xfBtGCdxHQ9HDX1QB
-         btE3MQ/tjEpQemOZY5/PyMxGQOL0MY0HaPicmtGqX0XwflMSWwyrE9DIj8sNLEWwWCx9
-         txcw==
-X-Gm-Message-State: APuU4Z+EvRcM8ZLCz9nzkNMTKMb4xA4fadCb+Ytm1LRUjImd62na2n4O
-	2sF1tbCAox1Ala6TjhALgyXGTKCx+WrNL5T8i3YvuzZO0ozJjCQ8hszeUo5FOk6C
-X-Gm-Gg: AZFdTZfhHGstA3mEpBmiAeFr64R58iyjygJ26E5DvkX+HUAYfQ44sDZH1la/Qca2Ir1
-	EnVENlnRpSAY/V2A4bjXqBNPdqUimPB0un9sk9VTzMhzIf8WtNcj67LLNsdxZe8FqPnTqTGIfnn
-	zR799mPCf89Z518Ed++XdJxmi+pTIZLAsk7+P0kZlgv/uwhhNdDMuXSyd2A3SQ7yFZ1dHIzRFWF
-	enpngSiDqt65yEsBGxEoEd5rdRP1GOaGGJ5wF8ivZCFmdEOB8LSl1LazzCrOj4IdMKvUzpPPgFY
-	mXZ84UJ0cln2PXBjK12BBjgfWEoUA0xU7qngSBcauTRk8xgVXWXYkZVGolUX/yIBRxXSevJIUmN
-	rAWdJselKgbh6vi8XW0hBdfrr5aDAytXHkKf4tLppwEe8IWI15m/OpRoXm7RDwCSAVCPHmOpgSl
-	AKmPsfQbMJUhYJCt4GDEbprJR2LnZ3OSm8bJWMvIzAnxhk0Q4Zg5kQXBDMzeT+pflosoYm6dWhF
-	Mx5U6QN3E/WGO6ZpmL+gA6RwKX8Se2ErKOYkvRV78/jUN9vWojETyNYpm5xlPmuEYR9zJIeV03k
-	9nh5oVOJHQ3zmjYznmKbmqZIexqpExdt7SEp2m127wP69zz3Gm6co3ijWFJZAPvPMQLCYCl5T71
-	JI+0avsy/FgNdA4X5h4EWwr5SIodB5g7I+cxWkTlpTDtqkw+Pjz0+PonThdnyOmNouyQm+1HVV/
-	A07efC6Ko2sscZLTD5+xj7ve90RYz+V5rJnDmbFnQuf2gtN7K5hDKJ+khzyyWUK5cQbPrIdFAux
-	/0L8tY1LobCiH7DkwjFu+i+vDlJANcyyh8YrmsgK/FHQOuL/BRIvOOaVNdb8zUjWh2WOxQKxVFp
-	pUQw
-X-Received: by 2002:a05:7301:4281:b0:386:a193:9afa with SMTP id 5a478bee46e88-386a1939c38mr19209501eec.11.1795753120175;
-        Thu, 26 Nov 2026 20:18:40 -0800 (PST)
+        b=zaCJOJYntNpvejc6+coV+kXHmuspBmpuSMTnfR6532gIjSn7+j++6KX5AARD3ZCOtx
+         8ksspM3lago2ervHqTmSCMM/N2KNas59MVUgKfIQa3mi266IDMHNMLQy2kvrAN7AEAII
+         +pzXq3FAYf7PrYp6mQKfbLU6bjlwK2EiMR4NxRIJelzEs6MS5XdBnpqp5Uf3pM50TiYr
+         kolf3tp+iz/lX/HxYLgYdBDoeBXjPv2xPi2NCm9ffhoHagPwVfLtEDcILA94/JsrLQSs
+         atBImuTbZxs4v/HgKOhTXN4Sul8Ef0nzJaSWPYPWFGjQ3OuDJgfensaA+cOZfFo+vrGL
+         cUxw==
+X-Gm-Message-State: APuU4Z8IE4aSEQKzswOVpLDjRqpM/CPJRQnqp27+0A12vPiECzj6mwb0
+	aoyxF59PjoUh7BmoeNUqP/G/slb1kXPxwOZ4diPjYcwP5rI87AOKkmZ2HbA4f4o3
+X-Gm-Gg: AZFdTZcCKTU7B5Ma2p/Kt/FB0IsWtmlzwpxcO/ohlBXtdRQAlIsbeVn1GtIUiUXdADb
+	L6g55SfVpVCQwo7l59ktdf8E4SPPTDEZ9RfM+c9aii7goGO0YTpm+r13fepu8m6mCqTTViRaN3q
+	CdEqkol1VLN5k1H2qGVoUUTRIgn7WcR9hT4WF1rcAgNUBBB3N3f6spRfs6SSW6msZa8XBKwCZSa
+	ESsSKw/X6TScvkh9CV7waUx4me/IXnCxQ67AIem6opOOWkfBtfSenV9PUvXbEMpOjrO2OFlxlqK
+	+JfDnslX5z4pOX0s+8M0v7k9zDREwscTwLbcFJkrOKgjm89oXttlzIdxS20gc2pAMRjiekndoRq
+	Ra4UjUDAc6Nk5EbmHHXOsI4x42GHRrHYPViP+fVbUQKCBPJIahFMBWh4Telj+l/0r6WV0TS+gxV
+	vLsFR4zamCb7MJU3IvKfpx8QuUbdACtqCC5e5cWoGIUKI6Ux+29oFvbll+XBRJaZTx4pVuogW5h
+	Nhiv++76SNogjq6LNc5F1wreJDCxVCdFIvTj+qcPfZQS2s1GJY4Uo7DhEuBexmxb6XO5RBcEOKZ
+	bQSASn3Hn+yeGZatSX3xvQjpbNAnTy5SBBh9kJYyqL8HaFnOzZkWpEAuZNUtDLi2K3uZe7qAOEm
+	+gJppRG4t6nhPNzpfTFYi2IKH6fMsCAnfq99VEonfd/VO5dsWrwYEgPu7LEE1DD4N5A8/VhrU2A
+	uudEu3LfadqVX3EXN6SlClj05SZQFJUKgaVqM0ZquR9Q+G2cdqW58afBH21bMD2s8tpp0cNPtsl
+	PU8Ugytyiu3RkZAYMjEGQ2JJ3q8tYMJLgy11EpXa0CJeuf+ZTbi+KqwgJvkrah5QCnYE9zdcUOv
+	3T8j
+X-Received: by 2002:a17:902:db11:b0:2ef:e13e:779c with SMTP id d9443c01a7336-2f03ef873cfmr245431145ad.6.1795762841900;
+        Thu, 26 Nov 2026 23:00:41 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-38567abb870sm56941116eec.25.2026.11.26.20.18.39
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2f03f146b84sm113719395ad.71.2026.11.26.23.00.41
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 26 Nov 2026 20:18:39 -0800 (PST)
+        Thu, 26 Nov 2026 23:00:41 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
 Subject: [meta-networking][PATCH 10/15] sngrep: upgrade 1.9.0 -> 1.10.0
-Date: Thu, 26 Nov 2026 20:18:22 -0800
-Message-ID: <20261127041827.1778052-11-khem.raj@oss.qualcomm.com>
+Date: Thu, 26 Nov 2026 23:00:33 -0800
+Message-ID: <20261127070038.2221538-1-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.1
-In-Reply-To: <20261127041827.1778052-1-khem.raj@oss.qualcomm.com>
-References: <20261127041827.1778052-1-khem.raj@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Fri, 27 Nov 2026 04:18:41 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/133298
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Fri, 27 Nov 2026 07:00:46 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/133299
 Content-Type: text/plain; charset="utf-8"
 
 - Add a media inspector dashboard with RTP stream inspection and
