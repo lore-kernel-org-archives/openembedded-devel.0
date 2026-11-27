@@ -1,65 +1,65 @@
 Received: from mail-dy1-f176.google.com (mail-dy1-f176.google.com [74.125.82.176])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.10301.1795753116006229673
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.10376.1795753116974792391
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 26 Nov 2026 20:18:36 -0800
+ Thu, 26 Nov 2026 20:18:37 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=sbjmVHTs;
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=HsVJXFXq;
  spf=pass (domain: gmail.com, ip: 74.125.82.176, mailfrom: raj.khem@gmail.com)
-Received: by mail-dy1-f176.google.com with SMTP id 5a478bee46e88-386c336eab8so4115193eec.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 26 Nov 2026 20:18:35 -0800 (PST)
+Received: by mail-dy1-f176.google.com with SMTP id 5a478bee46e88-33fb4680717so3951204eec.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 26 Nov 2026 20:18:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795753115; x=1796357915; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1795753116; x=1796357916; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=20tVbYTf/YTJbWUuMDloDs5aK5vuErarwdu3JRhKkEU=;
-        b=sbjmVHTstuJZCNz1EYLUAabyOjoqTSBtOIFFA2xtxzG4NQJS8b+crQLmpJ6pe4omMd
-         PuuU5OkM6YTxVs2pn/E/92LByRri3dc2ukNMmZ9bi+cVJbKELpPGDrlTE/O28g61Hunq
-         kOofbQeTJrAH6wSml3yht1XgoeDS88eB4ftx4z8HbpNzWRFkiSEYz8V5bXE+Bf5la5GN
-         K+zbmpyf25vdvGOZUXczlF8jVHb7lRTqOt0ZgGtq0JBfAiqUhp4U42D4CYVIo2GEp8yW
-         zkAAB5DwZZQiyVMyAPw2LOKTaDuq6YxOcDejDMDNA0LClO0/zuKzxnl0a6F3AHRPpK7s
-         C/nQ==
+        bh=WyqlSr0ZTQ+urL4PhhY9cyPLtJZHI7C7XaQ8RPafQoc=;
+        b=HsVJXFXqpiaDFc24O2MK85XF1tBYT8AoE4ggrr0WuSDcAe+w1LgZUdUkJ38ApslnQL
+         G2viUA4mjHDsEnV+qmmazlphkhU4A79xcsobyYTs64wZ0PpsVNJRa2rOUQelzkOgbCcm
+         LK9GXUObf2SMUWW5QNjed5xSzDUd7+ZRIJuhp+uKU7M2SYgCmgtYBWjUFHMfcTvCydxv
+         3fN4wGjxwx/hRGklUjBC6uuywBblS46rfOIgfNiYnxBDd7CJb69Xo4HRP+gnfIKFCJOu
+         aUosmcXqX+BbvvkeUeP8hKuD6aNLU29VA1E1yU39uwifyJ0LGN5WHrBsisFuA2cM0uuZ
+         hmAg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795753115; x=1796357915;
+        d=1e100.net; s=20260707; t=1795753116; x=1796357916;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=20tVbYTf/YTJbWUuMDloDs5aK5vuErarwdu3JRhKkEU=;
-        b=A2qqE3W7XIVPQbzLOHnumgWeBV6d82eZlteuPVlr+ChAglIMQt+AHny1CRUaomyUKK
-         YOUqRwi6x9Ghz+Vx96a/gkaHVJJ+5/u23kVWvisVYMdjc2wwNu5uOQWahUaNOlRMZQD9
-         BOdxS3XW1wBE6PSQ9QTmBOicLGEzZTv+3pHNhGkdGPiRhOdKq1jnJhb8E6uPKVr872aH
-         vhQb0+1DcW3++gsppc17dzq5wNEqQ737K0+8ecgAB/aoYT4iiubbcHdGpF4KEISWkYxi
-         97HWDoZ0cdoXIKP+Ae/j2Ykl1r843UOybKvBOtD5p0Q9oBocRyjvyshvVMrbSfjUkZ8l
-         XHYw==
-X-Gm-Message-State: APuU4Z8s1F43gExpBXslt3tQZKejL2qQJjv9FbYarY5PfWuipuirAld9
-	aawr+vBcYrpuuwnVPBaCFjP5OGnlfB+5+A65QRsplOcZfN83x8BzALnzUVJ35yCT
-X-Gm-Gg: AZFdTZdCUsZhaPK3KYzWIJ/pFO9sJ1mvEFjR5y3JjIrRsdO24OjIjbthXMYk2jxUq6H
-	Su0lI+AgBu3DVbyr34HvbSvStlmjmMSPqOZynUqQPfNnL5yKfL6nRUaaf85Nl1bDR9heWMEQGuY
-	o6SZdNczwBkmaA0OOQnJD0vPozJqvgJu8r4ZBKVdMEB14kKWwAHb2xobBlqtdZljQf6S3BlJsZT
-	bRSbEnp0OQ1+aY5I7EPPNVMDenx7MfFkfKGoCBDeoqyxhHaIqCB/pYv1v7MtD6WvhmV7wVxnepd
-	JOu3NnbBrBI5e4GPcpZq+kMV+kSiIlsrnQaByQCReexa60v+mN+m5S/5M74rPNZJ+oAf3gb/8vE
-	GYogMq06mOIiNwwTb0n5J3PoHTsO6BHTK7KT8mJNSOjrab/gPb9gYW9ukmH1FlP1ZdykjVXNyWn
-	ULMe8jDLYtnyXI6RUc5RsQvXW5yL3YiMZyq5QJ9VTEDJy3F55tOOMOnNqwccBJGsHdDOXp5qdS5
-	QV/nwbfNvzz6nIFrWFrARYKDccZ4U0Puncge6+gAZbu6W48azY5kc4jT1uTB6naP0101UOvZvY1
-	AlkFoYmFP8RFbJu0AU+qONm/cTLC6MSD2/sWhe4ZqchYskZl8DeQ6xL0lRNORSHcCOCAGFWJR5z
-	QvVTk5mfc+cKXNuTYUaP4daqrlHbKibIqTFYGe5960eX4IwdG1coQG/YIFVGpl0Cm+CnYqC1AqF
-	zACD+Zbjq4TMClXw2zcHUNnBUcIIl3C4ypgpk38+LctOu5d4uSXrUJbL+efiSQ8n9MwME+STzz7
-	zhZEYMqDz5pVFqqTPy+AdVGNYACeAG7d+L3rixbfbKR/AeRR1CgiM01jCh5MYXwGt5iMJa+m2MR
-	YpQ/
-X-Received: by 2002:a05:7300:cd86:b0:36c:a3ae:936e with SMTP id 5a478bee46e88-384b398741bmr34174833eec.5.1795753115278;
-        Thu, 26 Nov 2026 20:18:35 -0800 (PST)
+        bh=WyqlSr0ZTQ+urL4PhhY9cyPLtJZHI7C7XaQ8RPafQoc=;
+        b=U8enIvyYsMFDk/2PdvXQlGW1q+KYAcAIEFvXNyV1xFmeb+ZPw37cO+pvX6U0ysGZlc
+         3FHRAQHQ4KNHGvWOR7EF+IKNhUxO3DtaUyreUWKhepHnFBERB44/zfnGFMubidjTuqS/
+         k5k+tA383ZLQKfLhlFV6mGjFRTbxS1u28hVLzt9Dxk5MKg0Dqfy8wFUdr9/VsSnYEMWP
+         oeO/huWiwWuSriUv0KvUj4CRbpnJjiThGos9HmRTbzto7b/LB+ujOFdR4L/YL2HJE82k
+         2gVvbu4k35bfWYpN0C7KKxoGWIKZ9WTghsp8YnjmVuMsOIIeWLYxY9f1fQ+MZAKsuu/4
+         0rzg==
+X-Gm-Message-State: APuU4Z/inp16zhMqCPpv7Y+9vxpvKsts6jbmD3nYtULNtPDxxi7wJs4O
+	E3d5jM5813CU5iCFzoufGp638QTpyLo+dASTBhX0pzRjCsCApKC6Q/Y4NjWSbUI2
+X-Gm-Gg: AZFdTZcjScjhHc1YNrcRnXcQKPLYOrmG+bGoCAVZ3UeYanA+0z+JukILjOG7NSbVQKX
+	IxU4BKmHu4yGRQIRRZ1YhgXDR3JvtO4e9PBkwDk4tMpQ427lRhqhqNIYOJfDX1Qz/S/W4Bkktcv
+	IcmbKHDZKkZFjUD+kmQqKlbYb4XXK5IkVTiK0Rz+6l0lLWLHgp4nj1Q7im/BB7R4Z4RRmH/vPGq
+	PLNTV1rYnVJgPupzqknX848YrkW0I7ebyV2/nBuX5Q7I0IMywUqeRWnX6TGVMafT07sg79Sn06G
+	5TAx+EYMBMMsJdajABkBxrau5WQmWOHkXg1MHH6y+ZhZqvR9BvoJhAcrpHHmFyLRuVnmoxQ82X8
+	juVv8/uhUCMGjQIa3qcJY9Oo7oEZ6uCI9UMI05HnFzZxEf3jIt2JekC/uljAPXoeDQovouVQSG9
+	CXFgJEE7NYFfcb6jSvn0JLtzNRyUFb5Ba4aDmujsG73NelGgQL0GXxEpof5orLrPSW6pzLms56o
+	cZnigcpZPD2WiUU2t/ufqfFwPc1OWBzZMC3RGjwSiEI+JdvTNmkGaWzcYZg76UXlHyFOZIyw+4k
+	qCF2pnJDrp7Oeaup7AYrk6XsVHjp1RxtvytbKvc9QGYhEtCzbKfJsaGwfu+D9E4iuBSzZVbQSgL
+	wypKY03oTb2YD6Fx16fM+/tdehCrfBhNzOjDF9SnPj3L7gT2sVF1bmrKJhaUk05a4YoLlaXR+5z
+	ZQ5Lzud3VMU9YOGewXD3oyMs8+sxYVL5e+qt1LWXD3wW51v+OkZCh0Q8O6Z2duTwixYnOAScwYm
+	4Ijjemw5VcHOFD8BZaXdKWjk3dPXUh6ePqxzOl6ig/Wl9bDwRRhEt041yzyCwUMqb4+ourKJSOs
+	1t0J
+X-Received: by 2002:a05:693c:6205:b0:386:a498:3ab1 with SMTP id 5a478bee46e88-386a4983cc5mr19793734eec.25.1795753116306;
+        Thu, 26 Nov 2026 20:18:36 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-38567abb870sm56941116eec.25.2026.11.26.20.18.34
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-38567abb870sm56941116eec.25.2026.11.26.20.18.35
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 26 Nov 2026 20:18:34 -0800 (PST)
+        Thu, 26 Nov 2026 20:18:35 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-networking][PATCH 05/15] cannelloni: upgrade 2.0.0 -> 2.1.3
-Date: Thu, 26 Nov 2026 20:18:17 -0800
-Message-ID: <20261127041827.1778052-6-khem.raj@oss.qualcomm.com>
+Subject: [meta-networking][PATCH 06/15] fetchmail: upgrade 6.6.6 -> 6.6.10
+Date: Thu, 26 Nov 2026 20:18:18 -0800
+Message-ID: <20261127041827.1778052-7-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.1
 In-Reply-To: <20261127041827.1778052-1-khem.raj@oss.qualcomm.com>
 References: <20261127041827.1778052-1-khem.raj@oss.qualcomm.com>
@@ -67,75 +67,41 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Fri, 27 Nov 2026 04:18:41 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/133293
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/133294
 Content-Type: text/plain; charset="utf-8"
 
-- 2.1.2/2.1.3: reject oversized frame lengths in the network parser
-  and the TCP decoder to prevent out-of-bounds writes (CVE-2026-37539)
-- 2.1.0: CAN frames undeliverable on a stuck bus are dropped after a
-  staleness timeout, configurable with the new -x option
-- 2.1.0: the default remote address when -R is omitted is now
-  127.0.0.1 / ::1 as documented
+- 6.6.7: fix stack buffer overrun in NTLM challenge handling
+  (CVE-2026-94184); stricter IMAP tagged response and OK/NO/BAD/BYE
+  validation; more robust NTLM exchange; rcfile escape sequence fixes
+- 6.6.9: fix uninitialized-buffer strtok() on malformed NTLM challenge
+  (regression from 6.6.7), fix missing CR in daemon mode warnings
+- 6.6.10: fix SMTP address literal normalization that wrongly rewrote
+  domains made of letters a-f/x and digits
+- New Latvian, Serbian and traditional Chinese translations
 
-Drop the clang -Wno-error=vla-cxx-extension workaround, upstream no
-longer uses variable length arrays in sctpthread.cpp. Fetch by tag now.
+The recipe needs no changes beyond the new version and checksum. The
+upstream check URI and regex still match the 6.6 branch listing.
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- .../cannelloni/cannelloni_2.0.0.bb            | 23 -------------------
- .../cannelloni/cannelloni_2.1.3.bb            | 15 ++++++++++++
- 2 files changed, 15 insertions(+), 23 deletions(-)
- delete mode 100644 meta-networking/recipes-connectivity/cannelloni/cannelloni_2.0.0.bb
- create mode 100644 meta-networking/recipes-connectivity/cannelloni/cannelloni_2.1.3.bb
+ .../fetchmail/{fetchmail_6.6.6.bb => fetchmail_6.6.10.bb}       | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-networking/recipes-support/fetchmail/{fetchmail_6.6.6.bb => fetchmail_6.6.10.bb} (93%)
 
-diff --git a/meta-networking/recipes-connectivity/cannelloni/cannelloni_2.0.0.bb b/meta-networking/recipes-connectivity/cannelloni/cannelloni_2.0.0.bb
-deleted file mode 100644
-index f1eaaf80db..0000000000
---- a/meta-networking/recipes-connectivity/cannelloni/cannelloni_2.0.0.bb
-+++ /dev/null
-@@ -1,23 +0,0 @@
--SUMMARY = "a SocketCAN over Ethernet tunnel"
--HOMEPAGE = "https://github.com/mguentner/cannelloni"
--LICENSE = "GPL-2.0-only"
--
--SRC_URI = "git://github.com/mguentner/cannelloni.git;protocol=https;branch=master"
--SRCREV = "9f649ef21710999c6f674bc3d914ab2e88363bac"
--
--UPSTREAM_CHECK_GITTAGREGEX = "^v(?P<pver>\d+(\.\d+)+)$"
--
--LIC_FILES_CHKSUM = "file://gpl-2.0.txt;md5=b234ee4d69f5fce4486a80fdaf4a4263"
--
--inherit cmake
--
--PACKAGECONFIG ??= "lksctp-tools"
--PACKAGECONFIG[lksctp-tools] = "-DSCTP_SUPPORT=true, -DSCTP_SUPPORT=false, lksctp-tools"
--
--# Workaround for Clang error:
--# sctpthread.cpp:95:18: error: variable length arrays in C++ are a Clang extension [-Werror,-Wvla-cxx-extension]
--#   95 |   uint8_t buffer[m_linkMtuSize];
--#      |                  ^~~~~~~~~~~~~
--# Upstream fix proposed: https://github.com/mguentner/cannelloni/pull/82
--# When upgrading the recipe, remove this flag once the upstream patch is merged and included to new version.
--CXXFLAGS:append:toolchain-clang = " -Wno-error=vla-cxx-extension"
-diff --git a/meta-networking/recipes-connectivity/cannelloni/cannelloni_2.1.3.bb b/meta-networking/recipes-connectivity/cannelloni/cannelloni_2.1.3.bb
-new file mode 100644
-index 0000000000..0771d4ac85
---- /dev/null
-+++ b/meta-networking/recipes-connectivity/cannelloni/cannelloni_2.1.3.bb
-@@ -0,0 +1,15 @@
-+SUMMARY = "a SocketCAN over Ethernet tunnel"
-+HOMEPAGE = "https://github.com/mguentner/cannelloni"
-+LICENSE = "GPL-2.0-only"
-+
-+SRC_URI = "git://github.com/mguentner/cannelloni.git;protocol=https;branch=master;tag=v${PV}"
-+SRCREV = "873b99f3cdfc7d998d333c50e9cab7e12f58a40d"
-+
-+UPSTREAM_CHECK_GITTAGREGEX = "^v(?P<pver>\d+(\.\d+)+)$"
-+
-+LIC_FILES_CHKSUM = "file://gpl-2.0.txt;md5=b234ee4d69f5fce4486a80fdaf4a4263"
-+
-+inherit cmake
-+
-+PACKAGECONFIG ??= "lksctp-tools"
-+PACKAGECONFIG[lksctp-tools] = "-DSCTP_SUPPORT=true, -DSCTP_SUPPORT=false, lksctp-tools"
+diff --git a/meta-networking/recipes-support/fetchmail/fetchmail_6.6.6.bb b/meta-networking/recipes-support/fetchmail/fetchmail_6.6.10.bb
+similarity index 93%
+rename from meta-networking/recipes-support/fetchmail/fetchmail_6.6.6.bb
+rename to meta-networking/recipes-support/fetchmail/fetchmail_6.6.10.bb
+index 2147e5eec8..f3b4f38b75 100644
+--- a/meta-networking/recipes-support/fetchmail/fetchmail_6.6.6.bb
++++ b/meta-networking/recipes-support/fetchmail/fetchmail_6.6.10.bb
+@@ -12,7 +12,7 @@ DEPENDS = "openssl"
+ 
+ SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BPN}-${PV}.tar.xz \
+            "
+-SRC_URI[sha256sum] = "da99f8c573c4d9e63f493c7e24447126aea25b53b4c076ec79266874e29b1975"
++SRC_URI[sha256sum] = "f32f1ecfdb99a243b6f7fef5d1b5f5aeac2bb0a45ce0162552d6063db3b48073"
+ 
+ UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/fetchmail/files/branch_6.6/"
+ UPSTREAM_CHECK_REGEX = "fetchmail-(?P<pver>\d+(\.\d+)+)\.tar\.xz"
