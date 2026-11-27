@@ -1,65 +1,65 @@
-Received: from mail-dy1-f175.google.com (mail-dy1-f175.google.com [74.125.82.175])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.10307.1795752931755217645
+Received: from mail-dl1-f48.google.com (mail-dl1-f48.google.com [74.125.82.48])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.10230.1795752923828448009
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 26 Nov 2026 20:15:31 -0800
+ Thu, 26 Nov 2026 20:15:23 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=p0s339yE;
- spf=pass (domain: gmail.com, ip: 74.125.82.175, mailfrom: raj.khem@gmail.com)
-Received: by mail-dy1-f175.google.com with SMTP id 5a478bee46e88-38431138772so9925677eec.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 26 Nov 2026 20:15:31 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=mL5LTAZ2;
+ spf=pass (domain: gmail.com, ip: 74.125.82.48, mailfrom: raj.khem@gmail.com)
+Received: by mail-dl1-f48.google.com with SMTP id a92af1059eb24-15dd124bbe7so11212165c88.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 26 Nov 2026 20:15:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795752931; x=1796357731; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1795752923; x=1796357723; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=fC9pqkeYIjeie0SIUJGBBTrV/d+xmaLT3d5er4t+TOM=;
-        b=p0s339yEOLus8DTJVBpTikSYz4zcPUDb4N5bvg69AzRjcyo5qz2ITj5FXQg1spGpeJ
-         PkkTlM+Ux1IaPyP4bc56Rd3+0DtxR+0Dty7YqHu5KeYoZEDOYbmEfO8hQD8cppxhiYTq
-         vXf9+63G7vHVCEv028cKFaOagApjC7S9IrwjIsL23U7m4lAVXITIkCdbjZS0PIpZmoo+
-         xV1+BNe2/JWU/sT3qVIxoFpbc/mdoLfHFvkrqwly8ks5XVtlQywzDsGcOLTQ0VlJzUq1
-         L1FnSptUu6k27A9goTrazA7Ejva7wk68HdpVkRXKd+bD/2VKmFGEfFHx9+Ee7bw9ssep
-         Grcg==
+        bh=5TfgovrBV3BysHAnwzdH+Ygd8xZsbga/KykHg6Xx9WQ=;
+        b=mL5LTAZ29b9Nxl6+gmJloSQ4XTwVhvCmGH4iDVLp2OlE+xLUiKXphjgMsUe+NJKRxG
+         tedR/BIoHxXW9jXeoUXE8XUz3jungnaNCtNpizvDoU83kJ5Ybl8Gc903Lux25U+gpDG7
+         I6KVyd49N4fNwEbJnih+OX0WTXlfi0KCzORM8yeXn2iuhfnNouVmBP/HD4HnYocKdsHp
+         APkY0ja5v48/HsY4ZxFkloivjQraLTe+a1LEDWFZlOZJhgcUPs/XdXPetYc02tryoyqb
+         sB/XeUgWU+/03dP15ffPVzk4kbYCef1wJkEH0vi5nCGeh1x+qB4ayqUL3ZmZ2+9GL5dL
+         GwBQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795752931; x=1796357731;
+        d=1e100.net; s=20260707; t=1795752923; x=1796357723;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=fC9pqkeYIjeie0SIUJGBBTrV/d+xmaLT3d5er4t+TOM=;
-        b=ev1WZzU9k8Fi7yJ/mnp431rCuRT+vR/ZU6hs66AuL42Dt7nU8n0uOUvIiN4BHrkKdl
-         f/XTW63m0b5wlRLVu7La8eEwsaNdoYDSqvZFxz12YtzAhzr3TTLsYjK/64eJbaFibVuS
-         krU0p07GlL9s1Wy/pRqgeYp7wYxQ/aOvA4wRvZH+kvtXGZeBi7cTJPBLlFsxBCPmp7ZD
-         bUyPep1VqKoLIHQXJFLW467byaezFqaB9L1oqjQv4QAza69tVfATYx33b1PsmRYBQsIB
-         zEH5Sg8p8ktFypsaXWU1nWG0beWmbN98mN/2B9q54e9nC7TQBQBHKLKiqUY+5iAukLPw
-         wF3Q==
-X-Gm-Message-State: APuU4Z9UQJzQhsKPzLtM20MSYrLBwTRRQitGzAxAgGygFzh77QGxBarQ
-	Bdb/dj2QAd6iMcOpqA8QKIh+zU72kMRT3zI+wyweiiIcO/w04AYfn7E+WMGFMCBX
-X-Gm-Gg: AZFdTZeTMubwoh/z9y1rO6OglgYPELWITYCpnaqJvtp3/gnjlVihsusMTrc+eAA6Cel
-	WEs2Lt2oSzO0SWANo0deaIGjujWYovFoEWZIhSBqqAasSq/cpu0ok2NCO9KH9nAed4I+Gz9QwuP
-	3t28Yv3k0dnVHTAin0sVekfkB8//AL4RBa6XQsVQPKi5hZS6JFW9QTj947rY0tXL3XG2Ej1gnIJ
-	crqaPGksaSm2AAILeL5nmAJ+L8eYavlEzNDf24WYUN0VMs5Gsl5fqLyPnYn0k2wc94blpj/nG/l
-	0d3I18JsvF8WKbBzQ1YbV6iisJ8Wu4LhMzj4SNs0fNJpz6arPyvSBgxhBg5Nd1h3gEITLqJYB1v
-	jeWjyYPcE6widM2eBTuyHmT6uKqJb/9iaFGKJIhRxo8CmSP59tw3j0psq0eI4bQflTKHX7+LZZ+
-	AADKM8+fasz3PwEscNaqL/JMAcDEiqXfpoS5+REy4i+U1uLgK3UkycmlGZUJAB/5/n8M8RPuvip
-	/9SjZa978QHERK5cAQiKNKhQ/qYuH5FoWs6DIH6GZAGvfWAFfkVXyaXbkeqGxwuNaPTw1/N3GHz
-	bt7cJH/e7WirkB6srWwoMNSDUAgsJ9To+Mc/gTzw8qOg1JNq0ceRdasZiopeHY7zpuVDSLrW1Ub
-	FJNyS4JJOZE+qGz//J9TrXgy97Ht6a/OAfQ23BJwEQGIQzIlJISUzZY5y9SkTwOgFMTVl2AhFrO
-	knCSw7Cb7YRa4JVz+7us5umigqn4wSGF2vhbfBY76DDbzQd+JEIxLylF2K2LyYqsV1/VBYusfoJ
-	ZznUQaCqqioX8f4MV1pAtI/Or0IxlGhHaQAkVNK9rS4k3+xhAUG3BSyrR5e4twTM2U4KKFPikgA
-	PGG08xo/k5RRU0oRt8Ufn98eVg==
-X-Received: by 2002:a05:7300:1c95:b0:385:8851:fa4a with SMTP id 5a478bee46e88-385885211c2mr23306459eec.6.1795752930606;
-        Thu, 26 Nov 2026 20:15:30 -0800 (PST)
+        bh=5TfgovrBV3BysHAnwzdH+Ygd8xZsbga/KykHg6Xx9WQ=;
+        b=tmyboo8TNzT4dqE71tN7GSx37fDtrWZHGAwtxLLvfGMoizqXgJ2kNSNCmeF31AHRKZ
+         fiyy2s5bGbYnDmzV/+BkQOQkHYgdgvRNgfVxmBqq2dGlkVPtY0SvZFi7gJOSZ191L/BH
+         WglQWnQRJaPB9amaq3hgu3j44gdWUKkB4RT09gPY6Z/9d9m/Hi2VRglJxjOeeA9YW6r7
+         +bPs1tE2QzNbrNd3qV67HtX2mvHDtsPX0NWRv9B7krn/6Fde/xPOyKQlpq3O78Sea0QS
+         b+ZorrgDY5UWAIx3zZT7bBKi3JvqMatJ/+ggoMYAevoblZa3tg0Nq9pXau4jy5+5VF6A
+         /hiA==
+X-Gm-Message-State: APuU4Z9aIr16WJk9FYxXFgdXVJRKg2yWl1XZfDGCzbJVTUL1fMOgqcv1
+	AjuJO4T3Guq33Apqvt0pvGP6gps+NRphUM/XbD/IDsl02pn34pT5w+RVCScocs2R
+X-Gm-Gg: AZFdTZc7g/xFSEfAHV9kiD0uS7BEKmDl9+Rb8ZgJPkLSYA5clnJl6Rcfvf7Tq0iXlSc
+	N5e9xRza4BwBfGGomsdkUV8osf36TsHSXvBp11uHOVKfDaxupmhET6RNi2NFvneO9wQoOE3QeZO
+	mNpyKkPW8nXXc+bp7Yhx2THUl+hRsi2ouvg/5r+AEIc7GhW5xTWOrI5a+rbPP3CxB6bBtFHke2U
+	Z1RfrGRm7NxjfvKTOEOWJ2Cj6KxhocbWMpp/2d0rE5tN6B0OnGs0CY/WUuRE8cwbPV6OI/KYKZP
+	0W0JH+DRjdIOdWnPRSHCV02OI9s+DgS+dKvp24LBuwDKkulmteSMGs2u5hFqTkuWngsxQQ1WEAH
+	KdNGr3/gOZ+a3jguE+MsgkQUWORY2uXzUXe8uaCylqw5agqezw0fGRwhEYmnkZmSMbKh+qGZ8Zv
+	FcmgqrdRpiaorNDyTDE2geW9ce336BfSY/fc9yYrLDIFslWRjr7oyxoT1h67xQu3ECyRyWTCqsk
+	OuLbO3RjpqYDwFde+8qZ0Eb9oOl5Qsl6FoUeZ+nARAwesAFKTkHA9ynNSt3mPBO1l3+a6MBwdSg
+	eNqBw/k6//v/44IG9Hmi8BZ+mPCOcqv4rFLZgHwCFOfvBrkJYj2pJ+vIYzXgHaWR2KI9qTYUBnC
+	JX7lMVGMcnCZx+h/n1mKGX3NepB02pQjnNQzQMsZyUCMrcjzlws+BbuGnzRH1yAiXZIUjnRtCRO
+	M+5sLc6/ylgDBSFnD8Yda5PsLHmo4jyRUL0DT4uKomL4nB8oYsNuHOI0VGJtbJE5h76ywWuW0yQ
+	zD2nv14j+BmohuWT5EIMZNGNhSAmgVJDHr9bYx1Cjea/X03bbVQi16WP2iDtW4HZiLYXEAPOV6l
+	kPCr
+X-Received: by 2002:a05:7300:1899:b0:386:b6e2:9fa1 with SMTP id 5a478bee46e88-386b6e2a02fmr19116907eec.34.1795752922707;
+        Thu, 26 Nov 2026 20:15:22 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-385666e7fc3sm60340062eec.8.2026.11.26.20.15.29
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-385666e7fc3sm60340062eec.8.2026.11.26.20.15.21
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 26 Nov 2026 20:15:30 -0800 (PST)
+        Thu, 26 Nov 2026 20:15:22 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-oe][PATCH 7/8] minifi-cpp: upgrade 0.99.2 -> 1.1.0
-Date: Thu, 26 Nov 2026 20:15:16 -0800
-Message-ID: <20261127041517.1773986-8-khem.raj@oss.qualcomm.com>
+Subject: [meta-oe][PATCH 1/8] opencv: upgrade 4.14.0 -> 5.1.0
+Date: Thu, 26 Nov 2026 20:15:10 -0800
+Message-ID: <20261127041517.1773986-2-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.1
 In-Reply-To: <20261127041517.1773986-1-khem.raj@oss.qualcomm.com>
 References: <20261127041517.1773986-1-khem.raj@oss.qualcomm.com>
@@ -67,1025 +67,497 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Fri, 27 Nov 2026 04:15:33 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/133217
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/133211
 Content-Type: text/plain; charset="utf-8"
 
-1.1.0 adds a stable C extension API (with optional Rust extensions) and
-LMDB repositories, removes the SYSTEM dependency source, the bundled
-mbedTLS, libuvc and expected-lite and the OpenCV extension, and always
-builds expression language.
+OpenCV 5 is a new major series (4.x stays maintained in parallel):
+- C++17 is required, Python 2 support is dropped
+- legacy C API (CvMat, IplImage, cv* functions) removed
+- calib3d split into geometry/calib/stereo (calib3d.hpp kept as
+  a compat header), features2d renamed to features, new ptcloud
+- ML, G-API and Haar/HOG detectors moved to opencv_contrib
+  (ml, gapi, xobjdetect); Caffe/Darknet DNN parsers removed
+- MatShape replaces MatSize, new 1D/0D array semantics
+- pkg-config/CMake/include/data dirs renamed opencv4 -> opencv5;
+  putText now uses HarfBuzz, FFmpeg 8 support
 
-Rewrite 0001-Do-not-use-bundled-packages.patch to add a SYSTEM source
-to the cmake/Get*.cmake files used here, use upstream's
-BUILD_ROCKSDB=OFF path, and bump the FetchContent dependencies to the
-versions pinned in cmake/ with FETCHCONTENT_FULLY_DISCONNECTED set so
-nothing is downloaded at configure time. lz4 and zstd have no SYSTEM
-source any more and are dropped from DEPENDS. Patches fixed upstream are
-dropped and the rest refreshed. The new asset and Python venv
-directories move to /var/lib/minifi.
+Track the 5.x branch in opencv and opencv_contrib and move kleidicv
+to the 26.09 tag that hal/kleidicv/kleidicv.cmake expects; the other
+3rdparty blobs (boostdesc, vgg, face, wechat_qrcode, fastcv) are
+unchanged. Drop 29533.patch (FFmpeg pix_fmts), it is upstream, and
+refresh 0001-Dont-use-isystem.patch. Follow the opencv4 -> opencv5
+install path rename in FILES and do_install, fix the java package
+path, drop the explicit C++17 from the dnn PACKAGECONFIG as it is
+now the default, and build the bundled HarfBuzz subset since the
+system HarfBuzz is only used when it has hb-raster, which oe-core
+does not enable by default; its MIT license is added to LICENSE. Add an upstream version check that skips the
+pre-release tags. Library package names follow the new module
+names (e.g. libopencv-calib3d -> libopencv-calib/-geometry/-stereo,
+libopencv-features2d -> libopencv-features).
 
-License-Update: notices for the removed mbedTLS, libuvc, OpenCV (and its bundled libraries), cJSON and expected-lite bundles dropped from LICENSE
+Drop the ffmpeg RAW workaround patch: 5.x only uses AVFMT_RAWPICTURE
+and CODEC_FLAG_GLOBAL_HEADER behind ffmpeg version checks. Move the
+Upstream-Status of 0003-To-fix-errors-as-following.patch into the
+header and mark it Inappropriate; it is only needed together with
+0001-Make-ts-module-external.patch, which upstream declined.
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- ...-Add-missing-include-for-malloc-free.patch |  38 --
- .../0001-Do-not-use-bundled-packages.patch    | 330 ++++++------------
- .../files/0001-Fix-build-with-gcc-16.patch    |  49 ---
- ...sh-set-BUILD_DATE-to-SOURCE_DATE_EPO.patch |  17 +-
- .../files/0002-Fix-osspuuid-build.patch       |  22 +-
- .../files/0003-Fix-libsodium-build.patch      |  13 +-
- .../files/0004-Pass-noline-flag-to-flex.patch |  21 +-
- ...erateVersion.sh-set-correct-buildrev.patch |  13 +-
- ...006-CMakeLists.txt-do-not-use-ccache.patch |  31 +-
- ...h-add-missing-cstdint-include-for-in.patch |  35 --
- ...nifi-cpp_0.99.2.bb => minifi-cpp_1.1.0.bb} | 112 +++---
- 11 files changed, 228 insertions(+), 453 deletions(-)
- delete mode 100644 meta-oe/recipes-extended/minifi-cpp/files/0001-Add-missing-include-for-malloc-free.patch
- delete mode 100644 meta-oe/recipes-extended/minifi-cpp/files/0001-Fix-build-with-gcc-16.patch
- delete mode 100644 meta-oe/recipes-extended/minifi-cpp/files/0007-StreamCallback.h-add-missing-cstdint-include-for-in.patch
- rename meta-oe/recipes-extended/minifi-cpp/{minifi-cpp_0.99.2.bb => minifi-cpp_1.1.0.bb} (77%)
+ .../opencv/opencv/0001-Dont-use-isystem.patch |   8 +-
+ ...-around-deprecated-ffmpeg-RAW-functi.patch |  33 ---
+ .../0003-To-fix-errors-as-following.patch     |   3 +-
+ .../recipes-support/opencv/opencv/29533.patch | 242 ------------------
+ .../{opencv_4.14.0.bb => opencv_5.1.0.bb}     |  49 ++--
+ 5 files changed, 31 insertions(+), 304 deletions(-)
+ delete mode 100644 meta-oe/recipes-support/opencv/opencv/0001-Temporarliy-work-around-deprecated-ffmpeg-RAW-functi.patch
+ delete mode 100644 meta-oe/recipes-support/opencv/opencv/29533.patch
+ rename meta-oe/recipes-support/opencv/{opencv_4.14.0.bb => opencv_5.1.0.bb} (88%)
 
-diff --git a/meta-oe/recipes-extended/minifi-cpp/files/0001-Add-missing-include-for-malloc-free.patch b/meta-oe/recipes-extended/minifi-cpp/files/0001-Add-missing-include-for-malloc-free.patch
+diff --git a/meta-oe/recipes-support/opencv/opencv/0001-Dont-use-isystem.patch b/meta-oe/recipes-support/opencv/opencv/0001-Dont-use-isystem.patch
+index 948a80fafa..97181fff46 100644
+--- a/meta-oe/recipes-support/opencv/opencv/0001-Dont-use-isystem.patch
++++ b/meta-oe/recipes-support/opencv/opencv/0001-Dont-use-isystem.patch
+@@ -14,12 +14,12 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
+  1 file changed, 2 insertions(+)
+ 
+ diff --git a/cmake/OpenCVPCHSupport.cmake b/cmake/OpenCVPCHSupport.cmake
+-index 08cd06def4..46c9c02da3 100644
++index f7fb55c367..0fa86dcba5 100644
+ --- a/cmake/OpenCVPCHSupport.cmake
+ +++ b/cmake/OpenCVPCHSupport.cmake
+-@@ -18,6 +18,8 @@ IF(CV_GCC)
+-         SET(PCHSupport_FOUND TRUE)
+-     ENDIF()
++@@ -16,6 +16,8 @@ IF(CV_GCC)
++ 
++     SET(PCHSupport_FOUND TRUE)
+  
+ +    SET(CMAKE_INCLUDE_SYSTEM_FLAG_C "-I")
+ +    SET(CMAKE_INCLUDE_SYSTEM_FLAG_CXX "-I")
+diff --git a/meta-oe/recipes-support/opencv/opencv/0001-Temporarliy-work-around-deprecated-ffmpeg-RAW-functi.patch b/meta-oe/recipes-support/opencv/opencv/0001-Temporarliy-work-around-deprecated-ffmpeg-RAW-functi.patch
 deleted file mode 100644
-index e844bf9b7d..0000000000
---- a/meta-oe/recipes-extended/minifi-cpp/files/0001-Add-missing-include-for-malloc-free.patch
+index a3bbefaabe..0000000000
+--- a/meta-oe/recipes-support/opencv/opencv/0001-Temporarliy-work-around-deprecated-ffmpeg-RAW-functi.patch
 +++ /dev/null
-@@ -1,38 +0,0 @@
--From f01a1ae37d3e502a900b5a6cfa5be217003cf7d4 Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Fri, 29 Aug 2025 21:46:26 -0700
--Subject: [PATCH] Add missing include for malloc/free
+@@ -1,33 +0,0 @@
+-From e4ec6cea72da9e9ae5ba57140fa2f5c63f1f8295 Mon Sep 17 00:00:00 2001
+-From: Jason Wessel <jason.wessel@windriver.com>
+-Date: Wed, 9 May 2018 13:33:59 -0700
+-Subject: [PATCH] Temporarliy work around deprecated ffmpeg RAW function
+- compile failure until next uprev
 -
+-Signed-off-by: Jason Wessel <jason.wessel@windriver.com>
+-
+----
 -Upstream-Status: Pending
+-
+- modules/videoio/src/cap_ffmpeg_impl.hpp | 8 ++++++++
+- 1 file changed, 8 insertions(+)
+-
+-diff --git a/modules/videoio/src/cap_ffmpeg_impl.hpp b/modules/videoio/src/cap_ffmpeg_impl.hpp
+-index 6dca724a89..ae55dd4555 100644
+---- a/modules/videoio/src/cap_ffmpeg_impl.hpp
+-+++ b/modules/videoio/src/cap_ffmpeg_impl.hpp
+-@@ -774,6 +774,14 @@ struct ImplMutex::Impl
+- 
+- #endif
+- 
+-+/* NOTE This is deprecated in ffmpeg and the code should be removed */
+-+#ifndef AVFMT_RAWPICTURE
+-+#define AVFMT_RAWPICTURE	0x0020
+-+#endif /* AVFMT_RAWPICTURE */
+-+#ifndef CODEC_FLAG_GLOBAL_HEADER
+-+#define CODEC_FLAG_GLOBAL_HEADER	AV_CODEC_FLAG_GLOBAL_HEADER
+-+#endif
+-+
+- void ImplMutex::init()
+- {
+-     impl = new Impl();
+diff --git a/meta-oe/recipes-support/opencv/opencv/0003-To-fix-errors-as-following.patch b/meta-oe/recipes-support/opencv/opencv/0003-To-fix-errors-as-following.patch
+index 9df419d0b8..41f0401150 100644
+--- a/meta-oe/recipes-support/opencv/opencv/0003-To-fix-errors-as-following.patch
++++ b/meta-oe/recipes-support/opencv/opencv/0003-To-fix-errors-as-following.patch
+@@ -14,9 +14,8 @@ ts module.
+ 
+ Signed-off-by: Ismo Puustinen <ismo.puustinen@intel.com>
+ 
++Upstream-Status: Inappropriate [only needed with 0001-Make-ts-module-external.patch, which upstream declined]
+ ---
+-Upstream-Status: Pending
+-
+  modules/ts/include/opencv2/ts.hpp          | 4 ++--
+  modules/ts/include/opencv2/ts/ocl_test.hpp | 2 +-
+  modules/ts/include/opencv2/ts/ts_ext.hpp   | 2 +-
+diff --git a/meta-oe/recipes-support/opencv/opencv/29533.patch b/meta-oe/recipes-support/opencv/opencv/29533.patch
+deleted file mode 100644
+index 0dcbff932e..0000000000
+--- a/meta-oe/recipes-support/opencv/opencv/29533.patch
++++ /dev/null
+@@ -1,242 +0,0 @@
+-From 700cd32ffd59ed3c6f6aec1919867653d8b125ea Mon Sep 17 00:00:00 2001
+-From: Aadhu23 <aadhavansalthivel5@gmail.com>
+-Date: Thu, 16 Jul 2026 09:21:37 +0000
+-Subject: [PATCH 1/3] videoio: support FFmpeg after AVCodec::pix_fmts removal
+-
+-Upstream-Status: Backport [https://github.com/opencv/opencv/pull/29533]
 -Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ----
-- include/fmt/format.h | 5 +++--
-- 1 file changed, 3 insertions(+), 2 deletions(-)
+- modules/videoio/src/cap_ffmpeg_hw.hpp | 25 +++++++++++++++++++++++++
+- 1 file changed, 25 insertions(+)
 -
--diff --git a/include/fmt/format.h b/include/fmt/format.h
--index 287e7163..0412812f 100644
----- a/include/fmt/format.h
--+++ b/include/fmt/format.h
--@@ -44,6 +44,7 @@
-- #  include <cmath>    // std::signbit
-- #  include <cstddef>  // std::byte
-- #  include <cstdint>  // uint32_t
--+#  include <cstdlib>  // std::malloc, std::free
-- #  include <cstring>  // std::memcpy
-- #  include <limits>   // std::numeric_limits
-- #  include <new>      // std::bad_alloc
--@@ -744,12 +745,12 @@ template <typename T> struct allocator {
-- 
--   T* allocate(size_t n) {
--     FMT_ASSERT(n <= max_value<size_t>() / sizeof(T), "");
---    T* p = static_cast<T*>(malloc(n * sizeof(T)));
--+    T* p = static_cast<T*>(std::malloc(n * sizeof(T)));
--     if (!p) FMT_THROW(std::bad_alloc());
--     return p;
--   }
-- 
---  void deallocate(T* p, size_t) { free(p); }
--+  void deallocate(T* p, size_t) { std::free(p); }
-- };
-- 
-- }  // namespace detail
-diff --git a/meta-oe/recipes-extended/minifi-cpp/files/0001-Do-not-use-bundled-packages.patch b/meta-oe/recipes-extended/minifi-cpp/files/0001-Do-not-use-bundled-packages.patch
-index 98044877cd..e2f9c5b02a 100644
---- a/meta-oe/recipes-extended/minifi-cpp/files/0001-Do-not-use-bundled-packages.patch
-+++ b/meta-oe/recipes-extended/minifi-cpp/files/0001-Do-not-use-bundled-packages.patch
-@@ -1,10 +1,11 @@
--From ff886f41c471a4b7d97a5a4473727a8b1d8ba2bb Mon Sep 17 00:00:00 2001
-+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
- From: Yi Zhao <yi.zhao@windriver.com>
--Date: Tue, 19 Mar 2024 19:39:04 +0800
-+Date: Mon, 23 Nov 2026 08:02:00 -0800
- Subject: [PATCH] Do not use bundled packages
- 
--Use external dependencies for openssl, curl, bzip2, zlib, libarchive,
--xz, yaml-cpp and libxml2.
-+Add a SYSTEM source option that uses find_package() for openssl, curl,
-+zlib, bzip2, xz, libarchive, yaml-cpp, pugixml and civetweb instead of
-+building them from downloaded sources.
- 
- Upstream-Status: Inappropriate [embedded specific]
- 
-@@ -13,232 +14,131 @@ Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
- adapted the patch for context changes;
- added using external dependencies for pugixml.]
- Signed-off-by: Li Zhou <li.zhou@windriver.com>
-+[kr: Rewritten for 1.1.0, which selects bundled or system dependencies
-+through MINIFI_*_SOURCE options.]
-+AI-Generated: Uses Claude Code
-+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
-+[kr: Rewritten for 1.1.0, which dropped the SYSTEM source option and
-+moved libarchive, xz and yaml-cpp handling to cmake/Get*.cmake.]
-+AI-Generated: Uses Claude Code
-+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
- ---
-- CMakeLists.txt                       |  3 +--
-- cmake/GetBZip2.cmake                 |  3 +++
-- cmake/GetCatch2.cmake                |  4 ++++
-- cmake/GetCivetWeb.cmake              |  3 +++
-- cmake/GetFmt.cmake                   |  3 +++
-- cmake/GetLibCURL.cmake               |  3 +++
-- cmake/GetLibXml2.cmake               |  3 +++
-- cmake/GetOpenSSL.cmake               |  3 +++
-- cmake/GetRocksDB.cmake               |  4 ++++
-- cmake/GetSpdlog.cmake                |  4 ++++
-- cmake/GetZLIB.cmake                  |  3 +++
-- cmake/GetZstd.cmake                  |  4 ++++
-- cmake/PugiXml.cmake                  | 20 ++++++++++++--------
-- extensions/libarchive/CMakeLists.txt |  6 ++----
-- 14 files changed, 52 insertions(+), 14 deletions(-)
-+ cmake/GetBZip2.cmake      | 3 +++
-+ cmake/GetCivetWeb.cmake   | 3 +++
-+ cmake/GetLibArchive.cmake | 3 +++
-+ cmake/GetLibCURL.cmake    | 3 +++
-+ cmake/GetLibLZMA.cmake    | 3 +++
-+ cmake/GetOpenSSL.cmake    | 3 +++
-+ cmake/GetPugiXml.cmake    | 3 +++
-+ cmake/GetYamlCpp.cmake    | 3 +++
-+ cmake/GetZLIB.cmake       | 3 +++
-+ 9 files changed, 27 insertions(+)
- 
--diff --git a/CMakeLists.txt b/CMakeLists.txt
--index 5cf1c4e5f..36aee1508 100644
----- a/CMakeLists.txt
--+++ b/CMakeLists.txt
--@@ -285,8 +285,7 @@ include(GetSpdlog)
-- get_spdlog()
-- 
-- # yaml-cpp
---include(BundledYamlCpp)
---use_bundled_yamlcpp(${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR})
--+find_package(yaml-cpp REQUIRED)
-- 
-- # concurrentqueue
-- add_library(concurrentqueue INTERFACE)
- diff --git a/cmake/GetBZip2.cmake b/cmake/GetBZip2.cmake
--index 2a7d47e9e..754122895 100644
-+index 7da1424d..40ce02c9 100644
- --- a/cmake/GetBZip2.cmake
- +++ b/cmake/GetBZip2.cmake
--@@ -23,5 +23,8 @@ function(get_bzip2 SOURCE_DIR BINARY_DIR)
--         message("Using CMake to build bzip2 from source")
--         include(BundledBZip2)
--         use_bundled_bzip2(${SOURCE_DIR} ${BINARY_DIR})
--+    elseif(MINIFI_BZIP2_SOURCE STREQUAL "SYSTEM")
--+        message("Using bzip2 provided by system")
--+        find_package(BZip2 REQUIRED)
--     endif()
-- endfunction(get_bzip2)
--diff --git a/cmake/GetCatch2.cmake b/cmake/GetCatch2.cmake
--index d6c1d6acc..ec11b0a77 100644
----- a/cmake/GetCatch2.cmake
--+++ b/cmake/GetCatch2.cmake
--@@ -23,5 +23,9 @@ function(get_catch2)
--     elseif(MINIFI_CATCH2_SOURCE STREQUAL "BUILD")
--         message("Using CMake to build Catch2 from source")
--         include(Catch2)
--+    elseif(MINIFI_CATCH2_SOURCE STREQUAL "SYSTEM")
--+        message("Using Catch2 provided by system")
--+        find_package(Catch2 REQUIRED)
--+        add_library(Catch2WithMain ALIAS Catch2::Catch2WithMain)
--     endif()
-- endfunction(get_catch2)
-+@@ -22,4 +22,7 @@ elseif(MINIFI_BZIP2_SOURCE STREQUAL "BUILD")
-+     message("Using CMake to build bzip2 from source")
-+     include(BundledBZip2)
-+     use_bundled_bzip2(${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR})
-++elseif(MINIFI_BZIP2_SOURCE STREQUAL "SYSTEM")
-++    message("Using bzip2 provided by system")
-++    find_package(BZip2 REQUIRED)
-+ endif()
- diff --git a/cmake/GetCivetWeb.cmake b/cmake/GetCivetWeb.cmake
--index f30d22289..8fc39a0e2 100644
-+index 6604e22c..77428b51 100644
- --- a/cmake/GetCivetWeb.cmake
- +++ b/cmake/GetCivetWeb.cmake
--@@ -22,5 +22,8 @@ function(get_civetweb)
--     elseif(MINIFI_CIVETWEB_SOURCE STREQUAL "BUILD")
--         message("Using CMake to build CivetWeb from source")
--         include(CivetWeb)
--+    elseif(MINIFI_CIVETWEB_SOURCE STREQUAL "SYSTEM")
--+        message("Using CivetWeb provided by system")
--+        find_package(civetweb REQUIRED)
--     endif()
-- endfunction(get_civetweb)
--diff --git a/cmake/GetFmt.cmake b/cmake/GetFmt.cmake
--index f4f28458d..579a63897 100644
----- a/cmake/GetFmt.cmake
--+++ b/cmake/GetFmt.cmake
--@@ -22,5 +22,8 @@ function(get_fmt)
--     elseif(MINIFI_FMT_SOURCE STREQUAL "BUILD")
--         message("Using CMake to build Fmt from source")
--         include(fmt)
--+    elseif(MINIFI_FMT_SOURCE STREQUAL "SYSTEM")
--+        message("Using Fmt provided by system")
--+        find_package(fmt REQUIRED)
--     endif()
-- endfunction(get_fmt)
-+@@ -21,4 +21,7 @@ if(MINIFI_CIVETWEB_SOURCE STREQUAL "CONAN")
-+ elseif(MINIFI_CIVETWEB_SOURCE STREQUAL "BUILD")
-+     message("Using CMake to build CivetWeb from source")
-+     include(CivetWeb)
-++elseif(MINIFI_CIVETWEB_SOURCE STREQUAL "SYSTEM")
-++    message("Using CivetWeb provided by system")
-++    find_package(civetweb REQUIRED)
-+ endif()
-+diff --git a/cmake/GetLibArchive.cmake b/cmake/GetLibArchive.cmake
-+index 0aa925fa..f8f53a20 100644
-+--- a/cmake/GetLibArchive.cmake
-++++ b/cmake/GetLibArchive.cmake
-+@@ -22,4 +22,7 @@ elseif(MINIFI_LIBARCHIVE_SOURCE STREQUAL "BUILD")
-+     message("Using CMake to build LibArchive from source")
-+     include(BundledLibArchive)
-+     use_bundled_libarchive(${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR})
-++elseif(MINIFI_LIBARCHIVE_SOURCE STREQUAL "SYSTEM")
-++    message("Using LibArchive provided by system")
-++    find_package(LibArchive REQUIRED)
-+ endif()
- diff --git a/cmake/GetLibCURL.cmake b/cmake/GetLibCURL.cmake
--index afd38f3c9..0eac59ec4 100644
-+index a0654a10..5f800210 100644
- --- a/cmake/GetLibCURL.cmake
- +++ b/cmake/GetLibCURL.cmake
--@@ -23,5 +23,8 @@ function(get_curl SOURCE_DIR BINARY_DIR)
--         message("Using CMake to build libcurl from source")
--         include(BundledLibcURL)
--         use_bundled_curl(${SOURCE_DIR} ${BINARY_DIR})
--+    elseif(MINIFI_LIBCURL_SOURCE STREQUAL "SYSTEM")
--+        message("Using libcurl provided by system")
--+        find_package(CURL REQUIRED)
--     endif()
-- endfunction(get_curl SOURCE_DIR BINARY_DIR)
--diff --git a/cmake/GetLibXml2.cmake b/cmake/GetLibXml2.cmake
--index 2a6c618f6..093b57a4b 100644
----- a/cmake/GetLibXml2.cmake
--+++ b/cmake/GetLibXml2.cmake
--@@ -22,5 +22,8 @@ function(get_libxml2 SOURCE_DIR BINARY_DIR)
--     elseif(MINIFI_LIBXML2_SOURCE STREQUAL "BUILD")
--         message("Using CMake to build libxml2 from source")
--         include(LibXml2)
--+    elseif(MINIFI_LIBXML2_SOURCE STREQUAL "SYSTEM")
--+        message("Using libxml2 provided by system")
--+        find_package(libxml2 REQUIRED)
--     endif()
-- endfunction(get_libxml2)
-+@@ -21,4 +21,7 @@ if(MINIFI_LIBCURL_SOURCE STREQUAL "CONAN")
-+ elseif(MINIFI_LIBCURL_SOURCE STREQUAL "BUILD")
-+     message("Using CMake to build libcurl from source")
-+     include(FetchLibcURL)
-++elseif(MINIFI_LIBCURL_SOURCE STREQUAL "SYSTEM")
-++    message("Using libcurl provided by system")
-++    find_package(CURL REQUIRED)
-+ endif()
-+diff --git a/cmake/GetLibLZMA.cmake b/cmake/GetLibLZMA.cmake
-+index d7f25867..22c14db0 100644
-+--- a/cmake/GetLibLZMA.cmake
-++++ b/cmake/GetLibLZMA.cmake
-+@@ -21,4 +21,7 @@ if(MINIFI_LIBLZMA_SOURCE STREQUAL "CONAN")
-+ elseif(MINIFI_LIBLZMA_SOURCE STREQUAL "BUILD")
-+     message("Using CMake to build LibLZMA from source")
-+     include(LibLZMA)
-++elseif(MINIFI_LIBLZMA_SOURCE STREQUAL "SYSTEM")
-++    message("Using LibLZMA provided by system")
-++    find_package(LibLZMA REQUIRED)
-+ endif()
- diff --git a/cmake/GetOpenSSL.cmake b/cmake/GetOpenSSL.cmake
--index 58132c6bf..2b142f94e 100644
-+index 025ce48d..b565f6a4 100644
- --- a/cmake/GetOpenSSL.cmake
- +++ b/cmake/GetOpenSSL.cmake
--@@ -23,5 +23,8 @@ function(get_openssl SOURCE_DIR BINARY_DIR)
--         message("Using CMake to build OpenSSL from source")
--         include(BundledOpenSSL)
--         use_openssl(${SOURCE_DIR} ${BINARY_DIR})
--+    elseif(MINIFI_OPENSSL_SOURCE STREQUAL "SYSTEM")
--+        message("Using OpenSSL provided by system")
--+        find_package(OpenSSL REQUIRED)
--     endif()
-- endfunction(get_openssl)
--diff --git a/cmake/GetRocksDB.cmake b/cmake/GetRocksDB.cmake
--index 0968afc38..3ca1fe565 100644
----- a/cmake/GetRocksDB.cmake
--+++ b/cmake/GetRocksDB.cmake
--@@ -30,5 +30,9 @@ function(get_rocksdb SOURCE_DIR BINARY_DIR)
--             list(APPEND CMAKE_MODULE_PATH "${SOURCE_DIR}/cmake/rocksdb/sys")
--             find_package(RocksDB REQUIRED)
--         endif()
--+    elseif(MINIFI_ROCKSDB_SOURCE STREQUAL "SYSTEM")
--+        message("Using RocksDB provided by system")
--+        list(APPEND CMAKE_MODULE_PATH "${SOURCE_DIR}/cmake/rocksdb/sys")
--+        find_package(RocksDB REQUIRED)
--     endif()
-- endfunction(get_rocksdb SOURCE_DIR BINARY_DIR)
--diff --git a/cmake/GetSpdlog.cmake b/cmake/GetSpdlog.cmake
--index 9fe3b9c46..60f5c01d7 100644
----- a/cmake/GetSpdlog.cmake
--+++ b/cmake/GetSpdlog.cmake
--@@ -32,5 +32,9 @@ function(get_spdlog)
--     elseif(MINIFI_SPDLOG_SOURCE STREQUAL "BUILD")
--         message("Using CMake to build spdlog from source")
--         include(Spdlog)
--+    elseif(MINIFI_SPDLOG_SOURCE STREQUAL "SYSTEM")
--+        message("Using spdlog provided by system")
--+        find_package(spdlog REQUIRED)
--+        add_library(spdlog ALIAS spdlog::spdlog)
--     endif()
-- endfunction(get_spdlog)
-+@@ -79,4 +79,7 @@ elseif(MINIFI_OPENSSL_SOURCE STREQUAL "BUILD")
-+     include(BundledOpenSSL)
-+     use_openssl(${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR})
-+     list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake/ssl")
-++elseif(MINIFI_OPENSSL_SOURCE STREQUAL "SYSTEM")
-++    message("Using OpenSSL provided by system")
-++    find_package(OpenSSL REQUIRED)
-+ endif()
-+diff --git a/cmake/GetPugiXml.cmake b/cmake/GetPugiXml.cmake
-+index 1e784009..d31ef613 100644
-+--- a/cmake/GetPugiXml.cmake
-++++ b/cmake/GetPugiXml.cmake
-+@@ -21,4 +21,7 @@ if(MINIFI_PUGIXML_SOURCE STREQUAL "CONAN")
-+ elseif(MINIFI_PUGIXML_SOURCE STREQUAL "BUILD")
-+     message("Using CMake to build PugiXML from source")
-+     include(PugiXml)
-++elseif(MINIFI_PUGIXML_SOURCE STREQUAL "SYSTEM")
-++    message("Using PugiXML provided by system")
-++    find_package(pugixml REQUIRED)
-+ endif()
-+diff --git a/cmake/GetYamlCpp.cmake b/cmake/GetYamlCpp.cmake
-+index bfae7ad0..4d4f77b9 100644
-+--- a/cmake/GetYamlCpp.cmake
-++++ b/cmake/GetYamlCpp.cmake
-+@@ -21,4 +21,7 @@ if(MINIFI_YAMLCPP_SOURCE STREQUAL "CONAN")
-+ elseif(MINIFI_YAMLCPP_SOURCE STREQUAL "BUILD")
-+     message("Using CMake to build yaml-cpp from source")
-+     include(YamlCpp)
-++elseif(MINIFI_YAMLCPP_SOURCE STREQUAL "SYSTEM")
-++    message("Using yaml-cpp provided by system")
-++    find_package(yaml-cpp REQUIRED)
-+ endif()
- diff --git a/cmake/GetZLIB.cmake b/cmake/GetZLIB.cmake
--index 6e7bea1e3..c15e2246a 100644
-+index f8793c9c..1e0af57e 100644
- --- a/cmake/GetZLIB.cmake
- +++ b/cmake/GetZLIB.cmake
--@@ -23,5 +23,8 @@ function(get_zlib SOURCE_DIR BINARY_DIR)
--         message("Using CMake to build zlib from source")
--         include(BundledZLIB)
--         use_bundled_zlib(${SOURCE_DIR} ${BINARY_DIR})
--+    elseif(MINIFI_ZLIB_SOURCE STREQUAL "SYSTEM")
--+        message("Using zlib provided by system")
--+        find_package(ZLIB REQUIRED)
--     endif()
-- endfunction(get_zlib)
--diff --git a/cmake/GetZstd.cmake b/cmake/GetZstd.cmake
--index a0334b02d..0e7600c22 100644
----- a/cmake/GetZstd.cmake
--+++ b/cmake/GetZstd.cmake
--@@ -23,5 +23,9 @@ function(get_zstd)
--     elseif(MINIFI_ZSTD_SOURCE STREQUAL "BUILD")
--         message("Using CMake to build zstd from source")
--         include(Zstd)
--+    elseif(MINIFI_ZSTD_SOURCE STREQUAL "SYSTEM")
--+        message("Using zstd provided by system")
--+        find_package(zstd REQUIRED)
--+        add_library(zstd::zstd ALIAS zstd::libzstd_static)
--     endif()
-- endfunction(get_zstd)
--diff --git a/cmake/PugiXml.cmake b/cmake/PugiXml.cmake
--index ba5a4df38..7a1a72b9b 100644
----- a/cmake/PugiXml.cmake
--+++ b/cmake/PugiXml.cmake
--@@ -15,12 +15,16 @@
-- # specific language governing permissions and limitations
-- # under the License.
-- include(FetchContent)
--+if(MINIFI_PUGIXML_SOURCE STREQUAL "SYSTEM")
--+    message("Using pugixml provided by system")
--+    find_package(PUGIXML REQUIRED)
--+else()
--+    set(PUGIXML_BUILD_TESTS OFF CACHE BOOL "" FORCE)
-- 
---set(PUGIXML_BUILD_TESTS OFF CACHE BOOL "" FORCE)
---
---FetchContent_Declare(
---    pugixml
---    URL      https://github.com/zeux/pugixml/archive/refs/tags/v1.15.tar.gz
---    URL_HASH SHA256=b39647064d9e28297a34278bfb897092bf33b7c487906ddfc094c9e8868bddcb
---)
---FetchContent_MakeAvailable(pugixml)
--+    FetchContent_Declare(
--+        pugixml
--+        URL      https://github.com/zeux/pugixml/archive/refs/tags/v1.15.tar.gz
--+        URL_HASH SHA256=b39647064d9e28297a34278bfb897092bf33b7c487906ddfc094c9e8868bddcb
--+    )
--+    FetchContent_MakeAvailable(pugixml)
--+endif()
--diff --git a/extensions/libarchive/CMakeLists.txt b/extensions/libarchive/CMakeLists.txt
--index 14b75dcc2..ad2b13c25 100644
----- a/extensions/libarchive/CMakeLists.txt
--+++ b/extensions/libarchive/CMakeLists.txt
--@@ -22,12 +22,10 @@ if (NOT ENABLE_LIBARCHIVE)
-+@@ -21,4 +21,7 @@ if(MINIFI_ZLIB_SOURCE STREQUAL "CONAN")
-+ elseif(MINIFI_ZLIB_SOURCE STREQUAL "BUILD")
-+     message("Using CMake to build zlib from source")
-+     include(ZLIB)
-++elseif(MINIFI_ZLIB_SOURCE STREQUAL "SYSTEM")
-++    message("Using zlib provided by system")
-++    find_package(ZLIB REQUIRED)
-  endif()
-- 
-- if (ENABLE_LZMA)
---    include(LibLZMA)
---    list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake/liblzma/dummy")
--+    find_package(LibLZMA REQUIRED)
-- endif()
-- 
---include(BundledLibArchive)
---use_bundled_libarchive(${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR})
--+find_package(LibArchive REQUIRED)
-- 
-- include(${CMAKE_SOURCE_DIR}/extensions/ExtensionHeader.txt)
-- 
---- 
--2.34.1
+-diff --git a/modules/videoio/src/cap_ffmpeg_hw.hpp b/modules/videoio/src/cap_ffmpeg_hw.hpp
+-index 65045a2bc79e..bb5e4c108819 100644
+---- a/modules/videoio/src/cap_ffmpeg_hw.hpp
+-+++ b/modules/videoio/src/cap_ffmpeg_hw.hpp
+-@@ -757,6 +757,30 @@ AVCodec *hw_find_codec(AVCodecID id, AVHWDeviceType hw_type, int (*check_categor
+- #endif
+-             if (hw_type == AV_HWDEVICE_TYPE_CUDA) // CUDA encoders don't support avcodec_get_hw_config()
+-                 hw_native_fmt = AV_PIX_FMT_CUDA;
+-+#if LIBAVCODEC_VERSION_INT >= AV_VERSION_INT(61, 13, 100)
+-+            if (av_codec_is_encoder(c) && hw_native_fmt != AV_PIX_FMT_NONE) {
+-+                const AVPixelFormat *pix_fmts = NULL;
+-+                int num_pix_fmts = 0;
+-+
+-+                int ret = avcodec_get_supported_config(
+-+                    NULL,
+-+                    c,
+-+                    AV_CODEC_CONFIG_PIX_FORMAT,
+-+                    0,
+-+                    (const void **)&pix_fmts,
+-+                    &num_pix_fmts);
+-+
+-+            if (ret >= 0 && pix_fmts && num_pix_fmts > 0) {
+-+                    for (int i = 0; i < num_pix_fmts; i++) {
+-+                        if (pix_fmts[i] == hw_native_fmt) {
+-+                            *hw_pix_fmt = hw_native_fmt;
+-+                            if (hw_check_codec(c, hw_type, disabled_codecs))
+-+                                return c;
+-+                        }
+-+                    }
+-+                }
+-+            }
+-+#else
+-             if (av_codec_is_encoder(c) && hw_native_fmt != AV_PIX_FMT_NONE && c->pix_fmts) {
+-                 for (int i = 0; c->pix_fmts[i] != AV_PIX_FMT_NONE; i++) {
+-                     if (c->pix_fmts[i] == hw_native_fmt) {
+-@@ -766,6 +790,7 @@ AVCodec *hw_find_codec(AVCodecID id, AVHWDeviceType hw_type, int (*check_categor
+-                     }
+-                 }
+-             }
+-+#endif
+-             for (int i = 0;; i++) {
+-                 const AVCodecHWConfig *hw_config = avcodec_get_hw_config(c, i);
+-                 if (!hw_config)
 -
-diff --git a/meta-oe/recipes-extended/minifi-cpp/files/0001-Fix-build-with-gcc-16.patch b/meta-oe/recipes-extended/minifi-cpp/files/0001-Fix-build-with-gcc-16.patch
-deleted file mode 100644
-index ca1b67783d..0000000000
---- a/meta-oe/recipes-extended/minifi-cpp/files/0001-Fix-build-with-gcc-16.patch
-+++ /dev/null
-@@ -1,49 +0,0 @@
--From 950aea28ffefd88f230d6bd25fa0352e9ca157c9 Mon Sep 17 00:00:00 2001
--From: Mingli Yu <mingli.yu@windriver.com>
--Date: Wed, 3 Jun 2026 02:12:01 -0700
--Subject: [PATCH] Fix build with gcc 16
+-From 83ed22ca2800267050a4a9a94afab605c990c0e0 Mon Sep 17 00:00:00 2001
+-From: Arnesh Banerjee <linkrinku13@gmail.com>
+-Date: Tue, 4 Aug 2026 19:49:11 +0530
+-Subject: [PATCH 2/3] videoio(ffmpeg): use avcodec_get_supported_config for
+- framerates on FFmpeg 9
 -
--Fixes:
--  extensions/systemd/libwrapper/LibWrapper.h:38:31: error: 'uint64_t' has not been declared
--   38 |   virtual int getRealtimeUsec(uint64_t* usec_out) noexcept = 0;
--      |                               ^~~~~~~~
+-AVCodec::supported_framerates was deprecated in FFmpeg 7.1 and removed in
+-FFmpeg 9, so direct field access no longer builds against FFmpeg 9.
 -
--  minifi-api/include/minifi-cpp/core/RepositoryMetricsSource.h:29:5: error: 'uint64_t' does not name a type
--  |    29 |     uint64_t table_readers_size{};
--  |       |     ^~~~~~~~
--
--Upstream-Status: Submitted [https://github.com/apache/nifi-minifi-cpp/pull/2194]
--
--Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+-Read the supported frame rate list through avcodec_get_supported_config()
+-when building against libavcodec 61.13.100 or newer. That call returns the
+-same list plus its entry count, so the loop iterates by count instead of the
+-old sentinel terminator. Older FFmpeg keeps the previous field access.
+-Upstream-Status: Backport [https://github.com/opencv/opencv/pull/29533]
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ----
-- extensions/systemd/libwrapper/LibWrapper.h       | 1 +
-- minifi-api/include/minifi-cpp/core/RepositoryMetricsSource.h | 1 +
-- 2 files changed, 2 insertions(+)
+- modules/videoio/src/cap_ffmpeg_impl.hpp | 34 +++++++++++++++++++++++++
+- 1 file changed, 34 insertions(+)
 -
--diff --git a/extensions/systemd/libwrapper/LibWrapper.h b/extensions/systemd/libwrapper/LibWrapper.h
--index d7e7b7c..c8af00e 100644
----- a/extensions/systemd/libwrapper/LibWrapper.h
--+++ b/extensions/systemd/libwrapper/LibWrapper.h
--@@ -19,6 +19,7 @@
-- #pragma once
-- 
-- #include <memory>
--+#include <cstdint>
-- 
-- #include "../Common.h"
-- #include "utils/gsl.h"
--diff --git a/minifi-api/include/minifi-cpp/core/RepositoryMetricsSource.h b/minifi-api/include/minifi-cpp/core/RepositoryMetricsSource.h
--index 6c933b7..f39fccf 100644
----- a/minifi-api/include/minifi-cpp/core/RepositoryMetricsSource.h
--+++ b/minifi-api/include/minifi-cpp/core/RepositoryMetricsSource.h
--@@ -20,6 +20,7 @@
-- 
-- #include <string>
-- #include <optional>
--+#include <cstdint>
-- 
-- namespace org::apache::nifi::minifi::core {
-- 
---- 
--2.49.0
+-diff --git a/modules/videoio/src/cap_ffmpeg_impl.hpp b/modules/videoio/src/cap_ffmpeg_impl.hpp
+-index a7fb1eda9a54..d5b950392c94 100644
+---- a/modules/videoio/src/cap_ffmpeg_impl.hpp
+-+++ b/modules/videoio/src/cap_ffmpeg_impl.hpp
+-@@ -2627,6 +2627,39 @@ static AVCodecContext * icv_configure_video_stream_FFMPEG(AVFormatContext *oc,
+-     c->time_base.den = frame_rate;
+-     c->time_base.num = frame_rate_base;
+-     /* adjust time base for supported framerates */
+-+    // AVCodec::supported_framerates was deprecated in FFmpeg 7.1 and removed in
+-+    // FFmpeg 9. avcodec_get_supported_config() returns the same list together
+-+    // with its entry count, so use it when available.
+-+#if LIBAVCODEC_BUILD >= CALC_FFMPEG_VERSION(61, 13, 100)
+-+    const AVRational *supported_framerates = NULL;
+-+    int num_supported_framerates = 0;
+-+    if (codec)
+-+        avcodec_get_supported_config(NULL, codec, AV_CODEC_CONFIG_FRAME_RATE, 0,
+-+                                     (const void **)&supported_framerates, &num_supported_framerates);
+-+    if (supported_framerates && num_supported_framerates > 0){
+-+        AVRational req = {frame_rate, frame_rate_base};
+-+        const AVRational *best=NULL;
+-+        AVRational best_error= {INT_MAX, 1};
+-+        for(int i = 0; i < num_supported_framerates; i++){
+-+            const AVRational *p = &supported_framerates[i];
+-+            AVRational error= av_sub_q(req, *p);
+-+            if(error.num <0) error.num *= -1;
+-+            if(av_cmp_q(error, best_error) < 0){
+-+                best_error= error;
+-+                best= p;
+-+            }
+-+        }
+-+        if (best == NULL)
+-+        {
+-+#ifdef CV_FFMPEG_CODECPAR
+-+            avcodec_free_context(&c);
+-+#endif
+-+            return NULL;
+-+        }
+-+        c->time_base.den= best->num;
+-+        c->time_base.num= best->den;
+-+    }
+-+#else
+-     if(codec && codec->supported_framerates){
+-         const AVRational *p= codec->supported_framerates;
+-         AVRational req = {frame_rate, frame_rate_base};
+-@@ -2650,6 +2683,7 @@ static AVCodecContext * icv_configure_video_stream_FFMPEG(AVFormatContext *oc,
+-         c->time_base.den= best->num;
+-         c->time_base.num= best->den;
+-     }
+-+#endif
 -
-diff --git a/meta-oe/recipes-extended/minifi-cpp/files/0001-generateVersion.sh-set-BUILD_DATE-to-SOURCE_DATE_EPO.patch b/meta-oe/recipes-extended/minifi-cpp/files/0001-generateVersion.sh-set-BUILD_DATE-to-SOURCE_DATE_EPO.patch
-index a61873e21a..2290f38159 100644
---- a/meta-oe/recipes-extended/minifi-cpp/files/0001-generateVersion.sh-set-BUILD_DATE-to-SOURCE_DATE_EPO.patch
-+++ b/meta-oe/recipes-extended/minifi-cpp/files/0001-generateVersion.sh-set-BUILD_DATE-to-SOURCE_DATE_EPO.patch
-@@ -1,6 +1,6 @@
--From ee9722731b3f9cfc3d8e338ab09bc0ad409a6941 Mon Sep 17 00:00:00 2001
-+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
- From: Yi Zhao <yi.zhao@windriver.com>
--Date: Thu, 18 Sep 2025 14:43:11 +0000
-+Date: Mon, 23 Nov 2026 08:02:54 -0800
- Subject: [PATCH] generateVersion.sh: set BUILD_DATE to SOURCE_DATE_EPOCH
- 
- Use SOURCE_DATE_EPOCH to set BUILD_DATE to improve reproducibility.
-@@ -13,12 +13,12 @@ Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
-  1 file changed, 5 insertions(+), 1 deletion(-)
- 
- diff --git a/generateVersion.sh b/generateVersion.sh
--index 0b50a16..96cc3ae 100755
-+index 5c614240..0af066fa 100755
- --- a/generateVersion.sh
- +++ b/generateVersion.sh
--@@ -25,7 +25,11 @@ flags=$6
-- extensions=$7
-- buildident=$8
-+@@ -24,7 +24,11 @@ compiler_version=$5
-+ flags=$6
-+ buildident=$7
-  
- -date=$(date +%s)
- +if [ -n "${SOURCE_DATE_EPOCH}" ]; then
-@@ -28,7 +28,4 @@ index 0b50a16..96cc3ae 100755
- +fi
-  
-  if [ -d "${src_dir}"/.git ]; then
--   buildrev=$(git -C "${src_dir}" log -1 --pretty=format:"%H")
---- 
--2.48.1
+-     c->gop_size = 12; /* emit one intra frame every twelve frames at most */
+-     c->pix_fmt = pixel_format;
 -
-+   buildrev=$(git log -1 --pretty=format:"%H")
-diff --git a/meta-oe/recipes-extended/minifi-cpp/files/0002-Fix-osspuuid-build.patch b/meta-oe/recipes-extended/minifi-cpp/files/0002-Fix-osspuuid-build.patch
-index 537beb85d3..ba581dab70 100644
---- a/meta-oe/recipes-extended/minifi-cpp/files/0002-Fix-osspuuid-build.patch
-+++ b/meta-oe/recipes-extended/minifi-cpp/files/0002-Fix-osspuuid-build.patch
-@@ -1,6 +1,6 @@
--From 429b2b357e5142e2b845da95bdd38e8fc1229831 Mon Sep 17 00:00:00 2001
-+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
- From: Yi Zhao <yi.zhao@windriver.com>
--Date: Tue, 19 Mar 2024 20:48:25 +0800
-+Date: Mon, 23 Nov 2026 08:02:53 -0800
- Subject: [PATCH] Fix osspuuid build
- 
- * Specify correct configure options to fix osspuuid cross build.
-@@ -9,6 +9,9 @@ Subject: [PATCH] Fix osspuuid build
- Upstream-Status: Inappropriate [embedded specific]
- 
- Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
-+[kr: Refreshed for minifi-cpp 1.1.0, which moved the ossp-uuid patches
-+to thirdparty/ossp-uuid/all/patches.]
-+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
- ---
-  cmake/BundledOSSPUUID.cmake                         | 10 +++++-----
-  .../ossp-uuid/ossp-uuid-cross-compile-fix.patch     | 13 +++++++++++++
-@@ -16,13 +19,13 @@ Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
-  create mode 100644 thirdparty/ossp-uuid/ossp-uuid-cross-compile-fix.patch
- 
- diff --git a/cmake/BundledOSSPUUID.cmake b/cmake/BundledOSSPUUID.cmake
--index 747e52c27..fb6e2164d 100644
-+index 218d4075..0a853974 100644
- --- a/cmake/BundledOSSPUUID.cmake
- +++ b/cmake/BundledOSSPUUID.cmake
- @@ -23,10 +23,12 @@ function(use_bundled_osspuuid SOURCE_DIR BINARY_DIR)
--     set(PATCH_FILE1 "${SOURCE_DIR}/thirdparty/ossp-uuid/ossp-uuid-mac-fix.patch")
--     set(PATCH_FILE2 "${SOURCE_DIR}/thirdparty/ossp-uuid/ossp-uuid-no-prog.patch")
--     set(PATCH_FILE3 "${SOURCE_DIR}/thirdparty/ossp-uuid/ossp-uuid-update-config-guess.patch")
-+     set(PATCH_FILE1 "${SOURCE_DIR}/thirdparty/ossp-uuid/all/patches/ossp-uuid-mac-fix.patch")
-+     set(PATCH_FILE2 "${SOURCE_DIR}/thirdparty/ossp-uuid/all/patches/ossp-uuid-no-prog.patch")
-+     set(PATCH_FILE3 "${SOURCE_DIR}/thirdparty/ossp-uuid/all/patches/ossp-uuid-update-config-guess.patch")
- +    set(PATCH_FILE4 "${SOURCE_DIR}/thirdparty/ossp-uuid/ossp-uuid-cross-compile-fix.patch")
-      set(PC ${Bash_EXECUTABLE} -c "set -x &&\
-              (\"${Patch_EXECUTABLE}\" -p1 -R -s -f --dry-run -i \"${PATCH_FILE1}\" || \"${Patch_EXECUTABLE}\" -p1 -N -i \"${PATCH_FILE1}\") &&\
-@@ -38,7 +41,7 @@ index 747e52c27..fb6e2164d 100644
-          string(APPEND ADDITIONAL_COMPILER_FLAGS "-isysroot ${CMAKE_OSX_SYSROOT} ")
-      endif()
- -    set(CONFIGURE_COMMAND ./configure "CC=${CMAKE_C_COMPILER}" "CXX=${CMAKE_CXX_COMPILER}" "CFLAGS=${PASSTHROUGH_CMAKE_C_FLAGS} ${ADDITIONAL_COMPILER_FLAGS}" "CXXFLAGS=${PASSTHROUGH_CMAKE_CXX_FLAGS} ${ADDITIONAL_COMPILER_FLAGS}" --enable-shared=no --with-cxx --without-perl --without-php --without-pgsql "--prefix=${BINARY_DIR}/thirdparty/ossp-uuid-install")
--+    set(CONFIGURE_COMMAND ac_cv_va_copy=C99 ./configure --host=${HOST_SYS} --build=${BUILD_SYS} "CC=${CMAKE_C_COMPILER}" "CXX=${CMAKE_CXX_COMPILER}" "CFLAGS=${PASSTHROUGH_CMAKE_C_FLAGS} -fPIC" "CXXFLAGS=${PASSTHROUGH_CMAKE_CXX_FLAGS} -fPIC" --enable-shared=no --with-cxx --without-perl --without-php --without-pgsql "--prefix=${BINARY_DIR}/thirdparty/ossp-uuid-install")
-++    set(CONFIGURE_COMMAND ac_cv_va_copy=C99 ./configure --host=${HOST_SYS} --build=${BUILD_SYS} "CC=${CMAKE_C_COMPILER}" "CXX=${CMAKE_CXX_COMPILER}" "CFLAGS=${PASSTHROUGH_CMAKE_C_FLAGS} ${ADDITIONAL_COMPILER_FLAGS}" "CXXFLAGS=${PASSTHROUGH_CMAKE_CXX_FLAGS} ${ADDITIONAL_COMPILER_FLAGS}" --enable-shared=no --with-cxx --without-perl --without-php --without-pgsql "--prefix=${BINARY_DIR}/thirdparty/ossp-uuid-install")
-  
-      string(TOLOWER "${CMAKE_BUILD_TYPE}" build_type)
-      if(build_type MATCHES debug)
-@@ -56,7 +59,7 @@ index 747e52c27..fb6e2164d 100644
-              UPDATE_COMMAND ""
- diff --git a/thirdparty/ossp-uuid/ossp-uuid-cross-compile-fix.patch b/thirdparty/ossp-uuid/ossp-uuid-cross-compile-fix.patch
- new file mode 100644
--index 000000000..b8d7b0bba
-+index 00000000..b8d7b0bb
- --- /dev/null
- +++ b/thirdparty/ossp-uuid/ossp-uuid-cross-compile-fix.patch
- @@ -0,0 +1,13 @@
-@@ -73,6 +76,3 @@ index 000000000..b8d7b0bba
- +         fi
- +         if [ ".$opt_o" != . ]; then
- +             if [ ".$opt_t" = .yes ]; then
---- 
--2.34.1
+-From c0166c617d765ac707dde6b9acd8cfcd49751049 Mon Sep 17 00:00:00 2001
+-From: Alexander Smorkalov <alexander.smorkalov@opencv.ai>
+-Date: Tue, 11 Aug 2026 13:01:55 +0300
+-Subject: [PATCH 3/3] Code review fixes.
 -
-diff --git a/meta-oe/recipes-extended/minifi-cpp/files/0003-Fix-libsodium-build.patch b/meta-oe/recipes-extended/minifi-cpp/files/0003-Fix-libsodium-build.patch
-index 9ce5600327..fe32cbdc4a 100644
---- a/meta-oe/recipes-extended/minifi-cpp/files/0003-Fix-libsodium-build.patch
-+++ b/meta-oe/recipes-extended/minifi-cpp/files/0003-Fix-libsodium-build.patch
-@@ -1,6 +1,6 @@
--From d48ababf341708885ecf687ebc46bb1d84ca868d Mon Sep 17 00:00:00 2001
-+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
- From: Yi Zhao <yi.zhao@windriver.com>
--Date: Tue, 19 Mar 2024 20:56:05 +0800
-+Date: Mon, 23 Nov 2026 08:02:54 -0800
- Subject: [PATCH] Fix libsodium build
- 
- * Specify correct configure options to fix libsodium cross build.
-@@ -14,12 +14,14 @@ from 0.99.1 to 0.99.2; adapted the patch when upgrading libsodium
- from 1.0.19 to 1.0.20 because the top-level directory name inside the
- tarball changed from libsodium-stable to libsodium-1.0.20.]
- Signed-off-by: Li Zhou <li.zhou@windriver.com>
-+[kr: Adapted for libsodium 1.0.22 used by minifi-cpp 1.1.0.]
-+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
- ---
-  cmake/BundledLibSodium.cmake | 6 ++----
-  1 file changed, 2 insertions(+), 4 deletions(-)
- 
- diff --git a/cmake/BundledLibSodium.cmake b/cmake/BundledLibSodium.cmake
--index 001a90dad..87a3244fd 100644
-+index 4232ed3e..f2045723 100644
- --- a/cmake/BundledLibSodium.cmake
- +++ b/cmake/BundledLibSodium.cmake
- @@ -60,14 +60,12 @@ function(use_bundled_libsodium SOURCE_DIR BINARY_DIR)
-@@ -35,10 +37,7 @@ index 001a90dad..87a3244fd 100644
- -                URL_HASH ${LIBSODIUM_URL_HASH}
-                  BUILD_IN_SOURCE true
- -                SOURCE_DIR "${BINARY_DIR}/thirdparty/libsodium-src"
--+                SOURCE_DIR "${SOURCE_DIR}/thirdparty/libsodium-1.0.20"
-++                SOURCE_DIR "${SOURCE_DIR}/thirdparty/libsodium-1.0.22"
-                  BUILD_COMMAND make
-                  CMAKE_COMMAND ""
-                  UPDATE_COMMAND ""
---- 
--2.34.1
--
-diff --git a/meta-oe/recipes-extended/minifi-cpp/files/0004-Pass-noline-flag-to-flex.patch b/meta-oe/recipes-extended/minifi-cpp/files/0004-Pass-noline-flag-to-flex.patch
-index 344e8839e7..eb28122770 100644
---- a/meta-oe/recipes-extended/minifi-cpp/files/0004-Pass-noline-flag-to-flex.patch
-+++ b/meta-oe/recipes-extended/minifi-cpp/files/0004-Pass-noline-flag-to-flex.patch
-@@ -1,6 +1,6 @@
--From 229137659501ae51774dcb3249f94545bdd6e21f Mon Sep 17 00:00:00 2001
-+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
- From: Yi Zhao <yi.zhao@windriver.com>
--Date: Tue, 19 Mar 2024 21:00:59 +0800
-+Date: Mon, 23 Nov 2026 08:03:07 -0800
- Subject: [PATCH] Pass --noline flag to flex
- 
- This ensures that line directive is not emitted into lexer output which
-@@ -10,22 +10,19 @@ Upstream-Status: Inappropriate [embedded specific]
- 
- Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
- ---
-- extensions/expression-language/CMakeLists.txt | 2 +-
-+ cmake/ExpressionLanguage.cmake | 2 +-
-  1 file changed, 1 insertion(+), 1 deletion(-)
- 
--diff --git a/extensions/expression-language/CMakeLists.txt b/extensions/expression-language/CMakeLists.txt
--index c179ab3ef..7f507b03a 100644
----- a/extensions/expression-language/CMakeLists.txt
--+++ b/extensions/expression-language/CMakeLists.txt
--@@ -103,7 +103,7 @@ flex_target(
-+diff --git a/cmake/ExpressionLanguage.cmake b/cmake/ExpressionLanguage.cmake
-+index 4ce4e8f6..5a9f7a5e 100644
-+--- a/cmake/ExpressionLanguage.cmake
-++++ b/cmake/ExpressionLanguage.cmake
-+@@ -58,7 +58,7 @@ flex_target(
-      el-scanner
--     ${CMAKE_CURRENT_SOURCE_DIR}/Scanner.ll
-+     ${CMAKE_SOURCE_DIR}/libminifi/include/expression-language/Scanner.ll
-      ${CMAKE_BINARY_DIR}/el-generated/Scanner.cpp
- -    COMPILE_FLAGS --c++
- +    COMPILE_FLAGS "--c++ --noline"
-  )
-  
-  set(EL_GENERATED_INCLUDE_DIR ${CMAKE_BINARY_DIR}/el-generated)
---- 
--2.34.1
--
-diff --git a/meta-oe/recipes-extended/minifi-cpp/files/0005-generateVersion.sh-set-correct-buildrev.patch b/meta-oe/recipes-extended/minifi-cpp/files/0005-generateVersion.sh-set-correct-buildrev.patch
-index 2e78b1087e..d7477a0545 100644
---- a/meta-oe/recipes-extended/minifi-cpp/files/0005-generateVersion.sh-set-correct-buildrev.patch
-+++ b/meta-oe/recipes-extended/minifi-cpp/files/0005-generateVersion.sh-set-correct-buildrev.patch
-@@ -1,6 +1,6 @@
--From 1861170c6de3dd851324debf3a6eaeff4d8d8bce Mon Sep 17 00:00:00 2001
-+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
- From: Yi Zhao <yi.zhao@windriver.com>
--Date: Fri, 14 Mar 2025 20:26:38 +0800
-+Date: Mon, 23 Nov 2026 08:02:55 -0800
- Subject: [PATCH] generateVersion.sh: set correct buildrev
- 
- Since this script is run outside the source directory, git log can not
-@@ -15,11 +15,11 @@ Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
-  1 file changed, 1 insertion(+), 1 deletion(-)
- 
- diff --git a/generateVersion.sh b/generateVersion.sh
--index ff25afba8..0b50a1693 100755
-+index 0af066fa..7ca743e1 100755
- --- a/generateVersion.sh
- +++ b/generateVersion.sh
--@@ -28,7 +28,7 @@ buildident=$8
-- date=$(date +%s)
-+@@ -31,7 +31,7 @@ else
-+ fi
-  
-  if [ -d "${src_dir}"/.git ]; then
- -  buildrev=$(git log -1 --pretty=format:"%H")
-@@ -27,6 +27,3 @@ index ff25afba8..0b50a1693 100755
-  else
-    buildrev="Unknown"
-  fi
---- 
--2.34.1
--
-diff --git a/meta-oe/recipes-extended/minifi-cpp/files/0006-CMakeLists.txt-do-not-use-ccache.patch b/meta-oe/recipes-extended/minifi-cpp/files/0006-CMakeLists.txt-do-not-use-ccache.patch
-index 055a3e7b57..62d0a75f87 100644
---- a/meta-oe/recipes-extended/minifi-cpp/files/0006-CMakeLists.txt-do-not-use-ccache.patch
-+++ b/meta-oe/recipes-extended/minifi-cpp/files/0006-CMakeLists.txt-do-not-use-ccache.patch
-@@ -1,38 +1,43 @@
--From bbe5c95ef1755c4804c4561c03cafedeb004cb36 Mon Sep 17 00:00:00 2001
-+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
- From: Yi Zhao <yi.zhao@windriver.com>
--Date: Thu, 21 Mar 2024 10:18:39 +0800
-+Date: Mon, 23 Nov 2026 08:03:07 -0800
- Subject: [PATCH] CMakeLists.txt: do not use ccache
- 
- Upstream-Status: Inappropriate [embedded specific]
- 
- Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
- ---
-- CMakeLists.txt | 12 ++++++------
-- 1 file changed, 6 insertions(+), 6 deletions(-)
-+ CMakeLists.txt | 20 ++++++++++----------
-+ 1 file changed, 10 insertions(+), 10 deletions(-)
- 
- diff --git a/CMakeLists.txt b/CMakeLists.txt
--index fc1718dfd..70c94c2ff 100644
-+index f9c6474c..6932d1dd 100644
- --- a/CMakeLists.txt
- +++ b/CMakeLists.txt
--@@ -84,12 +84,12 @@ if (MINIFI_USE_REAL_ODBC_TEST_DRIVER)
-+@@ -85,16 +85,16 @@ if (MINIFI_USE_REAL_ODBC_TEST_DRIVER)
-  endif()
-  
-  # Use ccache if present
- -find_program(CCACHE_FOUND ccache)
- -if(CCACHE_FOUND)
---    set_property(GLOBAL PROPERTY RULE_LAUNCH_COMPILE ccache)
---    set_property(GLOBAL PROPERTY RULE_LAUNCH_LINK ccache)
-+-    if(NOT CMAKE_C_COMPILER_LAUNCHER)
-+-        set(CMAKE_C_COMPILER_LAUNCHER "${CCACHE_FOUND}")
-+-    endif()
-+-    if(NOT CMAKE_CXX_COMPILER_LAUNCHER)
-+-        set(CMAKE_CXX_COMPILER_LAUNCHER "${CCACHE_FOUND}")
-+-    endif()
- -    message("-- Found ccache: ${CCACHE_FOUND}")
- -endif(CCACHE_FOUND)
- +#find_program(CCACHE_FOUND ccache)
- +#if(CCACHE_FOUND)
--+#    set_property(GLOBAL PROPERTY RULE_LAUNCH_COMPILE ccache)
--+#    set_property(GLOBAL PROPERTY RULE_LAUNCH_LINK ccache)
-++#    if(NOT CMAKE_C_COMPILER_LAUNCHER)
-++#        set(CMAKE_C_COMPILER_LAUNCHER "${CCACHE_FOUND}")
-++#    endif()
-++#    if(NOT CMAKE_CXX_COMPILER_LAUNCHER)
-++#        set(CMAKE_CXX_COMPILER_LAUNCHER "${CCACHE_FOUND}")
-++#    endif()
- +#    message("-- Found ccache: ${CCACHE_FOUND}")
- +#endif(CCACHE_FOUND)
-  
-  # Check for exec info before we enable the backtrace features.
-  CHECK_INCLUDE_FILE("execinfo.h" HAS_EXECINFO)
---- 
--2.34.1
--
-diff --git a/meta-oe/recipes-extended/minifi-cpp/files/0007-StreamCallback.h-add-missing-cstdint-include-for-in.patch b/meta-oe/recipes-extended/minifi-cpp/files/0007-StreamCallback.h-add-missing-cstdint-include-for-in.patch
-deleted file mode 100644
-index f19cea494c..0000000000
---- a/meta-oe/recipes-extended/minifi-cpp/files/0007-StreamCallback.h-add-missing-cstdint-include-for-in.patch
-+++ /dev/null
-@@ -1,35 +0,0 @@
--From: Khem Raj <khem.raj@oss.qualcomm.com>
--Date: Tue, 29 Sep 2026 01:54:51 +0000
--Subject: [PATCH] StreamCallback.h: add missing <cstdint> include for
-- int64_t
--
--StreamCallback.h uses int64_t in ReadWriteResult and in the
--InputStreamCallback/OutputStreamCallback std::function aliases, but
--never includes <cstdint> itself. On glibc/libstdc++ this happens to
--compile because some other transitively-included standard header
--provides int64_t first, but musl's libc++ headers do not provide
--this transitive declaration, so the header fails to parse with
--"unknown type name 'int64_t'" (which then cascades into std::function
--template errors). This is the same class of issue already fixed for
--LibWrapper.h and RepositoryMetricsSource.h by
--0001-Fix-build-with-gcc-16.patch; StreamCallback.h needs the same
--treatment.
--
--Upstream-Status: Pending
--Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+-Upstream-Status: Backport [https://github.com/opencv/opencv/pull/29533]
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ----
-- minifi-api/include/minifi-cpp/io/StreamCallback.h | 1 +
-- 1 file changed, 1 insertion(+)
+- modules/videoio/src/cap_ffmpeg_hw.hpp   | 16 ++++----
+- modules/videoio/src/cap_ffmpeg_impl.hpp | 51 ++++++++++++-------------
+- 2 files changed, 33 insertions(+), 34 deletions(-)
 -
--diff --git a/minifi-api/include/minifi-cpp/io/StreamCallback.h b/minifi-api/include/minifi-cpp/io/StreamCallback.h
--index 1111111..2222222 100644
----- a/minifi-api/include/minifi-cpp/io/StreamCallback.h
--+++ b/minifi-api/include/minifi-cpp/io/StreamCallback.h
--@@ -16,6 +16,7 @@
--  */
-- #pragma once
+-diff --git a/modules/videoio/src/cap_ffmpeg_hw.hpp b/modules/videoio/src/cap_ffmpeg_hw.hpp
+-index bb5e4c108819..6c456881122a 100644
+---- a/modules/videoio/src/cap_ffmpeg_hw.hpp
+-+++ b/modules/videoio/src/cap_ffmpeg_hw.hpp
+-@@ -757,7 +757,7 @@ AVCodec *hw_find_codec(AVCodecID id, AVHWDeviceType hw_type, int (*check_categor
+- #endif
+-             if (hw_type == AV_HWDEVICE_TYPE_CUDA) // CUDA encoders don't support avcodec_get_hw_config()
+-                 hw_native_fmt = AV_PIX_FMT_CUDA;
+--#if LIBAVCODEC_VERSION_INT >= AV_VERSION_INT(61, 13, 100)
+-+#if LIBAVCODEC_BUILD >= AV_VERSION_INT(61, 13, 100)
+-             if (av_codec_is_encoder(c) && hw_native_fmt != AV_PIX_FMT_NONE) {
+-                 const AVPixelFormat *pix_fmts = NULL;
+-                 int num_pix_fmts = 0;
+-@@ -770,15 +770,15 @@ AVCodec *hw_find_codec(AVCodecID id, AVHWDeviceType hw_type, int (*check_categor
+-                     (const void **)&pix_fmts,
+-                     &num_pix_fmts);
 -
--+#include <cstdint>
-- #include <functional>
-- #include <memory>
-- #include <optional>
-diff --git a/meta-oe/recipes-extended/minifi-cpp/minifi-cpp_0.99.2.bb b/meta-oe/recipes-extended/minifi-cpp/minifi-cpp_1.1.0.bb
-similarity index 77%
-rename from meta-oe/recipes-extended/minifi-cpp/minifi-cpp_0.99.2.bb
-rename to meta-oe/recipes-extended/minifi-cpp/minifi-cpp_1.1.0.bb
-index 5854483ba9..46b4a96d66 100644
---- a/meta-oe/recipes-extended/minifi-cpp/minifi-cpp_0.99.2.bb
-+++ b/meta-oe/recipes-extended/minifi-cpp/minifi-cpp_1.1.0.bb
-@@ -5,69 +5,65 @@ management, focusing on the collection of data at the source of its creation."
- HOMEPAGE = "https://nifi.apache.org/minifi/index.html"
- SECTION = "console/network"
- LICENSE = "Apache-2.0 AND BSD-2-Clause AND BSD-3-Clause AND BSL-1.0 AND ISC AND MIT AND Zlib"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=cb72a6f151096df9e2f5f01b6bf9d735"
--
--SRC_URI = "git://github.com/apache/nifi-minifi-cpp.git;protocol=https;branch=main \
--           git://github.com/martinmoene/expected-lite.git;protocol=https;branch=master;name=expected-lite;destsuffix=${S}/thirdparty/expected-lite-src \
--           git://github.com/ericniebler/range-v3.git;protocol=https;branch=master;name=range-v3;destsuffix=${S}/thirdparty/range-v3-src \
--           git://github.com/Neargye/magic_enum.git;protocol=https;branch=master;name=magic-enum;destsuffix=${S}/thirdparty/magic-enum-src \
--           git://github.com/p-ranav/argparse.git;protocol=https;branch=master;name=argparse;destsuffix=${S}/thirdparty/argparse-src \
--           git://github.com/gsl-lite/gsl-lite.git;protocol=https;branch=master;name=gsl-lite;destsuffix=${S}/thirdparty/gsl-lite-src \
--           git://github.com/HowardHinnant/date.git;protocol=https;branch=master;name=date;destsuffix=${S}/thirdparty/date-src \
--           git://github.com/chriskohlhoff/asio.git;protocol=https;branch=master;name=asio;destsuffix=${S}/thirdparty/asio-src \
--           git://github.com/fmtlib/fmt.git;protocol=https;branch=main;name=fmt;destsuffix=${S}/thirdparty/fmt-src \
--           git://github.com/gabime/spdlog.git;protocol=https;branch=v1.x;tag=v1.15.3;name=spdlog;destsuffix=${S}/thirdparty/spdlog-src \
--           git://github.com/danielaparker/jsoncons.git;protocol=https;branch=master;name=jsoncons;destsuffix=${S}/thirdparty/jsoncons-src \
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=50c0151bf7c3999dcb7de9652ec6e3a6"
+--            if (ret >= 0 && pix_fmts && num_pix_fmts > 0) {
+--                    for (int i = 0; i < num_pix_fmts; i++) {
+--                        if (pix_fmts[i] == hw_native_fmt) {
+--                            *hw_pix_fmt = hw_native_fmt;
+--                            if (hw_check_codec(c, hw_type, disabled_codecs))
+--                                return c;
+-+                if (ret >= 0 && pix_fmts && num_pix_fmts > 0) {
+-+                        for (int i = 0; i < num_pix_fmts; i++) {
+-+                            if (pix_fmts[i] == hw_native_fmt) {
+-+                                *hw_pix_fmt = hw_native_fmt;
+-+                                if (hw_check_codec(c, hw_type, disabled_codecs))
+-+                                    return c;
+-+                            }
+-                         }
+-                     }
+--                }
+-             }
+- #else
+-             if (av_codec_is_encoder(c) && hw_native_fmt != AV_PIX_FMT_NONE && c->pix_fmts) {
+-diff --git a/modules/videoio/src/cap_ffmpeg_impl.hpp b/modules/videoio/src/cap_ffmpeg_impl.hpp
+-index d5b950392c94..fc4479e07c5f 100644
+---- a/modules/videoio/src/cap_ffmpeg_impl.hpp
+-+++ b/modules/videoio/src/cap_ffmpeg_impl.hpp
+-@@ -2627,37 +2627,36 @@ static AVCodecContext * icv_configure_video_stream_FFMPEG(AVFormatContext *oc,
+-     c->time_base.den = frame_rate;
+-     c->time_base.num = frame_rate_base;
+-     /* adjust time base for supported framerates */
+--    // AVCodec::supported_framerates was deprecated in FFmpeg 7.1 and removed in
+--    // FFmpeg 9. avcodec_get_supported_config() returns the same list together
+--    // with its entry count, so use it when available.
+- #if LIBAVCODEC_BUILD >= CALC_FFMPEG_VERSION(61, 13, 100)
+--    const AVRational *supported_framerates = NULL;
+--    int num_supported_framerates = 0;
+--    if (codec)
+--        avcodec_get_supported_config(NULL, codec, AV_CODEC_CONFIG_FRAME_RATE, 0,
+--                                     (const void **)&supported_framerates, &num_supported_framerates);
+--    if (supported_framerates && num_supported_framerates > 0){
+--        AVRational req = {frame_rate, frame_rate_base};
+--        const AVRational *best=NULL;
+--        AVRational best_error= {INT_MAX, 1};
+--        for(int i = 0; i < num_supported_framerates; i++){
+--            const AVRational *p = &supported_framerates[i];
+--            AVRational error= av_sub_q(req, *p);
+--            if(error.num <0) error.num *= -1;
+--            if(av_cmp_q(error, best_error) < 0){
+--                best_error= error;
+--                best= p;
+-+    if (codec){
+-+        const AVRational *supported_framerates = NULL;
+-+        int num_supported_framerates = 0;
+-+        int ret = avcodec_get_supported_config(NULL, codec, AV_CODEC_CONFIG_FRAME_RATE, 0,
+-+                                               (const void **)&supported_framerates, &num_supported_framerates);
+-+
+-+        if (ret >= 0 && supported_framerates && num_supported_framerates > 0){
+-+            AVRational req = {frame_rate, frame_rate_base};
+-+            const AVRational *best=NULL;
+-+            AVRational best_error= {INT_MAX, 1};
+-+            for(int i = 0; i < num_supported_framerates; i++){
+-+                const AVRational *p = &supported_framerates[i];
+-+                AVRational error = av_sub_q(req, *p);
+-+                if(error.num <0) error.num *= -1;
+-+                if(av_cmp_q(error, best_error) < 0){
+-+                    best_error = error;
+-+                    best = p;
+-+                }
+-             }
+--        }
+--        if (best == NULL)
+--        {
+-+            if (best == NULL)
+-+            {
+- #ifdef CV_FFMPEG_CODECPAR
+--            avcodec_free_context(&c);
+-+                avcodec_free_context(&c);
+- #endif
+--            return NULL;
+-+                return NULL;
+-+            }
+-+            c->time_base.den = best->num;
+-+            c->time_base.num = best->den;
+-         }
+--        c->time_base.den= best->num;
+--        c->time_base.num= best->den;
+-     }
+- #else
+-     if(codec && codec->supported_framerates){
+diff --git a/meta-oe/recipes-support/opencv/opencv_4.14.0.bb b/meta-oe/recipes-support/opencv/opencv_5.1.0.bb
+similarity index 88%
+rename from meta-oe/recipes-support/opencv/opencv_4.14.0.bb
+rename to meta-oe/recipes-support/opencv/opencv_5.1.0.bb
+index 7cc487c0ce..d2b7a2651c 100644
+--- a/meta-oe/recipes-support/opencv/opencv_4.14.0.bb
++++ b/meta-oe/recipes-support/opencv/opencv_5.1.0.bb
+@@ -2,42 +2,44 @@ SUMMARY = "Opencv : The Open Computer Vision Library"
+ HOMEPAGE = "http://opencv.org/"
+ SECTION = "libs"
+ 
+-LICENSE = "Apache-2.0"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
++# MIT for the bundled HarfBuzz (BUILD_HARFBUZZ)
++LICENSE = "Apache-2.0 AND MIT"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57 \
++                    file://3rdparty/harfbuzz/COPYING;md5=b98429b8e8e3c2a67cfef01e99e4893d"
+ 
+ ARM_INSTRUCTION_SET:armv4 = "arm"
+ ARM_INSTRUCTION_SET:armv5 = "arm"
+ 
+ DEPENDS = "libtool swig-native bzip2 zlib glib-2.0 libwebp"
+ 
+-SRCREV_opencv = "0654a42e19215ef25b1d367d822f3c630447e7c7"
+-SRCREV_contrib = "a8e9acd62cabd30419dba83007f2ac0d07de5e2c"
++SRCREV_opencv = "e4f78fbcf1a773fbed69e14500e8b734963eb585"
++SRCREV_contrib = "b67a855188a3d683813731010f6d39ac614733a4"
+ SRCREV_boostdesc = "34e4206aef44d50e6bbcd0ab06354b52e7466d26"
+ SRCREV_vgg = "fccf7cd6a4b12079f73bbfb21745f9babcd4eb1d"
+ SRCREV_face = "8afa57abc8229d611c4937165d20e2a2d9fc5a12"
+ SRCREV_wechat-qrcode = "a8b69ccc738421293254aec5ddb38bd523503252"
+ SRCREV_fastcv = "9e8d42b6d7e769548d70b2e5674e263b056de8b4"
+ # kleidicv must match version of OpenCV
+-SRCREV_kleidicv = "b1dbf474b8685b97a64d03e828b359fbdc050d1f"
++SRCREV_kleidicv = "cacea38588eb35de69075a0a1a876b82bfcd88dd"
+ 
+-SRCREV_FORMAT = "opencv_contrib_ipp_boostdesc_vgg_fastcv_kleidicv"
+-SRC_URI = "git://github.com/opencv/opencv.git;name=opencv;branch=4.x;protocol=https;tag=${PV} \
+-           git://github.com/opencv/opencv_contrib.git;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/contrib;name=contrib;branch=4.x;protocol=https;tag=${PV} \
++SRCREV_FORMAT = "opencv_contrib_boostdesc_vgg_face_wechat-qrcode_fastcv_kleidicv"
++SRC_URI = "git://github.com/opencv/opencv.git;name=opencv;branch=5.x;protocol=https;tag=${PV} \
++           git://github.com/opencv/opencv_contrib.git;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/contrib;name=contrib;branch=5.x;protocol=https;tag=${PV} \
+            git://github.com/opencv/opencv_3rdparty.git;branch=contrib_xfeatures2d_boostdesc_20161012;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/boostdesc;name=boostdesc;protocol=https \
+            git://github.com/opencv/opencv_3rdparty.git;branch=contrib_xfeatures2d_vgg_20160317;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/vgg;name=vgg;protocol=https \
+            git://github.com/opencv/opencv_3rdparty.git;branch=contrib_face_alignment_20170818;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/face;name=face;protocol=https \
+            git://github.com/WeChatCV/opencv_3rdparty.git;branch=wechat_qrcode;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/wechat_qrcode;name=wechat-qrcode;protocol=https \
+            git://github.com/opencv/opencv_3rdparty.git;branch=fastcv/4.x_20250715;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/fastcv;name=fastcv;protocol=https  \
+            file://0003-To-fix-errors-as-following.patch \
+-           file://0001-Temporarliy-work-around-deprecated-ffmpeg-RAW-functi.patch \
+            file://0001-Dont-use-isystem.patch \
+            file://download.patch \
+            file://0001-Make-ts-module-external.patch \
+            file://0008-Do-not-embed-build-directory-in-binaries.patch \
+-           file://29533.patch \
+            "
++UPSTREAM_CHECK_GITTAGREGEX = "^(?P<pver>\d+(\.\d+)+)$"
 +
-+SRC_URI = "git://github.com/apache/nifi-minifi-cpp.git;protocol=https;branch=main;tag=rel/minifi-cpp-${PV} \
-+           git://github.com/ericniebler/range-v3.git;protocol=https;branch=master;tag=0.12.0;name=range-v3;destsuffix=${S}/thirdparty/range-v3-src \
-+           git://github.com/Neargye/magic_enum.git;protocol=https;branch=master;tag=v0.9.8;name=magic-enum;destsuffix=${S}/thirdparty/magic-enum-src \
-+           git://github.com/p-ranav/argparse.git;protocol=https;branch=master;tag=v3.2;name=argparse;destsuffix=${S}/thirdparty/argparse-src \
-+           git://github.com/gsl-lite/gsl-lite.git;protocol=https;branch=master;tag=v1.1.0;name=gsl-lite;destsuffix=${S}/thirdparty/gsl-lite-src \
-+           git://github.com/HowardHinnant/date.git;protocol=https;branch=master;tag=v3.0.4;name=date;destsuffix=${S}/thirdparty/date-src \
-+           git://github.com/chriskohlhoff/asio.git;protocol=https;branch=master;tag=asio-1-38-0;name=asio;destsuffix=${S}/thirdparty/asio-src \
-+           git://github.com/fmtlib/fmt.git;protocol=https;branch=main;tag=12.1.0;name=fmt;destsuffix=${S}/thirdparty/fmt-src \
-+           git://github.com/gabime/spdlog.git;protocol=https;branch=v1.x;tag=v1.17.0;name=spdlog;destsuffix=${S}/thirdparty/spdlog-src \
-+           git://github.com/danielaparker/jsoncons.git;protocol=https;branch=master;tag=v1.7.0;name=jsoncons;destsuffix=${S}/thirdparty/jsoncons-src \
-            ${DEBIAN_MIRROR}/main/o/ossp-uuid/ossp-uuid_1.6.2.orig.tar.gz;name=ossp-uuid;subdir=${S}/thirdparty \
--           https://download.libsodium.org/libsodium/releases/libsodium-1.0.20.tar.gz;name=libsodium;subdir=${S}/thirdparty \
-+           https://download.libsodium.org/libsodium/releases/libsodium-1.0.22.tar.gz;name=libsodium;subdir=${S}/thirdparty \
-            file://0001-Do-not-use-bundled-packages.patch \
-            file://0002-Fix-osspuuid-build.patch \
-            file://0003-Fix-libsodium-build.patch \
--           file://0004-Pass-noline-flag-to-flex.patch \
-+           file://0001-generateVersion.sh-set-BUILD_DATE-to-SOURCE_DATE_EPO.patch \
-            file://0005-generateVersion.sh-set-correct-buildrev.patch \
-+           file://0004-Pass-noline-flag-to-flex.patch \
-            file://0006-CMakeLists.txt-do-not-use-ccache.patch \
--           file://0001-Add-missing-include-for-malloc-free.patch;patchdir=thirdparty/fmt-src \
--           file://0001-generateVersion.sh-set-BUILD_DATE-to-SOURCE_DATE_EPO.patch \
--           file://0001-Fix-build-with-gcc-16.patch \
--           file://0007-StreamCallback.h-add-missing-cstdint-include-for-in.patch \
-            file://systemd-volatile.conf \
-            file://sysvinit-volatile.conf \
-           "
+ SRC_URI:append:riscv64 = " file://0001-Use-Os-to-compile-tinyxml2.cpp.patch;patchdir=contrib"
+-SRC_URI:append:aarch64 = " git://gitlab.arm.com/kleidi/kleidicv;branch=main;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/3rdparty/kleidicv;name=kleidicv;protocol=https"
++SRC_URI:append:aarch64 = " git://gitlab.arm.com/kleidi/kleidicv;branch=main;tag=26.09;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/3rdparty/kleidicv;name=kleidicv;protocol=https"
  
--# minifi-cpp: 0.99.2
--SRCREV = "92fb88dca9aaff75b5c6795d25d6e437649c1c77"
--# expected-lite: 0.9.0
--SRCREV_expected-lite = "e45e8d5f295d54efe9cace331b9e9f5efa8a84c3"
-+# minifi-cpp: 1.1.0
-+SRCREV = "1a4b84eb8b53eebcf7c92d83f6ae818f440e33ee"
-+# The third-party revisions below are the versions pinned in cmake/*.cmake
- # range-v3: 0.12.0
- SRCREV_range-v3 = "a81477931a8aa2ad025c6bda0609f38e09e4d7ec"
--# magic-enum: 0.9.6
--SRCREV_magic-enum = "dd6a39d0ba1852cf06907e0f0573a2a10d23c2ad"
--# argparse: 3.0
--SRCREV_argparse = "af442b4da0cd7a07b56fa709bd16571889dc7fda"
--# gsl-lite: 0.41.0
--SRCREV_gsl-lite = "755ba124b54914e672737acace6a9314f59e8d6f"
--# date: 3.0.3
--SRCREV_date = "5bdb7e6f31fac909c090a46dbd9fea27b6e609a4"
--# asio: 1.34.2
--SRCREV_asio = "ed6aa8a13d51dfc6c00ae453fc9fb7df5d6ea963"
--# fmt: 11.2.0
--SRCREV_fmt = "40626af88bd7df9a5fb80be7b25ac85b122d6c21"
--# spdlog: 1.15.3
--SRCREV_spdlog = "6fa36017cfd5731d617e1a934f0e5ea9c4445b13"
--# jsoncons: 1.3.2
--SRCREV_jsoncons = "64b9da1e9f15eeff4ec9d6bc856538db542118f2"
--
--SRCREV_FORMAT .= "_expected-lite_range-v3_magic-enum_argparse_gsl-lite_date_asio_fmt_spdlog_jsoncons"
-+# magic-enum: 0.9.8
-+SRCREV_magic-enum = "1384769c66bd16ec9bb1353f45fe8ec8ccc12dbd"
-+# argparse: 3.2
-+SRCREV_argparse = "3eda91b2e1ce7d569f84ba295507c4cd8fd96910"
-+# gsl-lite: 1.1.0
-+SRCREV_gsl-lite = "c767277c1cad4d4446ba30a13a48ed18ebf9754a"
-+# date: 3.0.4
-+SRCREV_date = "f94b8f36c6180be0021876c4a397a054fe50c6f2"
-+# asio: 1.38.0
-+SRCREV_asio = "03cf5f86a780dd102f1cdd3a59d1244d12143e46"
-+# fmt: 12.1.0
-+SRCREV_fmt = "407c905e45ad75fc29bf0f9bb7c5c2fd3475976f"
-+# spdlog: 1.17.0
-+SRCREV_spdlog = "79524ddd08a4ec981b7fea76afd08ee05f83755d"
-+# jsoncons: 1.7.0
-+SRCREV_jsoncons = "cb54cdc3134a62634466bf7bcd24f1a906f4ef25"
-+
-+SRCREV_FORMAT .= "_range-v3_magic-enum_argparse_gsl-lite_date_asio_fmt_spdlog_jsoncons"
  
- # ossp-uuid: 1.6.2
- SRC_URI[ossp-uuid.sha256sum] = "11a615225baa5f8bb686824423f50e4427acd3f70d394765bdff32801f0fd5b0"
--# libsodium: 1.0.20
--SRC_URI[libsodium.sha256sum] = "ebb65ef6ca439333c2bb41a0c1990587288da07f6c7fd07cb3a18cc18d30ce19"
-+# libsodium: 1.0.22
-+SRC_URI[libsodium.sha256sum] = "adbdd8f16149e81ac6078a03aca6fc03b592b89ef7b5ed83841c086191be3349"
+ # OpenCV wants to download more files during configure.  We download these in
+@@ -78,6 +80,7 @@ EXTRA_OECMAKE = "-DOPENCV_EXTRA_MODULES_PATH=${S}/contrib/modules \
+     -DOPENCV_GENERATE_PKGCONFIG=ON \
+     -DOPENCV_DOWNLOAD_PATH=${OPENCV_DLDIR} \
+     -DOPENCV_ALLOW_DOWNLOADS=OFF \
++    -DBUILD_HARFBUZZ=ON \
+     ${@bb.utils.contains("TARGET_CC_ARCH", "-msse3", "-DCPU_DISPATCH=SSE,SSE2,SSE3,SSSE3", "", d)} \
+     ${@bb.utils.contains("TARGET_CC_ARCH", "-msse4.1", "-DCPU_DISPATCH=SSE,SSE2,SSE3,SSSE3,SSE41", "", d)} \
+     ${@bb.utils.contains("TARGET_CC_ARCH", "-msse4.2", "-DCPU_DISPATCH=SSE,SSE2,SSE3,SSSE3,SSE41,SSE42", "", d)} \
+@@ -103,7 +106,7 @@ PACKAGECONFIG:remove:libc-musl:riscv32 = "tbb"
+ PACKAGECONFIG[gapi] = "-DWITH_ADE=ON -Dade_DIR=${STAGING_LIBDIR},-DWITH_ADE=OFF,ade"
+ PACKAGECONFIG[amdblas] = "-DWITH_OPENCLAMDBLAS=ON,-DWITH_OPENCLAMDBLAS=OFF,libclamdblas,"
+ PACKAGECONFIG[amdfft] = "-DWITH_OPENCLAMDFFT=ON,-DWITH_OPENCLAMDFFT=OFF,libclamdfft,"
+-PACKAGECONFIG[dnn] = "-DBUILD_opencv_dnn=ON -DPROTOBUF_UPDATE_FILES=ON -DBUILD_PROTOBUF=OFF -DCMAKE_CXX_STANDARD=17,-DBUILD_opencv_dnn=OFF,protobuf protobuf-native,"
++PACKAGECONFIG[dnn] = "-DBUILD_opencv_dnn=ON -DPROTOBUF_UPDATE_FILES=ON -DBUILD_PROTOBUF=OFF,-DBUILD_opencv_dnn=OFF,protobuf protobuf-native,"
+ PACKAGECONFIG[eigen] = "-DWITH_EIGEN=ON,-DWITH_EIGEN=OFF,libeigen gflags glog,"
+ PACKAGECONFIG[freetype] = "-DBUILD_opencv_freetype=ON,-DBUILD_opencv_freetype=OFF,freetype,"
+ PACKAGECONFIG[gphoto2] = "-DWITH_GPHOTO2=ON,-DWITH_GPHOTO2=OFF,libgphoto2,"
+@@ -178,12 +181,12 @@ python populate_packages:prepend () {
+ PACKAGES_DYNAMIC += "^libopencv-.*"
  
-+UPSTREAM_CHECK_GITTAGREGEX = "^rel/minifi-cpp-(?P<pver>\d+(\.\d+)+)$"
+ FILES:${PN} = ""
+-FILES:${PN}-dbg += "${datadir}/OpenCV/java/.debug/* ${datadir}/OpenCV/samples/bin/.debug/*"
+-FILES:${PN}-dev = "${includedir} ${libdir}/pkgconfig  ${libdir}/cmake/opencv4/*.cmake"
+-FILES:${PN}-staticdev += "${libdir}/opencv4/3rdparty/*.a"
+-FILES:${PN}-apps = "${bindir}/* ${datadir}/opencv4 ${datadir}/licenses"
+-FILES:${PN}-java = "${datadir}/OpenCV/java"
+-FILES:${PN}-samples = "${datadir}/opencv4/samples/"
++FILES:${PN}-dbg += "${datadir}/java/opencv5/.debug/* ${datadir}/OpenCV/samples/bin/.debug/*"
++FILES:${PN}-dev = "${includedir} ${libdir}/pkgconfig  ${libdir}/cmake/opencv5/*.cmake"
++FILES:${PN}-staticdev += "${libdir}/opencv5/3rdparty/*.a"
++FILES:${PN}-apps = "${bindir}/* ${datadir}/opencv5 ${datadir}/licenses"
++FILES:${PN}-java = "${datadir}/java/opencv5"
++FILES:${PN}-samples = "${datadir}/opencv5/samples/"
  
- inherit pkgconfig cmake systemd
- 
--DEPENDS = "virtual/crypt bison-native flex-native flex openssl curl zlib xz bzip2 yaml-cpp zstd lz4 pugixml"
-+DEPENDS = "virtual/crypt bison-native flex-native flex openssl curl zlib xz bzip2 yaml-cpp pugixml"
- 
- OECMAKE_FIND_ROOT_PATH_MODE_PROGRAM = "BOTH"
- 
-@@ -103,17 +99,17 @@ EXTRA_OECMAKE = " \
-                  -DSKIP_TESTS=ON \
-                  -DMINIFI_OPENSSL_SOURCE=SYSTEM \
-                  -DMINIFI_LIBCURL_SOURCE=SYSTEM \
--                 -DMINIFI_ZSTD_SOURCE=SYSTEM \
--                 -DMINIFI_BZIP2_SOURCE=SYSTEM \
--                 -DMINIFI_LIBXML2_SOURCE=SYSTEM \
--                 -DMINIFI_CATCH2_SOURCE=SYSTEM \
-                  -DMINIFI_ZLIB_SOURCE=SYSTEM \
-+                 -DMINIFI_BZIP2_SOURCE=SYSTEM \
-+                 -DMINIFI_LIBLZMA_SOURCE=SYSTEM \
-+                 -DMINIFI_LIBARCHIVE_SOURCE=SYSTEM \
-+                 -DMINIFI_YAMLCPP_SOURCE=SYSTEM \
-                  -DMINIFI_PUGIXML_SOURCE=SYSTEM \
-                  -DMINIFI_FMT_SOURCE=BUILD \
-                  -DMINIFI_SPDLOG_SOURCE=BUILD \
-+                 -DFETCHCONTENT_FULLY_DISCONNECTED=ON \
-                  -DFETCHCONTENT_SOURCE_DIR_GSL-LITE=${S}/thirdparty/gsl-lite-src \
-                  -DFETCHCONTENT_SOURCE_DIR_DATE_SRC=${S}/thirdparty/date-src \
--                 -DFETCHCONTENT_SOURCE_DIR_EXPECTED-LITE=${S}/thirdparty/expected-lite-src \
-                  -DFETCHCONTENT_SOURCE_DIR_RANGE-V3_SRC=${S}/thirdparty/range-v3-src \
-                  -DFETCHCONTENT_SOURCE_DIR_MAGIC_ENUM=${S}/thirdparty/magic-enum-src \
-                  -DFETCHCONTENT_SOURCE_DIR_ASIO=${S}/thirdparty/asio-src \
-@@ -122,19 +118,21 @@ EXTRA_OECMAKE = " \
-                  -DFETCHCONTENT_SOURCE_DIR_SPDLOG=${S}/thirdparty/spdlog-src \
-                  -DFETCHCONTENT_SOURCE_DIR_JSONCONS=${S}/thirdparty/jsoncons-src \
-                  ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '-DENABLE_SYSTEMD=ON', '-DENABLE_SYSTEMD=OFF', d)} \
--                 -DBUILD_IDENTIFIER=${PV} \
-+                 -DBUILD_IDENTIFIER=${MINIFI_BUILD_IDENTIFIER} \
-                 "
- 
--PACKAGECONFIG ??= "libarchive expression-language"
-+# Used in the extension registration function name, so it must be an identifier
-+MINIFI_BUILD_IDENTIFIER = "${@d.getVar('PV').replace('.', '_')}"
-+
-+PACKAGECONFIG ??= "libarchive"
- 
- # rocksdb is not compatible with libc-musl:powerpc & armv5
- PACKAGECONFIG:remove:libc-musl:powerpc = "rocksdb"
- PACKAGECONFIG:remove:armv5 = "rocksdb"
- 
- PACKAGECONFIG[libarchive] = "-DENABLE_LIBARCHIVE=ON,-DENABLE_LIBARCHIVE=OFF,libarchive"
--PACKAGECONFIG[expression-language] = "-DENABLE_EXPRESSION_LANGUAGE=ON, -DENABLE_EXPRESSION_LANGUAGE=OFF"
- PACKAGECONFIG[civetweb] = "-DENABLE_CIVET=ON -DMINIFI_CIVETWEB_SOURCE=SYSTEM,-DENABLE_CIVET=OFF,civetweb"
--PACKAGECONFIG[rocksdb] = "-DENABLE_ROCKSDB=ON -DBUILD_ROCKSDB=OFF -DMINIFI_ROCKSDB_SOURCE=SYSTEM,-DENABLE_ROCKSDB=OFF,rocksdb"
-+PACKAGECONFIG[rocksdb] = "-DENABLE_ROCKSDB=ON -DBUILD_ROCKSDB=OFF,-DENABLE_ROCKSDB=OFF,rocksdb"
- 
- SYSTEMD_PACKAGES = "minifi-cpp"
- SYSTEMD_SERVICE:${PN} = "minifi.service"
-@@ -165,7 +163,7 @@ do_install() {
-     for i in minifi-encrypt-config minifi minifi.sh minifi-controller; do
-         install -m 755 ${WORKDIR}/minifi-install/usr/bin/${i} ${D}${MINIFI_BIN}
-     done
--    for i in config.yml minifi-log.properties minifi.properties minifi-uid.properties; do
-+    for i in minifi-log.properties minifi.properties minifi-uid.properties; do
-         install -m 644 ${WORKDIR}/minifi-install/usr/conf/${i} ${D}${MINIFI_HOME}/conf
-     done
- 
-@@ -189,6 +187,10 @@ do_install() {
-         ${D}${MINIFI_HOME}/conf/minifi.properties
-     sed -i "s|nifi.database.content.repository.directory.default=.*|nifi.database.content.repository.directory.default=${MINIFI_RUN}/content_repository|g" \
-         ${D}${MINIFI_HOME}/conf/minifi.properties
-+    sed -i "s|nifi.asset.directory=.*|nifi.asset.directory=${MINIFI_RUN}/asset|g" \
-+        ${D}${MINIFI_HOME}/conf/minifi.properties
-+    sed -i "s|nifi.python.virtualenv.directory=.*|nifi.python.virtualenv.directory=${MINIFI_RUN}/minifi-python-env|g" \
-+        ${D}${MINIFI_HOME}/conf/minifi.properties
-     sed -i "s|nifi.flow.configuration.file=.*|nifi.flow.configuration.file=${MINIFI_HOME}/conf/config.yml|g" \
-         ${D}${MINIFI_HOME}/conf/minifi.properties
-     sed -i "s|nifi.python.processor.dir=.*|nifi.python.processor.dir=${libexecdir}/minifi-python|g" \
-@@ -204,7 +206,7 @@ do_install() {
-         install -m 755 -d ${D}${systemd_system_unitdir}
-         install -m 644 ${WORKDIR}/minifi-install/usr/bin/minifi.service ${D}${systemd_system_unitdir}
- 
--        sed -i -e "s|^Environment=.*|Environment=MINIFI_HOME=${MINIFI_HOME}|g" ${D}${systemd_system_unitdir}/minifi.service
-+        sed -i -e "s|^Environment=MINIFI_HOME=.*|Environment=MINIFI_HOME=${MINIFI_HOME}|g" ${D}${systemd_system_unitdir}/minifi.service
-         sed -i -e "s|^ExecStart=.*|ExecStart=${MINIFI_BIN}/minifi|g" ${D}${systemd_system_unitdir}/minifi.service
+ INSANE_SKIP:${PN}-java = "libdir"
+ INSANE_SKIP:${PN}-dbg = "libdir"
+@@ -209,9 +212,9 @@ do_install:append() {
+         mv ${D}/usr/lib/* ${D}/${libdir}/
+         rm -rf ${D}/usr/lib
      fi
+-    # remove setup_vars_opencv4.sh as its content is confusing and useless
+-    if [ -f ${D}${bindir}/setup_vars_opencv4.sh ]; then
+-        rm -rf ${D}${bindir}/setup_vars_opencv4.sh
++    # remove setup_vars_opencv5.sh as its content is confusing and useless
++    if [ -f ${D}${bindir}/setup_vars_opencv5.sh ]; then
++        rm -rf ${D}${bindir}/setup_vars_opencv5.sh
+     fi
+ 
+     find ${B}/modules -name "*.cpp" | xargs -r grep -l "${S}" | while read -r fn; do
+@@ -227,9 +230,9 @@ do_install:append() {
+ 
+ do_install:append:class-target() {
+     # remove build host path to improve reproducibility
+-    if [ -f ${D}${libdir}/cmake/opencv4/OpenCVModules.cmake ]; then
++    if [ -f ${D}${libdir}/cmake/opencv5/OpenCVModules.cmake ]; then
+         sed -e 's@${STAGING_DIR_HOST}@@g' \
+-            -i ${D}${libdir}/cmake/opencv4/OpenCVModules.cmake
++            -i ${D}${libdir}/cmake/opencv5/OpenCVModules.cmake
+     fi
+ }
  
