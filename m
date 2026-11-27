@@ -1,65 +1,66 @@
-Received: from mail-dl1-f44.google.com (mail-dl1-f44.google.com [74.125.82.44])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.11799.1795762957396965879
+Received: from mail-dl1-f45.google.com (mail-dl1-f45.google.com [74.125.82.45])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.11801.1795762955232987968
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 26 Nov 2026 23:02:37 -0800
+ Thu, 26 Nov 2026 23:02:35 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=rC0Cnd7S;
- spf=pass (domain: gmail.com, ip: 74.125.82.44, mailfrom: raj.khem@gmail.com)
-Received: by mail-dl1-f44.google.com with SMTP id a92af1059eb24-1a3c08d6928so11576666c88.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 26 Nov 2026 23:02:37 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=pqqK+ohj;
+ spf=pass (domain: gmail.com, ip: 74.125.82.45, mailfrom: raj.khem@gmail.com)
+Received: by mail-dl1-f45.google.com with SMTP id a92af1059eb24-1b50a4bd2f3so6789551c88.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 26 Nov 2026 23:02:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795762957; x=1796367757; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=QrsTdzMN8eByYOE4VFfzamxV2Lidl3UnHeiEX4Q4/sw=;
-        b=rC0Cnd7SYu8LnNfOdCsuhHDkQtWnWSGnH/o1BxGp+GLw4SCL/2QBWwsbAE1C1NN6Wq
-         +R37BIcQws2jt8PIFCxPJvxXpzA2bVV6st1FIDQvvRsKZvs2VbkQtIfgTDUtSZ4EH9a+
-         lVArEiRU0yncJAuTKcu8OuCOQo1yLYwHqoHoypItd8iIVQy7AF/CVdDKpXYoXzg/GL7s
-         DNrpGxd7P2ruEfli65EzMzkkW4u7qkPe3wCTVV51jUdEaKjn3/oPZD/w+tzNLjOB2C3n
-         6IkW/WNObKmv7otvnA3WKgpVioiyXM4Op698WxrQi5yVlwQYNHsvV1dohdiehJBirzwO
-         oKCA==
+        d=gmail.com; s=20260707; t=1795762955; x=1796367755; darn=lists.openembedded.org;
+        h=content-transfer-encoding:content-type:mime-version:references
+         :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=bGTmKDISj2icqKBDRtzbTmZGVuvNNnS4bUv2jzLbKz0=;
+        b=pqqK+ohjRmEnW+7MyGHBOfnKrDHdxX2BD5GqytjbFeRuYsdoASgMJoGeC3arN2U78q
+         YBFqeAwSNCkYM5WcpMrAWmYzMTy+c2MXDUyBk85euscnFxXqoarMc2t1qOiJJHPq6V1g
+         xBZAHXYzUzgCsu7oURiUBXqGxbovacpwsYP8sZGUaug3aNQAUykDArzKIzVbo7+Yk1cO
+         FqFMzfh03yetjEZYLNvJI/lcmv7cwQEzoYMWnm7Se5mufB8QXXPuicmw/Lt27jrobAmp
+         NJHpN027FB9lWGD6BG9SiONROZK1J73U4emGCqLC7XCumPcP3PMTxR9kVVNISUiool7u
+         O1gg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795762957; x=1796367757;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=QrsTdzMN8eByYOE4VFfzamxV2Lidl3UnHeiEX4Q4/sw=;
-        b=yIXNXm+M/p+FquzcXwGQG3xI6A1B7efnp/4oeCaj1orPma/Jdm030qVfRrrp8CboXK
-         UdW8i4i1L4lZ2fm8DMh5UVT+WmWuNmgaPGEgc/XbkgiuRWtcItwhghnciy8LrdprAdtY
-         VOBzAR1Sh8ngGXzh2CYNdNXyCn51NroQoULtSpP2h1bf8RQCIug89ZciUIThRmt8PbWq
-         F9q5tEGzDMyCUlUlwJsJGNuDR92WfjdZPHpC0pyTgXuc3V5eail6tWB/DeQffyvTUlOt
-         GM5fM57KTRPZVtl7c9ZoJADH+OrowCb5uXUjE4aK2ZManAuBwvlzdw2x3pqg8CLPpY7B
-         4uwg==
-X-Gm-Message-State: APuU4Z/TTh/rb5kWhyO4AqiqjBjH0RzR3WSHFS2Z5pT2JcuYbs1P5N4j
-	+KmCMmAD6PuC/FX2GaKHZO4sfJfsGlh4IakL40xs2tf6iG2YZVikd88QMAw4OVEQ
-X-Gm-Gg: AZFdTZd4koKubIwW3whY9+vXbm9IXrRjpKfcocBdn/DNyDkOwGIULpDCTkDYd2Akoq2
-	4BIrO1YJ/aUV36l+SgSYEPKH5O3BdKui1Viii8PraB9xNdVYaaxRn7UEGhoI7SaEO5flcrmKIJj
-	oINM99c64wfvFiY95FAAb6C8kImD5gLQKopTnwPK+E2x47dTcAGTGdLYxC2oRAnynFmi41fyqa9
-	bwrjfGbWrBWGMfbtK2ZK//5+1rFRuDr7h7WXAAVJ1AmoOXFLr4abgrnfNBdxbEOlmWiRuosUu4+
-	ikTf8tkwBy3BlVPpIShmFZ2IOUGDj4T7TTY0WOXL+dao0PZmQcTm01LNz5ib+bHCU++Z9oLSM1l
-	EniwAo2Jk2IxhzyUlPY6sq9KfsUPe/HkNKqBaP5gliXfsi+SwC7Q41RJ6HL2G0lTYjC144Js7Ra
-	Bqk8QY8la+HDfDb8ezl5R0hAdV8Uix0CyYBWkIrLf6h2vZwzuAAEtCk1YuI81Q6SLndFjYu9Iz0
-	isfY9uJnMEgiEUq4OCo9c7fykwgZa0b7ub443+mso+v8u4VPxW5eN0QJQ7mUhX/gcnUCWXCqAeq
-	gI1G6HXzpoDPrERMNbH57OzpQqZ2ajaMcKfCLDakQm6ltmUmoiYyVo2YHZ2BBB8yvdsdobfAtUR
-	7yuLwiIa+0X97/J2FcL2gFxClIDdrEl+/EeXac5JmgF/eLVTiSV73pXjvCFcOhF3KmJeY1Fovhc
-	f8dMvfVsG9aOJMh1d8XqFOZ692BFD3BpvMOArH51c0pLsxZ6ecxIrD0Iq3te+NzKpDGLdiM22tM
-	JTpz6f3bFRCE8xl3q6gmIDdCekCnQJLz8WKSnS0iqWjg36+vBZJi3Tq1C4WOduXTX+QW3SxOILE
-	HtxsvwPJFTyp0AN7JA6xkISNZA==
-X-Received: by 2002:a05:7023:a5b:20b0:191:a5b2:ef4a with SMTP id a92af1059eb24-1b5568b9f5dmr21223678c88.28.1795762956491;
-        Thu, 26 Nov 2026 23:02:36 -0800 (PST)
+        d=1e100.net; s=20260707; t=1795762955; x=1796367755;
+        h=content-transfer-encoding:content-type:mime-version:references
+         :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=bGTmKDISj2icqKBDRtzbTmZGVuvNNnS4bUv2jzLbKz0=;
+        b=2thFdvWRKa/jXrh2ubDSC08U4JP0huphDt8qFaoQf+j0Mfb6kXS/P4zf1NZg07ICXU
+         A55HfuiMillojppg7KLBsF6WqEgPjgth9QEWE79njbl1i07oU2skUULURPWkSZt6P7vA
+         ZDw1wE7pF8ffZHoUPpznSEBxay8izxNnVUWuOYZwDHKQeDW5wSm+hS0GCSCanlPGi9w6
+         86oeF8+oaxM1QoNvFHfD/H6VNjEI0b5I4CGJN9B944YshwQ2nnZp+5vqGflnmqC3OjUO
+         lBqD7PRl/Jd62tmip8CZewyF0eeROt6/z1fcVuU1ANT2yJ/FDnO5LtsrDvRWS8He8RRB
+         /mAA==
+X-Gm-Message-State: APuU4Z9NcQyeleM6EunhWZhGzom0B/FUOWExhktdI2n9FDmI6yOEBUuM
+	muQj2n67ZNuRU1frGm8zyEkUVwctY2e24yDkuHVnjdg0i0TepIpEkCLyRqPWZPwC
+X-Gm-Gg: AZFdTZcxarNNUJ5fv3U3yVPd3piMzr4XVCCbhOCsfcxzOVbasHCGOZFAi5zMz/arPOY
+	Pmh8yCVr1Gn2CD6krL7rjXnb5L/60/J9lVmXiy9zXPHeL9OymkKJsSYFXhQ6tYXNivRwAYO727s
+	WMB8SpvRHDQwqmd3yXgnyStygDCxbKuRabC8oRoIOEG9MC1CxGAFM9IzfvHB7RXNXRtRqt84in6
+	X+fPPWsogg7IQedoQC5KsV7ENPqIgjcOBhbu3c5D1q6ytN10J96mWDjVMWEjFch6J5uvWXeKz9D
+	LZP1XIQmnEUqL7qExtP1gjkFwPe/k+vfAqPdEnpo8Ssk/ZvdayE0n4oOazrp2kUAfV2ZZ18wn+2
+	ls9YrXlek3/KzVJP5heaKxl+2CudKUqCe0V6nkq6XBzgQDqn3hFyL5fI2D6nsmbpekCAiaOaMhk
+	RjCxouKw9nJKNRAiadP0RRzZL45LVtSZmv5qL57gSIP5EqIFlSfdp8ASYh0sghdzi7pGOXBJGnW
+	qkAMEPQvYcQtcuHk+66Ar2rfvFL+IT3DL8ZHUoiT/gZFrWRpNDjcKzx6fh3c+N3MozR4aLuGCzN
+	Scpp2yZ1svLZwi7Y5wMfgMefIbP0R8IT5IuRXXNMLwHp9JMWfLAjPHFrz87pXxxC+ZRKCEX8ojY
+	SKWjosw27ixdWyHnMBWq4yZ9f2WwuxjD+SKjjsB8Y48qhlaOWrL/JVCF1FjpAiWbvgiGHLghBlj
+	thN2EKjLVSuimh5dniXEz7KeU998ke1oWrvbKNpH1ZSXGot9iw/weyhHhN+Gkrxp+ZKPeRF/QxK
+	445LZgbLgb25iuLnjd5+yi3Q94o9CDtQ7FXhz+wIZNYHEQKlAn2UwfwmgnyVhzsdPrRZ5rPfoz2
+	wnE4
+X-Received: by 2002:a05:701b:4555:20b0:1a2:2da2:b278 with SMTP id a92af1059eb24-1b556894b6emr25572520c88.14.1795762954535;
+        Thu, 26 Nov 2026 23:02:34 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1b5566c3052sm53911395c88.1.2026.11.26.23.02.35
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1b5566c3052sm53911395c88.1.2026.11.26.23.02.33
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 26 Nov 2026 23:02:36 -0800 (PST)
+        Thu, 26 Nov 2026 23:02:34 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-gnome][PATCH 20/21] libgedit-gfls: upgrade 0.5.0 -> 0.5.1
-Date: Thu, 26 Nov 2026 23:02:08 -0800
-Message-ID: <20261127070211.2329979-21-khem.raj@oss.qualcomm.com>
+Subject: [meta-gnome][PATCH 18/21] libgweather4: upgrade 4.4.4 -> 4.6.0
+Date: Thu, 26 Nov 2026 23:02:06 -0800
+Message-ID: <20261127070211.2329979-19-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.1
 In-Reply-To: <20261127070211.2329979-1-khem.raj@oss.qualcomm.com>
 References: <20261127070211.2329979-1-khem.raj@oss.qualcomm.com>
@@ -67,34 +68,88 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Fri, 27 Nov 2026 07:02:41 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/133347
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/133345
 Content-Type: text/plain; charset="utf-8"
 
-Documentation updates and translation updates only.
+4.5 moved the locations database to the separate gweather-locations
+module, dropped libsoup 2 support and updated the METAR endpoint; 4.6.0
+is the stable release of that series.
 
-Recipe: add UPSTREAM_CHECK_GITTAGREGEX so only release tags are seen.
+Depend on gweather-locations at build and run time, and skip the recipe
+when it cannot be built (without GI_DATA_ENABLED). libgweather no longer
+generates the database, so python3-pygobject-native and the
+GI_TYPELIB_PATH export are dropped. Refresh the cross gir patch.
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- .../gedit/{libgedit-gfls_0.5.0.bb => libgedit-gfls_0.5.1.bb}   | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
- rename meta-gnome/recipes-gnome/gedit/{libgedit-gfls_0.5.0.bb => libgedit-gfls_0.5.1.bb} (82%)
+ ...1-Allow-building-gir-in-cross-environments.patch | 10 +++++-----
+ ...{libgweather4_4.4.4.bb => libgweather4_4.6.0.bb} | 13 +++++++++----
+ 2 files changed, 14 insertions(+), 9 deletions(-)
+ rename meta-gnome/recipes-gnome/libgweather/{libgweather4_4.4.4.bb => libgweather4_4.6.0.bb} (71%)
 
-diff --git a/meta-gnome/recipes-gnome/gedit/libgedit-gfls_0.5.0.bb b/meta-gnome/recipes-gnome/gedit/libgedit-gfls_0.5.1.bb
-similarity index 82%
-rename from meta-gnome/recipes-gnome/gedit/libgedit-gfls_0.5.0.bb
-rename to meta-gnome/recipes-gnome/gedit/libgedit-gfls_0.5.1.bb
-index 2b00f595cd..b6dd9ddea4 100644
---- a/meta-gnome/recipes-gnome/gedit/libgedit-gfls_0.5.0.bb
-+++ b/meta-gnome/recipes-gnome/gedit/libgedit-gfls_0.5.1.bb
-@@ -8,7 +8,8 @@ DEPENDS = "glib-2.0 gtk+3"
- inherit gobject-introspection features_check gtk-doc gnomebase
+diff --git a/meta-gnome/recipes-gnome/libgweather/libgweather4/0001-Allow-building-gir-in-cross-environments.patch b/meta-gnome/recipes-gnome/libgweather/libgweather4/0001-Allow-building-gir-in-cross-environments.patch
+index 3a075de651..6e355cbe33 100644
+--- a/meta-gnome/recipes-gnome/libgweather/libgweather4/0001-Allow-building-gir-in-cross-environments.patch
++++ b/meta-gnome/recipes-gnome/libgweather/libgweather4/0001-Allow-building-gir-in-cross-environments.patch
+@@ -13,14 +13,14 @@ Upstream-Status: Inappropriate [OE-specific]
+ Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+ Signed-off-by: Markus Volk <f_l_k@t-online.de>
  
- SRC_URI = "git://gitlab.gnome.org/World/gedit/libgedit-gfls.git;branch=main;protocol=https;tag=${PV}"
--SRCREV = "8ff9380b1796aa141c07f335ac10a405f39f988f"
-+SRCREV = "67eeb41199e52e00a8308d556d52c3541de2504e"
-+UPSTREAM_CHECK_GITTAGREGEX = "^(?P<pver>\d+(\.\d+)+)$"
+---- a/meson.build	2022-09-18 14:48:53.000000000 +0200
+-+++ b/meson.build	2022-11-26 14:05:13.302487232 +0100
+-@@ -51,7 +51,7 @@
+- gen_locations_variant = find_program('build-aux/meson/gen_locations_variant.py')
++--- a/meson.build
+++++ b/meson.build
++@@ -49,7 +49,7 @@
++ ]
+  
+  g_ir_scanner = find_program('g-ir-scanner', required: get_option('introspection'))
+ -build_gir = get_option('introspection') and g_ir_scanner.found() and not meson.is_cross_build()
+ +build_gir = get_option('introspection') and g_ir_scanner.found()
+  build_docs = get_option('gtk_doc') and build_gir
+  
+- schemas_srcdir = meson.project_source_root() / 'schemas'
++ locations_bin = dependency('gweather-locations').get_variable(
+diff --git a/meta-gnome/recipes-gnome/libgweather/libgweather4_4.4.4.bb b/meta-gnome/recipes-gnome/libgweather/libgweather4_4.6.0.bb
+similarity index 71%
+rename from meta-gnome/recipes-gnome/libgweather/libgweather4_4.4.4.bb
+rename to meta-gnome/recipes-gnome/libgweather/libgweather4_4.6.0.bb
+index 57f599211a..8aad70466b 100644
+--- a/meta-gnome/recipes-gnome/libgweather/libgweather4_4.4.4.bb
++++ b/meta-gnome/recipes-gnome/libgweather/libgweather4_4.6.0.bb
+@@ -11,7 +11,7 @@ inherit gnomebase gsettings gobject-introspection gettext gi-docgen vala feature
+ REQUIRED_DISTRO_FEATURES = "opengl"
  
- ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
+ SRC_URI += "file://0001-Allow-building-gir-in-cross-environments.patch"
+-SRC_URI[archive.sha256sum] = "7017677753cdf7d1fdc355e4bfcdb1eba8369793a8df24d241427a939cbf4283"
++SRC_URI[archive.sha256sum] = "7f5d0e8c9685ef2ff46c2f3a57cae48d7bf3540b2d83921f889ef28e6a876788"
  
+ # 40.0 is an older libgweather-3 release; odd minors are development releases
+ UPSTREAM_CHECK_REGEX = "libgweather-(?P<pver>4\.\d*[02468](\.\d+)+)\.tar"
+@@ -19,16 +19,21 @@ UPSTREAM_CHECK_REGEX = "libgweather-(?P<pver>4\.\d*[02468](\.\d+)+)\.tar"
+ GTKDOC_MESON_OPTION = "gtk_doc"
+ VALA_MESON_OPTION = "enable_vala"
+ 
+-export GI_TYPELIB_PATH = "${STAGING_LIBDIR}/girepository-1.0/"
+-
+ DEPENDS = " \
+     geocode-glib \
+     gtk4 \
++    gweather-locations \
+     json-glib \
+     libsoup-3.0 \
+-    python3-pygobject-native \
+ "
+ 
++RDEPENDS:${PN} += "gweather-locations"
++
++python __anonymous() {
++    if d.getVar('GI_DATA_ENABLED') != 'True':
++        raise bb.parse.SkipRecipe("depends on gweather-locations, which needs GI_DATA_ENABLED")
++}
++
+ FILES:${PN} += " \
+     ${datadir}/libgweather-4 \
+     ${libdir}/libgweather-4 \
