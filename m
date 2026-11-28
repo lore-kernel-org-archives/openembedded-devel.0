@@ -1,138 +1,97 @@
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.924.1795831323051496045
+Received: from aer-iport-6.cisco.com (aer-iport-6.cisco.com [173.38.203.68])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.2331.1795842025718974543
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 27 Nov 2026 18:02:03 -0800
+ Fri, 27 Nov 2026 21:00:26 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@kernel.org header.s=k20260515 header.b=nZ235/bF;
- spf=pass (domain: kernel.org, ip: 172.105.4.254, mailfrom: devnull+dickson.wu.certik.com@kernel.org)
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
-	by tor.source.kernel.org (Postfix) with ESMTP id CB10960D42;
-	Sat, 28 Nov 2026 01:52:24 +0000 (UTC)
-Authentication-Results: smtp.kernel.org; arc=none smtp.remote-ip=100.80.115.77
-ARC-Seal: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256; cv=none;
-	t=1795830744;
-	b=ehVMU9WkSTdnv4SZOJUBVZ+LrWB4j9laXOgThwyDIVUje/Vg/REIjkHDrbZJckT5ujNS
-	 SmkNVYWWWKW1Poc6/RIaQky7ktKC8aP3A2QUL+xd19yP1Gppe8Os8N2O00FgUW2/ntCsx
-	 VVOpAnGoy7MCDMXi3ZryQ1jDqyiI9irkcECDy1TPMjugAoxij46Go0LG3GLKY8164dC5T
-	 qA0PcIimcoLTDwg3hj2zfvJPzCIqxMxexS+aK3jxnHVwM4GhixkpILglBT7Od6PYmkFuN
-	 pbShD3Qdxb7qWc/L7YUhtCbgeSWCJcPV22Kl9vSN7TO3Ff2tlP9F3gHFBC60OGjWaog==
-ARC-Message-Signature: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795830744;
-	h=DKIM-Signature:Received:MIME-Version:Content-Type:Message-Id:
-	 References:In-Reply-To:From:Date:Subject:To:Cc:X-Mailer:
-	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
-	 X-Original-From:Reply-To:Content-Transfer-Encoding;
-	bh=ED5Emds7XPjNy0wq+GdiNMZPOdMr52H46WwFQ4Fa6oQ=;
-	b=c3HFxLxVPGqlhAzuqZ+KfTgwbVOanjSSew68SpIShb9Muk3vul/SsX2sBpVL/jcoGKMM
-	 l1+f0Ow37y7qhAhu1cFfa0vT/KAi6rdMyfmk/QMUyfAeETzkvltPYh9BcFucynUrY83MA
-	 KqOWVXbvsT3lu5h/UiclaDROTOkgq/copMvJ+uMEgggLXuY4oEJJESTYoAU7UmwxzPF8k
-	 mYTTjwpwUpJOzDNhfe71nDtB7PMQ3CxkxperoleAPcs6hTCgWcxL2q0W46zf7+kRu1dkR
-	 Jiy3NWIr1iyHR8lFOIjeoXTabD4DFm97igfmC1+DAhH917b8P7n8jA9Kalj9k5GhZJA==
-ARC-Authentication-Results: i=1; smtp.kernel.org; 
-	arc=none smtp.remote-ip=100.80.115.77
-Received: from lkml.kernel.org (nexus.subspace.kernel.org [100.80.115.77])
+ dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=QcjAj72L;
+ spf=pass (domain: cisco.com, ip: 173.38.203.68, mailfrom: yurade@cisco.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+  d=cisco.com; i=@cisco.com; l=905; q=dns/txt;
+  s=iport01; t=1795842025; x=1797051625;
+  h=from:to:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=w+ec2n3G6XMitXxIDwibJ00+mVzTVQdJfpSrKIRzhbs=;
+  b=QcjAj72LO863yxvzWLTncr6kvlCNcW8+lFudJfmyqdgYUv8pVHu5OF6u
+   K+XSJAO1QFw5bSFDsOhFQFiSuCBnpDBz87T0vqpDbC3DacKiwGJ+NI5RH
+   KU9LOxT3pxaRgjemydCmPH6oxUlWC3jTTc6EubFOM0+Jwctk0hMNcem1i
+   HJUqXWccl/PUwb9KRbnhERWDVc0s0R1gmTTwOIGHzPia+1Cks8nMsXJ9q
+   OY9ZB6GiBh7P3JKYR47sLOWtzIbK8NETlL97PQCHx4Qsk97AG9HvWdj/+
+   /3p6RnZ/clZ8Lvz+U2Xxi3R4P1usO4l6KvAy7e99wbGcFubIuMEbiBBgI
+   w==;
+X-CSE-ConnectionGUID: 1Wjc1XL6Tu+tXslz0yEvKA==
+X-CSE-MsgGUID: zrR2qBYWTsCjcUIesDmeLw==
+X-IPAS-Result: =?us-ascii?q?A0BXAwBiXgpr/8xK/pBaglmDTGBDSZQqoE2Bfg8BAQEPM?=
+ =?us-ascii?q?SAEAQGTKgImNAkOAQIEAwIDAQEBAQEBAQEBAQEBCgEBBQEBAQIBBwWBDhOGX?=
+ =?us-ascii?q?JBACwEYAYE5g0YBgnQDug6BeTOBAYMpAYFU2UuBdBWBOI1ndQGEficbgUlEg?=
+ =?us-ascii?q?RWDaoUQhXkEgxwSmQZIgR4DWSwBVRMNCgsHBYFoAzUSKhVuMh2BIzsXgQcbB?=
+ =?us-ascii?q?gWBHIEegRKBA1uBKyZeIYEGgXYCglGCAAIBRkEOB0VTCSVDEkckIggSCQETG?=
+ =?us-ascii?q?iwKgRo1PAkmPxUMZwsaBWEIAg0McjkQMBwkLwUXJjwbB4EMJx0bFw4CKAYVI?=
+ =?us-ascii?q?QtDGA1IESw3FRkEPm4HlBKDHIEPllKReqERhCuMJJU6GjOqc5kIpFyEaoFoP?=
+ =?us-ascii?q?IFZMxoIGxWDIglKGQ/gfyYyAjsCBwIHDgMLk2YBAQ?=
+IronPort-Data: A9a23:w3Ukx6tBllTP8/YJeMaejdBabefnVANfMUV32f8akzHdYApBsoF/q
+ tZmKWiEaPeJajbzft9zbIu29UwA6JLVydBgSAJprHs8EiwbgMeUXt7xwmUckM+xwmwvaGo9s
+ q3yv/GZdJhcokf0/0nrb/656ykmiMlkf5KkYMbcICd9WAR4fykojBNnioYRj5Vh6TSDK1vlV
+ eja/YuFZzdJ5xYuajhKsvvZ+Es21BjPkGpwUmIWNKgjUGD2zxH5PLpHTYmtIn3xRJVjH+LSb
+ 47r0LGj82rFyAwmA9Wjn6yTWhVirmn6ZFXmZtJ+AsBOszAazsAA+v9T2Mk0NS+7vw60c+VZk
+ 72hg3AfpTABZcUgkMxFO/VR/roX0aduoNcrKlDn2SCfItGvn3bEm51T4E8K0YIwo9l1Cjh+0
+ aIkNXMRXguHlbqn7ayYY7w57igjBJGD0II3s3x6iDWcBvE8TNWbGOPB5MRT23E7gcUm8fT2P
+ pZFL2AyMFKfP1sVYgt/5JEWxI9EglHubidRpF+9rqss6G+Vxwt0uFToGISNJYTRFJoN9qqej
+ nDcxT7gKCAlCMe0yzG403+3qurCuTyuDer+E5X9rJaGmma7wXQeDhATX1a3rfS1z0KzRd9bA
+ 0gV4TY1668q+UqmS9PwUxG1rDiDpBF0ZjZLO+Q38kSJj6HT+QvcXjNCRT9aY9tgv8gzLdA36
+ mK0cxrSLWQHmNWopbi1r994cRva1fApEFI/
+IronPort-HdrOrdr: A9a23:G7Jx7akSuXX6wgraGmuGYRZA3CXpDfIc3DAbv31ZSRFFG/Fw8P
+ re/sjzuiWbtN98YhwdcLO7Scq9qA3nlKKdiLN5VdzJYOCMggSVxe9ZgbcKuweBJwTOsshAyK
+ xnb69yTPf0DVR8kILGxTPQKadE/DFCm5rY4ts3CBxWPGVXV50=
+X-Talos-CUID: =?us-ascii?q?9a23=3AClhqI2rvCPLQS28/RVfAfdHmUZkacHaE/FOOH1L?=
+ =?us-ascii?q?7FVZyTK/NWHKO24oxxg=3D=3D?=
+X-Talos-MUID: 9a23:9+N3dwRj4kLmzYqXRXT+ngs4Le1Z3Ji1I0IGrLQLoOWBOAhvbmI=
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-AV: E=Sophos;i="6.27,238,1787011200"; 
+   d="scan'208";a="60703970"
+Received: from aer-l-core-03.cisco.com ([144.254.74.204])
+  by aer-iport-6.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 28 Nov 2026 05:00:23 +0000
+Received: from sjc-ads-7871.cisco.com (sjc-ads-7871.cisco.com [10.30.222.158])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.kernel.org (Postfix) with ESMTPS id D88B21F0089B;
-	Sat, 28 Nov 2026 01:52:23 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795830744;
-	bh=ED5Emds7XPjNy0wq+GdiNMZPOdMr52H46WwFQ4Fa6oQ=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:Reply-To;
-	b=nZ235/bFjDIxMBn8tPSkKFlvRxY1d0fZxgqSF3eH+24XuGUoAPvzA5UIZJEVPc4q+
-	 pOmSLoHP88aGX0Vg+sLqBeXu81mNriUHLZWTAKGKHE4HZPY00SeW4OtOWwx5Pnf2y7
-	 ZFHBSPBbTFx0vHWIV80py9AHVPPtFxotMO4xQtPHtt441IYBzdB0VfsFAidrtFSbKb
-	 a3NPUOjQkx5mbtQOeuFDXmtlFVkNYgI2VPOZ60oL8RQD0AQuO1lsJ3HrdjUM6kbPnw
-	 gQ45ZMZkt7loZIQ08V2KnqqkVRBo+4eTajrRjo5y0mBUTzZeFEXrknKc7FPiNaQkJK
-	 f5LCs//5U7gJQ==
-Received: from nexus.subspace.kernel.org (localhost [IPv6:::1])
-	by lkml.kernel.org (Postfix) with ESMTP id 692A44DF16;
-	Sat, 28 Nov 2026 01:52:23 +0000 (UTC)
-MIME-Version: 1.0
-Message-Id: <20261128-pillow-sg-v1-4-cbcff72e5e81@certik.com>
-References: <20261128-pillow-sg-v1-0-cbcff72e5e81@certik.com>
-In-Reply-To: <20261128-pillow-sg-v1-0-cbcff72e5e81@certik.com>
-From: Dickson Wu via B4 Relay <devnull+dickson.wu.certik.com@kernel.org>
-Date: Fri, 27 Nov 2026 10:05:11 +0000
-Subject: [meta-python][scarthgap][PATCH 4/4] python3-pillow: patch CVE-2026-112406
+	by aer-l-core-03.cisco.com (Postfix) with ESMTPS id EE5E7180006DD
+	for <openembedded-devel@lists.openembedded.org>; Sat, 28 Nov 2026 05:00:22 +0000 (GMT)
+Received: by sjc-ads-7871.cisco.com (Postfix, from userid 1889728)
+	id 91A1ECC1611; Fri, 27 Nov 2026 21:00:21 -0800 (PST)
+From: Yogita Urade <yurade@cisco.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Anuj Mittal <anuj.mittal@oss.qualcomm.com>
-X-Mailer: b4 0.16.0
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1795830619; l=2898;
- i=dickson.wu@certik.com; s=dickson-b4; h=from:subject:message-id;
- bh=f0f1/8Xs4Bx9GcWebrCzo/t4/bZ2s1JSpSOy0JpVJzM=;
- b=s0xxUOIqNlKnxTtPY3/MEt64KXjSG9zvaNALzvugZrfJsgelSGfSbrwPAU6ykwvVI3ayMcgeq
- euyPgrEn4k2DaMbr+TPPrQBrqsHN7JnyCAOnw6J7UmFvOj7Rw0BqsA1
-X-Developer-Key: i=dickson.wu@certik.com; a=ed25519;
- pk=fxH7FS4FdojeJSGLJzgKdfO51Rvr4EW30yinj2mc1vg=
-X-Endpoint-Received: by B4 Relay for dickson.wu@certik.com/dickson-b4 with
- auth_id=1647
-X-Original-From: Dickson Wu <dickson.wu@certik.com>
-Reply-To: dickson.wu@certik.com
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
+Subject: [oe][meta-oe][blacksail][PATCH 0/1] php: upgrade 8.5.12 -> 8.5.13
+Date: Fri, 27 Nov 2026 21:00:19 -0800
+Message-Id: <20261128050020.4130975-1-yurade@cisco.com>
+X-Mailer: git-send-email 2.35.6
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+X-Outbound-Client-TLS: ANONYMOUS;sjc-ads-7871.cisco.com [10.30.222.158];TLSv1.3;TLS_AES_256_GCM_SHA384;256
+X-Outbound-SMTP-Client: 10.30.222.158, sjc-ads-7871.cisco.com
+X-Outbound-Node: aer-l-core-03.cisco.com
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Sat, 28 Nov 2026 03:31:09 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/133394
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Sat, 28 Nov 2026 05:00:30 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/133395
+Content-Type: text/plain; charset="utf-8"
 
-From: Dickson Wu <dickson.wu@certik.com>
+In addition to the CVEs listed in the cherry-picked master commit,
+PHP 8.5.13 fixes CVE-2026-129538 (PHP-CGI PATH_INFO handling) and
+CVE-2026-128090 (PHAR OpenSSL signature verification), as documented
+in the PHP 8.5.13 changelog. Both fixes are included by this version
+upgrade; no separate source patches are needed.
 
-Prevent infinite loop when rewriting PDF pages (#10125).
+Jason Schonberg (1):
+  php: upgrade 8.5.12 -> 8.5.13
 
-Upstream commit:
-https://github.com/python-pillow/Pillow/commit/b3ebf20c694f2f12537a629c30229a1d5a53f777
+ ...onfigure.ac-don-t-include-build-libtool.m4.patch |  9 +++------
+ ...-ext-phar-Makefile.frag-Fix-phar-packaging.patch |  9 +++------
+ .../php/php/0003-iconv-fix-detection.patch          |  6 +++---
+ .../php/0004-pear-fix-Makefile.frag-for-Yocto.patch | 13 +++++--------
+ ...-not-generate-phar.php-during-cross-compil.patch |  5 +----
+ .../php/{php_8.5.12.bb => php_8.5.13.bb}            |  2 +-
+ 6 files changed, 16 insertions(+), 28 deletions(-)
+ rename meta-oe/recipes-devtools/php/{php_8.5.12.bb => php_8.5.13.bb} (99%)
 
-AI-Generated: OpenAI Codex, gpt-6.2-sol
-Signed-off-by: Dickson Wu <dickson.wu@certik.com>
----
- .../python3-pillow/CVE-2026-112406.patch      | 26 +++++++++++++++++++
- .../python/python3-pillow_10.3.0.bb           |  1 +
- 2 files changed, 27 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-pillow/CVE-2026-112406.patch
-
-diff --git a/meta-python/recipes-devtools/python/python3-pillow/CVE-2026-112406.patch b/meta-python/recipes-devtools/python/python3-pillow/CVE-2026-112406.patch
-new file mode 100644
-index 000000000..ab6e180d1
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-pillow/CVE-2026-112406.patch
-@@ -0,0 +1,26 @@
-+From b3ebf20c694f2f12537a629c30229a1d5a53f777 Mon Sep 17 00:00:00 2001
-+From: Andrew Murray <3112309+radarhere@users.noreply.github.com>
-+Date: Mon, 5 Oct 2026 18:12:40 +1100
-+Subject: [PATCH] Prevent infinite loop when rewriting PDF pages (#10125)
-+
-+
-+CVE: CVE-2026-112406
-+Upstream-Status: Backport [https://github.com/python-pillow/Pillow/commit/b3ebf20c694f2f12537a629c30229a1d5a53f777]
-+Backport note: Omit upstream test changes in Tests/test_pdfparser.py.
-+Signed-off-by: Dickson Wu <dickson.wu@certik.com>
-+---
-+diff --git a/src/PIL/PdfParser.py b/src/PIL/PdfParser.py
-+index 5f75cf4d3ee..e7ec6180b6c 100644
-+--- a/src/PIL/PdfParser.py
-++++ b/src/PIL/PdfParser.py
-+@@ -502,7 +502,9 @@ def rewrite_pages(self) -> None:
-+                     self.pages[j] = new_page_ref
-+         # delete redundant Pages tree nodes from xref table
-+         for pages_tree_node_ref in pages_tree_nodes_to_delete:
-+-            while pages_tree_node_ref:
-++            processed_refs = []
-++            while pages_tree_node_ref and pages_tree_node_ref not in processed_refs:
-++                processed_refs.append(pages_tree_node_ref)
-+                 pages_tree_node = self.cached_objects[pages_tree_node_ref]
-+                 if pages_tree_node_ref.object_id in self.xref_table:
-+                     del self.xref_table[pages_tree_node_ref.object_id]
-diff --git a/meta-python/recipes-devtools/python/python3-pillow_10.3.0.bb b/meta-python/recipes-devtools/python/python3-pillow_10.3.0.bb
-index 374984d0e..d7adf8cef 100644
---- a/meta-python/recipes-devtools/python/python3-pillow_10.3.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-pillow_10.3.0.bb
-@@ -17,6 +17,7 @@ SRC_URI = "git://github.com/python-pillow/Pillow.git;branch=main;protocol=https
-            file://CVE-2026-112398_CVE-2026-112403.patch \
-            file://CVE-2026-112900.patch \
-            file://CVE-2026-112400.patch \
-+           file://CVE-2026-112406.patch \
-            "
- SRCREV = "5c89d88eee199ba53f64581ea39b6a1bc52feb1a"
- 
+-- 
+2.35.6
 
